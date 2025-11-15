@@ -1,0 +1,126 @@
+/* Floating Icons Container */
+.floating-icons-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Base Floating Icon Styles */
+.floating-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.floating-icon:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Icon Image */
+.icon-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.floating-icon:hover .icon-image {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Left Icon Positioning */
+.left-icon {
+  left: 15%;
+  animation-delay: 0s;
+}
+
+/* Right Icon Positioning */
+.right-icon {
+  right: 15%;
+  animation-delay: 2s; /* Offset animation for variety */
+}
+
+/* Floating Animation */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0px);
+  }
+  25% {
+    transform: translateY(-60%) translateX(5px);
+  }
+  50% {
+    transform: translateY(-40%) translateX(0px);
+  }
+  75% {
+    transform: translateY(-60%) translateX(-5px);
+  }
+}
+
+/* Simple floating animation only */
+.floating-icon {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .floating-icon {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .icon-image {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .left-icon {
+    left: 10%;
+  }
+  
+  .right-icon {
+    right: 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-icon {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .icon-image {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .left-icon {
+    left: 8%;
+  }
+  
+  .right-icon {
+    right: 8%;
+  }
+}
+
+/* Different animation timing for variety */
+.left-icon {
+  animation-duration: 4s;
+}
+
+.right-icon {
+  animation-duration: 5s;
+  animation-direction: reverse;
+}

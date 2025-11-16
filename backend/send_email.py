@@ -4,20 +4,31 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 
-# Load .env file
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    # If python-dotenv not installed, try to read .env manually
-    env_path = os.path.join(os.path.dirname(__file__), '.env')
-    if os.path.exists(env_path):
-        with open(env_path) as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#') and '=' in line:
-                    key, value = line.split('=', 1)
-                    os.environ[key.strip()] = value.strip()
+# Get environment variables directly (works better on Render)
+gmail_user = os.environ.get('GMAIL_USER')
+gmail_app_password = os.environ.get('GMAIL_APP_PASSWORD')
+
+# Fallback: Try to load .env file for local development
+if not gmail_user or not gmail_app_password:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        gmail_user = os.environ.get('GMAIL_USER')
+        gmail_app_password = os.environ.get('GMAIL_APP_PASSWORD')
+    except ImportError:
+        # If python-dotenv not installed, try to read .env manually
+        env_path = os.path.join(os.path.dirname(__file__), '.env')
+        if os.path.exists(env_path):
+            with open(env_path) as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, value = line.split('=', 1)
+                        os.environ[key.strip()] = value.strip()
+                        if key.strip() == 'GMAIL_USER':
+                            gmail_user = value.strip()
+                        elif key.strip() == 'GMAIL_APP_PASSWORD':
+                            gmail_app_password = value.strip()
 
 # Usage: python send_email.py "recipient@email.com" "userId" "password" "name"
 
@@ -30,16 +41,14 @@ user_id = sys.argv[2]
 password = sys.argv[3]
 name = sys.argv[4]
 
-# Get Gmail credentials
-gmail_user = os.getenv('GMAIL_USER')
-gmail_app_password = os.getenv('GMAIL_APP_PASSWORD')
-
 if not gmail_user or not gmail_app_password:
     print('ERROR: Missing Gmail credentials!')
-    print('Set GMAIL_USER and GMAIL_APP_PASSWORD in .env')
+    print(f'GMAIL_USER: {"SET" if gmail_user else "NOT SET"}')
+    print(f'GMAIL_APP_PASSWORD: {"SET" if gmail_app_password else "NOT SET"}')
+    print('Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables on Render')
     sys.exit(2)
 
-print(f'Sending email to {to_email}')
+print(f'Sending email to {to_email} from {gmail_user}')
 
 try:
     # Create email

@@ -309,13 +309,13 @@
 }
 
 .sponsors-section h2 {
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: #ffffff;
   margin-bottom: 40px;
   font-weight: 700;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
   background: linear-gradient(135deg, #8B4A9C, #6A1B9A);
-  padding: 15px 30px;
+  padding: 20px 40px;
   border-radius: 15px;
   display: inline-block;
   backdrop-filter: blur(10px);
@@ -4331,7 +4331,7 @@ html {
   
   /* Sponsors Section */
   .sponsors-section {
-    padding: 40px 5px;
+    padding: 80px 20px;
     width: 100%;
     max-width: 100vw;
   }

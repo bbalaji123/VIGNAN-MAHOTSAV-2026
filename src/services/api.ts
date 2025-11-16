@@ -1,4 +1,28 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// API Configuration - Automatically detects environment
+const getApiBaseUrl = () => {
+  // Production - Update this with your actual Render backend URL
+  const PRODUCTION_API = 'https://mahotsav-backend.onrender.com/api';
+  
+  // Development
+  const DEVELOPMENT_API = 'http://localhost:5000/api';
+  
+  // Auto-detect environment
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    
+    // Check if running in production (GitHub Pages, Vercel, Netlify, etc.)
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      return PRODUCTION_API;
+    }
+  }
+  
+  return DEVELOPMENT_API;
+};
+
+const API_BASE_URL = getApiBaseUrl();
+
+// Log current API configuration (for debugging)
+console.log('🌐 API Base URL:', API_BASE_URL);
 
 export interface SignupData {
   name: string;

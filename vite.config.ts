@@ -9,6 +9,8 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    target: 'esnext',
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -25,5 +27,8 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom']
   }
 })

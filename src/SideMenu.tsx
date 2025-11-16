@@ -14,9 +14,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
     { name: 'COLLABORATION', icon: '🤝' },
     { name: 'ZONALS', icon: '🌍' },
     { name: 'HOSPITALITY', icon: '🏨' },
+    { name: 'CERTIFICATES', icon: '🏆' },
     { name: 'MAP', icon: '🗺️' },
-    { name: 'CAMPUS AMBASSADOR', icon: '👥' },
-    { name: 'SPONSORS', icon: '💼' }
+    { name: 'CAMPUS AMBASSADOR', icon: '👥' }
   ];
 
   const handleCategoryClick = (category: string) => {

@@ -21,6 +21,7 @@ export interface ApiResponse {
     userId?: string;
     name?: string;
     email?: string;
+    userType?: string;
   };
   error?: string;
 }

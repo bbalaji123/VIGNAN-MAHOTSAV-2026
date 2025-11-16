@@ -4,7 +4,7 @@ import FloatingBubble from './FloatingBubble';
 import FloatingIcons from './FloatingIcons';
 import SideMenu from './SideMenu';
 import EventRegistrationModal from './EventRegistrationModal';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 import './Dashboard.css';
 import './ForgotPassword.css';
 import './App.css';
@@ -53,6 +53,7 @@ const Dashboard: React.FC = () => {
   const [myEvents, setMyEvents] = useState<Event[]>([]);
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [tempSelectedEvents, setTempSelectedEvents] = useState<Set<string>>(new Set());
+  const [eventRegistrationsCount, setEventRegistrationsCount] = useState(0);
 
   // Time-based theme detection
   useEffect(() => {
@@ -373,27 +374,28 @@ const Dashboard: React.FC = () => {
   };
 
   const handleShowProfile = () => {
-    setShowProfileDropdown(false);
+    // Fetch event registrations count when opening profile
+    if (userProfileData.userId) {
+      fetchEventRegistrationsCount(userProfileData.userId);
+    }
     setShowProfileModal(true);
+  };
+
+  const fetchEventRegistrationsCount = async (userId: string) => {
+    try {
+      const response = await getMyEventRegistrations(userId);
+      if (response.success && response.data) {
+        // Count the registrations
+        const count = Array.isArray(response.data) ? response.data.length : 0;
+        setEventRegistrationsCount(count);
+      }
+    } catch (error) {
+      console.error('Error fetching registrations:', error);
+    }
   };
 
   const handleCloseProfile = () => {
     setShowProfileModal(false);
-  };
-
-  const handleOpenEventChecklist = () => {
-    if (!isLoggedIn) {
-      alert('Please login to select events!');
-      setShowLoginModal(true);
-      return;
-    }
-    
-    if (userProfileData.userType === 'visitor') {
-      alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
-      return;
-    }
-    
-    setShowEventChecklistModal(true);
   };
 
   const handleCloseEventChecklist = () => {
@@ -444,10 +446,6 @@ const Dashboard: React.FC = () => {
     setShowMyEventsModal(false);
   };
 
-  const toggleProfileDropdown = () => {
-    setShowProfileDropdown(!showProfileDropdown);
-  };
-
   const handleLoginInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginFormData(prev => ({
@@ -476,7 +474,7 @@ const Dashboard: React.FC = () => {
       const result = await loginUser(loginFormData.email, loginFormData.password);
       
       if (result.success && result.data) {
-        const { userId, name, email, userType } = result.data;
+        const { userId, name, email, userType = 'visitor' } = result.data;
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -598,57 +596,43 @@ const Dashboard: React.FC = () => {
       <nav className="header-nav">
           <div className="nav-left">
             <a href="#home" className="active">Home</a>
-            <a href="#events" onClick={(e) => { e.preventDefault(); handleOpenEventChecklist(); }}>Events</a>
+            <a href="#my-events" onClick={(e) => { e.preventDefault(); handleShowMyEvents(); }}>My Events</a>
             <a href="#zonal">Zonal</a>
           </div>
           <div className="nav-right">
             {/* Profile section - shown when logged in */}
             {isLoggedIn && (
-              <div className="user-profile-wrapper">
-                <div className="user-profile-section" onClick={toggleProfileDropdown}>
-                  <div className="profile-icon">👤</div>
-                  <span className="welcome-text">Welcome, {loggedInUserName}!</span>
-                  <span className="dropdown-arrow">{showProfileDropdown ? '▲' : '▼'}</span>
-                </div>
-                {showProfileDropdown && (
-                  <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
-                    <button className="dropdown-item" onClick={handleShowProfile}>
-                      👤 My Profile
-                    </button>
-                    <button className="dropdown-item" onClick={handleShowMyEvents}>
-                      🎫 My Events
-                    </button>
-                    <button className="dropdown-item logout-item" onClick={handleLogout}>
-                      🚪 Logout
-                    </button>
-                  </div>
-                )}
+              <div className="user-profile-section" onClick={handleShowProfile}>
+                <div className="profile-icon">👤</div>
+                <span className="welcome-text">Welcome, {loggedInUserName}!</span>
               </div>
             )}
           </div>
       </nav>
       
-      {/* Payment Information Marquee */}
-      <div className="payment-marquee">
+      {/* Participation Stats Marquee */}
+      <div className="participation-marquee">
         <div className="marquee-content">
-          <span className="marquee-item">💰 Registration Fees: </span>
-          <span className="marquee-item">🏃‍♂️ Men Sports - ₹350</span>
+          <span className="marquee-item">🏅 Sports - Men: 350 </span>
           <span className="marquee-separator">•</span>
-          <span className="marquee-item">🏃‍♀️ Women Sports - ₹250</span>
+          <span className="marquee-item">🏅 Sports - Women: 250 </span>
           <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals (Men & Women) - ₹250</span>
+          <span className="marquee-item">🎭 Culturals - Men: 250 </span>
           <span className="marquee-separator">•</span>
-          <span className="marquee-item">💰 Registration Fees: </span>
-          <span className="marquee-item">🏃‍♂️ Men Sports - ₹350</span>
+          <span className="marquee-item">🎭 Culturals - Women: 250 </span>
           <span className="marquee-separator">•</span>
-          <span className="marquee-item">🏃‍♀️ Women Sports - ₹250</span>
+          <span className="marquee-item">🏅 Sports - Men: 350 </span>
           <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals (Men & Women) - ₹250</span>
+          <span className="marquee-item">🏅 Sports - Women: 250 </span>
+          <span className="marquee-separator">•</span>
+          <span className="marquee-item">🎭 Culturals - Men: 250 </span>
+          <span className="marquee-separator">•</span>
+          <span className="marquee-item">🎭 Culturals - Women: 250 </span>
         </div>
       </div>
       
       {/* The Icon Component - Fixed position, animates with scroll */}
-      <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.png`} />
+      <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
 
       {/* 1. Hero Section (First Fold) */}
       <section className="hero-section">
@@ -682,6 +666,14 @@ const Dashboard: React.FC = () => {
           <p>
             Join us in exploring the wonders of science and discover how innovation shapes our future.
           </p>
+        </div>
+      </section>
+
+      {/* Sponsors Section */}
+      <section className="sponsors-section">
+        <h2>Our Sponsors & Partners</h2>
+        <div className="sponsors-image-container">
+          <img src={`${import.meta.env.BASE_URL}sponsors.jpg`} alt="Our Sponsors and Partners" className="sponsors-image" />
         </div>
       </section>
 
@@ -723,13 +715,15 @@ const Dashboard: React.FC = () => {
               <div className="day-badge">Day ONE</div>
               <div className="highlight-video">
                 <video 
-                  autoPlay 
+                  autoPlay
+                  controls
                   loop 
                   muted 
                   playsInline
+                  preload="metadata"
                   className="day-video"
                 >
-                  <source src={`${import.meta.env.BASE_URL}day1.mp4`} type="video/mp4" />
+                  <source src={`${import.meta.env.BASE_URL}day 1.mp4`} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -743,13 +737,15 @@ const Dashboard: React.FC = () => {
               <div className="day-badge">Day TWO</div>
               <div className="highlight-video">
                 <video 
-                  autoPlay 
+                  autoPlay
+                  controls
                   loop 
                   muted 
                   playsInline
+                  preload="metadata"
                   className="day-video"
                 >
-                  <source src={`${import.meta.env.BASE_URL}day2.mp4`} type="video/mp4" />
+                  <source src={`${import.meta.env.BASE_URL}day 2.mp4`} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -763,56 +759,21 @@ const Dashboard: React.FC = () => {
               <div className="day-badge">Day THREE</div>
               <div className="highlight-video">
                 <video 
-                  autoPlay 
+                  autoPlay
+                  controls
                   loop 
                   muted 
                   playsInline
+                  preload="metadata"
                   className="day-video"
                 >
-                  <source src={`${import.meta.env.BASE_URL}day3.mp4`} type="video/mp4" />
+                  <source src={`${import.meta.env.BASE_URL}day 3.mp4`} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
             </div>
             <h3>Exciting Day Three Highlights</h3>
             <p>Grand finale, award ceremonies, closing performances, and memorable moments to conclude the festival.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Navbar Content Sections */}
-      
-      {/* Home Section */}
-      <section id="home" className="dashboard-section navbar-content-section">
-        <div className="navbar-section-content">
-          <h2>🏠 Welcome Home - Vignan Mahotsav 2026</h2>
-          <div className="home-content-grid">
-            <div className="home-info-card">
-              <h3>🎊 Festival Overview</h3>
-              <p>
-                Welcome to the most spectacular celebration of innovation, culture, and academic excellence! 
-                Vignan Mahotsav is our flagship annual festival that transforms our campus into a vibrant 
-                hub of creativity, learning, and fun. Join us for three unforgettable days of competitions, 
-                exhibitions, cultural performances, and networking opportunities.
-              </p>
-            </div>
-            <div className="home-info-card">
-              <h3>📅 Important Dates</h3>
-              <div className="date-info">
-                <p><strong>Festival Dates:</strong> February 5-7, 2026</p>
-                <p><strong>Registration Opens:</strong> January 1, 2026</p>
-                <p><strong>Early Bird Deadline:</strong> January 20, 2026</p>
-                <p><strong>Final Registration:</strong> February 1, 2026</p>
-              </div>
-            </div>
-            <div className="home-info-card">
-              <h3>🎯 What to Expect</h3>
-              <p>
-                Experience cutting-edge technical exhibitions, mesmerizing cultural performances, 
-                competitive sports events, literary competitions, workshops by industry experts, 
-                networking sessions, and much more. This is your gateway to inspiration and innovation!
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -843,7 +804,6 @@ const Dashboard: React.FC = () => {
       {/* Footer */}
       <footer className="dashboard-footer">
         <p>&copy; 2025 Vignan Mahotsav. All rights reserved.</p>
-        <p>Built with React + Vite + TypeScript</p>
       </footer>
 
       {/* Floating Bubble Menu */}
@@ -1447,6 +1407,23 @@ const Dashboard: React.FC = () => {
                 </div>
               )}
               
+              {activeSubModal === 'CERTIFICATES' && (
+                <div className="sub-cards-grid">
+                  <div className="sub-card">
+                    <h3>PARTICIPATION</h3>
+                  </div>
+                  <div className="sub-card">
+                    <h3>WINNER</h3>
+                  </div>
+                  <div className="sub-card">
+                    <h3>RUNNER UP</h3>
+                  </div>
+                  <div className="sub-card">
+                    <h3>EXCELLENCE</h3>
+                  </div>
+                </div>
+              )}
+              
               {activeSubModal === 'OUR TEAM' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -1619,7 +1596,7 @@ const Dashboard: React.FC = () => {
                   <h4>📊 Activity Summary</h4>
                   <div className="stats-grid">
                     <div className="stat-box">
-                      <div className="stat-number">0</div>
+                      <div className="stat-number">{eventRegistrationsCount}</div>
                       <div className="stat-label">Events Registered</div>
                     </div>
                     <div className="stat-box">

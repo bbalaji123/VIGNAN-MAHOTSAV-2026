@@ -4,30 +4,21 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Remove GitHub Pages base for Vercel
+  base: '/',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
+    emptyOutDir: true,
     sourcemap: false,
-    target: 'esnext',
-    minify: 'esbuild',
+    minify: 'terser',
+    target: 'es2020',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom']
-        }
+        manualChunks: undefined
       }
     }
   },
   server: {
     port: 3000,
-    host: true
-  },
-  preview: {
-    port: 4173,
-    host: true
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom']
+    host: '0.0.0.0'
   }
 })

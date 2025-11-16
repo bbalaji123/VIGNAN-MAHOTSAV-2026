@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/mahotsav/', // Fixed spelling - was 'mahostav'
+  base: '/', // Remove GitHub Pages base for Vercel
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -14,8 +14,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom']
+          vendor: ['react', 'react-dom']
         }
       }
     }

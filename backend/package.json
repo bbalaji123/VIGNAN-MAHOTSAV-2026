@@ -1,15 +1,20 @@
 {
-  "name": "backend",
+  "name": "mahotsav-backend",
   "version": "1.0.0",
-  "description": "Backend server for my-react-app",
+  "description": "Backend server for Vignan Mahotsav 2025",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required for Node.js'"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["mahotsav", "backend", "express", "mongodb", "redis"],
+  "author": "Vignan University",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",

@@ -334,6 +334,9 @@ const Dashboard: React.FC = () => {
       // Scroll to top for home
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setShowMenuCards(false);
+    } else if (cardName === 'ABOUT US') {
+      // Navigate to About Us page
+      window.location.href = '/about-us';
     } else if (cardName === 'EVENTS') {
       // Check if user is logged in and is a participant
       if (!isLoggedIn) {
@@ -653,27 +656,11 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. About Us Section (Second Fold) */}
-      <section className="about-us-section">
-        <h1>About Us</h1>
-        <div className="about-us-content">
-          <h2>Welcome to Vignan Mahotsav</h2>
-          <p>
-            Vignan Mahotsav is an annual celebration that brings together the brightest minds 
-            in science, technology, and innovation. Our festival showcases cutting-edge research, 
-            interactive exhibitions, and inspiring demonstrations that captivate audiences of all ages.
-          </p>
-          <p>
-            Join us in exploring the wonders of science and discover how innovation shapes our future.
-          </p>
-        </div>
-      </section>
-
       {/* Sponsors Section */}
       <section className="sponsors-section">
-        <h2>Our Sponsors & Partners</h2>
+        <h2>Sponsors</h2>
         <div className="sponsors-image-container">
-          <img src={`${import.meta.env.BASE_URL}sponsors.jpg`} alt="Our Sponsors and Partners" className="sponsors-image" />
+          <img src={`${import.meta.env.BASE_URL}sponsors.jpg`} alt="Our Sponsors" className="sponsors-image" />
         </div>
       </section>
 

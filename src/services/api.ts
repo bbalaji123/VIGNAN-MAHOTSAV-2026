@@ -1,12 +1,18 @@
 // API Configuration - Automatically detects environment
 const getApiBaseUrl = () => {
-  // Production - Update this with your actual Render backend URL
-  const PRODUCTION_API = 'https://mahotsav-backend.onrender.com/api';
+  // Production - Update this with your actual deployed backend URL
+  // TODO: Replace with your Render backend URL after deployment
+  const PRODUCTION_API = 'https://your-backend-name.onrender.com/api';
   
   // Development
   const DEVELOPMENT_API = 'http://localhost:5000/api';
   
-  // Auto-detect environment
+  // For testing deployed frontend with local backend
+  // Uncomment this to always use localhost
+  return DEVELOPMENT_API;
+  
+  /* 
+  // Auto-detect environment (use this after backend is deployed)
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
     
@@ -17,6 +23,7 @@ const getApiBaseUrl = () => {
   }
   
   return DEVELOPMENT_API;
+  */
 };
 
 const API_BASE_URL = getApiBaseUrl();

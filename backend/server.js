@@ -1,7 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import { generalLimiter } from './middleware/rateLimiter.js';
+import { logger, requestLogger, errorLogger } from './utils/logger.js';
+import { initializeQueue } from './utils/queue.js';
+
+// Import routes
 import registrationRoutes from './routes/registration.js';
 import eventsRoutes from './routes/events.js';
 import eventRegistrationRoutes from './routes/eventRegistration.js';
@@ -12,41 +19,78 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
+// Initialize database and queue
 connectDB();
+initializeQueue();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Security and performance middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'"],
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'none'"],
+    },
+  },
+}));
 
-// Routes
+app.use(compression());
+app.use(requestLogger);
+
+// CORS configuration
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Rate limiting
+app.use('/api', generalLimiter);
+
+// Body parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// API Routes
 app.use('/api', registrationRoutes);
 app.use('/api', eventsRoutes);
 app.use('/api', eventRegistrationRoutes);
 app.use('/api', userEventsRoutes);
 
 // Health check route
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'healthy',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    memory: process.memoryUsage(),
+    version: process.version
+  });
+});
+
+// Root route
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Backend server is running',
+    message: 'Vignan Mahotsav 2025 API',
     status: 'active',
     timestamp: new Date().toISOString()
   });
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ 
-    success: false,
-    message: 'Something went wrong!',
-    error: err.message 
-  });
-});
+app.use(errorLogger);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`API available at http://localhost:${PORT}/api`);
+  logger.info(`🚀 Server started on port ${PORT}`);
+  logger.info(`📡 API available at http://localhost:${PORT}/api`);
+  logger.info(`🏥 Health check at http://localhost:${PORT}/health`);
+  logger.info(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });

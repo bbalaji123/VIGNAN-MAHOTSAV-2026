@@ -8,7 +8,7 @@ const AboutUs: React.FC = () => {
       <nav className="header-nav">
         <div className="nav-left">
           <Link to="/" className="nav-link">Home</Link>
-          <a href="#my-events">My Events</a>
+          <a href="#events">Events</a>
           <a href="#zonal">Zonal</a>
           <a href="#about-us" className="active">About Us</a>
         </div>

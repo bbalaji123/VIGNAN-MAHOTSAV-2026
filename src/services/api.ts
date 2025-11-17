@@ -46,6 +46,7 @@ export interface ApiResponse {
     name?: string;
     email?: string;
     userType?: string;
+    gender?: string;
   };
   error?: string;
 }
@@ -53,7 +54,7 @@ export interface ApiResponse {
 export interface Event {
   _id: string;
   eventName: string;
-  eventType: 'sports' | 'culturals' | 'technical' | 'literary';
+  eventType: 'sports' | 'culturals' | 'technical' | 'literary' | 'parasports';
   description?: string;
   category?: string;
   date?: string;

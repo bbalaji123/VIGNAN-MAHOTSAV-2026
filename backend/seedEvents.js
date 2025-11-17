@@ -347,6 +347,144 @@ const sampleEvents = [
       { name: 'Aditya Mehta', contact: '9876543229' }
     ],
     isActive: true
+  },
+
+  // Para Sports Events (8 events)
+  {
+    eventName: 'Wheelchair Basketball',
+    eventType: 'parasports',
+    description: 'Competitive wheelchair basketball tournament following international rules',
+    category: 'Team Sport',
+    date: 'February 6, 2026',
+    time: '2:00 PM - 6:00 PM',
+    venue: 'Indoor Adapted Sports Hall',
+    maxParticipants: 40,
+    registeredCount: 0,
+    prizePool: '₹35,000',
+    rules: 'International Wheelchair Basketball Federation (IWBF) rules apply.',
+    coordinators: [
+      { name: 'Priya Sharma', contact: '9876543230' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Para Swimming Championship',
+    eventType: 'parasports',
+    description: 'Swimming competition for athletes with physical disabilities across multiple categories',
+    category: 'Individual Sport',
+    date: 'February 7, 2026',
+    time: '10:00 AM - 4:00 PM',
+    venue: 'University Swimming Pool (Accessible)',
+    maxParticipants: 30,
+    registeredCount: 0,
+    prizePool: '₹30,000',
+    rules: 'World Para Swimming classification and rules. Multiple categories available.',
+    coordinators: [
+      { name: 'Suresh Kumar', contact: '9876543231' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Goalball Tournament',
+    eventType: 'parasports',
+    description: 'Goalball competition for visually impaired athletes',
+    category: 'Team Sport',
+    date: 'February 5, 2026',
+    time: '3:00 PM - 7:00 PM',
+    venue: 'Adapted Sports Indoor Court',
+    maxParticipants: 24,
+    registeredCount: 0,
+    prizePool: '₹25,000',
+    rules: 'International Blind Sports Federation (IBSA) goalball rules.',
+    coordinators: [
+      { name: 'Anjali Gupta', contact: '9876543232' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Wheelchair Racing',
+    eventType: 'parasports',
+    description: 'Sprint and distance wheelchair racing events on the athletics track',
+    category: 'Individual Sport',
+    date: 'February 8, 2026',
+    time: '9:00 AM - 1:00 PM',
+    venue: 'University Athletics Track',
+    maxParticipants: 20,
+    registeredCount: 0,
+    prizePool: '₹28,000',
+    rules: 'World Para Athletics racing wheelchair specifications required.',
+    coordinators: [
+      { name: 'Ravi Patel', contact: '9876543233' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Sitting Volleyball',
+    eventType: 'parasports',
+    description: 'Competitive sitting volleyball for athletes with lower limb impairments',
+    category: 'Team Sport',
+    date: 'February 6, 2026',
+    time: '4:00 PM - 8:00 PM',
+    venue: 'Indoor Volleyball Court (Modified)',
+    maxParticipants: 36,
+    registeredCount: 0,
+    prizePool: '₹32,000',
+    rules: 'World ParaVolley sitting volleyball rules apply.',
+    coordinators: [
+      { name: 'Meera Joshi', contact: '9876543234' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Para Powerlifting',
+    eventType: 'parasports',
+    description: 'Bench press competition for athletes with physical impairments',
+    category: 'Individual Sport',
+    date: 'February 7, 2026',
+    time: '11:00 AM - 5:00 PM',
+    venue: 'Fitness Center (Accessible)',
+    maxParticipants: 15,
+    registeredCount: 0,
+    prizePool: '₹22,000',
+    rules: 'World Para Powerlifting technical rules and classifications.',
+    coordinators: [
+      { name: 'Amit Verma', contact: '9876543235' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Blind Cricket',
+    eventType: 'parasports',
+    description: 'Cricket tournament for visually impaired players using special ball',
+    category: 'Team Sport',
+    date: 'February 8, 2026',
+    time: '10:00 AM - 6:00 PM',
+    venue: 'Adapted Cricket Ground',
+    maxParticipants: 44,
+    registeredCount: 0,
+    prizePool: '₹38,000',
+    rules: 'World Blind Cricket Council rules. Ball with bells used.',
+    coordinators: [
+      { name: 'Deepak Singh', contact: '9876543236' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Para Table Tennis',
+    eventType: 'parasports',
+    description: 'Table tennis competition for athletes with physical and intellectual disabilities',
+    category: 'Individual Sport',
+    date: 'February 5, 2026',
+    time: '1:00 PM - 7:00 PM',
+    venue: 'Table Tennis Hall (Accessible)',
+    maxParticipants: 25,
+    registeredCount: 0,
+    prizePool: '₹20,000',
+    rules: 'World Para Table Tennis classification system and rules.',
+    coordinators: [
+      { name: 'Kavitha Rao', contact: '9876543237' }
+    ],
+    isActive: true
   }
 ];
 
@@ -367,10 +505,12 @@ const seedDatabase = async () => {
     // Display summary
     const sportsCount = insertedEvents.filter(e => e.eventType === 'sports').length;
     const culturalsCount = insertedEvents.filter(e => e.eventType === 'culturals').length;
+    const paraSportsCount = insertedEvents.filter(e => e.eventType === 'parasports').length;
     
     console.log('\n📊 Event Summary:');
     console.log(`   Sports Events: ${sportsCount}`);
     console.log(`   Cultural Events: ${culturalsCount}`);
+    console.log(`   Para Sports Events: ${paraSportsCount}`);
     console.log(`   Total Events: ${insertedEvents.length}`);
 
     // Disconnect

@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
   const [resetMessage, setResetMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
   const [culturalsEvents, setCulturalsEvents] = useState<Event[]>([]);
+  const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(false);
   const [showEventRegistrationModal, setShowEventRegistrationModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -47,13 +48,14 @@ const Dashboard: React.FC = () => {
   const [loginMessage, setLoginMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [userProfileData, setUserProfileData] = useState<{ name: string; email: string; userId?: string; userType?: string }>({ name: '', email: '' });
+  const [userProfileData, setUserProfileData] = useState<{ name: string; email: string; userId?: string; userType?: string; gender?: string }>({ name: '', email: '' });
   const [showEventChecklistModal, setShowEventChecklistModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
   const [myEvents, setMyEvents] = useState<Event[]>([]);
-  const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [tempSelectedEvents, setTempSelectedEvents] = useState<Set<string>>(new Set());
   const [eventRegistrationsCount, setEventRegistrationsCount] = useState(0);
+  const [paraSportsSelected, setParaSportsSelected] = useState(false);
+  const [regularEventsSelected, setRegularEventsSelected] = useState(false);
 
   // Time-based theme detection
   useEffect(() => {
@@ -86,12 +88,11 @@ const Dashboard: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fetch events on component mount
-  useEffect(() => {
-    const fetchEvents = async () => {
-      console.log('🔄 Fetching events from API...');
-      setLoadingEvents(true);
-      try {
+  // Function to fetch events from API
+  const fetchEvents = async () => {
+    console.log('🔄 Fetching events from API...');
+    setLoadingEvents(true);
+    try {
         // Fetch sports events
         console.log('📡 Fetching sports events...');
         const sportsResponse = await getEventsByType('sports');
@@ -109,14 +110,27 @@ const Dashboard: React.FC = () => {
           setCulturalsEvents(culturalsResponse.data);
           console.log(`✅ Loaded ${culturalsResponse.data.length} cultural events`);
         }
+
+        // Fetch para sports events
+        console.log('📡 Fetching para sports events...');
+        const paraSportsResponse = await getEventsByType('parasports');
+        console.log('♿ Para Sports response:', paraSportsResponse);
+        if (paraSportsResponse.success && paraSportsResponse.data) {
+          setParaSportsEvents(paraSportsResponse.data);
+          console.log(`✅ Loaded ${paraSportsResponse.data.length} para sports events`);
+        } else {
+          console.error('❌ Failed to load para sports events:', paraSportsResponse.message || paraSportsResponse.error);
+        }
       } catch (error) {
         console.error('❌ Error fetching events:', error);
       } finally {
-        setLoadingEvents(false);
-        console.log('✅ Finished loading events');
-      }
-    };
+      setLoadingEvents(false);
+      console.log('✅ Finished loading events');
+    }
+  };
 
+  // Fetch events on component mount
+  useEffect(() => {
     fetchEvents();
   }, []);
 
@@ -329,7 +343,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleCardClick = (cardName: string) => {
+  const handleCardClick = async (cardName: string) => {
     if (cardName === 'HOME') {
       // Scroll to top for home
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -350,6 +364,13 @@ const Dashboard: React.FC = () => {
         return;
       }
       
+      await fetchEvents();
+      if (isLoggedIn && userProfileData.userId) {
+        const savedEventIds = await fetchUserSavedEvents(userProfileData.userId);
+        setTempSelectedEvents(savedEventIds);
+      } else {
+        setTempSelectedEvents(new Set()); // Clear selections for non-logged users
+      }
       setActiveSubModal(cardName);
     } else {
       setActiveSubModal(cardName);
@@ -358,6 +379,119 @@ const Dashboard: React.FC = () => {
 
   const handleCloseSubModal = () => {
     setActiveSubModal(null);
+  };
+
+  // Calculate registration price based on gender and selected events
+  const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
+    const selectedEventsArray = Array.from(selectedEventIds);
+    
+    // Check if para sports events are selected
+    const hasParaSports = selectedEventsArray.some(eventId => 
+      paraSportsEvents.some(event => event._id === eventId)
+    );
+    
+    // Para sports are free for everyone
+    if (hasParaSports) {
+      return 0;
+    }
+    
+    // Check if sports events are selected
+    const hasSports = selectedEventsArray.some(eventId => 
+      sportsEvents.some(event => event._id === eventId)
+    );
+    
+    // Check if cultural events are selected
+    const hasCulturals = selectedEventsArray.some(eventId => 
+      culturalsEvents.some(event => event._id === eventId)
+    );
+    
+    // Pricing logic
+    if (gender?.toLowerCase() === 'male') {
+      if (hasSports && hasCulturals) return 350;
+      if (hasSports) return 350;
+      if (hasCulturals) return 250;
+    } else { // Female pricing
+      return 250; // Women pay 250 for any combination
+    }
+    
+    return 0;
+  };
+
+  // Handle registration with pricing confirmation
+  const handleRegisterForEvents = async () => {
+    if (!isLoggedIn) {
+      alert('Please login to register for events!');
+      setShowLoginModal(true);
+      handleCloseSubModal();
+      return;
+    }
+    
+    if (userProfileData.userType === 'visitor') {
+      alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
+      return;
+    }
+    
+    if (tempSelectedEvents.size === 0) {
+      alert('Please select at least one event!');
+      return;
+    }
+
+    const eventIds = Array.from(tempSelectedEvents);
+    const userGender = userProfileData.gender || 'male'; // Default to male if not specified
+    const totalAmount = calculateRegistrationPrice(tempSelectedEvents, userGender);
+    
+    // Get selected event names
+    const allEvents = [...sportsEvents, ...culturalsEvents, ...paraSportsEvents];
+    const selectedEventNames = eventIds.map(eventId => {
+      const event = allEvents.find(e => e._id === eventId);
+      return event ? event.eventName : 'Unknown Event';
+    });
+
+    // Create confirmation message
+    const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
+    const priceText = totalAmount === 0 ? 'FREE' : `₹${totalAmount}`;
+    
+    const confirmationMessage = `
+🎯 REGISTRATION CONFIRMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 Selected Events (${eventIds.length}):
+${eventsList}
+
+👤 Participant: ${userProfileData.name}
+⚧ Gender: ${userGender}
+💰 Total Amount: ${priceText}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Do you want to proceed with registration?`;
+
+    const confirmed = window.confirm(confirmationMessage);
+    
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      const result = await saveMyEvents(userProfileData.userId!, eventIds);
+      
+      if (result.success) {
+        const savedEventIds = await fetchUserSavedEvents(userProfileData.userId!);
+        setTempSelectedEvents(savedEventIds); // Keep the registered events selected
+        handleCloseSubModal();
+        
+        const successMessage = totalAmount === 0 
+          ? `✅ Successfully registered for ${eventIds.length} event(s) for FREE!`
+          : `✅ Successfully registered for ${eventIds.length} event(s)! Total amount: ₹${totalAmount}`;
+          
+        alert(successMessage);
+      } else {
+        alert(result.message || 'Failed to register. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error registering for events:', error);
+      alert('An error occurred while registering.');
+    }
   };
 
   const handleLogout = () => {
@@ -440,15 +574,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleShowMyEvents = () => {
-    setShowProfileDropdown(false);
-    setShowMyEventsModal(true);
-  };
-
-  const handleCloseMyEvents = () => {
-    setShowMyEventsModal(false);
-  };
-
   const handleLoginInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginFormData(prev => ({
@@ -477,7 +602,7 @@ const Dashboard: React.FC = () => {
       const result = await loginUser(loginFormData.email, loginFormData.password);
       
       if (result.success && result.data) {
-        const { userId, name, email, userType = 'visitor' } = result.data;
+        const { userId, name, email, userType = 'visitor', gender = 'male' } = result.data;
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -497,7 +622,8 @@ const Dashboard: React.FC = () => {
           name: name,
           email: email,
           userId: userId,
-          userType: userType || 'visitor'
+          userType: userType || 'visitor',
+          gender: gender || 'male'
         };
         setUserProfileData(profileData);
         
@@ -509,10 +635,11 @@ const Dashboard: React.FC = () => {
         localStorage.setItem('userEmail', email);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userType', userType || 'visitor');
+        localStorage.setItem('userGender', gender || 'male');
         localStorage.setItem('isLoggedIn', 'true');
         
         // Fetch user's saved events from database
-        fetchUserSavedEvents(userId);
+        await fetchUserSavedEvents(userId);
       } else {
         setLoginMessage({
           type: 'error',
@@ -535,6 +662,7 @@ const Dashboard: React.FC = () => {
     const storedUserEmail = localStorage.getItem('userEmail');
     const storedUserId = localStorage.getItem('userId');
     const storedUserType = localStorage.getItem('userType');
+    const storedUserGender = localStorage.getItem('userGender');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
     
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
@@ -544,7 +672,8 @@ const Dashboard: React.FC = () => {
         name: storedUserName,
         email: storedUserEmail || '',
         userId: storedUserId,
-        userType: storedUserType || 'visitor'
+        userType: storedUserType || 'visitor',
+        gender: storedUserGender || 'male'
       });
       
       // Fetch user's saved events from database
@@ -553,16 +682,19 @@ const Dashboard: React.FC = () => {
   }, []);
 
   // Function to fetch user's saved events from database
-  const fetchUserSavedEvents = async (userId: string) => {
+  const fetchUserSavedEvents = async (userId: string): Promise<Set<string>> => {
     try {
       const result = await getMyEvents(userId);
       if (result.success && result.data) {
         setMyEvents(result.data);
-        setSelectedEvents(new Set(result.data.map((e: Event) => e._id)));
+        const savedEventIds = new Set<string>(result.data.map((e: Event) => e._id));
+        setSelectedEvents(savedEventIds);
+        return savedEventIds; // Return the event IDs for immediate use
       }
     } catch (error) {
       console.error('Error fetching saved events:', error);
     }
+    return new Set<string>(); // Return empty set if failed
   };
 
   // Close profile dropdown when clicking outside
@@ -599,7 +731,7 @@ const Dashboard: React.FC = () => {
       <nav className="header-nav">
           <div className="nav-left">
             <a href="#home" className="active">Home</a>
-            <a href="#my-events" onClick={(e) => { e.preventDefault(); handleShowMyEvents(); }}>My Events</a>
+            <a href="#events" onClick={async (e) => { e.preventDefault(); await fetchEvents(); if (isLoggedIn && userProfileData.userId) { const savedEventIds = await fetchUserSavedEvents(userProfileData.userId); setTempSelectedEvents(savedEventIds); } else { setTempSelectedEvents(new Set()); } setActiveSubModal('EVENTS'); }}>Events</a>
             <a href="#zonal">Zonal</a>
           </div>
           <div className="nav-right">
@@ -1142,15 +1274,22 @@ const Dashboard: React.FC = () => {
                                 <input
                                   type="checkbox"
                                   className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)}
-                                  onChange={() => {
-                                    const newSelection = new Set(tempSelectedEvents);
-                                    if (newSelection.has(event._id)) {
-                                      newSelection.delete(event._id);
-                                    } else {
-                                      newSelection.add(event._id);
+                                  checked={tempSelectedEvents.has(event._id)} 
+                                  disabled={paraSportsSelected || selectedEvents.has(event._id)}
+                                  onChange={() => { 
+                                    // Only allow changes if not already registered
+                                    if (!selectedEvents.has(event._id)) {
+                                      const newSelection = new Set(tempSelectedEvents); 
+                                      const wasSelected = newSelection.has(event._id); 
+                                      if (wasSelected) { 
+                                        newSelection.delete(event._id); 
+                                      } else { 
+                                        newSelection.add(event._id); 
+                                      } 
+                                      const hasRegularEvents = [...sportsEvents, ...culturalsEvents].some(e => newSelection.has(e._id)); 
+                                      setRegularEventsSelected(hasRegularEvents); 
+                                      setTempSelectedEvents(newSelection); 
                                     }
-                                    setTempSelectedEvents(newSelection);
                                   }}
                                 />
                                 <div className="event-item-content">
@@ -1179,15 +1318,22 @@ const Dashboard: React.FC = () => {
                                 <input
                                   type="checkbox"
                                   className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)}
-                                  onChange={() => {
-                                    const newSelection = new Set(tempSelectedEvents);
-                                    if (newSelection.has(event._id)) {
-                                      newSelection.delete(event._id);
-                                    } else {
-                                      newSelection.add(event._id);
+                                  checked={tempSelectedEvents.has(event._id)} 
+                                  disabled={paraSportsSelected || selectedEvents.has(event._id)}
+                                  onChange={() => { 
+                                    // Only allow changes if not already registered
+                                    if (!selectedEvents.has(event._id)) {
+                                      const newSelection = new Set(tempSelectedEvents); 
+                                      const wasSelected = newSelection.has(event._id); 
+                                      if (wasSelected) { 
+                                        newSelection.delete(event._id); 
+                                      } else { 
+                                        newSelection.add(event._id); 
+                                      } 
+                                      const hasRegularEvents = [...sportsEvents, ...culturalsEvents].some(e => newSelection.has(e._id)); 
+                                      setRegularEventsSelected(hasRegularEvents); 
+                                      setTempSelectedEvents(newSelection); 
                                     }
-                                    setTempSelectedEvents(newSelection);
                                   }}
                                 />
                                 <div className="event-item-content">
@@ -1205,55 +1351,98 @@ const Dashboard: React.FC = () => {
                           )}
                         </div>
                       </div>
+                      
+                      {/* Para Sports Events */}
+                      <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
+                        <h3>♿ Para Sports Events ({paraSportsEvents.length})</h3>
+                        {paraSportsEvents.length === 0 && (
+                          <div>
+                            <p style={{color: '#e74c3c', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
+                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px'}}>
+                              🔄 Retry Loading Events
+                            </button>
+                          </div>
+                        )}
+                        <div className="event-list">
+                          {paraSportsEvents.length > 0 ? (
+                            paraSportsEvents.map((event) => (
+                              <label key={event._id} className="event-item event-checkbox-item">
+                                <input
+                                  type="checkbox"
+                                  className="event-checkbox"
+                                  checked={tempSelectedEvents.has(event._id)}
+                                  disabled={regularEventsSelected || selectedEvents.has(event._id)}
+                                  onChange={() => {
+                                    // Only allow changes if not already registered
+                                    if (!selectedEvents.has(event._id) && !regularEventsSelected) {
+                                      const newSelection = new Set(tempSelectedEvents);
+                                      const wasSelected = newSelection.has(event._id);
+                                      
+                                      if (wasSelected) {
+                                        newSelection.delete(event._id);
+                                      } else {
+                                        newSelection.add(event._id);
+                                      }
+                                      
+                                      // Check if any para sports events are selected
+                                      const hasParaSportsSelected = paraSportsEvents.some(pe => 
+                                        newSelection.has(pe._id)
+                                      );
+                                      
+                                      setParaSportsSelected(hasParaSportsSelected);
+                                      
+                                      // If selecting para sports, remove all regular events
+                                      if (!wasSelected && hasParaSportsSelected) {
+                                        [...sportsEvents, ...culturalsEvents].forEach(e => {
+                                          newSelection.delete(e._id);
+                                        });
+                                        setRegularEventsSelected(false);
+                                      }
+                                      
+                                      setTempSelectedEvents(newSelection);
+                                    }
+                                  }}
+                                />
+                                <div className="event-item-content">
+                                  <h4>{event.eventName}</h4>
+                                  <p>{event.description || 'No description available'}</p>
+                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
+                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
+                                  {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
+                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                </div>
+                              </label>
+                            ))
+                          ) : (
+                            <p>No para sports events available at the moment.</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                   
                   <div className="events-modal-footer">
                     <div className="selected-count">
                       Selected: {tempSelectedEvents.size} event(s)
+                      {tempSelectedEvents.size > 0 && userProfileData.gender && (
+                        <div className="price-preview">
+                          Total: {calculateRegistrationPrice(tempSelectedEvents, userProfileData.gender) === 0 ? 'FREE' : `₹${calculateRegistrationPrice(tempSelectedEvents, userProfileData.gender)}`}
+                        </div>
+                      )}
                     </div>
-                    <button 
-                      className="save-to-my-events-btn"
-                      onClick={async () => {
-                        if (!isLoggedIn) {
-                          alert('Please login to register for events!');
-                          setShowLoginModal(true);
-                          handleCloseSubModal();
-                          return;
-                        }
-                        
-                        if (userProfileData.userType === 'visitor') {
-                          alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
-                          return;
-                        }
-                        
-                        if (tempSelectedEvents.size === 0) {
-                          alert('Please select at least one event!');
-                          return;
-                        }
-
-                        const eventIds = Array.from(tempSelectedEvents);
-                        
-                        try {
-                          const result = await saveMyEvents(userProfileData.userId!, eventIds);
-                          
-                          if (result.success) {
-                            await fetchUserSavedEvents(userProfileData.userId!);
-                            setTempSelectedEvents(new Set());
-                            handleCloseSubModal();
-                            alert(`✅ Successfully registered for ${eventIds.length} event(s)! Check My Events to view them.`);
-                          } else {
-                            alert(result.message || 'Failed to register. Please try again.');
-                          }
-                        } catch (error) {
-                          console.error('Error registering for events:', error);
-                          alert('An error occurred while registering.');
-                        }
-                      }}
-                      disabled={tempSelectedEvents.size === 0}
-                    >
-                      ✅ Register for Events ({tempSelectedEvents.size})
-                    </button>
+                    <div className="modal-actions">
+                      <button className="close-modal-btn" onClick={handleCloseSubModal}>
+                        Cancel
+                      </button>
+                      {tempSelectedEvents.size > 0 && (
+                        <button 
+                          className="register-events-btn"
+                          onClick={handleRegisterForEvents}
+                        >
+                          🎯 Register for Events ({tempSelectedEvents.size})
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
@@ -1704,13 +1893,13 @@ const Dashboard: React.FC = () => {
         </div>
       )}
 
-      {/* My Events Modal */}
-      {showMyEventsModal && (
-        <div className="login-modal-overlay" onClick={handleCloseMyEvents}>
+      {/* My Events Modal - Disabled */}
+      {false && (
+        <div className="login-modal-overlay" onClick={() => {}}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>🎫 My Registered Events</h2>
-              <button className="close-btn" onClick={handleCloseMyEvents}>×</button>
+              <button className="close-btn" onClick={() => {}}>×</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -1784,7 +1973,7 @@ const Dashboard: React.FC = () => {
                 <div className="no-events-saved">
                   <p>You haven't registered for any events yet.</p>
                   <button className="browse-events-btn" onClick={() => {
-                    setShowMyEventsModal(false);
+                    // setShowMyEventsModal(false);
                     handleCardClick('EVENTS');
                   }}>
                     Browse Events
@@ -1800,3 +1989,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+

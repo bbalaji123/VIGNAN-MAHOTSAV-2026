@@ -28,11 +28,11 @@ router.get('/events/:type', async (req, res) => {
     const { type } = req.params;
     
     // Validate event type
-    const validTypes = ['sports', 'culturals', 'technical', 'literary'];
+    const validTypes = ['sports', 'culturals', 'technical', 'literary', 'parasports'];
     if (!validTypes.includes(type.toLowerCase())) {
       return res.status(400).json({
         success: false,
-        message: 'Invalid event type. Must be sports, culturals, technical, or literary'
+        message: 'Invalid event type. Must be sports, culturals, technical, literary, or parasports'
       });
     }
 

@@ -8,7 +8,7 @@ const eventSchema = new mongoose.Schema({
   },
   eventType: {
     type: String,
-    enum: ['sports', 'culturals', 'technical', 'literary'],
+    enum: ['sports', 'culturals', 'technical', 'literary', 'parasports'],
     required: true
   },
   description: {

@@ -95,9 +95,17 @@ app.get('/', (req, res) => {
 app.use(errorLogger);
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server started on port ${PORT}`);
+  console.log(`📡 API available at http://localhost:${PORT}/api`);
+  console.log(`🏥 Health check at http://localhost:${PORT}/health`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   logger.info(`🚀 Server started on port ${PORT}`);
   logger.info(`📡 API available at http://localhost:${PORT}/api`);
   logger.info(`🏥 Health check at http://localhost:${PORT}/health`);
   logger.info(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+}).on('error', (err) => {
+  console.error('❌ Server startup error:', err);
+  logger.error('Server startup error:', err);
+  process.exit(1);
 });

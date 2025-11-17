@@ -5,7 +5,7 @@ import Event from './models/Event.js';
 dotenv.config();
 
 const sampleEvents = [
-  // Sports Events
+  // Sports Events (10 events)
   {
     eventName: 'Cricket Tournament',
     eventType: 'sports',
@@ -91,8 +91,93 @@ const sampleEvents = [
     ],
     isActive: true
   },
+  {
+    eventName: 'Badminton Championship',
+    eventType: 'sports',
+    description: 'Singles and doubles badminton competitions with elimination rounds',
+    category: 'Individual Sport',
+    date: 'February 8, 2026',
+    time: '10:00 AM - 5:00 PM',
+    venue: 'Sports Complex - Badminton Hall',
+    maxParticipants: 80,
+    registeredCount: 0,
+    prizePool: '₹25,000',
+    rules: 'BWF rules apply. Singles and doubles categories available.',
+    coordinators: [
+      { name: 'Ananya Sharma', contact: '9876543221' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Volleyball Tournament',
+    eventType: 'sports',
+    description: 'Inter-college volleyball championship with team competitions',
+    category: 'Team Sport',
+    date: 'February 6-7, 2026',
+    time: '9:00 AM - 6:00 PM',
+    venue: 'Outdoor Volleyball Courts',
+    maxParticipants: 84,
+    registeredCount: 0,
+    prizePool: '₹35,000',
+    rules: 'FIVB rules. Teams of 6 players + 2 substitutes.',
+    coordinators: [
+      { name: 'Ravi Kumar', contact: '9876543222' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Chess Championship',
+    eventType: 'sports',
+    description: 'Strategic chess tournament with multiple rounds',
+    category: 'Individual Sport',
+    date: 'February 5-6, 2026',
+    time: '2:00 PM - 8:00 PM',
+    venue: 'Conference Hall - Chess Arena',
+    maxParticipants: 40,
+    registeredCount: 0,
+    prizePool: '₹15,000',
+    rules: 'FIDE rules apply. Swiss system tournament format.',
+    coordinators: [
+      { name: 'Deepak Gupta', contact: '9876543223' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Swimming Competition',
+    eventType: 'sports',
+    description: 'Multiple swimming events including freestyle, butterfly, and relay races',
+    category: 'Individual Sport',
+    date: 'February 8, 2026',
+    time: '7:00 AM - 12:00 PM',
+    venue: 'University Swimming Pool',
+    maxParticipants: 50,
+    registeredCount: 0,
+    prizePool: '₹30,000',
+    rules: 'FINA rules apply. Multiple stroke categories.',
+    coordinators: [
+      { name: 'Kavya Nair', contact: '9876543224' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Kabaddi Tournament',
+    eventType: 'sports',
+    description: 'Traditional Indian sport tournament with team competitions',
+    category: 'Team Sport',
+    date: 'February 7-8, 2026',
+    time: '3:00 PM - 7:00 PM',
+    venue: 'Main Sports Ground',
+    maxParticipants: 70,
+    registeredCount: 0,
+    prizePool: '₹28,000',
+    rules: 'Traditional kabaddi rules. Teams of 7 players each.',
+    coordinators: [
+      { name: 'Arjun Singh', contact: '9876543225' }
+    ],
+    isActive: true
+  },
 
-  // Cultural Events
+  // Cultural Events (10 events)
   {
     eventName: 'Classical Dance Competition',
     eventType: 'culturals',
@@ -192,6 +277,74 @@ const sampleEvents = [
     rules: 'Group performances (5-15 members). Authentic folk forms from any region.',
     coordinators: [
       { name: 'Kavita Nair', contact: '9876543220' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Stand-up Comedy Competition',
+    eventType: 'culturals',
+    description: 'Make the audience laugh with your original comedy acts',
+    category: 'Comedy',
+    date: 'February 7, 2026',
+    time: '7:00 PM - 10:00 PM',
+    venue: 'Open Air Theater',
+    maxParticipants: 30,
+    registeredCount: 0,
+    prizePool: '₹25,000',
+    rules: 'Solo performances. Time limit: 5-8 minutes. Original content only.',
+    coordinators: [
+      { name: 'Rohit Verma', contact: '9876543226' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Art & Painting Exhibition',
+    eventType: 'culturals',
+    description: 'Display your artistic talents through paintings and digital art',
+    category: 'Art',
+    date: 'February 5-7, 2026',
+    time: '10:00 AM - 6:00 PM',
+    venue: 'Art Gallery',
+    maxParticipants: 100,
+    registeredCount: 0,
+    prizePool: '₹30,000',
+    rules: 'Original artworks only. Multiple categories available.',
+    coordinators: [
+      { name: 'Priya Singh', contact: '9876543227' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Poetry & Literature Competition',
+    eventType: 'culturals',
+    description: 'Express yourself through the power of words and poetry',
+    category: 'Literature',
+    date: 'February 6, 2026',
+    time: '2:00 PM - 5:00 PM',
+    venue: 'Literature Hall',
+    maxParticipants: 60,
+    registeredCount: 0,
+    prizePool: '₹22,000',
+    rules: 'Original compositions. Hindi, English, and regional languages allowed.',
+    coordinators: [
+      { name: 'Suman Joshi', contact: '9876543228' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'DJ & Music Production Battle',
+    eventType: 'culturals',
+    description: 'Electronic music competition featuring DJs and music producers',
+    category: 'Music',
+    date: 'February 8, 2026',
+    time: '8:00 PM - 12:00 AM',
+    venue: 'Open Air Theater',
+    maxParticipants: 25,
+    registeredCount: 0,
+    prizePool: '₹42,000',
+    rules: 'Original mixes and live performances. 20 minutes per DJ.',
+    coordinators: [
+      { name: 'Aditya Mehta', contact: '9876543229' }
     ],
     isActive: true
   }

@@ -1,60 +1,9 @@
 import express from 'express';
 import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { sendWelcomeEmail, sendPasswordResetEmail } from '../utils/emailService.js';
 
 const router = express.Router();
-const execAsync = promisify(exec);
-
-// Get current file path for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Helper function to send email
-async function sendWelcomeEmail(email, userId, password, name) {
-  try {
-    const scriptPath = path.join(__dirname, '..', 'send_email.py');
-    const command = `python "${scriptPath}" "${email}" "${userId}" "${password}" "${name}"`;
-    
-    console.log(`Sending welcome email to ${email}...`);
-    const { stdout, stderr } = await execAsync(command);
-    
-    if (stderr) {
-      console.error('Email stderr:', stderr);
-    }
-    console.log('Email stdout:', stdout);
-    
-    return true;
-  } catch (error) {
-    console.error('Failed to send email:', error.message);
-    // Don't throw error - registration should succeed even if email fails
-    return false;
-  }
-}
-
-// Helper function to send password reset email
-async function sendPasswordResetEmail(email, name, userId, password) {
-  try {
-    const scriptPath = path.join(__dirname, '..', 'send_password_reset.py');
-    const command = `python "${scriptPath}" "${email}" "${name}" "${userId}" "${password}"`;
-    
-    console.log(`Sending password reset email to ${email}...`);
-    const { stdout, stderr } = await execAsync(command);
-    
-    if (stderr) {
-      console.error('Email stderr:', stderr);
-    }
-    console.log('Email stdout:', stdout);
-    
-    return true;
-  } catch (error) {
-    console.error('Failed to send password reset email:', error.message);
-    return false;
-  }
-}
 
 // Helper function to generate next user ID
 async function generateUserId() {

@@ -13,7 +13,13 @@
     "dev": "nodemon server.js",
     "build": "echo 'No build step required for Node.js'"
   },
-  "keywords": ["mahotsav", "backend", "express", "mongodb", "redis"],
+  "keywords": [
+    "mahotsav",
+    "backend",
+    "express",
+    "mongodb",
+    "redis"
+  ],
   "author": "Vignan University",
   "license": "ISC",
   "dependencies": {
@@ -29,6 +35,7 @@
     "ioredis": "^5.8.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
+    "nodemailer": "^6.10.1",
     "redis": "^5.9.0",
     "winston": "^3.18.3"
   },

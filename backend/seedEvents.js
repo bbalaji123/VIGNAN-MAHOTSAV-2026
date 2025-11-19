@@ -5,12 +5,15 @@ import Event from './models/Event.js';
 dotenv.config();
 
 const sampleEvents = [
-  // Sports Events (10 events)
+  // SPORTS EVENTS WITH GENDER CATEGORIES
+  
+  // Cricket - Gender Split
   {
-    eventName: 'Cricket Tournament',
+    eventName: 'Cricket Tournament - Men',
     eventType: 'sports',
-    description: 'Inter-college cricket championship with teams from across the region',
-    category: 'Team Sport',
+    description: 'Inter-college cricket championship for men\'s teams',
+    category: 'team',
+    gender: 'male',
     date: 'February 5-7, 2026',
     time: '9:00 AM onwards',
     venue: 'University Cricket Ground',
@@ -20,6 +23,24 @@ const sampleEvents = [
     rules: 'Standard ICC cricket rules apply. Teams of 11 players each.',
     coordinators: [
       { name: 'Rahul Sharma', contact: '9876543210' }
+    ],
+    isActive: true
+  },
+  {
+    eventName: 'Cricket Tournament - Women',
+    eventType: 'sports',
+    description: 'Inter-college cricket championship for women\'s teams',
+    category: 'team',
+    gender: 'female',
+    date: 'February 8-9, 2026',
+    time: '9:00 AM onwards',
+    venue: 'University Cricket Ground',
+    maxParticipants: 80,
+    registeredCount: 0,
+    prizePool: '₹40,000',
+    rules: 'Standard ICC cricket rules apply. Teams of 11 players each.',
+    coordinators: [
+      { name: 'Priya Sharma', contact: '9876543210' }
     ],
     isActive: true
   },

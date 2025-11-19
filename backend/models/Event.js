@@ -19,6 +19,11 @@ const eventSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'mixed'],
+    trim: true
+  },
   date: {
     type: String,
     trim: true

@@ -2,15 +2,481 @@ import React, { useState, useEffect } from 'react';
 import AnimatedIcon from './Animatedicon';
 import FloatingBubble from './FloatingBubble';
 import FloatingIcons from './FloatingIcons';
-import SideMenu from './SideMenu';
 import EventRegistrationModal from './EventRegistrationModal';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, getEventsByGender, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 import './Dashboard.css';
 import './ForgotPassword.css';
 import './App.css';
 
 const Dashboard: React.FC = () => {
-  const [showMenuCards, setShowMenuCards] = useState(false);
+  const [showPageMenu, setShowPageMenu] = useState(false);
+  const [showEventsInfo, setShowEventsInfo] = useState(false);
+  const [showInlineEventsInfo, setShowInlineEventsInfo] = useState(false);
+  const [showSportsDetails, setShowSportsDetails] = useState(false);
+  const [showEventDetail, setShowEventDetail] = useState(false);
+  const [selectedEventDetail, setSelectedEventDetail] = useState<any>(null);
+
+  const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
+
+  const eventInfoCards = [
+    { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
+    { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
+    { title: "PARA SPORTS", description: "Inclusive para sports events designed for participants with special abilities." }
+  ];
+
+  const sportsDetailCards = [
+    { title: "Men's Athletics", subtitle: "Track & Field" },
+    { title: "Women's Athletics", subtitle: "Track & Field" },
+    { title: "Men's Individual &", subtitle: "Indoor Sports" },
+    { title: "Women's Individual &", subtitle: "Indoor Sports" },
+    { title: "Men's Team Field Sports", subtitle: "" },
+    { title: "Women's Team Field", subtitle: "Sports" }
+  ];
+
+  const [showIndoorSports, setShowIndoorSports] = useState(false);
+  const [currentIndoorSlide, setCurrentIndoorSlide] = useState(0);
+  const [showWomenIndoorSports, setShowWomenIndoorSports] = useState(false);
+  const [currentWomenIndoorSlide, setCurrentWomenIndoorSlide] = useState(0);
+  const [showMenTeamSports, setShowMenTeamSports] = useState(false);
+  const [currentMenTeamSlide, setCurrentMenTeamSlide] = useState(0);
+  const [showWomenTeamSports, setShowWomenTeamSports] = useState(false);
+  const [currentWomenTeamSlide, setCurrentWomenTeamSlide] = useState(0);
+  const [showParaSports, setShowParaSports] = useState(false);
+  const [currentParaSportsSlide, setCurrentParaSportsSlide] = useState(0);
+  const [showParaAthleticsMen, setShowParaAthleticsMen] = useState(false);
+  const [currentParaAthleticsSlide, setCurrentParaAthleticsSlide] = useState(0);
+  const [showParaCricketMen, setShowParaCricketMen] = useState(false);
+  const [currentParaCricketSlide, setCurrentParaCricketSlide] = useState(0);
+  const [showCulturals, setShowCulturals] = useState(false);
+  const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
+
+  // State for fetched events from database
+  const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
+  const [culturalEvents, setCulturalEvents] = useState<Event[]>([]);
+  const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
+  const [showMusic, setShowMusic] = useState(false);
+  const [currentMusicSlide, setCurrentMusicSlide] = useState(0);
+  const [showDance, setShowDance] = useState(false);
+  const [currentDanceSlide, setCurrentDanceSlide] = useState(0);
+  const [showTheatre, setShowTheatre] = useState(false);
+  const [currentTheatreSlide, setCurrentTheatreSlide] = useState(0);
+  const [showLiterature, setShowLiterature] = useState(false);
+  const [currentLiteratureSlide, setCurrentLiteratureSlide] = useState(0);
+  const [showVisualArts, setShowVisualArts] = useState(false);
+  const [currentVisualArtsSlide, setCurrentVisualArtsSlide] = useState(0);
+  const [showFashionDesign, setShowFashionDesign] = useState(false);
+  const [currentFashionDesignSlide, setCurrentFashionDesignSlide] = useState(0);
+  const [showSpotLight, setShowSpotLight] = useState(false);
+  const [currentSpotLightSlide, setCurrentSpotLightSlide] = useState(0);
+
+  // Gender-based pricing structure
+  const getPricingForUser = () => {
+    const normalizedGender = userProfileData.gender?.toLowerCase();
+
+    if (normalizedGender === 'female') {
+      return {
+        sports: 250,
+        culturals: 250,
+        both: 350
+      };
+    }
+
+    // Default to male pricing (covers explicit male users + unknown gender)
+    return {
+      sports: 350,
+      culturals: 250,
+      both: 350
+    };
+  };
+
+  // Convert database events to card format for display
+  const convertEventsToCards = (events: Event[]) => {
+    return events.map(event => ({
+      title: event.eventName,
+      subtitle: event.category || event.eventType || "Event"
+    }));
+  };
+
+
+
+  const culturalsCards = [
+    { title: "Music", subtitle: "Singing & Instruments" },
+    { title: "Dance", subtitle: "Classical & Western" },
+    { title: "Theatre", subtitle: "Drama & Cinematography" },
+    { title: "Literature", subtitle: "Poetry & Writing" },
+    { title: "Visual Arts", subtitle: "Arts & Craft" },
+    { title: "Fashion Design", subtitle: "Fashion & Styling" },
+    { title: "Spot Light", subtitle: "Special Events" }
+  ];
+
+  const eventDetailsData = {
+    "Men's Athletics": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TRACK & FIELD (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "Everyone should report at least 30 mins before scheduled time.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+      ]
+    },
+    "Chess": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "CHESS (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Chess Tournament is conducted in Swiss League system.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All India Chess Federation Rules & Regulations are adopted for the competition.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Tie breaks is as following: A. Buchholz B. Buchholz but 1 C. Sonneburn burger D. Direct encounter E. Great number of victories",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 6,000",
+        second: "Rs. 4,000",
+        third: ""
+      },
+      contacts: [
+        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Table Tennis": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TABLE TENNIS - Singles (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "Matches are conducted on knock out basis and are played to 11 points.",
+        "All player must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "There will be only three sets for each match.",
+        "Five sets will be conducted for semifinals and finals.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: ""
+      },
+      contacts: [
+        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
+        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" }
+      ]
+    },
+    "Tennikoit": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TENNIKOIT – Singles (Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Participants should report at least 30 mins before scheduled time.",
+        "The match is played as the best of 3 sets, 21+21+15 points.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: ""
+      },
+      contacts: [
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" },
+        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" }
+      ]
+    },
+    "Traditional Yogasana": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All participants must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Syllabus, Rules & Regulations for the Yogasana events: A. Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat B. Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Link to refer syllabus: https://www.yogasanabharat.com/code",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: ""
+      },
+      contacts: [
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+      ]
+    },
+    "Artistic Yogasana": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All participants must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Syllabus, Rules & Regulations for the Yogasana events: A. Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat B. Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Link to refer syllabus: https://www.yogasanabharat.com/code",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: ""
+      },
+      contacts: [
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+      ]
+    },
+    "Taekwondo": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TAEKWONDO (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "Men Weight Categories (U-54, U-58, U-63, U-68, U-74, U-80, U-87, above 87).",
+        "Women Weight Categories (U-46, U-49, U-53, U-57, U-62, U-67, U-73, above 73).",
+        "World Taekwondo (WT) new competition rules are applicable.",
+        "Senior men and women kyorugi competitions only.",
+        "All participants must come with a proper sports attire.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 1,500",
+        second: "Rs. 1,000",
+        third: ""
+      },
+      contacts: [
+        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
+        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" }
+      ]
+    },
+    "Volley ball": {
+      title: "TEAM EVENTS",
+      subtitle: "VOLLEY BALL (Men & Women)",
+      rules: [
+        "Team strength is 6+4 players.",
+        "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
+        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" },
+        { name: "Mr. P. Murali", phone: "+91 7207049397" }
+      ]
+    },
+    "Basket ball": {
+      title: "TEAM EVENTS",
+      subtitle: "BASKET BALL (Men & Women)",
+      rules: [
+        "Team strength is 5+5 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
+      ]
+    },
+    "Kabaddi": {
+      title: "TEAM EVENTS",
+      subtitle: "KABADDI (Men & Women)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "Pro Kabaddi rules & Regulations are applicable.",
+        "All matches will be conducted on the kabaddi mat.",
+        "Player may wear mat shoes or can play with barefoot.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
+        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" },
+        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+      ]
+    },
+    "Football": {
+      title: "TEAM EVENTS",
+      subtitle: "FOOTBALL (Men & Women)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "The time of each half will be informed before the commencement of tournament.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. P. Murali", phone: "+91 7207049397" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Kho-Kho": {
+      title: "TEAM EVENTS",
+      subtitle: "KHO-KHO (Men & Women)",
+      rules: [
+        "Team strength is 9+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
+        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
+      ]
+    },
+    "Hockey": {
+      title: "TEAM EVENTS",
+      subtitle: "HOCKEY (Men & Women)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
+        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
+        third: "Men: Rs. 7,000",
+        fourth: "Men: Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Throw ball": {
+      title: "TEAM EVENTS",
+      subtitle: "THROWBALL (Women)",
+      rules: [
+        "Team limit is 9+1 players.",
+        "The match is played as the best of 3 sets, 25+25+15 points.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" },
+        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" },
+        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+      ]
+    },
+    "Para Sports": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "PARA SPORTS (Men)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "In Para sports only two events:100Mts,400Mts (Men only) under Hand amputee, Leg amputee and visual impairment categories.",
+        "Players must report at least before 30 minutes at respective grounds.",
+        "All participants must come with a proper sports attire.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000",
+        second: "Rs. 1,500"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" }
+      ]
+    }
+  };
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showOverviewModal, setShowOverviewModal] = useState(false);
@@ -35,9 +501,6 @@ const Dashboard: React.FC = () => {
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
   const [isSendingReset, setIsSendingReset] = useState(false);
   const [resetMessage, setResetMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
-  const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
-  const [culturalsEvents, setCulturalsEvents] = useState<Event[]>([]);
-  const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(false);
   const [showEventRegistrationModal, setShowEventRegistrationModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -56,6 +519,221 @@ const Dashboard: React.FC = () => {
   const [eventRegistrationsCount, setEventRegistrationsCount] = useState(0);
   const [paraSportsSelected, setParaSportsSelected] = useState(false);
   const [regularEventsSelected, setRegularEventsSelected] = useState(false);
+  const [showMyEventsModal, setShowMyEventsModal] = useState(false);
+
+  // Check what gender events are currently selected
+  const getSelectedEventsGender = () => {
+    const selectedEventsArray = Array.from(tempSelectedEvents);
+    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
+    
+    let hasMaleEvents = false;
+    let hasFemaleEvents = false;
+    let hasMixedEvents = false;
+    
+    for (const eventId of selectedEventsArray) {
+      const event = allEvents.find(e => e._id === eventId);
+      if (event) {
+        if (event.gender === 'male') hasMaleEvents = true;
+        else if (event.gender === 'female') hasFemaleEvents = true;
+        else if (event.gender === 'mixed') hasMixedEvents = true;
+      }
+    }
+    
+    return { hasMaleEvents, hasFemaleEvents, hasMixedEvents };
+  };
+
+  // Check if an event should be disabled based on current selections
+  const isEventDisabled = (event: Event) => {
+    // If already selected, don't disable
+    if (tempSelectedEvents.has(event._id)) {
+      return false;
+    }
+    
+    // If already registered for this event, disable
+    if (selectedEvents.has(event._id)) {
+      return true;
+    }
+    
+    const { hasMaleEvents, hasFemaleEvents } = getSelectedEventsGender();
+    const isParaSports = paraSportsEvents.some(pe => pe._id === event._id);
+    
+    // Para sports logic
+    if (isParaSports) {
+      // Para sports can't be selected if regular events are selected
+      return regularEventsSelected;
+    } else {
+      // Regular events can't be selected if para sports are selected
+      if (paraSportsSelected) {
+        return true;
+      }
+      
+      // Gender-based restrictions for regular events
+      if (event.gender === 'male' && hasFemaleEvents) {
+        return true; // Can't select male events if female events are selected
+      }
+      
+      if (event.gender === 'female' && hasMaleEvents) {
+        return true; // Can't select female events if male events are selected
+      }
+    }
+    
+    // Mixed events are always allowed (unless para sports conflict)
+    return false;
+  };
+
+  // Filter events based on user gender - users only see events appropriate for their gender
+  const filterEventsByGender = (events: Event[]) => {
+    const userGender = userProfileData.gender;
+    console.log('🔍 Filtering events - User gender:', userGender, 'User profile:', userProfileData);
+    console.log('📊 Events to filter:', events.length, 'events');
+    
+    if (userGender === 'female') {
+      // Female users can only see female and mixed gender events
+      const filtered = events.filter(event => 
+        event.gender === 'female' || event.gender === 'mixed'
+      );
+      console.log('👩 Female user - showing', filtered.length, 'events (female + mixed only)');
+      return filtered;
+    }
+    
+    if (userGender === 'male') {
+      // Male users can only see male and mixed gender events  
+      const filtered = events.filter(event => 
+        event.gender === 'male' || event.gender === 'mixed'
+      );
+      console.log('👨 Male user - showing', filtered.length, 'events (male + mixed only)');
+      return filtered;
+    }
+    
+    // For non-logged in users or other genders, show all events
+    console.log('🔓 Non-logged user or other gender - showing all', events.length, 'events');
+    return events;
+  };
+
+  // Apply gender filtering to event categories
+  const getFilteredSportsEvents = () => {
+    return isLoggedIn ? filterEventsByGender(sportsEvents) : sportsEvents;
+  };
+
+  const getFilteredCulturalEvents = () => {
+    return isLoggedIn ? filterEventsByGender(culturalEvents) : culturalEvents;
+  };
+
+  const getFilteredParaSportsEvents = () => {
+    return isLoggedIn ? filterEventsByGender(paraSportsEvents) : paraSportsEvents;
+  };
+
+  // Functions to filter cultural events by category (with gender filtering)
+  const getMusicEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('singing') || 
+      event.eventName?.toLowerCase().includes('music') ||
+      event.category?.toLowerCase().includes('music')
+    );
+  };
+
+  const getDanceEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('dance') ||
+      event.category?.toLowerCase().includes('dance')
+    );
+  };
+
+  const getTheatreEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('theatre') ||
+      event.eventName?.toLowerCase().includes('drama') ||
+      event.category?.toLowerCase().includes('theatre')
+    );
+  };
+
+  const getLiteratureEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('literature') ||
+      event.eventName?.toLowerCase().includes('poetry') ||
+      event.eventName?.toLowerCase().includes('writing') ||
+      event.category?.toLowerCase().includes('literature')
+    );
+  };
+
+  const getVisualArtsEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('art') ||
+      event.eventName?.toLowerCase().includes('painting') ||
+      event.eventName?.toLowerCase().includes('photography') ||
+      event.category?.toLowerCase().includes('visual')
+    );
+  };
+
+  const getFashionDesignEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('fashion') ||
+      event.eventName?.toLowerCase().includes('design') ||
+      event.category?.toLowerCase().includes('fashion')
+    );
+  };
+
+  const getSpotLightEvents = () => {
+    const filteredEvents = getFilteredCulturalEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('spotlight') ||
+      event.eventName?.toLowerCase().includes('talent') ||
+      event.category?.toLowerCase().includes('spotlight')
+    );
+  };
+
+  const getIndoorSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('chess') ||
+      event.eventName?.toLowerCase().includes('table tennis') ||
+      event.eventName?.toLowerCase().includes('badminton') ||
+      event.eventName?.toLowerCase().includes('yoga') ||
+      event.eventName?.toLowerCase().includes('taekwondo') ||
+      event.category?.toLowerCase().includes('indoor')
+    );
+  };
+
+  const getTeamSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event => 
+      event.eventName?.toLowerCase().includes('cricket') ||
+      event.eventName?.toLowerCase().includes('football') ||
+      event.eventName?.toLowerCase().includes('volleyball') ||
+      event.eventName?.toLowerCase().includes('basketball') ||
+      event.eventName?.toLowerCase().includes('kabaddi') ||
+      event.category?.toLowerCase().includes('team')
+    );
+  };
+
+  // Dynamic event cards from database (with gender filtering)
+  const musicCards = convertEventsToCards(getMusicEvents());
+  const danceCards = convertEventsToCards(getDanceEvents());
+  const theatreCards = convertEventsToCards(getTheatreEvents());
+  const literatureCards = convertEventsToCards(getLiteratureEvents());
+  const visualArtsCards = convertEventsToCards(getVisualArtsEvents());
+  const fashionDesignCards = convertEventsToCards(getFashionDesignEvents());
+  const spotLightCards = convertEventsToCards(getSpotLightEvents());
+  
+  // Sports event cards (with gender filtering)
+  const indoorSportsCards = convertEventsToCards(getIndoorSportsEvents());
+  const teamSportsCards = convertEventsToCards(getTeamSportsEvents());
+  
+  // Para sports cards (with gender filtering)
+  const paraSportsCards = convertEventsToCards(getFilteredParaSportsEvents());
+
+  // Additional card assignments for compatibility
+  const womenIndoorSportsCards = indoorSportsCards;
+  const menTeamSportsCards = teamSportsCards;
+  const womenTeamSportsCards = teamSportsCards;
+  const paraAthleticsMenCards = paraSportsCards;
+  const paraCricketMenCards = paraSportsCards;
 
   // Time-based theme detection
   useEffect(() => {
@@ -91,42 +769,59 @@ const Dashboard: React.FC = () => {
   // Function to fetch events from API
   const fetchEvents = async () => {
     console.log('🔄 Fetching events from API...');
+    const userGender = isLoggedIn ? userProfileData.gender : undefined;
+    console.log('👤 User gender for filtering:', userGender);
     setLoadingEvents(true);
     try {
-        // Fetch sports events
+        // Test API connection first
+        console.log('🔗 Testing API connection...');
+        const testResponse = await fetch('/api/events').catch(() => null);
+        if (!testResponse) {
+          console.warn('⚠️ Backend server may not be running. Using production API...');
+        }
+
+        // Fetch sports events with gender filter if user is logged in
         console.log('📡 Fetching sports events...');
-        const sportsResponse = await getEventsByType('sports');
+        const sportsResponse = await getEventsByType('sports', userGender);
         console.log('⚽ Sports response:', sportsResponse);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-          console.log(`✅ Loaded ${sportsResponse.data.length} sports events`);
+          console.log(`✅ Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
+        } else {
+          console.warn('⚠️ No sports events loaded:', sportsResponse.message);
         }
 
-        // Fetch culturals events
+        // Fetch culturals events with gender filter if user is logged in
         console.log('📡 Fetching cultural events...');
-        const culturalsResponse = await getEventsByType('culturals');
+        const culturalsResponse = await getEventsByType('culturals', userGender);
         console.log('🎨 Culturals response:', culturalsResponse);
         if (culturalsResponse.success && culturalsResponse.data) {
-          setCulturalsEvents(culturalsResponse.data);
-          console.log(`✅ Loaded ${culturalsResponse.data.length} cultural events`);
+          setCulturalEvents(culturalsResponse.data);
+          console.log(`✅ Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
+        } else {
+          console.warn('⚠️ No cultural events loaded:', culturalsResponse.message);
         }
 
-        // Fetch para sports events
+        // Fetch para sports events with gender filter if user is logged in
         console.log('📡 Fetching para sports events...');
-        const paraSportsResponse = await getEventsByType('parasports');
+        const paraSportsResponse = await getEventsByType('parasports', userGender);
         console.log('♿ Para Sports response:', paraSportsResponse);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-          console.log(`✅ Loaded ${paraSportsResponse.data.length} para sports events`);
+          console.log(`✅ Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.error('❌ Failed to load para sports events:', paraSportsResponse.message || paraSportsResponse.error);
+          console.warn('⚠️ No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
         console.error('❌ Error fetching events:', error);
+        console.log('💡 Troubleshooting tips:');
+        console.log('   1. Make sure backend server is running: npm start');
+        console.log('   2. Check if MongoDB is connected');
+        console.log('   3. Verify API endpoints are working');
       } finally {
-      setLoadingEvents(false);
-      console.log('✅ Finished loading events');
-    }
+        setLoadingEvents(false);
+        console.log('✅ Finished loading events');
+      }
   };
 
   // Fetch events on component mount
@@ -134,13 +829,236 @@ const Dashboard: React.FC = () => {
     fetchEvents();
   }, []);
 
-  const handleMenuClick = (category?: string) => {
-    if (category) {
-      // If a category is provided, open that specific modal
-      handleCardClick(category);
-    } else {
-      // Otherwise toggle menu cards display
-      setShowMenuCards(!showMenuCards);
+  // Refetch events when user login status or gender changes
+  useEffect(() => {
+    if (isLoggedIn && userProfileData.gender) {
+      console.log('🔄 User gender detected, refetching events for:', userProfileData.gender);
+      fetchEvents();
+    }
+  }, [isLoggedIn, userProfileData.gender]);
+
+  const handlePageMenuToggle = () => {
+    setShowPageMenu(!showPageMenu);
+  };
+
+  const handleEventsInfoClick = () => {
+    setShowInlineEventsInfo(true);
+    setShowPageMenu(false);
+    
+    // Scroll to events info section after a short delay to ensure it's rendered
+    setTimeout(() => {
+      const eventsInfoSection = document.querySelector('.inline-events-info-section');
+      if (eventsInfoSection) {
+        eventsInfoSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 100);
+  };
+
+
+
+  const nextSportsSlide = () => {
+    setCurrentSportsSlide((prev) => (prev + 1) % sportsDetailCards.length);
+  };
+
+  const prevSportsSlide = () => {
+    setCurrentSportsSlide((prev) => (prev - 1 + sportsDetailCards.length) % sportsDetailCards.length);
+  };
+
+  const nextIndoorSlide = () => {
+    setCurrentIndoorSlide((prev) => (prev + 1) % indoorSportsCards.length);
+  };
+
+  const prevIndoorSlide = () => {
+    setCurrentIndoorSlide((prev) => (prev - 1 + indoorSportsCards.length) % indoorSportsCards.length);
+  };
+
+  const nextWomenIndoorSlide = () => {
+    setCurrentWomenIndoorSlide((prev) => (prev + 1) % womenIndoorSportsCards.length);
+  };
+
+  const prevWomenIndoorSlide = () => {
+    setCurrentWomenIndoorSlide((prev) => (prev - 1 + womenIndoorSportsCards.length) % womenIndoorSportsCards.length);
+  };
+
+  const nextMenTeamSlide = () => {
+    setCurrentMenTeamSlide((prev) => (prev + 1) % menTeamSportsCards.length);
+  };
+
+  const prevMenTeamSlide = () => {
+    setCurrentMenTeamSlide((prev) => (prev - 1 + menTeamSportsCards.length) % menTeamSportsCards.length);
+  };
+
+  const nextWomenTeamSlide = () => {
+    setCurrentWomenTeamSlide((prev) => (prev + 1) % womenTeamSportsCards.length);
+  };
+
+  const prevWomenTeamSlide = () => {
+    setCurrentWomenTeamSlide((prev) => (prev - 1 + womenTeamSportsCards.length) % womenTeamSportsCards.length);
+  };
+
+  const nextParaSportsSlide = () => {
+    setCurrentParaSportsSlide((prev) => (prev + 1) % paraSportsCards.length);
+  };
+
+  const prevParaSportsSlide = () => {
+    setCurrentParaSportsSlide((prev) => (prev - 1 + paraSportsCards.length) % paraSportsCards.length);
+  };
+
+  const nextParaAthleticsSlide = () => {
+    setCurrentParaAthleticsSlide((prev: number) => (prev + 1) % paraAthleticsMenCards.length);
+  };
+
+  const prevParaAthleticsSlide = () => {
+    setCurrentParaAthleticsSlide((prev: number) => (prev - 1 + paraAthleticsMenCards.length) % paraAthleticsMenCards.length);
+  };
+
+  const nextParaCricketSlide = () => {
+    setCurrentParaCricketSlide((prev: number) => (prev + 1) % paraCricketMenCards.length);
+  };
+
+  const prevParaCricketSlide = () => {
+    setCurrentParaCricketSlide((prev: number) => (prev - 1 + paraCricketMenCards.length) % paraCricketMenCards.length);
+  };
+
+  const nextCulturalsSlide = () => {
+    setCurrentCulturalsSlide((prev: number) => (prev + 1) % culturalsCards.length);
+  };
+
+  const prevCulturalsSlide = () => {
+    setCurrentCulturalsSlide((prev: number) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
+  };
+
+  const nextMusicSlide = () => {
+    setCurrentMusicSlide((prev: number) => (prev + 1) % musicCards.length);
+  };
+
+  const prevMusicSlide = () => {
+    setCurrentMusicSlide((prev: number) => (prev - 1 + musicCards.length) % musicCards.length);
+  };
+
+  const nextDanceSlide = () => {
+    setCurrentDanceSlide((prev: number) => (prev + 1) % danceCards.length);
+  };
+
+  const prevDanceSlide = () => {
+    setCurrentDanceSlide((prev: number) => (prev - 1 + danceCards.length) % danceCards.length);
+  };
+
+  const nextTheatreSlide = () => {
+    setCurrentTheatreSlide((prev: number) => (prev + 1) % theatreCards.length);
+  };
+
+  const prevTheatreSlide = () => {
+    setCurrentTheatreSlide((prev: number) => (prev - 1 + theatreCards.length) % theatreCards.length);
+  };
+
+  const nextLiteratureSlide = () => {
+    setCurrentLiteratureSlide((prev: number) => (prev + 1) % literatureCards.length);
+  };
+
+  const prevLiteratureSlide = () => {
+    setCurrentLiteratureSlide((prev: number) => (prev - 1 + literatureCards.length) % literatureCards.length);
+  };
+
+  const nextVisualArtsSlide = () => {
+    setCurrentVisualArtsSlide((prev: number) => (prev + 1) % visualArtsCards.length);
+  };
+
+  const prevVisualArtsSlide = () => {
+    setCurrentVisualArtsSlide((prev: number) => (prev - 1 + visualArtsCards.length) % visualArtsCards.length);
+  };
+
+  const nextFashionDesignSlide = () => {
+    setCurrentFashionDesignSlide((prev: number) => (prev + 1) % fashionDesignCards.length);
+  };
+
+  const prevFashionDesignSlide = () => {
+    setCurrentFashionDesignSlide((prev: number) => (prev - 1 + fashionDesignCards.length) % fashionDesignCards.length);
+  };
+
+  const nextSpotLightSlide = () => {
+    setCurrentSpotLightSlide((prev: number) => (prev + 1) % spotLightCards.length);
+  };
+
+  const prevSpotLightSlide = () => {
+    setCurrentSpotLightSlide((prev: number) => (prev - 1 + spotLightCards.length) % spotLightCards.length);
+  };
+
+  const handleParaSportsClick = (eventTitle: string) => {
+    if (eventTitle === "Para Athletics") {
+      setShowParaAthleticsMen(true);
+      setShowParaSports(false);
+    } else if (eventTitle === "Para Cricket Men") {
+      setShowParaCricketMen(true);
+      setShowParaSports(false);
+    }
+  };
+
+  const handleCulturalsClick = (eventTitle: string) => {
+    setShowCulturals(false);
+    if (eventTitle === "Music") {
+      setShowMusic(true);
+    } else if (eventTitle === "Dance") {
+      setShowDance(true);
+    } else if (eventTitle === "Theatre &") {
+      setShowTheatre(true);
+    } else if (eventTitle === "Literature") {
+      setShowLiterature(true);
+    } else if (eventTitle === "Visual Arts &") {
+      setShowVisualArts(true);
+    } else if (eventTitle === "Fashion Design &") {
+      setShowFashionDesign(true);
+    } else if (eventTitle === "Spot Light") {
+      setShowSpotLight(true);
+    }
+  };
+
+  const handleIndoorSportsClick = (eventTitle: string) => {
+    if (eventTitle === "Men's Individual &") {
+      setShowIndoorSports(true);
+      setShowSportsDetails(false);
+    } else if (eventTitle === "Women's Individual &") {
+      setShowWomenIndoorSports(true);
+      setShowSportsDetails(false);
+    } else if (eventTitle === "Men's Team Field Sports") {
+      setShowMenTeamSports(true);
+      setShowSportsDetails(false);
+    } else if (eventTitle === "Women's Team Field") {
+      setShowWomenTeamSports(true);
+      setShowSportsDetails(false);
+    }
+  };
+
+  const handleSportsCardClick = () => {
+    setShowSportsDetails(true);
+    setShowInlineEventsInfo(false);
+  };
+
+  const handleParaSportsCardClick = () => {
+    setShowParaSports(true);
+    setShowInlineEventsInfo(false);
+  };
+
+  const handleCulturalsCardClick = () => {
+    setShowCulturals(true);
+    setShowInlineEventsInfo(false);
+  };
+
+  const handleEventDetailClick = (eventTitle: string) => {
+    console.log('Event clicked:', eventTitle);
+    const eventData = eventDetailsData[eventTitle as keyof typeof eventDetailsData];
+    console.log('Event data:', eventData);
+    if (eventData) {
+      setSelectedEventDetail({ eventTitle, ...eventData });
+      setShowEventDetail(true);
+      setShowSportsDetails(false);
+      setShowIndoorSports(false);
+      setShowWomenIndoorSports(false);
+      setShowMenTeamSports(false);
+      setShowWomenTeamSports(false);
     }
   };
 
@@ -347,7 +1265,7 @@ const Dashboard: React.FC = () => {
     if (cardName === 'HOME') {
       // Scroll to top for home
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setShowMenuCards(false);
+      setShowPageMenu(false);
     } else if (cardName === 'ABOUT US') {
       // Navigate to About Us page
       window.location.href = '/about-us';
@@ -364,14 +1282,18 @@ const Dashboard: React.FC = () => {
         return;
       }
       
-      await fetchEvents();
-      if (isLoggedIn && userProfileData.userId) {
-        const savedEventIds = await fetchUserSavedEvents(userProfileData.userId);
-        setTempSelectedEvents(savedEventIds);
-      } else {
-        setTempSelectedEvents(new Set()); // Clear selections for non-logged users
-      }
+      // Open modal immediately
       setActiveSubModal(cardName);
+      
+      // Fetch events and user data in background
+      fetchEvents();
+      if (isLoggedIn && userProfileData.userId) {
+        fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+          setTempSelectedEvents(savedEventIds);
+        });
+      } else {
+        setTempSelectedEvents(new Set());
+      }
     } else {
       setActiveSubModal(cardName);
     }
@@ -385,35 +1307,102 @@ const Dashboard: React.FC = () => {
   const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
     const selectedEventsArray = Array.from(selectedEventIds);
     
+    console.log('💰 PRICE CALCULATION START');
+    console.log('   - Gender:', gender);
+    console.log('   - Gender type:', typeof gender);
+    console.log('   - Events count:', selectedEventsArray.length);
+    console.log('   - Event IDs:', selectedEventsArray);
+    
+    // If no events selected, return 0
+    if (selectedEventsArray.length === 0) {
+      console.log('   - No events selected, returning 0');
+      return 0;
+    }
+    
     // Check if para sports events are selected
     const hasParaSports = selectedEventsArray.some(eventId => 
       paraSportsEvents.some(event => event._id === eventId)
     );
     
-    // Para sports are free for everyone
     if (hasParaSports) {
+      console.log('   - Para sports selected - FREE');
       return 0;
     }
     
-    // Check if sports events are selected
+    // Check event types
     const hasSports = selectedEventsArray.some(eventId => 
       sportsEvents.some(event => event._id === eventId)
     );
     
-    // Check if cultural events are selected
     const hasCulturals = selectedEventsArray.some(eventId => 
-      culturalsEvents.some(event => event._id === eventId)
+      culturalEvents.some(event => event._id === eventId)
     );
     
-    // Pricing logic
-    if (gender?.toLowerCase() === 'male') {
-      if (hasSports && hasCulturals) return 350;
-      if (hasSports) return 350;
-      if (hasCulturals) return 250;
-    } else { // Female pricing
-      return 250; // Women pay 250 for any combination
+    console.log('   - Has sports:', hasSports);
+    console.log('   - Has culturals:', hasCulturals);
+    console.log('   - Sports events in state:', sportsEvents.length);
+    console.log('   - Cultural events in state:', culturalEvents.length);
+    
+    // EXPLICIT FEMALE LOGIC - ALWAYS ₹250 FOR SINGLE TYPE
+    const normalizedGender = gender?.toLowerCase();
+
+    if (normalizedGender === 'female') {
+      console.log('   - ✅ FEMALE USER DETECTED');
+      
+      if (hasSports && hasCulturals) {
+        console.log('   - 👩 Female: Sports + Culturals = ₹350');
+        return 350;
+      }
+      
+      if (hasSports && !hasCulturals) {
+        console.log('   - 👩 Female: Sports ONLY = ₹250');
+        return 250;
+      }
+      
+      if (hasCulturals && !hasSports) {
+        console.log('   - 👩 Female: Culturals ONLY = ₹250');
+        return 250;
+      }
+      
+      console.log('   - ❌ Female user but no sports/culturals detected');
     }
     
+    // MALE LOGIC
+    if (normalizedGender === 'male') {
+      console.log('   - ✅ MALE USER DETECTED');
+      
+      if (hasSports && hasCulturals) {
+        console.log('   - 👨 Male: Sports + Culturals = ₹350');
+        return 350;
+      }
+      
+      if (hasSports && !hasCulturals) {
+        console.log('   - 👨 Male: Sports ONLY = ₹350');
+        return 350;
+      }
+      
+      if (hasCulturals && !hasSports) {
+        console.log('   - 👨 Male: Culturals ONLY = ₹250');
+        return 250;
+      }
+    }
+    
+    // Fallback for users without gender info - charge as per event mix
+    if (hasSports && hasCulturals) {
+      console.log('   - ⚙️ Fallback: Sports + Culturals = ₹350');
+      return 350;
+    }
+    if (hasSports) {
+      console.log('   - ⚙️ Fallback: Sports only = ₹350');
+      return 350;
+    }
+    if (hasCulturals) {
+      console.log('   - ⚙️ Fallback: Culturals only = ₹250');
+      return 250;
+    }
+
+    console.log('   - ❌ FALLBACK: Defaulting to ₹0');
+    console.log('💰 PRICE CALCULATION END');
     return 0;
   };
 
@@ -441,7 +1430,7 @@ const Dashboard: React.FC = () => {
     const totalAmount = calculateRegistrationPrice(tempSelectedEvents, userGender);
     
     // Get selected event names
-    const allEvents = [...sportsEvents, ...culturalsEvents, ...paraSportsEvents];
+    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
     const selectedEventNames = eventIds.map(eventId => {
       const event = allEvents.find(e => e._id === eventId);
       return event ? event.eventName : 'Unknown Event';
@@ -602,7 +1591,8 @@ Do you want to proceed with registration?`;
       const result = await loginUser(loginFormData.email, loginFormData.password);
       
       if (result.success && result.data) {
-        const { userId, name, email, userType = 'visitor', gender = 'male' } = result.data;
+        const { userId, name, email, userType = 'visitor', gender } = result.data;
+        console.log('🔑 Login success - User data:', { userId, name, email, userType, gender });
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -623,9 +1613,10 @@ Do you want to proceed with registration?`;
           email: email,
           userId: userId,
           userType: userType || 'visitor',
-          gender: gender || 'male'
+          gender: gender // No default value
         };
         setUserProfileData(profileData);
+        console.log('💾 Storing user profile:', profileData);
         
         setShowLoginModal(false);
         setLoginFormData({ email: '', password: '' });
@@ -635,7 +1626,9 @@ Do you want to proceed with registration?`;
         localStorage.setItem('userEmail', email);
         localStorage.setItem('userId', userId);
         localStorage.setItem('userType', userType || 'visitor');
-        localStorage.setItem('userGender', gender || 'male');
+        if (gender) {
+          localStorage.setItem('userGender', gender);
+        }
         localStorage.setItem('isLoggedIn', 'true');
         
         // Fetch user's saved events from database
@@ -647,6 +1640,7 @@ Do you want to proceed with registration?`;
         });
       }
     } catch (error) {
+      console.error('Login error:', error);
       setLoginMessage({
         type: 'error',
         text: 'An error occurred during login. Please try again.'
@@ -659,7 +1653,7 @@ Do you want to proceed with registration?`;
   // Check if user is already logged in on component mount
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
-    const storedUserEmail = localStorage.getItem('userEmail');
+    const storedUserEmail = localStorage.getItem('userEmail'); 
     const storedUserId = localStorage.getItem('userId');
     const storedUserType = localStorage.getItem('userType');
     const storedUserGender = localStorage.getItem('userGender');
@@ -668,20 +1662,22 @@ Do you want to proceed with registration?`;
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
       setIsLoggedIn(true);
       setLoggedInUserName(storedUserName);
-      setUserProfileData({
+      const profileData = {
         name: storedUserName,
         email: storedUserEmail || '',
         userId: storedUserId,
         userType: storedUserType || 'visitor',
-        gender: storedUserGender || 'male'
-      });
+        gender: storedUserGender || undefined // Convert null to undefined
+      };
+      setUserProfileData(profileData);
+      console.log('💾 Loading user profile from localStorage:', profileData);
       
       // Fetch user's saved events from database
-      fetchUserSavedEvents(storedUserId);
+      if (storedUserId) {
+        fetchUserSavedEvents(storedUserId);
+      }
     }
   }, []);
-
-  // Function to fetch user's saved events from database
   const fetchUserSavedEvents = async (userId: string): Promise<Set<string>> => {
     try {
       const result = await getMyEvents(userId);
@@ -713,7 +1709,7 @@ Do you want to proceed with registration?`;
   }, [showProfileDropdown]);
 
   return (
-    <div className={`single-page-app ${timeTheme}-theme`}>
+    <div className={`single-page-app ${timeTheme}-theme full-purple-bg`}>
       
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -725,46 +1721,23 @@ Do you want to proceed with registration?`;
       {/* Shimmer Overlay */}
       <div className={`shimmer-overlay ${isScrolled ? 'active' : ''}`}></div>
 
-      {/* Sticky Side Menu */}
-      <SideMenu onMenuClick={handleMenuClick} />
-     
-      <nav className="header-nav">
-          <div className="nav-left">
-            <a href="#home" className="active">Home</a>
-            <a href="#events" onClick={async (e) => { e.preventDefault(); await fetchEvents(); if (isLoggedIn && userProfileData.userId) { const savedEventIds = await fetchUserSavedEvents(userProfileData.userId); setTempSelectedEvents(savedEventIds); } else { setTempSelectedEvents(new Set()); } setActiveSubModal('EVENTS'); }}>Events</a>
-            <a href="#zonal">Zonal</a>
-          </div>
-          <div className="nav-right">
-            {/* Profile section - shown when logged in */}
-            {isLoggedIn && (
-              <div className="user-profile-section" onClick={handleShowProfile}>
-                <div className="profile-icon">👤</div>
-                <span className="welcome-text">Welcome, {loggedInUserName}!</span>
-              </div>
-            )}
-          </div>
-      </nav>
-      
-      {/* Participation Stats Marquee */}
-      <div className="participation-marquee">
-        <div className="marquee-content">
-          <span className="marquee-item">🏅 Sports - Men: 350 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🏅 Sports - Women: 250 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals - Men: 250 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals - Women: 250 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🏅 Sports - Men: 350 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🏅 Sports - Women: 250 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals - Men: 250 </span>
-          <span className="marquee-separator">•</span>
-          <span className="marquee-item">🎭 Culturals - Women: 250 </span>
+      {/* Top-Left Menu Icon */}
+      <div className="top-left-menu-icon" onClick={handlePageMenuToggle}>
+        <div className={`animated-menu-icon ${showPageMenu ? 'active' : ''}`}>
+          <span className="bar bar1"></span>
+          <span className="bar bar2"></span>
         </div>
       </div>
+
+      {/* Top-Right Profile Section */}
+      {isLoggedIn && (
+        <div className="top-right-profile-section" onClick={handleShowProfile}>
+          <div className="profile-icon">👤</div>
+          <span className="welcome-text">Welcome, {loggedInUserName}!</span>
+        </div>
+      )}
+     
+
       
       {/* The Icon Component - Fixed position, animates with scroll */}
       <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
@@ -778,6 +1751,19 @@ Do you want to proceed with registration?`;
         {/* Action Buttons - Overview always visible, Login only when not logged in */}
         <div className="hero-action-buttons">
           <button className="overview-btn" onClick={handleOverviewClick}>Overview</button>
+          <button className="events-btn" onClick={() => {
+            // Open modal immediately
+            setActiveSubModal('EVENTS');
+            // Fetch events in background
+            if (isLoggedIn && userProfileData.userId) {
+              fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+                setTempSelectedEvents(savedEventIds);
+              });
+            } else {
+              setTempSelectedEvents(new Set());
+            }
+            fetchEvents();
+          }}>Register for Events</button>
           {!isLoggedIn && (
             <button className="login-btn" onClick={handleLoginClick}>Login</button>
           )}
@@ -788,13 +1774,1072 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* Sponsors Section */}
-      <section className="sponsors-section">
-        <h2>Sponsors</h2>
-        <div className="sponsors-image-container">
-          <img src={`${import.meta.env.BASE_URL}sponsors.jpg`} alt="Our Sponsors" className="sponsors-image" />
+      {/* Full-Screen Menu Overlay */}
+      {showPageMenu && (
+        <div className="fullscreen-menu-overlay">
+          <div className="fullscreen-menu-content">
+            <div className="menu-close-btn" onClick={() => setShowPageMenu(false)}>
+              <span className="close-bar close-bar1"></span>
+              <span className="close-bar close-bar2"></span>
+            </div>
+            <div className="fullscreen-menu-grid">
+              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}>
+                <span>HOME</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('EVENTS'); setShowPageMenu(false); }}>
+                <span>REGISTRATIONS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}>
+                <span>MY EVENTS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={handleEventsInfoClick}>
+                <span>COMPETITIONS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }}>
+                <span>ACCOMMODATION</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>WORKSHOPS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>TICKETS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>MERCH</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>SCHEDULE</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>SPONSORS</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>FAQ</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+                <span>CONTACT US</span>
+              </div>
+              <div className="fullscreen-menu-item" onClick={handleEventsInfoClick}>
+                <span>EVENTS INFO</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      )}
+
+      {/* Inline Events Info - appears below menu */}
+      {showInlineEventsInfo && (
+        <section className="inline-events-info-section">
+          <div className="inline-events-info-container">
+            <div className="inline-events-info-header">
+              <div className="events-header-left">
+                <button className="events-back-btn" onClick={() => { setShowInlineEventsInfo(false); setShowPageMenu(true); }}>
+                  ← Back
+                </button>
+                <h2>EVENTS INFORMATION</h2>
+              </div>
+              <button className="inline-events-info-close-btn" onClick={() => { setShowInlineEventsInfo(false); setShowPageMenu(true); }}>×</button>
+            </div>
+            <div className="inline-events-info-grid">
+              {eventInfoCards.map((card, index) => (
+                <div 
+                  key={index} 
+                  className="inline-event-info-card"
+                  onClick={card.title === "SPORTS" ? handleSportsCardClick : card.title === "PARA SPORTS" ? handleParaSportsCardClick : card.title === "CULTURALS" ? handleCulturalsCardClick : undefined}
+                  style={card.title === "SPORTS" || card.title === "PARA SPORTS" || card.title === "CULTURALS" ? { cursor: 'pointer' } : {}}
+                >
+                  <div className="card-poster-background">
+                    <span className="poster-placeholder-text">POSTER of EVENT</span>
+                  </div>
+                  <div className="card-title-overlay">
+                    <h3>{card.title}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Para Sports Section - appears when clicking PARA SPORTS */}
+      {showParaSports && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowInlineEventsInfo(true); }}>
+                  ← Back
+                </button>
+                <h2>PARA SPORTS CATEGORIES</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowInlineEventsInfo(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, paraSportsCards.length) }).map((_, index) => {
+                  const cardIndex = (currentParaSportsSlide + index) % paraSportsCards.length;
+                  const card = paraSportsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleParaSportsClick(card.title)}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaSportsSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {paraSportsCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentParaSportsSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentParaSportsSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Para Athletics Men Section - appears when clicking Para Athletics */}
+      {showParaAthleticsMen && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>
+                  ← Back
+                </button>
+                <h2>PARA ATHLETICS MEN</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, paraAthleticsMenCards.length) }).map((_, index) => {
+                  const cardIndex = (currentParaAthleticsSlide + index) % paraAthleticsMenCards.length;
+                  const card = paraAthleticsMenCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {paraAthleticsMenCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentParaAthleticsSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentParaAthleticsSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Para Cricket Men Section - appears when clicking Para Cricket Men */}
+      {showParaCricketMen && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>
+                  ← Back
+                </button>
+                <h2>PARA CRICKET MEN</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, paraCricketMenCards.length) }).map((_, index) => {
+                  const cardIndex = (currentParaCricketSlide + index) % paraCricketMenCards.length;
+                  const card = paraCricketMenCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {paraCricketMenCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentParaCricketSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentParaCricketSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Culturals Section - appears when clicking CULTURALS */}
+      {showCulturals && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowInlineEventsInfo(true); }}>
+                  ← Back
+                </button>
+                <h2>CULTURAL CATEGORIES</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowInlineEventsInfo(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, culturalsCards.length) }).map((_, index) => {
+                  const cardIndex = (currentCulturalsSlide + index) % culturalsCards.length;
+                  const card = culturalsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleCulturalsClick(card.title)}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">CULTURAL POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {culturalsCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentCulturalsSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Music Section */}
+      {showMusic && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>MUSIC EVENTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, musicCards.length) }).map((_, index) => {
+                  const cardIndex = (currentMusicSlide + index) % musicCards.length;
+                  const card = musicCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">MUSIC POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {musicCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentMusicSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentMusicSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Dance Section */}
+      {showDance && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>DANCE EVENTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, danceCards.length) }).map((_, index) => {
+                  const cardIndex = (currentDanceSlide + index) % danceCards.length;
+                  const card = danceCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">DANCE POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {danceCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentDanceSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentDanceSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Theatre & Cinematography Section */}
+      {showTheatre && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>THEATRE & CINEMATOGRAPHY</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, theatreCards.length) }).map((_, index) => {
+                  const cardIndex = (currentTheatreSlide + index) % theatreCards.length;
+                  const card = theatreCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">THEATRE POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {theatreCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentTheatreSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentTheatreSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Literature Section */}
+      {showLiterature && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>LITERATURE EVENTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, literatureCards.length) }).map((_, index) => {
+                  const cardIndex = (currentLiteratureSlide + index) % literatureCards.length;
+                  const card = literatureCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">LITERATURE POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {literatureCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentLiteratureSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentLiteratureSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Visual Arts & Craft Section */}
+      {showVisualArts && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>VISUAL ARTS & CRAFT</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, visualArtsCards.length) }).map((_, index) => {
+                  const cardIndex = (currentVisualArtsSlide + index) % visualArtsCards.length;
+                  const card = visualArtsCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">VISUAL ARTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {visualArtsCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentVisualArtsSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentVisualArtsSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Fashion Design & Styling Section */}
+      {showFashionDesign && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>FASHION DESIGN & STYLING</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, fashionDesignCards.length) }).map((_, index) => {
+                  const cardIndex = (currentFashionDesignSlide + index) % fashionDesignCards.length;
+                  const card = fashionDesignCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">FASHION POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {fashionDesignCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentFashionDesignSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentFashionDesignSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Spot Light Section */}
+      {showSpotLight && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>
+                  ← Back
+                </button>
+                <h2>SPOT LIGHT EVENTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
+                  const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
+                  const card = spotLightCards[cardIndex];
+                  return (
+                    <div key={cardIndex} className="indoor-sport-card">
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPOTLIGHT POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && <h4>{card.subtitle}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {spotLightCards.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentSpotLightSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentSpotLightSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Sports Details Section - appears after clicking sports */}
+      {showSportsDetails && (
+        <section className="inline-sports-details-section">
+          <div className="inline-sports-details-container">
+            <div className="inline-sports-details-header">
+              <div className="sports-header-left">
+                <button className="sports-back-btn" onClick={() => { setShowSportsDetails(false); setShowInlineEventsInfo(true); }}>
+                  ← Back
+                </button>
+                <h2>SPORTS CATEGORIES</h2>
+              </div>
+              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowInlineEventsInfo(true); }}>×</button>
+            </div>
+            <div className="sports-details-navigation">
+              <button className="sports-nav-btn prev" onClick={prevSportsSlide}>◀</button>
+              <div className="sports-details-grid">
+                {Array.from({ length: 3 }).map((_, index) => {
+                  const cardIndex = (currentSportsSlide + index) % sportsDetailCards.length;
+                  const card = sportsDetailCards[cardIndex];
+                  const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="sports-detail-card"
+                      onClick={isClickable ? () => {
+                        if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
+                          handleIndoorSportsClick(card.title);
+                        } else {
+                          handleEventDetailClick(card.title);
+                        }
+                      } : undefined}
+                      style={isClickable ? { cursor: 'pointer' } : {}}
+                    >
+                      <div className="sports-card-poster-background">
+                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="sports-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="sports-nav-btn next" onClick={nextSportsSlide}>▶</button>
+            </div>
+            <div className="sports-carousel-indicators">
+              {sportsDetailCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`sports-indicator ${index === currentSportsSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentSportsSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Indoor Sports Section - appears when clicking Men's Individual & Indoor Sports */}
+      {showIndoorSports && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>
+                  ← Back
+                </button>
+                <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: 3 }).map((_, index) => {
+                  const cardIndex = (currentIndoorSlide + index) % indoorSportsCards.length;
+                  const card = indoorSportsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleEventDetailClick(card.title)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextIndoorSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {indoorSportsCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentIndoorSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentIndoorSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Women's Indoor Sports Section - appears when clicking Women's Individual & Indoor Sports */}
+      {showWomenIndoorSports && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>
+                  ← Back
+                </button>
+                <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: 3 }).map((_, index) => {
+                  const cardIndex = (currentWomenIndoorSlide + index) % womenIndoorSportsCards.length;
+                  const card = womenIndoorSportsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleEventDetailClick(card.title)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenIndoorSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {womenIndoorSportsCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentWomenIndoorSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentWomenIndoorSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Men's Team Field Sports Section - appears when clicking Men's Team Field Sports */}
+      {showMenTeamSports && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
+                  ← Back
+                </button>
+                <h2>MEN'S TEAM FIELD SPORTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: 3 }).map((_, index) => {
+                  const cardIndex = (currentMenTeamSlide + index) % menTeamSportsCards.length;
+                  const card = menTeamSportsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleEventDetailClick(card.title)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextMenTeamSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {menTeamSportsCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentMenTeamSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentMenTeamSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Women's Team Field Sports Section - appears when clicking Women's Team Field Sports */}
+      {showWomenTeamSports && (
+        <section className="inline-indoor-sports-section">
+          <div className="inline-indoor-sports-container">
+            <div className="inline-indoor-sports-header">
+              <div className="indoor-sports-header-left">
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>
+                  ← Back
+                </button>
+                <h2>WOMEN'S TEAM FIELD SPORTS</h2>
+              </div>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+            </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: 3 }).map((_, index) => {
+                  const cardIndex = (currentWomenTeamSlide + index) % womenTeamSportsCards.length;
+                  const card = womenTeamSportsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleEventDetailClick(card.title)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
+                      </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenTeamSlide}>▶</button>
+            </div>
+            <div className="indoor-sports-carousel-indicators">
+              {womenTeamSportsCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`indoor-sports-indicator ${index === currentWomenTeamSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentWomenTeamSlide(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Event Detail Page - appears when clicking specific sport */}
+      {showEventDetail && selectedEventDetail && (
+        <section className="event-detail-page">
+          <div className="event-detail-container">
+            <div className="event-detail-header">
+              <button className="event-detail-back-btn" onClick={() => { setShowEventDetail(false); setShowSportsDetails(true); }}>
+                ← Back to list
+              </button>
+            </div>
+            
+            <div className="event-detail-content">
+              <div className="event-detail-full-width">
+                <div className="event-title-section">
+                  <h1>{selectedEventDetail.title}</h1>
+                  <h2>{selectedEventDetail.subtitle}</h2>
+                </div>
+                
+                <div className="event-main-layout">
+                  <div className="event-poster-side">
+                    <div className="event-poster-large">
+                      <span>POSTER of EVENT</span>
+                    </div>
+                  </div>
+                  
+                  <div className="event-right-column">
+                    <div className="event-rules-section">
+                      <h3>Rules:</h3>
+                      <ul>
+                        {selectedEventDetail.rules.map((rule: string, index: number) => (
+                          <li key={index}>{rule}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="event-prizes-contact-section">
+                      <div className="event-prizes-section">
+                        <h3>Cash Prizes:</h3>
+                        <div className="prizes-list">
+                          <div>First - {selectedEventDetail.prizes.first}</div>
+                          <div>Second - {selectedEventDetail.prizes.second}</div>
+                          <div>Third - {selectedEventDetail.prizes.third}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="event-contact-section">
+                        <h3>For Queries Contact:</h3>
+                        <div className="contact-list">
+                          {selectedEventDetail.contacts.map((contact: any, index: number) => (
+                            <div key={index}>{contact.name} - {contact.phone}</div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="event-action-buttons">
+                  <button className="print-btn" onClick={() => {
+                    const element = document.querySelector('.event-detail-content');
+                    if (element) {
+                      // Create a clone for download
+                      const clone = element.cloneNode(true) as HTMLElement;
+                      const buttons = clone.querySelector('.event-action-buttons');
+                      if (buttons) buttons.remove();
+                      
+                      // Create HTML content with styles
+                      const htmlContent = `
+                        <!DOCTYPE html>
+                        <html>
+                          <head>
+                            <title>${selectedEventDetail.title} - Instructions</title>
+                            <style>
+                              body { 
+                                font-family: Arial, sans-serif; 
+                                padding: 40px; 
+                                margin: 0;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: #333;
+                              }
+                              .event-detail-content {
+                                background: rgba(255, 255, 255, 0.95);
+                                border-radius: 20px;
+                                padding: 40px;
+                                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+                                max-width: 1200px;
+                                margin: 0 auto;
+                              }
+                              .event-title-section { text-align: center; margin-bottom: 30px; }
+                              .event-title-section h1 { color: #4a148c; font-size: 2.5rem; margin: 0 0 10px 0; font-weight: bold; }
+                              .event-title-section h2 { color: #6a1b9a; font-size: 1.5rem; margin: 0 0 20px 0; font-weight: normal; }
+                              .event-main-layout { display: grid; grid-template-columns: 250px 1fr; gap: 20px; align-items: start; }
+                              .event-poster-large { 
+                                background: rgba(200, 200, 200, 0.3); 
+                                border: 2px dashed #999; 
+                                border-radius: 15px; 
+                                height: 300px; 
+                                width: 250px; 
+                                display: flex; 
+                                align-items: center; 
+                                justify-content: center; 
+                                color: #666; 
+                                font-weight: bold; 
+                                font-size: 1.1rem; 
+                                margin-top: 40px;
+                              }
+                              .event-rules-section h3, .event-prizes-section h3, .event-contact-section h3 { 
+                                color: #4a148c; 
+                                font-size: 1.3rem; 
+                                margin: 0 0 15px 0; 
+                                font-weight: bold; 
+                              }
+                              .event-rules-section ul { list-style: none; padding: 0; margin: 0; }
+                              .event-rules-section li { 
+                                color: #333; 
+                                padding: 8px 0; 
+                                border-bottom: 1px solid rgba(74, 20, 140, 0.1); 
+                                position: relative; 
+                                padding-left: 25px; 
+                                line-height: 1.5; 
+                              }
+                              .event-rules-section li:before { 
+                                content: "•"; 
+                                color: #4a148c; 
+                                position: absolute; 
+                                left: 0; 
+                                font-weight: bold; 
+                                font-size: 1.2rem; 
+                              }
+                              .event-right-column { display: flex; flex-direction: column; gap: 20px; }
+                              .event-prizes-contact-section { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+                              .prizes-list, .contact-list { display: flex; flex-direction: column; gap: 8px; }
+                              .prizes-list div, .contact-list div { color: #333; padding: 4px 0; }
+                            </style>
+                          </head>
+                          <body>
+                            <div class="event-detail-content">
+                              ${clone.innerHTML}
+                            </div>
+                          </body>
+                        </html>
+                      `;
+                      
+                      // Create and download the file
+                      const blob = new Blob([htmlContent], { type: 'text/html' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `${selectedEventDetail.title.replace(/[^a-z0-9]/gi, '_')}_Instructions.html`;
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                      URL.revokeObjectURL(url);
+                    }
+                  }}>Download Instructions</button>
+                  <button className="notification-btn">
+                    🔔 If interested in this event, Click to get updates of competition
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 3. Features Section */}
       <section className="dashboard-section features-section">
@@ -931,9 +2976,6 @@ Do you want to proceed with registration?`;
       {/* Decorative Floating Icons */}
       <FloatingIcons />
 
-      {/* Side Menu */}
-      <SideMenu onMenuClick={handleMenuClick} />
-
       {/* Overview Modal */}
       {showOverviewModal && (
         <div className="login-modal-overlay" onClick={handleCloseOverview}>
@@ -1022,6 +3064,26 @@ Do you want to proceed with registration?`;
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Events Info Modal */}
+      {showEventsInfo && (
+        <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
+          <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
+            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>×</button>
+            <div className="events-info-grid">
+              {eventInfoCards.map((card, index) => (
+                <div key={index} className="event-info-card">
+                  <div className="poster-placeholder">
+                    <span>POSTER of EVENT</span>
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1120,7 +3182,7 @@ Do you want to proceed with registration?`;
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="dateOfBirth">Date of Birth * (This will be your password)</label>
+                      <label htmlFor="dateOfBirth">Date of Birth * (Your Password)</label>
                       <input
                         type="date"
                         id="dateOfBirth"
@@ -1252,7 +3314,7 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseSubModal}>
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>{activeSubModal}</h2>
+              <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
               <button className="close-btn" onClick={handleCloseSubModal}>×</button>
             </div>
             <div className="sub-modal-body">
@@ -1263,19 +3325,20 @@ Do you want to proceed with registration?`;
                       <p>Loading events...</p>
                     </div>
                   ) : (
-                    <div className="events-category-grid">
+                    <>
+                      <div className="events-category-grid">
                       {/* Sports Events */}
                       <div className="event-category-card">
-                        <h3>⚽ Sports Events ({sportsEvents.length})</h3>
+                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
                         <div className="event-list">
-                          {sportsEvents.length > 0 ? (
-                            sportsEvents.map((event) => (
+                          {getFilteredSportsEvents().length > 0 ? (
+                            getFilteredSportsEvents().map((event) => (
                               <label key={event._id} className="event-item event-checkbox-item">
                                 <input
                                   type="checkbox"
                                   className="event-checkbox"
                                   checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={paraSportsSelected || selectedEvents.has(event._id)}
+                                  disabled={isEventDisabled(event)}
                                   onChange={() => { 
                                     // Only allow changes if not already registered
                                     if (!selectedEvents.has(event._id)) {
@@ -1286,7 +3349,7 @@ Do you want to proceed with registration?`;
                                       } else { 
                                         newSelection.add(event._id); 
                                       } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalsEvents].some(e => newSelection.has(e._id)); 
+                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
                                       setRegularEventsSelected(hasRegularEvents); 
                                       setTempSelectedEvents(newSelection); 
                                     }
@@ -1294,11 +3357,9 @@ Do you want to proceed with registration?`;
                                 />
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
-                                  <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  {isLoggedIn && (
+                                    <small className="event-gender">({event.gender})</small>
+                                  )}
                                 </div>
                               </label>
                             ))
@@ -1310,16 +3371,16 @@ Do you want to proceed with registration?`;
                       
                       {/* Cultural Events */}
                       <div className="event-category-card">
-                        <h3>🎨 Cultural Events ({culturalsEvents.length})</h3>
+                        <h3>🎨 Cultural Events ({getFilteredCulturalEvents().length})</h3>
                         <div className="event-list">
-                          {culturalsEvents.length > 0 ? (
-                            culturalsEvents.map((event) => (
+                          {getFilteredCulturalEvents().length > 0 ? (
+                            getFilteredCulturalEvents().map((event) => (
                               <label key={event._id} className="event-item event-checkbox-item">
                                 <input
                                   type="checkbox"
                                   className="event-checkbox"
                                   checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={paraSportsSelected || selectedEvents.has(event._id)}
+                                  disabled={isEventDisabled(event)}
                                   onChange={() => { 
                                     // Only allow changes if not already registered
                                     if (!selectedEvents.has(event._id)) {
@@ -1330,7 +3391,7 @@ Do you want to proceed with registration?`;
                                       } else { 
                                         newSelection.add(event._id); 
                                       } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalsEvents].some(e => newSelection.has(e._id)); 
+                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
                                       setRegularEventsSelected(hasRegularEvents); 
                                       setTempSelectedEvents(newSelection); 
                                     }
@@ -1338,11 +3399,9 @@ Do you want to proceed with registration?`;
                                 />
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
-                                  <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  {isLoggedIn && (
+                                    <small className="event-gender">({event.gender})</small>
+                                  )}
                                 </div>
                               </label>
                             ))
@@ -1354,8 +3413,8 @@ Do you want to proceed with registration?`;
                       
                       {/* Para Sports Events */}
                       <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>♿ Para Sports Events ({paraSportsEvents.length})</h3>
-                        {paraSportsEvents.length === 0 && (
+                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                        {getFilteredParaSportsEvents().length === 0 && (
                           <div>
                             <p style={{color: '#e74c3c', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
                             <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px'}}>
@@ -1364,14 +3423,14 @@ Do you want to proceed with registration?`;
                           </div>
                         )}
                         <div className="event-list">
-                          {paraSportsEvents.length > 0 ? (
-                            paraSportsEvents.map((event) => (
+                          {getFilteredParaSportsEvents().length > 0 ? (
+                            getFilteredParaSportsEvents().map((event) => (
                               <label key={event._id} className="event-item event-checkbox-item">
                                 <input
                                   type="checkbox"
                                   className="event-checkbox"
                                   checked={tempSelectedEvents.has(event._id)}
-                                  disabled={regularEventsSelected || selectedEvents.has(event._id)}
+                                  disabled={isEventDisabled(event)}
                                   onChange={() => {
                                     // Only allow changes if not already registered
                                     if (!selectedEvents.has(event._id) && !regularEventsSelected) {
@@ -1385,7 +3444,7 @@ Do you want to proceed with registration?`;
                                       }
                                       
                                       // Check if any para sports events are selected
-                                      const hasParaSportsSelected = paraSportsEvents.some(pe => 
+                                      const hasParaSportsSelected = getFilteredParaSportsEvents().some(pe => 
                                         newSelection.has(pe._id)
                                       );
                                       
@@ -1393,7 +3452,7 @@ Do you want to proceed with registration?`;
                                       
                                       // If selecting para sports, remove all regular events
                                       if (!wasSelected && hasParaSportsSelected) {
-                                        [...sportsEvents, ...culturalsEvents].forEach(e => {
+                                        [...getFilteredSportsEvents(), ...getFilteredCulturalEvents()].forEach(e => {
                                           newSelection.delete(e._id);
                                         });
                                         setRegularEventsSelected(false);
@@ -1419,15 +3478,26 @@ Do you want to proceed with registration?`;
                         </div>
                       </div>
                     </div>
+                    </>
                   )}
                   
                   <div className="events-modal-footer">
                     <div className="selected-count">
                       Selected: {tempSelectedEvents.size} event(s)
-                      {tempSelectedEvents.size > 0 && userProfileData.gender && (
-                        <div className="price-preview">
-                          Total: {calculateRegistrationPrice(tempSelectedEvents, userProfileData.gender) === 0 ? 'FREE' : `₹${calculateRegistrationPrice(tempSelectedEvents, userProfileData.gender)}`}
-                        </div>
+                      {tempSelectedEvents.size > 0 && (
+                        (() => {
+                          const totalAmount = calculateRegistrationPrice(
+                            tempSelectedEvents,
+                            userProfileData.gender || 'unknown'
+                          );
+                          const isParaSelection = totalAmount === 0;
+                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `₹${totalAmount}`;
+                          return (
+                            <div className="price-preview">
+                              Total: {formattedAmount}
+                            </div>
+                          );
+                        })()
                       )}
                     </div>
                     <div className="modal-actions">
@@ -1823,11 +3893,15 @@ Do you want to proceed with registration?`;
               ) : (
                 <div className="events-checklist-container">
                   {/* Sports Events Section */}
-                  {sportsEvents.length > 0 && (
+                  {getFilteredSportsEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>⚽ Sports Events</h3>
+                      <h3>⚽ Sports Events
+                        {isLoggedIn && userProfileData.gender === 'female' && (
+                          <span className="pricing-info"> (₹{getPricingForUser().sports} each)</span>
+                        )}
+                      </h3>
                       <div className="checklist-items">
-                        {sportsEvents.map((event) => (
+                        {getFilteredSportsEvents().map((event) => (
                           <label key={event._id} className="checklist-item">
                             <input
                               type="checkbox"
@@ -1847,11 +3921,15 @@ Do you want to proceed with registration?`;
                   )}
 
                   {/* Cultural Events Section */}
-                  {culturalsEvents.length > 0 && (
+                  {getFilteredCulturalEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>🎨 Cultural Events</h3>
+                      <h3>🎨 Cultural Events
+                        {isLoggedIn && userProfileData.gender === 'female' && (
+                          <span className="pricing-info"> (₹{getPricingForUser().culturals} each)</span>
+                        )}
+                      </h3>
                       <div className="checklist-items">
-                        {culturalsEvents.map((event) => (
+                        {getFilteredCulturalEvents().map((event) => (
                           <label key={event._id} className="checklist-item">
                             <input
                               type="checkbox"
@@ -1870,8 +3948,13 @@ Do you want to proceed with registration?`;
                     </div>
                   )}
 
-                  {sportsEvents.length === 0 && culturalsEvents.length === 0 && (
-                    <p className="no-events-message">No events available at the moment.</p>
+                  {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && (
+                    <p className="no-events-message">
+                      {isLoggedIn && userProfileData.gender === 'female' 
+                        ? "No events available for female participants at the moment." 
+                        : "No events available at the moment."
+                      }
+                    </p>
                   )}
                 </div>
               )}
@@ -1893,13 +3976,13 @@ Do you want to proceed with registration?`;
         </div>
       )}
 
-      {/* My Events Modal - Disabled */}
-      {false && (
-        <div className="login-modal-overlay" onClick={() => {}}>
+      {/* My Events Modal */}
+      {showMyEventsModal && (
+        <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>🎫 My Registered Events</h2>
-              <button className="close-btn" onClick={() => {}}>×</button>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -1914,7 +3997,7 @@ Do you want to proceed with registration?`;
                         <div className="my-event-header">
                           <h4>{event.eventName}</h4>
                           <span className="event-type-badge">
-                            {event.eventType === 'sports' ? '⚽' : '🎨'} {event.eventType}
+                            {event.eventType === 'sports' ? '⚽' : event.eventType === 'parasports' ? '🏅' : '🎨'} {event.eventType}
                           </span>
                         </div>
                         <p>{event.description || 'No description'}</p>
@@ -1927,45 +4010,6 @@ Do you want to proceed with registration?`;
                           ✅ Registered
                         </div>
                       </div>
-                      <button 
-                        className="delete-event-btn"
-                        onClick={async () => {
-                          if (!confirm(`Are you sure you want to remove "${event.eventName}" from your events?`)) {
-                            return;
-                          }
-                          
-                          try {
-                            // Remove this event from the user's saved events
-                            const remainingEventIds = myEvents
-                              .filter(e => e._id !== event._id)
-                              .map(e => e._id);
-                            
-                            if (remainingEventIds.length === 0) {
-                              // If removing all events, clear everything
-                              const result = await saveMyEvents(userProfileData.userId!, []);
-                              if (result.success) {
-                                setMyEvents([]);
-                                setSelectedEvents(new Set());
-                                alert('Event removed successfully!');
-                              }
-                            } else {
-                              // Update with remaining events
-                              const result = await saveMyEvents(userProfileData.userId!, remainingEventIds);
-                              if (result.success) {
-                                await fetchUserSavedEvents(userProfileData.userId!);
-                                alert('Event removed successfully!');
-                              } else {
-                                alert(result.message || 'Failed to remove event.');
-                              }
-                            }
-                          } catch (error) {
-                            console.error('Error removing event:', error);
-                            alert('An error occurred while removing the event.');
-                          }
-                        }}
-                      >
-                        Remove
-                      </button>
                     </div>
                   ))}
                 </div>
@@ -1973,8 +4017,17 @@ Do you want to proceed with registration?`;
                 <div className="no-events-saved">
                   <p>You haven't registered for any events yet.</p>
                   <button className="browse-events-btn" onClick={() => {
-                    // setShowMyEventsModal(false);
-                    handleCardClick('EVENTS');
+                    setShowMyEventsModal(false);
+                    setActiveSubModal('EVENTS');
+                    // Fetch data in background
+                    fetchEvents();
+                    if (isLoggedIn && userProfileData.userId) {
+                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+                        setTempSelectedEvents(savedEventIds);
+                      });
+                    } else {
+                      setTempSelectedEvents(new Set());
+                    }
                   }}>
                     Browse Events
                   </button>

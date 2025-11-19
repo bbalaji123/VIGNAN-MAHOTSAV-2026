@@ -220,7 +220,8 @@ router.post('/login', async (req, res) => {
         name: user.name,
         email: user.email,
         userType: user.userType,
-        participationType: user.participationType
+        participationType: user.participationType,
+        gender: user.gender // Add gender field to login response
       }
     });
   } catch (error) {

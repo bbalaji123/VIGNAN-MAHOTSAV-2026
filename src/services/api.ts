@@ -57,6 +57,7 @@ export interface Event {
   eventType: 'sports' | 'culturals' | 'technical' | 'literary' | 'parasports';
   description?: string;
   category?: string;
+  gender?: 'male' | 'female' | 'mixed';
   date?: string;
   time?: string;
   venue?: string;
@@ -212,15 +213,33 @@ export const getAllEvents = async (): Promise<EventsResponse> => {
 };
 
 // Fetch events by type (sports, culturals, technical, literary)
-export const getEventsByType = async (type: string): Promise<EventsResponse> => {
+export const getEventsByType = async (type: string, gender?: string): Promise<EventsResponse> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/events/${type}`);
+    const url = gender 
+      ? `${API_BASE_URL}/events/${type}?gender=${gender}`
+      : `${API_BASE_URL}/events/${type}`;
+    const response = await fetch(url);
     const data = await response.json();
     return data;
   } catch (error: any) {
     return {
       success: false,
       message: 'Failed to fetch events',
+      error: error.message,
+    };
+  }
+};
+
+// Fetch events by gender
+export const getEventsByGender = async (gender: string): Promise<EventsResponse> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/events-by-gender/${gender}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: 'Failed to fetch events by gender',
       error: error.message,
     };
   }

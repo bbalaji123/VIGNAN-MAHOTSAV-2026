@@ -26,6 +26,7 @@ router.get('/events', async (req, res) => {
 router.get('/events/:type', async (req, res) => {
   try {
     const { type } = req.params;
+    const { gender } = req.query; // Optional gender filter
     
     // Validate event type
     const validTypes = ['sports', 'culturals', 'technical', 'literary', 'parasports'];
@@ -36,15 +37,32 @@ router.get('/events/:type', async (req, res) => {
       });
     }
 
-    const events = await Event.find({ 
+    let query = { 
       eventType: type.toLowerCase(),
       isActive: true 
-    });
+    };
+
+    // Add gender filter if provided
+    if (gender && ['male', 'female', 'mixed'].includes(gender.toLowerCase())) {
+      if (gender.toLowerCase() === 'female') {
+        // Female users can see female and mixed events
+        query.gender = { $in: ['female', 'mixed'] };
+      } else if (gender.toLowerCase() === 'male') {
+        // Male users can see male and mixed events
+        query.gender = { $in: ['male', 'mixed'] };
+      } else {
+        // For 'mixed', just show mixed events
+        query.gender = 'mixed';
+      }
+    }
+
+    const events = await Event.find(query);
 
     res.status(200).json({
       success: true,
       count: events.length,
       type: type,
+      gender: gender,
       data: events
     });
   } catch (error) {
@@ -52,6 +70,45 @@ router.get('/events/:type', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Error fetching events',
+      error: error.message 
+    });
+  }
+});
+
+// Get all events with optional gender filtering
+router.get('/events-by-gender/:gender?', async (req, res) => {
+  try {
+    const { gender } = req.params;
+    
+    let query = { isActive: true };
+    
+    // Add gender filter if provided
+    if (gender && ['male', 'female', 'mixed'].includes(gender.toLowerCase())) {
+      if (gender.toLowerCase() === 'female') {
+        // Female users can see female and mixed events
+        query.gender = { $in: ['female', 'mixed'] };
+      } else if (gender.toLowerCase() === 'male') {
+        // Male users can see male and mixed events
+        query.gender = { $in: ['male', 'mixed'] };
+      } else {
+        // For 'mixed', just show mixed events
+        query.gender = 'mixed';
+      }
+    }
+
+    const events = await Event.find(query);
+
+    res.status(200).json({
+      success: true,
+      count: events.length,
+      gender: gender,
+      data: events
+    });
+  } catch (error) {
+    console.error('Fetch events by gender error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching events by gender',
       error: error.message 
     });
   }

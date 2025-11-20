@@ -13,7 +13,7 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
 
   // Continuous rotation animation (independent of scroll)
   const animateRotation = () => {
-    setRotation(prev => (prev + 1) % 360); // Increment rotation continuously
+    setRotation(prev => (prev + 0.3) % 360); // Much slower rotation - reduced to 0.2 degrees per frame
     animationRef.current = requestAnimationFrame(animateRotation);
   };
 

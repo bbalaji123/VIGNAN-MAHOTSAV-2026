@@ -1,11 +1,11 @@
 /* Main lotus icon with continuous rotation */
 .main-lotus-icon {
-    width: 600px; /* Large initial size */
+    width: 900px; /* Increased size to reach overview level */
     height: auto;
     
     /* Fixed position to stay on screen during scroll */
     position: fixed;
-    top: 90vh; 
+    top: 90vh; /* Moved up slightly to accommodate larger size */
     left: 50vw; 
 
     /* Initial centering transform */
@@ -32,12 +32,12 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .main-lotus-icon {
-        width: 400px;
+        width: 600px; /* Increased mobile size */
     }
 }
 
 @media (max-width: 480px) {
     .main-lotus-icon {
-        width: 300px;
+        width: 450px; /* Increased small screen size */
     }
 }

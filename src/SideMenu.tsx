@@ -51,7 +51,8 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
       {isOpen && <div className="sidebar-overlay" onClick={handleOverlayClick}></div>}
 
       {/* Side Menu Panel */}
-      <div className={`side-menu-panel ${isOpen ? 'open' : ''}`}>
+      <div className="side-menu-panel-wrapper">
+        <div className={`side-menu-panel ${isOpen ? 'open' : ''}`}>
         <div className="side-menu-header">
           <h2>Menu</h2>
         </div>
@@ -69,6 +70,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
         </div>
         <div className="side-menu-footer">
           <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="sidebar-logo" />
+        </div>
         </div>
       </div>
     </>

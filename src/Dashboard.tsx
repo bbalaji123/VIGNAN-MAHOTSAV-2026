@@ -1049,7 +1049,101 @@ const Dashboard: React.FC = () => {
 
   const handleEventDetailClick = (eventTitle: string) => {
     console.log('Event clicked:', eventTitle);
-    const eventData = eventDetailsData[eventTitle as keyof typeof eventDetailsData];
+    
+    // Create a comprehensive mapping from database event names to eventDetailsData keys
+    const eventNameMapping: { [key: string]: string } = {
+      // Chess events
+      'Chess Championship': 'Chess',
+      
+      // Table Tennis events
+      'Table Tennis Tournament': 'Table Tennis',
+      'Table Tennis Championship': 'Table Tennis',
+      
+      // Badminton events
+      'Badminton Championship': 'Table Tennis', // Assuming same structure
+      'Badminton Tournament': 'Table Tennis',
+      
+      // Athletics events
+      'Athletics Championship': 'Men\'s Athletics',
+      'Track & Field': 'Men\'s Athletics',
+      
+      // Taekwondo events
+      'Taekwondo Championship': 'Taekwondo',
+      'Taekwondo Tournament': 'Taekwondo',
+      
+      // Volleyball events
+      'Volleyball Tournament': 'Volley ball',
+      'Volleyball Championship': 'Volley ball',
+      'Volley Ball Tournament': 'Volley ball',
+      
+      // Basketball events
+      'Basketball Tournament': 'Basket ball',
+      'Basketball Championship': 'Basket ball',
+      'Basket Ball Tournament': 'Basket ball',
+      
+      // Football events
+      'Football Championship': 'Football',
+      'Football Tournament': 'Football',
+      
+      // Cricket events
+      'Cricket Tournament - Men': 'Football', // Using similar team sport structure
+      'Cricket Tournament - Women': 'Football',
+      'Cricket Tournament': 'Football',
+      'Cricket Championship': 'Football',
+      
+      // Kabaddi events
+      'Kabaddi Tournament': 'Kabaddi',
+      'Kabaddi Championship': 'Kabaddi',
+      
+      // Hockey events
+      'Hockey Tournament': 'Hockey',
+      'Hockey Championship': 'Hockey',
+      
+      // Kho-Kho events
+      'Kho-Kho Tournament': 'Kho-Kho',
+      'Kho-Kho Championship': 'Kho-Kho',
+      
+      // Swimming events
+      'Swimming Competition': 'Men\'s Athletics', // Using individual sports structure
+      'Swimming Championship': 'Men\'s Athletics',
+      
+      // Throwball events
+      'Throwball Tournament': 'Throw ball',
+      'Throwball Championship': 'Throw ball',
+      
+      // Tennikoit events
+      'Tennikoit Tournament': 'Tennikoit',
+      'Tennikoit Championship': 'Tennikoit',
+      
+      // Yoga events
+      'Yoga Competition': 'Traditional Yogasana',
+      'Traditional Yogasana Competition': 'Traditional Yogasana',
+      'Artistic Yogasana Competition': 'Artistic Yogasana',
+      
+      // Para Sports events
+      'Para Athletics': 'Para Sports',
+      'Para Cricket Men': 'Para Sports',
+      'Para Sports Competition': 'Para Sports',
+      
+      // Cultural events - using generic sports structure
+      'Classical Dance Competition': 'Chess', // Using individual event structure
+      'Western Music Band Competition': 'Football', // Using team event structure
+      'Solo Singing Competition': 'Chess',
+      'Drama & Theatre Competition': 'Football',
+      'Fashion Show': 'Chess',
+      'Folk Dance Competition': 'Chess',
+      'Stand-up Comedy Competition': 'Chess',
+      'Art & Painting Exhibition': 'Chess',
+      'Poetry & Literature Competition': 'Chess',
+      'DJ & Music Production Battle': 'Chess'
+    };
+    
+    // Try to find the event data using the original title first, then the mapped title
+    let eventData = eventDetailsData[eventTitle as keyof typeof eventDetailsData];
+    if (!eventData && eventNameMapping[eventTitle]) {
+      eventData = eventDetailsData[eventNameMapping[eventTitle] as keyof typeof eventDetailsData];
+    }
+    
     console.log('Event data:', eventData);
     if (eventData) {
       setSelectedEventDetail({ eventTitle, ...eventData });
@@ -1726,6 +1820,7 @@ Do you want to proceed with registration?`;
         <div className={`animated-menu-icon ${showPageMenu ? 'active' : ''}`}>
           <span className="bar bar1"></span>
           <span className="bar bar2"></span>
+          <span className="bar bar3"></span>
         </div>
       </div>
 
@@ -1774,52 +1869,30 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* Full-Screen Menu Overlay */}
+      {/* Left Side Menu Overlay */}
       {showPageMenu && (
-        <div className="fullscreen-menu-overlay">
-          <div className="fullscreen-menu-content">
-            <div className="menu-close-btn" onClick={() => setShowPageMenu(false)}>
-              <span className="close-bar close-bar1"></span>
-              <span className="close-bar close-bar2"></span>
-            </div>
-            <div className="fullscreen-menu-grid">
-              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}>
+        <div className="left-menu-overlay" onClick={() => setShowPageMenu(false)}>
+          <div className="left-menu-content" onClick={(e) => e.stopPropagation()}>
+            <div className="left-menu-list">
+              <div className="left-menu-item" onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }} style={{ animationDelay: '0.1s' }}>
                 <span>HOME</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('EVENTS'); setShowPageMenu(false); }}>
-                <span>REGISTRATIONS</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}>
+              <div className="left-menu-item" onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }} style={{ animationDelay: '0.2s' }}>
                 <span>MY EVENTS</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={handleEventsInfoClick}>
-                <span>COMPETITIONS</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }}>
+              <div className="left-menu-item" onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }} style={{ animationDelay: '0.3s' }}>
                 <span>ACCOMMODATION</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
-                <span>WORKSHOPS</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
-                <span>TICKETS</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
-                <span>MERCH</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.4s' }}>
                 <span>SCHEDULE</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.5s' }}>
                 <span>SPONSORS</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
-                <span>FAQ</span>
-              </div>
-              <div className="fullscreen-menu-item" onClick={() => { setShowPageMenu(false); }}>
+              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.6s' }}>
                 <span>CONTACT US</span>
               </div>
-              <div className="fullscreen-menu-item" onClick={handleEventsInfoClick}>
+              <div className="left-menu-item" onClick={handleEventsInfoClick} style={{ animationDelay: '0.7s' }}>
                 <span>EVENTS INFO</span>
               </div>
             </div>

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
 import FloatingBubble from './FloatingBubble';
-import FloatingIcons from './FloatingIcons';
 import EventRegistrationModal from './EventRegistrationModal';
-import { registerUser, loginUser, forgotPassword, getEventsByType, getEventsByGender, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
-import './Dashboard.css';
-import './ForgotPassword.css';
-import './App.css';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const [showPageMenu, setShowPageMenu] = useState(false);
@@ -479,7 +476,6 @@ const Dashboard: React.FC = () => {
   };
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  const [showOverviewModal, setShowOverviewModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [timeTheme, setTimeTheme] = useState<'day' | 'evening' | 'night'>('day');
@@ -1160,14 +1156,6 @@ const Dashboard: React.FC = () => {
     setShowLoginModal(true);
   };
 
-  const handleOverviewClick = () => {
-    setShowOverviewModal(true);
-  };
-
-  const handleCloseOverview = () => {
-    setShowOverviewModal(false);
-  };
-
   const handleCloseLogin = () => {
     setShowLoginModal(false);
     setLoginFormData({ email: '', password: '' });
@@ -1803,7 +1791,8 @@ Do you want to proceed with registration?`;
   }, [showProfileDropdown]);
 
   return (
-    <div className={`single-page-app ${timeTheme}-theme full-purple-bg`}>
+    <div className={`w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
+         style={{background: "#4c1d95"}}>
       
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -1816,37 +1805,31 @@ Do you want to proceed with registration?`;
       <div className={`shimmer-overlay ${isScrolled ? 'active' : ''}`}></div>
 
       {/* Top-Left Menu Icon */}
-      <div className="top-left-menu-icon" onClick={handlePageMenuToggle}>
-        <div className={`animated-menu-icon ${showPageMenu ? 'active' : ''}`}>
-          <span className="bar bar1"></span>
-          <span className="bar bar2"></span>
-          <span className="bar bar3"></span>
+      <div className="fixed top-5 left-5 z-50 cursor-pointer" onClick={handlePageMenuToggle}>
+        <div className={`w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300 ${showPageMenu ? 'rotate-45' : ''}`}>
+          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
+          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
+          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
         </div>
       </div>
 
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
-        <div className="top-right-profile-section" onClick={handleShowProfile}>
-          <div className="profile-icon">👤</div>
-          <span className="welcome-text">Welcome, {loggedInUserName}!</span>
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-3 cursor-pointer bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white hover:bg-white/30 transition-all duration-300" onClick={handleShowProfile}>
+          <div className="text-2xl">👤</div>
+          <span className="text-sm font-medium">Welcome, {loggedInUserName}!</span>
         </div>
       )}
      
-
-      
-      {/* The Icon Component - Fixed position, animates with scroll */}
-      <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
-
-      {/* 1. Hero Section (First Fold) */}
-      <section className="hero-section">
-        <div className="hero-image-container">
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="hero-main-image" />
+      {/* 1. Hero Section (First Fold) - Moved to Top */}
+      <section className="relative min-h-screen pt-5 flex flex-col items-center justify-start z-10 text-white text-center overflow-hidden" style={{background: "#4c1d95"}}>
+        <div className="flex justify-center items-center mb-2 z-20 relative">
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-[1200px] h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
         </div>
         
-        {/* Action Buttons - Overview always visible, Login only when not logged in */}
-        <div className="hero-action-buttons">
-          <button className="overview-btn" onClick={handleOverviewClick}>Overview</button>
-          <button className="events-btn" onClick={() => {
+        {/* Action Buttons - Register for events and login when not logged in */}
+        <div className="flex gap-8 my-2 justify-center items-center z-20 relative">
+          <button className="w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
             // Open modal immediately
             setActiveSubModal('EVENTS');
             // Fetch events in background
@@ -1860,14 +1843,13 @@ Do you want to proceed with registration?`;
             fetchEvents();
           }}>Register for Events</button>
           {!isLoggedIn && (
-            <button className="login-btn" onClick={handleLoginClick}>Login</button>
+            <button className="w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login</button>
           )}
         </div>
-        
-        <div className="scroll-indicator">
-          <p>Scroll down to see the magic ✨</p>
-        </div>
       </section>
+
+      {/* The Icon Component - Fixed position, animates with scroll */}
+      <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
 
       {/* Left Side Menu Overlay */}
       {showPageMenu && (
@@ -3045,102 +3027,6 @@ Do you want to proceed with registration?`;
 
       {/* Floating Bubble Menu */}
       <FloatingBubble />
-      
-      {/* Decorative Floating Icons */}
-      <FloatingIcons />
-
-      {/* Overview Modal */}
-      {showOverviewModal && (
-        <div className="login-modal-overlay" onClick={handleCloseOverview}>
-          <div className="overview-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>Vignan Mahotsav 2026 - Overview</h2>
-              <button className="close-btn" onClick={handleCloseOverview}>×</button>
-            </div>
-            <div className="overview-modal-body">
-              <div className="overview-content">
-                <div className="overview-section">
-                  <h3>🎉 Welcome to Vignan Mahotsav</h3>
-                  <p>
-                    Vignan Mahotsav is the grandest celebration of science, technology, culture, and innovation 
-                    organized annually at our esteemed institution. This magnificent festival brings together 
-                    brilliant minds, creative souls, and passionate individuals from across the nation to 
-                    celebrate the spirit of knowledge and cultural harmony.
-                  </p>
-                </div>
-
-                <div className="overview-section">
-                  <h3>🌟 Festival Highlights</h3>
-                  <div className="highlights-list">
-                    <div className="highlight-item">
-                      <strong>Cultural Extravaganza:</strong> Witness spectacular performances including 
-                      classical dance, music concerts, drama, and folk art from various regions of India.
-                    </div>
-                    <div className="highlight-item">
-                      <strong>Technical Competitions:</strong> Participate in cutting-edge technical events, 
-                      hackathons, robotics competitions, and innovation challenges.
-                    </div>
-                    <div className="highlight-item">
-                      <strong>Sports Tournaments:</strong> Engage in thrilling sports competitions including 
-                      cricket, football, basketball, athletics, and traditional games.
-                    </div>
-                    <div className="highlight-item">
-                      <strong>Literary Events:</strong> Express your creativity through poetry, storytelling, 
-                      debate competitions, and creative writing contests.
-                    </div>
-                  </div>
-                </div>
-
-                <div className="overview-section">
-                  <h3>📅 Event Details</h3>
-                  <div className="event-details">
-                    <div className="detail-row">
-                      <span className="detail-label">Duration:</span>
-                      <span className="detail-value">3 Days of Non-stop Celebration</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="detail-label">Dates:</span>
-                      <span className="detail-value">5-7 February 2026</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="detail-label">Venue:</span>
-                      <span className="detail-value">Vignan University Campus</span>
-                    </div>
-                    <div className="detail-row">
-                      <span className="detail-label">Expected Participants:</span>
-                      <span className="detail-value">5000+ Students & Faculty</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="overview-section">
-                  <h3>🏆 What Makes It Special</h3>
-                  <p>
-                    Vignan Mahotsav stands as a testament to the perfect blend of tradition and modernity. 
-                    Our festival promotes cultural diversity, technological advancement, and holistic 
-                    development of students. It provides a platform for showcasing talent, fostering 
-                    creativity, and building lasting memories.
-                  </p>
-                  <p>
-                    Join us in this incredible journey of learning, celebration, and cultural exchange. 
-                    Be part of an experience that celebrates the essence of "Eternal Harmony" - where 
-                    science meets art, tradition meets innovation, and dreams meet reality.
-                  </p>
-                </div>
-
-                <div className="overview-section">
-                  <h3>🎯 Registration & Participation</h3>
-                  <p>
-                    Ready to be part of this magnificent celebration? Register now to secure your spot 
-                    in various events, competitions, and cultural programs. Don't miss this opportunity 
-                    to showcase your talents and be part of something extraordinary!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Events Info Modal */}
       {showEventsInfo && (

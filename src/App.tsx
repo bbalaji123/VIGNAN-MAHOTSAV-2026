@@ -4,12 +4,14 @@ import AboutUs from './components/AboutUs';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/about-us" element={<AboutUs />} />
-      </Routes>
-    </Router>
+    <div className="w-full min-h-screen">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/about-us" element={<AboutUs />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

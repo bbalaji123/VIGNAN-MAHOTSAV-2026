@@ -1,19 +1,34 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './Animatedicon.css';
 
 interface AnimatedIconProps {
   iconSrc: string;
 }
 
 const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
-  const [translateAmount, setTranslateAmount] = useState('translate(-50%, -50%)');
+  const [translateAmount, setTranslateAmount] = useState('translate(-50%, 50%)');
   const [rotation, setRotation] = useState(0);
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
-  // Continuous rotation animation (independent of scroll)
+  // Continuous rotation animation with dynamic speed based on movement
   const animateRotation = () => {
-    setRotation(prev => (prev + 0.3) % 360); // Much slower rotation - reduced to 0.2 degrees per frame
+    const scrollY = window.scrollY;
+    const scrollRange = 500; // Animation completes after 500px of scroll
+    
+    // Calculate scroll progress (0 to 1)
+    let progress = scrollY / scrollRange;
+    progress = Math.min(1, Math.max(0, progress)); // Clamp between 0 and 1
+    
+    // Dynamic rotation speed based on movement state
+    const slowSpeed = 0.2; // Initial slow rotation speed (when not moving)
+    const fastSpeed = 1.5; // Increased rotation speed while moving
+    
+    // Increase speed only while moving (progress > 0 and < 1)
+    // Slow when stationary (progress = 0 or progress = 1)
+    const isMoving = progress > 0 && progress < 1;
+    const rotationSpeed = isMoving ? fastSpeed : slowSpeed;
+    
+    setRotation(prev => (prev + rotationSpeed) % 360);
     animationRef.current = requestAnimationFrame(animateRotation);
   };
 
@@ -29,12 +44,12 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
 
     // --- Dynamic Final Transform Calculations ---
     
-    // 1. Movement X: Move icon to far right edge of screen
-    const finalX = window.innerWidth * 0.47; // Move to far right edge
+    // 1. Movement X: Move icon to right edge with exactly half visible
+    const finalX = window.innerWidth * 0.5; // Position so exactly half the flower is visible
     const newX = progress * finalX;
 
-    // 2. Movement Y: Move upward to middle area
-    const finalY = -window.innerHeight * 0.4; // Move up by 40% of viewport height
+    // 2. Movement Y: Move to exact middle of screen vertically
+    const finalY = -window.innerHeight * 0.5; // Exact middle of screen (0% offset)
     const newY = progress * finalY; 
 
     // 3. Scaling: Increase size instead of shrinking
@@ -45,7 +60,7 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
     
     // Apply transformations (position and scale only, rotation is separate)
     setTranslateAmount(
-      `translate(-50%, -50%) translateX(${newX}px) translateY(${newY}px) scale(${newScale})`
+      `translate(-50%, 50%) translateX(${newX}px) translateY(${newY}px) scale(${newScale})`
     );
   };
 
@@ -68,17 +83,15 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
   return (
     <div
       ref={iconRef}
-      className="main-lotus-icon"
+      className="animated-icon-container"
       style={{ transform: translateAmount }}
     >
       <img
         src={iconSrc} 
         alt="Lotus Icon"
+        className="animated-icon-image"
         style={{ 
           transform: `rotate(${rotation}deg)`,
-          width: '100%',
-          height: 'auto',
-          display: 'block'
         }}
       />
     </div>

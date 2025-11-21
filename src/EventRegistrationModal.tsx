@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { registerIndividualEvent, registerTeamEvent, type Event, type TeamMember } from './services/api';
-import './EventRegistration.css';
 
 interface EventRegistrationModalProps {
   event: Event;

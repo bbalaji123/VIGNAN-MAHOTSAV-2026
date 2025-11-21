@@ -4,6 +4,24 @@
   box-sizing: border-box;
 }
 
+/* Animated Icon Component */
+.animated-icon-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 10;
+  width: 1050px;
+  height: 1050px;
+  pointer-events: none;
+}
+
+.animated-icon-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+}
+
 /* Payment Marquee */
 .payment-marquee {
   position: fixed;

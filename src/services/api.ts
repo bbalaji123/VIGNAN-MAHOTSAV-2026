@@ -359,6 +359,8 @@ export const getMyEvents = async (userId: string): Promise<EventsResponse> => {
 // Add a single event to My Events
 export const addEventToMyEvents = async (userId: string, eventId: string): Promise<ApiResponse> => {
   try {
+    console.log('Making API request to add event:', { userId, eventId, url: `${API_BASE_URL}/add-event` });
+    
     const response = await fetch(`${API_BASE_URL}/add-event`, {
       method: 'POST',
       headers: {
@@ -367,12 +369,20 @@ export const addEventToMyEvents = async (userId: string, eventId: string): Promi
       body: JSON.stringify({ userId, eventId }),
     });
 
+    console.log('API response status:', response.status, response.statusText);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
+    console.log('API response data:', data);
     return data;
   } catch (error: any) {
+    console.error('API Error in addEventToMyEvents:', error);
     return {
       success: false,
-      message: 'Failed to add event',
+      message: error.message.includes('fetch') ? 'Unable to connect to server. Please check your internet connection.' : 'Failed to add event',
       error: error.message,
     };
   }

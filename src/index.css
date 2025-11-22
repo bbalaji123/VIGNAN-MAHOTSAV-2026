@@ -78,7 +78,7 @@ html, body, #root {
 /* Custom component styles */
 .btn-primary {
   padding: 2.5rem 1rem;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(22, 33, 62, 0.9);
   color: #facc15;
   border: 2px solid #facc15;
   border-radius: 0.5rem;

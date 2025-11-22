@@ -1,13 +1,13 @@
 /* Event Registration Modal */
 .event-registration-modal {
-  background: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #ee5a6f 100%) !important;
   border-radius: 25px;
   width: 100%;
   max-width: 700px;
   max-height: 90vh;
   overflow-y: auto;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(26, 26, 46, 0.5);
   animation: modalSlideIn 0.3s ease;
 }
 
@@ -25,7 +25,7 @@
 .registration-type-selector .type-btn {
   flex: 1;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   color: white;
@@ -33,11 +33,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
 }
 
 .registration-type-selector .type-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 215, 0, 0.5);
+  background: rgba(111, 168, 219, 0.25);
+  border-color: rgba(255, 215, 0, 0.6);
+  transform: translateY(-2px);
 }
 
 .registration-type-selector .type-btn.active {
@@ -51,20 +53,21 @@
 .event-registration-body .form-section {
   margin-bottom: 30px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(64, 118, 200, 0.15);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .event-registration-body .form-section h3 {
   color: #ffd700;
   margin: 0 0 20px 0;
   font-size: 1.3rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(60, 104, 174, 0.5);
 }
 
 .event-registration-body .form-section h4 {
-  color: #ffffff;
+  color: #ffd700;
   margin: 15px 0 10px 0;
   font-size: 1.1rem;
 }
@@ -75,10 +78,10 @@
 
 .event-registration-body .form-group label {
   display: block;
-  color: #ffffff;
+  color: #ffd700;
   font-weight: 600;
   margin-bottom: 8px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 2px rgba(30, 20, 60, 0.5);
 }
 
 .event-registration-body .form-row {
@@ -106,13 +109,13 @@
 }
 
 .team-member-card strong {
-  color: #ffffff;
+  color: #ffd700;
   display: block;
   margin-bottom: 5px;
 }
 
 .team-member-card p {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 215, 0, 0.8);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -135,9 +138,10 @@
 /* Add Member Form */
 .add-member-form {
   padding: 20px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(30, 20, 60, 0.4);
   border-radius: 10px;
-  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
 }
 
 .add-member-btn {
@@ -219,7 +223,7 @@
   color: #ffd700;
   margin-bottom: 30px;
   font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(74, 129, 165, 0.5);
 }
 
 .generated-id-box {
@@ -241,7 +245,7 @@
   font-size: 2.5rem;
   font-weight: 900;
   letter-spacing: 3px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 8px rgba(22, 33, 62, 0.8);
   margin: 0;
 }
 
@@ -253,7 +257,7 @@
 
 .close-success-btn {
   padding: 15px 40px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(22, 33, 62, 0.9);
   border: 2px solid #ffd700;
   border-radius: 15px;
   color: white;

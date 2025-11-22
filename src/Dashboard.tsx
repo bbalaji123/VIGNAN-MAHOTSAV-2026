@@ -1567,6 +1567,9 @@ Do you want to proceed with registration?`;
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
     localStorage.removeItem('isLoggedIn');
+    
+    // Redirect to main page
+    window.location.href = '/';
   };
 
   const handleShowProfile = () => {
@@ -1797,7 +1800,7 @@ Do you want to proceed with registration?`;
 
       {/* Top-Left Menu Icon - Only show when menu is closed */}
       {!showPageMenu && (
-        <div className="fixed top-5 left-5 z-[60] cursor-pointer" onClick={handlePageMenuToggle}>
+        <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
           <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
             <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
             <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
@@ -1808,10 +1811,10 @@ Do you want to proceed with registration?`;
 
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
-        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-2 sm:gap-3 cursor-pointer bg-white/20 backdrop-blur-md px-2 sm:px-4 py-1 sm:py-2 rounded-full text-white hover:bg-white/30 transition-all duration-300" onClick={handleShowProfile}>
-          <div className="text-lg sm:text-2xl">👤</div>
-          <span className="text-xs sm:text-sm font-medium hidden xs:block">Welcome, {loggedInUserName}!</span>
-          <span className="text-xs sm:text-sm font-medium block xs:hidden">Profile</span>
+        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile}>
+          <div className="text-2xl sm:text-4xl">👤</div>
+          <span className="text-sm sm:text-lg font-bold hidden xs:block">Welcome, {loggedInUserName}!</span>
+          <span className="text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
         </div>
       )}
      
@@ -1823,21 +1826,22 @@ Do you want to proceed with registration?`;
         
         {/* Action Buttons - Register for events and login when not logged in */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 my-4 justify-center items-center z-20 relative px-4 w-full max-w-md sm:max-w-none">
-          <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
-            // Open modal immediately
-            setActiveSubModal('EVENTS');
-            // Fetch events in background
-            if (isLoggedIn && userProfileData.userId) {
-              fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                setTempSelectedEvents(savedEventIds);
-              });
-            } else {
-              setTempSelectedEvents(new Set());
-            }
-            fetchEvents();
-          }}>Register for Events</button>
-          {!isLoggedIn && (
-            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login</button>
+          {isLoggedIn ? (
+            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+              // Open modal immediately
+              setActiveSubModal('EVENTS');
+              // Fetch events in background
+              if (isLoggedIn && userProfileData.userId) {
+                fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+                  setTempSelectedEvents(savedEventIds);
+                });
+              } else {
+                setTempSelectedEvents(new Set());
+              }
+              fetchEvents();
+            }}>Register for Events</button>
+          ) : (
+            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login/Register</button>
           )}
         </div>
       </section>
@@ -1850,7 +1854,7 @@ Do you want to proceed with registration?`;
         <div className="left-menu-overlay" onClick={() => setShowPageMenu(false)}>
           <div className="left-menu-content" onClick={(e) => e.stopPropagation()}>
             {/* X Close Button inside menu */}
-            <div className="absolute top-5 right-5 z-[70] cursor-pointer" onClick={handlePageMenuToggle}>
+            <div className="absolute top-5 right-5 z-70 cursor-pointer" onClick={handlePageMenuToggle}>
               <div className="w-12 h-12 flex items-center justify-center">
                 <div className="relative w-8 h-8">
                   <span className="absolute w-full h-1 bg-yellow-400 transform rotate-45 top-1/2 left-0" style={{backgroundColor: '#FFD700'}}></span>
@@ -2956,7 +2960,7 @@ Do you want to proceed with registration?`;
                   <button type="button" onClick={handleForgotPasswordClick} className="forgot-password">Forgot password?</button>
                 </div>
                 <button type="submit" className="login-submit-btn" disabled={isLoggingIn}>
-                  {isLoggingIn ? '⏳ Logging in...' : '🔑 Login to Dashboard'}
+                  {isLoggingIn ? '⏳ Logging in...' : '🔑 Login'}
                 </button>
                 <div className="signup-link">
                   <p>Don't have an account? <button type="button" onClick={handleSignupClick} className="signup-btn">Sign up</button></p>

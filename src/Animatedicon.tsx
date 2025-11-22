@@ -42,19 +42,33 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
     let progress = scrollY / scrollRange;
     progress = Math.min(1, Math.max(0, progress)); // Clamp between 0 and 1
 
+    // Check for specific mobile resolution 360x740
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const isMobile360 = (vw >= 350 && vw <= 370) && (vh >= 730 && vh <= 750);
+
     // --- Dynamic Final Transform Calculations ---
     
-    // 1. Movement X: Move icon to right edge with exactly half visible
-    const finalX = window.innerWidth * 0.5; // Position so exactly half the flower is visible
+    // 1. Movement X: Adjust specifically for 360x740 mobile
+    let finalX = window.innerWidth * 0.5; // Default behavior for all other dimensions
+    if (isMobile360) {
+      finalX = window.innerWidth * 0.35; // Optimized movement for 360px width
+    }
     const newX = progress * finalX;
 
-    // 2. Movement Y: Move to exact middle of screen vertically
-    const finalY = -window.innerHeight * 0.5; // Exact middle of screen (0% offset)
+    // 2. Movement Y: Adjust specifically for 360x740 mobile
+    let finalY = -window.innerHeight * 0.5; // Default behavior for all other dimensions
+    if (isMobile360) {
+      finalY = -window.innerHeight * 0.35; // Optimized vertical movement for 740px height
+    }
     const newY = progress * finalY; 
 
-    // 3. Scaling: Increase size instead of shrinking
+    // 3. Scaling: Adjust specifically for 360x740 mobile
     const initialScale = 1;
-    const finalScale = 0.6; // Larger final size (60% instead of 30%)
+    let finalScale = 0.6; // Default behavior for all other dimensions
+    if (isMobile360) {
+      finalScale = 0.7; // Optimized scaling for 360x740 screen
+    }
     const scaleDiff = initialScale - finalScale;
     const newScale = initialScale - (progress * scaleDiff); 
     

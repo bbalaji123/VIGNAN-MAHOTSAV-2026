@@ -202,15 +202,15 @@
 }
 
 .login-btn {
-    background: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%) !important;
     color: white;
     text-transform: lowercase;
 }
 
 .login-btn:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: linear-gradient(135deg, #AD1457 0%, #C2185B 100%) !important;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(194, 24, 91, 0.4);
 }
 
 /* Background Accent Elements */

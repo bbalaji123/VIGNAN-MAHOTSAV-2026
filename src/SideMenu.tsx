@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';\nimport './SideMenu.css';
 
 interface SideMenuProps {
   onMenuClick: (category?: string) => void;
@@ -36,13 +36,15 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
     <>
       {/* Menu toggle button */}
       <div
-        className={`fixed left-4 top-1/2 transform -translate-y-1/2 z-50 w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-110 active:scale-95 ${isOpen ? 'rotate-45' : ''}`}
+        className={`hamburger-container fixed left-4 top-1/2 transform -translate-y-1/2 z-50 w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-110 active:scale-95 ${isOpen ? 'active' : ''}`}
         onClick={toggleMenu}
         role="button"
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
       >
-        <div className="text-white text-xl transition-transform duration-300">
-          {isOpen ? '✕' : '☰'}
+        <div className="hamburger-icon">
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
         </div>
       </div>
 
@@ -51,7 +53,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
 
       {/* Side Menu Panel */}
       <div className="fixed left-0 top-0 h-full z-50">
-        <div className={`h-full w-80 bg-gradient-to-br from-mahotsav-purple-900 via-mahotsav-purple-800 to-mahotsav-purple-700 text-white transform transition-all duration-500 ease-out backdrop-blur-md shadow-2xl ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        <div className={`menu-panel h-full w-80 bg-black/80 text-white transform transition-all duration-700 ease-out backdrop-blur-md shadow-2xl ${isOpen ? 'menu-open translate-x-0' : 'menu-closed -translate-x-full'}`}
              style={{
                clipPath: isOpen ? 'ellipse(150% 100% at 0% 50%)' : 'ellipse(0% 100% at 0% 50%)',
                borderRadius: '0 50px 50px 0'

@@ -1,3 +1,78 @@
+/* Animated Hamburger Icon */
+.hamburger-container {
+  overflow: visible !important;
+}
+
+.hamburger-icon {
+  width: 24px !important;
+  height: 18px !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  cursor: pointer !important;
+  gap: 0 !important;
+}
+
+.hamburger-line {
+  width: 100% !important;
+  height: 3px !important;
+  background-color: #FFD700 !important;
+  border-radius: 2px !important;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+  transform-origin: center !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Hamburger animation when active (X formation) */
+.hamburger-container.active .hamburger-line:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg) !important;
+}
+
+.hamburger-container.active .hamburger-line:nth-child(2) {
+  opacity: 0 !important;
+  transform: scaleX(0) !important;
+}
+
+.hamburger-container.active .hamburger-line:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg) !important;
+}
+
+/* Menu Panel Rotating Animations */
+.menu-panel {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.menu-panel.menu-closed {
+  transform: translateX(-100%) rotateY(-90deg);
+  opacity: 0;
+}
+
+.menu-panel.menu-open {
+  transform: translateX(0) rotateY(0deg);
+  opacity: 1;
+  animation: menuSlideRotate 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes menuSlideRotate {
+  0% {
+    transform: translateX(-100%) rotateY(-90deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-50%) rotateY(-45deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
 /* Menu Toggle Button */
 .arrow-toggle {
   position: fixed;
@@ -269,6 +344,29 @@
   font-weight: 600;
   transform: translateZ(5px);
   border-radius: 0 30px 30px 0;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.menu-panel.menu-open .side-menu-item {
+  animation: menuItemSlideIn 0.5s ease-out forwards;
+}
+
+.menu-panel.menu-open .side-menu-item:nth-child(1) { animation-delay: 0.1s; }
+.menu-panel.menu-open .side-menu-item:nth-child(2) { animation-delay: 0.15s; }
+.menu-panel.menu-open .side-menu-item:nth-child(3) { animation-delay: 0.2s; }
+.menu-panel.menu-open .side-menu-item:nth-child(4) { animation-delay: 0.25s; }
+.menu-panel.menu-open .side-menu-item:nth-child(5) { animation-delay: 0.3s; }
+.menu-panel.menu-open .side-menu-item:nth-child(6) { animation-delay: 0.35s; }
+.menu-panel.menu-open .side-menu-item:nth-child(7) { animation-delay: 0.4s; }
+.menu-panel.menu-open .side-menu-item:nth-child(8) { animation-delay: 0.45s; }
+.menu-panel.menu-open .side-menu-item:nth-child(9) { animation-delay: 0.5s; }
+
+@keyframes menuItemSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0) translateZ(5px);
+  }
 }
 
 .side-menu-item::before {

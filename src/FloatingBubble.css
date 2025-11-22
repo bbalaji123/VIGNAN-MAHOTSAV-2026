@@ -10,13 +10,13 @@
 .floating-bubble {
   width: 70px;
   height: 70px;
-  background: linear-gradient(135deg, #6a0dad 0%, #9b4dca 100%);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -28,9 +28,9 @@
 }
 
 .floating-bubble.open {
-  background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+  background: rgba(0, 0, 0, 0.9);
   transform: scale(1.2);
-  box-shadow: 0 15px 40px rgba(233, 30, 99, 0.6);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Logo Image */
@@ -83,7 +83,7 @@
 .bubble-menu-item {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #4a1a4a 0%, #6b2d6b 100%);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -205,7 +205,7 @@
 }
 
 .announcements-header {
-  background: linear-gradient(135deg, #6a0dad, #9b4dca);
+  background: rgba(0, 0, 0, 0.8);
   padding: 20px 25px;
   border-radius: 25px 25px 0 0;
   display: flex;

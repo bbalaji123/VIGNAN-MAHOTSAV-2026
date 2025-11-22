@@ -7,6 +7,18 @@
   height: 100vh;
   pointer-events: none;
   z-index: 50;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.floating-icons-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.floating-icons-container.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 /* Base Floating Icon Styles */
@@ -41,16 +53,40 @@
   transform: scale(1.1);
 }
 
-/* Left Icon Positioning */
-.left-icon {
-  left: 15%;
+/* Top Left Icon */
+.top-left-icon {
+  top: 15%;
+  left: 8%;
   animation-delay: 0s;
 }
 
-/* Right Icon Positioning */
-.right-icon {
+/* Top Right Icon */
+.top-right-icon {
+  top: 15%;
   right: 15%;
-  animation-delay: 2s; /* Offset animation for variety */
+  animation-delay: 1s;
+}
+
+/* Middle Left Icon */
+.middle-left-icon {
+  top: 45%;
+  left: 25%;
+  animation-delay: 2s;
+  transform: translateY(-50%);
+}
+
+/* Bottom Right Icon */
+.bottom-right-icon {
+  bottom: 45%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+/* Bottom Left Flower */
+.bottom-left-flower {
+  bottom: 100%;
+  left: 8%;
+  animation-delay: 4s;
 }
 
 /* Floating Animation */
@@ -77,41 +113,75 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .floating-icon {
-    width: 65px;
-    height: 65px;
+    width: 45px;
+    height: 45px;
   }
   
   .icon-image {
-    width: 65px;
-    height: 65px;
+    width: 45px;
+    height: 45px;
   }
   
-  .left-icon {
-    left: 10%;
+  .top-left-icon {
+    top: 12%;
+    left: 4%;
   }
   
-  .right-icon {
-    right: 10%;
+  .top-right-icon {
+    top: 14%;
+    right: 6%;
+  }
+  
+  .middle-left-icon {
+    top: 40%;
+    left: 2%;
+  }
+  
+  .bottom-right-icon {
+    bottom: 12%;
+    right: 5%;
+  }
+  
+  .bottom-left-flower {
+    bottom: 8%;
+    left: 4%;
   }
 }
 
 @media (max-width: 480px) {
   .floating-icon {
-    width: 55px;
-    height: 55px;
+    width: 35px;
+    height: 35px;
   }
   
   .icon-image {
-    width: 55px;
-    height: 55px;
+    width: 35px;
+    height: 35px;
   }
   
-  .left-icon {
-    left: 8%;
+  .top-left-icon {
+    top: 10%;
+    left: 2%;
   }
   
-  .right-icon {
-    right: 8%;
+  .top-right-icon {
+    top: 12%;
+    right: 3%;
+  }
+  
+  .middle-left-icon {
+    top: 35%;
+    left: 1%;
+  }
+  
+  .bottom-right-icon {
+    bottom: 10%;
+    right: 3%;
+  }
+  
+  .bottom-left-flower {
+    bottom: 6%;
+    left: 2%;
   }
 }
 

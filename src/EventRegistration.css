@@ -1,6 +1,6 @@
 /* Event Registration Modal */
 .event-registration-modal {
-  background: linear-gradient(135deg, #6a0dad 0%, #9b4dca 100%);
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 25px;
   width: 100%;
   max-width: 700px;
@@ -253,7 +253,7 @@
 
 .close-success-btn {
   padding: 15px 40px;
-  background: linear-gradient(135deg, #6a0dad 0%, #9b4dca 100%);
+  background: rgba(0, 0, 0, 0.8);
   border: 2px solid #ffd700;
   border-radius: 15px;
   color: white;

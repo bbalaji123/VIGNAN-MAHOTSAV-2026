@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+/* Global Background Image */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('/Background-redesign.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Apply background to all main containers */
+.single-page-app,
+.w-full.min-h-screen,
+.w-screen.min-h-screen,
+.w-screen.h-screen {
+  background-image: url('/Background-redesign.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 :root {
   --color-mahotsav-purple-50: #f3e8ff;
   --color-mahotsav-purple-100: #e9d5ff;
@@ -54,7 +78,7 @@
 /* Custom component styles */
 .btn-primary {
   padding: 2.5rem 1rem;
-  background: linear-gradient(to right, #7c3aed, #5b21b6);
+  background: rgba(0, 0, 0, 0.8);
   color: #facc15;
   border: 2px solid #facc15;
   border-radius: 0.5rem;
@@ -74,7 +98,7 @@
 
 .btn-secondary {
   padding: 2.5rem 1rem;
-  background: linear-gradient(to right, #ec4899, #db2777);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -86,7 +110,7 @@
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(to right, #db2777, #be185d);
+  background: rgba(0, 0, 0, 0.9);
   transform: translateY(-0.25rem);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
@@ -166,7 +190,7 @@
 .submit-btn {
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(to right, #7c3aed, #6d28d9);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -176,7 +200,7 @@
 }
 
 .submit-btn:hover {
-  background: linear-gradient(to right, #6d28d9, #5b21b6);
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .submit-btn:disabled {

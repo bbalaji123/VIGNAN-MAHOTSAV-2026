@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
 import FloatingBubble from './FloatingBubble';
+import FloatingIcons from './FloatingIcons';
 import EventRegistrationModal from './EventRegistrationModal';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [showPageMenu, setShowPageMenu] = useState(false);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
   const [showInlineEventsInfo, setShowInlineEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
-  const [showEventDetail, setShowEventDetail] = useState(false);
-  const [selectedEventDetail, setSelectedEventDetail] = useState<any>(null);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
 
@@ -840,17 +842,6 @@ const Dashboard: React.FC = () => {
   const handleEventsInfoClick = () => {
     setShowInlineEventsInfo(true);
     setShowPageMenu(false);
-    
-    // Scroll to events info section after a short delay to ensure it's rendered
-    setTimeout(() => {
-      const eventsInfoSection = document.querySelector('.inline-events-info-section');
-      if (eventsInfoSection) {
-        eventsInfoSection.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      }
-    }, 100);
   };
 
 
@@ -1029,24 +1020,24 @@ const Dashboard: React.FC = () => {
   };
 
   const handleSportsCardClick = () => {
+    setShowInlineEventsInfo(true);
     setShowSportsDetails(true);
-    setShowInlineEventsInfo(false);
   };
 
   const handleParaSportsCardClick = () => {
+    setShowInlineEventsInfo(true);
     setShowParaSports(true);
-    setShowInlineEventsInfo(false);
   };
 
   const handleCulturalsCardClick = () => {
+    setShowInlineEventsInfo(true);
     setShowCulturals(true);
-    setShowInlineEventsInfo(false);
   };
 
   const handleEventDetailClick = (eventTitle: string) => {
     console.log('Event clicked:', eventTitle);
     
-    // Create a comprehensive mapping from database event names to eventDetailsData keys
+    // Create a comprehensive mapping from database event names to URL-friendly names
     const eventNameMapping: { [key: string]: string } = {
       // Chess events
       'Chess Championship': 'Chess',
@@ -1134,21 +1125,18 @@ const Dashboard: React.FC = () => {
       'DJ & Music Production Battle': 'Chess'
     };
     
-    // Try to find the event data using the original title first, then the mapped title
-    let eventData = eventDetailsData[eventTitle as keyof typeof eventDetailsData];
-    if (!eventData && eventNameMapping[eventTitle]) {
-      eventData = eventDetailsData[eventNameMapping[eventTitle] as keyof typeof eventDetailsData];
+    // Try to find the event name using the original title first, then the mapped title
+    let eventName = eventTitle;
+    if (eventNameMapping[eventTitle]) {
+      eventName = eventNameMapping[eventTitle];
     }
     
-    console.log('Event data:', eventData);
-    if (eventData) {
-      setSelectedEventDetail({ eventTitle, ...eventData });
-      setShowEventDetail(true);
-      setShowSportsDetails(false);
-      setShowIndoorSports(false);
-      setShowWomenIndoorSports(false);
-      setShowMenTeamSports(false);
-      setShowWomenTeamSports(false);
+    // Check if event data exists before navigating
+    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData];
+    
+    if (eventExists || eventName) {
+      // Navigate to the new event detail page
+      navigate(`/event/${encodeURIComponent(eventName)}`);
     }
   };
 
@@ -1792,7 +1780,10 @@ Do you want to proceed with registration?`;
 
   return (
     <div className={`w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-         style={{background: "#4c1d95"}}>
+         style={{background: "transparent"}}>
+      
+      {/* Floating Decorative Icons */}
+      <FloatingIcons />
       
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -1804,32 +1795,35 @@ Do you want to proceed with registration?`;
       {/* Shimmer Overlay */}
       <div className={`shimmer-overlay ${isScrolled ? 'active' : ''}`}></div>
 
-      {/* Top-Left Menu Icon */}
-      <div className="fixed top-5 left-5 z-50 cursor-pointer" onClick={handlePageMenuToggle}>
-        <div className={`w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300 ${showPageMenu ? 'rotate-45' : ''}`}>
-          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
-          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
-          <span className="block w-full h-0.5 bg-white rounded transition-transform duration-300"></span>
+      {/* Top-Left Menu Icon - Only show when menu is closed */}
+      {!showPageMenu && (
+        <div className="fixed top-5 left-5 z-[60] cursor-pointer" onClick={handlePageMenuToggle}>
+          <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
-        <div className="fixed top-5 right-5 z-50 flex items-center gap-3 cursor-pointer bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white hover:bg-white/30 transition-all duration-300" onClick={handleShowProfile}>
-          <div className="text-2xl">👤</div>
-          <span className="text-sm font-medium">Welcome, {loggedInUserName}!</span>
+        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-2 sm:gap-3 cursor-pointer bg-white/20 backdrop-blur-md px-2 sm:px-4 py-1 sm:py-2 rounded-full text-white hover:bg-white/30 transition-all duration-300" onClick={handleShowProfile}>
+          <div className="text-lg sm:text-2xl">👤</div>
+          <span className="text-xs sm:text-sm font-medium hidden xs:block">Welcome, {loggedInUserName}!</span>
+          <span className="text-xs sm:text-sm font-medium block xs:hidden">Profile</span>
         </div>
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen pt-5 flex flex-col items-center justify-start z-10 text-white text-center overflow-hidden" style={{background: "#4c1d95"}}>
-        <div className="flex justify-center items-center mb-2 z-20 relative">
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-[1200px] h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
+      <section className="relative min-h-screen pt-16 sm:pt-20 md:pt-5 flex flex-col items-center justify-center sm:justify-start z-10 text-white text-center overflow-hidden" style={{background: "transparent"}}>
+        <div className="flex justify-center items-center mb-4 sm:mb-6 z-20 relative px-4">
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-4xl xl:max-w-6xl h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
         </div>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex gap-8 my-2 justify-center items-center z-20 relative">
-          <button className="w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 my-4 justify-center items-center z-20 relative px-4 w-full max-w-md sm:max-w-none">
+          <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
             // Open modal immediately
             setActiveSubModal('EVENTS');
             // Fetch events in background
@@ -1843,7 +1837,7 @@ Do you want to proceed with registration?`;
             fetchEvents();
           }}>Register for Events</button>
           {!isLoggedIn && (
-            <button className="w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login</button>
+            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login</button>
           )}
         </div>
       </section>
@@ -1855,6 +1849,15 @@ Do you want to proceed with registration?`;
       {showPageMenu && (
         <div className="left-menu-overlay" onClick={() => setShowPageMenu(false)}>
           <div className="left-menu-content" onClick={(e) => e.stopPropagation()}>
+            {/* X Close Button inside menu */}
+            <div className="absolute top-5 right-5 z-[70] cursor-pointer" onClick={handlePageMenuToggle}>
+              <div className="w-12 h-12 flex items-center justify-center">
+                <div className="relative w-8 h-8">
+                  <span className="absolute w-full h-1 bg-yellow-400 transform rotate-45 top-1/2 left-0" style={{backgroundColor: '#FFD700'}}></span>
+                  <span className="absolute w-full h-1 bg-yellow-400 transform -rotate-45 top-1/2 left-0" style={{backgroundColor: '#FFD700'}}></span>
+                </div>
+              </div>
+            </div>
             <div className="left-menu-list">
               <div className="left-menu-item" onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }} style={{ animationDelay: '0.1s' }}>
                 <span>HOME</span>
@@ -1901,13 +1904,14 @@ Do you want to proceed with registration?`;
                   key={index} 
                   className="inline-event-info-card"
                   onClick={card.title === "SPORTS" ? handleSportsCardClick : card.title === "PARA SPORTS" ? handleParaSportsCardClick : card.title === "CULTURALS" ? handleCulturalsCardClick : undefined}
-                  style={card.title === "SPORTS" || card.title === "PARA SPORTS" || card.title === "CULTURALS" ? { cursor: 'pointer' } : {}}
+                  style={{ cursor: 'pointer' }}
                 >
                   <div className="card-poster-background">
                     <span className="poster-placeholder-text">POSTER of EVENT</span>
                   </div>
                   <div className="card-title-overlay">
                     <h3>{card.title}</h3>
+                    <h4>{card.description}</h4>
                   </div>
                 </div>
               ))}
@@ -2732,169 +2736,24 @@ Do you want to proceed with registration?`;
         </section>
       )}
 
-      {/* Event Detail Page - appears when clicking specific sport */}
-      {showEventDetail && selectedEventDetail && (
-        <section className="event-detail-page">
-          <div className="event-detail-container">
-            <div className="event-detail-header">
-              <button className="event-detail-back-btn" onClick={() => { setShowEventDetail(false); setShowSportsDetails(true); }}>
-                ← Back to list
-              </button>
-            </div>
-            
-            <div className="event-detail-content">
-              <div className="event-detail-full-width">
-                <div className="event-title-section">
-                  <h1>{selectedEventDetail.title}</h1>
-                  <h2>{selectedEventDetail.subtitle}</h2>
-                </div>
-                
-                <div className="event-main-layout">
-                  <div className="event-poster-side">
-                    <div className="event-poster-large">
-                      <span>POSTER of EVENT</span>
-                    </div>
-                  </div>
-                  
-                  <div className="event-right-column">
-                    <div className="event-rules-section">
-                      <h3>Rules:</h3>
-                      <ul>
-                        {selectedEventDetail.rules.map((rule: string, index: number) => (
-                          <li key={index}>{rule}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div className="event-prizes-contact-section">
-                      <div className="event-prizes-section">
-                        <h3>Cash Prizes:</h3>
-                        <div className="prizes-list">
-                          <div>First - {selectedEventDetail.prizes.first}</div>
-                          <div>Second - {selectedEventDetail.prizes.second}</div>
-                          <div>Third - {selectedEventDetail.prizes.third}</div>
-                        </div>
-                      </div>
-                      
-                      <div className="event-contact-section">
-                        <h3>For Queries Contact:</h3>
-                        <div className="contact-list">
-                          {selectedEventDetail.contacts.map((contact: any, index: number) => (
-                            <div key={index}>{contact.name} - {contact.phone}</div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="event-action-buttons">
-                  <button className="print-btn" onClick={() => {
-                    const element = document.querySelector('.event-detail-content');
-                    if (element) {
-                      // Create a clone for download
-                      const clone = element.cloneNode(true) as HTMLElement;
-                      const buttons = clone.querySelector('.event-action-buttons');
-                      if (buttons) buttons.remove();
-                      
-                      // Create HTML content with styles
-                      const htmlContent = `
-                        <!DOCTYPE html>
-                        <html>
-                          <head>
-                            <title>${selectedEventDetail.title} - Instructions</title>
-                            <style>
-                              body { 
-                                font-family: Arial, sans-serif; 
-                                padding: 40px; 
-                                margin: 0;
-                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                color: #333;
-                              }
-                              .event-detail-content {
-                                background: rgba(255, 255, 255, 0.95);
-                                border-radius: 20px;
-                                padding: 40px;
-                                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-                                max-width: 1200px;
-                                margin: 0 auto;
-                              }
-                              .event-title-section { text-align: center; margin-bottom: 30px; }
-                              .event-title-section h1 { color: #4a148c; font-size: 2.5rem; margin: 0 0 10px 0; font-weight: bold; }
-                              .event-title-section h2 { color: #6a1b9a; font-size: 1.5rem; margin: 0 0 20px 0; font-weight: normal; }
-                              .event-main-layout { display: grid; grid-template-columns: 250px 1fr; gap: 20px; align-items: start; }
-                              .event-poster-large { 
-                                background: rgba(200, 200, 200, 0.3); 
-                                border: 2px dashed #999; 
-                                border-radius: 15px; 
-                                height: 300px; 
-                                width: 250px; 
-                                display: flex; 
-                                align-items: center; 
-                                justify-content: center; 
-                                color: #666; 
-                                font-weight: bold; 
-                                font-size: 1.1rem; 
-                                margin-top: 40px;
-                              }
-                              .event-rules-section h3, .event-prizes-section h3, .event-contact-section h3 { 
-                                color: #4a148c; 
-                                font-size: 1.3rem; 
-                                margin: 0 0 15px 0; 
-                                font-weight: bold; 
-                              }
-                              .event-rules-section ul { list-style: none; padding: 0; margin: 0; }
-                              .event-rules-section li { 
-                                color: #333; 
-                                padding: 8px 0; 
-                                border-bottom: 1px solid rgba(74, 20, 140, 0.1); 
-                                position: relative; 
-                                padding-left: 25px; 
-                                line-height: 1.5; 
-                              }
-                              .event-rules-section li:before { 
-                                content: "•"; 
-                                color: #4a148c; 
-                                position: absolute; 
-                                left: 0; 
-                                font-weight: bold; 
-                                font-size: 1.2rem; 
-                              }
-                              .event-right-column { display: flex; flex-direction: column; gap: 20px; }
-                              .event-prizes-contact-section { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
-                              .prizes-list, .contact-list { display: flex; flex-direction: column; gap: 8px; }
-                              .prizes-list div, .contact-list div { color: #333; padding: 4px 0; }
-                            </style>
-                          </head>
-                          <body>
-                            <div class="event-detail-content">
-                              ${clone.innerHTML}
-                            </div>
-                          </body>
-                        </html>
-                      `;
-                      
-                      // Create and download the file
-                      const blob = new Blob([htmlContent], { type: 'text/html' });
-                      const url = URL.createObjectURL(blob);
-                      const a = document.createElement('a');
-                      a.href = url;
-                      a.download = `${selectedEventDetail.title.replace(/[^a-z0-9]/gi, '_')}_Instructions.html`;
-                      document.body.appendChild(a);
-                      a.click();
-                      document.body.removeChild(a);
-                      URL.revokeObjectURL(url);
-                    }
-                  }}>Download Instructions</button>
-                  <button className="notification-btn">
-                    🔔 If interested in this event, Click to get updates of competition
-                  </button>
-                </div>
-              </div>
-            </div>
+      {/* About Theme Section */}
+      <section className="dashboard-section about-theme-section">
+        <div className="about-theme-container">
+          <h2 className="about-theme-title">About Theme</h2>
+          <div className="theme-content">
+            <h3 className="theme-name">Mahotsav 2026 - The Eternal Harmony</h3>
+            <p className="theme-description">
+              This is not just a theme, but a beacon of hope, a leap towards peace in the larger society around us, inspired by the visionaries of world peace. The hope of an eternal harmony focuses on ideals built through the nourishment of the balance of all the interdependent elements that are crucial for the ecosystem to thrive.
+            </p>
+            <p className="theme-description">
+              This fun revolution towards harmony includes festive vibes, fostering connections and fulfilment. Mahotsav 2026 is a step towards better understanding the words we take pride in saying, "sustainability", "diversity", "inclusivity", "reliability", and "solidarity".
+            </p>
+            <p className="theme-description">
+              Mahotsav, in its nature, is an entertaining and engaging event, and this year the focus is on using the influence of youth towards the global future in various aspects of the eternal harmony. Mahotsav 2026 is all set to focus on fun and the future, internally, societally and globally!
+            </p>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* 3. Features Section */}
       <section className="dashboard-section features-section">

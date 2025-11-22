@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const AboutUs: React.FC = () => {
   return (
     <div className="w-screen overflow-x-hidden font-sans bg-cover bg-center bg-fixed bg-no-repeat min-h-screen" style={{backgroundImage: "url('/IMG_2042.png')"}}>
-      <nav className="fixed top-0 left-0 right-0 w-full bg-mahotsav-purple-800/95 backdrop-blur-md flex justify-center items-center py-4 gap-10 text-lg z-50 shadow-lg">
+      <nav className="fixed top-0 left-0 right-0 w-full bg-black/80 backdrop-blur-md flex justify-center items-center py-4 gap-10 text-lg z-50 shadow-lg">
         <div className="flex gap-8">
           <Link to="/" className="text-white no-underline px-5 py-2 border-b-2 border-transparent transition-all duration-300 font-medium hover:border-white hover:text-mahotsav-gold-400">Home</Link>
           <a href="#events" className="text-white no-underline px-5 py-2 border-b-2 border-transparent transition-all duration-300 font-medium hover:border-white hover:text-mahotsav-gold-400">Events</a>

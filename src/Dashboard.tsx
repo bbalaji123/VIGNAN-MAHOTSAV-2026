@@ -2759,35 +2759,6 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* 3. Features Section */}
-      <section className="dashboard-section features-section">
-        <h2>Event Highlights</h2>
-        
-        {/* Statistics View */}
-        <div className="stats-showcase-grid">
-          <div className="stat-showcase-card">
-            <div className="stat-number">20K+</div>
-            <div className="stat-label">Participants</div>
-            <button className="stat-button">Participants</button>
-          </div>
-          <div className="stat-showcase-card">
-            <div className="stat-number">50+</div>
-            <div className="stat-label">Events</div>
-            <button className="stat-button">Events</button>
-          </div>
-          <div className="stat-showcase-card">
-            <div className="stat-number">15 Lakhs</div>
-            <div className="stat-label">Prize Pool</div>
-            <button className="stat-button">Prize Pool</button>
-          </div>
-          <div className="stat-showcase-card">
-            <div className="stat-number">25+</div>
-            <div className="stat-label">Sponsors</div>
-            <button className="stat-button">Sponsors</button>
-          </div>
-        </div>
-      </section>
-
       {/* Highlights of 2025 Section */}
       <section className="dashboard-section highlights-section">
         <h2>Highlights of 2025</h2>
@@ -2860,32 +2831,62 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* 4. Stats Section */}
-      <section className="dashboard-section stats-section">
-        <h2>Mahotsav by the Numbers</h2>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <h3>5000+</h3>
-            <p>Participants</p>
-          </div>
-          <div className="stat-card">
-            <h3>100+</h3>
-            <p>Exhibitions</p>
-          </div>
-          <div className="stat-card">
-            <h3>50+</h3>
-            <p>Workshops</p>
-          </div>
-          <div className="stat-card">
-            <h3>30+</h3>
-            <p>Expert Speakers</p>
-          </div>
+      {/* Accreditation Section - Standalone */}
+      <section className="accreditation-section">
+        <div className="accreditation-container">
+          <img src={`${import.meta.env.BASE_URL}clg.png`} alt="Accreditation and Rankings" className="accreditation-main-image" />
         </div>
       </section>
 
       {/* Footer */}
       <footer className="dashboard-footer">
-        <p>&copy; 2025 Vignan Mahotsav. All rights reserved.</p>
+        {/* Decorative lotus icons */}
+        <div className="footer-lotus footer-lotus-top-left"></div>
+        <div className="footer-lotus footer-lotus-top-right"></div>
+        <div className="footer-lotus footer-lotus-bottom-left"></div>
+        <div className="footer-lotus footer-lotus-bottom-right"></div>
+        
+        {/* Footer Content */}
+        <div className="footer-content">
+          {/* Logo Section */}
+          <div className="footer-logo">
+            <div className="footer-vignan-logo">
+              <img src={`${import.meta.env.BASE_URL}log.png`} alt="Vignan Logo" className="college-logo" />
+            </div>
+          </div>
+          
+          {/* Quick Links */}
+          <div className="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#fest-guide">Fest Guide</a></li>
+              <li><a href="#schedule">Schedule</a></li>
+              <li><a href="#events">A</a></li>
+              <li><a href="#registration">B</a></li>
+            </ul>
+          </div>
+          
+          {/* Contact */}
+          <div className="footer-section">
+            <h4>Contact</h4>
+            <p>+91 99999 99999 | +91 99999 99999</p>
+            <p>Email: <a href="mailto:mahotsav@vignan.ac.in">mahotsav@vignan.ac.in</a></p>
+          </div>
+          
+          {/* Social Media */}
+          <div className="footer-section">
+            <h4>Social Media</h4>
+            <p>Follow Us on</p>
+            <div className="social-icons">
+              <a href="#" className="social-icon instagram">
+                <img src={`${import.meta.env.BASE_URL}ins.png`} alt="Instagram" />
+              </a>
+              <a href="#" className="social-icon whatsapp">
+                <img src={`${import.meta.env.BASE_URL}wha.png`} alt="WhatsApp" />
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
 
       {/* Floating Bubble Menu */}

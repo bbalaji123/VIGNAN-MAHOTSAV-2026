@@ -1883,17 +1883,332 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Footer */
-.dashboard-footer {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 40px 20px;
-  text-align: center;
-  color: white;
+/* Standalone Accreditation Section */
+.accreditation-section {
+  padding: 300px 50px 60px;
+  position: relative;
+  overflow: hidden;
 }
 
-.dashboard-footer p {
-  margin: 10px 0;
-  opacity: 0.8;
+.accreditation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.accreditation-main-image {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.dashboard-footer {
+  padding: 40px 20px 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative lotus icons */
+.footer-lotus {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  opacity: 0.6;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.3s ease;
+}
+
+.footer-lotus:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.footer-lotus-top-left {
+  top: 20px;
+  left: 50px;
+  background-image: url('/logo.png');
+}
+
+.footer-lotus-top-right {
+  top: 20px;
+  right: 50px;
+  background-image: url('/logo.png');
+}
+
+.footer-lotus-bottom-left {
+  bottom: 20px;
+  left: 30px;
+  background-image: url('/photo.png');
+}
+
+.footer-lotus-bottom-right {
+  bottom: 20px;
+  right: 30px;
+  background-image: url('/photo.png');
+}
+
+/* Footer Content */
+.footer-content {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: start;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-vignan-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.college-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.footer-section h4 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.footer-section ul li a:hover {
+  color: #ffd700;
+}
+
+.footer-section p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.footer-section a {
+  color: #ffd700;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.social-icon img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+.social-icon.instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-icon.whatsapp {
+  background: #25d366;
+}
+
+.social-icon.whatsapp:hover {
+  background: #128c7e;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .accreditation-section {
+    padding: 40px 15px;
+  }
+  
+  .accreditation-main-image {
+    max-height: 250px;
+    width: 95%;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .footer-logo {
+    order: -1;
+    margin-bottom: 20px;
+  }
+  
+  .footer-lotus {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .college-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .accreditation-section {
+    padding: 30px 10px;
+  }
+  
+  .accreditation-main-image {
+    max-height: 180px;
+    width: 90%;
+  }
+  
+  .dashboard-footer {
+    padding: 30px 15px 15px;
+  }
+  
+  .footer-content {
+    gap: 25px;
+  }
+  
+  .footer-lotus {
+    display: none;
+  }
+  
+  .college-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.1rem;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Copyright */
+.footer-copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 30px;
+}
+
+.footer-copyright p {
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* Footer Mobile Responsive */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .footer-lotus {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .accreditation-logos {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  
+  .accreditation-logo {
+    padding: 10px 5px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+  
+  .footer-accreditation {
+    padding: 15px;
+  }
+  
+  .footer-accreditation h3 {
+    font-size: 1rem;
+  }
+  
+  .accreditation-logos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-lotus {
+    display: none;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
 }
 
 /* Inline Events Info Section - appears below menu */

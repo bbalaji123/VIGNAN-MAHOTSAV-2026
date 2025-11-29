@@ -1820,14 +1820,14 @@ Do you want to proceed with registration?`;
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen pt-16 sm:pt-20 md:pt-5 flex flex-col items-center justify-center sm:justify-start z-10 text-white text-center overflow-hidden" style={{background: "transparent"}}>
-        <div className="flex justify-center items-center mb-4 sm:mb-6 z-20 relative px-4">
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-4xl xl:max-w-6xl h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
+        <div className="flex justify-center items-center mb-4 sm:mb-6 z-20 relative px-4 ml-8 mt-6">
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-5xl xl:max-w-7xl h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
         </div>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 my-4 justify-center items-center z-20 relative px-4 w-full max-w-md sm:max-w-none">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 my-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -1841,7 +1841,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-full sm:w-44 md:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Login/Register</button>
+            <button className="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>

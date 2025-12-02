@@ -38,6 +38,10 @@ const participantSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  referenceId: {
+    type: String,
+    trim: true
+  },
   participantType: {
     type: String,
     default: 'general',

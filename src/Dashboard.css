@@ -3448,6 +3448,31 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   animation: modalSlideIn 0.3s ease;
+  padding-right: 5px;
+}
+
+/* Custom scrollbar for signup modal */
+.signup-modal-content::-webkit-scrollbar,
+.sub-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.signup-modal-content::-webkit-scrollbar-track,
+.sub-modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.signup-modal-content::-webkit-scrollbar-thumb,
+.sub-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(194, 24, 91, 0.5);
+  border-radius: 4px;
+}
+
+.signup-modal-content::-webkit-scrollbar-thumb:hover,
+.sub-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(194, 24, 91, 0.7);
 }
 
 .sub-modal-content:has(.events-modal-container) {
@@ -3460,6 +3485,7 @@
 
 .signup-modal-content {
   max-width: 700px;
+  padding-right: 10px;
 }
 
 .sub-modal-content {

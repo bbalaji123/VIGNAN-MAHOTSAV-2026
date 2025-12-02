@@ -489,7 +489,8 @@ const Dashboard: React.FC = () => {
     college: '',
     dateOfBirth: '',
     userType: 'visitor',
-    participationType: 'none'
+    participationType: 'none',
+    referenceId: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
@@ -1165,7 +1166,8 @@ const Dashboard: React.FC = () => {
       college: '',
       dateOfBirth: '',
       userType: 'visitor',
-      participationType: 'none'
+      participationType: 'none',
+      referenceId: ''
     });
     setSubmitMessage(null);
     setShowUserIdPopup(false);
@@ -1238,7 +1240,8 @@ const Dashboard: React.FC = () => {
           college: '',
           dateOfBirth: '',
           userType: 'visitor',
-          participationType: 'none'
+          participationType: 'none',
+          referenceId: ''
         });
       } else {
         setSubmitMessage({
@@ -3062,6 +3065,18 @@ Do you want to proceed with registration?`;
                         className="form-input"
                       />
                     </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="referenceId">Reference ID</label>
+                    <input
+                      type="text"
+                      id="referenceId"
+                      name="referenceId"
+                      value={signupFormData.referenceId || ''}
+                      onChange={handleSignupInputChange}
+                      placeholder="Enter reference ID (optional)"
+                      className="form-input"
+                    />
                   </div>
                 </div>
 

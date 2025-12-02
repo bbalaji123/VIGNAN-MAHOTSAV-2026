@@ -35,6 +35,7 @@ export interface SignupData {
   registerId?: string;
   userType?: string;
   participationType?: string;
+  referenceId?: string;
 }
 
 export interface ApiResponse {

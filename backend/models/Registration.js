@@ -42,6 +42,10 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  referenceId: {
+    type: String,
+    trim: true
+  },
   userType: {
     type: String,
     enum: ['visitor', 'participant'],

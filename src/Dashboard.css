@@ -27,6 +27,42 @@
   }
 }
 
+@keyframes flowerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes petalsRotateAnticlockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes sunRotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moonStatic {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 /* Animated Icon Component */
 .animated-icon-container {
   position: fixed;
@@ -4724,10 +4760,22 @@
   .highlights-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    padding: 0 10px;
   }
   
   .highlight-card {
     min-height: 400px;
+    max-width: 100%;
+  }
+  
+  .highlight-image {
+    height: 200px;
+  }
+  
+  .day-video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
   }
   
   .hero-main-image {
@@ -4883,6 +4931,35 @@
   
   .highlights-grid {
     grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+  
+  .highlight-card {
+    min-height: 360px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .highlight-image {
+    height: 180px;
+    width: 100%;
+  }
+  
+  .day-video {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .highlight-card h3 {
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+  
+  .highlight-card p {
+    font-size: 0.9rem;
+    padding: 0 15px 15px;
   }
   
   .menu-cards-grid {
@@ -6675,10 +6752,13 @@ html {
   .highlights-grid {
     grid-template-columns: 1fr;
     gap: 15px;
+    padding: 0 10px;
   }
   
   .highlight-card {
     min-height: 360px;
+    width: 100%;
+    max-width: 100%;
   }
   
   .highlight-image {
@@ -8341,3 +8421,164 @@ html {
     margin-bottom: 15px;
   }
 }
+
+/* Mobile Responsive Styles for Rotating Flowers */
+.flower-container-mobile {
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+}
+
+.flower-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flower-container-mobile:first-of-type .flower-inner,
+.fixed.top-0.right-0 .flower-inner {
+  top: -48%;
+  right: -48%;
+}
+
+.flower-container-mobile:nth-of-type(2) .flower-inner,
+.fixed.bottom-0.left-0 .flower-inner {
+  bottom: -48%;
+  left: -48%;
+}
+
+@media (max-width: 768px) {
+  .flower-container-mobile {
+    width: 300px !important;
+    height: 300px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -40% !important;
+    right: -40% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    top: auto !important;
+    bottom: -40% !important;
+    left: -40% !important;
+    right: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .flower-container-mobile {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -35% !important;
+    right: -35% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    bottom: -35% !important;
+    left: -35% !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .flower-container-mobile {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -30% !important;
+    right: -30% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    bottom: -30% !important;
+    left: -30% !important;
+  }
+}
+
+/* Note: Grid and other responsive styles handled by Tailwind classes in components */
+
+/* Menu Grid Cards - Mobile Responsive */
+.menu-grid-card {
+  min-height: 180px;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .menu-grid-card {
+    min-height: 140px;
+    padding: 1.5rem;
+  }
+  
+  .menu-grid-card .text-6xl {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .menu-grid-card .text-lg {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-grid-card {
+    min-height: 120px;
+    padding: 1rem;
+  }
+  
+  .menu-grid-card .text-6xl {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .menu-grid-card .text-lg {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .menu-grid-card {
+    min-height: 100px;
+    padding: 0.75rem;
+  }
+  
+  .menu-grid-card .text-6xl {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .menu-grid-card .text-lg {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+}
+
+/* Mobile responsive for EventsInfo cards and grids */
+/* Note: Grid responsive styles handled by Tailwind classes in components */
+
+@media (max-width: 480px) {
+  /* Mobile responsive styles handled by Tailwind responsive classes in components */
+}
+
+/* Specific mobile styles */
+@media (max-width: 768px) {
+  /* Mobile styles handled by Tailwind classes */
+}
+
+@media (max-width: 480px) {
+  /* Button positioning handled by Tailwind classes */
+}
+
+/* Ensure proper spacing and readability on all mobile devices */
+@media (max-width: 768px) {
+  /* Spacing handled by Tailwind responsive classes */
+}
+
+@media (max-width: 480px) {
+  /* Padding handled by Tailwind responsive classes */
+}
+

@@ -207,10 +207,10 @@ const EventDetail: React.FC = () => {
         <div className="flex flex-col items-center justify-center h-screen text-center text-white">
           <h2 className="text-4xl mb-8">Event Not Found</h2>
           <button 
-            onClick={() => navigate('/')} 
+            onClick={() => navigate(-1)} 
             className="bg-black/80 text-white border-none py-4 px-8 rounded-full text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            Go Back Home
+            Go Back
           </button>
         </div>
       </div>
@@ -533,8 +533,14 @@ const EventDetail: React.FC = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen overflow-x-hidden relative" style={{background: 'linear-gradient(135deg, #6B46C1 0%, #8B5CF6 25%, #A855F7 50%, #C084FC 75%, #DDD6FE 100%)'}}>
-      {/* Background with purple gradient */}
+    <div className="w-screen min-h-screen overflow-x-hidden relative" style={{
+      backgroundImage: 'url("/Background-redesign.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      backgroundRepeat: 'no-repeat'
+    }}>
+      {/* Background with dashboard image */}
       <div className="min-h-screen relative p-3 sm:p-5 text-white pdf-content">
         {/* Mahotsav Logo/Header */}
         <div className="flex justify-center sm:justify-start mb-6 lg:mb-8 px-2 sm:pl-5">
@@ -551,10 +557,11 @@ const EventDetail: React.FC = () => {
           <div className="max-w-7xl w-full mx-auto px-4">
             {/* Back Button */}
             <button 
-              className="bg-white/20 backdrop-blur-md text-white border-none py-3 px-6 rounded-full cursor-pointer text-base font-medium mb-8 transition-all duration-300 hover:bg-white/30 hover:-translate-x-1"
-              onClick={() => navigate('/')}
+              className="bg-white/10 border-2 border-white/30 text-white text-base font-medium py-2.5 px-5 rounded-[25px] cursor-pointer flex items-center gap-2 transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:-translate-x-1 mb-8"
+              onClick={() => navigate(-1)}
             >
-              ← Back to list
+              <span>←</span>
+              <span>Back</span>
             </button>
 
             {/* Event Title Section */}

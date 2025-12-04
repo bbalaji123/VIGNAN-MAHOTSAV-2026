@@ -12,7 +12,6 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [showPageMenu, setShowPageMenu] = useState(false);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
-  const [showInlineEventsInfo, setShowInlineEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
@@ -841,8 +840,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEventsInfoClick = () => {
-    setShowInlineEventsInfo(true);
-    setShowPageMenu(false);
+    navigate('/events-info');
   };
 
 
@@ -1020,21 +1018,6 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleSportsCardClick = () => {
-    setShowInlineEventsInfo(true);
-    setShowSportsDetails(true);
-  };
-
-  const handleParaSportsCardClick = () => {
-    setShowInlineEventsInfo(true);
-    setShowParaSports(true);
-  };
-
-  const handleCulturalsCardClick = () => {
-    setShowInlineEventsInfo(true);
-    setShowCulturals(true);
-  };
-
   const handleEventDetailClick = (eventTitle: string) => {
     console.log('Event clicked:', eventTitle);
     
@@ -1042,10 +1025,13 @@ const Dashboard: React.FC = () => {
     const eventNameMapping: { [key: string]: string } = {
       // Chess events
       'Chess Championship': 'Chess',
+      'Chess Tournament': 'Chess',
+      'Chess': 'Chess',
       
       // Table Tennis events
       'Table Tennis Tournament': 'Table Tennis',
       'Table Tennis Championship': 'Table Tennis',
+      'Table Tennis': 'Table Tennis',
       
       // Badminton events
       'Badminton Championship': 'Table Tennis', // Assuming same structure
@@ -1130,7 +1116,33 @@ const Dashboard: React.FC = () => {
     let eventName = eventTitle;
     if (eventNameMapping[eventTitle]) {
       eventName = eventNameMapping[eventTitle];
+    } else {
+      // Smart fallback: try to match based on keywords in the event title
+      const lowerTitle = eventTitle.toLowerCase();
+      if (lowerTitle.includes('chess')) {
+        eventName = 'Chess';
+      } else if (lowerTitle.includes('table tennis')) {
+        eventName = 'Table Tennis';
+      } else if (lowerTitle.includes('badminton')) {
+        eventName = 'Table Tennis'; // Using same template
+      } else if (lowerTitle.includes('football')) {
+        eventName = 'Football';
+      } else if (lowerTitle.includes('volleyball') || lowerTitle.includes('volley ball')) {
+        eventName = 'Volley ball';
+      } else if (lowerTitle.includes('basketball') || lowerTitle.includes('basket ball')) {
+        eventName = 'Basket ball';
+      } else if (lowerTitle.includes('kabaddi')) {
+        eventName = 'Kabaddi';
+      } else if (lowerTitle.includes('cricket')) {
+        eventName = 'Football'; // Using team structure
+      } else if (lowerTitle.includes('hockey')) {
+        eventName = 'Hockey';
+      } else if (lowerTitle.includes('athletics') || lowerTitle.includes('track')) {
+        eventName = 'Men\'s Athletics';
+      }
     }
+    
+    console.log('Mapped event name:', eventName);
     
     // Check if event data exists before navigating
     const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData];
@@ -1138,6 +1150,8 @@ const Dashboard: React.FC = () => {
     if (eventExists || eventName) {
       // Navigate to the new event detail page
       navigate(`/event/${encodeURIComponent(eventName)}`);
+    } else {
+      console.warn('No event details found for:', eventName);
     }
   };
 
@@ -1852,79 +1866,386 @@ Do you want to proceed with registration?`;
       {/* The Icon Component - Fixed position, animates with scroll */}
       <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
 
-      {/* Left Side Menu Overlay */}
+      {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
-        <div className="left-menu-overlay" onClick={() => setShowPageMenu(false)}>
-          <div className="left-menu-content" onClick={(e) => e.stopPropagation()}>
-            {/* X Close Button inside menu */}
-            <div className="absolute top-5 right-5 z-70 cursor-pointer" onClick={handlePageMenuToggle}>
-              <div className="w-12 h-12 flex items-center justify-center">
-                <div className="relative w-8 h-8">
-                  <span className="absolute w-full h-1 bg-yellow-400 transform rotate-45 top-1/2 left-0" style={{backgroundColor: '#FFD700'}}></span>
-                  <span className="absolute w-full h-1 bg-yellow-400 transform -rotate-45 top-1/2 left-0" style={{backgroundColor: '#FFD700'}}></span>
-                </div>
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-[99998]" 
+          style={{
+            backgroundImage: 'url("/Background-redesign.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}>
+          {/* Floating Flower - Top Right */}
+          <div className="fixed top-0 right-0 z-10 pointer-events-none flower-container-mobile" style={{ width: '600px', height: '600px', overflow: 'hidden' }}>
+            <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite', transformOrigin: 'center center' }}>
+              {/* Petals layer - rotates anticlockwise */}
+              <img 
+                src={`${import.meta.env.BASE_URL}petals.png`}
+                alt="Flower Petals"
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+              {/* Sun layer in center - rotates clockwise */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img 
+                  src={`${import.meta.env.BASE_URL}sun.png`}
+                  alt="Sun"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
+                />
+                {/* Moon layer - inside sun, stays static */}
+                <img 
+                  src={`${import.meta.env.BASE_URL}moon.png`}
+                  alt="Moon"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ 
+                    zIndex: 10
+                  }}
+                />
               </div>
             </div>
-            <div className="left-menu-list">
-              <div className="left-menu-item" onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }} style={{ animationDelay: '0.1s' }}>
-                <span>HOME</span>
+          </div>
+
+          {/* Floating Flower - Bottom Left */}
+          <div className="fixed bottom-0 left-0 z-10 pointer-events-none flower-container-mobile" style={{ width: '600px', height: '600px', overflow: 'hidden' }}>
+            <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite', transformOrigin: 'center center' }}>
+              {/* Petals layer - rotates anticlockwise */}
+              <img 
+                src={`${import.meta.env.BASE_URL}petals.png`}
+                alt="Flower Petals"
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+              {/* Sun layer in center - rotates clockwise */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img 
+                  src={`${import.meta.env.BASE_URL}sun.png`}
+                  alt="Sun"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
+                />
+                {/* Moon layer - inside sun, stays static */}
+                <img 
+                  src={`${import.meta.env.BASE_URL}moon.png`}
+                  alt="Moon"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ 
+                    zIndex: 10
+                  }}
+                />
               </div>
-              <div className="left-menu-item" onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }} style={{ animationDelay: '0.2s' }}>
-                <span>MY EVENTS</span>
+            </div>
+          </div>
+          
+          {/* Close Button */}
+          <button 
+            className="absolute top-5 right-5 z-[99999] w-12 h-12 flex items-center justify-center cursor-pointer group"
+            onClick={() => setShowPageMenu(false)}
+          >
+            <div className="relative w-8 h-8">
+              <span className="absolute w-full h-1 bg-white transform rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
+              <span className="absolute w-full h-1 bg-white transform -rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
+            </div>
+          </button>
+
+          {/* Menu Title */}
+          <div className="text-center pt-8 pb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-white tracking-widest">MENU</h1>
+          </div>
+
+          {/* Grid Menu Items - Centered */}
+          <div className="flex items-center justify-center h-[calc(100vh-140px)]">
+            <div className="max-w-7xl mx-auto px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {/* HOME */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">⚓</div>
+                <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
               </div>
-              <div className="left-menu-item" onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }} style={{ animationDelay: '0.3s' }}>
-                <span>ACCOMMODATION</span>
+
+              {/* EVENTS */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={handleEventsInfoClick}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗡️</div>
+                <span className="text-white text-lg font-semibold tracking-wide">EVENTS</span>
               </div>
-              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.4s' }}>
-                <span>SCHEDULE</span>
+
+              {/* PROFILE */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">⚓</div>
+                <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
               </div>
-              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.5s' }}>
-                <span>SPONSORS</span>
+
+              {/* SCHEDULE */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🔭</div>
+                <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
               </div>
-              <div className="left-menu-item" onClick={() => { setShowPageMenu(false); }} style={{ animationDelay: '0.6s' }}>
-                <span>CONTACT US</span>
+
+              {/* COLLABORATION */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🛢️</div>
+                <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
               </div>
-              <div className="left-menu-item" onClick={handleEventsInfoClick} style={{ animationDelay: '0.7s' }}>
-                <span>EVENTS INFO</span>
+
+              {/* ZONALS */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗼</div>
+                <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
+              </div>
+
+              {/* PARA SPORTS */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowParaSports(true); setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🧭</div>
+                <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
+              </div>
+
+              {/* HOSPITALITY */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🌴</div>
+                <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
+              </div>
+
+              {/* CAMPUS AMBASSADOR */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🚢</div>
+                <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
+              </div>
+
+              {/* SPONSORS */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">📦</div>
+                <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
+              </div>
+
+              {/* OUR TEAM */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">💣</div>
+                <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
+              </div>
+
+              {/* MAP */}
+              <div 
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                onClick={() => { setShowPageMenu(false); }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }}
+              >
+                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗺️</div>
+                <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
               </div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Inline Events Info - appears below menu */}
-      {showInlineEventsInfo && (
-        <section className="inline-events-info-section">
-          <div className="inline-events-info-container">
-            <div className="inline-events-info-header">
-              <div className="events-header-left">
-                <button className="events-back-btn" onClick={() => { setShowInlineEventsInfo(false); setShowPageMenu(true); }}>
-                  ← Back
-                </button>
-                <h2>EVENTS INFORMATION</h2>
-              </div>
-              <button className="inline-events-info-close-btn" onClick={() => { setShowInlineEventsInfo(false); setShowPageMenu(true); }}>×</button>
-            </div>
-            <div className="inline-events-info-grid">
-              {eventInfoCards.map((card, index) => (
-                <div 
-                  key={index} 
-                  className="inline-event-info-card"
-                  onClick={card.title === "SPORTS" ? handleSportsCardClick : card.title === "PARA SPORTS" ? handleParaSportsCardClick : card.title === "CULTURALS" ? handleCulturalsCardClick : undefined}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="card-poster-background">
-                    <span className="poster-placeholder-text">POSTER of EVENT</span>
-                  </div>
-                  <div className="card-title-overlay">
-                    <h3>{card.title}</h3>
-                    <h4>{card.description}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        </div>
       )}
 
       {/* Para Sports Section - appears when clicking PARA SPORTS */}
@@ -1933,12 +2254,12 @@ Do you want to proceed with registration?`;
           <div className="inline-indoor-sports-container">
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
-                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowInlineEventsInfo(true); }}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>
                   ← Back
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowInlineEventsInfo(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>×</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>◀</button>
@@ -2090,12 +2411,12 @@ Do you want to proceed with registration?`;
           <div className="inline-indoor-sports-container">
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
-                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowInlineEventsInfo(true); }}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
                   ← Back
                 </button>
                 <h2>CULTURAL CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowInlineEventsInfo(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>×</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
@@ -2472,12 +2793,12 @@ Do you want to proceed with registration?`;
           <div className="inline-sports-details-container">
             <div className="inline-sports-details-header">
               <div className="sports-header-left">
-                <button className="sports-back-btn" onClick={() => { setShowSportsDetails(false); setShowInlineEventsInfo(true); }}>
+                <button className="sports-back-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>
                   ← Back
                 </button>
                 <h2>SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowInlineEventsInfo(true); }}>×</button>
+              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>×</button>
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}>◀</button>

@@ -100,12 +100,63 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ iconSrc }) => {
       className="animated-icon-container"
       style={{ transform: translateAmount }}
     >
-      <img
-        src={iconSrc} 
-        alt="Lotus Icon"
+      <div
         className="animated-icon-image"
         style={{ 
           transform: `rotate(${rotation}deg)`,
+          position: 'relative',
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        {/* Petals layer - rotates anticlockwise */}
+        <img 
+          src={`${import.meta.env.BASE_URL}petals.png`}
+          alt="Flower Petals"
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            animation: 'petalsRotateAnticlockwise 10s linear infinite'
+          }}
+        />
+        {/* Sun layer in center - rotates clockwise */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <img 
+            src={`${import.meta.env.BASE_URL}sun.png`}
+            alt="Sun"
+            style={{
+              position: 'absolute',
+              width: '33.333%',
+              height: '33.333%',
+              objectFit: 'contain',
+              animation: 'sunRotateClockwise 10s linear infinite'
+            }}
+          />
+        </div>
+      </div>
+      {/* Moon layer - outside rotation, stays static */}
+      <img 
+        src={`${import.meta.env.BASE_URL}moon.png`}
+        alt="Moon"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '33.333%',
+          height: '33.333%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          margin: 0,
+          padding: 0
         }}
       />
     </div>

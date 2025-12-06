@@ -100,6 +100,27 @@
     box-shadow: none;
 }
 
+@media (max-width: 768px) {
+    .hero-main-image {
+        width: 95%;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-main-image {
+        width: 92%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-main-image {
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
 /* Main Hero Content Block (Title, Subtitle, Buttons) */
 .main-hero-content {
     display: flex;
@@ -116,6 +137,27 @@
     letter-spacing: 4px;
     text-align: center;
     line-height: 1;
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3.5em;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 375px) {
+    .main-title {
+        font-size: 2em;
+        letter-spacing: 0.5px;
+    }
 }
 
 .vignan-text {
@@ -150,6 +192,35 @@
     color: white;
     margin-bottom: 30px;
     opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .subtitle {
+        font-size: 1.2em;
+    }
+    .date {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .subtitle {
+        font-size: 1em;
+    }
+    .date {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 375px) {
+    .subtitle {
+        font-size: 0.9em;
+    }
+    .date {
+        font-size: 0.8em;
+    }
 }
 
 /* Image Overlay */
@@ -360,25 +431,33 @@
     }
     
     .header-nav {
-        gap: 20px;
-        font-size: 0.9em;
-        padding: 12px 0;
+        gap: 15px;
+        font-size: 0.85em;
+        padding: 12px 10px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .header-nav a {
         padding: 8px 12px;
+        font-size: 0.85em;
+        white-space: nowrap;
     }
     
     .hero-buttons {
         flex-direction: column;
         gap: 15px;
         align-items: center;
+        width: 100%;
+        padding: 0 20px;
     }
     
     .overview-btn,
     .login-btn {
-        padding: 12px 30px;
+        padding: 14px 35px;
         font-size: 1em;
+        width: 100%;
+        max-width: 300px;
     }
     
     .side-menu {
@@ -402,23 +481,41 @@
     .accent-infinity {
         font-size: 2.5em;
     }
+    
+    .about-us-section h1 {
+        font-size: 2.8em;
+    }
+    
+    .about-us-content {
+        width: 90%;
+        padding: 35px;
+    }
+    
+    .about-us-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-us-content p {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
     .main-title {
         font-size: 2.5em;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
     
     .header-nav {
-        gap: 10px;
-        font-size: 0.8em;
+        gap: 8px;
+        font-size: 0.75em;
         padding: 10px 5px;
         flex-wrap: wrap;
     }
     
     .header-nav a {
-        padding: 6px 8px;
+        padding: 6px 10px;
+        font-size: 0.75em;
     }
     
     .overlay-image {
@@ -427,12 +524,87 @@
     }
     
     .hero-buttons {
+        gap: 12px;
+        padding: 0 15px;
+    }
+    
+    .overview-btn,
+    .login-btn {
+        padding: 12px 28px;
+        font-size: 0.95em;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .about-us-section h1 {
+        font-size: 2.2em;
+    }
+    
+    .about-us-content {
+        width: 92%;
+        padding: 25px 20px;
+    }
+    
+    .about-us-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-us-content p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 375px) {
+    .main-title {
+        font-size: 2em;
+        letter-spacing: 0.5px;
+    }
+    
+    .header-nav {
+        gap: 6px;
+        font-size: 0.7em;
+        padding: 8px 5px;
+    }
+    
+    .header-nav a {
+        padding: 5px 8px;
+        font-size: 0.7em;
+    }
+    
+    .overlay-image {
+        width: 220px;
+        height: 160px;
+    }
+    
+    .hero-buttons {
         gap: 10px;
+        padding: 0 10px;
     }
     
     .overview-btn,
     .login-btn {
         padding: 10px 25px;
-        font-size: 0.9em;
+        font-size: 0.85em;
+        width: 100%;
+        max-width: 260px;
+    }
+    
+    .about-us-section h1 {
+        font-size: 1.8em;
+    }
+    
+    .about-us-content {
+        width: 95%;
+        padding: 20px 15px;
+    }
+    
+    .about-us-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .about-us-content p {
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 }

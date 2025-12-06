@@ -74,6 +74,34 @@
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .animated-icon-container {
+    width: 550px;
+    height: 550px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-icon-container {
+    width: 520px;
+    height: 520px;
+  }
+}
+
+@media (max-width: 400px) {
+  .animated-icon-container {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 365px) {
+  .animated-icon-container {
+    width: 580px;
+    height: 580px;
+  }
+}
+
 .animated-icon-image {
   width: 100%;
   height: auto;
@@ -84,29 +112,29 @@
 /* Responsive sizing for animated flower icon */
 @media (min-width: 640px) {
   .animated-icon-container {
-    width: 450px;
-    height: 450px;
-  }
-}
-
-@media (min-width: 768px) {
-  .animated-icon-container {
     width: 600px;
     height: 600px;
   }
 }
 
+@media (min-width: 768px) {
+  .animated-icon-container {
+    width: 750px;
+    height: 650px;
+  }
+}
+
 @media (min-width: 1024px) {
   .animated-icon-container {
-    width: 800px;
-    height: 800px;
+    width: 850px;
+    height: 850px;
   }
 }
 
 @media (min-width: 1280px) {
   .animated-icon-container {
-    width: 1050px;
-    height: 1050px;
+    width: 1100px;
+    height: 1100px;
   }
 }
 
@@ -470,6 +498,55 @@
   white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+  .sponsors-section {
+    padding: 35px 15px;
+  }
+  
+  .sponsors-section h2 {
+    font-size: 2.2rem;
+    padding: 15px 30px;
+    margin-bottom: 30px;
+  }
+  
+  .sponsors-image-container {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sponsors-section {
+    padding: 30px 10px;
+  }
+  
+  .sponsors-section h2 {
+    font-size: 1.8rem;
+    padding: 12px 25px;
+    margin-bottom: 25px;
+    white-space: normal;
+  }
+  
+  .sponsors-image-container {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 375px) {
+  .sponsors-section {
+    padding: 25px 10px;
+  }
+  
+  .sponsors-section h2 {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .sponsors-image-container {
+    max-width: 350px;
+  }
+}
+
 .sponsors-image-container {
   max-width: 800px;
   margin: 0 auto;
@@ -526,6 +603,38 @@
   width: 100%;
   margin: 0 auto;
   padding: 40px 20px;
+}
+
+@media (max-width: 1024px) {
+  .stats-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .stats-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px 10px;
+  }
 }
 
 .stat-showcase-card {
@@ -614,6 +723,24 @@
   animation: numberPulse 2s ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+  .stat-number {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .stat-number {
+    font-size: 2.2rem;
+  }
+}
+
 .stat-showcase-card:hover .stat-number {
   color: #8e44ad;
   transform: translateZ(50px) scale(1.1);
@@ -646,6 +773,27 @@
   color: #FFD700;
   margin-bottom: 20px;
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .stat-label {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-label {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .stat-label {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
 }
 
 .stat-button {
@@ -728,12 +876,12 @@
 }
 
 .theme-content {
-  background: rgba(0, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 25px;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
   padding: 40px;
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: none;
+  box-shadow: none;
 }
 
 .theme-name {
@@ -751,6 +899,77 @@
   margin-bottom: 25px;
   text-align: justify;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .about-theme-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+  
+  .theme-content {
+    padding: 30px 25px;
+  }
+  
+  .theme-name {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  
+  .theme-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-theme-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+    padding: 0 10px;
+  }
+  
+  .theme-content {
+    padding: 25px 20px;
+  }
+  
+  .theme-name {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .theme-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .about-theme-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  .theme-content {
+    padding: 20px 15px;
+  }
+  
+  .theme-name {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .theme-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
 }
 
 .theme-description:last-child {
@@ -774,6 +993,32 @@
   font-weight: 700;
 }
 
+@media (max-width: 768px) {
+  .highlights-section h2,
+  .features-section h2 {
+    font-size: 2rem;
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlights-section h2,
+  .features-section h2 {
+    font-size: 1.7rem;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .highlights-section h2,
+  .features-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    padding: 0 10px;
+  }
+}
+
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -781,6 +1026,37 @@
   max-width: 1500px;
   margin: 0 auto 0 auto;
   padding: 0 20px 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 10px;
+  }
 }
 
 .highlight-card {
@@ -849,6 +1125,67 @@
   margin: 0;
   opacity: 0.9;
   font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .highlight-card {
+    min-height: 380px;
+  }
+  
+  .highlight-card h3 {
+    font-size: 1.3rem;
+    padding: 15px 15px 8px;
+  }
+  
+  .highlight-card p {
+    font-size: 1rem;
+    padding: 0 15px 10px;
+  }
+  
+  .highlight-image {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight-card {
+    min-height: 350px;
+  }
+  
+  .highlight-card h3 {
+    font-size: 1.2rem;
+    padding: 12px 12px 6px;
+  }
+  
+  .highlight-card p {
+    font-size: 0.95rem;
+    padding: 0 12px 8px;
+    line-height: 1.5;
+  }
+  
+  .highlight-image {
+    height: 160px;
+  }
+}
+
+@media (max-width: 375px) {
+  .highlight-card {
+    min-height: 320px;
+  }
+  
+  .highlight-card h3 {
+    font-size: 1.1rem;
+    padding: 10px 10px 5px;
+  }
+  
+  .highlight-card p {
+    font-size: 0.9rem;
+    padding: 0 10px 8px;
+  }
+  
+  .highlight-image {
+    height: 140px;
+  }
 }
 
 /* Navbar Content Sections - All with Glass Morphism */
@@ -977,6 +1314,27 @@
     0 4px 16px rgba(0, 0, 0, 0.08);
   transform-style: preserve-3d;
   perspective: 1000px;
+}
+
+@media (max-width: 768px) {
+  .event-category-card {
+    padding: 30px 25px;
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-category-card {
+    padding: 25px 20px;
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 375px) {
+  .event-category-card {
+    padding: 20px 15px;
+    min-height: 320px;
+  }
 }
 
 .event-category-card:hover {
@@ -1165,6 +1523,58 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .event-item {
+    padding: 20px;
+  }
+  
+  .event-item h4 {
+    font-size: 1rem;
+  }
+  
+  .event-item p {
+    font-size: 0.85rem;
+  }
+  
+  .event-meta {
+    font-size: 0.8rem !important;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-item {
+    padding: 15px;
+  }
+  
+  .event-item h4 {
+    font-size: 0.95rem;
+  }
+  
+  .event-item p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  
+  .event-meta {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .event-item {
+    padding: 12px;
+  }
+  
+  .event-item h4 {
+    font-size: 0.9rem;
+  }
+  
+  .event-item p {
+    font-size: 0.75rem;
+  }
 }
 
 .loading-events {
@@ -2603,19 +3013,26 @@
   min-height: 100vh;
   padding: 40px 20px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .inline-indoor-sports-container {
   max-width: 1400px;
   margin: 0 auto;
+  overflow: visible;
 }
 
 .inline-indoor-sports-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  padding: 15px 25px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   color: white;
 }
 
@@ -3037,6 +3454,9 @@
   margin-top: 20px;
   border-top: 2px solid rgba(139, 69, 19, 0.3);
   animation: slideDown 0.5s ease-out;
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .inline-sports-details-container {
@@ -3044,6 +3464,15 @@
   margin: 0 auto;
   padding: 20px;
   border-radius: 15px;
+  overflow-x: hidden;
+}
+
+.inline-indoor-sports-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  overflow-x: hidden;
 }
 
 .inline-sports-details-header {
@@ -3118,28 +3547,129 @@
   justify-content: space-between;
   margin: 20px 0;
   gap: 30px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  padding: 0 20px;
 }
 
-.sports-nav-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.sports-details-navigation .sports-nav-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: transparent;
+  font-size: 0;
+  width: 0;
+  height: 0;
+  border-radius: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
   flex-shrink: 0;
+  box-shadow: none;
+  position: relative;
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.sports-details-navigation .sports-nav-btn.prev {
+  border-left: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 0;
+}
+
+.sports-details-navigation .sports-nav-btn.next {
+  border-right: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 0;
 }
 
 .sports-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.sports-nav-btn:hover.prev {
+  border-left-color: rgba(255, 255, 255, 1);
+}
+
+.sports-nav-btn:hover.next {
+  border-right-color: rgba(255, 255, 255, 1);
+}
+
+.sports-details-navigation .sports-carousel-3d-container,
+.culturals-navigation .culturals-carousel-3d-container {
+  flex: 1;
+  perspective: 1800px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
+  padding: 40px 20px;
+}
+
+.sports-details-navigation .sports-carousel-3d-wrapper,
+.culturals-navigation .culturals-carousel-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
+
+.sports-details-navigation .sports-detail-card-3d,
+.culturals-navigation .cultural-card-3d {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  color: #333;
+  width: 350px;
+  height: 480px;
+  will-change: transform;
+  transform-style: preserve-3d !important;
+  backface-visibility: visible !important;
+  /* Glide-style horizontal positioning */
+  left: 50% !important;
+  top: 50% !important;
+}
+
+.sports-detail-card-3d.active,
+.cultural-card-3d.active {
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateZ(50px) scale(1.02) !important;
+}
+
+.sports-detail-card-3d:hover,
+.cultural-card-3d:hover {
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.18),
+    0 10px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
 }
 
 .sports-details-grid {
@@ -3201,19 +3731,290 @@
   border-radius: 0 0 20px 20px;
 }
 
-.sports-card-title-overlay h3 {
-  color: #4a148c;
-  font-size: 1.4rem;
-  margin: 0 0 5px 0;
+.sports-card-poster-background,
+.cultural-card-poster-background {
+  height: 320px;
+  background: linear-gradient(135deg, rgba(240, 240, 245, 0.8), rgba(250, 250, 255, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(100, 100, 120, 0.5);
   font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 15px 15px 0 0;
+  border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.sports-card-title-overlay,
+.cultural-card-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 25px 20px;
+  border-radius: 0 0 15px 15px;
+  text-align: center;
+  border-top: 1px solid rgba(200, 200, 200, 0.2);
+}
+
+.sports-card-title-overlay h3,
+.cultural-card-title-overlay h3 {
+  color: #2d3748;
+  font-size: 1.4rem;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.sports-card-title-overlay h4,
+.cultural-card-title-overlay h4 {
+  color: #718096;
+  font-size: 1.05rem;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  opacity: 0.8;
+}
+
+.sports-carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sports-indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin: 0;
+  padding: 0;
+}
+
+.sports-indicator.active {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(106, 13, 173, 0.8);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.sports-indicator:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Culturals 3D Semicircle Carousel */
+.culturals-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 30px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+  padding: 0 20px;
+}
+
+.culturals-nav-btn {
+  background: transparent;
+  border: none;
+  color: transparent;
+  font-size: 0;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.culturals-nav-btn.prev {
+  border-left: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 0;
+}
+
+.culturals-nav-btn.next {
+  border-right: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 0;
+}
+
+.culturals-nav-btn:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.culturals-nav-btn:hover.prev {
+  border-left-color: rgba(255, 255, 255, 1);
+}
+
+.culturals-nav-btn:hover.next {
+  border-right-color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+
+
+
+
+.sports-detail-card-3d {
+  width: 320px;
+  height: 420px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.4);
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  color: #333;
+  width: 600px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform, opacity, filter;
+}
+
+.cultural-card-3d {
+  width: 320px;
+  height: 420px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.4);
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  color: #333;
+}
+
+.sports-detail-card-3d.active {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.cultural-card-3d.active {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.sports-card-poster-background {
+  height: 600px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(138, 43, 226, 0.3) 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cultural-card-poster-background {
+  height: 600px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(138, 43, 226, 0.3) 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sports-poster-placeholder-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cultural-poster-placeholder-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sports-card-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), transparent);
+  padding: 60px 20px 20px 20px;
+  color: white;
+}
+
+.sports-card-title-overlay h3 {
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
 }
 
 .sports-card-title-overlay h4 {
-  color: #4a148c;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 0;
-  font-weight: normal;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+.cultural-card-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), transparent);
+  padding: 70px 25px 25px 25px;
+  color: white;
+}
+
+.cultural-card-title-overlay h3 {
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.cultural-card-title-overlay h4 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
 }
 
 .sports-carousel-indicators {
@@ -3227,23 +4028,154 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 0;
 }
 
 .sports-indicator.active {
-  background: white;
-  transform: scale(1.2);
+  background: rgba(255, 215, 0, 0.9);
+  border-color: rgba(255, 215, 0, 1);
+  transform: scale(1.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
 }
 
 .sports-indicator:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 215, 0, 0.6);
+  transform: scale(1.25);
+  border-color: rgba(255, 215, 0, 0.8);
+}
+
+.culturals-carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.culturals-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.culturals-indicator.active {
+  background: rgba(255, 215, 0, 0.9);
+  border-color: rgba(255, 215, 0, 1);
+  transform: scale(1.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+.culturals-indicator:hover {
+  background: rgba(255, 215, 0, 0.6);
+  transform: scale(1.25);
+  border-color: rgba(255, 215, 0, 0.8);
+}
+
+
+
+/* Mobile responsive navigation */
+@media (max-width: 768px) {
+  .sports-details-navigation,
+  .culturals-navigation {
+    gap: 15px;
+    margin: 15px 0;
+  }
+  
+  .sports-nav-btn,
+  .culturals-nav-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    min-height: 550px !important;
+    perspective: 1200px !important;
+    padding-top: 80px !important;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    position: relative !important;
+    min-height: 550px !important;
+    width: 100% !important;
+    padding-top: 80px !important;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-wrapper,
+  .culturals-navigation .culturals-carousel-3d-wrapper {
+    position: relative !important;
+    max-width: 350px !important;
+    width: 350px !important;
+    height: 450px !important;
+    top: auto !important;
+    left: auto !important;
+    transform: translateZ(-150px) !important;
+  }
+  
+  .sports-detail-card-3d,
+  .cultural-card-3d {
+    min-height: 400px !important;
+    width: 300px !important;
+  }
+  
+  .sports-card-poster-background,
+  .cultural-card-poster-background {
+    height: 280px !important;
+  }
+}
+
+
+
+/* Smooth carousel animations */
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sports-detail-card-3d.active,
+.cultural-card-3d.active {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.sports-detail-card-3d:hover,
+.sports-detail-card-3d:hover {
+  transform: translateY(-8px) scale(1.03) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4) !important;
+  z-index: 100 !important;
+  transition: all 0.3s ease !important;
+}
+
+.cultural-card-3d:hover {
+  transform: translateY(-8px) scale(1.03) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4) !important;
+  z-index: 100 !important;
+  transition: all 0.3s ease !important;
 }
 
 /* Responsive design for sports details */
 @media (max-width: 768px) {
+  .inline-indoor-sports-header {
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+  
   .inline-sports-details-container {
     padding: 15px;
     margin: 0 10px;
@@ -3258,16 +4190,7 @@
     padding: 8px 15px;
   }
   
-  .sports-details-navigation {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .sports-nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
+
   
   .sports-details-grid {
     grid-template-columns: 1fr;
@@ -3295,14 +4218,602 @@
   }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
-  .sports-details-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+/* Desktop Responsive - Larger screens */
+@media (min-width: 1200px) {
+  .sports-details-navigation,
+  .culturals-navigation {
+    gap: 40px;
+    margin: 30px 0;
   }
   
-  .sports-detail-card {
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    height: 75vh;
+    perspective: 2500px;
+    min-height: 600px;
+  }
+  
+  .sports-detail-card-3d,
+  .cultural-card-3d {
+    width: 380px;
+    height: 520px;
+  }
+  
+  .sports-card-poster-background,
+  .cultural-card-poster-background {
+    height: 340px;
+    font-size: 1.3rem;
+  }
+  
+  .sports-card-title-overlay,
+  .cultural-card-title-overlay {
+    padding: 25px;
+  }
+  
+  .sports-card-title-overlay h3,
+  .cultural-card-title-overlay h3 {
+    font-size: 1.4rem;
+  }
+  
+  .sports-details-navigation .sports-nav-btn,
+  .culturals-nav-btn {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 769px) {
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    height: 60vh;
+    perspective: 1800px;
+  }
+  
+  .sports-detail-card-3d,
+  .cultural-card-3d {
+    width: 350px;
+    height: 450px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sports-details-navigation,
+  .culturals-navigation {
+    margin: 15px 10px;
+    gap: 18px;
+    padding: 0 10px;
+    overflow: visible;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    height: 50vh;
+    perspective: 1400px;
+    max-width: calc(100vw - 100px);
+    overflow: visible;
+    background: transparent;
+    padding: 30px 15px;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-wrapper,
+  .culturals-navigation .culturals-carousel-3d-wrapper {
+    transform: translateZ(0);
+    max-width: 100%;
+  }
+  
+  .sports-detail-card-3d,
+  .cultural-card-3d {
+    width: 280px !important;
+    height: 380px !important;
+    border-radius: 15px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(200, 200, 200, 0.3) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .sports-card-poster-background,
+  .cultural-card-poster-background {
+    height: 240px !important;
+    background: linear-gradient(135deg, rgba(240, 240, 245, 0.8), rgba(250, 250, 255, 0.6)) !important;
+    border-radius: 15px 15px 0 0 !important;
+    font-size: 0.9rem !important;
+  }
+
+  .sports-card-title-overlay,
+  .cultural-card-title-overlay {
+    padding: 18px 15px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0 0 15px 15px !important;
+    border-top: 1px solid rgba(200, 200, 200, 0.2) !important;
+  }
+
+  .sports-card-title-overlay h3,
+  .cultural-card-title-overlay h3 {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin: 0 0 6px 0 !important;
+    text-align: center !important;
+  }
+
+  .sports-card-title-overlay h4,
+  .cultural-card-title-overlay h4 {
+    font-size: 0.95rem !important;
+    color: #718096 !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  .sports-details-navigation .sports-nav-btn,
+  .culturals-nav-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    z-index: 100;
+  }
+}
+
+@media (max-width: 480px) {
+  .sports-details-navigation,
+  .culturals-navigation {
+    margin: 10px 5px;
+    gap: 15px;
+    padding: 0 5px;
+  }
+  
+  .sports-details-navigation .sports-carousel-3d-container,
+  .culturals-navigation .culturals-carousel-3d-container {
+    height: 45vh;
+    perspective: 1200px;
+    max-width: calc(100vw - 90px);
+    background: transparent;
+    padding: 25px 10px;
+    overflow: visible;
+  }
+  
+  .sports-detail-card-3d,
+  .cultural-card-3d {
+    width: 240px !important;
+    height: 340px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(255, 215, 0, 0.8) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 12px !important;
+    overflow: hidden !important;
+  }
+
+  .sports-card-poster-background,
+  .cultural-card-poster-background {
+    height: 210px !important;
+    background: linear-gradient(135deg, rgba(240, 240, 245, 0.8), rgba(250, 250, 255, 0.6)) !important;
+    border-radius: 12px 12px 0 0 !important;
+    font-size: 0.85rem !important;
+  }
+
+  .sports-card-title-overlay,
+  .cultural-card-title-overlay {
+    padding: 15px 12px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0 0 12px 12px !important;
+    border-top: 1px solid rgba(200, 200, 200, 0.2) !important;
+  }
+
+  .sports-card-title-overlay h3,
+  .cultural-card-title-overlay h3 {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin: 0 0 5px 0 !important;
+    text-align: center !important;
+  }
+
+  .sports-card-title-overlay h4,
+  .cultural-card-title-overlay h4 {
+    font-size: 0.85rem !important;
+    color: #718096 !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+  
+  .sports-details-navigation .sports-nav-btn,
+  .culturals-nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    flex-shrink: 0;
+    z-index: 100;
+  }
+}
+
+/* Highlights 3D Carousel Section */
+.highlights-section {
+  overflow: visible !important;
+}
+
+.highlights-navigation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  overflow: visible !important;
+  min-height: 650px;
+  padding: 0 20px;
+}
+
+.highlights-carousel-3d-container {
+  perspective: 2500px;
+  perspective-origin: center 40%;
+  width: 100%;
+  max-width: 1400px;
+  height: 650px;
+  position: relative;
+  overflow: visible !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlights-carousel-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  overflow: visible !important;
+  transform: translateZ(-300px);
+}
+
+.highlight-card-3d {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  margin-left: -300px;
+  margin-top: -275px;
+  width: 600px;
+  min-height: 550px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+  color: #2d3748;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+.highlight-card-3d.active {
+  cursor: default;
+}
+
+.highlight-card-3d:not(.active) {
+  cursor: pointer;
+}
+
+.highlight-card-3d .highlight-image {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.highlight-card-3d .day-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(255, 215, 0, 0.95);
+  color: #6a0dad;
+  padding: 10px 18px;
+  border-radius: 15px;
+  font-weight: bold;
+  z-index: 2;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-card-3d .highlight-video {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.highlight-card-3d .day-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.highlight-card-3d h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 20px 20px 10px 20px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.highlight-card-3d p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 20px 20px 20px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  flex: 1;
+}
+
+.highlights-nav-btn {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: transparent;
+  font-size: 0;
+  width: 0;
+  height: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: none;
+  z-index: 100;
+  position: relative;
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.highlights-nav-btn.prev {
+  border-left: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 0;
+}
+
+.highlights-nav-btn.next {
+  border-right: 25px solid rgba(255, 255, 255, 0.8);
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 0;
+}
+
+.highlights-nav-btn:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.highlights-nav-btn:hover.prev {
+  border-left-color: rgba(255, 255, 255, 1);
+}
+
+.highlights-nav-btn:hover.next {
+  border-right-color: rgba(255, 255, 255, 1);
+}
+
+.highlights-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.highlights-carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.highlights-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.highlights-indicator.active {
+  background: rgba(255, 215, 0, 0.9);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.highlights-indicator:hover {
+  background: rgba(255, 215, 0, 0.6);
+  transform: scale(1.2);
+}
+
+/* Responsive Highlights Carousel */
+@media (max-width: 1024px) {
+  .highlights-carousel-3d-container {
+    perspective: 1400px;
+    perspective-origin: center center;
+    max-width: 1000px;
+    height: 500px;
+  }
+  
+  .highlights-carousel-3d-wrapper {
+    transform: translateZ(-150px);
+  }
+  
+  .highlight-card-3d {
+    width: 500px;
+    min-height: 470px;
+    margin-left: -250px;
+    margin-top: -235px;
+  }
+  
+  .highlight-card-3d .highlight-image {
+    height: 260px;
+  }
+  
+  .highlights-nav-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .highlights-navigation {
+    min-height: 550px;
+    gap: 25px;
+    padding: 0 10px;
+  }
+  
+  .highlights-carousel-3d-container {
+    perspective: 1400px;
+    perspective-origin: center center;
+    max-width: calc(100vw - 100px);
+    height: 480px;
+    overflow: visible !important;
+  }
+  
+  .highlights-carousel-3d-wrapper {
+    transform: translateZ(-120px);
+  }
+  
+  .highlight-card-3d {
+    width: 350px;
     min-height: 420px;
+    margin-left: -175px;
+    margin-top: -210px;
+  }
+  
+  .highlight-card-3d .highlight-image {
+    height: 230px;
+  }
+  
+  .highlight-card-3d h3 {
+    font-size: 1.3rem;
+    margin: 15px 15px 8px 15px;
+  }
+  
+  .highlight-card-3d p {
+    font-size: 0.9rem;
+    margin: 0 15px 15px 15px;
+    line-height: 1.5;
+  }
+  
+  .highlights-nav-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlights-navigation {
+    min-height: 480px;
+    gap: 18px;
+    padding: 0 5px;
+  }
+  
+  .highlights-carousel-3d-container {
+    perspective: 1200px;
+    perspective-origin: center center;
+    max-width: calc(100vw - 90px);
+    height: 420px;
+    overflow: visible !important;
+  }
+  
+  .highlights-carousel-3d-wrapper {
+    transform: translateZ(-80px);
+  }
+  
+  .highlight-card-3d {
+    width: 280px;
+    min-height: 380px;
+    margin-left: -140px;
+    margin-top: -190px;
+  }
+  
+  .highlight-card-3d .highlight-image {
+    height: 190px;
+  }
+  
+  .highlight-card-3d .day-badge {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .highlight-card-3d h3 {
+    font-size: 1.15rem;
+    margin: 12px 12px 6px 12px;
+  }
+  
+  .highlight-card-3d p {
+    font-size: 0.85rem;
+    margin: 0 12px 12px 12px;
+    line-height: 1.4;
+  }
+  
+  .highlights-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+  
+  .highlights-carousel-indicators {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .highlights-indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .highlights-navigation {
+    min-height: 460px;
+  }
+  
+  .highlights-carousel-3d-container {
+    perspective: 1100px;
+    max-width: calc(100vw - 80px);
+    height: 400px;
+  }
+  
+  .highlights-carousel-3d-wrapper {
+    transform: translateZ(-70px);
+  }
+  
+  .highlight-card-3d {
+    width: 260px;
+    min-height: 360px;
+    margin-left: -130px;
+    margin-top: -180px;
+  }
+  
+  .highlight-card-3d .highlight-image {
+    height: 180px;
+  }
+  
+  .highlight-card-3d h3 {
+    font-size: 1.05rem;
+  }
+  
+  .highlight-card-3d p {
+    font-size: 0.8rem;
   }
 }
 
@@ -3528,6 +5039,48 @@
   max-width: 600px;
 }
 
+@media (max-width: 768px) {
+  .login-modal-content,
+  .overview-modal-content,
+  .signup-modal-content,
+  .sub-modal-content {
+    width: 95%;
+    margin: 10px;
+    max-height: 92vh;
+  }
+  
+  .signup-modal-content {
+    max-width: 95%;
+    padding-right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-modal-content,
+  .overview-modal-content,
+  .signup-modal-content,
+  .sub-modal-content {
+    width: 98%;
+    margin: 5px;
+    max-height: 95vh;
+  }
+  
+  .signup-modal-content {
+    max-width: 98%;
+  }
+}
+
+@media (max-width: 375px) {
+  .login-modal-content,
+  .overview-modal-content,
+  .signup-modal-content,
+  .sub-modal-content {
+    width: 100%;
+    margin: 2px;
+    border-radius: 15px;
+  }
+}
+
 .events-modal-container {
   width: 100%;
   max-width: 1400px;
@@ -3715,6 +5268,57 @@
   padding: 30px;
 }
 
+@media (max-width: 768px) {
+  .login-modal-header {
+    padding: 25px 25px 15px;
+  }
+  
+  .login-modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .login-modal-body,
+  .overview-modal-body,
+  .signup-modal-body,
+  .sub-modal-body {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-modal-header {
+    padding: 20px 20px 12px;
+  }
+  
+  .login-modal-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .login-modal-body,
+  .overview-modal-body,
+  .signup-modal-body,
+  .sub-modal-body {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .login-modal-header {
+    padding: 15px 15px 10px;
+  }
+  
+  .login-modal-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .login-modal-body,
+  .overview-modal-body,
+  .signup-modal-body,
+  .sub-modal-body {
+    padding: 15px 12px;
+  }
+}
+
 /* Form Styles */
 .login-form,
 .signup-form {
@@ -3748,6 +5352,30 @@
   transition: all 0.3s ease;
   width: 100%;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .form-input,
+  .form-select {
+    padding: 13px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-input,
+  .form-select {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .form-input,
+  .form-select {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
 }
 
 .form-input::placeholder {
@@ -3919,6 +5547,30 @@
   margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+  .login-submit-btn,
+  .signup-submit-btn {
+    padding: 16px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-submit-btn,
+  .signup-submit-btn {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .login-submit-btn,
+  .signup-submit-btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
 .login-submit-btn:disabled,
 .signup-submit-btn:disabled {
   opacity: 0.6;
@@ -3980,6 +5632,27 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: start;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 .form-row .form-group {
@@ -4236,6 +5909,31 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .left-menu-item {
+    height: 58px;
+    padding: 0 16px;
+    margin: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-menu-item {
+    height: 54px;
+    padding: 0 14px;
+    margin: 5px 0;
+  }
+}
+
+/* Oppo F31 Pro and similar devices (360px width) */
+@media (max-width: 400px) {
+  .left-menu-item {
+    height: 52px;
+    padding: 0 12px;
+    margin: 5px 0;
+  }
+}
+
 .left-menu-item::before {
   content: '';
   position: absolute;
@@ -4366,20 +6064,31 @@
   position: absolute;
   top: 30px;
   left: 30px;
-  width: 40px;
-  height: 40px;
+  right: auto;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   z-index: 99999;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.menu-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
 }
 
 .close-bar {
   position: absolute;
-  width: 30px;
-  height: 3px;
+  width: 40px;
+  height: 4px;
   background-color: white;
   top: 50%;
   left: 50%;
   transform-origin: center;
+  border-radius: 2px;
 }
 
 .close-bar1 {
@@ -4505,9 +6214,9 @@
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
-  font-size: 2rem;
-  width: 40px;
-  height: 40px;
+  font-size: 2.5rem;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -4531,6 +6240,32 @@
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .inline-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 0 10px;
+  }
+  
+  .inline-menu-item {
+    padding: 24px 16px;
+    min-height: 92px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Oppo F31 Pro and similar devices */
+@media (max-width: 400px) {
+  .inline-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 8px;
+  }
+}
+
 .inline-menu-item {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -4545,6 +6280,19 @@
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+/* Oppo F31 Pro and similar devices */
+@media (max-width: 400px) {
+  .inline-menu-item {
+    padding: 18px 13px;
+    min-height: 86px;
+    border-radius: 10px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.85rem;
+  }
 }
 
 .inline-menu-item:hover {
@@ -4584,18 +6332,22 @@
 
 @media (max-width: 480px) {
   .inline-menu-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   
   .inline-menu-container {
-    padding: 15px;
-    margin: 0 10px;
+    padding: 10px;
+    margin: 0 8px;
   }
   
   .inline-menu-item {
-    padding: 30px 20px;
-    min-height: 120px;
+    padding: 20px 14px;
+    min-height: 88px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.87rem;
   }
 }
 
@@ -5322,6 +7074,78 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+/* Global Text Overflow Prevention for Mobile */
+@media (max-width: 768px) {
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+  }
+  
+  p {
+    line-height: 1.6;
+  }
+  
+  .single-page-app {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  * {
+    max-width: 100%;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.7rem !important;
+  }
+  
+  h3 {
+    font-size: 1.4rem !important;
+  }
+  
+  h4 {
+    font-size: 1.2rem !important;
+  }
+  
+  p, span, div {
+    font-size: inherit;
+  }
+}
+
+@media (max-width: 375px) {
+  h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  h3 {
+    font-size: 1.3rem !important;
+  }
+  
+  h4 {
+    font-size: 1.1rem !important;
+  }
 }/* Event Checklist Modal Styles */
 .event-checklist-modal {
   background: rgba(0, 0, 0, 0.8);
@@ -8306,13 +10130,14 @@ html {
   .menu-close-btn {
     top: 20px;
     left: 20px;
-    width: 35px;
-    height: 35px;
+    right: auto;
+    width: 55px;
+    height: 55px;
   }
   
   .close-bar {
-    width: 25px;
-    height: 2.5px;
+    width: 35px;
+    height: 3.5px;
   }
 }
 
@@ -8333,6 +10158,25 @@ html {
   .fullscreen-menu-grid {
     gap: 12px;
     padding: 25px 0;
+  }
+  
+  .menu-close-btn {
+    top: 15px;
+    left: 15px;
+    right: auto;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .close-bar {
+    width: 32px;
+    height: 3px;
+  }
+  
+  .inline-menu-close-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 2.2rem;
   }
 }
 
@@ -8449,44 +10293,8 @@ html {
 
 @media (max-width: 768px) {
   .flower-container-mobile {
-    width: 300px !important;
-    height: 300px !important;
-  }
-  
-  .flower-container-mobile .flower-inner {
-    top: -40% !important;
-    right: -40% !important;
-  }
-  
-  .fixed.bottom-0.left-0 .flower-inner {
-    top: auto !important;
-    bottom: -40% !important;
-    left: -40% !important;
-    right: auto !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .flower-container-mobile {
-    width: 200px !important;
-    height: 200px !important;
-  }
-  
-  .flower-container-mobile .flower-inner {
-    top: -35% !important;
-    right: -35% !important;
-  }
-  
-  .fixed.bottom-0.left-0 .flower-inner {
-    bottom: -35% !important;
-    left: -35% !important;
-  }
-}
-
-@media (max-width: 375px) {
-  .flower-container-mobile {
-    width: 150px !important;
-    height: 150px !important;
+    width: 160px !important;
+    height: 160px !important;
   }
   
   .flower-container-mobile .flower-inner {
@@ -8495,8 +10303,61 @@ html {
   }
   
   .fixed.bottom-0.left-0 .flower-inner {
+    top: auto !important;
     bottom: -30% !important;
     left: -30% !important;
+    right: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .flower-container-mobile {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -28% !important;
+    right: -28% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    bottom: -28% !important;
+    left: -28% !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .flower-container-mobile {
+    width: 130px !important;
+    height: 130px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -25% !important;
+    right: -25% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    bottom: -25% !important;
+    left: -25% !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .flower-container-mobile {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .flower-container-mobile .flower-inner {
+    top: -22% !important;
+    right: -22% !important;
+  }
+  
+  .fixed.bottom-0.left-0 .flower-inner {
+    bottom: -22% !important;
+    left: -22% !important;
   }
 }
 
@@ -8508,52 +10369,114 @@ html {
   padding: 2rem;
 }
 
-@media (max-width: 768px) {
+/* Oppo F31 Pro and similar small devices (360-400px) */
+@media (max-width: 400px) {
   .menu-grid-card {
-    min-height: 140px;
-    padding: 1.5rem;
+    min-height: 85px;
+    padding: 0.6rem;
   }
   
   .menu-grid-card .text-6xl {
-    font-size: 3rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.7rem;
+    margin-bottom: 0.3rem;
   }
   
   .menu-grid-card .text-lg {
-    font-size: 0.95rem;
+    font-size: 0.7rem;
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-grid-card {
+    min-height: 90px;
+    padding: 0.65rem;
+  }
+  
+  .menu-grid-card .text-6xl {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .menu-grid-card .text-lg {
+    font-size: 0.7rem;
+    line-height: 1.15;
   }
 }
 
 @media (max-width: 480px) {
   .menu-grid-card {
-    min-height: 120px;
-    padding: 1rem;
+    min-height: 88px;
+    padding: 0.6rem;
   }
   
   .menu-grid-card .text-6xl {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
   }
   
   .menu-grid-card .text-lg {
-    font-size: 0.85rem;
+    font-size: 0.68rem;
+    line-height: 1.15;
   }
 }
 
 @media (max-width: 375px) {
   .menu-grid-card {
-    min-height: 100px;
-    padding: 0.75rem;
+    min-height: 85px;
+    padding: 0.6rem;
   }
   
   .menu-grid-card .text-6xl {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.7rem;
+    margin-bottom: 0.35rem;
   }
   
   .menu-grid-card .text-lg {
-    font-size: 0.75rem;
-    line-height: 1.2;
+    font-size: 0.68rem;
+    line-height: 1.15;
+  }
+  
+  .inline-menu-item {
+    padding: 20px 12px;
+    min-height: 90px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.87rem;
+  }
+}
+
+/* Oppo F31 Pro specific (360px width) */
+@media (max-width: 365px) {
+  .menu-grid-card {
+    min-height: 82px;
+    padding: 0.55rem;
+  }
+  
+  .menu-grid-card .text-6xl {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .menu-grid-card .text-lg {
+    font-size: 0.65rem;
+    line-height: 1.1;
+  }
+  
+  .inline-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 5px;
+  }
+  
+  .inline-menu-item {
+    padding: 18px 12px;
+    min-height: 88px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.85rem;
   }
 }
 

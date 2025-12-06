@@ -2096,7 +2096,10 @@ Do you want to proceed with registration?`;
               {/* ZONALS */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/zonals');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;

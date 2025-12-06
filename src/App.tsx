@@ -11,6 +11,7 @@ import Sponsors from './Sponsors';
 import Schedule from './Schedule';
 import ParaSports from './ParaSports';
 import Collaboration from './Collaboration';
+import Zonals from './Zonals';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/para-sports" element={<ParaSports />} />
           <Route path="/collaboration" element={<Collaboration />} />
+          <Route path="/zonals" element={<Zonals />} />
         </Routes>
       </Router>
     </div>

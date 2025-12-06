@@ -48,6 +48,14 @@ const Dashboard: React.FC = () => {
   const [currentParaCricketSlide, setCurrentParaCricketSlide] = useState(0);
   const [showCulturals, setShowCulturals] = useState(false);
   const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
+  
+  // Highlights carousel state
+  const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
+  const highlightCards = [
+    { day: "Day ONE", title: "Exciting Day One Highlights", description: "Cultural performances, inauguration ceremony, and opening events that set the stage for an amazing festival.", video: "day 1.mp4" },
+    { day: "Day TWO", title: "Exciting Day Two Highlights", description: "Main events, competitions, technical exhibitions, and spectacular performances by renowned artists.", video: "day 2.mp4" },
+    { day: "Day THREE", title: "Exciting Day Three Highlights", description: "Grand finale, award ceremonies, closing performances, and memorable moments to conclude the festival.", video: "day 3.mp4" }
+  ];
 
   // State for fetched events from database
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -863,6 +871,30 @@ const Dashboard: React.FC = () => {
     setCurrentSportsSlide((prev) => (prev - 1 + sportsDetailCards.length) % sportsDetailCards.length);
   };
 
+  // Keyboard navigation for sports carousel
+  React.useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (showSportsDetails) {
+        if (event.key === 'ArrowLeft') {
+          prevSportsSlide();
+        } else if (event.key === 'ArrowRight') {
+          nextSportsSlide();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showSportsDetails]);
+  
+  const nextHighlightSlide = () => {
+    setCurrentHighlightSlide((prev) => (prev + 1) % highlightCards.length);
+  };
+
+  const prevHighlightSlide = () => {
+    setCurrentHighlightSlide((prev) => (prev - 1 + highlightCards.length) % highlightCards.length);
+  };
+
   const nextIndoorSlide = () => {
     setCurrentIndoorSlide((prev) => (prev + 1) % indoorSportsCards.length);
   };
@@ -926,6 +958,22 @@ const Dashboard: React.FC = () => {
   const prevCulturalsSlide = () => {
     setCurrentCulturalsSlide((prev: number) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
   };
+
+  // Keyboard navigation for culturals carousel
+  React.useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (showCulturals) {
+        if (event.key === 'ArrowLeft') {
+          prevCulturalsSlide();
+        } else if (event.key === 'ArrowRight') {
+          nextCulturalsSlide();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [showCulturals]);
 
   const nextMusicSlide = () => {
     setCurrentMusicSlide((prev: number) => (prev + 1) % musicCards.length);
@@ -999,13 +1047,13 @@ const Dashboard: React.FC = () => {
       setShowMusic(true);
     } else if (eventTitle === "Dance") {
       setShowDance(true);
-    } else if (eventTitle === "Theatre &") {
+    } else if (eventTitle === "Theatre") {
       setShowTheatre(true);
     } else if (eventTitle === "Literature") {
       setShowLiterature(true);
-    } else if (eventTitle === "Visual Arts &") {
+    } else if (eventTitle === "Visual Arts") {
       setShowVisualArts(true);
-    } else if (eventTitle === "Fashion Design &") {
+    } else if (eventTitle === "Fashion Design") {
       setShowFashionDesign(true);
     } else if (eventTitle === "Spot Light") {
       setShowSpotLight(true);
@@ -1814,9 +1862,6 @@ Do you want to proceed with registration?`;
     <div className={`w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
          style={{background: "transparent"}}>
       
-      {/* Floating Decorative Icons */}
-      <FloatingIcons />
-      
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
         <div className="sunlight-rays ray-1"></div>
@@ -1848,15 +1893,72 @@ Do you want to proceed with registration?`;
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen pt-16 sm:pt-20 md:pt-5 flex flex-col items-center justify-center sm:justify-start z-10 text-white text-center overflow-hidden" style={{background: "transparent"}}>
-        <div className="flex justify-center items-center mb-4 sm:mb-6 z-20 relative px-4 ml-8 mt-6">
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-5xl xl:max-w-7xl h-auto object-contain bg-transparent border-none shadow-none animate-fadeInDown" />
+      <section className="relative min-h-screen flex flex-col items-center justify-center md:justify-start md:pt-20 lg:pt-16 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+        <div className="flex justify-center items-center z-20 relative w-full px-0">
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "120%", height: "120%", maxWidth: "none", marginLeft: "15%", marginRight: "0"}} />
         </div>
+        <style>{`
+          @media (min-width: 768px) {
+            .animate-fadeInDown {
+              margin-left: 5% !important;
+            }
+          }
+          
+          /* Mobile view adjustments for flower overlap */
+          @media (max-width: 767px) {
+            .flower-container-mobile {
+              width: 150px !important;
+              height: 150px !important;
+              opacity: 0.25 !important;
+            }
+            
+            /* Adjust all dashboard sections for mobile */
+            .about-theme-section,
+            .highlights-section,
+            .dashboard-section {
+              padding-left: 15px !important;
+              padding-right: 15px !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+            
+            .about-theme-container {
+              padding-left: 10px !important;
+              padding-right: 10px !important;
+              max-width: 100% !important;
+            }
+            
+            .theme-content {
+              padding-left: 20px !important;
+              padding-right: 20px !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+            }
+            
+            .theme-description {
+              padding-left: 5px !important;
+              padding-right: 5px !important;
+            }
+            
+            .highlights-navigation {
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              padding-left: 5px !important;
+              padding-right: 5px !important;
+            }
+            
+            /* Ensure content has proper z-index above flowers */
+            section {
+              position: relative;
+              z-index: 20 !important;
+            }
+          }
+        `}</style>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 my-4 justify-center items-center z-20 relative px-4 w-full">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-12 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -1870,7 +1972,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-32 sm:w-36 md:w-40 lg:w-44 xl:w-48 h-12 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
+            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -1949,12 +2051,12 @@ Do you want to proceed with registration?`;
           
           {/* Close Button */}
           <button 
-            className="absolute top-5 right-5 z-99999 w-12 h-12 flex items-center justify-center cursor-pointer group"
+            className="absolute top-5 right-5 z-[99999] w-12 h-12 flex items-center justify-center cursor-pointer group"
             onClick={() => setShowPageMenu(false)}
           >
-            <div className="relative w-8 h-8">
-              <span className="absolute w-full h-1 bg-white transform rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
-              <span className="absolute w-full h-1 bg-white transform -rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
+            <div className="relative w-10 h-10">
+              <span className="absolute w-full h-1 bg-white rounded transform rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
+              <span className="absolute w-full h-1 bg-white rounded transform -rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
             </div>
           </button>
 
@@ -2482,10 +2584,10 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {culturalsCards.map((_: unknown, index: number) => (
+              {culturalsCards.map((_: any, index: number) => (
                 <button
                   key={index}
-                  className={`indoor-sports-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
+                  className={`culturals-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
                   onClick={() => setCurrentCulturalsSlide(index)}
                 />
               ))}
@@ -2837,39 +2939,102 @@ Do you want to proceed with registration?`;
               <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>×</button>
             </div>
             <div className="sports-details-navigation">
-              <button className="sports-nav-btn prev" onClick={prevSportsSlide}>◀</button>
-              <div className="sports-details-grid">
-                {Array.from({ length: 3 }).map((_, index) => {
-                  const cardIndex = (currentSportsSlide + index) % sportsDetailCards.length;
-                  const card = sportsDetailCards[cardIndex];
-                  const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
-                  return (
-                    <div 
-                      key={cardIndex} 
-                      className="sports-detail-card"
-                      onClick={isClickable ? () => {
-                        if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
-                          handleIndoorSportsClick(card.title);
-                        } else {
-                          handleEventDetailClick(card.title);
-                        }
-                      } : undefined}
-                      style={isClickable ? { cursor: 'pointer' } : {}}
-                    >
-                      <div className="sports-card-poster-background">
-                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+              <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
+              <div className="sports-carousel-3d-container">
+                <div className="sports-carousel-3d-wrapper">
+                  {sportsDetailCards.map((card, index) => {
+                    const isActive = index === currentSportsSlide;
+                    const offset = index - currentSportsSlide;
+                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
+                    
+                    let transform = '';
+                    let zIndex = 0;
+                    let opacity = 0;
+                    let filter = 'grayscale(100%) brightness(0.5)';
+                    
+                    if (offset === 0) {
+                      // Active card - center front (Glide style)
+                      transform = 'translateX(-50%) translateY(-50%) translateZ(0) rotateY(0deg) scale(1)';
+                      zIndex = 10;
+                      opacity = 1;
+                      filter = 'none';
+                    } else if (offset === 1 || offset === -sportsDetailCards.length + 1) {
+                      // Right card - horizontal slide with subtle depth
+                      transform = 'translateX(calc(-50% + 420px)) translateY(-50%) translateZ(-100px) rotateY(-12deg) scale(0.92)';
+                      zIndex = 8;
+                      opacity = 0.6;
+                      filter = 'brightness(0.7)';
+                    } else if (offset === -1 || offset === sportsDetailCards.length - 1) {
+                      // Left card - horizontal slide with subtle depth
+                      transform = 'translateX(calc(-50% - 420px)) translateY(-50%) translateZ(-100px) rotateY(12deg) scale(0.92)';
+                      zIndex = 8;
+                      opacity = 0.6;
+                      filter = 'brightness(0.7)';
+                    } else if (offset === 2 || offset === -sportsDetailCards.length + 2) {
+                      // Far right card - more receded
+                      transform = 'translateX(calc(-50% + 840px)) translateY(-50%) translateZ(-200px) rotateY(-18deg) scale(0.85)';
+                      zIndex = 6;
+                      opacity = 0.4;
+                      filter = 'brightness(0.5)';
+                    } else if (offset === -2 || offset === sportsDetailCards.length - 2) {
+                      // Far left card - more receded
+                      transform = 'translateX(calc(-50% - 840px)) translateY(-50%) translateZ(-200px) rotateY(18deg) scale(0.85)';
+                      zIndex = 6;
+                      opacity = 0.4;
+                      filter = 'brightness(0.5)';
+                    } else if (offset > 0) {
+                      // Far right hidden cards
+                      transform = 'translateX(calc(-50% + 1200px)) translateY(-50%) translateZ(-300px) rotateY(-25deg) scale(0.75)';
+                      zIndex = 2;
+                      opacity = 0.2;
+                      filter = 'brightness(0.3)';
+                    } else {
+                      // Far left hidden cards
+                      transform = 'translateX(calc(-50% - 1200px)) translateY(-50%) translateZ(-300px) rotateY(25deg) scale(0.75)';
+                      zIndex = 2;
+                      opacity = 0.2;
+                      filter = 'brightness(0.3)';
+                    }
+                    
+                    return (
+                      <div 
+                        key={index} 
+                        className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
+                        onClick={isClickable && isActive ? () => {
+                          if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
+                            handleIndoorSportsClick(card.title);
+                          } else {
+                            handleEventDetailClick(card.title);
+                          }
+                        } : !isActive ? () => setCurrentSportsSlide(index) : undefined}
+                        style={{
+                          transform,
+                          zIndex,
+                          opacity,
+                          filter,
+                          cursor: isActive && isClickable ? 'pointer' : 'pointer',
+                          position: 'absolute',
+                          left: '50%',
+                          top: '50%',
+                          marginLeft: '-100px',
+                          marginTop: '-150px'
+                        }}
+                      >
+                        <div className="sports-card-poster-background">
+                          <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+                        </div>
+                        <div className="sports-card-title-overlay">
+                          <h3>{card.title}</h3>
+                          {card.subtitle && (
+                            <h4>{card.subtitle}</h4>
+                          )}
+                        </div>
                       </div>
-                      <div className="sports-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && (
-                          <h4>{card.subtitle}</h4>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-              <button className="sports-nav-btn next" onClick={nextSportsSlide}>▶</button>
+              <button className="sports-nav-btn next" onClick={nextSportsSlide}></button>
             </div>
             <div className="sports-carousel-indicators">
               {sportsDetailCards.map((_, index) => (
@@ -3107,13 +3272,19 @@ Do you want to proceed with registration?`;
           <div className="theme-content">
             <h3 className="theme-name">Mahotsav 2026 - The Eternal Harmony</h3>
             <p className="theme-description">
-              This is not just a theme, but a beacon of hope, a leap towards peace in the larger society around us, inspired by the visionaries of world peace. The hope of an eternal harmony focuses on ideals built through the nourishment of the balance of all the interdependent elements that are crucial for the ecosystem to thrive.
+              This is not just a theme, but a beacon of hope, a leap towards peace in the larger society around us. It inspires the visionaries of world peace. The hope of an eternal harmony focuses on ideals built through the refinement of the balance of all the interdependence that are crucial for the ecosystem to thrive.
             </p>
             <p className="theme-description">
-              This fun revolution towards harmony includes festive vibes, fostering connections and fulfilment. Mahotsav 2026 is a step towards better understanding the words we take pride in saying, "sustainability", "diversity", "inclusivity", "reliability", and "solidarity".
+              This fun revolution towards harmony includes vibrant, fostering connections and fulfillment. Mahotsav 2026 is a step towards better understanding the way we take pride in saying, "sustainability", "diversity", "inclusivity", "reliability", and "solidarity".
             </p>
             <p className="theme-description">
               Mahotsav, in its nature, is an entertaining and engaging event, and this year the focus is on using the influence of youth towards the global future in various aspects of the eternal harmony. Mahotsav 2026 is all set to focus on fun and the future, internally, societally and globally!
+            </p>
+            <p className="theme-description">
+              Our vision encompasses not just technological advancement, but the holistic development of human consciousness towards creating a sustainable and harmonious world. We believe in the power of youth to drive meaningful change and create lasting impact through innovation, collaboration, and cultural exchange.
+            </p>
+            <p className="theme-description">
+              Join us in this transformative journey as we explore the intersection of tradition and modernity, science and spirituality, individual growth and collective responsibility. Together, we're not just organizing an event - we're cultivating a movement towards eternal harmony that will resonate far beyond the boundaries of our institution.
             </p>
           </div>
         </div>
@@ -3122,72 +3293,92 @@ Do you want to proceed with registration?`;
       {/* Highlights of 2025 Section */}
       <section className="dashboard-section highlights-section">
         <h2>Highlights of 2025</h2>
-        <div className="highlights-grid">
-          <div className="highlight-card">
-            <div className="highlight-image">
-              <div className="day-badge">Day ONE</div>
-              <div className="highlight-video">
-                <video 
-                  autoPlay
-                  controls
-                  loop 
-                  muted 
-                  playsInline
-                  preload="metadata"
-                  className="day-video"
-                >
-                  <source src={`${import.meta.env.BASE_URL}day 1.mp4`} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+        <div className="highlights-navigation">
+          <button className="highlights-nav-btn prev" onClick={prevHighlightSlide}></button>
+          <div className="highlights-carousel-3d-container">
+            <div className="highlights-carousel-3d-wrapper">
+              {highlightCards.map((card, index) => {
+                const isActive = index === currentHighlightSlide;
+                const offset = index - currentHighlightSlide;
+                
+                let transform = '';
+                let zIndex = 0;
+                let opacity = 0;
+                let filter = 'grayscale(100%) brightness(0.5)';
+                
+                if (offset === 0) {
+                  // Active card - center front
+                  transform = 'translateX(0) translateY(0) translateZ(300px) rotateY(0deg) scale(1.05)';
+                  zIndex = 10;
+                  opacity = 1;
+                  filter = 'none';
+                } else if (offset === 1 || offset === -highlightCards.length + 1) {
+                  // Right card - arc position
+                  transform = 'translateX(75%) translateY(15%) translateZ(-300px) rotateY(-45deg) scale(0.75)';
+                  zIndex = 5;
+                  opacity = 0.5;
+                  filter = 'brightness(0.3)';
+                } else if (offset === -1 || offset === highlightCards.length - 1) {
+                  // Left card - arc position
+                  transform = 'translateX(-75%) translateY(15%) translateZ(-300px) rotateY(45deg) scale(0.75)';
+                  zIndex = 5;
+                  opacity = 0.5;
+                  filter = 'brightness(0.3)';
+                } else {
+                  // Hidden cards
+                  transform = 'translateX(0) translateZ(-600px) scale(0.5)';
+                  zIndex = 1;
+                  opacity = 0;
+                  filter = 'grayscale(100%) brightness(0.5)';
+                }
+                
+                return (
+                  <div 
+                    key={index}
+                    className={`highlight-card-3d ${isActive ? 'active' : ''}`}
+                    onClick={() => setCurrentHighlightSlide(index)}
+                    style={{
+                      transform,
+                      zIndex,
+                      opacity,
+                      filter,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <div className="highlight-image">
+                      <div className="day-badge">{card.day}</div>
+                      <div className="highlight-video">
+                        <video 
+                          autoPlay={isActive}
+                          controls
+                          loop 
+                          muted 
+                          playsInline
+                          preload="metadata"
+                          className="day-video"
+                        >
+                          <source src={`${import.meta.env.BASE_URL}${card.video}`} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <h3>{card.title}</h3>
+                    <p>{card.description}</p>
+                  </div>
+                );
+              })}
             </div>
-            <h3>Exciting Day One Highlights</h3>
-            <p>Cultural performances, inauguration ceremony, and opening events that set the stage for an amazing festival.</p>
           </div>
-          
-          <div className="highlight-card">
-            <div className="highlight-image">
-              <div className="day-badge">Day TWO</div>
-              <div className="highlight-video">
-                <video 
-                  autoPlay
-                  controls
-                  loop 
-                  muted 
-                  playsInline
-                  preload="metadata"
-                  className="day-video"
-                >
-                  <source src={`${import.meta.env.BASE_URL}day 2.mp4`} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-            <h3>Exciting Day Two Highlights</h3>
-            <p>Main events, competitions, technical exhibitions, and spectacular performances by renowned artists.</p>
-          </div>
-          
-          <div className="highlight-card">
-            <div className="highlight-image">
-              <div className="day-badge">Day THREE</div>
-              <div className="highlight-video">
-                <video 
-                  autoPlay
-                  controls
-                  loop 
-                  muted 
-                  playsInline
-                  preload="metadata"
-                  className="day-video"
-                >
-                  <source src={`${import.meta.env.BASE_URL}day 3.mp4`} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-            <h3>Exciting Day Three Highlights</h3>
-            <p>Grand finale, award ceremonies, closing performances, and memorable moments to conclude the festival.</p>
-          </div>
+          <button className="highlights-nav-btn next" onClick={nextHighlightSlide}></button>
+        </div>
+        <div className="highlights-carousel-indicators">
+          {highlightCards.map((_, index) => (
+            <button
+              key={index}
+              className={`highlights-indicator ${index === currentHighlightSlide ? 'active' : ''}`}
+              onClick={() => setCurrentHighlightSlide(index)}
+            />
+          ))}
         </div>
       </section>
 

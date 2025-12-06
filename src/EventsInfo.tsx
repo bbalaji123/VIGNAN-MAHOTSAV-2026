@@ -391,43 +391,90 @@ const EventsInfo: React.FC = () => {
           {showSportsDetails && (
             <section className="inline-sports-details-section">
               <div className="inline-sports-details-container">
-                <div className="inline-sports-details-header">
-                  <div className="sports-header-left">
-                    <button className="sports-back-btn" onClick={() => setShowSportsDetails(false)}>
+                <div className="inline-indoor-sports-header">
+                  <div className="indoor-sports-header-left">
+                    <button className="indoor-sports-back-btn" onClick={() => setShowSportsDetails(false)}>
                       ← Back
                     </button>
                     <h2>SPORTS CATEGORIES</h2>
                   </div>
-                  <button className="inline-sports-details-close-btn" onClick={() => setShowSportsDetails(false)}>×</button>
+                  <button className="inline-indoor-sports-close-btn" onClick={() => setShowSportsDetails(false)}>×</button>
                 </div>
                 <div className="sports-details-navigation">
                   <button className="sports-nav-btn prev" onClick={prevSportsSlide}>◀</button>
-                  <div className="sports-details-grid">
-                    {Array.from({ length: Math.min(3, sportsDetailCards.length) }).map((_, index) => {
-                      const cardIndex = (currentSportsSlide + index) % sportsDetailCards.length;
-                      const card = sportsDetailCards[cardIndex];
-                      const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
-                                         card.title === "Men's Individual &" || 
-                                         card.title === "Women's Individual &" || 
-                                         card.title === "Men's Team Field Sports" || 
-                                         card.title === "Women's Team Field";
-                      return (
-                        <div 
-                          key={cardIndex} 
-                          className="sports-detail-card" 
-                          onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
-                          style={isClickable ? { cursor: 'pointer' } : {}}
-                        >
-                          <div className="sports-card-poster-background">
-                            <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+                  <div className="sports-carousel-3d-container">
+                    <div className="sports-carousel-3d-wrapper">
+                      {sportsDetailCards.map((card, index) => {
+                        const isActive = index === currentSportsSlide;
+                        const offset = index - currentSportsSlide;
+                        const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
+                                           card.title === "Men's Individual &" || 
+                                           card.title === "Women's Individual &" || 
+                                           card.title === "Men's Team Field Sports" || 
+                                           card.title === "Women's Team Field";
+                        
+                        let transform = '';
+                        let zIndex = 0;
+                        let opacity = 0;
+                        let filter = 'grayscale(100%) brightness(0.5)';
+                        
+                        // Netflix-style semicircle positioning
+                        const angle = offset * 25; // 25 degrees between cards
+                        const radius = 280; // Arc radius
+                        
+                        if (offset === 0) {
+                          // Center card - prominent and forward
+                          transform = `translateX(0) translateY(0) translateZ(100px) rotateY(0deg) scale(1.1)`;
+                          zIndex = 10;
+                          opacity = 1;
+                          filter = 'brightness(1) saturate(1.2)';
+                        } else {
+                          // Calculate arc position
+                          const x = Math.sin(angle * Math.PI / 180) * radius;
+                          const z = (Math.cos(angle * Math.PI / 180) - 1) * radius;
+                          const y = Math.abs(offset) * 10; // Slight vertical offset
+                          const rotY = -angle * 0.8; // Rotate towards center
+                          const scale = Math.max(0.6, 1 - Math.abs(offset) * 0.15);
+                          
+                          transform = `translateX(${x}px) translateY(${y}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+                          zIndex = Math.max(1, 10 - Math.abs(offset));
+                          opacity = Math.max(0.3, 1 - Math.abs(offset) * 0.2);
+                          
+                          // Fade and desaturate distant cards
+                          const brightness = Math.max(0.4, 1 - Math.abs(offset) * 0.2);
+                          const saturate = Math.max(0.3, 1 - Math.abs(offset) * 0.3);
+                          filter = `brightness(${brightness}) saturate(${saturate})`;
+                        }
+                        
+                        return (
+                          <div 
+                            key={index} 
+                            className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
+                            onClick={isClickable && isActive ? () => handleEventDetailClick(card.title) : !isActive ? () => setCurrentSportsSlide(index) : undefined}
+                            style={{
+                              transform,
+                              zIndex,
+                              opacity,
+                              filter,
+                              cursor: isActive && isClickable ? 'pointer' : 'pointer',
+                              position: 'absolute',
+                              left: '50%',
+                              top: '50%',
+                              marginLeft: '-100px',
+                              marginTop: '-140px'
+                            }}
+                          >
+                            <div className="sports-card-poster-background">
+                              <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+                            </div>
+                            <div className="sports-card-title-overlay">
+                              <h3>{card.title}</h3>
+                              {card.subtitle && <h4>{card.subtitle}</h4>}
+                            </div>
                           </div>
-                          <div className="sports-card-title-overlay">
-                            <h3>{card.title}</h3>
-                            {card.subtitle && <h4>{card.subtitle}</h4>}
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                   <button className="sports-nav-btn next" onClick={nextSportsSlide}>▶</button>
                 </div>
@@ -481,32 +528,84 @@ const EventsInfo: React.FC = () => {
                   </div>
                   <button className="inline-indoor-sports-close-btn" onClick={() => setShowCulturals(false)}>×</button>
                 </div>
-                <div className="indoor-sports-navigation">
-                  <button className="indoor-sports-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
-                  <div className="indoor-sports-grid">
-                    {Array.from({ length: Math.min(3, culturalsCards.length) }).map((_, index) => {
-                      const cardIndex = (currentCulturalsSlide + index) % culturalsCards.length;
-                      const card = culturalsCards[cardIndex];
-                      return (
-                        <div key={cardIndex} className="indoor-sport-card" style={{ cursor: 'pointer' }}>
-                          <div className="indoor-sport-card-poster-background">
-                            <span className="indoor-sport-poster-placeholder-text">CULTURAL POSTER</span>
+                <div className="culturals-navigation">
+                  <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+                  <div className="culturals-carousel-3d-container">
+                    <div className="culturals-carousel-3d-wrapper">
+                      {culturalsCards.map((card, index) => {
+                        const isActive = index === currentCulturalsSlide;
+                        const offset = index - currentCulturalsSlide;
+                        
+                        let transform = '';
+                        let zIndex = 0;
+                        let opacity = 0;
+                        let filter = 'grayscale(100%) brightness(0.5)';
+                        
+                        // Netflix-style semicircle positioning
+                        const angle = offset * 25; // 25 degrees between cards
+                        const radius = 280; // Arc radius
+                        
+                        if (offset === 0) {
+                          // Center card - prominent and forward
+                          transform = `translateX(0) translateY(0) translateZ(100px) rotateY(0deg) scale(1.1)`;
+                          zIndex = 10;
+                          opacity = 1;
+                          filter = 'brightness(1) saturate(1.2)';
+                        } else {
+                          // Calculate arc position
+                          const x = Math.sin(angle * Math.PI / 180) * radius;
+                          const z = (Math.cos(angle * Math.PI / 180) - 1) * radius;
+                          const y = Math.abs(offset) * 10; // Slight vertical offset
+                          const rotY = -angle * 0.8; // Rotate towards center
+                          const scale = Math.max(0.6, 1 - Math.abs(offset) * 0.15);
+                          
+                          transform = `translateX(${x}px) translateY(${y}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+                          zIndex = Math.max(1, 10 - Math.abs(offset));
+                          opacity = Math.max(0.3, 1 - Math.abs(offset) * 0.2);
+                          
+                          // Fade and desaturate distant cards
+                          const brightness = Math.max(0.4, 1 - Math.abs(offset) * 0.2);
+                          const saturate = Math.max(0.3, 1 - Math.abs(offset) * 0.3);
+                          filter = `brightness(${brightness}) saturate(${saturate})`;
+                        }
+                        
+                        return (
+                          <div 
+                            key={index} 
+                            className={`cultural-card-3d ${isActive ? 'active' : ''}`}
+                            onClick={isActive ? undefined : () => setCurrentCulturalsSlide(index)}
+                            style={{
+                              transform,
+                              zIndex,
+                              opacity,
+                              filter,
+                              cursor: 'pointer',
+                              position: 'absolute',
+                              left: '50%',
+                              top: '50%',
+                              marginLeft: '-100px',
+                              marginTop: '-140px'
+                            }}
+                          >
+                            <div className="cultural-card-poster-background">
+                              <span className="cultural-poster-placeholder-text">CULTURAL POSTER</span>
+                            </div>
+                            <div className="cultural-card-title-overlay">
+                              <h3>{card.title}</h3>
+                              {card.subtitle && <h4>{card.subtitle}</h4>}
+                            </div>
                           </div>
-                          <div className="indoor-sport-card-title-overlay">
-                            <h3>{card.title}</h3>
-                            {card.subtitle && <h4>{card.subtitle}</h4>}
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                  <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
+                  <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
                 </div>
-                <div className="indoor-sports-carousel-indicators">
+                <div className="culturals-carousel-indicators">
                   {culturalsCards.map((_, index) => (
                     <button
                       key={index}
-                      className={`indoor-sports-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
+                      className={`culturals-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
                       onClick={() => setCurrentCulturalsSlide(index)}
                     />
                   ))}

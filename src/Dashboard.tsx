@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
@@ -10,6 +10,7 @@ import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents,
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPageMenu, setShowPageMenu] = useState(false);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
@@ -741,6 +742,15 @@ const Dashboard: React.FC = () => {
   const paraAthleticsMenCards = paraSportsCards;
   const paraCricketMenCards = paraSportsCards;
 
+  // Check if coming from Campus Ambassador with login request
+  useEffect(() => {
+    if (location.state?.openLogin) {
+      setShowLoginModal(true);
+      // Clear the state to prevent reopening on subsequent visits
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
+
   // Time-based theme detection
   useEffect(() => {
     const updateTimeTheme = () => {
@@ -773,7 +783,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   // Function to fetch events from API
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     console.log('🔄 Fetching events from API...');
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
     console.log('👤 User gender for filtering:', userGender);
@@ -828,12 +838,12 @@ const Dashboard: React.FC = () => {
         setLoadingEvents(false);
         console.log('✅ Finished loading events');
       }
-  };
+  }, [isLoggedIn, userProfileData.gender]);
 
   // Fetch events on component mount
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [fetchEvents]);
 
   // Refetch events when user login status or gender changes
   useEffect(() => {
@@ -841,7 +851,7 @@ const Dashboard: React.FC = () => {
       console.log('🔄 User gender detected, refetching events for:', userProfileData.gender);
       fetchEvents();
     }
-  }, [isLoggedIn, userProfileData.gender]);
+  }, [isLoggedIn, userProfileData.gender, fetchEvents]);
 
   const handlePageMenuToggle = () => {
     setShowPageMenu(!showPageMenu);
@@ -1311,7 +1321,8 @@ const Dashboard: React.FC = () => {
           text: result.message || 'Registration failed. Please try again.'
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error('Registration error:', error);
       setSubmitMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1386,7 +1397,8 @@ const Dashboard: React.FC = () => {
           text: result.message || 'Failed to send recovery email. Please try again.'
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error('Password reset error:', error);
       setResetMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1970,7 +1982,7 @@ Do you want to proceed with registration?`;
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-[99998]" 
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-99998" 
           style={{
             backgroundImage: 'url("/Background-redesign.png")',
             backgroundSize: 'cover',
@@ -2039,7 +2051,7 @@ Do you want to proceed with registration?`;
           
           {/* Close Button */}
           <button 
-            className="absolute top-5 left-5 z-[99999] w-16 h-16 md:w-14 md:h-14 flex items-center justify-center cursor-pointer group bg-white/15 backdrop-blur-md rounded-xl hover:bg-white/25 transition-all hover:scale-110"
+            className="absolute top-5 right-5 z-[99999] w-12 h-12 flex items-center justify-center cursor-pointer group"
             onClick={() => setShowPageMenu(false)}
           >
             <div className="relative w-10 h-10">
@@ -2132,7 +2144,10 @@ Do you want to proceed with registration?`;
               {/* SCHEDULE */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/schedule');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2156,7 +2171,10 @@ Do you want to proceed with registration?`;
               {/* COLLABORATION */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/collaboration');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2180,7 +2198,10 @@ Do you want to proceed with registration?`;
               {/* ZONALS */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/zonals');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2204,7 +2225,10 @@ Do you want to proceed with registration?`;
               {/* PARA SPORTS */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowParaSports(true); setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/para-sports');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2228,7 +2252,10 @@ Do you want to proceed with registration?`;
               {/* HOSPITALITY */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { handleCardClick('ABOUT US'); setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/hospitality');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2252,7 +2279,7 @@ Do you want to proceed with registration?`;
               {/* CAMPUS AMBASSADOR */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2276,7 +2303,10 @@ Do you want to proceed with registration?`;
               {/* SPONSORS */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/sponsors');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2300,7 +2330,10 @@ Do you want to proceed with registration?`;
               {/* OUR TEAM */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/our-team');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2324,7 +2357,10 @@ Do you want to proceed with registration?`;
               {/* MAP */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
-                onClick={() => { setShowPageMenu(false); }}
+                onClick={() => { 
+                  navigate('/campus-map');
+                  setShowPageMenu(false); 
+                }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2443,7 +2479,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {paraAthleticsMenCards.map((_: any, index: number) => (
+              {paraAthleticsMenCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentParaAthleticsSlide ? 'active' : ''}`}
@@ -2495,7 +2531,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {paraCricketMenCards.map((_: any, index: number) => (
+              {paraCricketMenCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentParaCricketSlide ? 'active' : ''}`}
@@ -2520,93 +2556,34 @@ Do you want to proceed with registration?`;
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>×</button>
             </div>
-            <div className="culturals-navigation">
-              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}></button>
-              <div className="culturals-carousel-3d-container">
-                <div className="culturals-carousel-3d-wrapper">
-                  {culturalsCards.map((card, index) => {
-                    const isActive = index === currentCulturalsSlide;
-                    const offset = index - currentCulturalsSlide;
-                    
-                    let transform = '';
-                    let zIndex = 0;
-                    let opacity = 0;
-                    let filter = 'grayscale(100%) brightness(0.5)';
-                    
-                    if (offset === 0) {
-                      // Active card - center front (Glide style)
-                      transform = 'translateX(0) translateY(0) translateZ(0) rotateY(0deg) scale(1)';
-                      zIndex = 10;
-                      opacity = 1;
-                      filter = 'none';
-                    } else if (offset === 1 || offset === -culturalsCards.length + 1) {
-                      // Right card - horizontal slide with subtle depth
-                      transform = 'translateX(420px) translateY(0) translateZ(-100px) rotateY(-12deg) scale(0.92)';
-                      zIndex = 8;
-                      opacity = 0.6;
-                      filter = 'brightness(0.7)';
-                    } else if (offset === -1 || offset === culturalsCards.length - 1) {
-                      // Left card - horizontal slide with subtle depth
-                      transform = 'translateX(-420px) translateY(0) translateZ(-100px) rotateY(12deg) scale(0.92)';
-                      zIndex = 8;
-                      opacity = 0.6;
-                      filter = 'brightness(0.7)';
-                    } else if (offset === 2 || offset === -culturalsCards.length + 2) {
-                      // Far right card - more receded
-                      transform = 'translateX(840px) translateY(0) translateZ(-200px) rotateY(-18deg) scale(0.85)';
-                      zIndex = 6;
-                      opacity = 0.4;
-                      filter = 'brightness(0.5)';
-                    } else if (offset === -2 || offset === culturalsCards.length - 2) {
-                      // Far left card - more receded
-                      transform = 'translateX(-840px) translateY(0) translateZ(-200px) rotateY(18deg) scale(0.85)';
-                      zIndex = 6;
-                      opacity = 0.4;
-                      filter = 'brightness(0.5)';
-                    } else if (offset > 0) {
-                      // Far right hidden cards
-                      transform = 'translateX(1200px) translateY(0) translateZ(-300px) rotateY(-25deg) scale(0.75)';
-                      zIndex = 2;
-                      opacity = 0.2;
-                      filter = 'brightness(0.3)';
-                    } else {
-                      // Far left hidden cards
-                      transform = 'translateX(-1200px) translateY(0) translateZ(-300px) rotateY(25deg) scale(0.75)';
-                      zIndex = 2;
-                      opacity = 0.2;
-                      filter = 'brightness(0.3)';
-                    }
-                    
-                    return (
-                      <div 
-                        key={index} 
-                        className={`cultural-card-3d ${isActive ? 'active' : ''}`}
-                        onClick={isActive ? () => handleCulturalsClick(card.title) : () => setCurrentCulturalsSlide(index)}
-                        style={{
-                          transform,
-                          zIndex,
-                          opacity,
-                          filter,
-                          cursor: 'pointer'
-                        }}
-                      >
-                        <div className="cultural-card-poster-background">
-                          <span className="cultural-poster-placeholder-text">CULTURAL POSTER</span>
-                        </div>
-                        <div className="cultural-card-title-overlay">
-                          <h3>{card.title}</h3>
-                          {card.subtitle && (
-                            <h4>{card.subtitle}</h4>
-                          )}
-                        </div>
+            <div className="indoor-sports-navigation">
+              <button className="indoor-sports-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+              <div className="indoor-sports-grid">
+                {Array.from({ length: Math.min(3, culturalsCards.length) }).map((_, index) => {
+                  const cardIndex = (currentCulturalsSlide + index) % culturalsCards.length;
+                  const card = culturalsCards[cardIndex];
+                  return (
+                    <div 
+                      key={cardIndex} 
+                      className="indoor-sport-card"
+                      onClick={() => handleCulturalsClick(card.title)}
+                    >
+                      <div className="indoor-sport-card-poster-background">
+                        <span className="indoor-sport-poster-placeholder-text">CULTURAL POSTER</span>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div className="indoor-sport-card-title-overlay">
+                        <h3>{card.title}</h3>
+                        {card.subtitle && (
+                          <h4>{card.subtitle}</h4>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}></button>
+              <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
             </div>
-            <div className="culturals-carousel-indicators">
+            <div className="indoor-sports-carousel-indicators">
               {culturalsCards.map((_: any, index: number) => (
                 <button
                   key={index}
@@ -2654,7 +2631,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {musicCards.map((_: any, index: number) => (
+              {musicCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentMusicSlide ? 'active' : ''}`}
@@ -2701,7 +2678,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {danceCards.map((_: any, index: number) => (
+              {danceCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentDanceSlide ? 'active' : ''}`}
@@ -2748,7 +2725,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {theatreCards.map((_: any, index: number) => (
+              {theatreCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentTheatreSlide ? 'active' : ''}`}
@@ -2795,7 +2772,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {literatureCards.map((_: any, index: number) => (
+              {literatureCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentLiteratureSlide ? 'active' : ''}`}
@@ -2842,7 +2819,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {visualArtsCards.map((_: any, index: number) => (
+              {visualArtsCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentVisualArtsSlide ? 'active' : ''}`}
@@ -2889,7 +2866,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {fashionDesignCards.map((_: any, index: number) => (
+              {fashionDesignCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentFashionDesignSlide ? 'active' : ''}`}
@@ -2936,7 +2913,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {spotLightCards.map((_: any, index: number) => (
+              {spotLightCards.map((_: unknown, index: number) => (
                 <button
                   key={index}
                   className={`indoor-sports-indicator ${index === currentSpotLightSlide ? 'active' : ''}`}

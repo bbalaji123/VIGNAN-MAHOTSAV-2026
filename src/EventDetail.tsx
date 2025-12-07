@@ -208,9 +208,10 @@ const EventDetail: React.FC = () => {
           <h2 className="text-4xl mb-8">Event Not Found</h2>
           <button 
             onClick={() => navigate(-1)} 
-            className="bg-black/80 text-white border-none py-4 px-8 rounded-full text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="circular-back-button"
+            aria-label="Go back"
+            style={{ position: 'relative' }}
           >
-            Go Back
           </button>
         </div>
       </div>
@@ -557,11 +558,11 @@ const EventDetail: React.FC = () => {
           <div className="max-w-7xl w-full mx-auto px-4">
             {/* Back Button */}
             <button 
-              className="bg-white/10 border-2 border-white/30 text-white text-base font-medium py-2.5 px-5 rounded-[25px] cursor-pointer flex items-center gap-2 transition-all duration-300 hover:bg-white/20 hover:border-white/50 hover:-translate-x-1 mb-8"
+              className="circular-back-button"
               onClick={() => navigate(-1)}
+              aria-label="Go back"
+              style={{ position: 'relative', marginBottom: '2rem' }}
             >
-              <span>←</span>
-              <span>Back</span>
             </button>
 
             {/* Event Title Section */}

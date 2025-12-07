@@ -24,8 +24,8 @@ const CampusAmbassador: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed top-0 right-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
@@ -52,8 +52,8 @@ const CampusAmbassador: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed bottom-0 left-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
@@ -263,16 +263,12 @@ const CampusAmbassador: React.FC = () => {
       </style>
 
       {/* Back to Dashboard Button */}
-      <div className="fixed top-4 left-4 z-50">
-        <button 
-          onClick={handleBackToDashboard}
-          className="flex items-center gap-2 text-white hover:text-yellow-300 transition-colors duration-300 bg-black/40 rounded-lg px-4 py-2"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-      </div>
+      <button 
+        onClick={handleBackToDashboard}
+        className="circular-back-button"
+        aria-label="Go back"
+      >
+      </button>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center min-h-screen py-20">

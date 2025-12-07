@@ -4,7 +4,6 @@ import './Dashboard.css';
 import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
 import FloatingBubble from './FloatingBubble';
-import FloatingIcons from './FloatingIcons';
 import EventRegistrationModal from './EventRegistrationModal';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
@@ -863,13 +862,13 @@ const Dashboard: React.FC = () => {
 
 
 
-  const nextSportsSlide = () => {
+  const nextSportsSlide = useCallback(() => {
     setCurrentSportsSlide((prev) => (prev + 1) % sportsDetailCards.length);
-  };
+  }, [sportsDetailCards.length]);
 
-  const prevSportsSlide = () => {
+  const prevSportsSlide = useCallback(() => {
     setCurrentSportsSlide((prev) => (prev - 1 + sportsDetailCards.length) % sportsDetailCards.length);
-  };
+  }, [sportsDetailCards.length]);
 
   // Keyboard navigation for sports carousel
   React.useEffect(() => {
@@ -885,7 +884,7 @@ const Dashboard: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showSportsDetails]);
+  }, [showSportsDetails, nextSportsSlide, prevSportsSlide]);
   
   const nextHighlightSlide = () => {
     setCurrentHighlightSlide((prev) => (prev + 1) % highlightCards.length);
@@ -893,6 +892,56 @@ const Dashboard: React.FC = () => {
 
   const prevHighlightSlide = () => {
     setCurrentHighlightSlide((prev) => (prev - 1 + highlightCards.length) % highlightCards.length);
+  };
+
+  // Touch swipe handling for highlights carousel
+  const [highlightTouchStart, setHighlightTouchStart] = useState<number | null>(null);
+  const [highlightTouchEnd, setHighlightTouchEnd] = useState<number | null>(null);
+
+  const handleHighlightTouchStart = (e: React.TouchEvent) => {
+    setHighlightTouchEnd(null);
+    setHighlightTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleHighlightTouchMove = (e: React.TouchEvent) => {
+    setHighlightTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleHighlightTouchEnd = () => {
+    if (!highlightTouchStart || !highlightTouchEnd) return;
+    const distance = highlightTouchStart - highlightTouchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    if (isLeftSwipe) {
+      nextHighlightSlide();
+    } else if (isRightSwipe) {
+      prevHighlightSlide();
+    }
+  };
+
+  // Touch swipe handling for sports carousel
+  const [sportsTouchStart, setSportsTouchStart] = useState<number | null>(null);
+  const [sportsTouchEnd, setSportsTouchEnd] = useState<number | null>(null);
+
+  const handleSportsTouchStart = (e: React.TouchEvent) => {
+    setSportsTouchEnd(null);
+    setSportsTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleSportsTouchMove = (e: React.TouchEvent) => {
+    setSportsTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleSportsTouchEnd = () => {
+    if (!sportsTouchStart || !sportsTouchEnd) return;
+    const distance = sportsTouchStart - sportsTouchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    if (isLeftSwipe) {
+      nextSportsSlide();
+    } else if (isRightSwipe) {
+      prevSportsSlide();
+    }
   };
 
   const nextIndoorSlide = () => {
@@ -951,13 +1000,13 @@ const Dashboard: React.FC = () => {
     setCurrentParaCricketSlide((prev: number) => (prev - 1 + paraCricketMenCards.length) % paraCricketMenCards.length);
   };
 
-  const nextCulturalsSlide = () => {
+  const nextCulturalsSlide = useCallback(() => {
     setCurrentCulturalsSlide((prev: number) => (prev + 1) % culturalsCards.length);
-  };
+  }, [culturalsCards.length]);
 
-  const prevCulturalsSlide = () => {
+  const prevCulturalsSlide = useCallback(() => {
     setCurrentCulturalsSlide((prev: number) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
-  };
+  }, [culturalsCards.length]);
 
   // Keyboard navigation for culturals carousel
   React.useEffect(() => {
@@ -973,7 +1022,7 @@ const Dashboard: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showCulturals]);
+  }, [showCulturals, nextCulturalsSlide, prevCulturalsSlide]);
 
   const nextMusicSlide = () => {
     setCurrentMusicSlide((prev: number) => (prev + 1) % musicCards.length);
@@ -1990,8 +2039,8 @@ Do you want to proceed with registration?`;
             backgroundAttachment: 'fixed'
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed top-0 right-0 z-10 pointer-events-none flower-container-mobile" style={{ width: '600px', height: '600px', overflow: 'hidden' }}>
-            <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite', transformOrigin: 'center center' }}>
+          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
                 src={`${import.meta.env.BASE_URL}petals.png`}
@@ -2020,8 +2069,8 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed bottom-0 left-0 z-10 pointer-events-none flower-container-mobile" style={{ width: '600px', height: '600px', overflow: 'hidden' }}>
-            <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite', transformOrigin: 'center center' }}>
+          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
                 src={`${import.meta.env.BASE_URL}petals.png`}
@@ -2049,15 +2098,13 @@ Do you want to proceed with registration?`;
             </div>
           </div>
           
-          {/* Close Button */}
+          {/* Back Button */}
           <button 
-            className="absolute top-5 right-5 z-[99999] w-12 h-12 flex items-center justify-center cursor-pointer group"
+            className="circular-back-button"
             onClick={() => setShowPageMenu(false)}
+            aria-label="Go back"
+            style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', zIndex: 99999 }}
           >
-            <div className="relative w-10 h-10">
-              <span className="absolute w-full h-1 bg-white rounded transform rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
-              <span className="absolute w-full h-1 bg-white rounded transform -rotate-45 top-1/2 left-0 transition-all group-hover:bg-yellow-400"></span>
-            </div>
           </button>
 
           {/* Menu Title */}
@@ -2584,7 +2631,7 @@ Do you want to proceed with registration?`;
               <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
-              {culturalsCards.map((_: any, index: number) => (
+              {culturalsCards.map((_: typeof culturalsCards[0], index: number) => (
                 <button
                   key={index}
                   className={`culturals-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
@@ -2931,16 +2978,19 @@ Do you want to proceed with registration?`;
           <div className="inline-sports-details-container">
             <div className="inline-sports-details-header">
               <div className="sports-header-left">
-                <button className="sports-back-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>
-                  ← Back
-                </button>
+                <button className="circular-back-button" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}></button>
                 <h2>SPORTS CATEGORIES</h2>
               </div>
               <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>×</button>
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
-              <div className="sports-carousel-3d-container">
+              <div 
+                className="sports-carousel-3d-container"
+                onTouchStart={handleSportsTouchStart}
+                onTouchMove={handleSportsTouchMove}
+                onTouchEnd={handleSportsTouchEnd}
+              >
                 <div className="sports-carousel-3d-wrapper">
                   {sportsDetailCards.map((card, index) => {
                     const isActive = index === currentSportsSlide;
@@ -3295,7 +3345,12 @@ Do you want to proceed with registration?`;
         <h2>Highlights of 2025</h2>
         <div className="highlights-navigation">
           <button className="highlights-nav-btn prev" onClick={prevHighlightSlide}></button>
-          <div className="highlights-carousel-3d-container">
+          <div 
+            className="highlights-carousel-3d-container"
+            onTouchStart={handleHighlightTouchStart}
+            onTouchMove={handleHighlightTouchMove}
+            onTouchEnd={handleHighlightTouchEnd}
+          >
             <div className="highlights-carousel-3d-wrapper">
               {highlightCards.map((card, index) => {
                 const isActive = index === currentHighlightSlide;
@@ -3400,34 +3455,26 @@ Do you want to proceed with registration?`;
         {/* Footer Content */}
         <div className="footer-content">
           {/* Logo Section */}
-          <div className="footer-logo">
+          <div className="footer-logo-section">
             <div className="footer-vignan-logo">
               <img src={`${import.meta.env.BASE_URL}log.png`} alt="Vignan Logo" className="college-logo" />
             </div>
+            <h2 className="footer-vignan-title">VIGNAN'S</h2>
+            <p className="footer-vignan-subtitle">FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH</p>
+            <p className="footer-deemed-text">(Deemed to be University) - Estd. u/s 3 of UGC Act 1956</p>
           </div>
           
-          {/* Quick Links */}
-          <div className="footer-section">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#fest-guide">Fest Guide</a></li>
-              <li><a href="#schedule">Schedule</a></li>
-              <li><a href="#events">A</a></li>
-              <li><a href="#registration">B</a></li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div className="footer-section">
-            <h4>Contact</h4>
-            <p>+91 99999 99999 | +91 99999 99999</p>
-            <p>Email: <a href="mailto:mahotsav@vignan.ac.in">mahotsav@vignan.ac.in</a></p>
+          {/* Contact Section */}
+          <div className="footer-contact-section">
+            <p className="footer-contact-label">Contact us:</p>
+            <p className="footer-contact-numbers">+91 94930 33592 | +91 90305 57363</p>
+            <p className="footer-email-label">Email: <a href="mailto:mahotsav@vignan.ac.in">mahotsav@vignan.ac.in</a></p>
+            <p className="footer-website-label">Website: <a href="https://vignan.ac.in/mahotsav" target="_blank" rel="noopener noreferrer">vignan.ac.in/mahotsav</a></p>
           </div>
           
           {/* Social Media */}
-          <div className="footer-section">
-            <h4>Social Media</h4>
-            <p>Follow Us on</p>
+          <div className="footer-social-section">
+            <p className="footer-social-label">Follow us on:</p>
             <div className="social-icons">
               <a href="#" className="social-icon instagram">
                 <img src={`${import.meta.env.BASE_URL}ins.png`} alt="Instagram" />

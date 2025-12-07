@@ -26,8 +26,8 @@ const Schedule: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed top-0 right-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
@@ -54,8 +54,8 @@ const Schedule: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed bottom-0 left-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
@@ -565,8 +565,7 @@ const Schedule: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <button onClick={handleBackClick} className="back-button">
-        ←
+      <button onClick={handleBackClick} className="circular-back-button" aria-label="Go back">
       </button>
 
       {/* Main Content */}

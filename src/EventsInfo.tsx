@@ -21,12 +21,6 @@ const EventsInfo: React.FC = () => {
   const [culturalEvents, setCulturalEvents] = useState<Event[]>([]);
   const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
 
-  const eventInfoCards = [
-    { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
-    { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
-    { title: "PARA SPORTS", description: "Inclusive para sports events designed for participants with special abilities." }
-  ];
-
   const sportsDetailCards = [
     { title: "Men's Athletics", subtitle: "Track & Field" },
     { title: "Women's Athletics", subtitle: "Track & Field" },
@@ -163,8 +157,8 @@ const EventsInfo: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed top-0 right-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
@@ -194,8 +188,8 @@ const EventsInfo: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed bottom-0 left-0 z-10 pointer-events-none flower-container-mobile">
-        <div className="flower-inner" style={{ animation: 'petalsRotateAnticlockwise 20s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}

@@ -63,6 +63,15 @@
   }
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Animated Icon Component */
 .animated-icon-container {
   position: fixed;
@@ -2430,8 +2439,6 @@
   width: 120px;
   height: 120px;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
   padding: 10px;
 }
 
@@ -2608,24 +2615,122 @@
 
 /* Footer Mobile Responsive */
 @media (max-width: 768px) {
+  .dashboard-footer {
+    padding: 40px 20px 30px;
+  }
+  
   .footer-content {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 30px;
   }
   
-  .footer-lotus {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .accreditation-logos {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  .footer-logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
   }
   
-  .accreditation-logo {
-    padding: 10px 5px;
+  .footer-vignan-logo {
+    margin-bottom: 15px;
+  }
+  
+  .college-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .footer-vignan-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 2px;
+    font-family: 'Baloo 2', cursive;
+  }
+  
+  .footer-vignan-subtitle {
+    color: white;
+    font-size: 0.75rem;
+    margin: 5px 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+  
+  .footer-deemed-text {
+    color: white;
+    background: rgba(30, 144, 255, 0.8);
+    padding: 8px 20px;
+    border-radius: 5px;
     font-size: 0.7rem;
+    margin: 10px 0;
+  }
+  
+  .footer-contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footer-contact-label,
+  .footer-email-label,
+  .footer-website-label {
+    color: white;
+    font-size: 0.95rem;
+    margin: 5px 0;
+  }
+  
+  .footer-contact-numbers {
+    color: white;
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .footer-contact-section a {
+    color: #4da6ff;
+    text-decoration: none;
+  }
+  
+  .footer-contact-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-social-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .footer-social-label {
+    color: white;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .social-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-icon img:hover {
+    transform: scale(1.1);
+  }
+  
+  .footer-lotus {
+    display: none;
   }
 }
 
@@ -3517,6 +3622,7 @@
   font-weight: bold;
   margin: 0;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Baloo 2', cursive;
 }
 
 .inline-sports-details-close-btn {
@@ -4091,9 +4197,7 @@
   
   .sports-nav-btn,
   .culturals-nav-btn {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
+    display: none !important;
   }
   
   .sports-details-navigation .sports-carousel-3d-container,
@@ -4101,6 +4205,7 @@
     min-height: 550px !important;
     perspective: 1200px !important;
     padding-top: 80px !important;
+    touch-action: pan-y;
   }
   
   .sports-details-navigation .sports-carousel-3d-container,
@@ -4109,6 +4214,7 @@
     min-height: 550px !important;
     width: 100% !important;
     padding-top: 80px !important;
+    touch-action: pan-y;
   }
   
   .sports-details-navigation .sports-carousel-3d-wrapper,
@@ -4675,13 +4781,19 @@
     gap: 25px;
     padding: 0 10px;
   }
+
+  .highlights-nav-btn {
+    display: none !important;
+  }
   
   .highlights-carousel-3d-container {
     perspective: 1400px;
     perspective-origin: center center;
-    max-width: calc(100vw - 100px);
+    max-width: 100%;
+    width: 100%;
     height: 480px;
     overflow: visible !important;
+    touch-action: pan-y;
   }
   
   .highlights-carousel-3d-wrapper {
@@ -4727,9 +4839,11 @@
   .highlights-carousel-3d-container {
     perspective: 1200px;
     perspective-origin: center center;
-    max-width: calc(100vw - 90px);
+    max-width: 100%;
+    width: 100%;
     height: 420px;
     overflow: visible !important;
+    touch-action: pan-y;
   }
   
   .highlights-carousel-3d-wrapper {
@@ -4789,8 +4903,10 @@
   
   .highlights-carousel-3d-container {
     perspective: 1100px;
-    max-width: calc(100vw - 80px);
+    max-width: 100%;
+    width: 100%;
     height: 400px;
+    touch-action: pan-y;
   }
   
   .highlights-carousel-3d-wrapper {

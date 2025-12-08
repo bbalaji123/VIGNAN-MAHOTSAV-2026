@@ -2434,7 +2434,7 @@
   padding: 20px;
   width: 100%;
   max-width: 800px;
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -2446,6 +2446,7 @@
   width: 100%;
   height: auto;
   display: block;
+  object-fit: contain;
 }
 
 .footer-contact-section {
@@ -2529,15 +2530,33 @@
   background: #128c7e;
 }
 
+.social-icon.linkedin {
+  background: #0077b5;
+}
+
+.social-icon.linkedin:hover {
+  background: #005582;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .accreditation-section {
-    padding: 40px 15px;
+    padding: 30px 15px;
+  }
+  
+  .accreditation-container {
+    width: 95%;
+    max-width: 95%;
+    margin: 0 auto;
   }
   
   .accreditation-main-image {
-    max-height: 250px;
-    width: 95%;
+    max-height: none;
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 12px;
   }
   
   .footer-content {
@@ -2568,12 +2587,15 @@
 
 @media (max-width: 480px) {
   .accreditation-section {
-    padding: 30px 10px;
+    padding: 25px 10px;
   }
   
   .accreditation-main-image {
-    max-height: 180px;
-    width: 90%;
+    max-height: none;
+    height: auto;
+    width: 100%;
+    max-width: 90%;
+    object-fit: contain;
   }
   
   .dashboard-footer {
@@ -2637,11 +2659,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 20px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
+    width: 95%;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #ffffff;
+    border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 10;
@@ -2651,7 +2676,9 @@
     max-width: 100%;
     width: 100%;
     height: auto;
+    max-height: none;
     display: block;
+    object-fit: contain;
   }
   
   .footer-contact-section {
@@ -2728,6 +2755,35 @@
     grid-template-columns: 1fr;
     gap: 25px;
     text-align: center;
+  }
+  
+  .footer-logo-section {
+    padding: 12px;
+    width: 90%;
+    max-width: 90%;
+    border-radius: 10px;
+    background: #ffffff;
+  }
+  
+  .footer-vignan-logo-img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    min-height: 70px;
+    display: block;
+    object-fit: contain;
+  }
+  
+  .accreditation-container {
+    width: 90%;
+    max-width: 90%;
+  }
+  
+  .accreditation-main-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
   }
   
   .footer-accreditation {

@@ -3464,11 +3464,14 @@ Do you want to proceed with registration?`;
           <div className="footer-social-section">
             <p className="footer-social-label">Follow us on:</p>
             <div className="social-icons">
-              <a href="#" className="social-icon instagram">
-                <img src={`${import.meta.env.BASE_URL}ins.png`} alt="Instagram" />
+              <a href="https://www.instagram.com/vignan_mahotsav?igsh=c3lwNjc4Y2phaGlx" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
+                <img src={`${import.meta.env.BASE_URL}insta.svg`} alt="Instagram" />
               </a>
-              <a href="#" className="social-icon whatsapp">
+              <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" className="social-icon whatsapp">
                 <img src={`${import.meta.env.BASE_URL}wha.png`} alt="WhatsApp" />
+              </a>
+              <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
+                <img src={`${import.meta.env.BASE_URL}linkedin.svg`} alt="LinkedIn" />
               </a>
             </div>
           </div>

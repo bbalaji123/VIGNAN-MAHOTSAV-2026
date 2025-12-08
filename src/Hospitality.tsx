@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import './FloatingIcons.css';
+import GarudaBubble from './GarudaBubble';
 
 const Hospitality: React.FC = () => {
   const navigate = useNavigate();
@@ -162,6 +163,41 @@ const Hospitality: React.FC = () => {
             padding: 0 1rem;
           }
 
+          .tab-dropdown {
+            display: none;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 2rem auto;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(251, 191, 36, 0.5);
+            border-radius: 12px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 24px;
+            padding-right: 3rem;
+          }
+
+          .tab-dropdown:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+          }
+
+          .tab-dropdown option {
+            background: #1f2937;
+            color: #ffffff;
+            padding: 1rem;
+          }
+
           .tab-button {
             padding: 0.75rem 1.5rem;
             background: rgba(255, 255, 255, 0.1);
@@ -289,6 +325,14 @@ const Hospitality: React.FC = () => {
               margin-bottom: 1.5rem;
             }
 
+            .tab-navigation {
+              display: none;
+            }
+
+            .tab-dropdown {
+              display: block;
+            }
+
             .section-heading {
               font-size: 1.25rem;
             }
@@ -321,7 +365,20 @@ const Hospitality: React.FC = () => {
       <div className="hospitality-content">
         <h1 className="hospitality-title">HOSPITALITY</h1>
         
-        {/* Tab Navigation */}
+        {/* Mobile Dropdown Navigation */}
+        <select 
+          className="tab-dropdown"
+          value={activeTab}
+          onChange={(e) => setActiveTab(e.target.value as 'instructions' | 'howToReach' | 'accommodation' | 'contacts' | 'faqs')}
+        >
+          <option value="instructions">Instructions</option>
+          <option value="howToReach">How to Reach</option>
+          <option value="accommodation">Accommodation</option>
+          <option value="contacts">Contacts</option>
+          <option value="faqs">FAQ's</option>
+        </select>
+
+        {/* Desktop Tab Navigation */}
         <div className="tab-navigation">
           <button 
             className={`tab-button ${activeTab === 'instructions' ? 'active' : ''}`}
@@ -668,6 +725,9 @@ const Hospitality: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Garuda Floating Bubble */}
+      <GarudaBubble />
     </div>
   );
 };

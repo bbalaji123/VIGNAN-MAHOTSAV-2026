@@ -9,16 +9,29 @@ const FloatingBubble: React.FC = () => {
 
   return (
     <div className="floating-bubble-container">
-      {/* Main floating button */}
+      {/* Main floating button with Garuda logo */}
       <div 
         className={`floating-bubble ${isOpen ? 'open' : ''}`}
         onClick={toggleMenu}
       >
+        <img 
+          src={`${import.meta.env.BASE_URL}garuda.png`} 
+          alt="Garuda" 
+          className="garuda-logo"
+        />
       </div>
 
       {/* Expandable menu items */}
       <div className={`bubble-menu ${isOpen ? 'expanded' : ''}`}>
-        {/* Menu items removed */}
+        <button className="bubble-menu-item" style={{ transitionDelay: '0.1s' }}>
+          Button 1
+        </button>
+        <button className="bubble-menu-item" style={{ transitionDelay: '0.05s' }}>
+          Button 2
+        </button>
+        <button className="bubble-menu-item" style={{ transitionDelay: '0s' }}>
+          Button 3
+        </button>
       </div>
 
       {/* Backdrop overlay */}

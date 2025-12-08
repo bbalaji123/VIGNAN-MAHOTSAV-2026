@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
-import FloatingBubble from './FloatingBubble';
+import GarudaBubble from './GarudaBubble';
 import EventRegistrationModal from './EventRegistrationModal';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
@@ -3446,28 +3446,16 @@ Do you want to proceed with registration?`;
 
       {/* Footer */}
       <footer className="dashboard-footer">
-        {/* Decorative lotus icons */}
-        <div className="footer-lotus footer-lotus-top-left"></div>
-        <div className="footer-lotus footer-lotus-top-right"></div>
-        <div className="footer-lotus footer-lotus-bottom-left"></div>
-        <div className="footer-lotus footer-lotus-bottom-right"></div>
-        
         {/* Footer Content */}
         <div className="footer-content">
           {/* Logo Section */}
           <div className="footer-logo-section">
-            <div className="footer-vignan-logo">
-              <img src={`${import.meta.env.BASE_URL}log.png`} alt="Vignan Logo" className="college-logo" />
-            </div>
-            <h2 className="footer-vignan-title">VIGNAN'S</h2>
-            <p className="footer-vignan-subtitle">FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH</p>
-            <p className="footer-deemed-text">(Deemed to be University) - Estd. u/s 3 of UGC Act 1956</p>
+            <img src={`${import.meta.env.BASE_URL}vig.png`} alt="Vignan Logo" className="footer-vignan-logo-img" />
           </div>
           
           {/* Contact Section */}
           <div className="footer-contact-section">
-            <p className="footer-contact-label">Contact us:</p>
-            <p className="footer-contact-numbers">+91 94930 33592 | +91 90305 57363</p>
+            <p className="footer-contact-label">Contact us: +91 94930 33592 | +91 90305 57363</p>
             <p className="footer-email-label">Email: <a href="mailto:mahotsav@vignan.ac.in">mahotsav@vignan.ac.in</a></p>
             <p className="footer-website-label">Website: <a href="https://vignan.ac.in/mahotsav" target="_blank" rel="noopener noreferrer">vignan.ac.in/mahotsav</a></p>
           </div>
@@ -3487,8 +3475,8 @@ Do you want to proceed with registration?`;
         </div>
       </footer>
 
-      {/* Floating Bubble Menu */}
-      <FloatingBubble />
+      {/* Garuda Floating Bubble */}
+      <GarudaBubble />
 
       {/* Events Info Modal */}
       {showEventsInfo && (

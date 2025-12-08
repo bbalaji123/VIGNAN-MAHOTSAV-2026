@@ -2381,6 +2381,8 @@
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease;
+  z-index: 1;
+  display: none;
 }
 
 .footer-lotus:hover {
@@ -2414,75 +2416,76 @@
 
 /* Footer Content */
 .footer-content {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr 1fr;
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-  align-items: start;
-}
-
-.footer-logo {
-  display: flex;
-  justify-content: center;
+  padding: 0 40px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
-.footer-vignan-logo {
+.footer-logo-section {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
 }
 
-.college-logo {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  padding: 10px;
+.footer-vignan-logo-img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.footer-section h4 {
-  color: #ffffff;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  font-weight: 600;
+.footer-contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
 }
 
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-
-.footer-section ul li a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: color 0.3s ease;
+.footer-contact-label,
+.footer-email-label,
+.footer-website-label {
+  color: white;
   font-size: 1rem;
+  margin: 5px 0;
+  white-space: nowrap;
 }
 
-.footer-section ul li a:hover {
-  color: #ffd700;
-}
-
-.footer-section p {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 8px;
-  line-height: 1.5;
-  font-size: 1rem;
-}
-
-.footer-section a {
-  color: #ffd700;
+.footer-contact-section a {
+  color: #4da6ff;
   text-decoration: none;
 }
 
-.footer-section a:hover {
+.footer-contact-section a:hover {
   text-decoration: underline;
+}
+
+.footer-social-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.footer-social-label {
+  color: white;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 /* Social Icons */
@@ -2622,66 +2625,50 @@
   .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-end;
+    text-align: right;
     gap: 30px;
+    padding-right: 20px;
+    position: relative;
+    z-index: 10;
   }
   
   .footer-logo-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
   }
   
-  .footer-vignan-logo {
-    margin-bottom: 15px;
-  }
-  
-  .college-logo {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .footer-vignan-title {
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-    letter-spacing: 2px;
-    font-family: 'Baloo 2', cursive;
-  }
-  
-  .footer-vignan-subtitle {
-    color: white;
-    font-size: 0.75rem;
-    margin: 5px 0;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.9;
-  }
-  
-  .footer-deemed-text {
-    color: white;
-    background: rgba(30, 144, 255, 0.8);
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-size: 0.7rem;
-    margin: 10px 0;
+  .footer-vignan-logo-img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    display: block;
   }
   
   .footer-contact-section {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
+    align-items: flex-end;
+    margin-bottom: 0;
   }
   
   .footer-contact-label,
   .footer-email-label,
   .footer-website-label {
     color: white;
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     margin: 5px 0;
+    white-space: nowrap;
   }
   
   .footer-contact-numbers {
@@ -2702,9 +2689,10 @@
   
   .footer-social-section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 15px;
+    justify-content: flex-end;
   }
   
   .footer-social-label {
@@ -2716,6 +2704,7 @@
   .social-icons {
     display: flex;
     gap: 20px;
+    justify-content: flex-end;
   }
   
   .social-icon img {
@@ -4789,11 +4778,12 @@
   .highlights-carousel-3d-container {
     perspective: 1400px;
     perspective-origin: center center;
-    max-width: 100%;
-    width: 100%;
+    max-width: 85%;
+    width: 85%;
     height: 480px;
     overflow: visible !important;
     touch-action: pan-y;
+    margin: 0 auto;
   }
   
   .highlights-carousel-3d-wrapper {
@@ -4839,11 +4829,12 @@
   .highlights-carousel-3d-container {
     perspective: 1200px;
     perspective-origin: center center;
-    max-width: 100%;
-    width: 100%;
+    max-width: 85%;
+    width: 85%;
     height: 420px;
     overflow: visible !important;
     touch-action: pan-y;
+    margin: 0 auto;
   }
   
   .highlights-carousel-3d-wrapper {
@@ -4903,10 +4894,11 @@
   
   .highlights-carousel-3d-container {
     perspective: 1100px;
-    max-width: 100%;
-    width: 100%;
+    max-width: 85%;
+    width: 85%;
     height: 400px;
     touch-action: pan-y;
+    margin: 0 auto;
   }
   
   .highlights-carousel-3d-wrapper {
@@ -8626,13 +8618,16 @@ html {
   .hero-main-image {
     max-width: 100%;
     width: 100%;
-    padding: 0 5px;
+    padding: 0;
   }
   
   .hero-image-container {
-    width: 100%;
-    padding: 0;
-    margin-bottom: 20px;
+    width: 100% !important;
+    padding: 0 20px !important;
+    margin: 0 auto 30px auto !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
   
   .hero-section h1 {
@@ -9156,10 +9151,13 @@ html {
   }
   
   .hero-image-container {
-    width: 100%;
-    max-width: 100vw;
-    padding: 0;
-    margin: 0 auto 20px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 15px !important;
+    margin: 0 auto 35px auto !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
   
   .hero-main-image {
@@ -9880,7 +9878,12 @@ html {
   }
   
   .hero-image-container {
-    padding: 0;
+    width: 100% !important;
+    padding: 0 10px !important;
+    margin: 0 auto 40px auto !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
   }
 }
 

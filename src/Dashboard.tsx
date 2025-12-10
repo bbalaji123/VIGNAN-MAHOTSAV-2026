@@ -55,6 +55,11 @@ const Dashboard: React.FC = () => {
     { day: "Day TWO", title: "Exciting Day Two Highlights", description: "Main events, competitions, technical exhibitions, and spectacular performances by renowned artists.", video: "day 2.mp4" },
     { day: "Day THREE", title: "Exciting Day Three Highlights", description: "Grand finale, award ceremonies, closing performances, and memorable moments to conclude the festival.", video: "day 3.mp4" }
   ];
+  
+  // Touch swipe state for carousels
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
 
   // State for fetched events from database
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -885,6 +890,38 @@ const Dashboard: React.FC = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showSportsDetails, nextSportsSlide, prevSportsSlide]);
+  
+  // Touch swipe handlers for culturals carousel
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchEnd = (carouselType: 'sports' | 'culturals') => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (carouselType === 'sports') {
+      if (isLeftSwipe) {
+        nextSportsSlide();
+      } else if (isRightSwipe) {
+        prevSportsSlide();
+      }
+    } else if (carouselType === 'culturals') {
+      if (isLeftSwipe) {
+        setCurrentCulturalsSlide((prev) => (prev + 1) % culturalsCards.length);
+      } else if (isRightSwipe) {
+        setCurrentCulturalsSlide((prev) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
+      }
+    }
+  };
   
   const nextHighlightSlide = () => {
     setCurrentHighlightSlide((prev) => (prev + 1) % highlightCards.length);
@@ -2120,7 +2157,12 @@ Do you want to proceed with registration?`;
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
                 onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
-                style={{ transformStyle: 'preserve-3d' }}
+                 style={{ 
+                  transformStyle: 'preserve-3d',
+                  backgroundImage: 'url(/home.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
                   const rect = card.getBoundingClientRect();
@@ -2136,8 +2178,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">⚓</div>
-                <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
+                
               </div>
 
               {/* EVENTS */}
@@ -2603,32 +2644,96 @@ Do you want to proceed with registration?`;
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>×</button>
             </div>
-            <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
-              <div className="indoor-sports-grid">
-                {Array.from({ length: Math.min(3, culturalsCards.length) }).map((_, index) => {
-                  const cardIndex = (currentCulturalsSlide + index) % culturalsCards.length;
-                  const card = culturalsCards[cardIndex];
-                  return (
-                    <div 
-                      key={cardIndex} 
-                      className="indoor-sport-card"
-                      onClick={() => handleCulturalsClick(card.title)}
-                    >
-                      <div className="indoor-sport-card-poster-background">
-                        <span className="indoor-sport-poster-placeholder-text">CULTURAL POSTER</span>
+            <div className="culturals-navigation">
+              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+              <div 
+                className="culturals-carousel-3d-container"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={() => onTouchEnd('culturals')}
+              >
+                <div className="culturals-carousel-3d-wrapper">
+                  {culturalsCards.map((card, index) => {
+                    const isActive = index === currentCulturalsSlide;
+                    const offset = index - currentCulturalsSlide;
+                    
+                    let transform = '';
+                    let zIndex = 0;
+                    let opacity = 0;
+                    let filter = 'grayscale(100%) brightness(0.5)';
+                    
+                    if (offset === 0) {
+                      // Active card - center front of semicircle
+                      transform = 'translateX(0) translateY(0) translateZ(250px) rotateY(0deg) scale(1.08)';
+                      zIndex = 10;
+                      opacity = 1;
+                      filter = 'none';
+                    } else if (offset === 1 || offset === -culturalsCards.length + 1) {
+                      // Right card - arc position
+                      transform = 'translateX(55%) translateY(12%) translateZ(-180px) rotateY(-42deg) scale(0.78)';
+                      zIndex = 8;
+                      opacity = 0.55;
+                      filter = 'brightness(0.35)';
+                    } else if (offset === -1 || offset === culturalsCards.length - 1) {
+                      // Left card - arc position
+                      transform = 'translateX(-55%) translateY(12%) translateZ(-180px) rotateY(42deg) scale(0.78)';
+                      zIndex = 8;
+                      opacity = 0.55;
+                      filter = 'brightness(0.35)';
+                    } else if (offset === 2 || offset === -culturalsCards.length + 2) {
+                      // Far right card
+                      transform = 'translateX(85%) translateY(20%) translateZ(-350px) rotateY(-55deg) scale(0.6)';
+                      zIndex = 6;
+                      opacity = 0.35;
+                      filter = 'brightness(0.25)';
+                    } else if (offset === -2 || offset === culturalsCards.length - 2) {
+                      // Far left card
+                      transform = 'translateX(-85%) translateY(20%) translateZ(-350px) rotateY(55deg) scale(0.6)';
+                      zIndex = 6;
+                      opacity = 0.35;
+                      filter = 'brightness(0.25)';
+                    } else if (offset > 0) {
+                      // Far right hidden
+                      transform = 'translateX(100%) translateY(25%) translateZ(-500px) rotateY(-65deg) scale(0.5)';
+                      zIndex = 1;
+                      opacity = 0.15;
+                      filter = 'brightness(0.2)';
+                    } else {
+                      // Far left hidden
+                      transform = 'translateX(-100%) translateY(25%) translateZ(-500px) rotateY(65deg) scale(0.5)';
+                      zIndex = 1;
+                      opacity = 0.15;
+                      filter = 'brightness(0.2)';
+                    }
+                    
+                    return (
+                      <div 
+                        key={index} 
+                        className={`cultural-card-3d ${isActive ? 'active' : ''}`}
+                        onClick={isActive ? () => handleCulturalsClick(card.title) : () => setCurrentCulturalsSlide(index)}
+                        style={{
+                          transform,
+                          zIndex,
+                          opacity,
+                          filter,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <div className="cultural-card-poster-background">
+                          <span className="cultural-poster-placeholder-text">CULTURAL POSTER</span>
+                        </div>
+                        <div className="cultural-card-title-overlay">
+                          <h3>{card.title}</h3>
+                          {card.subtitle && (
+                            <h4>{card.subtitle}</h4>
+                          )}
+                        </div>
                       </div>
-                      <div className="indoor-sport-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && (
-                          <h4>{card.subtitle}</h4>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
+              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {culturalsCards.map((_: typeof culturalsCards[0], index: number) => (

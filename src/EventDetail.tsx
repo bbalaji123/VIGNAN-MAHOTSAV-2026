@@ -571,65 +571,74 @@ const EventDetail: React.FC = () => {
               <h2 className="text-lg sm:text-xl lg:text-3xl font-medium text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)'}}>{eventData.subtitle}</h2>
             </div>
 
-            {/* Mobile Layout */}
+            {/* Mobile Layout - Simple & Clean */}
             <div className="block lg:hidden">
-              {/* Mobile Poster - First */}
-              <div className="flex justify-center mb-8">
-                <div className="w-48 h-64 sm:w-56 sm:h-72 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-sm sm:text-base font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
-                  <span>POSTER of EVENT</span>
+              <div className="flex flex-col gap-4 px-4 max-w-md mx-auto">
+                {/* Poster */}
+                <div className="flex justify-center mb-2">
+                  <div className="w-48 h-64 bg-white/90 border-2 border-white rounded-xl flex items-center justify-center text-sm font-bold text-purple-900 text-center shadow-lg backdrop-blur-md">
+                    <span>POSTER of EVENT</span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Mobile Rules */}
-              <div className="p-4 sm:p-6 mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold mb-4 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>Rules:</h3>
-                <ul className="rules-list list-none p-0 m-0 space-y-3">
-                  {eventData.rules.map((rule, index) => (
-                    <li key={index} className="flex items-start gap-3 text-white text-sm sm:text-base font-medium leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-                      <span className="text-yellow-400 font-bold text-lg mt-0 shrink-0" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>•</span>
-                      <span className="flex-1">{rule}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                {/* Rules */}
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                  <h3 className="text-lg font-bold mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                    Rules:
+                  </h3>
+                  <div className="max-h-48 overflow-y-auto scrollbar-thin pr-2">
+                    <ul className="space-y-2.5">
+                      {eventData.rules.map((rule, index) => (
+                        <li key={index} className="flex items-start gap-2.5">
+                          <span className="text-yellow-400 font-bold text-sm mt-0.5 shrink-0">•</span>
+                          <span className="text-white text-sm leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
+                            {rule}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
 
-              {/* Mobile Prizes and Contact */}
-              <div className="flex flex-col gap-6">
                 {/* Cash Prizes */}
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-4 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>Cash Prizes:</h3>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center text-white text-sm sm:text-base">
-                      <span className="font-bold text-yellow-400 min-w-16 sm:min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>First</span>
-                      <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.first}</span>
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                  <h3 className="text-lg font-bold mb-3 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                    Cash Prizes:
+                  </h3>
+                  <div className="space-y-2.5 px-2">
+                    <div className="flex items-center gap-3 text-white text-sm">
+                      <span className="font-bold text-yellow-400 min-w-[70px]">First:</span>
+                      <span className="font-semibold">{eventData.prizes.first}</span>
                     </div>
-                    <div className="flex items-center text-white text-sm sm:text-base">
-                      <span className="font-bold text-yellow-400 min-w-16 sm:min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Second</span>
-                      <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.second}</span>
+                    <div className="flex items-center gap-3 text-white text-sm">
+                      <span className="font-bold text-yellow-400 min-w-[70px]">Second:</span>
+                      <span className="font-semibold">{eventData.prizes.second}</span>
                     </div>
                     {eventData.prizes.third && (
-                      <div className="flex items-center text-white text-sm sm:text-base">
-                        <span className="font-bold text-yellow-400 min-w-16 sm:min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Third</span>
-                        <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.third}</span>
+                      <div className="flex items-center gap-3 text-white text-sm">
+                        <span className="font-bold text-yellow-400 min-w-[70px]">Third:</span>
+                        <span className="font-semibold">{eventData.prizes.third}</span>
                       </div>
                     )}
                     {eventData.prizes.fourth && (
-                      <div className="flex items-center text-white text-sm sm:text-base">
-                        <span className="font-bold text-yellow-400 min-w-16 sm:min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Fourth</span>
-                        <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.fourth}</span>
+                      <div className="flex items-center gap-3 text-white text-sm">
+                        <span className="font-bold text-yellow-400 min-w-[70px]">Fourth:</span>
+                        <span className="font-semibold">{eventData.prizes.fourth}</span>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Contact Information */}
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-4 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>For Queries Contact:</h3>
-                  <div className="flex flex-col gap-2">
+                {/* Contact */}
+                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+                  <h3 className="text-lg font-bold mb-3 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                    For Queries Contact:
+                  </h3>
+                  <div className="space-y-3 px-2">
                     {eventData.contacts.map((contact, index) => (
-                      <div key={index} className="text-white text-sm sm:text-base font-medium leading-relaxed overflow-wrap-break-word" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-                        <div className="sm:inline">{contact.name}</div>
-                        <div className="sm:inline sm:ml-2">- {contact.phone}</div>
+                      <div key={index} className="text-white text-sm">
+                        <div className="font-semibold mb-1">{contact.name}</div>
+                        <div className="text-yellow-300 text-xs">{contact.phone}</div>
                       </div>
                     ))}
                   </div>
@@ -704,38 +713,39 @@ const EventDetail: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-8 lg:mt-12 flex-wrap print-hide px-4">
+            <div className="flex flex-col gap-3 justify-center items-center mt-6 lg:mt-12 lg:flex-row print-hide px-4 max-w-md mx-auto lg:max-w-none">
               <button 
-                className="action-button bg-linear-to-r from-red-500 via-red-600 to-red-700 text-white border-none py-3 sm:py-4 lg:py-5 px-6 sm:px-8 lg:px-12 rounded-2xl text-base sm:text-lg lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-2xl hover:-translate-y-2 hover:shadow-3xl hover:from-red-600 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 lg:gap-3 min-w-[180px] sm:min-w-[200px] justify-center transform hover:scale-105 active:scale-95 w-full sm:w-auto"
+                className="action-button bg-gradient-to-r from-red-500 to-red-600 text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
                 onClick={handleDownloadPDF}
                 disabled={isDownloading}
               >
                 {isDownloading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    Preparing PDF...
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <span>Preparing PDF...</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-2xl">📄</span>
-                    Download PDF
+                    <span className="text-lg">📄</span>
+                    <span>Download PDF</span>
                   </>
                 )}
               </button>
+              
               <button 
-                className="action-button bg-linear-to-r from-green-500 via-green-600 to-green-700 text-white border-none py-3 sm:py-4 lg:py-5 px-6 sm:px-8 lg:px-12 rounded-2xl text-base sm:text-lg lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-2xl hover:-translate-y-2 hover:shadow-3xl hover:from-green-600 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 lg:gap-3 min-w-[180px] sm:min-w-60 lg:min-w-[280px] justify-center transform hover:scale-105 active:scale-95 w-full sm:w-auto"
+                className="action-button bg-gradient-to-r from-green-500 to-green-600 text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
                 onClick={handleAddToMyEvents}
                 disabled={isSaving}
               >
                 {isSaving ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    Saving...
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-2xl">⭐</span>
-                    Add to My Events
+                    <span className="text-lg">⭐</span>
+                    <span>Add to My Events</span>
                   </>
                 )}
               </button>

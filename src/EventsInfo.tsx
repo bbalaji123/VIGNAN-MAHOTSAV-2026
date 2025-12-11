@@ -13,8 +13,8 @@ const EventsInfo: React.FC = () => {
   const [showCulturals, setShowCulturals] = useState(false);
 
   // Carousel states
-  const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
-  const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
+  const [currentSportsSlide, setCurrentSportsSlide] = useState(2);
+  const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(3);
 
   // Events data
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -164,6 +164,7 @@ const EventsInfo: React.FC = () => {
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
             className="absolute inset-0 w-full h-full object-contain"
+            style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
           />
           {/* Sun layer in center - rotates clockwise */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -195,6 +196,7 @@ const EventsInfo: React.FC = () => {
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
             className="absolute inset-0 w-full h-full object-contain"
+            style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
           />
           {/* Sun layer in center - rotates clockwise */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -412,31 +414,32 @@ const EventsInfo: React.FC = () => {
                         let opacity = 0;
                         let filter = 'grayscale(100%) brightness(0.5)';
                         
-                        // Netflix-style semicircle positioning
-                        const angle = offset * 25; // 25 degrees between cards
-                        const radius = 280; // Arc radius
-                        
-                        if (offset === 0) {
+                        // Only show 5 cards: center + 2 on each side
+                        if (Math.abs(offset) > 2) {
+                          // Hide cards that are more than 2 positions away
+                          opacity = 0;
+                          transform = `translateX(0) translateY(0) translateZ(-500px) scale(0)`;
+                        } else if (offset === 0) {
                           // Center card - prominent and forward
                           transform = `translateX(0) translateY(0) translateZ(100px) rotateY(0deg) scale(1.1)`;
                           zIndex = 10;
                           opacity = 1;
                           filter = 'brightness(1) saturate(1.2)';
                         } else {
-                          // Calculate arc position
-                          const x = Math.sin(angle * Math.PI / 180) * radius;
-                          const z = (Math.cos(angle * Math.PI / 180) - 1) * radius;
-                          const y = Math.abs(offset) * 10; // Slight vertical offset
-                          const rotY = -angle * 0.8; // Rotate towards center
-                          const scale = Math.max(0.6, 1 - Math.abs(offset) * 0.15);
+                          // Side cards (offset -2, -1, 1, 2)
+                          const direction = offset > 0 ? 1 : -1;
+                          const absOffset = Math.abs(offset);
+                          const x = direction * (190 + (absOffset - 1) * 85); // Tighter horizontal spacing
+                          const z = -30 - (absOffset - 1) * 25; // Less depth
+                          const rotY = direction * 10 * absOffset; // Slight rotation
+                          const scale = 1 - absOffset * 0.08; // Minimal size decrease
                           
-                          transform = `translateX(${x}px) translateY(${y}px) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
-                          zIndex = Math.max(1, 10 - Math.abs(offset));
-                          opacity = Math.max(0.3, 1 - Math.abs(offset) * 0.2);
+                          transform = `translateX(${x}px) translateY(0) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
+                          zIndex = 10 - absOffset;
+                          opacity = 1 - absOffset * 0.15;
                           
-                          // Fade and desaturate distant cards
-                          const brightness = Math.max(0.4, 1 - Math.abs(offset) * 0.2);
-                          const saturate = Math.max(0.3, 1 - Math.abs(offset) * 0.3);
+                          const brightness = 1 - absOffset * 0.12;
+                          const saturate = 1 - absOffset * 0.15;
                           filter = `brightness(${brightness}) saturate(${saturate})`;
                         }
                         
@@ -454,8 +457,8 @@ const EventsInfo: React.FC = () => {
                               position: 'absolute',
                               left: '50%',
                               top: '50%',
-                              marginLeft: '-100px',
-                              marginTop: '-140px'
+                              marginLeft: '-110px',
+                              marginTop: '-160px'
                             }}
                           >
                             <div className="sports-card-poster-background">

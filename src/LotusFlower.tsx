@@ -5,7 +5,7 @@ interface LotusFlowerProps {
   size?: number;
 }
 
-const LotusFlower: React.FC<LotusFlowerProps> = ({ position, size = 800 }) => {
+const LotusFlower: React.FC<LotusFlowerProps> = ({ position, size = 400 }) => {
   const positionClasses = position === 'top-right' 
     ? '-top-64 -right-64' 
     : '-bottom-64 -left-64';

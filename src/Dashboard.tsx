@@ -2083,6 +2083,7 @@ Do you want to proceed with registration?`;
                 src={`${import.meta.env.BASE_URL}petals.png`}
                 alt="Flower Petals"
                 className="absolute inset-0 w-full h-full object-contain"
+                style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
               />
               {/* Sun layer in center - rotates clockwise */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -2113,6 +2114,7 @@ Do you want to proceed with registration?`;
                 src={`${import.meta.env.BASE_URL}petals.png`}
                 alt="Flower Petals"
                 className="absolute inset-0 w-full h-full object-contain"
+                style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
               />
               {/* Sun layer in center - rotates clockwise */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -2159,7 +2161,7 @@ Do you want to proceed with registration?`;
                 onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
                  style={{ 
                   transformStyle: 'preserve-3d',
-                  backgroundImage: 'url(/home.png)',
+                  backgroundImage: 'url(/home.jpg)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
@@ -3804,21 +3806,7 @@ Do you want to proceed with registration?`;
                 </div>
 
                 <div className="form-section">
-                  <h3>🎯 Registration Type</h3>
-                  <div className="form-group">
-                    <label htmlFor="userType">I am registering as *</label>
-                    <select 
-                      id="userType" 
-                      name="userType" 
-                      value={signupFormData.userType || 'visitor'}
-                      onChange={handleSignupInputChange}
-                      className="form-input form-select"
-                      required
-                    >
-                      <option value="visitor">Visitor</option>
-                      <option value="participant">Participant</option>
-                    </select>
-                  </div>
+                    {/* Registration Type section removed as requested */}
                 </div>
 
                 <button 

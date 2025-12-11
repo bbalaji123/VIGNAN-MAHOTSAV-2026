@@ -77,37 +77,37 @@
   position: fixed;
   bottom: 0;
   left: 50%;
-  z-index: 10;
-  width: 300px;
-  height: 300px;
+  z-index: 1;
+  width: 50vw;
+  height: 50vw;
   pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .animated-icon-container {
-    width: 550px;
-    height: 550px;
+    width: 70vw;
+    height: 70vw;
   }
 }
 
 @media (max-width: 480px) {
   .animated-icon-container {
-    width: 520px;
-    height: 520px;
+    width: 75vw;
+    height: 75vw;
   }
 }
 
 @media (max-width: 400px) {
   .animated-icon-container {
-    width: 500px;
-    height: 500px;
+    width: 80vw;
+    height: 80vw;
   }
 }
 
 @media (max-width: 365px) {
   .animated-icon-container {
-    width: 580px;
-    height: 580px;
+    width: 85vw;
+    height: 85vw;
   }
 }
 
@@ -121,29 +121,29 @@
 /* Responsive sizing for animated flower icon */
 @media (min-width: 640px) {
   .animated-icon-container {
-    width: 600px;
-    height: 600px;
+    width: 60vw;
+    height: 60vw;
   }
 }
 
 @media (min-width: 768px) {
   .animated-icon-container {
-    width: 750px;
-    height: 650px;
+    width: 55vw;
+    height: 55vw;
   }
 }
 
 @media (min-width: 1024px) {
   .animated-icon-container {
-    width: 850px;
-    height: 850px;
+    width: 50vw;
+    height: 50vw;
   }
 }
 
 @media (min-width: 1280px) {
   .animated-icon-container {
-    width: 1100px;
-    height: 1100px;
+    width: 45vw;
+    height: 45vw;
   }
 }
 
@@ -3711,46 +3711,61 @@
 
 .sports-details-navigation .sports-nav-btn {
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: none;
   color: transparent;
   font-size: 0;
-  width: 0;
-  height: 0;
-  border-radius: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
   box-shadow: none;
+  z-index: 100;
   position: relative;
-  padding: 5px;
-  margin: 0 10px;
+  padding: 0;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.sports-details-navigation .sports-nav-btn.prev {
-  border-left: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-right: 0;
+.sports-details-navigation .sports-nav-btn.prev::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  left: 14px;
 }
 
-.sports-details-navigation .sports-nav-btn.next {
-  border-right: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 0;
+.sports-details-navigation .sports-nav-btn.next::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-right: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  right: 14px;
 }
 
 .sports-nav-btn:hover {
   transform: scale(1.15);
-  filter: brightness(1.2);
+  background: transparent;
+  box-shadow: none;
 }
 
-.sports-nav-btn:hover.prev {
-  border-left-color: rgba(255, 255, 255, 1);
-}
-
-.sports-nav-btn:hover.next {
+.sports-nav-btn:hover.prev::before {
   border-right-color: rgba(255, 255, 255, 1);
+}
+
+.sports-nav-btn:hover.next::before {
+  border-left-color: rgba(255, 255, 255, 1);
 }
 
 .sports-details-navigation .sports-carousel-3d-container,
@@ -3800,8 +3815,8 @@
   flex-direction: column;
   padding: 0;
   color: #333;
-  width: 350px;
-  height: 480px;
+  width: 220px;
+  height: 320px;
   will-change: transform;
   transform-style: preserve-3d !important;
   backface-visibility: visible !important;
@@ -3985,41 +4000,58 @@
   border: none;
   color: transparent;
   font-size: 0;
-  width: 0;
-  height: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  box-shadow: none;
+  z-index: 100;
   position: relative;
-  padding: 5px;
-  margin: 0 10px;
+  padding: 0;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.culturals-nav-btn.prev {
-  border-left: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-right: 0;
+.culturals-nav-btn.prev::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  left: 14px;
 }
 
-.culturals-nav-btn.next {
-  border-right: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 0;
+.culturals-nav-btn.next::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-right: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  right: 14px;
 }
 
 .culturals-nav-btn:hover {
   transform: scale(1.15);
-  filter: brightness(1.2);
+  background: transparent;
+  box-shadow: none;
 }
 
-.culturals-nav-btn:hover.prev {
-  border-left-color: rgba(255, 255, 255, 1);
-}
-
-.culturals-nav-btn:hover.next {
+.culturals-nav-btn:hover.prev::before {
   border-right-color: rgba(255, 255, 255, 1);
+}
+
+.culturals-nav-btn:hover.next::before {
+  border-left-color: rgba(255, 255, 255, 1);
 }
 
 
@@ -4717,47 +4749,61 @@
 
 .highlights-nav-btn {
   background: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: none;
   color: transparent;
   font-size: 0;
-  width: 0;
-  height: 0;
-  border-radius: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
   box-shadow: none;
   z-index: 100;
   position: relative;
-  padding: 5px;
-  margin: 0 10px;
+  padding: 0;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.highlights-nav-btn.prev {
-  border-left: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-right: 0;
+.highlights-nav-btn.prev::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  left: 14px;
 }
 
-.highlights-nav-btn.next {
-  border-right: 25px solid rgba(255, 255, 255, 0.8);
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 0;
+.highlights-nav-btn.next::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-right: none;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 16px solid rgba(255, 255, 255, 1);
+  position: absolute;
+  right: 14px;
 }
 
 .highlights-nav-btn:hover {
   transform: scale(1.15);
-  filter: brightness(1.2);
+  background: transparent;
+  box-shadow: none;
 }
 
-.highlights-nav-btn:hover.prev {
-  border-left-color: rgba(255, 255, 255, 1);
-}
-
-.highlights-nav-btn:hover.next {
+.highlights-nav-btn:hover.prev::before {
   border-right-color: rgba(255, 255, 255, 1);
+}
+
+.highlights-nav-btn:hover.next::before {
+  border-left-color: rgba(255, 255, 255, 1);
 }
 
 .highlights-nav-btn:active {
@@ -10544,8 +10590,8 @@ html {
 
 /* Menu Grid Cards - Mobile Responsive */
 .menu-grid-card {
-  min-height: 180px;
-  padding: 2rem;
+  min-height: 150px;
+  padding: 1.5rem;
 }
 
 /* Oppo F31 Pro and similar small devices (360-400px) */

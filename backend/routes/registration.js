@@ -1,36 +1,11 @@
 import express from 'express';
 import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
+import mongoose from 'mongoose';
 import { sendWelcomeEmail, sendPasswordResetEmail } from '../utils/emailService.js';
+import { generateUserId } from '../utils/idGenerator.js';
 
 const router = express.Router();
-
-// Helper function to generate next user ID
-async function generateUserId() {
-  try {
-    // Find the last registration sorted by userId in descending order
-    const lastRegistration = await Registration.findOne()
-      .sort({ userId: -1 })
-      .select('userId');
-    
-    if (!lastRegistration || !lastRegistration.userId) {
-      // First user
-      return 'MH26000001';
-    }
-    
-    // Extract the number from the last userId (e.g., "MH26000001" -> 1)
-    const lastNumber = parseInt(lastRegistration.userId.substring(4));
-    const nextNumber = lastNumber + 1;
-    
-    // Format with leading zeros (e.g., 2 -> "MH26000002")
-    const nextUserId = `MH26${nextNumber.toString().padStart(6, '0')}`;
-    
-    return nextUserId;
-  } catch (error) {
-    console.error('Error generating user ID:', error);
-    throw error;
-  }
-}
 
 // Create new registration
 router.post('/register', async (req, res) => {
@@ -45,90 +20,216 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    // Check if user already exists
-    const existingUser = await Registration.findOne({ email });
-    if (existingUser) {
+    // Normalize email (trim and lowercase to match schema)
+    const normalizedEmail = email.trim().toLowerCase();
+    console.log(`📧 Original email: "${email}"`);
+    console.log(`📧 Normalized email: "${normalizedEmail}"`);
+
+    // Check if email already exists in Registration collection
+    const emailExistsInRegistration = await Registration.findOne({ email: normalizedEmail });
+    console.log(`📊 Email exists in Registration:`, emailExistsInRegistration ? 'YES' : 'NO');
+    
+    if (emailExistsInRegistration) {
+      console.log(`⚠️  Existing user found in Registration:`, emailExistsInRegistration.userId, emailExistsInRegistration.name);
       return res.status(400).json({ 
         success: false, 
-        message: 'User with this email already exists' 
+        message: `This email (${normalizedEmail}) is already registered. Please login or use a different email.`,
+        existingUser: true
       });
     }
 
-    // Generate unique user ID
-    const userId = await generateUserId();
-
-    // Create new registration
-    const registration = new Registration({
-      userId,
-      name,
-      email,
-      password, // Note: In production, you should hash passwords before storing
-      phone,
-      college,
-      dateOfBirth,
-      gender,
-      registerId,
-      userType: userType || 'visitor',
-      participationType: participationType || 'none',
-      paymentStatus: 'unpaid' // Automatically set to unpaid
-    });
-
-    await registration.save();
-
-    // If user is a participant, also save to participants collection
-    if (userType === 'participant') {
-      try {
-        const participant = new Participant({
-          userId,
-          name,
-          email,
-          phone,
-          college,
-          dateOfBirth,
-          gender,
-          registerId,
-          participantType: participationType || 'general',
-          registeredEvents: []
-        });
-        
-        await participant.save();
-        console.log(`✅ Participant record created for ${name} (${userId})`);
-      } catch (participantError) {
-        console.error('Error creating participant record:', participantError);
-        // Don't fail the whole registration if participant save fails
-      }
+    // Also check if email exists in Participant collection (from partial registrations)
+    const emailExistsInParticipant = await Participant.findOne({ email: normalizedEmail });
+    console.log(`📊 Email exists in Participant:`, emailExistsInParticipant ? 'YES' : 'NO');
+    
+    if (emailExistsInParticipant) {
+      console.log(`⚠️  Orphan participant found, cleaning up:`, emailExistsInParticipant.userId);
+      // Clean up orphan participant record (exists in participants but not in registrations)
+      await Participant.deleteOne({ email: normalizedEmail });
+      console.log(`🧹 Cleaned up orphan participant record for ${normalizedEmail}`);
     }
+    
+    console.log(`✅ Email is available, proceeding with registration...`);
 
-    // Send welcome email with credentials (async, don't wait for it)
-    sendWelcomeEmail(email, userId, password, name)
-      .then(success => {
-        if (success) {
-          console.log(`✅ Welcome email sent to ${email}`);
-        } else {
-          console.log(`⚠️  Email sending failed for ${email}, but registration succeeded`);
+    // Start transaction for the actual registration
+    const session = await mongoose.startSession();
+    session.startTransaction();
+  
+    try {
+      // Generate unique user ID (queue ensures uniqueness)
+      const userId = await generateUserId();
+
+      // Create new registration
+      const registration = new Registration({
+        userId,
+        name,
+        email: normalizedEmail, // Use normalized email
+        password, // Note: In production, you should hash passwords before storing
+        phone,
+        college,
+        dateOfBirth,
+        gender,
+        registerId,
+        userType: userType || 'visitor',
+        participationType: participationType || 'none',
+        paymentStatus: 'unpaid' // Automatically set to unpaid
+      });
+
+      await registration.save({ session });
+
+      // If user is a participant, also save to participants collection
+      if (userType === 'participant') {
+        try {
+          const participant = new Participant({
+            userId,
+            name,
+            email: normalizedEmail, // Use normalized email
+            phone,
+            college,
+            dateOfBirth,
+            gender,
+            registerId,
+            participantType: participationType || 'general',
+            registeredEvents: []
+          });
+          
+          await participant.save({ session });
+          console.log(`✅ Participant record created for ${name} (${userId})`);
+        } catch (participantError) {
+          console.error('Error creating participant record:', participantError);
+          // Roll back transaction on participant save failure
+          throw participantError;
         }
-      })
-      .catch(err => {
-        console.error(`❌ Email error for ${email}:`, err.message);
-      });
-
-    res.status(201).json({
-      success: true,
-      message: 'Registration successful',
-      data: {
-        id: registration._id,
-        userId: registration.userId,
-        name: registration.name,
-        email: registration.email
       }
-    });
-  } catch (error) {
-    console.error('Registration error:', error);
+
+      // Commit the transaction
+      await session.commitTransaction();
+      session.endSession();
+
+      // Send welcome email with credentials (async, don't wait for it)
+      sendWelcomeEmail(normalizedEmail, userId, password, name)
+        .then(success => {
+          if (success) {
+            console.log(`✅ Welcome email sent to ${normalizedEmail}`);
+          } else {
+            console.log(`⚠️  Email sending failed for ${normalizedEmail}, but registration succeeded`);
+          }
+        })
+        .catch(err => {
+          console.error(`❌ Email error for ${normalizedEmail}:`, err.message);
+        });
+
+      res.status(201).json({
+        success: true,
+        message: 'Registration successful',
+        data: {
+          id: registration._id,
+          userId: registration.userId,
+          name: registration.name,
+          email: registration.email
+        }
+      });
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      
+      console.error('Registration error:', error);
+      
+      // Handle duplicate key errors with more specific messages
+      if (error.code === 11000) {
+        // Check which field caused the duplicate
+        if (error.keyPattern?.email) {
+          return res.status(409).json({
+            success: false,
+            message: 'This email is already registered. Please use a different email or login with your existing account.',
+            error: 'Duplicate email'
+          });
+        } else if (error.keyPattern?.userId) {
+          return res.status(409).json({
+            success: false,
+            message: 'Registration conflict detected. Please try again.',
+            error: 'Duplicate userId - please retry'
+          });
+        } else {
+          return res.status(409).json({
+            success: false,
+            message: 'This account already exists. Please try a different email.',
+            error: 'Duplicate registration detected'
+          });
+        }
+      }
+      
+      res.status(500).json({ 
+        success: false, 
+        message: 'Server error during registration',
+        error: error.message 
+      });
+    }
+  } catch (outerError) {
+    console.error('Outer registration error:', outerError);
     res.status(500).json({ 
       success: false, 
       message: 'Server error during registration',
-      error: error.message 
+      error: outerError.message 
     });
+  }
+});
+
+// Check if email exists (for debugging)
+router.get('/check-email/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await Registration.findOne({ email });
+    res.json({
+      exists: !!user,
+      email: email,
+      user: user ? { userId: user.userId, name: user.name, email: user.email } : null
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete user by email (for testing only - remove in production)
+router.delete('/delete-email/:email', async (req, res) => {
+  try {
+    const { email } = req.params;
+    const result = await Registration.deleteOne({ email });
+    // Also clean up from participants collection
+    const participantResult = await Participant.deleteOne({ email });
+    res.json({
+      success: true,
+      message: `Deleted ${result.deletedCount} registration(s) and ${participantResult.deletedCount} participant(s) with email ${email}`,
+      deletedCount: result.deletedCount,
+      participantDeletedCount: participantResult.deletedCount
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Clean up orphan participants (participants without matching registration)
+router.post('/cleanup-orphans', async (req, res) => {
+  try {
+    const participants = await Participant.find({});
+    let cleanedCount = 0;
+    
+    for (const participant of participants) {
+      const registration = await Registration.findOne({ email: participant.email });
+      if (!registration) {
+        await Participant.deleteOne({ _id: participant._id });
+        console.log(`🧹 Cleaned up orphan participant: ${participant.email}`);
+        cleanedCount++;
+      }
+    }
+    
+    res.json({
+      success: true,
+      message: `Cleaned up ${cleanedCount} orphan participant(s)`,
+      cleanedCount
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

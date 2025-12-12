@@ -90,8 +90,16 @@ const eventRegistrationSchema = new mongoose.Schema({
     default: 'confirmed'
   }
 }, {
-  collection: 'eventRegistrations'
+  collection: 'eventRegistrations',
+  timestamps: true // Adds createdAt and updatedAt automatically
 });
+
+// Create compound indexes for better query performance and duplicate prevention
+eventRegistrationSchema.index({ eventId: 1, userId: 1, registrationType: 1 });
+eventRegistrationSchema.index({ eventId: 1, 'captain.userId': 1, registrationType: 1 });
+eventRegistrationSchema.index({ createdAt: -1 }); // For ID generation sorting
+eventRegistrationSchema.index({ registrationId: 1 }, { unique: true }); // Ensure unique registration IDs
+eventRegistrationSchema.index({ teamId: 1 }, { sparse: true }); // For team lookups
 
 const EventRegistration = mongoose.model('EventRegistration', eventRegistrationSchema);
 

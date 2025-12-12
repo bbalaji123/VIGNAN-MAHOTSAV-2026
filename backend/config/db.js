@@ -27,6 +27,25 @@ const connectDB = async () => {
     console.log(`✅ MongoDB Connected Successfully!`);
     console.log(`🗄️  Database Host: ${conn.connection.host}`);
     console.log(`📚 Database Name: ${conn.connection.name}`);
+
+    // Clean up stale indexes that might cause issues
+    try {
+      const participantsCollection = conn.connection.collection('participants');
+      const indexes = await participantsCollection.indexes();
+      
+      // Check for stale participantId index
+      const staleIndex = indexes.find(idx => idx.name === 'participantId_1');
+      if (staleIndex) {
+        console.log('🧹 Found stale participantId_1 index, dropping it...');
+        await participantsCollection.dropIndex('participantId_1');
+        console.log('✅ Stale index dropped successfully!');
+      }
+    } catch (indexError) {
+      // Index might not exist, which is fine
+      if (indexError.code !== 27) { // 27 = IndexNotFound
+        console.log('⚠️  Index cleanup note:', indexError.message);
+      }
+    }
     
     // Handle connection events
     mongoose.connection.on('error', (err) => {

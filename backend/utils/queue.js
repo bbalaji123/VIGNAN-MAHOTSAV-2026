@@ -4,6 +4,7 @@ import Redis from 'ioredis';
 // Redis connection
 let redisClient;
 let emailQueue;
+let idGenerationQueue;
 
 const initializeQueue = () => {
   try {
@@ -44,12 +45,56 @@ const initializeQueue = () => {
       console.error(`Email job ${job.id} failed:`, err);
     });
 
+    // Initialize ID generation queue for sequential processing
+    idGenerationQueue = new Queue('id generation', {
+      redis: {
+        port: process.env.REDIS_PORT || 6379,
+        host: process.env.REDIS_HOST || 'localhost',
+        password: process.env.REDIS_PASSWORD || undefined
+      },
+      settings: {
+        maxStalledCount: 0, // Don't retry stalled jobs
+        lockDuration: 30000 // Lock for 30 seconds
+      }
+    });
+
     console.log('Redis queue initialized successfully');
     
   } catch (error) {
     console.error('Failed to initialize queue:', error);
     // Fallback to direct processing if Redis is not available
   }
+};
+
+// Queue-based ID generation to prevent duplicates
+const generateIdInQueue = async (generatorFunction, type) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // If queue is available, use it for serialized execution
+      if (idGenerationQueue) {
+        const job = await idGenerationQueue.add('generate-id', 
+          { type, timestamp: Date.now() },
+          {
+            attempts: 1,
+            removeOnComplete: true,
+            removeOnFail: false
+          }
+        );
+        
+        // Process this specific job
+        const result = await generatorFunction();
+        await job.finished();
+        resolve(result);
+      } else {
+        // Fallback: direct execution with mutex-like behavior
+        const result = await generatorFunction();
+        resolve(result);
+      }
+    } catch (error) {
+      console.error(`Failed to generate ID for ${type}:`, error);
+      reject(error);
+    }
+  });
 };
 
 // Add email to queue
@@ -79,6 +124,8 @@ const addEmailToQueue = async (emailData) => {
 export {
   initializeQueue,
   addEmailToQueue,
+  generateIdInQueue,
   redisClient,
-  emailQueue
+  emailQueue,
+  idGenerationQueue
 };

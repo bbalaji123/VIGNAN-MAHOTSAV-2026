@@ -1,10 +1,14 @@
 import express from 'express';
 import EventRegistration from '../models/EventRegistration.js';
 import Event from '../models/Event.js';
+import UserEvent from '../models/UserEvent.js';
+import Registration from '../models/Registration.js';
+import mongoose from 'mongoose';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { generateRegistrationId, generateTeamId } from '../utils/idGenerator.js';
 
 const router = express.Router();
 const execAsync = promisify(exec);
@@ -12,48 +16,6 @@ const execAsync = promisify(exec);
 // Get current file path for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Helper function to generate registration ID for individual
-async function generateRegistrationId(eventType) {
-  try {
-    const prefix = eventType === 'sports' ? 'SR' : eventType === 'culturals' ? 'CR' : 'ER';
-    const lastRegistration = await EventRegistration.findOne({ registrationType: 'individual' })
-      .sort({ registrationId: -1 })
-      .select('registrationId');
-    
-    if (!lastRegistration || !lastRegistration.registrationId) {
-      return `${prefix}26000001`;
-    }
-    
-    const lastNumber = parseInt(lastRegistration.registrationId.substring(2));
-    const nextNumber = lastNumber + 1;
-    return `${prefix}${nextNumber.toString().padStart(8, '0')}`;
-  } catch (error) {
-    console.error('Error generating registration ID:', error);
-    throw error;
-  }
-}
-
-// Helper function to generate team ID
-async function generateTeamId(eventType) {
-  try {
-    const prefix = eventType === 'sports' ? 'ST' : eventType === 'culturals' ? 'CT' : 'ET';
-    const lastTeam = await EventRegistration.findOne({ registrationType: 'team' })
-      .sort({ teamId: -1 })
-      .select('teamId');
-    
-    if (!lastTeam || !lastTeam.teamId) {
-      return `${prefix}26000001`;
-    }
-    
-    const lastNumber = parseInt(lastTeam.teamId.substring(2));
-    const nextNumber = lastNumber + 1;
-    return `${prefix}${nextNumber.toString().padStart(8, '0')}`;
-  } catch (error) {
-    console.error('Error generating team ID:', error);
-    throw error;
-  }
-}
 
 // Helper function to send team registration email
 async function sendTeamRegistrationEmail(captainEmail, teamId, teamName, eventName, captainName, teamMembers) {
@@ -100,44 +62,92 @@ async function sendIndividualRegistrationEmail(email, registrationId, eventName,
 
 // Individual Event Registration
 router.post('/register-individual', async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  
   try {
     const { eventId, userId, participantName, email, phone, college } = req.body;
 
     // Validate required fields
     if (!eventId || !userId || !participantName || !email) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         success: false,
         message: 'Event ID, User ID, Name, and Email are required'
       });
     }
 
+    // Get user details
+    const user = await Registration.findOne({ userId }).session(session);
+    if (!user) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
     // Check if event exists
-    const event = await Event.findById(eventId);
+    const event = await Event.findById(eventId).session(session);
     if (!event) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({
         success: false,
         message: 'Event not found'
       });
     }
 
-    // Check if user already registered for this event
-    const existingRegistration = await EventRegistration.findOne({
-      eventId,
-      userId,
-      registrationType: 'individual'
-    });
+    // Check if user document exists, if not create it
+    let userEvent = await UserEvent.findOne({ userId }).session(session);
+    
+    if (!userEvent) {
+      // Create new user event document
+      userEvent = new UserEvent({
+        userId,
+        userName: user.name,
+        email: user.email,
+        registeredEvents: []
+      });
+    }
 
-    if (existingRegistration) {
+    // Check if already registered for this event
+    const alreadyRegistered = userEvent.registeredEvents.some(
+      event => event.eventId.toString() === eventId
+    );
+
+    if (alreadyRegistered) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         success: false,
         message: 'You are already registered for this event'
       });
     }
 
-    // Generate registration ID
+    // Generate registration ID (queue ensures uniqueness)
     const registrationId = await generateRegistrationId(event.eventType);
 
-    // Create registration
+    // Add event to user's registered events
+    userEvent.registeredEvents.push({
+      registrationId,
+      registrationType: 'individual',
+      eventId,
+      eventName: event.eventName,
+      eventType: event.eventType,
+      participantName,
+      phone,
+      college,
+      paymentStatus: 'unpaid',
+      teamRole: 'none',
+      registeredAt: new Date()
+    });
+
+    await userEvent.save({ session });
+
+    // Also save to EventRegistration for backward compatibility
     const registration = new EventRegistration({
       registrationId,
       registrationType: 'individual',
@@ -152,14 +162,20 @@ router.post('/register-individual', async (req, res) => {
       paymentStatus: 'unpaid'
     });
 
-    await registration.save();
+    await registration.save({ session });
 
     // Update event registered count
-    await Event.findByIdAndUpdate(eventId, {
-      $inc: { registeredCount: 1 }
-    });
+    await Event.findByIdAndUpdate(
+      eventId,
+      { $inc: { registeredCount: 1 } },
+      { session }
+    );
 
-    // Send confirmation email
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    // Send confirmation email (after successful transaction)
     sendIndividualRegistrationEmail(email, registrationId, event.eventName, participantName)
       .then(success => {
         if (success) {
@@ -174,11 +190,25 @@ router.post('/register-individual', async (req, res) => {
       data: {
         registrationId,
         eventName: event.eventName,
-        participantName
+        participantName,
+        totalEventsRegistered: userEvent.registeredEvents.length
       }
     });
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    
     console.error('Individual registration error:', error);
+    
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: 'Registration ID conflict. Please try again.',
+        error: 'Duplicate registration detected'
+      });
+    }
+    
     res.status(500).json({
       success: false,
       message: 'Server error during registration',
@@ -189,11 +219,16 @@ router.post('/register-individual', async (req, res) => {
 
 // Team Event Registration
 router.post('/register-team', async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  
   try {
     const { eventId, teamName, captain, teamMembers } = req.body;
 
     // Validate required fields
     if (!eventId || !teamName || !captain || !captain.userId || !captain.name || !captain.email) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         success: false,
         message: 'Event ID, Team Name, and Captain details (User ID, Name, Email) are required'
@@ -201,36 +236,63 @@ router.post('/register-team', async (req, res) => {
     }
 
     if (!teamMembers || teamMembers.length === 0) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         success: false,
         message: 'At least one team member is required'
       });
     }
 
+    // Get captain user details
+    const captainUser = await Registration.findOne({ userId: captain.userId }).session(session);
+    if (!captainUser) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({
+        success: false,
+        message: 'Captain user not found'
+      });
+    }
+
     // Check if event exists
-    const event = await Event.findById(eventId);
+    const event = await Event.findById(eventId).session(session);
     if (!event) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(404).json({
         success: false,
         message: 'Event not found'
       });
     }
 
-    // Check if captain already registered a team for this event
-    const existingTeam = await EventRegistration.findOne({
-      eventId,
-      'captain.userId': captain.userId,
-      registrationType: 'team'
-    });
+    // Check captain's user event document
+    let captainUserEvent = await UserEvent.findOne({ userId: captain.userId }).session(session);
+    
+    if (!captainUserEvent) {
+      captainUserEvent = new UserEvent({
+        userId: captain.userId,
+        userName: captainUser.name,
+        email: captainUser.email,
+        registeredEvents: []
+      });
+    }
 
-    if (existingTeam) {
+    // Check if captain already registered for this event
+    const alreadyRegistered = captainUserEvent.registeredEvents.some(
+      event => event.eventId.toString() === eventId
+    );
+
+    if (alreadyRegistered) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({
         success: false,
         message: 'You have already registered a team for this event'
       });
     }
 
-    // Generate team ID
+    // Generate team ID (queue ensures uniqueness)
     const teamId = await generateTeamId(event.eventType);
 
     // Prepare team members with captain role
@@ -245,9 +307,77 @@ router.post('/register-team', async (req, res) => {
       }))
     ];
 
-    // Create team registration
+    // Add to captain's user event document
+    captainUserEvent.registeredEvents.push({
+      registrationId: teamId,
+      registrationType: 'team',
+      eventId,
+      eventName: event.eventName,
+      eventType: event.eventType,
+      teamId,
+      teamName,
+      teamRole: 'captain',
+      captain: {
+        userId: captain.userId,
+        name: captain.name,
+        email: captain.email
+      },
+      teamMembers: allMembers,
+      teamSize: allMembers.length,
+      paymentStatus: 'unpaid',
+      registeredAt: new Date()
+    });
+
+    await captainUserEvent.save({ session });
+
+    // Add to each team member's user event document
+    for (const member of teamMembers) {
+      if (member.userId) {
+        let memberUserEvent = await UserEvent.findOne({ userId: member.userId }).session(session);
+        
+        if (!memberUserEvent) {
+          memberUserEvent = new UserEvent({
+            userId: member.userId,
+            userName: member.name,
+            email: member.email,
+            registeredEvents: []
+          });
+        }
+
+        // Check if member already registered for this event
+        const memberAlreadyRegistered = memberUserEvent.registeredEvents.some(
+          event => event.eventId.toString() === eventId
+        );
+
+        if (!memberAlreadyRegistered) {
+          memberUserEvent.registeredEvents.push({
+            registrationId: teamId,
+            registrationType: 'team',
+            eventId,
+            eventName: event.eventName,
+            eventType: event.eventType,
+            teamId,
+            teamName,
+            teamRole: 'member',
+            captain: {
+              userId: captain.userId,
+              name: captain.name,
+              email: captain.email
+            },
+            teamMembers: allMembers,
+            teamSize: allMembers.length,
+            paymentStatus: 'unpaid',
+            registeredAt: new Date()
+          });
+
+          await memberUserEvent.save({ session });
+        }
+      }
+    }
+
+    // Also save to EventRegistration for backward compatibility
     const registration = new EventRegistration({
-      registrationId: teamId, // Use teamId as registrationId for teams
+      registrationId: teamId,
       registrationType: 'team',
       eventId,
       eventName: event.eventName,
@@ -266,14 +396,20 @@ router.post('/register-team', async (req, res) => {
       paymentStatus: 'unpaid'
     });
 
-    await registration.save();
+    await registration.save({ session });
 
     // Update event registered count
-    await Event.findByIdAndUpdate(eventId, {
-      $inc: { registeredCount: allMembers.length }
-    });
+    await Event.findByIdAndUpdate(
+      eventId,
+      { $inc: { registeredCount: allMembers.length } },
+      { session }
+    );
 
-    // Send team registration email to captain
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    // Send team registration email to captain (after successful transaction)
     sendTeamRegistrationEmail(
       captain.email,
       teamId,
@@ -301,7 +437,20 @@ router.post('/register-team', async (req, res) => {
       }
     });
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    
     console.error('Team registration error:', error);
+    
+    // Handle duplicate key errors
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: 'Team ID conflict. Please try again.',
+        error: 'Duplicate team registration detected'
+      });
+    }
+    
     res.status(500).json({
       success: false,
       message: 'Server error during team registration',
@@ -310,23 +459,38 @@ router.post('/register-team', async (req, res) => {
   }
 });
 
-// Get registrations by user ID
+// Get registrations by user ID - NEW: From single user document
 router.get('/my-registrations/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const registrations = await EventRegistration.find({
-      $or: [
-        { userId },
-        { 'captain.userId': userId },
-        { 'teamMembers.userId': userId }
-      ]
-    }).sort({ registrationDate: -1 });
+    // Get user's event document containing all registrations
+    const userEvent = await UserEvent.findOne({ userId })
+      .populate('registeredEvents.eventId', 'eventName eventType venue date');
+
+    if (!userEvent) {
+      return res.status(200).json({
+        success: true,
+        count: 0,
+        data: {
+          userId,
+          userName: '',
+          email: '',
+          registeredEvents: []
+        }
+      });
+    }
 
     res.status(200).json({
       success: true,
-      count: registrations.length,
-      data: registrations
+      count: userEvent.registeredEvents.length,
+      data: {
+        userId: userEvent.userId,
+        userName: userEvent.userName,
+        email: userEvent.email,
+        registeredEvents: userEvent.registeredEvents,
+        totalEvents: userEvent.registeredEvents.length
+      }
     });
   } catch (error) {
     console.error('Fetch registrations error:', error);

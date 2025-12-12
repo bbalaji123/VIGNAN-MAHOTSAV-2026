@@ -5245,7 +5245,7 @@
 }
 
 .signup-modal-content {
-  max-width: 700px;
+  max-width: 550px;
   padding-right: 10px;
 }
 
@@ -5538,7 +5538,7 @@
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .form-group {
@@ -5548,21 +5548,21 @@
 
 .form-group label {
   color: white;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   display: block;
 }
 
 .form-input,
 .form-select {
-  padding: 15px;
+  padding: 12px 14px;
   border: 2px solid rgba(194, 24, 91, 0.3);
-  border-radius: 12px;
+  border-radius: 10px;
   background: white !important;
   color: #c2185b !important;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   width: 100%;
   font-weight: 500;
@@ -5752,13 +5752,13 @@
   background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
   color: white;
   border: none;
-  padding: 18px;
-  border-radius: 15px;
-  font-size: 1.1rem;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 @media (max-width: 768px) {
@@ -5827,14 +5827,14 @@
 
 /* Form Sections for Signup */
 .form-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .form-section h3 {
   color: #ffd700;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-bottom: 2px solid rgba(255, 215, 0, 0.3);
   padding-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -5844,7 +5844,7 @@
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 15px;
   align-items: start;
 }
 
@@ -10728,5 +10728,181 @@ html {
 
 @media (max-width: 480px) {
   /* Padding handled by Tailwind responsive classes */
+}
+
+/* Multi-Step Signup Form Styles */
+.signup-steps-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: -20px -20px 0 -20px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.step.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.step.completed {
+  opacity: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+  background: white;
+  color: #667eea;
+  border-color: white;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.step.completed .step-number {
+  background: #4ade80;
+  border-color: #4ade80;
+  color: white;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.step.active .step-label {
+  color: white;
+  font-weight: 600;
+}
+
+.step-connector {
+  width: 60px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+  margin-bottom: 20px;
+}
+
+.signup-navigation {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.signup-prev-btn,
+.signup-next-btn {
+  flex: 1;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.signup-prev-btn {
+  background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+  color: white;
+}
+
+.signup-prev-btn:hover {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  transform: translateX(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.signup-next-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.signup-next-btn:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateX(3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.signup-navigation .signup-submit-btn {
+  flex: 1;
+}
+
+/* Mobile responsive for steps */
+@media (max-width: 768px) {
+  .signup-steps-indicator {
+    padding: 15px 20px 10px;
+  }
+  
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .step-label {
+    font-size: 0.7rem;
+  }
+  
+  .step-connector {
+    width: 40px;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-steps-indicator {
+    padding: 12px 15px 8px;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+  
+  .step-label {
+    font-size: 0.65rem;
+  }
+  
+  .step-connector {
+    width: 30px;
+    margin: 0 3px;
+  }
+  
+  .signup-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .signup-prev-btn,
+  .signup-next-btn {
+    width: 100%;
+  }
 }
 

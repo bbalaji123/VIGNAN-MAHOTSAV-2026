@@ -60,14 +60,16 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     enum: ['paid', 'unpaid'],
     default: 'unpaid'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
   }
 }, {
-  collection: 'registrations'
+  collection: 'registrations',
+  timestamps: true // Adds createdAt and updatedAt automatically
 });
+
+// Create indexes for better performance and duplicate prevention
+registrationSchema.index({ email: 1 }, { unique: true }); // Prevent duplicate emails
+registrationSchema.index({ userId: 1 }, { unique: true }); // Ensure unique user IDs
+registrationSchema.index({ createdAt: -1 }); // For ID generation sorting
 
 const Registration = mongoose.model('Registration', registrationSchema);
 

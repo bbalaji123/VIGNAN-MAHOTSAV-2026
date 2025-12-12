@@ -318,6 +318,13 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showParaSports && !showCulturals && (
             <section className="inline-events-info-section">
               <div className="inline-events-info-container">
+                <div className="inline-indoor-sports-header">
+                  <div className="indoor-sports-header-left">
+                    <button className="indoor-sports-back-btn" onClick={() => navigate('/dashboard')}>
+                      ← Back
+                    </button>
+                  </div>
+                </div>
                 <div className="inline-events-info-header">
                   <div className="events-header-left">
                     <h2>EVENTS INFORMATION</h2>

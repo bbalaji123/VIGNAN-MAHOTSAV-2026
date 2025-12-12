@@ -500,10 +500,12 @@ const Dashboard: React.FC = () => {
     phone: '',
     college: '',
     dateOfBirth: '',
-    userType: 'visitor',
+    userType: 'participant',
     participationType: 'none',
     referenceId: ''
   });
+  const [signupStep, setSignupStep] = useState(1);
+  const totalSteps = 3;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [generatedUserId, setGeneratedUserId] = useState<string | null>(null);
@@ -1316,6 +1318,7 @@ const Dashboard: React.FC = () => {
 
   const handleCloseSignup = () => {
     setShowSignupModal(false);
+    setSignupStep(1);
     setSignupFormData({
       name: '',
       email: '',
@@ -1323,13 +1326,49 @@ const Dashboard: React.FC = () => {
       phone: '',
       college: '',
       dateOfBirth: '',
-      userType: 'visitor',
+      userType: 'participant',
       participationType: 'none',
       referenceId: ''
     });
     setSubmitMessage(null);
     setShowUserIdPopup(false);
     setGeneratedUserId(null);
+  };
+
+  const handleNextStep = () => {
+    // Validate current step before moving forward
+    if (signupStep === 1) {
+      if (!signupFormData.name || !signupFormData.dateOfBirth) {
+        setSubmitMessage({ type: 'error', text: 'Please fill in all required fields' });
+        return;
+      }
+    } else if (signupStep === 2) {
+      if (!signupFormData.college) {
+        setSubmitMessage({ type: 'error', text: 'Please enter your college name' });
+        return;
+      }
+    } else if (signupStep === 3) {
+      if (!signupFormData.email || !signupFormData.phone) {
+        setSubmitMessage({ type: 'error', text: 'Please enter your email and phone number' });
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(signupFormData.email)) {
+        setSubmitMessage({ type: 'error', text: 'Please enter a valid email address' });
+        return;
+      }
+      if (signupFormData.phone && signupFormData.phone.length !== 10) {
+        setSubmitMessage({ type: 'error', text: 'Please enter a valid 10-digit phone number' });
+        return;
+      }
+    }
+    setSubmitMessage(null);
+    setSignupStep(prev => prev + 1);
+  };
+
+  const handlePrevStep = () => {
+    setSubmitMessage(null);
+    setSignupStep(prev => prev - 1);
   };
 
   const handleSignupInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -1746,9 +1785,11 @@ Do you want to proceed with registration?`;
   const fetchEventRegistrationsCount = async (userId: string) => {
     try {
       const response = await getMyEventRegistrations(userId);
-      if (response.success && response.data) {
-        // Count the registrations
-        const count = Array.isArray(response.data) ? response.data.length : 0;
+      if (response.success) {
+        // Get count from registeredEvents array or count field
+        const data = response.data as any;
+        const count = data?.registeredEvents?.length || data?.totalEvents || response.count || 0;
+        console.log('📊 Event registrations count:', count);
         setEventRegistrationsCount(count);
       }
     } catch (error) {
@@ -3676,6 +3717,25 @@ Do you want to proceed with registration?`;
               <h2>Join Mahotsav 2026</h2>
               <button className="close-btn" onClick={handleCloseSignup}>×</button>
             </div>
+            
+            {/* Progress Steps */}
+            <div className="signup-steps-indicator">
+              <div className={`step ${signupStep >= 1 ? 'active' : ''} ${signupStep > 1 ? 'completed' : ''}`}>
+                <div className="step-number">{signupStep > 1 ? '✓' : '1'}</div>
+                <div className="step-label">Personal Info</div>
+              </div>
+              <div className="step-connector"></div>
+              <div className={`step ${signupStep >= 2 ? 'active' : ''} ${signupStep > 2 ? 'completed' : ''}`}>
+                <div className="step-number">{signupStep > 2 ? '✓' : '2'}</div>
+                <div className="step-label">Academic Info</div>
+              </div>
+              <div className="step-connector"></div>
+              <div className={`step ${signupStep >= 3 ? 'active' : ''} ${signupStep > 3 ? 'completed' : ''}`}>
+                <div className="step-number">{signupStep > 3 ? '✓' : '3'}</div>
+                <div className="step-label">Contact Info</div>
+              </div>
+            </div>
+
             <div className="signup-modal-body">
               <form className="signup-form" onSubmit={handleSignupSubmit}>
                 {submitMessage && (
@@ -3684,138 +3744,168 @@ Do you want to proceed with registration?`;
                   </div>
                 )}
                 
-                <div className="form-section">
-                  <h3>👤 Personal Information</h3>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="name">Full Name *</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={signupFormData.name}
-                        onChange={handleSignupInputChange}
-                        placeholder="Enter your full name"
-                        className="form-input"
-                        required
-                      />
+                {/* Step 1: Personal Information */}
+                {signupStep === 1 && (
+                  <div className="form-section">
+                    <h3>👤 Personal Information</h3>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="name">Full Name *</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={signupFormData.name}
+                          onChange={handleSignupInputChange}
+                          placeholder="Enter your full name"
+                          className="form-input"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="dateOfBirth">Date of Birth * (Your Password)</label>
+                        <input
+                          type="date"
+                          id="dateOfBirth"
+                          name="dateOfBirth"
+                          value={signupFormData.dateOfBirth || ''}
+                          onChange={handleSignupInputChange}
+                          className="form-input"
+                          placeholder="DD/MM/YYYY"
+                          required
+                        />
+                      </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="dateOfBirth">Date of Birth * (Your Password)</label>
-                      <input
-                        type="date"
-                        id="dateOfBirth"
-                        name="dateOfBirth"
-                        value={signupFormData.dateOfBirth || ''}
+                      <label htmlFor="gender">Gender</label>
+                      <select 
+                        id="gender" 
+                        name="gender" 
+                        value={signupFormData.gender || ''}
                         onChange={handleSignupInputChange}
+                        className="form-input form-select"
+                      >
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: Academic Information */}
+                {signupStep === 2 && (
+                  <div className="form-section">
+                    <h3>🎓 Academic Information</h3>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="college">College Name *</label>
+                        <input
+                          type="text"
+                          id="college"
+                          name="college"
+                          value={signupFormData.college}
+                          onChange={handleSignupInputChange}
+                          placeholder="Enter your college name"
+                          className="form-input"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="registerId">Register ID</label>
+                        <input
+                          type="text"
+                          id="registerId"
+                          name="registerId"
+                          value={signupFormData.registerId || ''}
+                          onChange={handleSignupInputChange}
+                          placeholder="Enter your register ID"
+                          className="form-input"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="referenceId">Reference ID</label>
+                      <input
+                        type="text"
+                        id="referenceId"
+                        name="referenceId"
+                        value={signupFormData.referenceId || ''}
+                        onChange={handleSignupInputChange}
+                        placeholder="Enter reference ID (optional)"
                         className="form-input"
-                        placeholder="DD/MM/YYYY"
-                        required
                       />
                     </div>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="gender">Gender</label>
-                    <select 
-                      id="gender" 
-                      name="gender" 
-                      value={signupFormData.gender || ''}
-                      onChange={handleSignupInputChange}
-                      className="form-input form-select"
+                )}
+
+                {/* Step 3: Contact Information */}
+                {signupStep === 3 && (
+                  <div className="form-section">
+                    <h3>📞 Contact Information</h3>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="email">Email Address *</label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={signupFormData.email}
+                          onChange={handleSignupInputChange}
+                          placeholder="your.email@example.com"
+                          className="form-input"
+                          required
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="phone">Mobile Number *</label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value={signupFormData.phone}
+                          onChange={handleSignupInputChange}
+                          placeholder="10-digit mobile number"
+                          maxLength={10}
+                          className="form-input"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Navigation Buttons */}
+                <div className="signup-navigation">
+                  {signupStep > 1 && (
+                    <button 
+                      type="button" 
+                      className="signup-prev-btn"
+                      onClick={handlePrevStep}
                     >
-                      <option value="">Select gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
+                      ← Previous
+                    </button>
+                  )}
+                  
+                  {signupStep < totalSteps ? (
+                    <button 
+                      type="button" 
+                      className="signup-next-btn"
+                      onClick={handleNextStep}
+                    >
+                      Next →
+                    </button>
+                  ) : (
+                    <button 
+                      type="submit" 
+                      className="signup-submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? '⏳ Creating Account...' : '🎉 Create Account & Get Mahotsav ID'}
+                    </button>
+                  )}
                 </div>
-
-                <div className="form-section">
-                  <h3>🎓 Academic Information</h3>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="college">College Name</label>
-                      <input
-                        type="text"
-                        id="college"
-                        name="college"
-                        value={signupFormData.college}
-                        onChange={handleSignupInputChange}
-                        placeholder="Enter your college name"
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="registerId">Register ID</label>
-                      <input
-                        type="text"
-                        id="registerId"
-                        name="registerId"
-                        value={signupFormData.registerId || ''}
-                        onChange={handleSignupInputChange}
-                        placeholder="Enter your register ID"
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="referenceId">Reference ID</label>
-                    <input
-                      type="text"
-                      id="referenceId"
-                      name="referenceId"
-                      value={signupFormData.referenceId || ''}
-                      onChange={handleSignupInputChange}
-                      placeholder="Enter reference ID (optional)"
-                      className="form-input"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-section">
-                  <h3>📞 Contact Information</h3>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="email">Email Address *</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={signupFormData.email}
-                        onChange={handleSignupInputChange}
-                        placeholder="your.email@example.com"
-                        className="form-input"
-                        required
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="phone">Mobile Number</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={signupFormData.phone}
-                        onChange={handleSignupInputChange}
-                        placeholder="10-digit mobile number"
-                        maxLength={10}
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-section">
-                    {/* Registration Type section removed as requested */}
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="signup-submit-btn"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? '⏳ Creating Account...' : '🎉 Create Account & Get Mahotsav ID'}
-                </button>
                 
                 <div className="login-link">
                   <p>Already have an account? <button type="button" onClick={() => { setShowSignupModal(false); setShowLoginModal(true); }} className="login-btn-link">Login here</button></p>

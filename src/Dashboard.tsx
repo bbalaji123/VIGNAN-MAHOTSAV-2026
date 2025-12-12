@@ -5,6 +5,8 @@ import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
 import GarudaBubble from './GarudaBubble';
 import EventRegistrationModal from './EventRegistrationModal';
+import LoadingAnimation from './components/LoadingAnimation';
+import CollegeSelect from './components/CollegeSelect';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
@@ -3713,6 +3715,16 @@ Do you want to proceed with registration?`;
       {showSignupModal && (
         <div className="login-modal-overlay" onClick={handleCloseSignup}>
           <div className="signup-modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* Loading Animation Overlay */}
+            {isSubmitting && (
+              <div className="signup-loading-overlay">
+                <LoadingAnimation 
+                  message="Creating your Mahotsav account..." 
+                  size={200}
+                />
+              </div>
+            )}
+            
             <div className="login-modal-header">
               <h2>Join Mahotsav 2026</h2>
               <button className="close-btn" onClick={handleCloseSignup}>×</button>
@@ -3801,14 +3813,9 @@ Do you want to proceed with registration?`;
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="college">College Name *</label>
-                        <input
-                          type="text"
-                          id="college"
-                          name="college"
-                          value={signupFormData.college}
-                          onChange={handleSignupInputChange}
-                          placeholder="Enter your college name"
-                          className="form-input"
+                        <CollegeSelect
+                          value={signupFormData.college || ''}
+                          onChange={(value) => setSignupFormData(prev => ({ ...prev, college: value }))}
                           required
                         />
                       </div>

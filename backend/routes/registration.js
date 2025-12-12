@@ -51,31 +51,37 @@ router.post('/register', async (req, res) => {
     
     console.log(`✅ Email is available, proceeding with registration...`);
 
-    // Start transaction for the actual registration
-    const session = await mongoose.startSession();
-    session.startTransaction();
-  
-    try {
-      // Generate unique user ID (queue ensures uniqueness)
-      const userId = await generateUserId();
+    // Retry logic for concurrent userId conflicts
+    const MAX_RETRIES = 3;
+    let lastError = null;
+    
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      // Start transaction for the actual registration
+      const session = await mongoose.startSession();
+      session.startTransaction();
+    
+      try {
+        // Generate unique user ID (queue ensures uniqueness)
+        const userId = await generateUserId();
+        console.log(`🔄 Attempt ${attempt}: Generated userId ${userId}`);
 
-      // Create new registration
-      const registration = new Registration({
-        userId,
-        name,
-        email: normalizedEmail, // Use normalized email
-        password, // Note: In production, you should hash passwords before storing
-        phone,
-        college,
-        dateOfBirth,
-        gender,
-        registerId,
-        userType: userType || 'visitor',
-        participationType: participationType || 'none',
-        paymentStatus: 'unpaid' // Automatically set to unpaid
-      });
+        // Create new registration
+        const registration = new Registration({
+          userId,
+          name,
+          email: normalizedEmail, // Use normalized email
+          password, // Note: In production, you should hash passwords before storing
+          phone,
+          college,
+          dateOfBirth,
+          gender,
+          registerId,
+          userType: userType || 'visitor',
+          participationType: participationType || 'none',
+          paymentStatus: 'unpaid' // Automatically set to unpaid
+        });
 
-      await registration.save({ session });
+        await registration.save({ session });
 
       // If user is a participant, also save to participants collection
       if (userType === 'participant') {
@@ -119,7 +125,7 @@ router.post('/register', async (req, res) => {
           console.error(`❌ Email error for ${normalizedEmail}:`, err.message);
         });
 
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
         message: 'Registration successful',
         data: {
@@ -133,9 +139,10 @@ router.post('/register', async (req, res) => {
       await session.abortTransaction();
       session.endSession();
       
-      console.error('Registration error:', error);
+      console.error(`Registration error (attempt ${attempt}):`, error);
+      lastError = error;
       
-      // Handle duplicate key errors with more specific messages
+      // Handle duplicate key errors
       if (error.code === 11000) {
         // Check which field caused the duplicate
         if (error.keyPattern?.email) {
@@ -145,11 +152,11 @@ router.post('/register', async (req, res) => {
             error: 'Duplicate email'
           });
         } else if (error.keyPattern?.userId) {
-          return res.status(409).json({
-            success: false,
-            message: 'Registration conflict detected. Please try again.',
-            error: 'Duplicate userId - please retry'
-          });
+          // This is a race condition - retry with a new ID
+          console.log(`⚠️  userId conflict on attempt ${attempt}, retrying...`);
+          // Add small delay before retry
+          await new Promise(resolve => setTimeout(resolve, 100 * attempt));
+          continue; // Retry with next attempt
         } else {
           return res.status(409).json({
             success: false,
@@ -159,12 +166,22 @@ router.post('/register', async (req, res) => {
         }
       }
       
-      res.status(500).json({ 
+      // For non-duplicate errors, don't retry
+      return res.status(500).json({ 
         success: false, 
         message: 'Server error during registration',
         error: error.message 
       });
     }
+    } // End of retry loop
+    
+    // All retries exhausted for userId conflict
+    console.error('All retry attempts failed for userId generation');
+    return res.status(503).json({ 
+      success: false, 
+      message: 'Server is busy. Please try again in a moment.',
+      error: lastError?.message || 'Registration conflict after retries'
+    });
   } catch (outerError) {
     console.error('Outer registration error:', outerError);
     res.status(500).json({ 

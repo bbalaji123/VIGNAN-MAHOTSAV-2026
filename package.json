@@ -15,9 +15,11 @@
     "deploy": "gh-pages -d dist --dotfiles"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.17.10",
     "compression": "^1.8.1",
     "helmet": "^8.1.0",
     "html2pdf.js": "^0.12.1",
+    "lottie-react": "^2.4.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.6"

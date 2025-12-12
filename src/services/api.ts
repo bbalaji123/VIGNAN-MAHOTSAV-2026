@@ -109,6 +109,7 @@ export interface TeamEventRegistration {
 export interface EventRegistrationResponse {
   success: boolean;
   message: string;
+  count?: number;
   data?: {
     registrationId?: string;
     teamId?: string;
@@ -121,25 +122,63 @@ export interface EventRegistrationResponse {
   error?: string;
 }
 
-export const registerUser = async (userData: SignupData): Promise<ApiResponse> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
+export const registerUser = async (userData: SignupData, maxRetries: number = 3): Promise<ApiResponse> => {
+  let lastError: ApiResponse = {
+    success: false,
+    message: 'Registration failed',
+    error: 'Unknown error',
+  };
 
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'Failed to connect to server',
-      error: error.message,
-    };
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+      
+      // If successful, return immediately
+      if (data.success) {
+        return data;
+      }
+      
+      // If it's a conflict error (duplicate userId from concurrent registration), retry
+      if (response.status === 409 && data.error?.includes('userId')) {
+        console.log(`⏳ Registration conflict, retrying... (attempt ${attempt}/${maxRetries})`);
+        lastError = data;
+        // Wait a bit before retrying (exponential backoff)
+        await new Promise(resolve => setTimeout(resolve, 300 * attempt));
+        continue;
+      }
+      
+      // For other errors (like duplicate email), return immediately
+      return data;
+    } catch (error: any) {
+      lastError = {
+        success: false,
+        message: 'Failed to connect to server',
+        error: error.message,
+      };
+      
+      // Retry on network errors too
+      if (attempt < maxRetries) {
+        console.log(`⏳ Network error, retrying... (attempt ${attempt}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, 300 * attempt));
+        continue;
+      }
+    }
   }
+
+  // All retries failed
+  return {
+    success: false,
+    message: 'Registration is busy. Please try again in a moment.',
+    error: lastError.error,
+  };
 };
 
 export const loginUser = async (email: string, password: string): Promise<ApiResponse> => {

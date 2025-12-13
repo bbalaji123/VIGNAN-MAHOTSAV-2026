@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
     },
     "Tennikoit": {
       title: "INDIVIDUAL EVENTS",
-      subtitle: "TENNIKOIT – Singles (Women)",
+      subtitle: "TENNIKOIT â€“ Singles (Women)",
       rules: [
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
@@ -598,15 +598,15 @@ const Dashboard: React.FC = () => {
   // Filter events based on user gender - users only see events appropriate for their gender
   const filterEventsByGender = (events: Event[]) => {
     const userGender = userProfileData.gender;
-    console.log('🔍 Filtering events - User gender:', userGender, 'User profile:', userProfileData);
-    console.log('📊 Events to filter:', events.length, 'events');
+    console.log('ðŸ” Filtering events - User gender:', userGender, 'User profile:', userProfileData);
+    console.log('ðŸ“Š Events to filter:', events.length, 'events');
     
     if (userGender === 'female') {
       // Female users can only see female and mixed gender events
       const filtered = events.filter(event => 
         event.gender === 'female' || event.gender === 'mixed'
       );
-      console.log('👩 Female user - showing', filtered.length, 'events (female + mixed only)');
+      console.log('ðŸ‘© Female user - showing', filtered.length, 'events (female + mixed only)');
       return filtered;
     }
     
@@ -615,12 +615,12 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'male' || event.gender === 'mixed'
       );
-      console.log('👨 Male user - showing', filtered.length, 'events (male + mixed only)');
+      console.log('ðŸ‘¨ Male user - showing', filtered.length, 'events (male + mixed only)');
       return filtered;
     }
     
     // For non-logged in users or other genders, show all events
-    console.log('🔓 Non-logged user or other gender - showing all', events.length, 'events');
+    console.log('ðŸ”“ Non-logged user or other gender - showing all', events.length, 'events');
     return events;
   };
 
@@ -791,59 +791,59 @@ const Dashboard: React.FC = () => {
 
   // Function to fetch events from API
   const fetchEvents = useCallback(async () => {
-    console.log('🔄 Fetching events from API...');
+    console.log('ðŸ”„ Fetching events from API...');
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
-    console.log('👤 User gender for filtering:', userGender);
+    console.log('ðŸ‘¤ User gender for filtering:', userGender);
     setLoadingEvents(true);
     try {
         // Test API connection first
-        console.log('🔗 Testing API connection...');
+        console.log('ðŸ”— Testing API connection...');
         const testResponse = await fetch('/api/events').catch(() => null);
         if (!testResponse) {
-          console.warn('⚠️ Backend server may not be running. Using production API...');
+          console.warn('âš ï¸ Backend server may not be running. Using production API...');
         }
 
         // Fetch sports events with gender filter if user is logged in
-        console.log('📡 Fetching sports events...');
+        console.log('ðŸ“¡ Fetching sports events...');
         const sportsResponse = await getEventsByType('sports', userGender);
-        console.log('⚽ Sports response:', sportsResponse);
+        console.log('âš½ Sports response:', sportsResponse);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-          console.log(`✅ Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`âœ… Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No sports events loaded:', sportsResponse.message);
+          console.warn('âš ï¸ No sports events loaded:', sportsResponse.message);
         }
 
         // Fetch culturals events with gender filter if user is logged in
-        console.log('📡 Fetching cultural events...');
+        console.log('ðŸ“¡ Fetching cultural events...');
         const culturalsResponse = await getEventsByType('culturals', userGender);
-        console.log('🎨 Culturals response:', culturalsResponse);
+        console.log('ðŸŽ¨ Culturals response:', culturalsResponse);
         if (culturalsResponse.success && culturalsResponse.data) {
           setCulturalEvents(culturalsResponse.data);
-          console.log(`✅ Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`âœ… Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No cultural events loaded:', culturalsResponse.message);
+          console.warn('âš ï¸ No cultural events loaded:', culturalsResponse.message);
         }
 
         // Fetch para sports events with gender filter if user is logged in
-        console.log('📡 Fetching para sports events...');
+        console.log('ðŸ“¡ Fetching para sports events...');
         const paraSportsResponse = await getEventsByType('parasports', userGender);
-        console.log('♿ Para Sports response:', paraSportsResponse);
+        console.log('â™¿ Para Sports response:', paraSportsResponse);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-          console.log(`✅ Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`âœ… Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
+          console.warn('âš ï¸ No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
-        console.error('❌ Error fetching events:', error);
-        console.log('💡 Troubleshooting tips:');
+        console.error('âŒ Error fetching events:', error);
+        console.log('ðŸ’¡ Troubleshooting tips:');
         console.log('   1. Make sure backend server is running: npm start');
         console.log('   2. Check if MongoDB is connected');
         console.log('   3. Verify API endpoints are working');
       } finally {
         setLoadingEvents(false);
-        console.log('✅ Finished loading events');
+        console.log('âœ… Finished loading events');
       }
   }, [isLoggedIn, userProfileData.gender]);
 
@@ -855,7 +855,7 @@ const Dashboard: React.FC = () => {
   // Refetch events when user login status or gender changes
   useEffect(() => {
     if (isLoggedIn && userProfileData.gender) {
-      console.log('🔄 User gender detected, refetching events for:', userProfileData.gender);
+      console.log('ðŸ”„ User gender detected, refetching events for:', userProfileData.gender);
       fetchEvents();
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
@@ -1580,7 +1580,7 @@ const Dashboard: React.FC = () => {
   const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
     const selectedEventsArray = Array.from(selectedEventIds);
     
-    console.log('💰 PRICE CALCULATION START');
+    console.log('ðŸ’° PRICE CALCULATION START');
     console.log('   - Gender:', gender);
     console.log('   - Gender type:', typeof gender);
     console.log('   - Events count:', selectedEventsArray.length);
@@ -1616,66 +1616,66 @@ const Dashboard: React.FC = () => {
     console.log('   - Sports events in state:', sportsEvents.length);
     console.log('   - Cultural events in state:', culturalEvents.length);
     
-    // EXPLICIT FEMALE LOGIC - ALWAYS ₹250 FOR SINGLE TYPE
+    // EXPLICIT FEMALE LOGIC - ALWAYS â‚¹250 FOR SINGLE TYPE
     const normalizedGender = gender?.toLowerCase();
 
     if (normalizedGender === 'female') {
-      console.log('   - ✅ FEMALE USER DETECTED');
+      console.log('   - âœ… FEMALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - 👩 Female: Sports + Culturals = ₹350');
+        console.log('   - ðŸ‘© Female: Sports + Culturals = â‚¹350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - 👩 Female: Sports ONLY = ₹250');
+        console.log('   - ðŸ‘© Female: Sports ONLY = â‚¹250');
         return 250;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - 👩 Female: Culturals ONLY = ₹250');
+        console.log('   - ðŸ‘© Female: Culturals ONLY = â‚¹250');
         return 250;
       }
       
-      console.log('   - ❌ Female user but no sports/culturals detected');
+      console.log('   - âŒ Female user but no sports/culturals detected');
     }
     
     // MALE LOGIC
     if (normalizedGender === 'male') {
-      console.log('   - ✅ MALE USER DETECTED');
+      console.log('   - âœ… MALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - 👨 Male: Sports + Culturals = ₹350');
+        console.log('   - ðŸ‘¨ Male: Sports + Culturals = â‚¹350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - 👨 Male: Sports ONLY = ₹350');
+        console.log('   - ðŸ‘¨ Male: Sports ONLY = â‚¹350');
         return 350;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - 👨 Male: Culturals ONLY = ₹250');
+        console.log('   - ðŸ‘¨ Male: Culturals ONLY = â‚¹250');
         return 250;
       }
     }
     
     // Fallback for users without gender info - charge as per event mix
     if (hasSports && hasCulturals) {
-      console.log('   - ⚙️ Fallback: Sports + Culturals = ₹350');
+      console.log('   - âš™ï¸ Fallback: Sports + Culturals = â‚¹350');
       return 350;
     }
     if (hasSports) {
-      console.log('   - ⚙️ Fallback: Sports only = ₹350');
+      console.log('   - âš™ï¸ Fallback: Sports only = â‚¹350');
       return 350;
     }
     if (hasCulturals) {
-      console.log('   - ⚙️ Fallback: Culturals only = ₹250');
+      console.log('   - âš™ï¸ Fallback: Culturals only = â‚¹250');
       return 250;
     }
 
-    console.log('   - ❌ FALLBACK: Defaulting to ₹0');
-    console.log('💰 PRICE CALCULATION END');
+    console.log('   - âŒ FALLBACK: Defaulting to â‚¹0');
+    console.log('ðŸ’° PRICE CALCULATION END');
     return 0;
   };
 
@@ -1711,20 +1711,20 @@ const Dashboard: React.FC = () => {
 
     // Create confirmation message
     const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
-    const priceText = totalAmount === 0 ? 'FREE' : `₹${totalAmount}`;
+    const priceText = totalAmount === 0 ? 'FREE' : `â‚¹${totalAmount}`;
     
     const confirmationMessage = `
-🎯 REGISTRATION CONFIRMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ðŸŽ¯ REGISTRATION CONFIRMATION
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
 
-📋 Selected Events (${eventIds.length}):
+ðŸ“‹ Selected Events (${eventIds.length}):
 ${eventsList}
 
-👤 Participant: ${userProfileData.name}
-⚧ Gender: ${userGender}
-💰 Total Amount: ${priceText}
+ðŸ‘¤ Participant: ${userProfileData.name}
+âš§ Gender: ${userGender}
+ðŸ’° Total Amount: ${priceText}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
 
 Do you want to proceed with registration?`;
 
@@ -1743,8 +1743,8 @@ Do you want to proceed with registration?`;
         handleCloseSubModal();
         
         const successMessage = totalAmount === 0 
-          ? `✅ Successfully registered for ${eventIds.length} event(s) for FREE!`
-          : `✅ Successfully registered for ${eventIds.length} event(s)! Total amount: ₹${totalAmount}`;
+          ? `âœ… Successfully registered for ${eventIds.length} event(s) for FREE!`
+          : `âœ… Successfully registered for ${eventIds.length} event(s)! Total amount: â‚¹${totalAmount}`;
           
         alert(successMessage);
       } else {
@@ -1790,7 +1790,7 @@ Do you want to proceed with registration?`;
         // Get count from registeredEvents array or count field
         const data = response.data as any;
         const count = data?.registeredEvents?.length || data?.totalEvents || response.count || 0;
-        console.log('📊 Event registrations count:', count);
+        console.log('ðŸ“Š Event registrations count:', count);
         setEventRegistrationsCount(count);
       }
     } catch (error) {
@@ -1831,7 +1831,7 @@ Do you want to proceed with registration?`;
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
         setShowEventChecklistModal(false);
-        alert(`✅ Successfully saved and registered for ${eventIds.length} event(s)!`);
+        alert(`âœ… Successfully saved and registered for ${eventIds.length} event(s)!`);
       } else {
         alert(result.message || 'Failed to save events. Please try again.');
       }
@@ -1870,7 +1870,7 @@ Do you want to proceed with registration?`;
       
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;
-        console.log('🔑 Login success - User data:', { userId, name, email, userType, gender });
+        console.log('ðŸ”‘ Login success - User data:', { userId, name, email, userType, gender });
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -1894,7 +1894,7 @@ Do you want to proceed with registration?`;
           gender: gender // No default value
         };
         setUserProfileData(profileData);
-        console.log('💾 Storing user profile:', profileData);
+        console.log('ðŸ’¾ Storing user profile:', profileData);
         
         setShowLoginModal(false);
         setLoginFormData({ email: '', password: '' });
@@ -1948,7 +1948,7 @@ Do you want to proceed with registration?`;
         gender: storedUserGender || undefined // Convert null to undefined
       };
       setUserProfileData(profileData);
-      console.log('💾 Loading user profile from localStorage:', profileData);
+      console.log('ðŸ’¾ Loading user profile from localStorage:', profileData);
       
       // Fetch user's saved events from database
       if (storedUserId) {
@@ -2002,8 +2002,8 @@ Do you want to proceed with registration?`;
 
       {/* Top-Left Menu Icon - Only show when menu is closed */}
       {!showPageMenu && (
-        <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
-          <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
+        <div className="fixed top-3 2xs:top-4 xs:top-5 left-3 2xs:left-4 xs:left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
+          <div className="w-6 2xs:w-7 xs:w-8 h-6 2xs:h-7 xs:h-8 flex flex-col justify-around items-center transition-transform duration-300">
             <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
             <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
             <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
@@ -2013,10 +2013,10 @@ Do you want to proceed with registration?`;
 
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
-        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile}>
-          <div className="text-2xl sm:text-4xl">👤</div>
-          <span className="text-sm sm:text-lg font-bold hidden xs:block">Welcome, {loggedInUserName}!</span>
-          <span className="text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
+        <div className="fixed top-2 2xs:top-3 xs:top-3 sm:top-5 right-2 2xs:right-3 xs:right-3 sm:right-5 z-50 flex items-center gap-2 2xs:gap-3 xs:gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-3 2xs:px-4 xs:px-5 sm:px-8 py-2 2xs:py-3 xs:py-3 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[100px] 2xs:min-w-[120px] xs:min-w-[140px] sm:min-w-[200px]" onClick={handleShowProfile}>
+          <div className="text-lg 2xs:text-xl xs:text-2xl sm:text-4xl">ðŸ‘¤</div>
+          <span className="text-xs 2xs:text-xs xs:text-sm sm:text-lg font-bold hidden xs:block truncate max-w-[80px] xs:max-w-[100px] sm:max-w-none">Welcome, {loggedInUserName}!</span>
+          <span className="text-xs 2xs:text-xs xs:text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
         </div>
       )}
      
@@ -2084,9 +2084,9 @@ Do you want to proceed with registration?`;
         `}</style>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 mb-4 justify-center items-center z-20 relative px-4 w-full">
+        <div className="flex flex-col sm:flex-row gap-3 2xs:gap-4 xs:gap-4 sm:gap-6 md:gap-8 mt-4 2xs:mt-5 xs:mt-6 sm:mt-8 mb-4 justify-center items-center z-20 relative px-3 2xs:px-4 xs:px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-44 2xs:w-48 xs:w-52 sm:w-48 h-12 2xs:h-14 xs:h-14 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-green-500 to-green-600 text-white rounded-xl 2xs:rounded-2xl text-base 2xs:text-lg xs:text-lg sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -2100,7 +2100,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
+            <button className="w-44 2xs:w-48 xs:w-52 sm:w-48 h-12 2xs:h-14 xs:h-14 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-xl 2xs:rounded-2xl text-base 2xs:text-lg xs:text-lg sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -2189,17 +2189,17 @@ Do you want to proceed with registration?`;
           </button>
 
           {/* Menu Title */}
-          <div className="text-center pt-8 pb-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-white tracking-widest">MENU</h1>
+          <div className="text-center pt-4 2xs:pt-6 xs:pt-6 sm:pt-8 pb-2 2xs:pb-3 xs:pb-4">
+            <h1 className="text-3xl 2xs:text-4xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-widest">MENU</h1>
           </div>
 
           {/* Grid Menu Items - Centered */}
-          <div className="flex items-center justify-center h-[calc(100vh-140px)]">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="flex items-center justify-center h-[calc(100vh-100px)] 2xs:h-[calc(100vh-120px)] xs:h-[calc(100vh-120px)] sm:h-[calc(100vh-140px)]">
+            <div className="max-w-7xl mx-auto px-3 2xs:px-4 xs:px-6 sm:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 2xs:gap-3 xs:gap-4 sm:gap-6">
               {/* HOME */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
                  style={{ 
                   transformStyle: 'preserve-3d',
@@ -2227,7 +2227,7 @@ Do you want to proceed with registration?`;
 
               {/* EVENTS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={handleEventsInfoClick}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2245,13 +2245,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗡️</div>
-                <span className="text-white text-lg font-semibold tracking-wide">EVENTS</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ—¡ï¸</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">EVENTS</span>
               </div>
 
               {/* PROFILE */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2269,13 +2269,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">⚓</div>
-                <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">âš“</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">PROFILE</span>
               </div>
 
               {/* SCHEDULE */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/schedule');
                   setShowPageMenu(false); 
@@ -2296,13 +2296,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🔭</div>
-                <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ”­</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">SCHEDULE</span>
               </div>
 
               {/* COLLABORATION */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/collaboration');
                   setShowPageMenu(false); 
@@ -2323,13 +2323,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🛢️</div>
-                <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ›¢ï¸</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">COLLABORATION</span>
               </div>
 
               {/* ZONALS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/zonals');
                   setShowPageMenu(false); 
@@ -2350,13 +2350,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗼</div>
-                <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ—¼</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">ZONALS</span>
               </div>
 
               {/* PARA SPORTS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/para-sports');
                   setShowPageMenu(false); 
@@ -2377,13 +2377,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🧭</div>
-                <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ§­</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">PARA SPORTS</span>
               </div>
 
               {/* HOSPITALITY */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/hospitality');
                   setShowPageMenu(false); 
@@ -2404,13 +2404,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🌴</div>
-                <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸŒ´</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">HOSPITALITY</span>
               </div>
 
               {/* CAMPUS AMBASSADOR */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2428,13 +2428,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🚢</div>
-                <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸš¢</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">CAMPUS AMBASSADOR</span>
               </div>
 
               {/* SPONSORS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/sponsors');
                   setShowPageMenu(false); 
@@ -2455,13 +2455,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">📦</div>
-                <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ“¦</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">SPONSORS</span>
               </div>
 
               {/* OUR TEAM */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/our-team');
                   setShowPageMenu(false); 
@@ -2482,13 +2482,13 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">💣</div>
-                <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ’£</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">OUR TEAM</span>
               </div>
 
               {/* MAP */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-xl 2xs:rounded-2xl p-3 2xs:p-4 xs:p-6 sm:p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[100px] 2xs:min-h-[120px] xs:min-h-[140px] sm:min-h-[180px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/campus-map');
                   setShowPageMenu(false); 
@@ -2509,8 +2509,8 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗺️</div>
-                <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
+                <div className="text-3xl 2xs:text-4xl xs:text-5xl sm:text-6xl mb-2 2xs:mb-3 xs:mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">ðŸ—ºï¸</div>
+                <span className="text-white text-xs 2xs:text-sm xs:text-base sm:text-lg font-semibold tracking-wide text-center">MAP</span>
               </div>
             </div>
           </div>
@@ -2525,14 +2525,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraSportsCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaSportsSlide + index) % paraSportsCards.length;
@@ -2556,7 +2556,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaSportsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaSportsSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraSportsCards.map((_, index) => (
@@ -2578,14 +2578,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>PARA ATHLETICS MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraAthleticsMenCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaAthleticsSlide + index) % paraAthleticsMenCards.length;
@@ -2608,7 +2608,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraAthleticsMenCards.map((_: unknown, index: number) => (
@@ -2630,14 +2630,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>PARA CRICKET MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraCricketMenCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaCricketSlide + index) % paraCricketMenCards.length;
@@ -2660,7 +2660,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraCricketMenCards.map((_: unknown, index: number) => (
@@ -2682,14 +2682,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>CULTURAL CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>Ã—</button>
             </div>
             <div className="culturals-navigation">
-              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>â—€</button>
               <div 
                 className="culturals-carousel-3d-container"
                 onTouchStart={onTouchStart}
@@ -2777,7 +2777,7 @@ Do you want to proceed with registration?`;
                   })}
                 </div>
               </div>
-              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
+              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {culturalsCards.map((_: typeof culturalsCards[0], index: number) => (
@@ -2799,14 +2799,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>MUSIC EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, musicCards.length) }).map((_, index) => {
                   const cardIndex = (currentMusicSlide + index) % musicCards.length;
@@ -2824,7 +2824,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {musicCards.map((_: unknown, index: number) => (
@@ -2846,14 +2846,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>DANCE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, danceCards.length) }).map((_, index) => {
                   const cardIndex = (currentDanceSlide + index) % danceCards.length;
@@ -2871,7 +2871,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {danceCards.map((_: unknown, index: number) => (
@@ -2893,14 +2893,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>THEATRE & CINEMATOGRAPHY</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, theatreCards.length) }).map((_, index) => {
                   const cardIndex = (currentTheatreSlide + index) % theatreCards.length;
@@ -2918,7 +2918,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {theatreCards.map((_: unknown, index: number) => (
@@ -2940,14 +2940,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>LITERATURE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, literatureCards.length) }).map((_, index) => {
                   const cardIndex = (currentLiteratureSlide + index) % literatureCards.length;
@@ -2965,7 +2965,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {literatureCards.map((_: unknown, index: number) => (
@@ -2987,14 +2987,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>VISUAL ARTS & CRAFT</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, visualArtsCards.length) }).map((_, index) => {
                   const cardIndex = (currentVisualArtsSlide + index) % visualArtsCards.length;
@@ -3012,7 +3012,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {visualArtsCards.map((_: unknown, index: number) => (
@@ -3034,14 +3034,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>FASHION DESIGN & STYLING</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, fashionDesignCards.length) }).map((_, index) => {
                   const cardIndex = (currentFashionDesignSlide + index) % fashionDesignCards.length;
@@ -3059,7 +3059,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {fashionDesignCards.map((_: unknown, index: number) => (
@@ -3081,14 +3081,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>SPOT LIGHT EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
                   const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
@@ -3106,7 +3106,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {spotLightCards.map((_: unknown, index: number) => (
@@ -3130,7 +3130,7 @@ Do you want to proceed with registration?`;
                 <button className="circular-back-button" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}></button>
                 <h2>SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>Ã—</button>
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
@@ -3255,14 +3255,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentIndoorSlide + index) % indoorSportsCards.length;
@@ -3287,7 +3287,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextIndoorSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextIndoorSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {indoorSportsCards.map((_, index) => (
@@ -3309,14 +3309,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentWomenIndoorSlide + index) % womenIndoorSportsCards.length;
@@ -3341,7 +3341,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextWomenIndoorSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenIndoorSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {womenIndoorSportsCards.map((_, index) => (
@@ -3363,14 +3363,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>MEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentMenTeamSlide + index) % menTeamSportsCards.length;
@@ -3395,7 +3395,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextMenTeamSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextMenTeamSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {menTeamSportsCards.map((_, index) => (
@@ -3417,14 +3417,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  â† Back
                 </button>
                 <h2>WOMEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>Ã—</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>â—€</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentWomenTeamSlide + index) % womenTeamSportsCards.length;
@@ -3449,7 +3449,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextWomenTeamSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenTeamSlide}>â–¶</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {womenTeamSportsCards.map((_, index) => (
@@ -3634,7 +3634,7 @@ Do you want to proceed with registration?`;
       {showEventsInfo && (
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
-            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>×</button>
+            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>Ã—</button>
             <div className="events-info-grid">
               {eventInfoCards.map((card, index) => (
                 <div key={index} className="event-info-card">
@@ -3656,7 +3656,7 @@ Do you want to proceed with registration?`;
           <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>Welcome Back!</h2>
-              <button className="close-btn" onClick={handleCloseLogin}>×</button>
+              <button className="close-btn" onClick={handleCloseLogin}>Ã—</button>
             </div>
             <div className="login-modal-body">
               <form className="login-form" onSubmit={handleLoginSubmit}>
@@ -3699,7 +3699,7 @@ Do you want to proceed with registration?`;
                   <button type="button" onClick={handleForgotPasswordClick} className="forgot-password">Forgot password?</button>
                 </div>
                 <button type="submit" className="login-submit-btn" disabled={isLoggingIn}>
-                  {isLoggingIn ? '⏳ Logging in...' : '🔑 Login'}
+                  {isLoggingIn ? 'â³ Logging in...' : 'ðŸ”‘ Login'}
                 </button>
                 <div className="signup-link">
                   <p>Don't have an account? <button type="button" onClick={handleSignupClick} className="signup-btn">Sign up</button></p>
@@ -3726,23 +3726,23 @@ Do you want to proceed with registration?`;
             
             <div className="login-modal-header">
               <h2>Join Mahotsav 2026</h2>
-              <button className="close-btn" onClick={handleCloseSignup}>×</button>
+              <button className="close-btn" onClick={handleCloseSignup}>Ã—</button>
             </div>
             
             {/* Progress Steps */}
             <div className="signup-steps-indicator">
               <div className={`step ${signupStep >= 1 ? 'active' : ''} ${signupStep > 1 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 1 ? '✓' : '1'}</div>
+                <div className="step-number">{signupStep > 1 ? 'âœ“' : '1'}</div>
                 <div className="step-label">Personal Info</div>
               </div>
               <div className="step-connector"></div>
               <div className={`step ${signupStep >= 2 ? 'active' : ''} ${signupStep > 2 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 2 ? '✓' : '2'}</div>
+                <div className="step-number">{signupStep > 2 ? 'âœ“' : '2'}</div>
                 <div className="step-label">Academic Info</div>
               </div>
               <div className="step-connector"></div>
               <div className={`step ${signupStep >= 3 ? 'active' : ''} ${signupStep > 3 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 3 ? '✓' : '3'}</div>
+                <div className="step-number">{signupStep > 3 ? 'âœ“' : '3'}</div>
                 <div className="step-label">Contact Info</div>
               </div>
             </div>
@@ -3758,7 +3758,7 @@ Do you want to proceed with registration?`;
                 {/* Step 1: Personal Information */}
                 {signupStep === 1 && (
                   <div className="form-section">
-                    <h3>👤 Personal Information</h3>
+                    <h3>ðŸ‘¤ Personal Information</h3>
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="name">Full Name *</label>
@@ -3808,7 +3808,7 @@ Do you want to proceed with registration?`;
                 {/* Step 2: Academic Information */}
                 {signupStep === 2 && (
                   <div className="form-section">
-                    <h3>🎓 Academic Information</h3>
+                    <h3>ðŸŽ“ Academic Information</h3>
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="college">College Name *</label>
@@ -3849,7 +3849,7 @@ Do you want to proceed with registration?`;
                 {/* Step 3: Contact Information */}
                 {signupStep === 3 && (
                   <div className="form-section">
-                    <h3>📞 Contact Information</h3>
+                    <h3>ðŸ“ž Contact Information</h3>
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="email">Email Address *</label>
@@ -3890,7 +3890,7 @@ Do you want to proceed with registration?`;
                       className="signup-prev-btn"
                       onClick={handlePrevStep}
                     >
-                      ← Previous
+                      â† Previous
                     </button>
                   )}
                   
@@ -3900,7 +3900,7 @@ Do you want to proceed with registration?`;
                       className="signup-next-btn"
                       onClick={handleNextStep}
                     >
-                      Next →
+                      Next â†’
                     </button>
                   ) : (
                     <button 
@@ -3908,7 +3908,7 @@ Do you want to proceed with registration?`;
                       className="signup-submit-btn"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? '⏳ Creating Account...' : '🎉 Create Account & Get Mahotsav ID'}
+                      {isSubmitting ? 'â³ Creating Account...' : 'ðŸŽ‰ Create Account & Get Mahotsav ID'}
                     </button>
                   )}
                 </div>
@@ -3928,7 +3928,7 @@ Do you want to proceed with registration?`;
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
-              <button className="close-btn" onClick={handleCloseSubModal}>×</button>
+              <button className="close-btn" onClick={handleCloseSubModal}>Ã—</button>
             </div>
             <div className="sub-modal-body">
               {activeSubModal === 'EVENTS' && (
@@ -3942,7 +3942,7 @@ Do you want to proceed with registration?`;
                       <div className="events-category-grid">
                       {/* Sports Events */}
                       <div className="event-category-card">
-                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
+                        <h3>âš½ Sports Events ({getFilteredSportsEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredSportsEvents().length > 0 ? (
                             getFilteredSportsEvents().map((event) => (
@@ -3984,7 +3984,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Cultural Events */}
                       <div className="event-category-card">
-                        <h3>🎨 Cultural Events ({getFilteredCulturalEvents().length})</h3>
+                        <h3>ðŸŽ¨ Cultural Events ({getFilteredCulturalEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredCulturalEvents().length > 0 ? (
                             getFilteredCulturalEvents().map((event) => (
@@ -4026,12 +4026,12 @@ Do you want to proceed with registration?`;
                       
                       {/* Para Sports Events */}
                       <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                        <h3>â™¿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
                         {getFilteredParaSportsEvents().length === 0 && (
                           <div>
-                            <p style={{color: '#e74c3c', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
+                            <p style={{color: '#e74c3c', fontWeight: 'bold'}}>âš ï¸ No para sports events loaded. Server might be down.</p>
                             <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px'}}>
-                              🔄 Retry Loading Events
+                              ðŸ”„ Retry Loading Events
                             </button>
                           </div>
                         )}
@@ -4078,10 +4078,10 @@ Do you want to proceed with registration?`;
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
                                   <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  {event.date && <p className="event-meta">ðŸ“… {event.date}</p>}
+                                  {event.venue && <p className="event-meta">ðŸ“ {event.venue}</p>}
+                                  {event.prizePool && <p className="event-meta">ðŸ’° {event.prizePool}</p>}
+                                  {event.category && <p className="event-meta">ðŸ·ï¸ {event.category}</p>}
                                 </div>
                               </label>
                             ))
@@ -4104,7 +4104,7 @@ Do you want to proceed with registration?`;
                             userProfileData.gender || 'unknown'
                           );
                           const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `₹${totalAmount}`;
+                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `â‚¹${totalAmount}`;
                           return (
                             <div className="price-preview">
                               Total: {formattedAmount}
@@ -4122,7 +4122,7 @@ Do you want to proceed with registration?`;
                           className="register-events-btn"
                           onClick={handleRegisterForEvents}
                         >
-                          🎯 Register for Events ({tempSelectedEvents.size})
+                          ðŸŽ¯ Register for Events ({tempSelectedEvents.size})
                         </button>
                       )}
                     </div>
@@ -4326,11 +4326,11 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseUserIdPopup}>
           <div className="userid-popup-content" onClick={(e) => e.stopPropagation()}>
             <div className="userid-popup-header">
-              <h2>🎉 Registration Successful!</h2>
+              <h2>ðŸŽ‰ Registration Successful!</h2>
             </div>
             <div className="userid-popup-body">
               <div className="userid-display">
-                <div className="success-icon">✓</div>
+                <div className="success-icon">âœ“</div>
                 <h3>Your Mahotsav ID</h3>
                 <div className="userid-box">
                   <span className="userid-text">{generatedUserId}</span>
@@ -4339,9 +4339,9 @@ Do you want to proceed with registration?`;
                   Please save this ID for future reference. You will need this ID to login and participate in events.
                 </p>
                 <div className="userid-info">
-                  <p>📧 A confirmation email has been sent to your registered email address with your credentials.</p>
-                  <p>🔑 Your password is your date of birth in DDMMYYYY format (e.g., 15012000).</p>
-                  <p>📝 Use your email/Mahotsav ID and password to login.</p>
+                  <p>ðŸ“§ A confirmation email has been sent to your registered email address with your credentials.</p>
+                  <p>ðŸ”‘ Your password is your date of birth in DDMMYYYY format (e.g., 15012000).</p>
+                  <p>ðŸ“ Use your email/Mahotsav ID and password to login.</p>
                 </div>
               </div>
               <button className="userid-close-btn" onClick={handleCloseUserIdPopup}>
@@ -4357,8 +4357,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseForgotPassword}>
           <div className="forgot-password-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>🔑 Forgot Password</h2>
-              <button className="close-btn" onClick={handleCloseForgotPassword}>×</button>
+              <h2>ðŸ”‘ Forgot Password</h2>
+              <button className="close-btn" onClick={handleCloseForgotPassword}>Ã—</button>
             </div>
             <div className="forgot-password-modal-body">
               <p className="forgot-password-instructions">
@@ -4391,7 +4391,7 @@ Do you want to proceed with registration?`;
                   className="forgot-password-submit-btn"
                   disabled={isSendingReset}
                 >
-                  {isSendingReset ? '📧 Sending...' : '📧 Send Password to Email'}
+                  {isSendingReset ? 'ðŸ“§ Sending...' : 'ðŸ“§ Send Password to Email'}
                 </button>
                 
                 <div className="back-to-login">
@@ -4403,7 +4403,7 @@ Do you want to proceed with registration?`;
                     }} 
                     className="back-to-login-btn"
                   >
-                    ← Back to Login
+                    â† Back to Login
                   </button>
                 </div>
               </form>
@@ -4417,8 +4417,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseProfile}>
           <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>👤 My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>×</button>
+              <h2>ðŸ‘¤ My Profile</h2>
+              <button className="close-btn" onClick={handleCloseProfile}>Ã—</button>
             </div>
             <div className="login-modal-body">
               <div className="profile-details">
@@ -4430,7 +4430,7 @@ Do you want to proceed with registration?`;
                 </div>
                 
                 <div className="profile-info-section">
-                  <h4>📋 Personal Information</h4>
+                  <h4>ðŸ“‹ Personal Information</h4>
                   <div className="profile-info-grid">
                     <div className="profile-info-item">
                       <span className="info-label">Full Name:</span>
@@ -4452,7 +4452,7 @@ Do you want to proceed with registration?`;
                 </div>
 
                 <div className="profile-stats-section">
-                  <h4>📊 Activity Summary</h4>
+                  <h4>ðŸ“Š Activity Summary</h4>
                   <div className="stats-grid">
                     <div className="stat-box">
                       <div className="stat-number">{eventRegistrationsCount}</div>
@@ -4466,8 +4466,8 @@ Do you want to proceed with registration?`;
                 </div>
 
                 <div className="profile-actions">
-                  <button className="profile-action-btn edit-btn">✏️ Edit Profile</button>
-                  <button className="profile-action-btn logout-btn" onClick={handleLogout}>🚪 Logout</button>
+                  <button className="profile-action-btn edit-btn">âœï¸ Edit Profile</button>
+                  <button className="profile-action-btn logout-btn" onClick={handleLogout}>ðŸšª Logout</button>
                 </div>
               </div>
             </div>
@@ -4491,8 +4491,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseEventChecklist}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>📋 Select Events</h2>
-              <button className="close-btn" onClick={handleCloseEventChecklist}>×</button>
+              <h2>ðŸ“‹ Select Events</h2>
+              <button className="close-btn" onClick={handleCloseEventChecklist}>Ã—</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -4508,9 +4508,9 @@ Do you want to proceed with registration?`;
                   {/* Sports Events Section */}
                   {getFilteredSportsEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>⚽ Sports Events
+                      <h3>âš½ Sports Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (₹{getPricingForUser().sports} each)</span>
+                          <span className="pricing-info"> (â‚¹{getPricingForUser().sports} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
@@ -4524,8 +4524,8 @@ Do you want to proceed with registration?`;
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">📅 {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">📍 {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">ðŸ“… {event.date}</span>}
+                              {event.venue && <span className="event-meta-small">ðŸ“ {event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -4536,9 +4536,9 @@ Do you want to proceed with registration?`;
                   {/* Cultural Events Section */}
                   {getFilteredCulturalEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>🎨 Cultural Events
+                      <h3>ðŸŽ¨ Cultural Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (₹{getPricingForUser().culturals} each)</span>
+                          <span className="pricing-info"> (â‚¹{getPricingForUser().culturals} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
@@ -4552,8 +4552,8 @@ Do you want to proceed with registration?`;
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">📅 {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">📍 {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">ðŸ“… {event.date}</span>}
+                              {event.venue && <span className="event-meta-small">ðŸ“ {event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -4581,7 +4581,7 @@ Do you want to proceed with registration?`;
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
                 >
-                  💾 Save to My Events
+                  ðŸ’¾ Save to My Events
                 </button>
               </div>
             </div>
@@ -4594,8 +4594,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>🎫 My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
+              <h2>ðŸŽ« My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>Ã—</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -4610,17 +4610,17 @@ Do you want to proceed with registration?`;
                         <div className="my-event-header">
                           <h4>{event.eventName}</h4>
                           <span className="event-type-badge">
-                            {event.eventType === 'sports' ? '⚽' : event.eventType === 'parasports' ? '🏅' : '🎨'} {event.eventType}
+                            {event.eventType === 'sports' ? 'âš½' : event.eventType === 'parasports' ? 'ðŸ…' : 'ðŸŽ¨'} {event.eventType}
                           </span>
                         </div>
                         <p>{event.description || 'No description'}</p>
                         <div className="event-details-grid">
-                          {event.date && <p className="event-meta">📅 {event.date}</p>}
-                          {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                          {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
+                          {event.date && <p className="event-meta">ðŸ“… {event.date}</p>}
+                          {event.venue && <p className="event-meta">ðŸ“ {event.venue}</p>}
+                          {event.prizePool && <p className="event-meta">ðŸ’° {event.prizePool}</p>}
                         </div>
                         <div className="event-registered-badge">
-                          ✅ Registered
+                          âœ… Registered
                         </div>
                       </div>
                     </div>

@@ -111,6 +111,22 @@
   }
 }
 
+/* Extra small screens - 360px width (360x740) */
+@media (max-width: 360px) {
+  .animated-icon-container {
+    width: 90vw;
+    height: 90vw;
+  }
+}
+
+/* Very small screens - 344px width (344x882) */
+@media (max-width: 344px) {
+  .animated-icon-container {
+    width: 95vw;
+    height: 95vw;
+  }
+}
+
 .animated-icon-image {
   width: 100%;
   height: auto;
@@ -5322,6 +5338,40 @@
   }
 }
 
+/* 360x740 screens */
+@media (max-width: 360px) {
+  .login-modal-overlay {
+    padding: 8px;
+  }
+  
+  .login-modal-content,
+  .overview-modal-content,
+  .signup-modal-content,
+  .sub-modal-content {
+    width: 100%;
+    margin: 0;
+    border-radius: 12px;
+    max-height: 96vh;
+  }
+}
+
+/* 344x882 screens */
+@media (max-width: 344px) {
+  .login-modal-overlay {
+    padding: 5px;
+  }
+  
+  .login-modal-content,
+  .overview-modal-content,
+  .signup-modal-content,
+  .sub-modal-content {
+    width: 100%;
+    margin: 0;
+    border-radius: 10px;
+    max-height: 97vh;
+  }
+}
+
 .events-modal-container {
   width: 100%;
   max-width: 1400px;
@@ -5619,6 +5669,36 @@
   }
 }
 
+/* 360x740 screens */
+@media (max-width: 360px) {
+  .form-input,
+  .form-select {
+    padding: 9px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+  }
+  
+  .form-group label {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+}
+
+/* 344x882 screens */
+@media (max-width: 344px) {
+  .form-input,
+  .form-select {
+    padding: 8px;
+    font-size: 0.78rem;
+    border-radius: 6px;
+  }
+  
+  .form-group label {
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+  }
+}
+
 .form-input::placeholder {
   color: rgba(194, 24, 91, 0.6);
   font-weight: 400;
@@ -5809,6 +5889,26 @@
   .signup-submit-btn {
     padding: 12px;
     font-size: 0.9rem;
+  }
+}
+
+/* 360x740 screens */
+@media (max-width: 360px) {
+  .login-submit-btn,
+  .signup-submit-btn {
+    padding: 10px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+}
+
+/* 344x882 screens */
+@media (max-width: 344px) {
+  .login-submit-btn,
+  .signup-submit-btn {
+    padding: 9px;
+    font-size: 0.8rem;
+    border-radius: 8px;
   }
 }
 
@@ -10732,6 +10832,86 @@ html {
   }
 }
 
+/* Small mobile - 360x740 screens */
+@media (max-width: 360px) {
+  .menu-grid-card {
+    min-height: 80px;
+    padding: 0.5rem;
+    border-radius: 12px;
+  }
+  
+  .menu-grid-card .text-6xl,
+  .menu-grid-card .text-3xl,
+  .menu-grid-card .text-4xl,
+  .menu-grid-card .text-5xl {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.25rem;
+  }
+  
+  .menu-grid-card .text-lg,
+  .menu-grid-card .text-xs,
+  .menu-grid-card .text-sm,
+  .menu-grid-card .text-base {
+    font-size: 0.6rem !important;
+    line-height: 1.1;
+  }
+  
+  .inline-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 0 4px;
+  }
+  
+  .inline-menu-item {
+    padding: 16px 10px;
+    min-height: 85px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.8rem;
+  }
+}
+
+/* Very small mobile - 344x882 screens */
+@media (max-width: 344px) {
+  .menu-grid-card {
+    min-height: 75px;
+    padding: 0.4rem;
+    border-radius: 10px;
+  }
+  
+  .menu-grid-card .text-6xl,
+  .menu-grid-card .text-3xl,
+  .menu-grid-card .text-4xl,
+  .menu-grid-card .text-5xl {
+    font-size: 1.35rem !important;
+    margin-bottom: 0.2rem;
+  }
+  
+  .menu-grid-card .text-lg,
+  .menu-grid-card .text-xs,
+  .menu-grid-card .text-sm,
+  .menu-grid-card .text-base {
+    font-size: 0.55rem !important;
+    line-height: 1.05;
+  }
+  
+  .inline-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    padding: 0 3px;
+  }
+  
+  .inline-menu-item {
+    padding: 14px 8px;
+    min-height: 80px;
+  }
+  
+  .inline-menu-item span {
+    font-size: 0.75rem;
+  }
+}
+
 /* Mobile responsive for EventsInfo cards and grids */
 /* Note: Grid responsive styles handled by Tailwind classes in components */
 
@@ -10933,3 +11113,58 @@ html {
   }
 }
 
+/* 360x740 screens */
+@media (max-width: 360px) {
+  .signup-steps-indicator {
+    padding: 10px 10px 6px;
+  }
+  
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+  
+  .step-label {
+    font-size: 0.6rem;
+  }
+  
+  .step-connector {
+    width: 25px;
+    margin: 0 2px;
+  }
+  
+  .signup-prev-btn,
+  .signup-next-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* 344x882 screens */
+@media (max-width: 344px) {
+  .signup-steps-indicator {
+    padding: 8px 8px 5px;
+  }
+  
+  .step-number {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+  }
+  
+  .step-label {
+    font-size: 0.55rem;
+  }
+  
+  .step-connector {
+    width: 20px;
+    margin: 0 1px;
+  }
+  
+  .signup-prev-btn,
+  .signup-next-btn {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+  }
+}

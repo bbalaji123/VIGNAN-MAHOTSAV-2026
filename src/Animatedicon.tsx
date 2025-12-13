@@ -102,7 +102,7 @@ const AnimatedIcon: React.FC = () => {
     <div
       ref={iconRef}
       className="fixed bottom-0 left-1/2 z-[8] 
-                 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[550px] md:h-[550px] lg:w-[720px] lg:h-[720px]
+                 w-[200px] h-[200px] 2xs:w-[220px] 2xs:h-[220px] xs:w-[250px] xs:h-[250px] sm:w-[400px] sm:h-[400px] md:w-[550px] md:h-[550px] lg:w-[720px] lg:h-[720px]
                  drop-shadow-[0_10px_40px_rgba(0,0,0,0.4)] pointer-events-none"
       style={{ transform }}
     >

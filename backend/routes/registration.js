@@ -1,7 +1,6 @@
 import express from 'express';
 import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
-import mongoose from 'mongoose';
 import { sendWelcomeEmail, sendPasswordResetEmail } from '../utils/emailService.js';
 import { generateUserId } from '../utils/idGenerator.js';
 
@@ -56,16 +55,12 @@ router.post('/register', async (req, res) => {
     let lastError = null;
     
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-      // Start transaction for the actual registration
-      const session = await mongoose.startSession();
-      session.startTransaction();
-    
       try {
         // Generate unique user ID (queue ensures uniqueness)
         const userId = await generateUserId();
         console.log(`🔄 Attempt ${attempt}: Generated userId ${userId}`);
 
-        // Create new registration
+        // Create new registration (without transaction for better compatibility)
         const registration = new Registration({
           userId,
           name,
@@ -81,98 +76,93 @@ router.post('/register', async (req, res) => {
           paymentStatus: 'unpaid' // Automatically set to unpaid
         });
 
-        await registration.save({ session });
+        await registration.save();
+        console.log(`✅ Registration saved for ${name} (${userId})`);
 
-      // If user is a participant, also save to participants collection
-      if (userType === 'participant') {
-        try {
-          const participant = new Participant({
-            userId,
-            name,
-            email: normalizedEmail, // Use normalized email
-            phone,
-            college,
-            dateOfBirth,
-            gender,
-            registerId,
-            participantType: participationType || 'general',
-            registeredEvents: []
-          });
-          
-          await participant.save({ session });
-          console.log(`✅ Participant record created for ${name} (${userId})`);
-        } catch (participantError) {
-          console.error('Error creating participant record:', participantError);
-          // Roll back transaction on participant save failure
-          throw participantError;
-        }
-      }
-
-      // Commit the transaction
-      await session.commitTransaction();
-      session.endSession();
-
-      // Send welcome email with credentials (async, don't wait for it)
-      sendWelcomeEmail(normalizedEmail, userId, password, name)
-        .then(success => {
-          if (success) {
-            console.log(`✅ Welcome email sent to ${normalizedEmail}`);
-          } else {
-            console.log(`⚠️  Email sending failed for ${normalizedEmail}, but registration succeeded`);
+        // If user is a participant, also save to participants collection
+        if (userType === 'participant') {
+          try {
+            const participant = new Participant({
+              userId,
+              name,
+              email: normalizedEmail, // Use normalized email
+              phone,
+              college,
+              dateOfBirth,
+              gender,
+              registerId,
+              participantType: participationType || 'general',
+              registeredEvents: []
+            });
+            
+            await participant.save();
+            console.log(`✅ Participant record created for ${name} (${userId})`);
+          } catch (participantError) {
+            console.error('Error creating participant record:', participantError);
+            // If participant save fails, we should clean up the registration
+            // But the registration is still valid, so we can continue
+            console.log(`⚠️  Participant record failed but registration succeeded for ${name}`);
           }
-        })
-        .catch(err => {
-          console.error(`❌ Email error for ${normalizedEmail}:`, err.message);
-        });
+        }
 
-      return res.status(201).json({
-        success: true,
-        message: 'Registration successful',
-        data: {
-          id: registration._id,
-          userId: registration.userId,
-          name: registration.name,
-          email: registration.email
-        }
-      });
-    } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      
-      console.error(`Registration error (attempt ${attempt}):`, error);
-      lastError = error;
-      
-      // Handle duplicate key errors
-      if (error.code === 11000) {
-        // Check which field caused the duplicate
-        if (error.keyPattern?.email) {
-          return res.status(409).json({
-            success: false,
-            message: 'This email is already registered. Please use a different email or login with your existing account.',
-            error: 'Duplicate email'
+        // Send welcome email with credentials (async, don't wait for it)
+        sendWelcomeEmail(normalizedEmail, userId, password, name)
+          .then(success => {
+            if (success) {
+              console.log(`✅ Welcome email sent to ${normalizedEmail}`);
+            } else {
+              console.log(`⚠️  Email sending failed for ${normalizedEmail}, but registration succeeded`);
+            }
+          })
+          .catch(err => {
+            console.error(`❌ Email error for ${normalizedEmail}:`, err.message);
           });
-        } else if (error.keyPattern?.userId) {
-          // This is a race condition - retry with a new ID
-          console.log(`⚠️  userId conflict on attempt ${attempt}, retrying...`);
-          // Add small delay before retry
-          await new Promise(resolve => setTimeout(resolve, 100 * attempt));
-          continue; // Retry with next attempt
-        } else {
-          return res.status(409).json({
-            success: false,
-            message: 'This account already exists. Please try a different email.',
-            error: 'Duplicate registration detected'
-          });
+
+        return res.status(201).json({
+          success: true,
+          message: 'Registration successful',
+          data: {
+            id: registration._id,
+            userId: registration.userId,
+            name: registration.name,
+            email: registration.email
+          }
+        });
+      } catch (error) {
+        console.error(`Registration error (attempt ${attempt}):`, error);
+        lastError = error;
+        
+        // Handle duplicate key errors
+        if (error.code === 11000) {
+          // Check which field caused the duplicate
+          if (error.keyPattern?.email) {
+            return res.status(409).json({
+              success: false,
+              message: 'This email is already registered. Please use a different email or login with your existing account.',
+              error: 'Duplicate email'
+            });
+          } else if (error.keyPattern?.userId) {
+            // This is a race condition - retry with a new ID
+            console.log(`⚠️  userId conflict on attempt ${attempt}, retrying...`);
+            // Add small delay before retry
+            await new Promise(resolve => setTimeout(resolve, 100 * attempt));
+            continue; // Retry with next attempt
+          } else {
+            return res.status(409).json({
+              success: false,
+              message: 'This account already exists. Please try a different email.',
+              error: 'Duplicate registration detected'
+            });
+          }
         }
+        
+        // For non-duplicate errors, don't retry
+        return res.status(500).json({ 
+          success: false, 
+          message: 'Server error during registration',
+          error: error.message 
+        });
       }
-      
-      // For non-duplicate errors, don't retry
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Server error during registration',
-        error: error.message 
-      });
-    }
     } // End of retry loop
     
     // All retries exhausted for userId conflict

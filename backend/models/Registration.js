@@ -53,7 +53,7 @@ const registrationSchema = new mongoose.Schema({
   },
   participationType: {
     type: String,
-    enum: ['sports', 'culturals', 'none'],
+    enum: ['sports', 'culturals', 'none', 'college', 'general', 'external'],
     default: 'none'
   },
   paymentStatus: {
@@ -63,7 +63,7 @@ const registrationSchema = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    default: 250
+    default: 0
   }
 }, {
   collection: 'registrations',

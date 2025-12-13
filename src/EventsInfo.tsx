@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import './FloatingIcons.css';
 import { getEventsByType, type Event } from './services/api';
 
 const EventsInfo: React.FC = () => {

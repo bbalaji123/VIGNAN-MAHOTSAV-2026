@@ -1,6 +1,5 @@
 import React from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import './LoadingAnimation.css';
 
 interface LoadingAnimationProps {
   message?: string;
@@ -14,15 +13,25 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
   fullScreen = false 
 }) => {
   return (
-    <div className={`loading-animation-container ${fullScreen ? 'fullscreen' : ''}`}>
-      <div className="loading-animation-content">
+    <div className={`flex items-center justify-center flex-col
+      ${fullScreen ? 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[10000]' : ''}`}
+    >
+      <div className={`flex flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-lg
+        ${fullScreen ? 'bg-white/15 shadow-2xl' : 'bg-transparent'}`}
+      >
         <DotLottieReact
           src="/loading.lottie"
           loop
           autoplay
           style={{ width: size, height: size }}
         />
-        {message && <p className="loading-message">{message}</p>}
+        {message && (
+          <p className={`mt-4 text-lg text-center font-medium animate-pulse
+            ${fullScreen ? 'text-white' : 'text-orange-500'}`}
+          >
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );

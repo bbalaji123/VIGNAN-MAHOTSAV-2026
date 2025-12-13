@@ -300,48 +300,104 @@ export const getEventById = async (id: string): Promise<EventsResponse> => {
   }
 };
 
-// Register for individual event
+// Register for individual event - with silent retry for queue conflicts
 export const registerIndividualEvent = async (registrationData: IndividualEventRegistration): Promise<EventRegistrationResponse> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/register-individual`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registrationData),
-    });
+  const maxRetries = 5;
+  const baseDelay = 1000; // 1 second base delay
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/register-individual`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registrationData),
+      });
 
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'Failed to register for event',
-      error: error.message,
-    };
+      const data = await response.json();
+      
+      // If server is busy (409 conflict or 500 server busy), retry silently
+      if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
+        const delay = baseDelay * attempt; // Linear backoff
+        console.log(`Registration attempt ${attempt} - server busy, retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      return data;
+    } catch (error: any) {
+      // Network error - retry silently
+      if (attempt < maxRetries) {
+        const delay = baseDelay * attempt;
+        console.log(`Registration attempt ${attempt} - network error, retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      return {
+        success: false,
+        message: 'Registration is processing. Please wait.',
+        error: error.message,
+      };
+    }
   }
+  
+  // All retries exhausted - still return a hopeful message
+  return {
+    success: false,
+    message: 'Registration is taking longer than expected. Please try again.',
+  };
 };
 
-// Register team for event
+// Register team for event - with silent retry for queue conflicts
 export const registerTeamEvent = async (registrationData: TeamEventRegistration): Promise<EventRegistrationResponse> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/register-team`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registrationData),
-    });
+  const maxRetries = 5;
+  const baseDelay = 1000; // 1 second base delay
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/register-team`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registrationData),
+      });
 
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'Failed to register team',
-      error: error.message,
-    };
+      const data = await response.json();
+      
+      // If server is busy (409 conflict or 500 server busy), retry silently
+      if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
+        const delay = baseDelay * attempt; // Linear backoff
+        console.log(`Team registration attempt ${attempt} - server busy, retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      return data;
+    } catch (error: any) {
+      // Network error - retry silently
+      if (attempt < maxRetries) {
+        const delay = baseDelay * attempt;
+        console.log(`Team registration attempt ${attempt} - network error, retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      return {
+        success: false,
+        message: 'Registration is processing. Please wait.',
+        error: error.message,
+      };
+    }
   }
+  
+  // All retries exhausted - still return a hopeful message
+  return {
+    success: false,
+    message: 'Registration is taking longer than expected. Please try again.',
+  };
 };
 
 // Get user's event registrations

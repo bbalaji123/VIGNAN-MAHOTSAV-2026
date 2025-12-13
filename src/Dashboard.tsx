@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
-import './FloatingIcons.css';
 import AnimatedIcon from './Animatedicon';
 import GarudaBubble from './GarudaBubble';
 import EventRegistrationModal from './EventRegistrationModal';
@@ -2106,8 +2105,8 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* The Icon Component - Fixed position, animates with scroll */}
-      <AnimatedIcon iconSrc={`${import.meta.env.BASE_URL}IMG_2037.webp`} />
+      {/* The Icon Component - Fixed position flower */}
+      <AnimatedIcon />
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (

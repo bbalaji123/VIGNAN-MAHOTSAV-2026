@@ -60,6 +60,10 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     enum: ['paid', 'unpaid'],
     default: 'unpaid'
+  },
+  amount: {
+    type: Number,
+    default: 250
   }
 }, {
   collection: 'registrations',

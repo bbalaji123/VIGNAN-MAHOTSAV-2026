@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import './FloatingIcons.css';
 
 const ParaSports: React.FC = () => {
   const navigate = useNavigate();

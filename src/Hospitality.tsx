@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import './FloatingIcons.css';
 import GarudaBubble from './GarudaBubble';
 
 const Hospitality: React.FC = () => {

@@ -7,9 +7,9 @@ interface RotatingFlowerProps {
 
 const RotatingFlower: React.FC<RotatingFlowerProps> = ({ position = 'top-right', size = 'medium' }) => {
   const sizeClasses = {
-    small: 'w-[120px] h-[120px] 2xs:w-[150px] 2xs:h-[150px] xs:w-[180px] xs:h-[180px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px]',
-    medium: 'w-[120px] h-[120px] 2xs:w-[150px] 2xs:h-[150px] xs:w-[180px] xs:h-[180px] sm:w-[250px] sm:h-[250px] md:w-[500px] md:h-[500px]',
-    large: 'w-[150px] h-[150px] 2xs:w-[180px] 2xs:h-[180px] xs:w-[200px] xs:h-[200px] sm:w-[280px] sm:h-[280px] md:w-[700px] md:h-[700px]'
+    small: 'w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px]',
+    medium: 'w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[600px] md:h-[600px]',
+    large: 'w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] md:w-[800px] md:h-[800px]'
   };
 
   const positionClasses = {

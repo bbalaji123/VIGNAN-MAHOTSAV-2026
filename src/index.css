@@ -1,12 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
 
-/* Spin animation for flower rotation */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* Sun rotation animation */
 @keyframes sunRotateClockwise {
   from { transform: rotate(0deg); }

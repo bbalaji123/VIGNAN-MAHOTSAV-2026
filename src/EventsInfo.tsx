@@ -148,7 +148,7 @@ const EventsInfo: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -156,7 +156,7 @@ const EventsInfo: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
         <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
@@ -188,7 +188,7 @@ const EventsInfo: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
         <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
@@ -197,7 +197,6 @@ const EventsInfo: React.FC = () => {
             className="absolute inset-0 w-full h-full object-contain"
             style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
           />
-          {/* Sun layer in center - rotates clockwise */}
           <div className="absolute inset-0 flex items-center justify-center">
             <img 
               src={`${import.meta.env.BASE_URL}sun.png`}

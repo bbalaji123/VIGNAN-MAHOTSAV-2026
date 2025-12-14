@@ -1,7 +1,6 @@
 import express from 'express';
 import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
-import { sendWelcomeEmail, sendPasswordResetEmail } from '../utils/emailService.js';
 import { generateUserId } from '../utils/idGenerator.js';
 
 const router = express.Router();
@@ -104,19 +103,6 @@ router.post('/register', async (req, res) => {
             console.log(`⚠️  Participant record failed but registration succeeded for ${name}`);
           }
         }
-
-        // Send welcome email with credentials (async, don't wait for it)
-        sendWelcomeEmail(normalizedEmail, userId, password, name)
-          .then(success => {
-            if (success) {
-              console.log(`✅ Welcome email sent to ${normalizedEmail}`);
-            } else {
-              console.log(`⚠️  Email sending failed for ${normalizedEmail}, but registration succeeded`);
-            }
-          })
-          .catch(err => {
-            console.error(`❌ Email error for ${normalizedEmail}:`, err.message);
-          });
 
         return res.status(201).json({
           success: true,
@@ -342,7 +328,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Forgot Password - Send credentials to email
+// Forgot Password - Return credentials directly (email disabled)
 router.post('/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -364,29 +350,16 @@ router.post('/forgot-password', async (req, res) => {
       });
     }
 
-    // Send password reset email with credentials
-    const emailSent = await sendPasswordResetEmail(
-      user.email, 
-      user.name, 
-      user.userId, 
-      user.password
-    );
-
-    if (emailSent) {
-      res.status(200).json({
-        success: true,
-        message: 'Password recovery email sent successfully! Please check your inbox.',
-        data: {
-          email: user.email,
-          userId: user.userId
-        }
-      });
-    } else {
-      res.status(500).json({
-        success: false,
-        message: 'Failed to send recovery email. Please try again later.'
-      });
-    }
+    // Return user credentials directly
+    res.status(200).json({
+      success: true,
+      message: 'Account found! Here are your credentials.',
+      data: {
+        email: user.email,
+        userId: user.userId,
+        password: user.password
+      }
+    });
   } catch (error) {
     console.error('Forgot password error:', error);
     res.status(500).json({ 

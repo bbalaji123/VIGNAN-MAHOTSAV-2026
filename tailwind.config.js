@@ -93,8 +93,8 @@ export default {
           '100%': { transform: 'rotate(-360deg)' },
         },
         sunRotate: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
+          '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+          '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' },
         },
         slideUpBounce: {
           '0%': { opacity: '0', transform: 'translateY(30px) scale(0.5)' },

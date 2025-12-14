@@ -2,15 +2,18 @@ import React, { useRef, useEffect, useState } from 'react';
 
 const AnimatedIcon: React.FC = () => {
   const [transform, setTransform] = useState('translate(-50%, 50%)');
+  const [size, setSize] = useState(720);
   const iconRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const updatePosition = () => {
       // Get scroll position using multiple methods for compatibility
-      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      
+      console.log('Scroll Y:', scrollY); // Debug log
       
       // Detect device type based on screen size
       const isSmallMobile = vw < 480;  // Small phones
@@ -18,39 +21,52 @@ const AnimatedIcon: React.FC = () => {
       const isTablet = vw >= 768 && vw < 1024;  // Tablets & Z Fold unfolded
       const isDesktop = vw >= 1024;
       
-      // Adjust scroll range based on device
-      let scrollRange = 500;
-      if (isSmallMobile) scrollRange = 250;
-      else if (isMobile) scrollRange = 300;
-      else if (isTablet) scrollRange = 400;
+      // Set responsive size
+      if (isSmallMobile) {
+        setSize(320);
+      } else if (isMobile) {
+        setSize(400);
+      } else if (isTablet) {
+        setSize(550);
+      } else {
+        setSize(720);
+      }
+      
+      // Adjust scroll range based on device - move quickly
+      let scrollRange = 150;
+      if (isSmallMobile) scrollRange = 80;
+      else if (isMobile) scrollRange = 100;
+      else if (isTablet) scrollRange = 120;
       
       let progress = scrollY / scrollRange;
       progress = Math.min(1, Math.max(0, progress));
 
-      // Move flower to right side - half off screen
-      // Calculate final X position based on screen size
+      // Move flower to right side - only half visible (half off screen)
+      // Calculate final X position - flower center should end at right edge
+      // Since flower starts at left:50% (center of screen), move it by 50% of viewport
+      // to position center at right edge (making half visible)
       let finalX;
       if (isSmallMobile) {
-        finalX = vw * 0.9;  // Move more on small screens
+        finalX = vw * 0.5;  // Move center to right edge
       } else if (isMobile) {
-        finalX = vw * 0.85;
+        finalX = vw * 0.5;
       } else if (isTablet) {
-        finalX = vw * 0.6;  // Tablets like Z Fold
+        finalX = vw * 0.5;
       } else {
-        finalX = vw * 0.5;  // Desktop
+        finalX = vw * 0.5;  // Desktop - center at right edge = half visible
       }
       const newX = progress * finalX;
 
-      // Move up to vertical center
+      // Move up to vertical center (middle of screen)
       let finalY;
       if (isSmallMobile) {
-        finalY = -vh * 0.2;
+        finalY = -vh * 0.5;  // Move to middle
       } else if (isMobile) {
-        finalY = -vh * 0.25;
-      } else if (isTablet) {
-        finalY = -vh * 0.4;
-      } else {
         finalY = -vh * 0.5;
+      } else if (isTablet) {
+        finalY = -vh * 0.5;
+      } else {
+        finalY = -vh * 0.5;  // Middle of screen
       }
       const newY = progress * finalY; 
 
@@ -83,15 +99,23 @@ const AnimatedIcon: React.FC = () => {
     // Listen on both window and document for maximum compatibility
     window.addEventListener('scroll', handleScroll, { passive: true });
     document.addEventListener('scroll', handleScroll, { passive: true });
+    document.body.addEventListener('scroll', handleScroll, { passive: true });
+    document.documentElement.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', updatePosition);
     
     // Initial position
     updatePosition();
     
+    // Also run on interval to catch any missed scrolls
+    const interval = setInterval(updatePosition, 100);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('scroll', handleScroll);
+      document.body.removeEventListener('scroll', handleScroll);
+      document.documentElement.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updatePosition);
+      clearInterval(interval);
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
@@ -101,10 +125,15 @@ const AnimatedIcon: React.FC = () => {
   return (
     <div
       ref={iconRef}
-      className="fixed bottom-0 left-1/2 z-[8] 
-                 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[550px] md:h-[550px] lg:w-[720px] lg:h-[720px]
-                 drop-shadow-[0_10px_40px_rgba(0,0,0,0.4)] pointer-events-none"
-      style={{ transform }}
+      className="z-[8] drop-shadow-[0_10px_40px_rgba(0,0,0,0.4)] pointer-events-none"
+      style={{ 
+        position: 'fixed',
+        bottom: 0,
+        left: '50%',
+        width: `${size}px`,
+        height: `${size}px`,
+        transform 
+      }}
     >
       {/* Petals layer - rotates anticlockwise */}
       <img 

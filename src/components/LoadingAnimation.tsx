@@ -20,7 +20,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
         ${fullScreen ? 'bg-white/15 shadow-2xl' : 'bg-transparent'}`}
       >
         <DotLottieReact
-          src="/loading.lottie"
+          src={`${import.meta.env.BASE_URL}loading.lottie`}
           loop
           autoplay
           style={{ width: size, height: size }}

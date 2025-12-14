@@ -493,6 +493,7 @@ const Dashboard: React.FC = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [flowerScrollOffset, setFlowerScrollOffset] = useState(0);
   const [timeTheme, setTimeTheme] = useState<'day' | 'evening' | 'night'>('day');
   const [signupFormData, setSignupFormData] = useState<SignupData>({
     name: '',
@@ -510,6 +511,7 @@ const Dashboard: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [generatedUserId, setGeneratedUserId] = useState<string | null>(null);
+  const [generatedPassword, setGeneratedPassword] = useState<string | null>(null);
   const [showUserIdPopup, setShowUserIdPopup] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
@@ -777,12 +779,14 @@ const Dashboard: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll detection for sunlight effect
+  // Scroll detection for sunlight effect and flower parallax
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       setIsScrolled(scrollPosition > windowHeight * 0.5);
+      // Update flower parallax offset
+      setFlowerScrollOffset(scrollPosition * 0.15);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -1347,10 +1351,10 @@ const Dashboard: React.FC = () => {
     setSubmitMessage(null);
     setShowUserIdPopup(false);
     setGeneratedUserId(null);
+    setGeneratedPassword(null);
   };
 
   const handleNextStep = () => {
-    // Validate current step before moving forward
     if (signupStep === 1) {
       if (!signupFormData.name || !signupFormData.dateOfBirth) {
         setSubmitMessage({ type: 'error', text: 'Please fill in all required fields' });
@@ -1437,6 +1441,7 @@ const Dashboard: React.FC = () => {
       
       if (result.success && result.data?.userId) {
         setGeneratedUserId(result.data.userId);
+        setGeneratedPassword(password);
         setShowUserIdPopup(true);
         
         // Store the generated userId
@@ -1474,6 +1479,7 @@ const Dashboard: React.FC = () => {
   const handleCloseUserIdPopup = () => {
     setShowUserIdPopup(false);
     setGeneratedUserId(null);
+    setGeneratedPassword(null);
     setShowSignupModal(false);
     setShowLoginModal(true);
   };
@@ -2131,7 +2137,7 @@ Do you want to proceed with registration?`;
             backgroundAttachment: 'fixed'
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px)`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -2162,7 +2168,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1 }}>
+          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px)`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -4348,14 +4354,17 @@ Do you want to proceed with registration?`;
                 <div className="userid-box">
                   <span className="userid-text">{generatedUserId}</span>
                 </div>
-                <p className="userid-instructions">
-                  Please save this ID for future reference. You will need this ID to login and participate in events.
-                </p>
-                <div className="userid-info">
-                  <p>• A confirmation email has been sent to your registered email address with your credentials.</p>
-                  <p>• Your password is your date of birth in DDMMYYYY format (e.g., 15012000).</p>
-                  <p>• Use your email/Mahotsav ID and password to login.</p>
+                <h3>Your Password</h3>
+                <div className="userid-box password-box">
+                  <span className="password-text">{generatedPassword}</span>
                 </div>
+                <div className="screenshot-note">
+                  <span className="screenshot-icon">📸</span>
+                  <p>Please take a screenshot of this page to save your credentials!</p>
+                </div>
+                <p className="userid-instructions">
+                  Use your email/Mahotsav ID and password to login.
+                </p>
               </div>
               <button className="userid-close-btn" onClick={handleCloseUserIdPopup}>
                 Continue to Login

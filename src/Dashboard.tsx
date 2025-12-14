@@ -2075,16 +2075,16 @@ Do you want to proceed with registration?`;
       {!showPageMenu && (
         <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
           <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#FFD700'}}></span>
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
           </div>
         </div>
       )}
 
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
-        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile}>
+        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile} style={{backgroundColor: '#c96ba1', borderColor: '#fdee71'}}>
           <div className="text-2xl sm:text-4xl">👤</div>
           <span className="text-sm sm:text-lg font-bold hidden xs:block">Welcome, {loggedInUserName}!</span>
           <span className="text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
@@ -2157,7 +2157,7 @@ Do you want to proceed with registration?`;
         {/* Action Buttons - Register for events and login when not logged in */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-green-500 to-green-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-green-600 hover:to-green-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-[#c96ba1] hover:to-[#522566] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -4112,8 +4112,8 @@ Do you want to proceed with registration?`;
                         <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
                         {getFilteredParaSportsEvents().length === 0 && (
                           <div>
-                            <p style={{color: '#e74c3c', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
-                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#9b59b6', color: 'white', border: 'none', borderRadius: '4px'}}>
+                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
+                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px'}}>
                               🔄 Retry Loading Events
                             </button>
                           </div>

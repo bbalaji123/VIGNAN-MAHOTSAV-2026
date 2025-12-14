@@ -192,7 +192,7 @@ const Hospitality: React.FC = () => {
           }
 
           .tab-dropdown option {
-            background: #1f2937;
+            background: #522566;
             color: #ffffff;
             padding: 1rem;
           }

@@ -152,11 +152,11 @@ const Schedule: React.FC = () => {
             font-weight: bold;
             text-align: center;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            text-shadow: 0 0 30px rgba(253, 238, 113, 0.3);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
@@ -200,7 +200,7 @@ const Schedule: React.FC = () => {
 
           .category-button {
             background: rgba(30, 30, 30, 0.8);
-            border: 1px solid rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(253, 238, 113, 0.3);
             border-radius: 10px;
             color: #ffffff;
             padding: 0.9rem 1.2rem;
@@ -214,16 +214,16 @@ const Schedule: React.FC = () => {
           }
 
           .category-button:hover {
-            background: rgba(251, 191, 36, 0.2);
-            border-color: rgba(251, 191, 36, 0.6);
+            background: rgba(253, 238, 113, 0.2);
+            border-color: rgba(253, 238, 113, 0.6);
             transform: scale(1.03);
-            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+            box-shadow: 0 5px 15px rgba(253, 238, 113, 0.3);
           }
 
           .category-button.active {
-            background: rgba(251, 191, 36, 0.3);
-            border-color: #fbbf24;
-            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.5);
+            background: rgba(253, 238, 113, 0.3);
+            border-color: #fdee71;
+            box-shadow: 0 5px 15px rgba(253, 238, 113, 0.5);
           }
 
           .main-content {
@@ -231,7 +231,7 @@ const Schedule: React.FC = () => {
             border-radius: 15px;
             padding: 2.5rem;
             min-height: 600px;
-            border: 2px solid rgba(251, 191, 36, 0.2);
+            border: 2px solid rgba(253, 238, 113, 0.2);
           }
 
           .event-table {
@@ -241,12 +241,12 @@ const Schedule: React.FC = () => {
           }
 
           .event-table th {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             color: #000;
             padding: 1rem 1.5rem;
             text-align: left;
             font-weight: 700;
-            border: 1px solid rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(253, 238, 113, 0.3);
             font-size: 1rem;
             letter-spacing: 0.5px;
           }
@@ -254,7 +254,7 @@ const Schedule: React.FC = () => {
           .event-table td {
             color: #ffffff;
             padding: 1rem 1.5rem;
-            border: 1px solid rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(253, 238, 113, 0.3);
             background: rgba(0, 0, 0, 0.3);
           }
 
@@ -270,7 +270,7 @@ const Schedule: React.FC = () => {
           }
 
           .schedule-action-button {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #e48ab9, #c96ba1);
             color: #ffffff;
             padding: 0.9rem 2.5rem;
             border-radius: 50px;
@@ -285,14 +285,14 @@ const Schedule: React.FC = () => {
           }
 
           .schedule-action-button:hover {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6);
+            box-shadow: 0 8px 30px rgba(253, 238, 113, 0.6);
           }
 
           .schedule-action-button.active {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.7);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
+            box-shadow: 0 8px 30px rgba(253, 238, 113, 0.7);
             transform: translateY(-2px);
           }
 
@@ -301,7 +301,7 @@ const Schedule: React.FC = () => {
             top: 2rem;
             left: 2rem;
             z-index: 1000;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             color: #000;
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
@@ -309,12 +309,12 @@ const Schedule: React.FC = () => {
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+            box-shadow: 0 5px 15px rgba(253, 238, 113, 0.4);
           }
 
           .back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.6);
+            box-shadow: 0 8px 20px rgba(253, 238, 113, 0.6);
           }
 
           .coming-soon {
@@ -334,17 +334,17 @@ const Schedule: React.FC = () => {
           @keyframes neonPulse {
             0%, 100% {
               box-shadow: 
-                0 0 20px rgba(251, 191, 36, 0.5),
-                0 0 40px rgba(251, 191, 36, 0.3),
-                0 0 60px rgba(251, 191, 36, 0.2),
-                inset 0 0 20px rgba(251, 191, 36, 0.1);
+                0 0 20px rgba(253, 238, 113, 0.5),
+                0 0 40px rgba(253, 238, 113, 0.3),
+                0 0 60px rgba(253, 238, 113, 0.2),
+                inset 0 0 20px rgba(253, 238, 113, 0.1);
             }
             50% {
               box-shadow: 
-                0 0 30px rgba(251, 191, 36, 0.7),
-                0 0 60px rgba(251, 191, 36, 0.5),
-                0 0 90px rgba(251, 191, 36, 0.3),
-                inset 0 0 30px rgba(251, 191, 36, 0.2);
+                0 0 30px rgba(253, 238, 113, 0.7),
+                0 0 60px rgba(253, 238, 113, 0.5),
+                0 0 90px rgba(253, 238, 113, 0.3),
+                inset 0 0 30px rgba(253, 238, 113, 0.2);
             }
           }
 
@@ -356,7 +356,7 @@ const Schedule: React.FC = () => {
 
           .neon-card {
             background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.95));
-            border: 3px solid rgba(251, 191, 36, 0.6);
+            border: 3px solid rgba(253, 238, 113, 0.6);
             border-radius: 20px;
             padding: 2rem;
             position: relative;
@@ -373,7 +373,7 @@ const Schedule: React.FC = () => {
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24);
+            background: linear-gradient(45deg, #fdee71, #e48ab9, #fdee71);
             border-radius: 20px;
             z-index: -1;
             opacity: 0;
@@ -384,12 +384,12 @@ const Schedule: React.FC = () => {
 
           .neon-card:hover {
             transform: translateY(-10px) scale(1.03);
-            border-color: #fbbf24;
+            border-color: #fdee71;
             box-shadow: 
-              0 0 40px rgba(251, 191, 36, 0.8),
-              0 0 80px rgba(251, 191, 36, 0.6),
-              0 0 120px rgba(251, 191, 36, 0.4),
-              inset 0 0 40px rgba(251, 191, 36, 0.2);
+              0 0 40px rgba(253, 238, 113, 0.8),
+              0 0 80px rgba(253, 238, 113, 0.6),
+              0 0 120px rgba(253, 238, 113, 0.4),
+              inset 0 0 40px rgba(253, 238, 113, 0.2);
           }
 
           .neon-card:hover::before {
@@ -400,7 +400,7 @@ const Schedule: React.FC = () => {
             width: 100%;
             height: 300px;
             background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(251, 191, 36, 0.3);
+            border: 2px solid rgba(253, 238, 113, 0.3);
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -418,11 +418,11 @@ const Schedule: React.FC = () => {
             transform: translate(-50%, -50%);
             width: 80%;
             height: 80%;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(253, 238, 113, 0.1) 0%, transparent 70%);
           }
 
           .placeholder-text {
-            color: rgba(251, 191, 36, 0.4);
+            color: rgba(253, 238, 113, 0.4);
             font-size: 1.1rem;
             font-weight: 500;
             letter-spacing: 1px;
@@ -433,7 +433,7 @@ const Schedule: React.FC = () => {
             font-size: 1.8rem;
             font-weight: bold;
             text-align: center;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -445,7 +445,7 @@ const Schedule: React.FC = () => {
           .card-subtitle {
             font-size: 1rem;
             text-align: center;
-            color: rgba(251, 191, 36, 0.8);
+            color: rgba(253, 238, 113, 0.8);
             font-weight: 600;
             letter-spacing: 0.5px;
           }
@@ -456,20 +456,20 @@ const Schedule: React.FC = () => {
             right: 15px;
             width: 35px;
             height: 35px;
-            border: 2px solid #fbbf24;
+            border: 2px solid #fdee71;
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 15px rgba(253, 238, 113, 0.5);
           }
 
           .shield-icon::before,
           .shield-icon::after {
             content: '';
             position: absolute;
-            background: #fbbf24;
+            background: #fdee71;
           }
 
           .shield-icon::before {

@@ -41,7 +41,7 @@ button,
   position: absolute;
   width: 24px;
   height: 2.5px;
-  background: #4a2c5c;
+  background: #522566;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -54,8 +54,8 @@ button,
   position: absolute;
   width: 11px;
   height: 11px;
-  border-left: 2.5px solid #4a2c5c;
-  border-bottom: 2.5px solid #4a2c5c;
+  border-left: 2.5px solid #522566;
+  border-bottom: 2.5px solid #522566;
   top: 50%;
   left: 50%;
   transform: translate(-130%, -50%) rotate(45deg);
@@ -70,12 +70,12 @@ button,
 }
 
 .circular-back-button:hover::before {
-  background: #FFD700;
+  background: #fdee71;
 }
 
 .circular-back-button:hover::after {
-  border-left-color: #FFD700;
-  border-bottom-color: #FFD700;
+  border-left-color: #fdee71;
+  border-bottom-color: #fdee71;
 }
 
 .circular-back-button:active {

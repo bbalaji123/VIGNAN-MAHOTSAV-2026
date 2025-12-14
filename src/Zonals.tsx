@@ -146,11 +146,11 @@ const Zonals: React.FC = () => {
             font-weight: bold;
             text-align: center;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+            text-shadow: 0 0 30px rgba(253, 238, 113, 0.3);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
@@ -162,7 +162,7 @@ const Zonals: React.FC = () => {
             font-weight: 600;
             text-align: center;
             color: #ffffff;
-            text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+            text-shadow: 0 0 20px rgba(253, 238, 113, 0.6);
             margin-bottom: 1.5rem;
             opacity: 0;
             transform: translateY(30px);
@@ -185,7 +185,7 @@ const Zonals: React.FC = () => {
             top: 2rem;
             left: 2rem;
             z-index: 1000;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #fdee71, #e48ab9);
             color: #000;
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
@@ -193,12 +193,12 @@ const Zonals: React.FC = () => {
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+            box-shadow: 0 5px 15px rgba(253, 238, 113, 0.4);
           }
 
           .back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.6);
+            box-shadow: 0 8px 20px rgba(253, 238, 113, 0.6);
           }
 
           @media (max-width: 768px) {

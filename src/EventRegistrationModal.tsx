@@ -150,11 +150,11 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[10001] p-4" onClick={onClose}>
         <div 
-          className="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] via-50% to-[#533483] rounded-3xl w-full max-w-[700px] max-h-[90vh] overflow-y-auto border border-white/30 shadow-[0_20px_60px_rgba(26,26,46,0.5)] animate-[modalSlideIn_0.3s_ease]"
+          className="bg-gradient-to-br from-[#522566] via-[#2596be] via-50% to-[#c96ba1] rounded-3xl w-full max-w-[700px] max-h-[90vh] overflow-y-auto border border-white/30 shadow-[0_20px_60px_rgba(82,37,102,0.5)] animate-[modalSlideIn_0.3s_ease]"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-center p-8 md:p-16">
-            <div className="w-24 h-24 md:w-[100px] md:h-[100px] bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-5xl md:text-6xl text-white mx-auto mb-6 md:mb-8 shadow-[0_10px_40px_rgba(76,175,80,0.4)] animate-pulse">
+            <div className="w-24 h-24 md:w-[100px] md:h-[100px] bg-gradient-to-br from-[#e48ab9] to-[#c96ba1] rounded-full flex items-center justify-center text-5xl md:text-6xl text-white mx-auto mb-6 md:mb-8 shadow-[0_10px_40px_rgba(228,138,185,0.4)] animate-pulse">
               ✓
             </div>
             <h2 className="text-amber-400 text-xl md:text-2xl font-bold mb-6 md:mb-8">🎉 Registration Successful!</h2>
@@ -166,7 +166,7 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
               A confirmation email has been sent with all details.
             </p>
             <button 
-              className="px-8 md:px-10 py-3 md:py-4 bg-[#16213e]/90 border-2 border-amber-400 rounded-xl text-white text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(106,13,173,0.5)]"
+              className="px-8 md:px-10 py-3 md:py-4 bg-[#522566]/90 border-2 border-[#fdee71] rounded-xl text-white text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(228,138,185,0.5)]"
               onClick={onClose}
             >
               Close
@@ -180,7 +180,7 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[10001] p-2 md:p-4" onClick={onClose}>
       <div 
-        className="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] via-50% to-[#533483] rounded-2xl md:rounded-3xl w-full max-w-[98%] md:max-w-[700px] max-h-[95vh] md:max-h-[90vh] overflow-y-auto border border-white/30 shadow-[0_20px_60px_rgba(26,26,46,0.5)] animate-[modalSlideIn_0.3s_ease]"
+        className="bg-gradient-to-br from-[#522566] via-[#2596be] via-50% to-[#c96ba1] rounded-2xl md:rounded-3xl w-full max-w-[98%] md:max-w-[700px] max-h-[95vh] md:max-h-[90vh] overflow-y-auto border border-white/30 shadow-[0_20px_60px_rgba(82,37,102,0.5)] animate-[modalSlideIn_0.3s_ease]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -222,7 +222,7 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
           {message && (
             <div className={`p-4 rounded-xl mb-6 text-center font-medium ${
               message.type === 'success' 
-                ? 'bg-green-500/20 text-green-300 border border-green-500/30' 
+                ? 'bg-[#e48ab9]/20 text-[#fdee71] border border-[#e48ab9]/30' 
                 : 'bg-red-500/20 text-red-300 border border-red-500/30'
             }`}>
               {message.text}
@@ -402,7 +402,7 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
                 )}
 
                 {/* Add member form */}
-                <div className="p-4 bg-[#1e143c]/40 rounded-xl border-2 border-dashed border-white/40 backdrop-blur-sm">
+                <div className="p-4 bg-[#522566]/40 rounded-xl border-2 border-dashed border-white/40 backdrop-blur-sm">
                   <h4 className="text-amber-400 font-semibold mb-3">Add Team Member</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                     <input
@@ -448,7 +448,7 @@ const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({ event, 
                   <button 
                     type="button" 
                     onClick={addTeamMember} 
-                    className="w-full py-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl text-white font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_rgba(76,175,80,0.4)]"
+                    className="w-full py-3 bg-gradient-to-br from-[#e48ab9] to-[#c96ba1] rounded-xl text-white font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_rgba(228,138,185,0.4)]"
                   >
                     ➕ Add Member
                   </button>

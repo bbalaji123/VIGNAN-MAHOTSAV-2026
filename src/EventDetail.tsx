@@ -733,7 +733,7 @@ const EventDetail: React.FC = () => {
               </button>
               
               <button 
-                className="action-button bg-gradient-to-r from-green-500 to-green-600 text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
+                className="action-button bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
                 onClick={handleAddToMyEvents}
                 disabled={isSaving}
               >

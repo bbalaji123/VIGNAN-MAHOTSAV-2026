@@ -318,7 +318,7 @@ const EventsInfo: React.FC = () => {
               <div className="inline-events-info-container">
                 <div className="inline-indoor-sports-header">
                   <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => navigate('/dashboard')}>
+                    <button className="indoor-sports-back-btn" onClick={() => navigate('/')}>
                       ← Back
                     </button>
                   </div>

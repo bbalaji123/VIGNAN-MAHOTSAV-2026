@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 const AnimatedIcon: React.FC = () => {
   const [transform, setTransform] = useState('translate(-50%, 50%)');
   const [size, setSize] = useState(720);
+  const [opacity, setOpacity] = useState(1);
   const iconRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
 
@@ -41,46 +42,77 @@ const AnimatedIcon: React.FC = () => {
       let progress = scrollY / scrollRange;
       progress = Math.min(1, Math.max(0, progress));
 
-      // Move flower to right side - only half visible (half off screen)
-      // Calculate final X position - flower center should end at right edge
-      // Since flower starts at left:50% (center of screen), move it by 50% of viewport
-      // to position center at right edge (making half visible)
-      let finalX;
-      if (isSmallMobile) {
-        finalX = vw * 0.5;  // Move center to right edge
-      } else if (isMobile) {
-        finalX = vw * 0.5;
-      } else if (isTablet) {
-        finalX = vw * 0.5;
+      // Opacity fade effect - fade out in middle, fade in from right
+      let newOpacity = 1;
+      if (progress < 0.4) {
+        // First 40% - fade out
+        newOpacity = 1 - (progress / 0.4);
+      } else if (progress >= 0.4 && progress < 0.6) {
+        // Middle 20% - completely invisible
+        newOpacity = 0;
       } else {
-        finalX = vw * 0.5;  // Desktop - center at right edge = half visible
+        // Last 40% - fade in from right
+        newOpacity = (progress - 0.6) / 0.4;
       }
-      const newX = progress * finalX;
+      setOpacity(newOpacity);
 
-      // Move up to vertical center (middle of screen)
-      let finalY;
-      if (isSmallMobile) {
-        finalY = -vh * 0.5;  // Move to middle
-      } else if (isMobile) {
-        finalY = -vh * 0.5;
-      } else if (isTablet) {
-        finalY = -vh * 0.5;
+      // Animation in two phases:
+      // Phase 1 (0-0.5): Flower moves DOWN and fades out
+      // Phase 2 (0.5-1): Flower appears from RIGHT side and moves to final position
+      
+      let newX = 0;
+      let newY = 0;
+      
+      if (progress < 0.5) {
+        // Phase 1: Move down only (no horizontal movement)
+        newX = 0;
+        newY = (progress / 0.5) * vh * 0.3; // Move down by 30% of viewport height
       } else {
-        finalY = -vh * 0.5;  // Middle of screen
-      }
-      const newY = progress * finalY; 
+        // Phase 2: Come from right side
+        const phase2Progress = (progress - 0.5) / 0.5;
+        
+        // Start from right side and move to final position
+        let finalX;
+        if (isSmallMobile) {
+          finalX = vw * 0.5;  // Final position at right edge
+        } else if (isMobile) {
+          finalX = vw * 0.5;
+        } else if (isTablet) {
+          finalX = vw * 0.5;
+        } else {
+          finalX = vw * 0.5;
+        }
+        
+        // Start from further right (off-screen) and move to final position
+        const startX = vw * 0.8; // Start 80% off to the right
+        newX = startX - (startX - finalX) * phase2Progress;
+        
+        // Final Y position
+        let finalY;
+        if (isSmallMobile) {
+          finalY = -vh * 0.5;
+        } else if (isMobile) {
+          finalY = -vh * 0.5;
+        } else if (isTablet) {
+          finalY = -vh * 0.5;
+        } else {
+          finalY = -vh * 0.5;
+        }
+        
+        newY = finalY * phase2Progress;
+      } 
 
       // Scale down
       const initialScale = 1;
       let finalScale;
       if (isSmallMobile) {
-        finalScale = 0.3;
-      } else if (isMobile) {
-        finalScale = 0.35;
-      } else if (isTablet) {
-        finalScale = 0.38;
-      } else {
         finalScale = 0.4;
+      } else if (isMobile) {
+        finalScale = 0.45;
+      } else if (isTablet) {
+        finalScale = 0.5;
+      } else {
+        finalScale = 0.55;
       }
       const newScale = initialScale - (progress * (initialScale - finalScale));
       
@@ -132,7 +164,9 @@ const AnimatedIcon: React.FC = () => {
         left: '50%',
         width: `${size}px`,
         height: `${size}px`,
-        transform 
+        transform,
+        opacity,
+        transition: 'opacity 0.3s ease-out'
       }}
     >
       {/* Petals layer - rotates anticlockwise */}

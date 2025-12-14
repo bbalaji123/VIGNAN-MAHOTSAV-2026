@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
@@ -494,6 +494,10 @@ const Dashboard: React.FC = () => {
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [flowerScrollOffset, setFlowerScrollOffset] = useState(0);
+  
+  // Animation state for sections
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
   const [timeTheme, setTimeTheme] = useState<'day' | 'evening' | 'night'>('day');
   const [signupFormData, setSignupFormData] = useState<SignupData>({
     name: '',
@@ -791,6 +795,54 @@ const Dashboard: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // IntersectionObserver for scroll-based animations
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '100px 0px -100px 0px', // Start animation 100px before, remove 100px after
+      threshold: [0, 0.1, 0.5, 0.9, 1] // Multiple thresholds for better detection
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.getAttribute('data-section-id');
+        if (sectionId) {
+          setVisibleSections(prev => {
+            const newSet = new Set(prev);
+            if (entry.isIntersecting) {
+              // Section is entering viewport - add it
+              newSet.add(sectionId);
+            } else {
+              // Section is leaving viewport - remove it for re-animation
+              newSet.delete(sectionId);
+            }
+            return newSet;
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all registered sections
+    sectionRefs.current.forEach((element) => {
+      if (element) observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Helper function to register section refs
+  const registerSection = useCallback((id: string, element: HTMLElement | null) => {
+    if (element) {
+      sectionRefs.current.set(id, element);
+    } else {
+      sectionRefs.current.delete(id);
+    }
   }, []);
 
   // Function to fetch events from API
@@ -2007,7 +2059,7 @@ Do you want to proceed with registration?`;
 
   return (
     <div className={`w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-         style={{background: "transparent"}}>
+         style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative"}}>
       
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -2137,7 +2189,7 @@ Do you want to proceed with registration?`;
             backgroundAttachment: 'fixed'
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px)`, transition: 'transform 0.1s ease-out' }}>
+          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -2168,7 +2220,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px)`, transition: 'transform 0.1s ease-out' }}>
+          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -3484,7 +3536,11 @@ Do you want to proceed with registration?`;
       )}
 
       {/* About Theme Section */}
-      <section className="dashboard-section about-theme-section">
+      <section 
+        className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
+        data-section-id="about-theme"
+        ref={(el) => registerSection('about-theme', el)}
+      >
         <div className="about-theme-container">
           <h2 className="about-theme-title">About Theme</h2>
           <div className="theme-content">
@@ -3509,7 +3565,11 @@ Do you want to proceed with registration?`;
       </section>
 
       {/* Highlights of 2025 Section */}
-      <section className="dashboard-section highlights-section">
+      <section 
+        className={`dashboard-section highlights-section section-animate section-animate-left ${visibleSections.has('highlights') ? 'visible' : ''}`}
+        data-section-id="highlights"
+        ref={(el) => registerSection('highlights', el)}
+      >
         <h2>Highlights of 2025</h2>
         <div className="highlights-navigation">
           <button className="highlights-nav-btn prev" onClick={prevHighlightSlide}></button>
@@ -3606,7 +3666,11 @@ Do you want to proceed with registration?`;
       </section>
 
       {/* Accreditation Section - Standalone */}
-      <section className="accreditation-section">
+      <section 
+        className={`accreditation-section section-animate section-animate-right ${visibleSections.has('accreditation') ? 'visible' : ''}`}
+        data-section-id="accreditation"
+        ref={(el) => registerSection('accreditation', el)}
+      >
         <div className="accreditation-container">
           <img src={`${import.meta.env.BASE_URL}clg.png`} alt="Accreditation and Rankings" className="accreditation-main-image" />
         </div>

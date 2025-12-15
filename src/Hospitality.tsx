@@ -40,7 +40,7 @@ const Hospitality: React.FC = () => {
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ 
                 zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
+                animation: 'moonStatic 120s linear infinite'
               }}
             />
           </div>
@@ -68,7 +68,7 @@ const Hospitality: React.FC = () => {
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ 
                 zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
+                animation: 'moonStatic 120s linear infinite'
               }}
             />
           </div>
@@ -414,30 +414,31 @@ const Hospitality: React.FC = () => {
         {/* Instructions Tab */}
         {activeTab === 'instructions' && (
           <div className="section-content">
-            <h2 className="section-heading">Eligibility</h2>
-            <p>◆ <strong>Sports & Games:</strong> Students of any UG / PG program from Technical Deemed Universities, Health Universities, Engineering and Pharmacy institutes are only allowed to participate in sports events.</p>
-            <p>◆ <strong>Cultural:</strong> Students of any UG / PG program of any discipline are permitted to participate, from Institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc. to Cultural / Literary / Fine Arts / Fashion events.</p>
+            <h2 className="section-heading">Eligibility:</h2>
+            <p>• <strong>Sports & Games:</strong> Students of any UG / PG program from Technical Deemed Universities, Engineering and Pharmacy institutes are only allowed to participate in sports events.</p>
+            <p>• <strong>Performing Arts:</strong> Students of any UG / PG program of any discipline are permitted to participate, from institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc., in Performing arts / Literature / Visual Arts and Crafts / Fashion events.</p>
 
-            <h2 className="section-heading">Registrations</h2>
-          <p>◆ All external participants have to report at the Registration desk arranged near the main gate before 12 noon on 6th Feb 2025.</p>
-          <p>◆ Registration Fee</p>
-          <p style={{ paddingLeft: '2rem' }}>• Sports & Games: ₹350 for Men, ₹250 for Women</p>
-          <p style={{ paddingLeft: '2rem' }}>• Cultural/Literary/Fine Arts and Fashion: Rs. 250/-</p>
-          <p style={{ paddingLeft: '2rem' }}>• Entry is free for PARA sports participants</p>
-          <p>◆ All participants must produce their college ID card and Bonafide certificate.</p>
-          <p>◆ On completion of individual registration, a Mahotsav ID will be generated for your account.</p>
-          <p>◆ After individual registration, Team Captain/leads must report at counters using for concerned parent event for registering their team by producing Mahotsav ID cards of all the team members.</p>
-          <p>◆ Students registered for sports and games events are permitted to participate in any one Team event of sports and games/ and any number of Track & Field/ Individual sport event / Cultural / Literary / Fine Arts / Fashion events.</p>
-          <p>◆ Students registered for Cultural events alone will not be permitted to participate in Sports & Games.</p>
-          <p>◆ Participants who require accommodation must register at the adjacent hospitality desk by producing a Mahotsav ID card issued upon first serve first serve basis.</p>
-          <p>◆ Any Number of Individuals / Teams are allowed to participate from an institute in all events.</p>
-          <p>◆ Lunch will be provided on the three days of the fest for Sports & Games participants only.</p>
-          <p>◆ All the visitors should also register at the desk with a nominal entry fee.</p>
-          <p>◆ Winners and Runners will be awarded with cash prizes, mementos/medal and appreciation certificate during the valedictory function only i.e. held on 8th Feb 2025 from 6 - 8 p.m.</p>
-          <p>◆ Participation certificates will be issued to all the participants at the event venue only upon completion of the event.</p>
+            <h2 className="section-heading">Registrations:</h2>
+          <p>• All external participants have to report at the Registration desk arranged near the main gate before 12 noon on 5th Feb 2026.</p>
+          <p>• Registration fee:</p>
+          <p style={{ paddingLeft: '2rem' }}>o Sports & Games: Rs.350/- for Men and Rs. 250/- for women</p>
+          <p style={{ paddingLeft: '2rem' }}>o Performing arts / Literature / Visual Arts and Crafts / Fashion: Rs. 250/-</p>
+          <p style={{ paddingLeft: '2rem' }}>o Entry is free for PARA sports participants.</p>
+          <p>• All participants must produce their college ID card and Bonafide certificate.</p>
+          <p>• On completion of individual registration, a Mahotsav ID will be generated for your account.</p>
+          <p>• After individual registration, Team captain/leads must report at counters setup for concerned game/ event for registering their team by producing Mahotsav ID cards of all the team members.</p>
+          <p>• Students registered for sports and games events are permitted to participate in any one Team event of sports and games and any number of Track & Field/ Individual sport event Performing Arts / Literature / Visual Arts and Crafts / Fashion.</p>
+          <p>• Students registered for Performing Arts alone will not be permitted to participate in Sports & Games.</p>
+          <p>• Participants who require accommodation must register at the adjacent hospitality desk by producing a Mahotsav ID card issued upon first come first serve basis.</p>
+          <p>• Any number of individuals / teams are allowed to participate from an institute in an event.</p>
+          <p>• Lunch will be provided on the three days of the fest for Sports & Games participants only.</p>
+          <p>• All the visitors should also register at the desk with a nominal entry fee.</p>
+          <p>• Winners and Runners will be awarded with cash prizes, memento/medal and appreciation certificate during the valedictory function only i.e., held on 8th Feb 2025 from 6 – 8 p.m.</p>
+          <p>• Participation certificates will be issued to all the participants at the event venue only upon completion of the event.</p>
 
-          <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+          <h2 className="contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
+          <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
           <table className="contact-table">
             <thead>
               <tr>
@@ -447,32 +448,72 @@ const Hospitality: React.FC = () => {
             </thead>
             <tbody>
               <tr>
-                <td>HARSHAD.S</td>
-                <td>7569395043</td>
+                <td>Ashwin</td>
+                <td>88852 84355</td>
               </tr>
               <tr>
-                <td>HYDER AHAMAD SHAIK</td>
-                <td>7780176877</td>
+                <td>Ajith anna</td>
+                <td>93461 93840</td>
               </tr>
               <tr>
-                <td>PHANI KUMAR</td>
-                <td>9542666866</td>
+                <td>Hemanth</td>
+                <td>88854 76252</td>
               </tr>
               <tr>
-                <td>SHAIK ASSAD</td>
-                <td>9390019163</td>
+                <td>Phani</td>
+                <td>95426 66866</td>
               </tr>
               <tr>
-                <td>GAYATHRI TATHIREDDY</td>
-                <td>9553464625</td>
+                <td>Nawaz Basha</td>
+                <td>99638 76989</td>
               </tr>
               <tr>
-                <td>NALLURI LIKHITHA</td>
-                <td>9390720020</td>
+                <td>Yeshwanth</td>
+                <td>83091 90435</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+          <table className="contact-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Yamini</td>
+                <td>70939 12677</td>
               </tr>
               <tr>
-                <td>T.ANUVARSHITHA</td>
-                <td>9182672419</td>
+                <td>Sravani</td>
+                <td>90147 04929</td>
+              </tr>
+              <tr>
+                <td>Bindhu</td>
+                <td>99590 22317</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+          <table className="contact-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lohith</td>
+                <td>8309751051</td>
+              </tr>
+              <tr>
+                <td>Sri Vatsav</td>
+                <td>94419 34549</td>
               </tr>
             </tbody>
           </table>
@@ -483,13 +524,14 @@ const Hospitality: React.FC = () => {
         {activeTab === 'howToReach' && (
           <div className="section-content">
             <h2 className="section-heading">How to Reach</h2>
-            <p>◆ Vignan University is well-connected to neighboring cities and towns, making it easily accessible for visitors. The nearest major city is Guntur, which is approximately 20 kilometers away. Guntur has a railway station and is connected to major cities like Hyderabad, Vijayawada, and Chennai. From Guntur, one can hire a taxi or take a bus that goes to Tenali to reach Vignan.</p>
-            <p>◆ The nearest major railway station is in Tenali which is approximately 12 kM from Vignan University and is connected to major cities like Vishakhapatnam, Chennai, Coimbatore, Cochin.</p>
-            <p>◆ One can get down at Vijayawada junction that has great connectivity to all parts of India and reach Tenali by bus which would take around 45 minutes.</p>
-            <p>◆ There are plenty of auto-rickshaws and buses available from Tenali to reach Vignan University.</p>
+            <p>• Vignan University is well-connected to neighboring cities and towns, making it easily accessible for visitors. The nearest major city is Guntur, which is approximately 20 kilometers away. Guntur has a railway station and is connected to major cities like Hyderabad, Vijayawada, and Chennai. From Guntur, one can hire a taxi or take a bus that goes to Tenali to reach Vignan.</p>
+            <p>• The nearest major railway station is in Tenali which is approximately 12 kM from Vignan University and is connected to major cities like Vishakhapatnam, Chennai, Coimbatore, Cochin.</p>
+            <p>• One can get down at Vijayawada junction that has great connectivity to all parts of India and reach Tenali by bus which would take around 45 minutes.</p>
+            <p>• There are plenty of auto-rickshaws and buses available from Tenali to reach Vignan University.</p>
 
-            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
             <table className="contact-table">
               <thead>
                 <tr>
@@ -499,32 +541,72 @@ const Hospitality: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>HARSHAD.S</td>
-                  <td>7569395043</td>
+                  <td>Ashwin</td>
+                  <td>88852 84355</td>
                 </tr>
                 <tr>
-                  <td>HYDER AHAMAD SHAIK</td>
-                  <td>7780176877</td>
+                  <td>Ajith anna</td>
+                  <td>93461 93840</td>
                 </tr>
                 <tr>
-                  <td>PHANI KUMAR</td>
-                  <td>9542666866</td>
+                  <td>Hemanth</td>
+                  <td>88854 76252</td>
                 </tr>
                 <tr>
-                  <td>SHAIK ASSAD</td>
-                  <td>9390019163</td>
+                  <td>Phani</td>
+                  <td>95426 66866</td>
                 </tr>
                 <tr>
-                  <td>GAYATHRI TATHIREDDY</td>
-                  <td>9553464625</td>
+                  <td>Nawaz Basha</td>
+                  <td>99638 76989</td>
                 </tr>
                 <tr>
-                  <td>NALLURI LIKHITHA</td>
-                  <td>9390720020</td>
+                  <td>Yeshwanth</td>
+                  <td>83091 90435</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Yamini</td>
+                  <td>70939 12677</td>
                 </tr>
                 <tr>
-                  <td>T.ANUVARSHITHA</td>
-                  <td>9182672419</td>
+                  <td>Sravani</td>
+                  <td>90147 04929</td>
+                </tr>
+                <tr>
+                  <td>Bindhu</td>
+                  <td>99590 22317</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lohith</td>
+                  <td>8309751051</td>
+                </tr>
+                <tr>
+                  <td>Sri Vatsav</td>
+                  <td>94419 34549</td>
                 </tr>
               </tbody>
             </table>
@@ -535,24 +617,25 @@ const Hospitality: React.FC = () => {
         {activeTab === 'accommodation' && (
           <div className="section-content">
             <h2 className="section-heading">Accommodation</h2>
-            <p>◆ Participants who require accommodation must register at the hospitality desk by producing the Mahotsav ID card issued post registration process.</p>
-            <p>◆ Participants coming from distances more than 100 km from Guntur will only be provided with accommodation upon first come first serve basis depending on the availability with basic amenities.</p>
-            <p>◆ Participants are advised to bring their basic bedding and electrical spikes for charging their gadgets.</p>
-            <p>◆ Boys and Girls will be accommodated at different venues; common halls will be provided along with decent washroom facilities.</p>
-            <p>◆ No additional charge will be taken for accommodation from sports & Games participants; a nominal fee of Rs.100 will be charged from participants of cultural events.</p>
-            <p>◆ Smoking, drinking and other drug consumption are strictly prohibited and necessary action will be taken by the institute if a participant is found to be in possession of these items.</p>
-            <p>◆ Any damage to institution facilities and property provided to the participants would result in serious action and necessary reimbursement charges should be paid by the participants found guilty.</p>
-            <p>◆ Participants are required to keep the given check-in receipts and ID card safe until they checkout. the candidate has to pay the registration fee again and get a new ID card.</p>
-            <p>◆ Participants should report at the accommodation venue to the concerned in-charge with their ID cards every time they enter or exit the room for safety concerns.</p>
-            <p>◆ Participants are requested to adhere to the check-out time mentioned in the check-in receipt. Check-out after the time indicated will not be entertained.</p>
-            <p>◆ Participants are expected to not create any kind of nuisance which might trouble other participants in the room.</p>
-            <p>◆ The college will not be responsible for any damage or loss of property or valuables stored in places of accommodation.</p>
-            <p>◆ Girls should strictly follow the curfew timings of Vignan that are specified during the allocation of room.</p>
-            <p>◆ The decision of organizers is final and binding in case of any dispute.</p>
-            <p>◆ Faculty members accompanying the students will be provided the facility free of cost, if informed in advance.</p>
+            <p>• Participants who require accommodation must register at the hospitality desk by producing the Mahotsav ID card issued post registration process.</p>
+            <p>• Participants coming from distances more than 100 km from Guntur will only be provided with accommodation upon first come first serve basis depending on the availability with basic amenities.</p>
+            <p>• Participants are advised to bring their basic bedding and electrical spikes for their charging their gadgets.</p>
+            <p>• Boys and Girls will be accommodated at different venues; common halls will be provided along with decent washroom facilities.</p>
+            <p>• No additional charge will be taken for accommodation from sports & Games participants; a nominal fee of Rs.100 will be charged from participants of cultural events.</p>
+            <p>• Smoking, drinking and other drug consumption are strictly prohibited and necessary action will be taken by the institute if a participant is found to be in possession of these items.</p>
+            <p>• Any damage to institution facilities and property provided to the participants would result in serious action and necessary reimbursement charges should be paid by the participants found guilty.</p>
+            <p>• Participants are required to keep the given check-in receipts and ID card safe until they checkout. the candidate has to pay the registration fee again and get a new ID card.</p>
+            <p>• Participants should report at the accommodation venue to the concerned in-charge with their ID cards every time they enter or exit the room for safety concerns.</p>
+            <p>• Participants are requested to adhere to the check-out time mentioned in the check-in receipt. Check-out after the time indicated will not be entertained.</p>
+            <p>• Participants are expected to not create any kind of nuisance which might trouble other participants in the room.</p>
+            <p>• The college will not be responsible for any damage or loss of property or valuables stored in places of accommodation.</p>
+            <p>• Girls should strictly follow the curfew timings of Vignan that are specified during the allocation of room.</p>
+            <p>• The decision of organizers is final and binding in case of any dispute.</p>
+            <p>• Faculty members accompanying the students will be provided the facility free of cost, if informed in advance.</p>
 
-            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
             <table className="contact-table">
               <thead>
                 <tr>
@@ -562,32 +645,72 @@ const Hospitality: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>HARSHAD.S</td>
-                  <td>7569395043</td>
+                  <td>Ashwin</td>
+                  <td>88852 84355</td>
                 </tr>
                 <tr>
-                  <td>HYDER AHAMAD SHAIK</td>
-                  <td>7780176877</td>
+                  <td>Ajith anna</td>
+                  <td>93461 93840</td>
                 </tr>
                 <tr>
-                  <td>PHANI KUMAR</td>
-                  <td>9542666866</td>
+                  <td>Hemanth</td>
+                  <td>88854 76252</td>
                 </tr>
                 <tr>
-                  <td>SHAIK ASSAD</td>
-                  <td>9390019163</td>
+                  <td>Phani</td>
+                  <td>95426 66866</td>
                 </tr>
                 <tr>
-                  <td>GAYATHRI TATHIREDDY</td>
-                  <td>9553464625</td>
+                  <td>Nawaz Basha</td>
+                  <td>99638 76989</td>
                 </tr>
                 <tr>
-                  <td>NALLURI LIKHITHA</td>
-                  <td>9390720020</td>
+                  <td>Yeshwanth</td>
+                  <td>83091 90435</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Yamini</td>
+                  <td>70939 12677</td>
                 </tr>
                 <tr>
-                  <td>T.ANUVARSHITHA</td>
-                  <td>9182672419</td>
+                  <td>Sravani</td>
+                  <td>90147 04929</td>
+                </tr>
+                <tr>
+                  <td>Bindhu</td>
+                  <td>99590 22317</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lohith</td>
+                  <td>8309751051</td>
+                </tr>
+                <tr>
+                  <td>Sri Vatsav</td>
+                  <td>94419 34549</td>
                 </tr>
               </tbody>
             </table>
@@ -597,8 +720,9 @@ const Hospitality: React.FC = () => {
         {/* Contacts Tab */}
         {activeTab === 'contacts' && (
           <div className="section-content">
-            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
             <table className="contact-table">
               <thead>
                 <tr>
@@ -608,32 +732,72 @@ const Hospitality: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>HARSHAD.S</td>
-                  <td>7569395043</td>
+                  <td>Ashwin</td>
+                  <td>88852 84355</td>
                 </tr>
                 <tr>
-                  <td>HYDER AHAMAD SHAIK</td>
-                  <td>7780176877</td>
+                  <td>Ajith anna</td>
+                  <td>93461 93840</td>
                 </tr>
                 <tr>
-                  <td>PHANI KUMAR</td>
-                  <td>9542666866</td>
+                  <td>Hemanth</td>
+                  <td>88854 76252</td>
                 </tr>
                 <tr>
-                  <td>SHAIK ASSAD</td>
-                  <td>9390019163</td>
+                  <td>Phani</td>
+                  <td>95426 66866</td>
                 </tr>
                 <tr>
-                  <td>GAYATHRI TATHIREDDY</td>
-                  <td>9553464625</td>
+                  <td>Nawaz Basha</td>
+                  <td>99638 76989</td>
                 </tr>
                 <tr>
-                  <td>NALLURI LIKHITHA</td>
-                  <td>9390720020</td>
+                  <td>Yeshwanth</td>
+                  <td>83091 90435</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Yamini</td>
+                  <td>70939 12677</td>
                 </tr>
                 <tr>
-                  <td>T.ANUVARSHITHA</td>
-                  <td>9182672419</td>
+                  <td>Sravani</td>
+                  <td>90147 04929</td>
+                </tr>
+                <tr>
+                  <td>Bindhu</td>
+                  <td>99590 22317</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lohith</td>
+                  <td>8309751051</td>
+                </tr>
+                <tr>
+                  <td>Sri Vatsav</td>
+                  <td>94419 34549</td>
                 </tr>
               </tbody>
             </table>
@@ -643,46 +807,47 @@ const Hospitality: React.FC = () => {
         {/* FAQs Tab */}
         {activeTab === 'faqs' && (
           <div className="section-content">
-            <h2 className="section-heading">FAQs</h2>
+            <h2 className="section-heading">FAQ's</h2>
             
-            <p><strong>From when can I avail accommodation?</strong></p>
-            <p>Ans: Accommodation can be availed from 5th February, 2025 - 10 pm onwards.</p>
+            <p><strong>1) From when can I avail accommodation?</strong></p>
+            <p>Accommodation can be availed from 4th February, 2026 - 10 pm onwards.</p>
 
-            <p><strong>What documents and proofs are required while coming to Mahotsav?</strong></p>
-            <p>Ans: It is mandatory to bring the College ID card and bonafide certificate when you arrive at registration desk at Vignan University.</p>
+            <p><strong>2) What documents and proofs are required while coming to Mahotsav?</strong></p>
+            <p>It is mandatory to bring the College ID card and bonafide certificate when you arrive at registration desk at Vignan University.</p>
 
-            <p><strong>Does the accommodation include food?</strong></p>
-            <p>Ans: No, but you can make use of the canteens/food stalls available during Mahotsav at your own expense. Whereas, for Sports & Games participants, Lunch will be provided</p>
+            <p><strong>3) Does the accommodation include food?</strong></p>
+            <p>No, but you can make use of the canteens/food stalls available during Mahotsav at your own expense. Whereas, for Sports & Games participants, Lunch will be provided</p>
 
-            <p><strong>When can I come for registration and accommodation?</strong></p>
-            <p>Ans: Accommodation and registration services can be availed from 5th Feb 2025, starting at 10 PM. The Registration and Hospitality desk will operate 24/7 until 6th Feb 2025. Please note that registrations and check-outs are paused during Inaugural and Valedictory functions, so kindly plan accordingly.</p>
+            <p><strong>4) When can I come for registration and accommodation?</strong></p>
+            <p>Accommodation and registration services can be availed from 4th Feb 2026, starting at 10 PM. The Registration and Hospitality desk will operate 24/7 until 5th Feb 2025. Please note that registrations and check-outs are paused during Inaugural and Valedictory functions, so kindly plan accordingly.</p>
 
-            <p><strong>Can I vacate earlier than the registered date?</strong></p>
-            <p>Ans: Yes, however you have to inform to the coordinator regarding your check out.</p>
+            <p><strong>5) Can I vacate earlier than the registered date?</strong></p>
+            <p>Yes, however you have to inform to the coordinator regarding your check out.</p>
 
-            <p><strong>Whom and How should I approach for accommodation on arrival?</strong></p>
-            <p>Ans: You have to report at the hospitality desk. You can contact Helpline numbers for any further help. Helpline No: 7995426657</p>
+            <p><strong>6) Whom and How should I approach for accommodation on arrival?</strong></p>
+            <p>You have to report at the hospitality desk. You can contact Helpline numbers for any further help.<br />Helpline No: 88854 76252</p>
 
-            <p><strong>Will Mahotsav guarantee security for my luggage and stuff?</strong></p>
-            <p>Ans: The attendees are responsible for managing their own belongings, Mahotsav does not guarantee security of luggage or any personal belongings.</p>
+            <p><strong>7) Will Mahotsav guarantee security for my luggage and stuff?</strong></p>
+            <p>The attendees are responsible for managing their own belongings, Mahotsav does not guarantee security of luggage or any personal belongings.</p>
 
-            <p><strong>Can I check out later than my scheduled time of checkout?</strong></p>
-            <p>Ans: You have to checkout at your given time only.</p>
+            <p><strong>8) Can I check out later than my scheduled time of checkout?</strong></p>
+            <p>You have to checkout at your given time only.</p>
 
-            <p><strong>Are Male and Female students provided with the same accommodations?</strong></p>
-            <p>Ans: No, male and female students would not be provided with the same accommodation.</p>
+            <p><strong>9) Are Male and Female students provided with the same accommodations?</strong></p>
+            <p>No, male and female students would not be provided with the same accommodation.</p>
 
-            <p><strong>Can I expect to have a private room allotted to me?</strong></p>
-            <p>Ans: No, common halls will be arranged with decent washroom facilities.</p>
+            <p><strong>10) Can I expect to private room allotted to me?</strong></p>
+            <p>No, common halls will be arranged with decent washroom facilities.</p>
 
-            <p><strong>Is there any curfew for students?</strong></p>
-            <p>Ans: Yes, there will be a curfew for girl students. It will be informed during the allocation of room.</p>
+            <p><strong>11) Is there any curfew for students?</strong></p>
+            <p>Yes, there will be a curfew for girl students. It will be informed during the allocation of room.</p>
 
-            <p><strong>What about the food provision inside the college?</strong></p>
-            <p>Ans: You can make use of the canteens/food stalls available during Mahotsav at your own expense.</p>
+            <p><strong>12) What about the food provision inside the college?</strong></p>
+            <p>You can make use of the canteens/food stalls available during Mahotsav at your own expense.</p>
 
-            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
             <table className="contact-table">
               <thead>
                 <tr>
@@ -692,32 +857,72 @@ const Hospitality: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>HARSHAD.S</td>
-                  <td>7569395043</td>
+                  <td>Ashwin</td>
+                  <td>88852 84355</td>
                 </tr>
                 <tr>
-                  <td>HYDER AHAMAD SHAIK</td>
-                  <td>7780176877</td>
+                  <td>Ajith anna</td>
+                  <td>93461 93840</td>
                 </tr>
                 <tr>
-                  <td>PHANI KUMAR</td>
-                  <td>9542666866</td>
+                  <td>Hemanth</td>
+                  <td>88854 76252</td>
                 </tr>
                 <tr>
-                  <td>SHAIK ASSAD</td>
-                  <td>9390019163</td>
+                  <td>Phani</td>
+                  <td>95426 66866</td>
                 </tr>
                 <tr>
-                  <td>GAYATHRI TATHIREDDY</td>
-                  <td>9553464625</td>
+                  <td>Nawaz Basha</td>
+                  <td>99638 76989</td>
                 </tr>
                 <tr>
-                  <td>NALLURI LIKHITHA</td>
-                  <td>9390720020</td>
+                  <td>Yeshwanth</td>
+                  <td>83091 90435</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Yamini</td>
+                  <td>70939 12677</td>
                 </tr>
                 <tr>
-                  <td>T.ANUVARSHITHA</td>
-                  <td>9182672419</td>
+                  <td>Sravani</td>
+                  <td>90147 04929</td>
+                </tr>
+                <tr>
+                  <td>Bindhu</td>
+                  <td>99590 22317</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2 className="contact-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <table className="contact-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lohith</td>
+                  <td>8309751051</td>
+                </tr>
+                <tr>
+                  <td>Sri Vatsav</td>
+                  <td>94419 34549</td>
                 </tr>
               </tbody>
             </table>

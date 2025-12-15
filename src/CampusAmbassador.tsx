@@ -272,42 +272,198 @@ const CampusAmbassador: React.FC = () => {
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center min-h-screen py-20">
         <div className="ambassador-content">
-          <h1 className="ambassador-title">CAMPUS AMBASSADOR</h1>
-          <h2 className="ambassador-subtitle">Rules & Regulations</h2>
+          <h1 className="ambassador-title">MAHOTSAV CREW</h1>
+          <h2 className="ambassador-subtitle">Vignan Mahotsav Campus Ambassador Program</h2>
 
-          {/* Responsibilities Section */}
-          <h3 className="section-title">1. Responsibilities</h3>
+          {/* Introduction Section */}
+          <h3 className="section-title">1. Introduction</h3>
           <div className="section-content">
-            <p>Act as the primary point of contact between Vignan Mahotsav 2025 and your college.</p>
-            <p>Actively promote the festival within your college through various channels, including but not limited to: Distributing official Vignan Mahotsav 2025 posters and flyers.</p>
-            <p>Organizing on-campus promotional events (e.g., information sessions, social media campaigns).</p>
-            <p>Utilizing college networks and student forums to spread awareness.</p>
-            <p>Achieve a minimum registration target: Secure at least 50 registrations for Vignan Mahotsav 2025 from students within your college.</p>
+            <p>Mahotsav Crew- The Vignan Mahotsav 2026 Campus Ambassador (CA) Program is a student-driven initiative that empowers enthusiastic individuals to represent Vignan Mahotsav in their respective colleges. The program's primary goal is to promote the fest, expand outreach, and foster intercollegiate engagement through innovative campaigns and personal networks. It's a unique leadership opportunity to be the face of one of South India's largest cultural festivals.</p>
+            <p>Being part of the Mahotsav Crew is not just about promotion — it is about becoming the face of a movement that celebrates youth, culture, and collaboration. For many, it becomes a memorable journey filled with opportunities, recognition, and unforgettable experiences.</p>
           </div>
 
-          {/* Benefits Section */}
-          <h3 className="section-title">2. Benefits</h3>
+          {/* Eligibility Criteria Section */}
+          <h3 className="section-title">2. Eligibility Criteria</h3>
           <div className="section-content">
-            <p><strong>Free Registration:</strong> Complimentary access to all Vignan Mahotsav 2025 events and activities.</p>
-            <p><strong>Complimentary Accommodation & Meals:</strong> Provision of comfortable accommodation and nutritious meals throughout the festival duration.</p>
-            <p><strong>Exclusive Goodie Bag:</strong> Receive a Vignan Mahotsav 2025 T-shirt, jacket, or another exclusive merchandise item.</p>
-            <p><strong>Certificate of Appreciation:</strong> Acknowledgement of your valuable contributions with a personalized Certificate of Appreciation.</p>
-            <p><strong>Letter of Recommendation:</strong> Opportunity to receive a Letter of Recommendation from Vignan Mahotsav 2025, highlighting your leadership, initiative, and promotional skills.</p>
-            <p><strong>"Best Campus Ambassador" Award:</strong> The top 3 performing ambassadors, based on registration numbers, will be recognized as "Best Campus Ambassador" and receive a special award.</p>
+            <p>To become a Mahotsav Crew Campus Ambassador for Vignan Mahotsav 2026, the applicant must:</p>
+            <p><strong>2.1 Current Enrollment:</strong> Must be a student in a recognized college/university (UG/PG).</p>
+            <p><strong>2.2 Communication Skills:</strong> Able to connect and interact confidently with peers.</p>
+            <p><strong>2.3 Proactive & Enthusiastic:</strong> Self-motivated, energetic, and ready to take initiative.</p>
+            <p><strong>2.4 Creative & Innovative:</strong> Bring fresh ideas for online/offline fest promotions.</p>
+            <p><strong>2.5 Time Management:</strong> Balance academics with ambassador tasks efficiently.</p>
+            <p><strong>2.6 Passion for Events:</strong> Genuine interest in fests, marketing, and student activities.</p>
           </div>
 
-          {/* Eligibility Section */}
-          <h3 className="section-title">3. Eligibility</h3>
+          {/* Points Allotment Rules Section */}
+          <h3 className="section-title">3. Points Allotment Rules</h3>
           <div className="section-content">
-            <p>Must be a currently enrolled student at a recognized college or university.</p>
-            <p>Possess strong interpersonal and communication skills.</p>
-            <p>Be enthusiastic, proactive, and committed to promoting Vignan Mahotsav 2025.</p>
+            <p>Campus Ambassadors will earn points based on their engagement and efforts across various categories.</p>
+            
+            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Outreach & Promotion</h4>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse', 
+              marginBottom: '2rem',
+              background: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '10px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Activity</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Resharing /Reposting official posts on social media</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/post</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Sharing in WhatsApp groups (50-100 mem) to (100-200 mem)</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/group to 10 points/group</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Creating original content (reels/blogs/memes)</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>15 points</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Organizing on-campus promotional events</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>20 points/event</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Referrals & Signups</h4>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse', 
+              marginBottom: '2rem',
+              background: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '10px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Activity</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Referring a friend/Surrounding Colleges Students to sign up as a CA</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>20 points/referral</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Registering participants for Mahotsav</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/attendee</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bridging team Mahotsav & Student Council of colleges</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>10 points/college</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>C. Performance Multipliers</h4>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse', 
+              marginBottom: '2rem',
+              background: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '10px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Special Cases</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Multiplier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>For colleges located at long distances</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Total Points= 4 x (multiplier + 1) x (number of participants)</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>For exceeding 50+ attendee registrations</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bonus 50 points</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style={{ fontStyle: 'italic', color: '#fbbf24' }}>➢ 4 x (multiplier + 1) x (number of participants) points Multiplier = (distance between VFSTR and admitted institute (in kms) /1000) * number of people. Get students to participate in events</p>
           </div>
 
-          {/* Disclaimer Section */}
-          <h3 className="section-title">4. Disclaimer</h3>
+          {/* Incentives & Rewards Section */}
+          <h3 className="section-title">4. Incentives & Rewards (Extending this Based on Targets)</h3>
           <div className="section-content">
-            <p>The Vignan Mahotsav 2025 organizing committee reserves the right to modify these rules and regulations at any time.</p>
+            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Rewards Based on Milestones</h4>
+            <table style={{ 
+              width: '100%', 
+              borderCollapse: 'collapse', 
+              marginBottom: '2rem',
+              background: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '10px',
+              overflow: 'hidden'
+            }}>
+              <thead>
+                <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Tier</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Milestone</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Reward</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bronze</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>100+ Points</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Silver</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>150+ Points</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tier+ Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Gold</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>200+ Points</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Platinum</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>250+ points</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Diamond</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)</td>
+                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
+            <p>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
+            <p>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
+            <p>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
+          </div>
+
+          {/* Code of Conduct Section */}
+          <h3 className="section-title">5. Code of Conduct</h3>
+          <div className="section-content">
+            <p>All Campus Ambassadors must:</p>
+            <p>1. Maintain professionalism and uphold the brand reputation.</p>
+            <p>2. Avoid spamming, false/misleading promotions.</p>
+            <p>3. Respect the rules and policies of their own institutions during all promotional activities.</p>
+            <p>4. Submit updates and progress reports when requested.</p>
+          </div>
+
+          {/* Program Duration & Review Section */}
+          <h3 className="section-title">6. Program Duration & Review</h3>
+          <div className="section-content">
+            <p>The program will run from [Dec 2025] to [Feb 2026].</p>
+            <p>Monthly performance reviews will be conducted based on point submissions and engagement.</p>
+            <p>Final awards will be based on cumulative performance throughout the duration.</p>
           </div>
 
           {/* Contact Information */}

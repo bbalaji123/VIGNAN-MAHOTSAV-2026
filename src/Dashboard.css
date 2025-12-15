@@ -198,7 +198,7 @@ html, body {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(-360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -207,7 +207,7 @@ html, body {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 
@@ -5352,17 +5352,95 @@ html, body {
 .overview-modal-content,
 .signup-modal-content,
 .sub-modal-content {
-  background: rgba(22, 33, 62, 0.9);
-  border-radius: 25px;
+  background: linear-gradient(165deg, rgba(82, 37, 102, 0.75) 0%, rgba(37, 150, 190, 0.68) 100%);
+  backdrop-filter: blur(24px);
+  border-radius: 32px 8px 32px 8px;
   width: 100%;
   max-width: min(500px, 95vw);
   max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  animation: modalSlideIn 0.3s ease;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, rgba(228, 138, 185, 0.3), rgba(253, 238, 113, 0.2), rgba(37, 150, 190, 0.3)) 1;
+  box-shadow: 
+    0 24px 64px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(82, 37, 102, 0.2);
+  animation: harmonyEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   padding-right: 5px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Symbolic Harmony Element - Concentric circles representing balance */
+.login-modal-content::before,
+.signup-modal-content::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, 
+    transparent 30%, 
+    rgba(253, 238, 113, 0.08) 30%, 
+    rgba(253, 238, 113, 0.08) 35%, 
+    transparent 35%,
+    transparent 50%,
+    rgba(228, 138, 185, 0.06) 50%,
+    rgba(228, 138, 185, 0.06) 55%,
+    transparent 55%,
+    transparent 70%,
+    rgba(37, 150, 190, 0.05) 70%,
+    rgba(37, 150, 190, 0.05) 75%,
+    transparent 75%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  animation: harmonicPulse 4s ease-in-out infinite;
+}
+
+/* Harmony Flow Line - Bottom unity element */
+.login-modal-content::after,
+.signup-modal-content::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(228, 138, 185, 0.4) 20%,
+    rgba(253, 238, 113, 0.5) 50%,
+    rgba(228, 138, 185, 0.4) 80%,
+    transparent
+  );
+  border-radius: 2px;
+  filter: blur(1px);
+}
+
+@keyframes harmonyEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes harmonicPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) rotate(180deg);
+  }
 }
 
 /* Custom scrollbar for signup modal */
@@ -5380,13 +5458,13 @@ html, body {
 
 .signup-modal-content::-webkit-scrollbar-thumb,
 .sub-modal-content::-webkit-scrollbar-thumb {
-  background: rgba(194, 24, 91, 0.5);
+  background: linear-gradient(180deg, rgba(228, 138, 185, 0.5), rgba(201, 107, 161, 0.6));
   border-radius: 4px;
 }
 
 .signup-modal-content::-webkit-scrollbar-thumb:hover,
 .sub-modal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(194, 24, 91, 0.7);
+  background: linear-gradient(180deg, rgba(228, 138, 185, 0.7), rgba(201, 107, 161, 0.8));
 }
 
 .sub-modal-content:has(.events-modal-container) {
@@ -5623,43 +5701,111 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 30px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 36px 38px 24px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, 
+    transparent, 
+    rgba(253, 238, 113, 0.3) 30%,
+    rgba(228, 138, 185, 0.25) 50%,
+    rgba(253, 238, 113, 0.3) 70%,
+    transparent
+  ) 1;
+  position: relative;
+}
+
+/* Lotus-inspired symbolic element at header */
+.login-modal-header::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 6px;
+  background: radial-gradient(ellipse, 
+    rgba(253, 238, 113, 0.6) 0%,
+    rgba(228, 138, 185, 0.4) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(2px);
 }
 
 .login-modal-header h2 {
-  color: white;
-  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1.7rem;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-weight: bold;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(253, 238, 113, 0.1);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+/* Sacred dot accent */
+.login-modal-header h2::after {
+  content: '•';
+  color: rgba(253, 238, 113, 0.7);
+  margin-left: 8px;
+  font-size: 0.6em;
+  vertical-align: middle;
+  animation: sacredGlow 3s ease-in-out infinite;
+}
+
+@keyframes sacredGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; text-shadow: 0 0 8px rgba(253, 238, 113, 0.8); }
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(228, 138, 185, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.8rem;
   cursor: pointer;
   padding: 0;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(228, 138, 185, 0.15);
+  border-color: rgba(228, 138, 185, 0.4);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 16px rgba(228, 138, 185, 0.3);
 }
 
 .login-modal-body,
 .overview-modal-body,
 .signup-modal-body,
 .sub-modal-body {
-  padding: 30px;
+  padding: 32px 38px 36px;
+  position: relative;
+}
+
+/* Subtle side harmony indicators */
+.login-modal-body::before,
+.signup-modal-body::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 40%;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(228, 138, 185, 0.15) 30%,
+    rgba(253, 238, 113, 0.1) 50%,
+    rgba(228, 138, 185, 0.15) 70%,
+    transparent
+  );
+  border-radius: 2px;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
@@ -5727,25 +5873,46 @@ html, body {
 }
 
 .form-group label {
-  color: white;
-  margin-bottom: 6px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 9px;
+  font-weight: 500;
+  font-size: 0.88rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   display: block;
+  letter-spacing: 0.3px;
+  position: relative;
+  padding-left: 12px;
+}
+
+/* Unity dot before label */
+.form-group label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: rgba(253, 238, 113, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(253, 238, 113, 0.4);
 }
 
 .form-input,
 .form-select {
-  padding: 12px 14px;
-  border: 2px solid rgba(194, 24, 91, 0.3);
-  border-radius: 10px;
-  background: white !important;
-  color: #c2185b !important;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  padding: 14px 18px 14px 20px;
+  border: 1.5px solid rgba(228, 138, 185, 0.25);
+  border-radius: 16px 4px 16px 4px;
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #522566 !important;
+  font-size: 0.92rem;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 100%;
   font-weight: 500;
+  box-shadow: 
+    inset 0 2px 6px rgba(82, 37, 102, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 
 @media (max-width: 768px) {
@@ -5773,39 +5940,43 @@ html, body {
 }
 
 .form-input::placeholder {
-  color: rgba(194, 24, 91, 0.6);
+  color: rgba(82, 37, 102, 0.4);
   font-weight: 400;
   text-shadow: none;
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #c2185b;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.3);
+  border-color: rgba(228, 138, 185, 0.6);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 0 0 4px rgba(253, 238, 113, 0.12),
+    0 6px 16px rgba(228, 138, 185, 0.2),
+    inset 0 2px 6px rgba(82, 37, 102, 0.06);
+  transform: translateY(-2px);
 }
 
 /* Dropdown/Select Styles */
 .form-select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2185b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23522566' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 15px center;
-  background-size: 20px;
-  padding-right: 45px;
-  background-color: white !important;
-  color: #c2185b;
+  background-position: right 18px center;
+  background-size: 18px;
+  padding-right: 48px;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #522566;
   font-weight: 500;
 }
 
 /* Ensure dropdown arrow is visible even with form-input class */
 .form-input.form-select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2185b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23522566' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
   background-repeat: no-repeat !important;
-  background-position: right 15px center !important;
-  background-size: 18px !important;
-  padding-right: 45px !important;
+  background-position: right 18px center !important;
+  background-size: 17px !important;
+  padding-right: 48px !important;
   cursor: pointer !important;
   appearance: none !important;
 }
@@ -5813,43 +5984,43 @@ html, body {
 .form-select option {
   background-color: white !important;
   background: white !important;
-  color: #c2185b !important;
+  color: #522566 !important;
   padding: 12px;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .form-select option:hover {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  background: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(228, 138, 185, 0.08) !important;
+  background: rgba(228, 138, 185, 0.08) !important;
 }
 
 .form-select option:checked,
 .form-select option:focus,
 .form-select option[selected] {
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  background: rgba(0, 0, 0, 0.9) !important;
-  color: var(--mahotsav-yellow) !important;
-  font-weight: 700;
+  background-color: rgba(82, 37, 102, 0.06) !important;
+  background: rgba(82, 37, 102, 0.06) !important;
+  color: #522566 !important;
+  font-weight: 600;
 }
 
 /* Date Input Styling */
 .form-input[type="date"] {
-  color: #c2185b !important;
+  color: #522566 !important;
   color-scheme: light;
   position: relative;
   width: 100%;
   box-sizing: border-box;
   height: auto;
-  min-height: 47px;
+  min-height: 50px;
 }
 
 .form-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.3) sepia(1) saturate(5) hue-rotate(320deg);
+  filter: invert(0.25) sepia(0.75) saturate(2.5) hue-rotate(280deg);
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
   position: absolute;
-  right: 15px;
+  right: 18px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -5863,7 +6034,7 @@ html, body {
 .form-input[type="email"],
 .form-input[type="text"],
 .form-input[type="password"] {
-  color: #c2185b !important;
+  color: #522566 !important;
   font-weight: 500;
 }
 
@@ -5871,8 +6042,8 @@ html, body {
 .form-input:-webkit-autofill,
 .form-input:-webkit-autofill:hover,
 .form-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #c2185b !important;
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #522566 !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.95) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -5891,60 +6062,114 @@ html, body {
 }
 
 .forgot-password {
-  color: var(--mahotsav-yellow);
+  color: #fdee71;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
+  font-size: 0.88rem;
+  transition: all 0.3s ease;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  font-weight: 500;
+  position: relative;
+  letter-spacing: 0.2px;
+}
+
+.forgot-password::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, #fdee71 0%, rgba(253, 238, 113, 0) 100%);
+  transition: width 0.35s ease;
 }
 
 .forgot-password:hover {
   color: #ffed4a;
-  text-decoration: underline;
+  text-shadow: 0 0 8px rgba(253, 238, 113, 0.4);
+}
+
+.forgot-password:hover::after {
+  width: 100%;
 }
 
 /* Submit Message Styles */
 .submit-message {
-  padding: 15px;
-  border-radius: 10px;
+  padding: 16px 20px;
+  border-radius: 16px 6px 16px 6px;
   margin-bottom: 20px;
   font-weight: 500;
   text-align: center;
+  font-size: 0.95rem;
+  backdrop-filter: blur(8px);
+  position: relative;
 }
 
 .submit-message.success {
-  background-color: rgba(76, 175, 80, 0.2);
-  border: 2px solid #e48ab9;
-  color: #e48ab9;
+  background: linear-gradient(135deg, rgba(37, 150, 190, 0.12), rgba(37, 150, 190, 0.06));
+  border: 2px solid rgba(37, 150, 190, 0.5);
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 4px 12px rgba(37, 150, 190, 0.15),
+    inset 0 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 .submit-message.error {
-  background-color: rgba(244, 67, 54, 0.2);
-  border: 2px solid #f44336;
-  color: #f44336;
+  background: linear-gradient(135deg, rgba(228, 138, 185, 0.15), rgba(201, 107, 161, 0.08));
+  border: 2px solid rgba(228, 138, 185, 0.6);
+  color: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 4px 12px rgba(228, 138, 185, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.1);
 }
 
 .login-submit-btn,
 .signup-submit-btn {
-  background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
+  background: linear-gradient(135deg, #e48ab9 0%, #c96ba1 60%, #522566 100%);
   color: white;
   border: none;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 15px 28px;
+  border-radius: 28px 10px 28px 10px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 6px 18px rgba(201, 107, 161, 0.35),
+    inset 0 -2px 8px rgba(82, 37, 102, 0.3);
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.login-submit-btn::before,
+.signup-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(253, 238, 113, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.login-submit-btn:hover::before,
+.signup-submit-btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 @media (max-width: 768px) {
   .login-submit-btn,
   .signup-submit-btn {
-    padding: 16px;
+    padding: 16px 24px;
     font-size: 1rem;
   }
 }
@@ -5952,7 +6177,7 @@ html, body {
 @media (max-width: 480px) {
   .login-submit-btn,
   .signup-submit-btn {
-    padding: 14px;
+    padding: 14px 20px;
     font-size: 0.95rem;
   }
 }
@@ -5960,21 +6185,32 @@ html, body {
 @media (max-width: 375px) {
   .login-submit-btn,
   .signup-submit-btn {
-    padding: 12px;
+    padding: 12px 18px;
     font-size: 0.9rem;
   }
 }
 
 .login-submit-btn:disabled,
 .signup-submit-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .login-submit-btn:hover,
 .signup-submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 28px rgba(201, 107, 161, 0.45),
+    inset 0 -2px 8px rgba(82, 37, 102, 0.3);
+}
+
+.login-submit-btn:active,
+.signup-submit-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 12px rgba(201, 107, 161, 0.3),
+    inset 0 2px 6px rgba(82, 37, 102, 0.4);
 }
 
 .login-submit-btn:disabled:hover,
@@ -5987,22 +6223,47 @@ html, body {
 .login-link {
   text-align: center;
   margin-top: 20px;
-  color: white;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.92rem;
+  letter-spacing: 0.3px;
 }
 
 .signup-btn,
 .login-btn-link {
   background: none;
   border: none;
-  color: var(--mahotsav-yellow);
-  text-decoration: underline;
+  color: #fdee71;
+  text-decoration: none;
   cursor: pointer;
   font-size: inherit;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0 2px;
+}
+
+.signup-btn::after,
+.login-btn-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #fdee71 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .signup-btn:hover,
 .login-btn-link:hover {
   color: #ffed4a;
+  text-shadow: 0 0 8px rgba(253, 238, 113, 0.35);
+}
+
+.signup-btn:hover::after,
+.login-btn-link:hover::after {
+  opacity: 1;
 }
 
 /* Form Sections for Signup */
@@ -10983,10 +11244,11 @@ html {
 .signup-steps-indicator {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px 30px 10px;
-  background: linear-gradient(135deg, #2596be 0%, #764ba2 100%);
-  margin: -20px -20px 0 -20px;
+  justify-content: space-between;
+  padding: 25px 50px;
+  background: transparent;
+  margin: 0;
+  gap: 0;
 }
 
 .step {
@@ -10996,11 +11258,11 @@ html {
   gap: 8px;
   opacity: 0.5;
   transition: all 0.3s ease;
+  flex: 0 0 auto;
 }
 
 .step.active {
   opacity: 1;
-  transform: scale(1.1);
 }
 
 .step.completed {
@@ -11011,7 +11273,7 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   color: white;
   display: flex;
   align-items: center;
@@ -11023,16 +11285,16 @@ html {
 }
 
 .step.active .step-number {
-  background: white;
-  color: #2596be;
+  background: transparent;
+  color: white;
   border-color: white;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .step.completed .step-number {
-  background: #4ade80;
+  background: transparent;
   border-color: #4ade80;
-  color: white;
+  color: #4ade80;
 }
 
 .step-label {
@@ -11048,11 +11310,13 @@ html {
 }
 
 .step-connector {
-  width: 60px;
+  width: 80px;
   height: 2px;
   background: rgba(255, 255, 255, 0.3);
-  margin: 0 10px;
-  margin-bottom: 20px;
+  margin: 0 15px;
+  align-self: flex-start;
+  margin-top: 19px;
+  flex-shrink: 0;
 }
 
 .signup-navigation {
@@ -11067,35 +11331,78 @@ html {
   flex: 1;
   padding: 14px 28px;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 20px 8px 20px 8px;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  position: relative;
+  overflow: hidden;
 }
 
 .signup-prev-btn {
-  background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
-  color: white;
+  background: linear-gradient(135deg, rgba(82, 37, 102, 0.15) 0%, rgba(37, 150, 190, 0.08) 100%);
+  color: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(82, 37, 102, 0.4);
+  box-shadow: 0 4px 12px rgba(82, 37, 102, 0.15);
+}
+
+.signup-prev-btn::before {
+  content: '‹';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
 .signup-prev-btn:hover {
-  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-  transform: translateX(-3px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(82, 37, 102, 0.25) 0%, rgba(37, 150, 190, 0.15) 100%);
+  border-color: rgba(82, 37, 102, 0.6);
+  transform: translateX(-4px);
+  box-shadow: 0 6px 20px rgba(82, 37, 102, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.signup-prev-btn:hover::before {
+  left: 8px;
+  opacity: 1;
 }
 
 .signup-next-btn {
-  background: linear-gradient(135deg, #2596be 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e48ab9 0%, #c96ba1 70%, #522566 100%);
   color: white;
+  box-shadow: 
+    0 5px 16px rgba(201, 107, 161, 0.35),
+    inset 0 -2px 6px rgba(82, 37, 102, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.signup-next-btn::after {
+  content: '›';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
 .signup-next-btn:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #2596be 100%);
-  transform: translateX(3px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: translateX(4px);
+  box-shadow: 
+    0 8px 24px rgba(201, 107, 161, 0.45),
+    inset 0 -2px 6px rgba(82, 37, 102, 0.3);
+}
+
+.signup-next-btn:hover::after {
+  right: 8px;
+  opacity: 1;
 }
 
 .signup-navigation .signup-submit-btn {

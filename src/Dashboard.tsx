@@ -4,8 +4,8 @@ import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
 import GarudaBubble from './GarudaBubble';
 import EventRegistrationModal from './EventRegistrationModal';
-import LoadingAnimation from './components/LoadingAnimation';
-import CollegeSelect from './components/CollegeSelect';
+import Login from './Login';
+import Signup from './Signup';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
@@ -2273,10 +2273,7 @@ Do you want to proceed with registration?`;
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
                 onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
                  style={{ 
-                  transformStyle: 'preserve-3d',
-                  backgroundImage: 'url(/home.jpg)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
+                  transformStyle: 'preserve-3d'
                 }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -2293,7 +2290,8 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                
+                <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
               </div>
 
               {/* EVENTS */}
@@ -2316,7 +2314,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🏛️</div>
+                <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">EVENTS</span>
               </div>
 
@@ -2340,7 +2338,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">👤</div>
+                <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
               </div>
 
@@ -2367,7 +2365,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">�</div>
+                <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
               </div>
 
@@ -2394,7 +2392,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🤝</div>
+                <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
               </div>
 
@@ -2421,7 +2419,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🌐</div>
+                <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
               </div>
 
@@ -2448,7 +2446,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">♿</div>
+                <img src="/para sports.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
               </div>
 
@@ -2475,7 +2473,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">�</div>
+                <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
               </div>
 
@@ -2499,7 +2497,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🎓</div>
+                <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
               </div>
 
@@ -2526,7 +2524,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">�</div>
+                <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
               </div>
 
@@ -2553,7 +2551,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">�</div>
+                <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
               </div>
 
@@ -2580,7 +2578,7 @@ Do you want to proceed with registration?`;
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <div className="text-6xl mb-4 text-yellow-400 transition-transform duration-300 group-hover:scale-125">🗺️</div>
+                <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
               </div>
             </div>
@@ -3665,54 +3663,6 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* Accreditation Section - Standalone */}
-      <section 
-        className={`accreditation-section section-animate section-animate-right ${visibleSections.has('accreditation') ? 'visible' : ''}`}
-        data-section-id="accreditation"
-        ref={(el) => registerSection('accreditation', el)}
-      >
-        <div className="accreditation-container">
-          <img src={`${import.meta.env.BASE_URL}clg.png`} alt="Accreditation and Rankings" className="accreditation-main-image" />
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="dashboard-footer">
-        {/* Footer Content */}
-        <div className="footer-content">
-          {/* Logo Section */}
-          <div className="footer-logo-section">
-            <img src={`${import.meta.env.BASE_URL}vig.png`} alt="Vignan Logo" className="footer-vignan-logo-img" />
-          </div>
-          
-          {/* Contact Section */}
-          <div className="footer-contact-section">
-            <p className="footer-contact-label">Contact us: +91 94930 33592 | +91 90305 57363</p>
-            <p className="footer-email-label">Email: <a href="mailto:mahotsav@vignan.ac.in">mahotsav@vignan.ac.in</a></p>
-            <p className="footer-website-label">Website: <a href="https://vignan.ac.in/mahotsav" target="_blank" rel="noopener noreferrer">vignan.ac.in/mahotsav</a></p>
-          </div>
-          
-          {/* Social Media */}
-          <div className="footer-social-section">
-            <p className="footer-social-label">Follow us on:</p>
-            <div className="social-icons">
-              <a href="https://www.instagram.com/vignan_mahotsav?igsh=c3lwNjc4Y2phaGlx" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
-                <img src={`${import.meta.env.BASE_URL}insta.svg`} alt="Instagram" />
-              </a>
-              <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" className="social-icon whatsapp">
-                <img src={`${import.meta.env.BASE_URL}wha.png`} alt="WhatsApp" />
-              </a>
-              <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
-                <img src={`${import.meta.env.BASE_URL}linkedin.svg`} alt="LinkedIn" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* Garuda Floating Bubble */}
-      <GarudaBubble />
-
       {/* Events Info Modal */}
       {showEventsInfo && (
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
@@ -3734,276 +3684,34 @@ Do you want to proceed with registration?`;
       )}
 
       {/* Login Modal */}
-      {showLoginModal && (
-        <div className="login-modal-overlay" onClick={handleCloseLogin}>
-          <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>Welcome Back!</h2>
-              <button className="close-btn" onClick={handleCloseLogin}>×</button>
-            </div>
-            <div className="login-modal-body">
-              <form className="login-form" onSubmit={handleLoginSubmit}>
-                {loginMessage && (
-                  <div className={`submit-message ${loginMessage.type}`}>
-                    {loginMessage.text}
-                  </div>
-                )}
-                
-                <div className="form-group">
-                  <label htmlFor="email">Email or Mahotsav ID</label>
-                  <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    value={loginFormData.email}
-                    onChange={handleLoginInputChange}
-                    placeholder="Enter email or MH26XXXXXX"
-                    className="form-input"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={loginFormData.password}
-                    onChange={handleLoginInputChange}
-                    placeholder="Enter your password"
-                    className="form-input"
-                    required
-                  />
-                </div>
-                <div className="form-options">
-                  <label className="checkbox-label">
-                    <input type="checkbox" /> Remember me
-                  </label>
-                  <button type="button" onClick={handleForgotPasswordClick} className="forgot-password">Forgot password?</button>
-                </div>
-                <button type="submit" className="login-submit-btn" disabled={isLoggingIn}>
-                  {isLoggingIn ? '⏳ Logging in...' : '🔑 Login'}
-                </button>
-                <div className="signup-link">
-                  <p>Don't have an account? <button type="button" onClick={handleSignupClick} className="signup-btn">Sign up</button></p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
+      <Login
+        showLoginModal={showLoginModal}
+        onClose={handleCloseLogin}
+        loginFormData={loginFormData}
+        onInputChange={handleLoginInputChange}
+        onSubmit={handleLoginSubmit}
+        isLoggingIn={isLoggingIn}
+        loginMessage={loginMessage}
+        onForgotPasswordClick={handleForgotPasswordClick}
+        onSignupClick={handleSignupClick}
+      />
 
       {/* Signup Modal */}
-      {showSignupModal && (
-        <div className="login-modal-overlay" onClick={handleCloseSignup}>
-          <div className="signup-modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* Loading Animation Overlay */}
-            {isSubmitting && (
-              <div className="signup-loading-overlay">
-                <LoadingAnimation 
-                  message="Creating your Mahotsav account..." 
-                  size={200}
-                />
-              </div>
-            )}
-            
-            <div className="login-modal-header">
-              <h2>Join Mahotsav 2026</h2>
-              <button className="close-btn" onClick={handleCloseSignup}>×</button>
-            </div>
-            
-            {/* Progress Steps */}
-            <div className="signup-steps-indicator">
-              <div className={`step ${signupStep >= 1 ? 'active' : ''} ${signupStep > 1 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 1 ? '✓' : '1'}</div>
-                <div className="step-label">Personal Info</div>
-              </div>
-              <div className="step-connector"></div>
-              <div className={`step ${signupStep >= 2 ? 'active' : ''} ${signupStep > 2 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 2 ? '✓' : '2'}</div>
-                <div className="step-label">Academic Info</div>
-              </div>
-              <div className="step-connector"></div>
-              <div className={`step ${signupStep >= 3 ? 'active' : ''} ${signupStep > 3 ? 'completed' : ''}`}>
-                <div className="step-number">{signupStep > 3 ? '✓' : '3'}</div>
-                <div className="step-label">Contact Info</div>
-              </div>
-            </div>
-
-            <div className="signup-modal-body">
-              <form className="signup-form" onSubmit={handleSignupSubmit}>
-                {submitMessage && (
-                  <div className={`submit-message ${submitMessage.type}`}>
-                    {submitMessage.text}
-                  </div>
-                )}
-                
-                {/* Step 1: Personal Information */}
-                {signupStep === 1 && (
-                  <div className="form-section">
-                    <h3>👤 Personal Information</h3>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="name">Full Name *</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={signupFormData.name}
-                          onChange={handleSignupInputChange}
-                          placeholder="Enter your full name"
-                          className="form-input"
-                          required
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="dateOfBirth">Date of Birth * (Your Password)</label>
-                        <input
-                          type="date"
-                          id="dateOfBirth"
-                          name="dateOfBirth"
-                          value={signupFormData.dateOfBirth || ''}
-                          onChange={handleSignupInputChange}
-                          className="form-input"
-                          placeholder="DD/MM/YYYY"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="gender">Gender</label>
-                      <select 
-                        id="gender" 
-                        name="gender" 
-                        value={signupFormData.gender || ''}
-                        onChange={handleSignupInputChange}
-                        className="form-input form-select"
-                      >
-                        <option value="">Select gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 2: Academic Information */}
-                {signupStep === 2 && (
-                  <div className="form-section">
-                    <h3>🎓 Academic Information</h3>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="college">College Name *</label>
-                        <CollegeSelect
-                          value={signupFormData.college || ''}
-                          onChange={(value) => setSignupFormData(prev => ({ ...prev, college: value }))}
-                          required
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="registerId">Register ID</label>
-                        <input
-                          type="text"
-                          id="registerId"
-                          name="registerId"
-                          value={signupFormData.registerId || ''}
-                          onChange={handleSignupInputChange}
-                          placeholder="Enter your register ID"
-                          className="form-input"
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="referenceId">Reference ID</label>
-                      <input
-                        type="text"
-                        id="referenceId"
-                        name="referenceId"
-                        value={signupFormData.referenceId || ''}
-                        onChange={handleSignupInputChange}
-                        placeholder="Enter reference ID (optional)"
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: Contact Information */}
-                {signupStep === 3 && (
-                  <div className="form-section">
-                    <h3>📞 Contact Information</h3>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="email">Email Address *</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={signupFormData.email}
-                          onChange={handleSignupInputChange}
-                          placeholder="your.email@example.com"
-                          className="form-input"
-                          required
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="phone">Mobile Number *</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={signupFormData.phone}
-                          onChange={handleSignupInputChange}
-                          placeholder="10-digit mobile number"
-                          maxLength={10}
-                          className="form-input"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Navigation Buttons */}
-                <div className="signup-navigation">
-                  {signupStep > 1 && (
-                    <button 
-                      type="button" 
-                      className="signup-prev-btn"
-                      onClick={handlePrevStep}
-                    >
-                      ← Previous
-                    </button>
-                  )}
-                  
-                  {signupStep < totalSteps ? (
-                    <button 
-                      type="button" 
-                      className="signup-next-btn"
-                      onClick={handleNextStep}
-                    >
-                      Next →
-                    </button>
-                  ) : (
-                    <button 
-                      type="submit" 
-                      className="signup-submit-btn"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? '⏳ Creating Account...' : '🎉 Create Account & Get Mahotsav ID'}
-                    </button>
-                  )}
-                </div>
-                
-                <div className="login-link">
-                  <p>Already have an account? <button type="button" onClick={() => { setShowSignupModal(false); setShowLoginModal(true); }} className="login-btn-link">Login here</button></p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
+      <Signup
+        showSignupModal={showSignupModal}
+        onClose={handleCloseSignup}
+        signupFormData={signupFormData}
+        onInputChange={handleSignupInputChange}
+        onCollegeChange={(value) => setSignupFormData(prev => ({ ...prev, college: value }))}
+        onSubmit={handleSignupSubmit}
+        signupStep={signupStep}
+        totalSteps={totalSteps}
+        onNextStep={handleNextStep}
+        onPrevStep={handlePrevStep}
+        isSubmitting={isSubmitting}
+        submitMessage={submitMessage}
+        onLoginClick={() => { setShowSignupModal(false); setShowLoginModal(true); }}
+      />
 
       {/* Sub-Modal for Menu Categories */}
       {activeSubModal && (
@@ -4736,6 +4444,74 @@ Do you want to proceed with registration?`;
           </div>
         </div>
       )}
+
+      {/* Footer Section */}
+      <footer className="dashboard-footer">
+        {/* Contact Us Section */}
+        <div className="contact-us-section">
+          <h2 className="contact-us-title">CONTACT US</h2>
+          <div className="contact-grid">
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m2 7 10 6 10-6"/>
+                </svg>
+              </div>
+              <h3 className="contact-label">Email</h3>
+              <p className="contact-value">support@Vignan.org</p>
+            </div>
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <h3 className="contact-label">Phone</h3>
+              <p className="contact-value">+91 98765 43210</p>
+            </div>
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 className="contact-label">Address</h3>
+              <p className="contact-value">VFSTR, Guntur, Andhra Pradesh, India</p>
+            </div>
+          </div>
+          <p className="contact-subtitle">For any queries, feel free to reach out — we're here to help!</p>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="footer-bottom">
+          <div className="footer-brand">MAHOTSAV <span className="footer-year">'26</span></div>
+          <div className="footer-social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+          <div className="footer-copyright">© 2025</div>
+        </div>
+      </footer>
     </div>
   );
 };

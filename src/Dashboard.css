@@ -2517,10 +2517,142 @@ html, body {
 
 /* Footer */
 .dashboard-footer {
-  padding: 40px 20px 20px;
-  color: white;
+  width: 100vw;
+  margin-top: 80px;
   position: relative;
-  overflow: hidden;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Contact Us Section */
+.contact-us-section {
+  background: transparent;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.contact-us-title {
+  font-size: 3rem;
+  font-weight: bold;
+  font-style: italic;
+  color: #ff3333;
+  margin-bottom: 50px;
+  letter-spacing: 2px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-icon {
+  color: #ff3333;
+  margin-bottom: 10px;
+}
+
+.contact-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.contact-value {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.contact-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background: #000000;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.footer-year {
+  color: #ff3333;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-social-link {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.footer-social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.footer-copyright {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .contact-us-title {
+    font-size: 2rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-size: 1.5rem;
+  }
 }
 
 /* Decorative lotus icons */

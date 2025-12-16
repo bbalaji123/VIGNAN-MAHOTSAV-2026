@@ -8,15 +8,15 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuCategories = [
-    { name: 'EVENTS', icon: '🎯' },
-    { name: 'ABOUT US', icon: 'ℹ️' },
-    { name: 'SCHEDULE', icon: '📅' },
-    { name: 'COLLABORATION', icon: '🤝' },
-    { name: 'ZONALS', icon: '🌍' },
-    { name: 'HOSPITALITY', icon: '🏨' },
-    { name: 'CERTIFICATES', icon: '🏆' },
-    { name: 'MAP', icon: '🗺️' },
-    { name: 'CAMPUS AMBASSADOR', icon: '👥' }
+    { name: 'EVENTS', icon: '/events.svg' },
+    { name: 'ABOUT US', icon: '/team.svg' },
+    { name: 'SCHEDULE', icon: '/Schedule.svg' },
+    { name: 'COLLABORATION', icon: '/collaboration.svg' },
+    { name: 'ZONALS', icon: '/zonals.svg' },
+    { name: 'HOSPITALITY', icon: '/hospitality.svg' },
+    { name: 'CERTIFICATES', icon: '/home.svg' },
+    { name: 'MAP', icon: '/17.svg' },
+    { name: 'CAMPUS AMBASSADOR', icon: '/campus ambassador.svg' }
   ];
 
   const handleCategoryClick = (category: string) => {
@@ -99,9 +99,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
                   onClick={() => handleCategoryClick(category.name)}
                   style={{ animationDelay: `${0.1 + index * 0.05}s` }}
                 >
-                  <span className="text-xl md:text-2xl group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
-                  </span>
+                  <img 
+                    src={`${import.meta.env.BASE_URL}${category.icon}`}
+                    alt={category.name}
+                    className="w-6 h-6 md:w-7 md:h-7 group-hover:scale-110 transition-transform duration-300 object-contain"
+                  />
                   <span className="font-medium text-xs md:text-sm tracking-wide">
                     {category.name}
                   </span>

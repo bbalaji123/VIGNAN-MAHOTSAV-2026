@@ -20,11 +20,11 @@ button,
 /* Circular Back Navigation Button */
 .circular-back-button {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: 0.3rem;
+  left: 0.8rem;
   z-index: 1000;
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #f5f5f5;
   border: none;
@@ -39,8 +39,8 @@ button,
 .circular-back-button::before {
   content: '';
   position: absolute;
-  width: 24px;
-  height: 2.5px;
+  width: 20px;
+  height: 2px;
   background: #522566;
   top: 50%;
   left: 50%;
@@ -52,10 +52,10 @@ button,
 .circular-back-button::after {
   content: '';
   position: absolute;
-  width: 11px;
-  height: 11px;
-  border-left: 2.5px solid #522566;
-  border-bottom: 2.5px solid #522566;
+  width: 9px;
+  height: 9px;
+  border-left: 2px solid #522566;
+  border-bottom: 2px solid #522566;
   top: 50%;
   left: 50%;
   transform: translate(-130%, -50%) rotate(45deg);
@@ -84,20 +84,20 @@ button,
 
 @media (max-width: 768px) {
   .circular-back-button {
-    top: 1.5rem;
-    left: 1.5rem;
-    width: 52px;
-    height: 52px;
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 42px;
+    height: 42px;
   }
   
   .circular-back-button::before {
-    width: 20px;
+    width: 18px;
     height: 2px;
   }
   
   .circular-back-button::after {
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-left-width: 2px;
     border-bottom-width: 2px;
   }

@@ -2,7 +2,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
-import GarudaBubble from './GarudaBubble';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
@@ -193,7 +192,7 @@ const Dashboard: React.FC = () => {
     },
     "Tennikoit": {
       title: "INDIVIDUAL EVENTS",
-      subtitle: "TENNIKOIT – Singles (Women)",
+      subtitle: "TENNIKOIT � Singles (Women)",
       rules: [
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
@@ -604,15 +603,15 @@ const Dashboard: React.FC = () => {
   // Filter events based on user gender - users only see events appropriate for their gender
   const filterEventsByGender = (events: Event[]) => {
     const userGender = userProfileData.gender;
-    console.log('🔍 Filtering events - User gender:', userGender, 'User profile:', userProfileData);
-    console.log('📊 Events to filter:', events.length, 'events');
+    console.log('?? Filtering events - User gender:', userGender, 'User profile:', userProfileData);
+    console.log('?? Events to filter:', events.length, 'events');
     
     if (userGender === 'female') {
       // Female users can only see female and mixed gender events
       const filtered = events.filter(event => 
         event.gender === 'female' || event.gender === 'mixed'
       );
-      console.log('👩 Female user - showing', filtered.length, 'events (female + mixed only)');
+      console.log('?? Female user - showing', filtered.length, 'events (female + mixed only)');
       return filtered;
     }
     
@@ -621,12 +620,12 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'male' || event.gender === 'mixed'
       );
-      console.log('👨 Male user - showing', filtered.length, 'events (male + mixed only)');
+      console.log('?? Male user - showing', filtered.length, 'events (male + mixed only)');
       return filtered;
     }
     
     // For non-logged in users or other genders, show all events
-    console.log('🔓 Non-logged user or other gender - showing all', events.length, 'events');
+    console.log('?? Non-logged user or other gender - showing all', events.length, 'events');
     return events;
   };
 
@@ -847,59 +846,59 @@ const Dashboard: React.FC = () => {
 
   // Function to fetch events from API
   const fetchEvents = useCallback(async () => {
-    console.log('🔄 Fetching events from API...');
+    console.log('?? Fetching events from API...');
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
-    console.log('👤 User gender for filtering:', userGender);
+    console.log('?? User gender for filtering:', userGender);
     setLoadingEvents(true);
     try {
         // Test API connection first
-        console.log('🔗 Testing API connection...');
+        console.log('?? Testing API connection...');
         const testResponse = await fetch('/api/events').catch(() => null);
         if (!testResponse) {
-          console.warn('⚠️ Backend server may not be running. Using production API...');
+          console.warn('?? Backend server may not be running. Using production API...');
         }
 
         // Fetch sports events with gender filter if user is logged in
-        console.log('📡 Fetching sports events...');
+        console.log('?? Fetching sports events...');
         const sportsResponse = await getEventsByType('sports', userGender);
-        console.log('⚽ Sports response:', sportsResponse);
+        console.log('? Sports response:', sportsResponse);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-          console.log(`✅ Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`? Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No sports events loaded:', sportsResponse.message);
+          console.warn('?? No sports events loaded:', sportsResponse.message);
         }
 
         // Fetch culturals events with gender filter if user is logged in
-        console.log('📡 Fetching cultural events...');
+        console.log('?? Fetching cultural events...');
         const culturalsResponse = await getEventsByType('culturals', userGender);
-        console.log('🎨 Culturals response:', culturalsResponse);
+        console.log('?? Culturals response:', culturalsResponse);
         if (culturalsResponse.success && culturalsResponse.data) {
           setCulturalEvents(culturalsResponse.data);
-          console.log(`✅ Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`? Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No cultural events loaded:', culturalsResponse.message);
+          console.warn('?? No cultural events loaded:', culturalsResponse.message);
         }
 
         // Fetch para sports events with gender filter if user is logged in
-        console.log('📡 Fetching para sports events...');
+        console.log('?? Fetching para sports events...');
         const paraSportsResponse = await getEventsByType('parasports', userGender);
-        console.log('♿ Para Sports response:', paraSportsResponse);
+        console.log('? Para Sports response:', paraSportsResponse);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-          console.log(`✅ Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
+          console.log(`? Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
-          console.warn('⚠️ No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
+          console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
-        console.error('❌ Error fetching events:', error);
-        console.log('💡 Troubleshooting tips:');
+        console.error('? Error fetching events:', error);
+        console.log('?? Troubleshooting tips:');
         console.log('   1. Make sure backend server is running: npm start');
         console.log('   2. Check if MongoDB is connected');
         console.log('   3. Verify API endpoints are working');
       } finally {
         setLoadingEvents(false);
-        console.log('✅ Finished loading events');
+        console.log('? Finished loading events');
       }
   }, [isLoggedIn, userProfileData.gender]);
 
@@ -911,7 +910,7 @@ const Dashboard: React.FC = () => {
   // Refetch events when user login status or gender changes
   useEffect(() => {
     if (isLoggedIn && userProfileData.gender) {
-      console.log('🔄 User gender detected, refetching events for:', userProfileData.gender);
+      console.log('?? User gender detected, refetching events for:', userProfileData.gender);
       fetchEvents();
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
@@ -1651,7 +1650,7 @@ const Dashboard: React.FC = () => {
   const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
     const selectedEventsArray = Array.from(selectedEventIds);
     
-    console.log('💰 PRICE CALCULATION START');
+    console.log('?? PRICE CALCULATION START');
     console.log('   - Gender:', gender);
     console.log('   - Gender type:', typeof gender);
     console.log('   - Events count:', selectedEventsArray.length);
@@ -1687,66 +1686,66 @@ const Dashboard: React.FC = () => {
     console.log('   - Sports events in state:', sportsEvents.length);
     console.log('   - Cultural events in state:', culturalEvents.length);
     
-    // EXPLICIT FEMALE LOGIC - ALWAYS ₹250 FOR SINGLE TYPE
+    // EXPLICIT FEMALE LOGIC - ALWAYS ?250 FOR SINGLE TYPE
     const normalizedGender = gender?.toLowerCase();
 
     if (normalizedGender === 'female') {
-      console.log('   - ✅ FEMALE USER DETECTED');
+      console.log('   - ? FEMALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - 👩 Female: Sports + Culturals = ₹350');
+        console.log('   - ?? Female: Sports + Culturals = ?350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - 👩 Female: Sports ONLY = ₹250');
+        console.log('   - ?? Female: Sports ONLY = ?250');
         return 250;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - 👩 Female: Culturals ONLY = ₹250');
+        console.log('   - ?? Female: Culturals ONLY = ?250');
         return 250;
       }
       
-      console.log('   - ❌ Female user but no sports/culturals detected');
+      console.log('   - ? Female user but no sports/culturals detected');
     }
     
     // MALE LOGIC
     if (normalizedGender === 'male') {
-      console.log('   - ✅ MALE USER DETECTED');
+      console.log('   - ? MALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - 👨 Male: Sports + Culturals = ₹350');
+        console.log('   - ?? Male: Sports + Culturals = ?350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - 👨 Male: Sports ONLY = ₹350');
+        console.log('   - ?? Male: Sports ONLY = ?350');
         return 350;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - 👨 Male: Culturals ONLY = ₹250');
+        console.log('   - ?? Male: Culturals ONLY = ?250');
         return 250;
       }
     }
     
     // Fallback for users without gender info - charge as per event mix
     if (hasSports && hasCulturals) {
-      console.log('   - ⚙️ Fallback: Sports + Culturals = ₹350');
+      console.log('   - ?? Fallback: Sports + Culturals = ?350');
       return 350;
     }
     if (hasSports) {
-      console.log('   - ⚙️ Fallback: Sports only = ₹350');
+      console.log('   - ?? Fallback: Sports only = ?350');
       return 350;
     }
     if (hasCulturals) {
-      console.log('   - ⚙️ Fallback: Culturals only = ₹250');
+      console.log('   - ?? Fallback: Culturals only = ?250');
       return 250;
     }
 
-    console.log('   - ❌ FALLBACK: Defaulting to ₹0');
-    console.log('💰 PRICE CALCULATION END');
+    console.log('   - ? FALLBACK: Defaulting to ?0');
+    console.log('?? PRICE CALCULATION END');
     return 0;
   };
 
@@ -1782,20 +1781,20 @@ const Dashboard: React.FC = () => {
 
     // Create confirmation message
     const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
-    const priceText = totalAmount === 0 ? 'FREE' : `₹${totalAmount}`;
+    const priceText = totalAmount === 0 ? 'FREE' : `?${totalAmount}`;
     
     const confirmationMessage = `
-🎯 REGISTRATION CONFIRMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+?? REGISTRATION CONFIRMATION
+????????????????????????????
 
-📋 Selected Events (${eventIds.length}):
+?? Selected Events (${eventIds.length}):
 ${eventsList}
 
-👤 Participant: ${userProfileData.name}
-⚧ Gender: ${userGender}
-💰 Total Amount: ${priceText}
+?? Participant: ${userProfileData.name}
+? Gender: ${userGender}
+?? Total Amount: ${priceText}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+????????????????????????????
 
 Do you want to proceed with registration?`;
 
@@ -1814,8 +1813,8 @@ Do you want to proceed with registration?`;
         handleCloseSubModal();
         
         const successMessage = totalAmount === 0 
-          ? `✅ Successfully registered for ${eventIds.length} event(s) for FREE!`
-          : `✅ Successfully registered for ${eventIds.length} event(s)! Total amount: ₹${totalAmount}`;
+          ? `? Successfully registered for ${eventIds.length} event(s) for FREE!`
+          : `? Successfully registered for ${eventIds.length} event(s)! Total amount: ?${totalAmount}`;
           
         alert(successMessage);
       } else {
@@ -1861,7 +1860,7 @@ Do you want to proceed with registration?`;
         // Get count from registeredEvents array or count field
         const data = response.data as any;
         const count = data?.registeredEvents?.length || data?.totalEvents || response.count || 0;
-        console.log('📊 Event registrations count:', count);
+        console.log('?? Event registrations count:', count);
         setEventRegistrationsCount(count);
       }
     } catch (error) {
@@ -1902,7 +1901,7 @@ Do you want to proceed with registration?`;
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
         setShowEventChecklistModal(false);
-        alert(`✅ Successfully saved and registered for ${eventIds.length} event(s)!`);
+        alert(`? Successfully saved and registered for ${eventIds.length} event(s)!`);
       } else {
         alert(result.message || 'Failed to save events. Please try again.');
       }
@@ -1941,7 +1940,7 @@ Do you want to proceed with registration?`;
       
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;
-        console.log('🔑 Login success - User data:', { userId, name, email, userType, gender });
+        console.log('?? Login success - User data:', { userId, name, email, userType, gender });
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -1965,7 +1964,7 @@ Do you want to proceed with registration?`;
           gender: gender // No default value
         };
         setUserProfileData(profileData);
-        console.log('💾 Storing user profile:', profileData);
+        console.log('?? Storing user profile:', profileData);
         
         setShowLoginModal(false);
         setLoginFormData({ email: '', password: '' });
@@ -2019,7 +2018,7 @@ Do you want to proceed with registration?`;
         gender: storedUserGender || undefined // Convert null to undefined
       };
       setUserProfileData(profileData);
-      console.log('💾 Loading user profile from localStorage:', profileData);
+      console.log('?? Loading user profile from localStorage:', profileData);
       
       // Fetch user's saved events from database
       if (storedUserId) {
@@ -2085,7 +2084,7 @@ Do you want to proceed with registration?`;
       {/* Top-Right Profile Section */}
       {isLoggedIn && (
         <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile} style={{backgroundColor: '#c96ba1', borderColor: '#fdee71'}}>
-          <div className="text-2xl sm:text-4xl">👤</div>
+          <div className="text-2xl sm:text-4xl">??</div>
           <span className="text-sm sm:text-lg font-bold hidden xs:block">Welcome, {loggedInUserName}!</span>
           <span className="text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
         </div>
@@ -2189,7 +2188,7 @@ Do you want to proceed with registration?`;
             backgroundAttachment: 'fixed'
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
+          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 0, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -2220,7 +2219,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 1, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
+          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 0, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
               {/* Petals layer - rotates anticlockwise */}
               <img 
@@ -2255,22 +2254,21 @@ Do you want to proceed with registration?`;
             className="circular-back-button"
             onClick={() => setShowPageMenu(false)}
             aria-label="Go back"
-            style={{ position: 'absolute', top: '1.25rem', left: '1.25rem', zIndex: 99999 }}
           >
           </button>
 
           {/* Menu Title */}
-          <div className="text-center pt-8 pb-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-white tracking-widest">MENU</h1>
+          <div className="text-center pt-6 pb-4 md:pt-8 md:pb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)'}}>MENU</h1>
           </div>
 
-          {/* Grid Menu Items - Centered */}
-          <div className="flex items-center justify-center h-[calc(100vh-140px)]">
-            <div className="max-w-7xl mx-auto px-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Grid Menu Items - Scrollable Container */}
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6">
+            <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
               {/* HOME */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
                  style={{ 
                   transformStyle: 'preserve-3d'
@@ -2296,7 +2294,7 @@ Do you want to proceed with registration?`;
 
               {/* EVENTS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={handleEventsInfoClick}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2320,7 +2318,7 @@ Do you want to proceed with registration?`;
 
               {/* PROFILE */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2344,7 +2342,7 @@ Do you want to proceed with registration?`;
 
               {/* SCHEDULE */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/schedule');
                   setShowPageMenu(false); 
@@ -2371,7 +2369,7 @@ Do you want to proceed with registration?`;
 
               {/* COLLABORATION */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/collaboration');
                   setShowPageMenu(false); 
@@ -2398,7 +2396,7 @@ Do you want to proceed with registration?`;
 
               {/* ZONALS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/zonals');
                   setShowPageMenu(false); 
@@ -2425,7 +2423,7 @@ Do you want to proceed with registration?`;
 
               {/* PARA SPORTS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/para-sports');
                   setShowPageMenu(false); 
@@ -2452,7 +2450,7 @@ Do you want to proceed with registration?`;
 
               {/* HOSPITALITY */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/hospitality');
                   setShowPageMenu(false); 
@@ -2479,7 +2477,7 @@ Do you want to proceed with registration?`;
 
               {/* CAMPUS AMBASSADOR */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
@@ -2503,7 +2501,7 @@ Do you want to proceed with registration?`;
 
               {/* SPONSORS */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/sponsors');
                   setShowPageMenu(false); 
@@ -2530,7 +2528,7 @@ Do you want to proceed with registration?`;
 
               {/* OUR TEAM */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/our-team');
                   setShowPageMenu(false); 
@@ -2557,7 +2555,7 @@ Do you want to proceed with registration?`;
 
               {/* MAP */}
               <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[180px] border border-white/20 group"
+                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
                   navigate('/campus-map');
                   setShowPageMenu(false); 
@@ -2594,14 +2592,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraSportsCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaSportsSlide + index) % paraSportsCards.length;
@@ -2625,7 +2623,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaSportsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaSportsSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraSportsCards.map((_, index) => (
@@ -2647,14 +2645,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>PARA ATHLETICS MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraAthleticsMenCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaAthleticsSlide + index) % paraAthleticsMenCards.length;
@@ -2677,7 +2675,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaAthleticsSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraAthleticsMenCards.map((_: unknown, index: number) => (
@@ -2699,14 +2697,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>PARA CRICKET MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, paraCricketMenCards.length) }).map((_, index) => {
                   const cardIndex = (currentParaCricketSlide + index) % paraCricketMenCards.length;
@@ -2729,7 +2727,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextParaCricketSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {paraCricketMenCards.map((_: unknown, index: number) => (
@@ -2751,14 +2749,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>CULTURAL CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>�</button>
             </div>
             <div className="culturals-navigation">
-              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
+              <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>?</button>
               <div 
                 className="culturals-carousel-3d-container"
                 onTouchStart={onTouchStart}
@@ -2846,7 +2844,7 @@ Do you want to proceed with registration?`;
                   })}
                 </div>
               </div>
-              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
+              <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {culturalsCards.map((_: typeof culturalsCards[0], index: number) => (
@@ -2868,14 +2866,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>MUSIC EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, musicCards.length) }).map((_, index) => {
                   const cardIndex = (currentMusicSlide + index) % musicCards.length;
@@ -2893,7 +2891,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextMusicSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {musicCards.map((_: unknown, index: number) => (
@@ -2915,14 +2913,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>DANCE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, danceCards.length) }).map((_, index) => {
                   const cardIndex = (currentDanceSlide + index) % danceCards.length;
@@ -2940,7 +2938,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextDanceSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {danceCards.map((_: unknown, index: number) => (
@@ -2962,14 +2960,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>THEATRE & CINEMATOGRAPHY</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, theatreCards.length) }).map((_, index) => {
                   const cardIndex = (currentTheatreSlide + index) % theatreCards.length;
@@ -2987,7 +2985,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextTheatreSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {theatreCards.map((_: unknown, index: number) => (
@@ -3009,14 +3007,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>LITERATURE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, literatureCards.length) }).map((_, index) => {
                   const cardIndex = (currentLiteratureSlide + index) % literatureCards.length;
@@ -3034,7 +3032,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextLiteratureSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {literatureCards.map((_: unknown, index: number) => (
@@ -3056,14 +3054,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>VISUAL ARTS & CRAFT</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, visualArtsCards.length) }).map((_, index) => {
                   const cardIndex = (currentVisualArtsSlide + index) % visualArtsCards.length;
@@ -3081,7 +3079,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextVisualArtsSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {visualArtsCards.map((_: unknown, index: number) => (
@@ -3103,14 +3101,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>FASHION DESIGN & STYLING</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, fashionDesignCards.length) }).map((_, index) => {
                   const cardIndex = (currentFashionDesignSlide + index) % fashionDesignCards.length;
@@ -3128,7 +3126,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextFashionDesignSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {fashionDesignCards.map((_: unknown, index: number) => (
@@ -3150,14 +3148,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>SPOT LIGHT EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
                   const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
@@ -3175,7 +3173,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {spotLightCards.map((_: unknown, index: number) => (
@@ -3199,7 +3197,7 @@ Do you want to proceed with registration?`;
                 <button className="circular-back-button" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}></button>
                 <h2>SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>×</button>
+              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>�</button>
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
@@ -3324,14 +3322,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentIndoorSlide + index) % indoorSportsCards.length;
@@ -3356,7 +3354,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextIndoorSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextIndoorSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {indoorSportsCards.map((_, index) => (
@@ -3378,14 +3376,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentWomenIndoorSlide + index) % womenIndoorSportsCards.length;
@@ -3410,7 +3408,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextWomenIndoorSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenIndoorSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {womenIndoorSportsCards.map((_, index) => (
@@ -3432,14 +3430,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>MEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentMenTeamSlide + index) % menTeamSportsCards.length;
@@ -3464,7 +3462,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextMenTeamSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextMenTeamSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {menTeamSportsCards.map((_, index) => (
@@ -3486,14 +3484,14 @@ Do you want to proceed with registration?`;
             <div className="inline-indoor-sports-header">
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>
-                  ← Back
+                  ? Back
                 </button>
                 <h2>WOMEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>×</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>�</button>
             </div>
             <div className="indoor-sports-navigation">
-              <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>◀</button>
+              <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>?</button>
               <div className="indoor-sports-grid">
                 {Array.from({ length: 3 }).map((_, index) => {
                   const cardIndex = (currentWomenTeamSlide + index) % womenTeamSportsCards.length;
@@ -3518,7 +3516,7 @@ Do you want to proceed with registration?`;
                   );
                 })}
               </div>
-              <button className="indoor-sports-nav-btn next" onClick={nextWomenTeamSlide}>▶</button>
+              <button className="indoor-sports-nav-btn next" onClick={nextWomenTeamSlide}>?</button>
             </div>
             <div className="indoor-sports-carousel-indicators">
               {womenTeamSportsCards.map((_, index) => (
@@ -3564,7 +3562,7 @@ Do you want to proceed with registration?`;
 
       {/* Highlights of 2025 Section */}
       <section 
-        className={`dashboard-section highlights-section section-animate section-animate-left ${visibleSections.has('highlights') ? 'visible' : ''}`}
+        className={`dashboard-section highlights-section section-animate section-animate-left ${visibleSections.has('highlights') ? 'visible animate-in' : ''}`}
         data-section-id="highlights"
         ref={(el) => registerSection('highlights', el)}
       >
@@ -3667,7 +3665,7 @@ Do you want to proceed with registration?`;
       {showEventsInfo && (
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
-            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>×</button>
+            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
             <div className="events-info-grid">
               {eventInfoCards.map((card, index) => (
                 <div key={index} className="event-info-card">
@@ -3719,7 +3717,7 @@ Do you want to proceed with registration?`;
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
-              <button className="close-btn" onClick={handleCloseSubModal}>×</button>
+              <button className="close-btn" onClick={handleCloseSubModal}>�</button>
             </div>
             <div className="sub-modal-body">
               {activeSubModal === 'EVENTS' && (
@@ -3733,7 +3731,7 @@ Do you want to proceed with registration?`;
                       <div className="events-category-grid">
                       {/* Sports Events */}
                       <div className="event-category-card">
-                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
+                        <h3>? Sports Events ({getFilteredSportsEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredSportsEvents().length > 0 ? (
                             getFilteredSportsEvents().map((event) => (
@@ -3775,7 +3773,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Cultural Events */}
                       <div className="event-category-card">
-                        <h3>🎨 Cultural Events ({getFilteredCulturalEvents().length})</h3>
+                        <h3>?? Cultural Events ({getFilteredCulturalEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredCulturalEvents().length > 0 ? (
                             getFilteredCulturalEvents().map((event) => (
@@ -3817,12 +3815,12 @@ Do you want to proceed with registration?`;
                       
                       {/* Para Sports Events */}
                       <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                        <h3>? Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
                         {getFilteredParaSportsEvents().length === 0 && (
                           <div>
-                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>⚠️ No para sports events loaded. Server might be down.</p>
+                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
                             <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px'}}>
-                              🔄 Retry Loading Events
+                              ?? Retry Loading Events
                             </button>
                           </div>
                         )}
@@ -3869,10 +3867,10 @@ Do you want to proceed with registration?`;
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
                                   <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  {event.date && <p className="event-meta">?? {event.date}</p>}
+                                  {event.venue && <p className="event-meta">?? {event.venue}</p>}
+                                  {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
+                                  {event.category && <p className="event-meta">??? {event.category}</p>}
                                 </div>
                               </label>
                             ))
@@ -3895,7 +3893,7 @@ Do you want to proceed with registration?`;
                             userProfileData.gender || 'unknown'
                           );
                           const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `₹${totalAmount}`;
+                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `?${totalAmount}`;
                           return (
                             <div className="price-preview">
                               Total: {formattedAmount}
@@ -3913,7 +3911,7 @@ Do you want to proceed with registration?`;
                           className="register-events-btn"
                           onClick={handleRegisterForEvents}
                         >
-                          🎯 Register for Events ({tempSelectedEvents.size})
+                          ?? Register for Events ({tempSelectedEvents.size})
                         </button>
                       )}
                     </div>
@@ -4117,11 +4115,11 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseUserIdPopup}>
           <div className="userid-popup-content" onClick={(e) => e.stopPropagation()}>
             <div className="userid-popup-header">
-              <h2>🎉 Registration Successful!</h2>
+              <h2>?? Registration Successful!</h2>
             </div>
             <div className="userid-popup-body">
               <div className="userid-display">
-                <div className="success-icon">✓</div>
+                <div className="success-icon">?</div>
                 <h3>Your Mahotsav ID</h3>
                 <div className="userid-box">
                   <span className="userid-text">{generatedUserId}</span>
@@ -4131,7 +4129,7 @@ Do you want to proceed with registration?`;
                   <span className="password-text">{generatedPassword}</span>
                 </div>
                 <div className="screenshot-note">
-                  <span className="screenshot-icon">📸</span>
+                  <span className="screenshot-icon">??</span>
                   <p>Please take a screenshot of this page to save your credentials!</p>
                 </div>
                 <p className="userid-instructions">
@@ -4151,8 +4149,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseForgotPassword}>
           <div className="forgot-password-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>🔑 Forgot Password</h2>
-              <button className="close-btn" onClick={handleCloseForgotPassword}>×</button>
+              <h2>?? Forgot Password</h2>
+              <button className="close-btn" onClick={handleCloseForgotPassword}>�</button>
             </div>
             <div className="forgot-password-modal-body">
               <p className="forgot-password-instructions">
@@ -4185,7 +4183,7 @@ Do you want to proceed with registration?`;
                   className="forgot-password-submit-btn"
                   disabled={isSendingReset}
                 >
-                  {isSendingReset ? '📧 Sending...' : '📧 Send Password to Email'}
+                  {isSendingReset ? '?? Sending...' : '?? Send Password to Email'}
                 </button>
                 
                 <div className="back-to-login">
@@ -4197,7 +4195,7 @@ Do you want to proceed with registration?`;
                     }} 
                     className="back-to-login-btn"
                   >
-                    ← Back to Login
+                    ? Back to Login
                   </button>
                 </div>
               </form>
@@ -4211,8 +4209,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseProfile}>
           <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>👤 My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>×</button>
+              <h2>?? My Profile</h2>
+              <button className="close-btn" onClick={handleCloseProfile}>�</button>
             </div>
             <div className="login-modal-body">
               <div className="profile-details">
@@ -4224,7 +4222,7 @@ Do you want to proceed with registration?`;
                 </div>
                 
                 <div className="profile-info-section">
-                  <h4>📋 Personal Information</h4>
+                  <h4>?? Personal Information</h4>
                   <div className="profile-info-grid">
                     <div className="profile-info-item">
                       <span className="info-label">Full Name:</span>
@@ -4246,7 +4244,7 @@ Do you want to proceed with registration?`;
                 </div>
 
                 <div className="profile-stats-section">
-                  <h4>📊 Activity Summary</h4>
+                  <h4>?? Activity Summary</h4>
                   <div className="stats-grid">
                     <div className="stat-box">
                       <div className="stat-number">{eventRegistrationsCount}</div>
@@ -4260,8 +4258,8 @@ Do you want to proceed with registration?`;
                 </div>
 
                 <div className="profile-actions">
-                  <button className="profile-action-btn edit-btn">✏️ Edit Profile</button>
-                  <button className="profile-action-btn logout-btn" onClick={handleLogout}>🚪 Logout</button>
+                  <button className="profile-action-btn edit-btn">?? Edit Profile</button>
+                  <button className="profile-action-btn logout-btn" onClick={handleLogout}>?? Logout</button>
                 </div>
               </div>
             </div>
@@ -4285,8 +4283,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseEventChecklist}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>📋 Select Events</h2>
-              <button className="close-btn" onClick={handleCloseEventChecklist}>×</button>
+              <h2>?? Select Events</h2>
+              <button className="close-btn" onClick={handleCloseEventChecklist}>�</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -4302,9 +4300,9 @@ Do you want to proceed with registration?`;
                   {/* Sports Events Section */}
                   {getFilteredSportsEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>⚽ Sports Events
+                      <h3>? Sports Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (₹{getPricingForUser().sports} each)</span>
+                          <span className="pricing-info"> (?{getPricingForUser().sports} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
@@ -4318,8 +4316,8 @@ Do you want to proceed with registration?`;
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">📅 {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">📍 {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
+                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -4330,9 +4328,9 @@ Do you want to proceed with registration?`;
                   {/* Cultural Events Section */}
                   {getFilteredCulturalEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>🎨 Cultural Events
+                      <h3>?? Cultural Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (₹{getPricingForUser().culturals} each)</span>
+                          <span className="pricing-info"> (?{getPricingForUser().culturals} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
@@ -4346,8 +4344,8 @@ Do you want to proceed with registration?`;
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">📅 {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">📍 {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
+                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -4375,7 +4373,7 @@ Do you want to proceed with registration?`;
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
                 >
-                  💾 Save to My Events
+                  ?? Save to My Events
                 </button>
               </div>
             </div>
@@ -4388,8 +4386,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>🎫 My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
+              <h2>?? My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>�</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -4404,17 +4402,17 @@ Do you want to proceed with registration?`;
                         <div className="my-event-header">
                           <h4>{event.eventName}</h4>
                           <span className="event-type-badge">
-                            {event.eventType === 'sports' ? '⚽' : event.eventType === 'parasports' ? '🏅' : '🎨'} {event.eventType}
+                            {event.eventType === 'sports' ? '?' : event.eventType === 'parasports' ? '??' : '??'} {event.eventType}
                           </span>
                         </div>
                         <p>{event.description || 'No description'}</p>
                         <div className="event-details-grid">
-                          {event.date && <p className="event-meta">📅 {event.date}</p>}
-                          {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                          {event.prizePool && <p className="event-meta">💰 {event.prizePool}</p>}
+                          {event.date && <p className="event-meta">?? {event.date}</p>}
+                          {event.venue && <p className="event-meta">?? {event.venue}</p>}
+                          {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
                         </div>
                         <div className="event-registered-badge">
-                          ✅ Registered
+                          ? Registered
                         </div>
                       </div>
                     </div>
@@ -4446,7 +4444,11 @@ Do you want to proceed with registration?`;
       )}
 
       {/* Footer Section */}
-      <footer className="dashboard-footer">
+      <footer 
+        className={`dashboard-footer ${visibleSections.has('footer') ? 'animate-in' : ''}`}
+        data-section-id="footer"
+        ref={(el) => registerSection('footer', el)}
+      >
         {/* Contact Us Section */}
         <div className="contact-us-section">
           <h2 className="contact-us-title">CONTACT US</h2>
@@ -4481,35 +4483,55 @@ Do you want to proceed with registration?`;
               <p className="contact-value">VFSTR, Guntur, Andhra Pradesh, India</p>
             </div>
           </div>
-          <p className="contact-subtitle">For any queries, feel free to reach out — we're here to help!</p>
+          <p className="contact-subtitle">For any queries, feel free to reach out � we're here to help!</p>
         </div>
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <div className="footer-brand">MAHOTSAV <span className="footer-year">'26</span></div>
-          <div className="footer-social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer-social-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
+          {/* Decorative Infinity Symbol Background */}
+          <div className="footer-infinity-motif" aria-hidden="true">
+            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50,50 Q30,20 15,50 Q0,80 15,80 Q30,80 50,50 Q70,20 85,50 Q100,80 115,80 Q130,80 150,50 Q170,20 185,50" 
+                fill="none" 
+                stroke="rgba(255,255,255,0.08)" 
+                strokeWidth="2"
+                strokeLinecap="round"/>
+            </svg>
           </div>
-          <div className="footer-copyright">© 2025</div>
+
+          <div className="footer-content-wrapper">
+            <div className="footer-brand">
+              <span className="footer-brand-main">MAHOTSAV'26</span>
+              <span className="footer-tagline">The Eternal Harmony</span>
+            </div>
+
+            <div className="footer-social-icons">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
+
+            <div className="footer-copyright">
+              <span>� 2025 Mahotsav</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

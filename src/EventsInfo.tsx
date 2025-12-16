@@ -148,7 +148,7 @@ const EventsInfo: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
+    <div className="min-h-screen flex flex-col relative" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -156,8 +156,8 @@ const EventsInfo: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed pointer-events-none w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px]" style={{ top: '0px', right: '0px', opacity: 0.5, zIndex: 5 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', width: '100%', height: '100%', position: 'relative' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
@@ -188,8 +188,8 @@ const EventsInfo: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
+      <div className="fixed pointer-events-none w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px]" style={{ bottom: '0px', left: '0px', opacity: 0.5, zIndex: 5 }}>
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', width: '100%', height: '100%', position: 'relative' }}>
           {/* Petals layer - rotates anticlockwise */}
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}

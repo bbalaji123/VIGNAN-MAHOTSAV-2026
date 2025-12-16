@@ -13,6 +13,7 @@ const Dashboard: React.FC = () => {
   const [showPageMenu, setShowPageMenu] = useState(false);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
+  const [currentEventSlide, setCurrentEventSlide] = useState(0);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
 
@@ -959,7 +960,7 @@ const Dashboard: React.FC = () => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
   
-  const onTouchEnd = (carouselType: 'sports' | 'culturals') => {
+  const onTouchEnd = (carouselType: 'sports' | 'culturals' | 'events') => {
     if (!touchStart || !touchEnd) return;
     
     const distance = touchStart - touchEnd;
@@ -978,11 +979,25 @@ const Dashboard: React.FC = () => {
       } else if (isRightSwipe) {
         setCurrentCulturalsSlide((prev) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
       }
+    } else if (carouselType === 'events') {
+      if (isLeftSwipe) {
+        nextEventSlide();
+      } else if (isRightSwipe) {
+        prevEventSlide();
+      }
     }
   };
   
   const nextHighlightSlide = () => {
     setCurrentHighlightSlide((prev) => (prev + 1) % highlightCards.length);
+  };
+
+  const prevEventSlide = () => {
+    setCurrentEventSlide((prev) => (prev - 1 + eventInfoCards.length) % eventInfoCards.length);
+  };
+
+  const nextEventSlide = () => {
+    setCurrentEventSlide((prev) => (prev + 1) % eventInfoCards.length);
   };
 
   const prevHighlightSlide = () => {
@@ -2081,13 +2096,30 @@ Do you want to proceed with registration?`;
         </div>
       )}
 
-      {/* Top-Right Profile Section */}
+      {/* Top-Right Logout Button */}
       {isLoggedIn && (
-        <div className="fixed top-3 sm:top-5 right-3 sm:right-5 z-50 flex items-center gap-4 sm:gap-6 cursor-pointer bg-pink-600 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-white hover:bg-purple-700 transition-all duration-300 border-2 border-yellow-400 min-w-[150px] sm:min-w-[200px]" onClick={handleShowProfile} style={{backgroundColor: '#c96ba1', borderColor: '#fdee71'}}>
-          <div className="text-2xl sm:text-4xl">??</div>
-          <span className="text-sm sm:text-lg font-bold hidden xs:block">Welcome, {loggedInUserName}!</span>
-          <span className="text-sm sm:text-lg font-bold block xs:hidden">Profile</span>
-        </div>
+        <button 
+          className="logout-button-top"
+          onClick={handleLogout}
+          aria-label="Logout"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+        </button>
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
@@ -2180,74 +2212,14 @@ Do you want to proceed with registration?`;
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-99998" 
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible" 
           style={{
             backgroundImage: 'url("/Background-redesign.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: 'fixed',
+            zIndex: 99998
           }}>
-          {/* Floating Flower - Top Right */}
-          <div className="fixed -top-64 -right-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 0, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
-            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
-              {/* Petals layer - rotates anticlockwise */}
-              <img 
-                src={`${import.meta.env.BASE_URL}petals.png`}
-                alt="Flower Petals"
-                className="absolute inset-0 w-full h-full object-contain"
-                style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
-              />
-              {/* Sun layer in center - rotates clockwise */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src={`${import.meta.env.BASE_URL}sun.png`}
-                  alt="Sun"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
-                />
-                {/* Moon layer - inside sun, stays static */}
-                <img 
-                  src={`${import.meta.env.BASE_URL}moon.png`}
-                  alt="Moon"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ 
-                    zIndex: 10
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-64 -left-64 pointer-events-none" style={{ width: '600px', height: '600px', opacity: 0.25, zIndex: 0, transform: `translateX(${flowerScrollOffset}px) scale(${1 + flowerScrollOffset * 0.001})`, transition: 'transform 0.1s ease-out' }}>
-            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
-              {/* Petals layer - rotates anticlockwise */}
-              <img 
-                src={`${import.meta.env.BASE_URL}petals.png`}
-                alt="Flower Petals"
-                className="absolute inset-0 w-full h-full object-contain"
-                style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
-              />
-              {/* Sun layer in center - rotates clockwise */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src={`${import.meta.env.BASE_URL}sun.png`}
-                  alt="Sun"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
-                />
-                {/* Moon layer - inside sun, stays static */}
-                <img 
-                  src={`${import.meta.env.BASE_URL}moon.png`}
-                  alt="Moon"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ 
-                    zIndex: 10
-                  }}
-                />
-              </div>
-            </div>
-          </div>
           
           {/* Back Button */}
           <button 
@@ -3666,15 +3638,80 @@ Do you want to proceed with registration?`;
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
             <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
-            <div className="events-info-grid">
-              {eventInfoCards.map((card, index) => (
-                <div key={index} className="event-info-card">
-                  <div className="poster-placeholder">
-                    <span>POSTER of EVENT</span>
-                  </div>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
+            <div className="events-navigation">
+              <button className="events-nav-btn prev" onClick={prevEventSlide}>◀</button>
+              <div 
+                className="events-carousel-3d-container"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={() => onTouchEnd('events')}
+              >
+                <div className="events-carousel-3d-wrapper">
+                  {eventInfoCards.map((card, index) => {
+                    const isActive = index === currentEventSlide;
+                    const offset = index - currentEventSlide;
+                    
+                    let transform = '';
+                    let zIndex = 0;
+                    let opacity = 0;
+                    let filter = 'grayscale(100%) brightness(0.5)';
+                    
+                    if (offset === 0) {
+                      // Active card - center front
+                      transform = 'translateX(0) translateY(0) translateZ(200px) rotateY(0deg) scale(1)';
+                      zIndex = 10;
+                      opacity = 1;
+                      filter = 'none';
+                    } else if (offset === 1 || offset === -eventInfoCards.length + 1) {
+                      // Right card
+                      transform = 'translateX(60%) translateY(10%) translateZ(-200px) rotateY(-35deg) scale(0.7)';
+                      zIndex = 5;
+                      opacity = 0.5;
+                      filter = 'grayscale(50%) brightness(0.7)';
+                    } else if (offset === -1 || offset === eventInfoCards.length - 1) {
+                      // Left card
+                      transform = 'translateX(-60%) translateY(10%) translateZ(-200px) rotateY(35deg) scale(0.7)';
+                      zIndex = 5;
+                      opacity = 0.5;
+                      filter = 'grayscale(50%) brightness(0.7)';
+                    } else {
+                      // Hidden cards
+                      transform = offset > 0 ? 'translateX(100%) translateZ(-400px) scale(0.5)' : 'translateX(-100%) translateZ(-400px) scale(0.5)';
+                      zIndex = 0;
+                      opacity = 0;
+                    }
+                    
+                    return (
+                      <div
+                        key={index}
+                        className="event-info-card-3d"
+                        style={{
+                          transform,
+                          zIndex,
+                          opacity,
+                          filter,
+                          transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                      >
+                        <div className="poster-placeholder">
+                          <span>POSTER of EVENT</span>
+                        </div>
+                        <h3>{card.title}</h3>
+                        <p>{card.description}</p>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
+              <button className="events-nav-btn next" onClick={nextEventSlide}>▶</button>
+            </div>
+            <div className="events-carousel-indicators">
+              {eventInfoCards.map((_, index) => (
+                <button
+                  key={index}
+                  className={`events-indicator ${index === currentEventSlide ? 'active' : ''}`}
+                  onClick={() => setCurrentEventSlide(index)}
+                />
               ))}
             </div>
           </div>

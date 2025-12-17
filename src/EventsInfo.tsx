@@ -105,10 +105,6 @@ const EventsInfo: React.FC = () => {
     setShowCulturals(true);
   };
 
-  const handleBackToDashboard = () => {
-    navigate('/');
-  };
-
   // Navigation functions for sports carousel
   const nextSportsSlide = () => {
     setCurrentSportsSlide((prev) => (prev + 1) % sportsDetailCards.length);

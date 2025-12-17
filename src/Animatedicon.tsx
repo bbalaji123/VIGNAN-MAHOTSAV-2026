@@ -159,7 +159,7 @@ const AnimatedIcon: React.FC = () => {
       className="z-[8] drop-shadow-[0_10px_40px_rgba(0,0,0,0.4)] pointer-events-none"
       style={{
         position: 'fixed',
-        bottom: '25px',
+        bottom: '1px',
         left: '50%',
         width: `${size}px`,
         height: `${size}px`,

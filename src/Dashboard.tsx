@@ -5,7 +5,7 @@ import AnimatedIcon from './Animatedicon';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getMyEventRegistrations, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -493,7 +493,7 @@ const Dashboard: React.FC = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [flowerScrollOffset, setFlowerScrollOffset] = useState(0);
+  const [] = useState(0);
   
   // Animation state for sections
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
@@ -525,7 +525,7 @@ const Dashboard: React.FC = () => {
   const [showEventRegistrationModal, setShowEventRegistrationModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loggedInUserName, setLoggedInUserName] = useState<string>('');
+  const [, setLoggedInUserName] = useState<string>('');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [loginFormData, setLoginFormData] = useState({ email: '', password: '' });
   const [loginMessage, setLoginMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
@@ -536,7 +536,7 @@ const Dashboard: React.FC = () => {
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
   const [myEvents, setMyEvents] = useState<Event[]>([]);
   const [tempSelectedEvents, setTempSelectedEvents] = useState<Set<string>>(new Set());
-  const [eventRegistrationsCount, setEventRegistrationsCount] = useState(0);
+  const [eventRegistrationsCount] = useState(0);
   const [paraSportsSelected, setParaSportsSelected] = useState(false);
   const [regularEventsSelected, setRegularEventsSelected] = useState(false);
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
@@ -789,8 +789,6 @@ const Dashboard: React.FC = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       setIsScrolled(scrollPosition > windowHeight * 0.5);
-      // Update flower parallax offset
-      setFlowerScrollOffset(scrollPosition * 0.15);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -1860,28 +1858,6 @@ Do you want to proceed with registration?`;
     window.location.href = '/';
   };
 
-  const handleShowProfile = () => {
-    // Fetch event registrations count when opening profile
-    if (userProfileData.userId) {
-      fetchEventRegistrationsCount(userProfileData.userId);
-    }
-    setShowProfileModal(true);
-  };
-
-  const fetchEventRegistrationsCount = async (userId: string) => {
-    try {
-      const response = await getMyEventRegistrations(userId);
-      if (response.success) {
-        // Get count from registeredEvents array or count field
-        const data = response.data as any;
-        const count = data?.registeredEvents?.length || data?.totalEvents || response.count || 0;
-        console.log('?? Event registrations count:', count);
-        setEventRegistrationsCount(count);
-      }
-    } catch (error) {
-      console.error('Error fetching registrations:', error);
-    }
-  };
 
   const handleCloseProfile = () => {
     setShowProfileModal(false);
@@ -3706,7 +3682,6 @@ Do you want to proceed with registration?`;
               >
                 <div className="events-carousel-3d-wrapper">
                   {eventInfoCards.map((card, index) => {
-                    const isActive = index === currentEventSlide;
                     const offset = index - currentEventSlide;
                     
                     let transform = '';

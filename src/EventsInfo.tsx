@@ -156,16 +156,13 @@ const EventsInfo: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed pointer-events-none w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px]" style={{ top: '0px', right: '0px', opacity: 0.5, zIndex: 5 }}>
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', width: '100%', height: '100%', position: 'relative' }}>
-          {/* Petals layer - rotates anticlockwise */}
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
             className="absolute inset-0 w-full h-full object-contain"
-            style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
           />
-          {/* Sun layer in center - rotates clockwise */}
           <div className="absolute inset-0 flex items-center justify-center">
             <img 
               src={`${import.meta.env.BASE_URL}sun.png`}
@@ -173,14 +170,13 @@ const EventsInfo: React.FC = () => {
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
             />
-            {/* Moon layer - inside sun, stays static */}
             <img 
               src={`${import.meta.env.BASE_URL}moon.png`}
               alt="Moon"
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ 
                 zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
+                animation: 'moonStatic 120s linear infinite'
               }}
             />
           </div>
@@ -188,14 +184,12 @@ const EventsInfo: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed pointer-events-none w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[700px] lg:h-[700px]" style={{ bottom: '0px', left: '0px', opacity: 0.5, zIndex: 5 }}>
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', width: '100%', height: '100%', position: 'relative' }}>
-          {/* Petals layer - rotates anticlockwise */}
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
             alt="Flower Petals"
             className="absolute inset-0 w-full h-full object-contain"
-            style={{ animation: 'petalsRotateAnticlockwise 10s linear infinite' }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <img 
@@ -204,14 +198,13 @@ const EventsInfo: React.FC = () => {
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
             />
-            {/* Moon layer - inside sun, stays static */}
             <img 
               src={`${import.meta.env.BASE_URL}moon.png`}
               alt="Moon"
               className="absolute w-1/3 h-1/3 object-contain"
               style={{ 
                 zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
+                animation: 'moonStatic 120s linear infinite'
               }}
             />
           </div>
@@ -306,6 +299,11 @@ const EventsInfo: React.FC = () => {
           @keyframes moonStatic {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+          }
+          
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
           }
         `}
       </style>

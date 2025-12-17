@@ -5602,6 +5602,44 @@ html, body {
   animation: fadeIn 0.3s ease-out;
 }
 
+.corner-flower {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.65;
+  z-index: 1001;
+}
+
+.corner-flower-tr {
+  top: 0;
+  right: 0;
+}
+
+.corner-flower-bl {
+  bottom: 0;
+  left: 0;
+}
+
+.corner-flower-img {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+}
+
+.corner-flower-tr .corner-flower-img {
+  top: -120px;
+  right: -120px;
+  transform: scaleX(-1);
+}
+
+.corner-flower-bl .corner-flower-img {
+  bottom: -120px;
+  left: -120px;
+  transform: scaleY(-1);
+}
+
 .events-info-content {
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
@@ -11569,6 +11607,8 @@ html {
   position: absolute;
   width: 100%;
   height: 100%;
+  border: none;
+  outline: none;
 }
 
 .flower-container-mobile:first-of-type .flower-inner,

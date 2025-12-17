@@ -2123,9 +2123,9 @@ Do you want to proceed with registration?`;
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center md:justify-start md:pt-20 lg:pt-16 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-4 xl:pt-2 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         <div className="flex justify-center items-center z-20 relative w-full px-0">
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "120%", height: "120%", maxWidth: "none", marginLeft: "15%", marginRight: "0"}} />
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2186,9 +2186,9 @@ Do you want to proceed with registration?`;
         `}</style>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 mb-4 justify-center items-center z-20 relative px-4 w-full">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-[#c96ba1] hover:to-[#522566] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-[#c96ba1] hover:to-[#522566] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -2202,7 +2202,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-56 h-16 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-xl sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
+            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -2220,6 +2220,67 @@ Do you want to proceed with registration?`;
             backgroundAttachment: 'fixed',
             zIndex: 99998
           }}>
+          {/* Floating Flower - Top Right */}
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
+              <img 
+                src={`${import.meta.env.BASE_URL}petals.png`}
+                alt="Flower Petals"
+                className="absolute inset-0 w-full h-full object-contain"
+                style={{ border: 'none', outline: 'none' }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center" style={{ border: 'none', outline: 'none' }}>
+                <img 
+                  src={`${import.meta.env.BASE_URL}sun.png`}
+                  alt="Sun"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ animation: 'sunRotateClockwise 20s linear infinite', border: 'none', outline: 'none' }}
+                />
+                <img 
+                  src={`${import.meta.env.BASE_URL}moon.png`}
+                  alt="Moon"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ 
+                    zIndex: 10,
+                    animation: 'moonStatic 120s linear infinite',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Floating Flower - Bottom Left */}
+          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+            <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
+              <img 
+                src={`${import.meta.env.BASE_URL}petals.png`}
+                alt="Flower Petals"
+                className="absolute inset-0 w-full h-full object-contain"
+                style={{ border: 'none', outline: 'none' }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center" style={{ border: 'none', outline: 'none' }}>
+                <img 
+                  src={`${import.meta.env.BASE_URL}sun.png`}
+                  alt="Sun"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ animation: 'sunRotateClockwise 20s linear infinite', border: 'none', outline: 'none' }}
+                />
+                <img 
+                  src={`${import.meta.env.BASE_URL}moon.png`}
+                  alt="Moon"
+                  className="absolute w-1/3 h-1/3 object-contain"
+                  style={{ 
+                    zIndex: 10,
+                    animation: 'moonStatic 120s linear infinite',
+                    border: 'none',
+                    outline: 'none'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           
           {/* Back Button */}
           <button 
@@ -3514,19 +3575,7 @@ Do you want to proceed with registration?`;
           <div className="theme-content">
             <h3 className="theme-name">Mahotsav 2026 - The Eternal Harmony</h3>
             <p className="theme-description">
-              This is not just a theme, but a beacon of hope, a leap towards peace in the larger society around us. It inspires the visionaries of world peace. The hope of an eternal harmony focuses on ideals built through the refinement of the balance of all the interdependence that are crucial for the ecosystem to thrive.
-            </p>
-            <p className="theme-description">
-              This fun revolution towards harmony includes vibrant, fostering connections and fulfillment. Mahotsav 2026 is a step towards better understanding the way we take pride in saying, "sustainability", "diversity", "inclusivity", "reliability", and "solidarity".
-            </p>
-            <p className="theme-description">
-              Mahotsav, in its nature, is an entertaining and engaging event, and this year the focus is on using the influence of youth towards the global future in various aspects of the eternal harmony. Mahotsav 2026 is all set to focus on fun and the future, internally, societally and globally!
-            </p>
-            <p className="theme-description">
-              Our vision encompasses not just technological advancement, but the holistic development of human consciousness towards creating a sustainable and harmonious world. We believe in the power of youth to drive meaningful change and create lasting impact through innovation, collaboration, and cultural exchange.
-            </p>
-            <p className="theme-description">
-              Join us in this transformative journey as we explore the intersection of tradition and modernity, science and spirituality, individual growth and collective responsibility. Together, we're not just organizing an event - we're cultivating a movement towards eternal harmony that will resonate far beyond the boundaries of our institution.
+              Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ₹17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
             </p>
           </div>
         </div>
@@ -3638,6 +3687,15 @@ Do you want to proceed with registration?`;
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
             <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
+            
+            {/* Corner Flowers for Events Information - only a sliver shows in each corner */}
+            <div className="corner-flower corner-flower-tr">
+              <img src="/flower.svg" alt="" className="corner-flower-img" />
+            </div>
+            <div className="corner-flower corner-flower-bl">
+              <img src="/flower.svg" alt="" className="corner-flower-img" />
+            </div>
+            
             <div className="events-navigation">
               <button className="events-nav-btn prev" onClick={prevEventSlide}>◀</button>
               <div 

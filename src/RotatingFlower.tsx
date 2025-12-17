@@ -70,7 +70,7 @@ const RotatingFlower: React.FC<RotatingFlowerProps> = ({ position = 'top-right',
       <img 
         src={`${import.meta.env.BASE_URL}moon.png`}
         alt="Moon"
-        className="absolute top-1/2 left-1/2 w-1/3 h-1/3 -translate-x-1/2 -translate-y-1/2 object-contain z-[2]"
+        className="absolute top-1/2 left-1/2 w-1/5 h-1/5 -translate-x-1/2 -translate-y-1/2 object-contain z-[2]"
       />
     </div>
   );

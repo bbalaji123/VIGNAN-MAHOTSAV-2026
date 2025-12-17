@@ -20,7 +20,6 @@ const AnimatedIcon: React.FC = () => {
       const isSmallMobile = vw < 480;  // Small phones
       const isMobile = vw < 768;        // Regular phones
       const isTablet = vw >= 768 && vw < 1024;  // Tablets & Z Fold unfolded
-      const isDesktop = vw >= 1024;
       
       // Set responsive size
       if (isSmallMobile) {
@@ -158,9 +157,9 @@ const AnimatedIcon: React.FC = () => {
     <div
       ref={iconRef}
       className="z-[8] drop-shadow-[0_10px_40px_rgba(0,0,0,0.4)] pointer-events-none"
-      style={{ 
+      style={{
         position: 'fixed',
-        bottom: 0,
+        bottom: '25px',
         left: '50%',
         width: `${size}px`,
         height: `${size}px`,
@@ -169,33 +168,103 @@ const AnimatedIcon: React.FC = () => {
         transition: 'opacity 0.3s ease-out'
       }}
     >
-      {/* Petals layer - rotates anticlockwise */}
-      <img 
-        src={`${import.meta.env.BASE_URL}petals.png`}
-        alt="Flower Petals"
-        className="absolute inset-0 w-full h-full object-contain"
-        style={{ 
-          animation: 'spin 20s linear infinite reverse'
+      {/* 
+        FIXED POSITION DECORATIVE ELEMENT
+        - SVG used ONLY as positioning container for PNG assets
+        - Transform origin locked at exact center (500, 500) to prevent drift
+        - No translateX/translateY in animations to keep position stable
+      */}
+      <svg 
+        viewBox="0 0 1000 1000" 
+        width="100%" 
+        height="100%"
+        preserveAspectRatio="xMidYMid meet"
+        style={{
+          position: 'absolute',
+          inset: 0
         }}
-      />
-      {/* Sun layer in center - rotates clockwise */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <img 
-          src={`${import.meta.env.BASE_URL}sun.png`}
-          alt="Sun"
-          className="w-1/3 h-1/3 object-contain"
+      >
+        {/* 
+          PETALS GROUP (ANTI-CLOCKWISE)
+          - Rotates anti-clockwise independently
+          - Transform origin set to 500,500 in SVG coordinates (exact center)
+        */}
+        <g 
           style={{ 
-            animation: 'spin 10s linear infinite'
+            animation: 'rotateAntiClockwise 40s linear infinite',
+            transformOrigin: '500px 500px',
+            transformBox: 'view-box'
           }}
+        >
+          {/* Petals (back layer, rotating anti-clockwise) */}
+          <image 
+            x="0" 
+            y="0" 
+            width="1000" 
+            height="1000"
+            href={`${import.meta.env.BASE_URL}petals.png`}
+          />
+        </g>
+        
+        {/* 
+          SUN GROUP (CLOCKWISE)
+          - Rotates clockwise independently from petals
+          - Transform origin set to 500,500 in SVG coordinates (same center as petals)
+        */}
+        <g 
+          style={{ 
+            animation: 'rotateClockwise 20s linear infinite',
+            transformOrigin: '500px 500px',
+            transformBox: 'view-box'
+          }}
+        >
+          {/* Sun (middle layer, rotating clockwise) */}
+          <image 
+            x="360" 
+            y="360" 
+            width="280" 
+            height="280"
+            href={`${import.meta.env.BASE_URL}sun.png`}
+          />
+        </g>
+        
+        {/* 
+          STATIC MOON (CRITICAL)
+          - Placed OUTSIDE the rotating <g> so it does NOT inherit rotation
+          - Uses EXACT same x, y, width, height as sun for perfect overlap
+          - Creates eclipse effect by overlaying the sun
+          - No animation, no transform, completely static
+        */}
+        <image 
+          x="360" 
+          y="360" 
+          width="280" 
+          height="280"
+          href={`${import.meta.env.BASE_URL}moon.png`}
         />
-      </div>
-      {/* Moon layer - stays static in center */}
-      <img 
-        src={`${import.meta.env.BASE_URL}moon.png`}
-        alt="Moon"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                   w-1/3 h-1/3 object-contain"
-      />
+      </svg>
+      
+      <style>{`
+        /* 
+          ANTI-CLOCKWISE ROTATION (Petals)
+          - Negative rotation = anti-clockwise
+          - No translate transforms = no position drift
+        */
+        @keyframes rotateAntiClockwise {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
+        }
+        
+        /* 
+          CLOCKWISE ROTATION (Sun)
+          - Positive rotation = clockwise
+          - No translate transforms = no position drift
+        */
+        @keyframes rotateClockwise {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 };

@@ -534,7 +534,7 @@ const EventDetail: React.FC = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen overflow-x-hidden relative" style={{
+    <div className="event-detail-page" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -753,18 +753,10 @@ const EventDetail: React.FC = () => {
           </div>
         </div>
 
-        {/* Floating Flower Image - Continuous Rotation */}
-        <div className="absolute top-[5%] sm:top-[10%] right-[1%] z-20">
+        {/* CSS Styles for Print and Buttons */}
+        <div style={{ display: 'none' }}>
           <style>
             {`
-              @keyframes flowerRotate {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-              }
-              .rotating-flower {
-                animation: flowerRotate 6s linear infinite;
-              }
-              
               /* Print styles for PDF generation */
               @media print {
                 @page {
@@ -786,11 +778,6 @@ const EventDetail: React.FC = () => {
                 
                 .print-show {
                   display: block !important;
-                }
-                
-                /* Ensure content fits on page */
-                .rotating-flower {
-                  display: none !important;
                 }
                 
                 /* Make text more readable in print */
@@ -850,15 +837,6 @@ const EventDetail: React.FC = () => {
               }
             `}
           </style>
-          <img 
-            src={`${import.meta.env.BASE_URL}IMG_2037.webp`}
-            alt="Decorative Flower" 
-            className="w-16 h-auto sm:w-24 md:w-32 lg:w-48 xl:w-64 opacity-50 sm:opacity-70 rounded-full p-1 sm:p-2 rotating-flower"
-            style={{
-              filter: 'brightness(1.4) contrast(1.2) saturate(0.9) hue-rotate(5deg) drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3))',
-              background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent)'
-            }}
-          />
         </div>
       </div>
     </div>

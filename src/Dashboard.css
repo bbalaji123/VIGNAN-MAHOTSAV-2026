@@ -1398,9 +1398,10 @@ body::-webkit-scrollbar {
 /* Events Section */
 .events-category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
   gap: 30px;
   margin-top: 40px;
+  justify-content: center;
 }
 
 /* New layout for events */
@@ -1483,12 +1484,13 @@ body::-webkit-scrollbar {
 .event-category-card {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(20px);
-  padding: 40px;
+  padding: 30px;
   border-radius: 25px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: #2d3748;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  min-height: 450px;
+  min-height: 380px;
+  max-width: 350px;
   position: relative;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.12),

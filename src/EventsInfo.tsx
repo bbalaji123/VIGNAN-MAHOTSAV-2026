@@ -231,15 +231,15 @@ const EventsInfo: React.FC = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen flex flex-col relative" style={{
+    <div className="min-h-screen flex flex-col relative overflow-hidden" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
       backgroundRepeat: 'no-repeat'
     }}>
-      {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      {/* Floating Flower - Top Right (clipped naturally) */}
+      <div className="fixed pointer-events-none z-[1] flower-top-right">
         <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
@@ -266,8 +266,8 @@ const EventsInfo: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      {/* Floating Flower - Bottom Left (clipped naturally) */}
+      <div className="fixed pointer-events-none z-[1] flower-bottom-left">
         <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
           <img 
             src={`${import.meta.env.BASE_URL}petals.png`}
@@ -296,76 +296,59 @@ const EventsInfo: React.FC = () => {
 
       <style>
         {`
-          .flower-container-mobile {
-            width: 600px;
-            height: 600px;
-            overflow: hidden;
+          /* Flower positioning - Desktop */
+          .flower-top-right {
+            top: -15%;
+            right: -8%;
+            width: 450px;
+            height: 450px;
+            opacity: 0.3;
           }
           
-          .flower-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+          .flower-bottom-left {
+            bottom: -15%;
+            left: -8%;
+            width: 450px;
+            height: 450px;
+            opacity: 0.3;
           }
           
-          .flower-container-mobile:first-of-type .flower-inner {
-            top: -48%;
-            right: -48%;
-          }
-          
-          .flower-container-mobile:nth-of-type(2) .flower-inner {
-            bottom: -48%;
-            left: -48%;
-          }
-          
+          /* Responsive flower positioning */
           @media (max-width: 768px) {
-            .flower-container-mobile {
-              width: 300px;
-              height: 300px;
+            .flower-top-right,
+            .flower-bottom-left {
+              width: 350px !important;
+              height: 350px !important;
+              opacity: 0.25 !important;
             }
             
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -40%;
-              right: -40%;
+            .flower-top-right {
+              top: -10% !important;
+              right: -10% !important;
             }
             
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -40%;
-              left: -40%;
+            .flower-bottom-left {
+              bottom: -10% !important;
+              left: -10% !important;
             }
           }
           
           @media (max-width: 480px) {
-            .flower-container-mobile {
-              width: 200px;
-              height: 200px;
+            .flower-top-right,
+            .flower-bottom-left {
+              width: 250px !important;
+              height: 250px !important;
+              opacity: 0.2 !important;
             }
             
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -35%;
-              right: -35%;
+            .flower-top-right {
+              top: -8% !important;
+              right: -12% !important;
             }
             
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -35%;
-              left: -35%;
-            }
-          }
-          
-          @media (max-width: 375px) {
-            .flower-container-mobile {
-              width: 150px;
-              height: 150px;
-            }
-            
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -30%;
-              right: -30%;
-            }
-            
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -30%;
-              left: -30%;
+            .flower-bottom-left {
+              bottom: -8% !important;
+              left: -12% !important;
             }
           }
         
@@ -388,80 +371,151 @@ const EventsInfo: React.FC = () => {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
           }
+          
+          /* Responsive adjustments for mobile */
+          @media (max-width: 768px) {
+            .events-header-title {
+              font-size: 3rem !important;
+            }
+            
+            .events-cards-container > div {
+              width: 280px !important;
+              height: 320px !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .events-header-title {
+              font-size: 2.5rem !important;
+            }
+            
+            .events-cards-container > div {
+              width: 260px !important;
+              height: 300px !important;
+            }
+          }
         `}
       </style>
 
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Top Header Section */}
-        <div className="w-full py-6 px-8 flex items-center justify-between">
+        {/* Logo and heading row */}
+        <div className="w-full pt-8 pb-4 px-8 relative z-20 flex items-center gap-69">
+          <img 
+            src={`${import.meta.env.BASE_URL}image.png`}
+            alt="Vignan Mahotsav" 
+            className="h-16 md:h-20 object-contain"
+          />
+          <h1 className="text-4xl md:text-6xl font-bold text-white" style={{
+            fontFamily: 'Bradley Hand, cursive',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+          }}>
+            {showIndoorSports ? 'Indoor Sports' : 
+             showWomensIndoorSports ? "Women's Indoor Sports" : 
+             showMensTeamSports ? "Men's Team Field Sports" : 
+             showWomensTeamSports ? "Women's Team Field Sports" :
+             showSportsDetails ? 'sports and games' : 
+             showCulturals ? 'performing arts, visual arts, literary, fashion' :
+             'EVENTS'}
+          </h1>
+        </div>
+
+        {/* Back button - on left */}
+        <div className="w-full px-8 pb-4 relative z-20">
           <button 
-            onClick={() => navigate('/')}
-            className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 text-lg hover:text-pink-300"
+            onClick={() => {
+              if (showSportsDetails || showCulturals || showParaSports) {
+                setShowSportsDetails(false);
+                setShowCulturals(false);
+                setShowParaSports(false);
+              } else {
+                navigate('/');
+              }
+            }}
+            className="bg-pink-300 hover:bg-pink-400 text-purple-900 font-bold py-3 px-10 rounded-full transition-all duration-300 text-base shadow-lg"
           >
             BACK
           </button>
-          <h1 className="text-5xl md:text-7xl font-bold text-white" style={{
-            fontFamily: 'cursive',
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-          }}>
-            events
-          </h1>
-          <div className="w-32"></div>
         </div>
 
         {/* Main Cards Section */}
-        <div className="flex-1 flex items-center justify-center px-8 py-12">
+        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
           {!showSportsDetails && !showParaSports && !showCulturals && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && (
-            <div className="w-full max-w-7xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 max-w-5xl mx-auto">
+            <div className="w-full max-w-7xl mx-auto">
+              {/* Three Cards - exact spacing from reference */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-10">
+                {/* Card 1 - Performing Arts */}
                 <div 
-                  className="relative h-96 rounded-3xl overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
                   style={{
-                    background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(200,180,220,0.5) 100%)',
-                    backdropFilter: 'blur(10px)'
+                    background: 'rgba(180, 150, 200, 0.35)',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                    height: '350px',
+                    width: '300px',
+                    maxWidth: '100%'
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-xl font-bold" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
                       PERFORMING ARTS,VISUAL<br />ARTS,LITERARY,FASHION
                     </h2>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <div 
-                    className="relative h-96 rounded-3xl overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
-                    onClick={handleSportsCardClick}
-                    style={{
-                      background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(200,180,220,0.5) 100%)',
-                      backdropFilter: 'blur(10px)'
-                    }}
-                  >
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                      <h2 className="text-white text-xl font-bold" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
-                        SPORTS AND GAMES
-                      </h2>
-                    </div>
-                  </div>
-                  <button 
-                    className="bg-pink-300 hover:bg-pink-400 text-purple-900 font-bold py-4 px-8 rounded-full transition-all duration-300 text-lg"
-                    onClick={() => window.open('https://saturnalia.in/rulebook', '_blank')}
-                  >
-                    DOWNLOAD RULEBOOK
-                  </button>
-                </div>
-
+                {/* Card 2 - Sports and Games */}
                 <div 
-                  className="relative h-96 rounded-3xl overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  onClick={handleSportsCardClick}
                   style={{
-                    background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(200,180,220,0.5) 100%)',
-                    backdropFilter: 'blur(10px)'
+                    background: 'rgba(180, 150, 200, 0.35)',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                    height: '350px',
+                    width: '300px',
+                    maxWidth: '100%'
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-xl font-bold" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                      SPORTS AND GAMES
+                    </h2>
+                  </div>
+                  {/* Download Rulebook button - positioned under this card */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2" style={{ top: '370px' }}>
+                    <button 
+                      className="bg-pink-300 hover:bg-pink-400 text-purple-900 font-bold py-3 px-10 rounded-full transition-all duration-300 text-sm shadow-lg whitespace-nowrap"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open('https://saturnalia.in/rulebook', '_blank');
+                      }}
+                    >
+                      DOWNLOAD RULEBOOK
+                    </button>
+                  </div>
+                </div>
+
+                {/* Card 3 - Robo Wars & Gaming */}
+                <div 
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  style={{
+                    background: 'rgba(180, 150, 200, 0.35)',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                    height: '350px',
+                    width: '300px',
+                    maxWidth: '100%'
+                  }}
+                >
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
                       ROBO WARS & GAMING
                     </h2>
                   </div>
@@ -472,353 +526,212 @@ const EventsInfo: React.FC = () => {
 
           {/* Keep existing sections for when cards are clicked */}
           {showSportsDetails && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && (
-            <section className="inline-sports-details-section">
-              <div className="inline-sports-details-container">
-                <div className="mb-6">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="sports-grid-container" style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px',
-                  padding: '20px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                  justifyContent: 'center'
-                }}>
-                  {sportsDetailCards.map((card, index) => {
-                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
-                                       card.title === "Men's Individual &" || 
-                                       card.title === "Women's Individual &" || 
-                                       card.title === "Men's Team Field Sports" || 
-                                       card.title === "Women's Team Field";
-                    
-                    return (
-                      <div 
-                        key={index} 
-                        className="sports-detail-card"
-                        onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
-                        style={{
-                          cursor: isClickable ? 'pointer' : 'default',
-                          width: 'calc(20% - 16px)',
-                          minWidth: '220px',
-                          height: '300px',
-                          borderRadius: '12px',
-                          overflow: 'hidden',
-                          position: 'relative',
-                          transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          if (isClickable) {
-                            e.currentTarget.style.transform = 'translateY(-5px)';
-                            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = 'none';
-                        }}
-                      >
-                        <div className="sports-card-poster-background">
-                          <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+            <div className="w-full h-full flex flex-col relative z-20">
+              {/* Cards Grid - centered */}
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {sportsDetailCards.map((card, index) => {
+                      const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
+                                         card.title === "Men's Individual &" || 
+                                         card.title === "Women's Individual &" || 
+                                         card.title === "Men's Team Field Sports" || 
+                                         card.title === "Women's Team Field";
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
+                          style={{
+                            background: 'rgba(180, 150, 200, 0.35)',
+                            backdropFilter: 'blur(15px)',
+                            WebkitBackdropFilter: 'blur(15px)',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                            height: '280px',
+                            width: '100%',
+                            maxWidth: '280px'
+                          }}
+                        >
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                            <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                              {card.title}
+                            </h2>
+                            {card.subtitle && (
+                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                                {card.subtitle}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                        <div className="sports-card-title-overlay">
-                          <h3>{card.title}</h3>
-                          {card.subtitle && <h4>{card.subtitle}</h4>}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="events-display">
-                  <p className="text-white text-center mt-4">Sports Events: {sportsEvents.length} events available</p>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Indoor Sports Section */}
           {showIndoorSports && (
-            <section className="inline-sports-details-section">
-              <div className="inline-sports-details-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowIndoorSports(false)}>
-                      ← Back
-                    </button>
-                  </div>
-                </div>
-                <div className="inline-events-info-header">
-                  <div className="events-header-left">
-                    <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
-                  </div>
-                </div>
-                <div className="sports-grid-container" style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px',
-                  padding: '20px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                  justifyContent: 'center'
-                }}>
-                  {indoorSportsCards.map((card, index) => (
-                    <div 
-                      key={index} 
-                      className="sports-detail-card"
-                      onClick={() => handleEventDetailClick(card.title)}
-                      style={{
-                        cursor: 'pointer',
-                        width: 'calc(25% - 15px)',
-                        minWidth: '250px',
-                        height: '300px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      <div className="sports-card-poster-background">
-                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+            <div className="w-full h-full flex flex-col relative z-20">
+              {/* Cards Grid - centered */}
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {indoorSportsCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <div className="sports-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && <h4>{card.subtitle}</h4>}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Women's Indoor Sports Section */}
           {showWomensIndoorSports && (
-            <section className="inline-sports-details-section">
-              <div className="inline-sports-details-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowWomensIndoorSports(false)}>
-                      ← Back
-                    </button>
-                  </div>
-                </div>
-                <div className="inline-events-info-header">
-                  <div className="events-header-left">
-                    <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
-                  </div>
-                </div>
-                <div className="sports-grid-container" style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px',
-                  padding: '20px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                  justifyContent: 'center'
-                }}>
-                  {indoorSportsCards.map((card, index) => (
-                    <div 
-                      key={index} 
-                      className="sports-detail-card"
-                      onClick={() => handleEventDetailClick(card.title)}
-                      style={{
-                        cursor: 'pointer',
-                        width: 'calc(25% - 15px)',
-                        minWidth: '250px',
-                        height: '300px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      <div className="sports-card-poster-background">
-                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {indoorSportsCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <div className="sports-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && <h4>{card.subtitle}</h4>}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Men's Team Field Sports Section */}
           {showMensTeamSports && (
-            <section className="inline-sports-details-section">
-              <div className="inline-sports-details-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowMensTeamSports(false)}>
-                      ← Back
-                    </button>
-                  </div>
-                </div>
-                <div className="inline-events-info-header">
-                  <div className="events-header-left">
-                    <h2>MEN'S TEAM FIELD SPORTS</h2>
-                  </div>
-                </div>
-                <div className="sports-grid-container" style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px',
-                  padding: '20px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                  justifyContent: 'center'
-                }}>
-                  {mensTeamSportsCards.map((card, index) => (
-                    <div 
-                      key={index} 
-                      className="sports-detail-card"
-                      onClick={() => handleEventDetailClick(card.title, 'Men')}
-                      style={{
-                        cursor: 'pointer',
-                        width: 'calc(25% - 15px)',
-                        minWidth: '250px',
-                        height: '300px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      <div className="sports-card-poster-background">
-                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {mensTeamSportsCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title, 'Men')}
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <div className="sports-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && <h4>{card.subtitle}</h4>}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Women's Team Field Sports Section */}
           {showWomensTeamSports && (
-            <section className="inline-sports-details-section">
-              <div className="inline-sports-details-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowWomensTeamSports(false)}>
-                      ← Back
-                    </button>
-                  </div>
-                </div>
-                <div className="inline-events-info-header">
-                  <div className="events-header-left">
-                    <h2>WOMEN'S TEAM FIELD SPORTS</h2>
-                  </div>
-                </div>
-                <div className="sports-grid-container" style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px',
-                  padding: '20px',
-                  maxWidth: '1200px',
-                  margin: '0 auto',
-                  justifyContent: 'center'
-                }}>
-                  {womensTeamSportsCards.map((card, index) => (
-                    <div 
-                      key={index} 
-                      className="sports-detail-card"
-                      onClick={() => handleEventDetailClick(card.title, 'Women')}
-                      style={{
-                        cursor: 'pointer',
-                        width: 'calc(25% - 15px)',
-                        minWidth: '250px',
-                        height: '300px',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-5px)';
-                        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
-                    >
-                      <div className="sports-card-poster-background">
-                        <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {womensTeamSportsCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title, 'Women')}
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                      <div className="sports-card-title-overlay">
-                        <h3>{card.title}</h3>
-                        {card.subtitle && <h4>{card.subtitle}</h4>}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Para Sports Section */}
@@ -850,120 +763,44 @@ const EventsInfo: React.FC = () => {
 
           {/* Culturals Section */}
           {showCulturals && (
-            <section className="inline-indoor-sports-section">
-              <div className="inline-indoor-sports-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
-                    alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowCulturals(false)}>
-                      ← Back
-                    </button>
-                  </div>
-                </div>
-                <div className="culturals-navigation">
-                  <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>◀</button>
-                  <div className="culturals-carousel-3d-container">
-                    <div className="culturals-carousel-3d-wrapper">
-                      {culturalsCards.map((card, index) => {
-                        const isActive = index === currentCulturalsSlide;
-                        const totalCards = culturalsCards.length;
-                        
-                        // Calculate offset with wrapping for infinite loop
-                        let offset = index - currentCulturalsSlide;
-                        
-                        // Normalize offset to wrap around (e.g., -5 becomes +2 in a 7-card carousel)
-                        if (offset > totalCards / 2) {
-                          offset -= totalCards;
-                        } else if (offset < -totalCards / 2) {
-                          offset += totalCards;
-                        }
-                        
-                        let transform = '';
-                        let zIndex = 0;
-                        let opacity = 0;
-                        let filter = 'grayscale(100%) brightness(0.5)';
-                        
-                        // Only show 5 cards: center + 2 on each side
-                        if (Math.abs(offset) > 2) {
-                          // Hide cards that are more than 2 positions away
-                          opacity = 0;
-                          transform = `translateX(0) translateY(0) translateZ(-500px) scale(0)`;
-                        } else if (offset === 0) {
-                          // Center card - prominent and forward
-                          transform = `translateX(0) translateY(0) translateZ(100px) rotateY(0deg) scale(1.1)`;
-                          zIndex = 10;
-                          opacity = 1;
-                          filter = 'brightness(1) saturate(1.2)';
-                        } else {
-                          // Side cards (offset -2, -1, 1, 2)
-                          const direction = offset > 0 ? 1 : -1;
-                          const absOffset = Math.abs(offset);
-                          const x = direction * (190 + (absOffset - 1) * 85); // Tighter horizontal spacing
-                          const z = -30 - (absOffset - 1) * 25; // Less depth
-                          const rotY = direction * 10 * absOffset; // Slight rotation
-                          const scale = 1 - absOffset * 0.08; // Minimal size decrease
-                          
-                          transform = `translateX(${x}px) translateY(0) translateZ(${z}px) rotateY(${rotY}deg) scale(${scale})`;
-                          zIndex = 10 - absOffset;
-                          opacity = 1 - absOffset * 0.15;
-                          
-                          const brightness = 1 - absOffset * 0.12;
-                          const saturate = 1 - absOffset * 0.15;
-                          filter = `brightness(${brightness}) saturate(${saturate})`;
-                        }
-                        
-                        return (
-                          <div 
-                            key={index} 
-                            className={`cultural-card-3d ${isActive ? 'active' : ''}`}
-                            onClick={!isActive ? () => setCurrentCulturalsSlide(index) : undefined}
-                            style={{
-                              transform,
-                              zIndex,
-                              opacity,
-                              filter,
-                              cursor: 'pointer',
-                              position: 'absolute',
-                              left: '50%',
-                              top: '50%',
-                              marginLeft: '-150px',
-                              marginTop: '-225px'
-                            }}
-                          >
-                            <div className="cultural-card-poster-background">
-                              <span className="cultural-poster-placeholder-text">CULTURAL POSTER</span>
-                            </div>
-                            <div className="cultural-card-title-overlay">
-                              <h3>{card.title}</h3>
-                              {card.subtitle && <h4>{card.subtitle}</h4>}
-                            </div>
+            <div className="w-full h-full flex flex-col relative z-20">
+              {/* Cards Grid - centered */}
+              <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {culturalsCards.map((card, index) => {
+                      return (
+                        <div 
+                          key={index} 
+                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          style={{
+                            background: 'rgba(180, 150, 200, 0.35)',
+                            backdropFilter: 'blur(15px)',
+                            WebkitBackdropFilter: 'blur(15px)',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                            height: '280px',
+                            width: '100%',
+                            maxWidth: '280px'
+                          }}
+                        >
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                            <h2 className="text-white text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                              {card.title}
+                            </h2>
+                            {card.subtitle && (
+                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                                {card.subtitle}
+                              </p>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                  <button className="culturals-nav-btn next" onClick={nextCulturalsSlide}>▶</button>
-                </div>
-                <div className="culturals-carousel-indicators">
-                  {culturalsCards.map((_, index) => (
-                    <button
-                      key={index}
-                      className={`culturals-indicator ${index === currentCulturalsSlide ? 'active' : ''}`}
-                      onClick={() => setCurrentCulturalsSlide(index)}
-                    />
-                  ))}
-                </div>
-                <div className="events-display">
-                  <p className="text-white text-center mt-4">Cultural Events: {culturalEvents.length} events available</p>
                 </div>
               </div>
-            </section>
+            </div>
           )}
         </div>
       </div>

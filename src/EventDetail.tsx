@@ -21,9 +21,8 @@ const EventDetail: React.FC = () => {
   const { eventName } = useParams<{ eventName: string }>();
   const navigate = useNavigate();
   const [isDownloading, setIsDownloading] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
 
-  // Sample event data - this would normally come from your API
+  // Event data
   const eventDetailsData: { [key: string]: EventDetailData } = {
     "Chess": {
       title: "INDIVIDUAL EVENTS",
@@ -35,12 +34,12 @@ const EventDetail: React.FC = () => {
         "Everyone should report at least 30 mins before scheduled match time.",
         "All India Chess Federation Rules & Regulations are adopted for the competition.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Tie breaks is as following: A. Buchholz B. Buchholz but 1 C. Sonneburn burger D. Direct encounter E. Great number of victories"
+        "Tie breaks is as following: A. Buchholz B. Buchholz but 1 C. Sonneburn burger D. Direct encounter E. Great number of victories",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
         first: "Rs. 6,000",
-        second: "Rs. 4,000",
-        third: ""
+        second: "Rs. 4,000"
       },
       contacts: [
         { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" },
@@ -58,47 +57,110 @@ const EventDetail: React.FC = () => {
         "All player must come with a proper sports attire.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "There will be only three sets for each match.",
-        "Five sets will be conducted for semifinals and finals."
+        "Five sets will be conducted for semifinals and finals.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
         first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: ""
+        second: "Rs. 2,000"
       },
       contacts: [
         { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
         { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" }
       ]
     },
-    "Football": {
-      title: "TEAM EVENTS",
-      subtitle: "FOOTBALL (Men & Women)",
+    "Tennikoit": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TENNICOIT – Singles (Women)",
       rules: [
-        "Team strength is 7+3 players.",
-        "The time of each half will be informed before the commencement of tournament.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team."
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Participants should report at least 30 mins before scheduled time.",
+        "The match is played as the best of 3 sets, 21+21+15 points.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500"
       },
       contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" },
+        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" }
       ]
     },
-    "Volley ball": {
+    "Traditional Yogasana": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All participants must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Syllabus, Rules & Regulations for the Yogasana events: Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat",
+        "Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Link to refer syllabus: https://www.yogasanabharat.com/code",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000 (Traditional) / Rs. 2,000 (Artistic)",
+        second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
+      },
+      contacts: [
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+      ]
+    },
+    "Artistic Yogasana": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All participants must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Syllabus, Rules & Regulations for the Yogasana events: Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat",
+        "Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Link to refer syllabus: https://www.yogasanabharat.com/code",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000 (Traditional) / Rs. 2,000 (Artistic)",
+        second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
+      },
+      contacts: [
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+      ]
+    },
+    "Taekwondo": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TAEKWONDO (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "Men Weight Categories (U-54, U-58, U-63, U-68, U-74, U-80, U-87, above 87).",
+        "Women Weight Categories (U-46, U-49, U-53, U-57, U-62, U-67, U-73, above 73).",
+        "World Taekwondo (WT) new competition rules are applicable.",
+        "Senior men and women kyorugi competitions only.",
+        "All participants must come with a proper sports attire.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 1,500",
+        second: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
+        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" }
+      ]
+    },
+    "Volley ball (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "VOLLEY BALL (Men & Women)",
+      subtitle: "VOLLEY BALL (Men)",
       rules: [
         "Team strength is 6+4 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
@@ -108,13 +170,14 @@ const EventDetail: React.FC = () => {
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team."
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
       },
       contacts: [
         { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
@@ -122,9 +185,34 @@ const EventDetail: React.FC = () => {
         { name: "Mr. P. Murali", phone: "+91 7207049397" }
       ]
     },
-    "Basket ball": {
+    "Volley ball (Women)": {
       title: "TEAM EVENTS",
-      subtitle: "BASKET BALL (Men & Women)",
+      subtitle: "VOLLEY BALL (Women)",
+      rules: [
+        "Team strength is 6+4 players.",
+        "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
+        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" },
+        { name: "Mr. P. Murali", phone: "+91 7207049397" }
+      ]
+    },
+    "Basket ball (Men)": {
+      title: "TEAM EVENTS",
+      subtitle: "BASKET BALL (Men)",
       rules: [
         "Team strength is 5+5 players.",
         "All matches are conducted on knock out basis.",
@@ -133,13 +221,14 @@ const EventDetail: React.FC = () => {
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team."
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
       },
       contacts: [
         { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
@@ -147,9 +236,33 @@ const EventDetail: React.FC = () => {
         { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
       ]
     },
-    "Kabaddi": {
+    "Basket ball (Women)": {
       title: "TEAM EVENTS",
-      subtitle: "KABADDI (Men & Women)",
+      subtitle: "BASKET BALL (Women)",
+      rules: [
+        "Team strength is 5+5 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
+      ]
+    },
+    "Kabaddi (Men)": {
+      title: "TEAM EVENTS",
+      subtitle: "KABADDI (Men)",
       rules: [
         "Team strength is 7+3 players.",
         "Pro Kabaddi rules & Regulations are applicable.",
@@ -161,13 +274,14 @@ const EventDetail: React.FC = () => {
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team."
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
       },
       contacts: [
         { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
@@ -175,217 +289,252 @@ const EventDetail: React.FC = () => {
         { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
       ]
     },
-    "Men's Athletics": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TRACK & FIELD (Men & Women)",
+    "Kabaddi (Women)": {
+      title: "TEAM EVENTS",
+      subtitle: "KABADDI (Women)",
       rules: [
+        "Team strength is 7+3 players.",
+        "Pro Kabaddi rules & Regulations are applicable.",
+        "All matches will be conducted on the kabaddi mat.",
+        "Player may wear mat shoes or can play with barefoot.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "All participants must come with a proper sports attire.",
-        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
-        "Everyone should report at least 30 mins before scheduled time.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: "Rs. 1,000"
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
+        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" },
+        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+      ]
+    },
+    "Kho-Kho (Men)": {
+      title: "TEAM EVENTS",
+      subtitle: "KHO-KHO (Men)",
+      rules: [
+        "Team strength is 9+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
       },
       contacts: [
         { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
+        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
+      ]
+    },
+    "Kho-Kho (Women)": {
+      title: "TEAM EVENTS",
+      subtitle: "KHO-KHO (Women)",
+      rules: [
+        "Team strength is 9+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
+        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
+      ]
+    },
+    "Hockey (Men)": {
+      title: "TEAM EVENTS",
+      subtitle: "HOCKEY (Men)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Hockey (Women)": {
+      title: "TEAM EVENTS",
+      subtitle: "HOCKEY (Women)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Throw ball": {
+      title: "TEAM EVENTS",
+      subtitle: "THROWBALL (Women)",
+      rules: [
+        "Team limit is 9+1 players.",
+        "The match is played as the best of 3 sets, 25+25+15 points.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" },
+        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" },
+        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+      ]
+    },
+    "Football (Men)": {
+      title: "TEAM EVENTS",
+      subtitle: "FOOTBALL (Men)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "The time of each half will be informed before the commencement of tournament.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 30,000",
+        second: "Rs. 20,000",
+        third: "Rs. 7,000",
+        fourth: "Rs. 3,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. P. Murali", phone: "+91 7207049397" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+      ]
+    },
+    "Football (Women)": {
+      title: "TEAM EVENTS",
+      subtitle: "FOOTBALL (Women)",
+      rules: [
+        "Team strength is 7+3 players.",
+        "The time of each half will be informed before the commencement of tournament.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
+      },
+      contacts: [
+        { name: "Mr. B. Bala", phone: "+91 7981216560" },
+        { name: "Mr. P. Murali", phone: "+91 7207049397" },
+        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
       ]
     }
   };
 
-  const eventData = eventDetailsData[eventName || ''];
-
-  if (!eventData) {
-    return (
-      <div className="w-screen min-h-screen overflow-x-hidden relative">
-        <div className="flex flex-col items-center justify-center h-screen text-center text-white">
-          <h2 className="text-4xl mb-8">Event Not Found</h2>
-          <button 
-            onClick={() => navigate(-1)} 
-            className="circular-back-button"
-            aria-label="Go back"
-            style={{ position: 'relative' }}
-          >
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   const handleDownloadPDF = async () => {
+    if (!eventData) return;
+    
     setIsDownloading(true);
     try {
-      console.log('Creating downloadable HTML file...');
-      
-      // Create a complete HTML page with all styling
       const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${eventData?.subtitle || 'Event'} Details - Vignan Mahotsav</title>
+    <title>${eventData.subtitle} - Vignan Mahotsav</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6B46C1 0%, #8B5CF6 25%, #A855F7 50%, #C084FC 75%, #DDD6FE 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6B46C1 0%, #8B5CF6 50%, #C084FC 100%);
             color: white;
-            padding: 20px;
+            padding: 40px;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            color: white;
-        }
-        
-        .header h2 {
-            font-size: 28px;
-            color: #E9D5FF;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-        }
-        
-        .content-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            gap: 40px;
-            align-items: start;
-        }
-        
-        .poster-section {
-            text-align: center;
-        }
-        
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 36px; margin-bottom: 10px; }
+        .header h2 { font-size: 28px; color: #E9D5FF; }
+        .content { display: grid; grid-template-columns: 300px 1fr 350px; gap: 40px; }
         .poster {
-            width: 250px;
-            height: 350px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 4px solid white;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #581C87;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(12px);
+            width: 250px; height: 350px; background: rgba(255,255,255,0.9);
+            border: 4px solid white; border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: #581C87; font-weight: bold; font-size: 18px;
         }
-        
-        .rules-section h3,
-        .prizes-section h3,
-        .contact-section h3 {
-            color: #FFD700;
-            font-size: 28px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .rules-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .rules-list li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-            font-size: 16px;
-            line-height: 1.5;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .rule-bullet {
-            color: #FFD700;
-            font-weight: bold;
-            margin-right: 12px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .prizes-section {
-            margin-bottom: 40px;
-        }
-        
-        .prize-item {
-            margin-bottom: 12px;
-            font-size: 18px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .prize-label {
-            color: #FFD700;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .contact-item {
-            margin-bottom: 12px;
-            font-size: 16px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            line-height: 1.4;
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: center;
-            }
-            
-            .header h1 {
-                font-size: 36px;
-            }
-            
-            .header h2 {
-                font-size: 22px;
-            }
-            
-            .poster {
-                margin: 0 auto;
-            }
-        }
-        
-        /* Print styles */
+        h3 { color: #FFD700; font-size: 24px; margin-bottom: 20px; }
+        .rules-list { list-style: none; padding: 0; }
+        .rules-list li { margin-bottom: 15px; display: flex; }
+        .rules-list li:before { content: "•"; color: #FFD700; font-weight: bold; margin-right: 12px; }
+        .prize-item { margin-bottom: 12px; font-size: 16px; }
+        .prize-label { color: #FFD700; font-weight: bold; }
+        .contact-item { margin-bottom: 12px; font-size: 14px; }
         @media print {
-            body {
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-            
-            .content-grid {
-                gap: 20px;
-            }
+            body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -395,448 +544,201 @@ const EventDetail: React.FC = () => {
             <h1>${eventData.title}</h1>
             <h2>${eventData.subtitle}</h2>
         </div>
-        
-        <div class="content-grid">
-            <!-- Poster Section -->
-            <div class="poster-section">
-                <div class="poster">
-                    POSTER of EVENT
-                </div>
-            </div>
-            
-            <!-- Rules Section -->
-            <div class="rules-section">
+        <div class="content">
+            <div class="poster">POSTER of EVENT</div>
+            <div>
                 <h3>Rules:</h3>
                 <ul class="rules-list">
-                    ${eventData.rules.map(rule => `
-                        <li>
-                            <span class="rule-bullet">•</span>
-                            <span>${rule}</span>
-                        </li>
-                    `).join('')}
+                    ${eventData.rules.map(rule => `<li>${rule}</li>`).join('')}
                 </ul>
             </div>
-            
-            <!-- Prizes and Contact Section -->
             <div>
-                <!-- Cash Prizes -->
-                <div class="prizes-section">
-                    <h3>Cash Prizes:</h3>
-                    <div class="prize-item">
-                        <span class="prize-label">First:</span> ${eventData.prizes.first}
-                    </div>
-                    <div class="prize-item">
-                        <span class="prize-label">Second:</span> ${eventData.prizes.second}
-                    </div>
-                    ${eventData.prizes.third ? `
-                        <div class="prize-item">
-                            <span class="prize-label">Third:</span> ${eventData.prizes.third}
-                        </div>
-                    ` : ''}
-                    ${eventData.prizes.fourth ? `
-                        <div class="prize-item">
-                            <span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}
-                        </div>
-                    ` : ''}
-                </div>
-                
-                <!-- Contact Information -->
-                <div class="contact-section">
-                    <h3>For Queries Contact:</h3>
-                    ${eventData.contacts.map(contact => `
-                        <div class="contact-item">
-                            ${contact.name} - ${contact.phone}
-                        </div>
-                    `).join('')}
-                </div>
+                <h3>Cash Prizes:</h3>
+                <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.first}</div>
+                <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.second}</div>
+                ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.third}</div>` : ''}
+                ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}</div>` : ''}
+                <h3 style="margin-top: 30px;">Contact no:</h3>
+                ${eventData.contacts.map(contact => `<div class="contact-item">${contact.name}: ${contact.phone}</div>`).join('')}
             </div>
         </div>
     </div>
 </body>
 </html>`;
 
-      // Create and download the HTML file
       const blob = new Blob([htmlContent], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `${eventData?.subtitle?.replace(/[^a-zA-Z0-9\s]/g, '') || 'Event'}_Details.html`;
-      link.style.display = 'none';
-      
+      link.download = `${eventData.subtitle.replace(/[^a-zA-Z0-9\s]/g, '')}_Details.html`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
       
-      console.log('HTML file downloaded successfully');
-      
-      // Show success message with instructions
-      alert(`✅ Event details downloaded as HTML file!\\n\\n📄 To convert to PDF:\\n1. Open the downloaded HTML file in your browser\\n2. Press Ctrl+P (or Cmd+P on Mac)\\n3. Choose "Save as PDF"\\n4. Click Save\\n\\nThe file includes all styling and will look exactly like the webpage!`);
-      
+      alert('✅ Event details downloaded successfully!');
     } catch (error) {
-      console.error('Error creating HTML file:', error);
+      console.error('Download error:', error);
       alert('❌ Download failed. Please try again.');
     } finally {
       setIsDownloading(false);
     }
   };
 
-  const handleAddToMyEvents = async () => {
-    setIsSaving(true);
-    try {
-      // Get user data from localStorage
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      const userId = localStorage.getItem('userId');
-      
-      if (!isLoggedIn || isLoggedIn !== 'true') {
-        alert('Please login to save events to your profile.');
-        return;
-      }
-      
-      if (!userId) {
-        alert('User information not found. Please login again.');
-        return;
-      }
+  const eventData = eventDetailsData[eventName || ''];
 
-      // Get existing saved events from localStorage
-      const existingEvents = JSON.parse(localStorage.getItem('myEvents') || '[]');
-      
-      // Create event object with current event data
-      const eventToSave = {
-        id: eventName || 'unknown',
-        name: eventName,
-        title: eventData.title,
-        subtitle: eventData.subtitle,
-        savedAt: new Date().toISOString()
-      };
-      
-      // Check if already saved
-      const isAlreadySaved = existingEvents.some((event: any) => event.id === eventToSave.id);
-      
-      if (isAlreadySaved) {
-        alert('📋 This event is already in your saved events!');
-        return;
-      }
-      
-      // Add to saved events
-      const updatedEvents = [...existingEvents, eventToSave];
-      localStorage.setItem('myEvents', JSON.stringify(updatedEvents));
-      
-      console.log('Event saved successfully:', eventToSave);
-      alert(`✅ "${eventData?.subtitle || eventName}" has been added to your saved events!\n\n📁 You can view all your saved events in your profile.`);
-      
-    } catch (error) {
-      console.error('Error adding event to My Events:', error);
-      alert('⚠️ Error saving event. Please try again.');
-    } finally {
-      setIsSaving(false);
-    }
-  };
+  if (!eventData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{
+        backgroundImage: 'url("/Background-redesign.png")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="text-center text-white">
+          <h2 className="text-4xl mb-8">Event Not Found</h2>
+          <button 
+            onClick={() => navigate(-1)} 
+            className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
+          >
+            Go Back
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="event-detail-page" style={{
+    <div className="min-h-screen" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
       backgroundRepeat: 'no-repeat'
     }}>
-      {/* Background with dashboard image */}
-      <div className="min-h-screen relative p-3 sm:p-5 text-white pdf-content">
-        {/* Mahotsav Logo/Header */}
-        <div className="flex justify-center sm:justify-start mb-6 lg:mb-8 px-2 sm:pl-5">
-          <img 
-            src={`${import.meta.env.BASE_URL}image.png`}
-            alt="Vignan Mahotsav" 
-            className="max-w-xs sm:max-w-lg lg:max-w-2xl h-auto object-contain brightness-110 contrast-110"
-            style={{filter: 'drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3))'}}
-          />
-        </div>
-
-        {/* Main Content Area - Centered */}
-        <div className="flex items-start justify-center min-h-[calc(100vh-200px)] relative z-10">
-          <div className="max-w-7xl w-full mx-auto px-4">
-            {/* Back Button */}
+      <div className="min-h-screen p-4 md:p-8">
+        {/* Header with Logo and Back Button */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-4">
+            <img 
+              src={`${import.meta.env.BASE_URL}image.png`}
+              alt="Vignan Mahotsav" 
+              className="h-16 md:h-20 object-contain"
+            />
             <button 
-              className="circular-back-button"
               onClick={() => navigate(-1)}
-              aria-label="Go back"
-              style={{ position: 'relative', marginBottom: '2rem' }}
+              className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
             >
+              ← Back
             </button>
-
-            {/* Event Title Section */}
-            <div className="text-center mb-6 lg:mb-10 px-4">
-              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-2 lg:mb-3 text-white" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'}}>{eventData.title}</h1>
-              <h2 className="text-lg sm:text-xl lg:text-3xl font-medium text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)'}}>{eventData.subtitle}</h2>
-            </div>
-
-            {/* Mobile Layout - Simple & Clean */}
-            <div className="block lg:hidden">
-              <div className="flex flex-col gap-4 px-4 max-w-md mx-auto">
-                {/* Poster */}
-                <div className="flex justify-center mb-2">
-                  <div className="w-48 h-64 bg-white/90 border-2 border-white rounded-xl flex items-center justify-center text-sm font-bold text-purple-900 text-center shadow-lg backdrop-blur-md">
-                    <span>POSTER of EVENT</span>
-                  </div>
-                </div>
-
-                {/* Rules */}
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                  <h3 className="text-lg font-bold mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
-                    Rules:
-                  </h3>
-                  <div className="max-h-48 overflow-y-auto scrollbar-thin pr-2">
-                    <ul className="space-y-2.5">
-                      {eventData.rules.map((rule, index) => (
-                        <li key={index} className="flex items-start gap-2.5">
-                          <span className="text-yellow-400 font-bold text-sm mt-0.5 shrink-0">•</span>
-                          <span className="text-white text-sm leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-                            {rule}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Cash Prizes */}
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                  <h3 className="text-lg font-bold mb-3 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
-                    Cash Prizes:
-                  </h3>
-                  <div className="space-y-2.5 px-2">
-                    <div className="flex items-center gap-3 text-white text-sm">
-                      <span className="font-bold text-yellow-400 min-w-[70px]">First:</span>
-                      <span className="font-semibold">{eventData.prizes.first}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-white text-sm">
-                      <span className="font-bold text-yellow-400 min-w-[70px]">Second:</span>
-                      <span className="font-semibold">{eventData.prizes.second}</span>
-                    </div>
-                    {eventData.prizes.third && (
-                      <div className="flex items-center gap-3 text-white text-sm">
-                        <span className="font-bold text-yellow-400 min-w-[70px]">Third:</span>
-                        <span className="font-semibold">{eventData.prizes.third}</span>
-                      </div>
-                    )}
-                    {eventData.prizes.fourth && (
-                      <div className="flex items-center gap-3 text-white text-sm">
-                        <span className="font-bold text-yellow-400 min-w-[70px]">Fourth:</span>
-                        <span className="font-semibold">{eventData.prizes.fourth}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Contact */}
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
-                  <h3 className="text-lg font-bold mb-3 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
-                    For Queries Contact:
-                  </h3>
-                  <div className="space-y-3 px-2">
-                    {eventData.contacts.map((contact, index) => (
-                      <div key={index} className="text-white text-sm">
-                        <div className="font-semibold mb-1">{contact.name}</div>
-                        <div className="text-yellow-300 text-xs">{contact.phone}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Layout - Original 3-column with poster on left */}
-            <div className="hidden lg:grid lg:grid-cols-[300px_1fr_350px] gap-10 mb-10 items-start">
-              {/* Left Side - Poster */}
-              <div className="flex justify-center">
-                <div className="w-72 h-96 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
-                  <span>POSTER of EVENT</span>
-                </div>
-              </div>
-
-              {/* Center - Rules */}
-              <div className="p-8">
-                <h3 className="text-3xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>Rules:</h3>
-                <ul className="rules-list list-none p-0 m-0 space-y-4">
-                  {eventData.rules.map((rule, index) => (
-                    <li key={index} className="flex items-start gap-4 text-white text-base font-medium leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-                      <span className="text-yellow-400 font-bold text-xl mt-0 shrink-0" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>•</span>
-                      <span className="flex-1">{rule}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Right Side - Prizes and Contact */}
-              <div className="flex flex-col gap-8">
-                {/* Cash Prizes */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>Cash Prizes:</h3>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center text-white text-lg">
-                      <span className="font-bold text-yellow-400 min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>First</span>
-                      <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.first}</span>
-                    </div>
-                    <div className="flex items-center text-white text-lg">
-                      <span className="font-bold text-yellow-400 min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Second</span>
-                      <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.second}</span>
-                    </div>
-                    {eventData.prizes.third && (
-                      <div className="flex items-center text-white text-lg">
-                        <span className="font-bold text-yellow-400 min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Third</span>
-                        <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.third}</span>
-                      </div>
-                    )}
-                    {eventData.prizes.fourth && (
-                      <div className="flex items-center text-white text-lg">
-                        <span className="font-bold text-yellow-400 min-w-20" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>Fourth</span>
-                        <span className="text-white font-semibold" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>: {eventData.prizes.fourth}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Contact Information */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>For Queries Contact:</h3>
-                  <div className="flex flex-col gap-3">
-                    {eventData.contacts.map((contact, index) => (
-                      <div key={index} className="text-white text-base font-medium leading-relaxed overflow-wrap-break-word" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-                        <div className="sm:inline">{contact.name}</div>
-                        <div className="sm:inline sm:ml-2">- {contact.phone}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col gap-3 justify-center items-center mt-6 lg:mt-12 lg:flex-row print-hide px-4 max-w-md mx-auto lg:max-w-none">
-              <button 
-                className="action-button bg-gradient-to-r from-red-500 to-red-600 text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
-                onClick={handleDownloadPDF}
-                disabled={isDownloading}
-              >
-                {isDownloading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    <span>Preparing PDF...</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-lg">📄</span>
-                    <span>Download PDF</span>
-                  </>
-                )}
-              </button>
-              
-              <button 
-                className="action-button bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white border-none py-3 lg:py-5 px-6 lg:px-12 rounded-xl text-sm lg:text-xl font-bold cursor-pointer transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 justify-center w-full lg:w-auto"
-                onClick={handleAddToMyEvents}
-                disabled={isSaving}
-              >
-                {isSaving ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-lg">⭐</span>
-                    <span>Add to My Events</span>
-                  </>
-                )}
-              </button>
-            </div>
           </div>
         </div>
 
-        {/* CSS Styles for Print and Buttons */}
-        <div style={{ display: 'none' }}>
-          <style>
-            {`
-              /* Print styles for PDF generation */
-              @media print {
-                @page {
-                  margin: 0.5in;
-                  size: A4;
-                }
-                
-                body, * {
-                  background: white !important;
-                  color: black !important;
-                  font-size: 12pt !important;
-                  -webkit-print-color-adjust: exact !important;
-                  color-adjust: exact !important;
-                }
-                
-                .print-hide {
-                  display: none !important;
-                }
-                
-                .print-show {
-                  display: block !important;
-                }
-                
-                /* Make text more readable in print */
-                h1, h2, h3 {
-                  color: #333 !important;
-                  text-shadow: none !important;
-                  font-weight: bold !important;
-                }
-                
-                .text-white {
-                  color: #333 !important;
-                  text-shadow: none !important;
-                }
-                
-                .text-yellow-400 {
-                  color: #666 !important;
-                  text-shadow: none !important;
-                  font-weight: bold !important;
-                }
-                
-                /* Hide action buttons in print */
-                button, .action-button {
-                  display: none !important;
-                }
-                
-                /* Improve bullet point visibility in print */
-                .rules-list li {
-                  margin-bottom: 8px !important;
-                  line-height: 1.4 !important;
-                }
-                
-                /* Ensure proper spacing */
-                .pdf-content {
-                  padding: 20px !important;
-                }
-              }
-              
-              /* Enhanced button hover effects */
-              .action-button {
-                position: relative;
-                overflow: hidden;
-              }
-              
-              .action-button::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                transition: left 0.5s;
-              }
-              
-              .action-button:hover::before {
-                left: 100%;
-              }
-            `}
-          </style>
+        {/* Title Section */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+            {eventData.title}
+          </h1>
+          <h2 className="text-2xl md:text-3xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
+            {eventData.subtitle}
+          </h2>
+        </div>
+
+        {/* Content Grid */}
+        <div className="flex justify-center items-center min-h-[calc(100vh-250px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-6 max-w-7xl items-center">
+          {/* Poster */}
+          <div className="flex justify-center lg:justify-start">
+            <div className="w-64 h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
+              <span>POSTER of EVENT</span>
+            </div>
+          </div>
+
+          {/* Rules Section */}
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-4 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+              Rules:
+            </h3>
+            <ul className="space-y-3">
+              {eventData.rules.map((rule, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <span className="text-yellow-400 font-bold text-lg mt-0.5 shrink-0">•</span>
+                  <span className="text-white text-sm md:text-base leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
+                    {rule}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Prizes and Contact Section */}
+          <div className="space-y-6">
+            {/* Cash Prizes */}
+            <div className="p-6">
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                Cash Prizes:
+              </h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[80px]">First</span>
+                  <span className="font-semibold">- {eventData.prizes.first}</span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[80px]">Second</span>
+                  <span className="font-semibold">- {eventData.prizes.second}</span>
+                </div>
+                {eventData.prizes.third && (
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[80px]">Third</span>
+                    <span className="font-semibold">- {eventData.prizes.third}</span>
+                  </div>
+                )}
+                {eventData.prizes.fourth && (
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[80px]">Fourth</span>
+                    <span className="font-semibold">- {eventData.prizes.fourth}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Contact Information */}
+            <div className="p-6">
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+                Contact no:
+              </h3>
+              <div className="space-y-3">
+                {eventData.contacts.map((contact, index) => (
+                  <div key={index} className="text-white text-sm md:text-base">
+                    <div className="font-semibold">{contact.name}: {contact.phone}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-8 mb-8 px-4">
+          <button 
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handleDownloadPDF}
+            disabled={isDownloading}
+          >
+            {isDownloading ? '⏳ Downloading...' : '📄 Download PDF'}
+          </button>
+          
+          <button 
+            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px]"
+            onClick={() => {
+              // Add to events functionality
+              alert('Event added to your list!');
+            }}
+          >
+            ⭐ Add to My Events
+          </button>
         </div>
       </div>
     </div>

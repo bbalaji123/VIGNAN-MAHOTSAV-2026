@@ -59,7 +59,7 @@
   box-sizing: border-box;
 }
 
-.college-other-input:focus {
+/* .college-other-input:focus {3
   outline: none;
   border-color: #ff6b35;
   background: rgba(255, 255, 255, 0.15);
@@ -68,7 +68,7 @@
 
 .college-other-input::placeholder {
   color: rgba(255, 255, 255, 0.5);
-}
+} */
 
 .college-other-actions {
   display: flex;

@@ -2177,70 +2177,48 @@ body::-webkit-scrollbar {
   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* Top-Right Logout Button */
-.logout-button-top {
+/* Top-Right Vignan Logo */
+.vignan-logo-top {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: -50px;
+  right: -10px;
   z-index: 99999;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #522566 0%, #2596be 100%);
-  color: white;
-  border: 2px solid #fdee71;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(82, 37, 102, 0.4);
 }
 
-.logout-button-top:hover {
-  background: linear-gradient(135deg, #2596be 0%, #522566 100%);
-  border-color: #ffed4a;
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(253, 238, 113, 0.5);
+.vignan-logo-top:hover {
+  transform: scale(1.05);
 }
 
-.logout-button-top:active {
-  transform: translateY(0) scale(1);
-}
-
-.logout-button-top svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 2.5;
+.vignan-logo-img {
+  height: 180px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 @media (max-width: 768px) {
-  .logout-button-top {
-    top: 0.75rem;
-    right: 0.75rem;
-    padding: 10px 18px;
-    font-size: 0.85rem;
-    gap: 8px;
+  .vignan-logo-top {
+    top: -10px;
+    right: -10px;
   }
   
-  .logout-button-top svg {
-    width: 18px;
-    height: 18px;
+  .vignan-logo-img {
+    height: 140px;
   }
 }
 
 @media (max-width: 480px) {
-  .logout-button-top span {
-    display: none;
+  .vignan-logo-top {
+    top: -10px;
+    right: -10px;
   }
   
-  .logout-button-top {
-    padding: 10px;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
+  .vignan-logo-img {
+    height: 100px;
   }
 }
 
@@ -2998,14 +2976,6 @@ html, body {
   z-index: 10;
 }
 
-.footer-vignan-logo-img {
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
 .footer-contact-section {
   display: flex;
   flex-direction: column;
@@ -3229,15 +3199,6 @@ html, body {
     z-index: 10;
   }
   
-  .footer-vignan-logo-img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-    max-height: none;
-    display: block;
-    object-fit: contain;
-  }
-  
   .footer-contact-section {
     display: flex;
     flex-direction: column;
@@ -3320,16 +3281,6 @@ html, body {
     max-width: 90%;
     border-radius: 10px;
     background: #ffffff;
-  }
-  
-  .footer-vignan-logo-img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-    max-height: none;
-    min-height: 70px;
-    display: block;
-    object-fit: contain;
   }
   
   .accreditation-container {

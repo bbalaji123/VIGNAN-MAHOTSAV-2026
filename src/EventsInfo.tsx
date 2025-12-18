@@ -15,6 +15,16 @@ const EventsInfo: React.FC = () => {
   const [showWomensIndoorSports, setShowWomensIndoorSports] = useState(false);
   const [showMensTeamSports, setShowMensTeamSports] = useState(false);
   const [showWomensTeamSports, setShowWomensTeamSports] = useState(false);
+  const [showDance, setShowDance] = useState(false);
+  const [showMusic, setShowMusic] = useState(false);
+  const [showTheatre, setShowTheatre] = useState(false);
+  const [showLiterature, setShowLiterature] = useState(false);
+  const [showVisualArts, setShowVisualArts] = useState(false);
+  const [showFashionDesign, setShowFashionDesign] = useState(false);
+  const [showDigitalStorytelling, setShowDigitalStorytelling] = useState(false);
+  const [showGaming, setShowGaming] = useState(false);
+  const [showRoboGames, setShowRoboGames] = useState(false);
+  const [showSpotLight, setShowSpotLight] = useState(false);
 
   // Carousel states
   const [currentSportsSlide, setCurrentSportsSlide] = useState(2);
@@ -68,7 +78,93 @@ const EventsInfo: React.FC = () => {
     { title: "Literature", subtitle: "Poetry & Writing" },
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
-    { title: "Spot Light", subtitle: "Special Events" }
+    { title: "Spot Light", subtitle: "Special Events" },
+    { title: "Digital Storytelling & Creative Media", subtitle: "" },
+    { title: "Gaming", subtitle: "" },
+    { title: "Robo Games", subtitle: "" }
+  ];
+
+  const danceCards = [
+    { title: "Classical Dance Solo", subtitle: "" },
+    { title: "Dancing Star – Western Solo", subtitle: "" },
+    { title: "Dancing Jodi – Western Duo", subtitle: "" },
+    { title: "Spot Dance - Jodi", subtitle: "" },
+    { title: "Group Dance (10 no.)", subtitle: "" }
+  ];
+
+  const musicCards = [
+    { title: "Singing Idol", subtitle: "" },
+    { title: "Group Singing (6 no.)", subtitle: "" },
+    { title: "Singing Jodi", subtitle: "" },
+    { title: "Classical/Light Vocal Solo", subtitle: "" },
+    { title: "Western Vocal Solo", subtitle: "" },
+    { title: "Anthyakshari Duo", subtitle: "" },
+    { title: "Instrumental Solo", subtitle: "" }
+  ];
+
+  const theatreCards = [
+    { title: "Skit (8 no.)", subtitle: "" },
+    { title: "Mime (6 no.)", subtitle: "" },
+    { title: "Dialogue Dhamakha", subtitle: "" },
+    { title: "Mono Action", subtitle: "" },
+    { title: "On the Spot Ad making", subtitle: "" }
+  ];
+
+  const literatureCards = [
+    { title: "Master Orator", subtitle: "" },
+    { title: "Spot Creative writing", subtitle: "" },
+    { title: "Telugu Vyaasa rachana", subtitle: "" },
+    { title: "Shayari – Hindi", subtitle: "" },
+    { title: "Impromptu (JAM)", subtitle: "" },
+    { title: "Story telling", subtitle: "" },
+    { title: "Quiz wiz (3 no.)", subtitle: "" },
+    { title: "Word Master", subtitle: "" },
+    { title: "Dumb charades (2 no.)", subtitle: "" }
+  ];
+
+  const visualArtsCards = [
+    { title: "Theme Painting", subtitle: "" },
+    { title: "Clay modelling", subtitle: "" },
+    { title: "Rangoli (2 no.)", subtitle: "" },
+    { title: "Mehandi", subtitle: "" },
+    { title: "Collage", subtitle: "" },
+    { title: "Face Painting", subtitle: "" },
+    { title: "Pencil Sketching", subtitle: "" },
+    { title: "Mandala", subtitle: "" }
+  ];
+
+  const fashionDesignCards = [
+    { title: "Haute Couture - Theme Ramp walk (12 no.)", subtitle: "" },
+    { title: "Craft villa ( Accessory design)", subtitle: "" },
+    { title: "Texart (Fashion sketching)", subtitle: "" },
+    { title: "T-Shirt designing", subtitle: "" }
+  ];
+
+  const digitalStorytellingCards = [
+    { title: "Short film", subtitle: "" },
+    { title: "Theme Photography (Online)", subtitle: "" },
+    { title: "Digital Poster making", subtitle: "" },
+    { title: "Mahotsav Digital Chronicle", subtitle: "" },
+    { title: "Reel Making", subtitle: "" }
+  ];
+
+  const gamingCards = [
+    { title: "Valorant (PC)", subtitle: "" },
+    { title: "E- Football (PC)", subtitle: "" },
+    { title: "Counter Strike (PC)", subtitle: "" },
+    { title: "Smash Karts (PC)", subtitle: "" }
+  ];
+
+  const roboGamesCards = [
+    { title: "Line follower robot", subtitle: "" },
+    { title: "Bot Wrestling", subtitle: "" },
+    { title: "Robo races", subtitle: "" }
+  ];
+
+  const spotLightCards = [
+    { title: "Mr. Mahotsav", subtitle: "" },
+    { title: "Ms. Mahotsav", subtitle: "" },
+    { title: "Mahotsav Got Talent", subtitle: "" }
   ];
 
   // Event details data - just the keys to check if event exists
@@ -414,8 +510,18 @@ const EventsInfo: React.FC = () => {
              showWomensIndoorSports ? "Women's Indoor Sports" : 
              showMensTeamSports ? "Men's Team Field Sports" : 
              showWomensTeamSports ? "Women's Team Field Sports" :
+             showDance ? 'Dance' :
+             showMusic ? 'Music' :
+             showTheatre ? 'Theatre' :
+             showLiterature ? 'Literature' :
+             showVisualArts ? 'Visual Arts' :
+             showFashionDesign ? 'Fashion Design' :
+             showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+             showGaming ? 'Gaming' :
+             showRoboGames ? 'Robo Games' :
+             showSpotLight ? 'Spot Light' :
              showSportsDetails ? 'sports and games' : 
-             showCulturals ? 'performing arts, visual arts, literary, fashion' :
+             showCulturals ? 'culturals' :
              'EVENTS'}
           </h1>
         </div>
@@ -424,7 +530,23 @@ const EventsInfo: React.FC = () => {
         <div className="w-full px-8 pb-4 relative z-20">
           <button 
             onClick={() => {
-              if (showSportsDetails || showCulturals || showParaSports) {
+              if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                setShowDance(false);
+                setShowMusic(false);
+                setShowTheatre(false);
+                setShowLiterature(false);
+                setShowVisualArts(false);
+                setShowFashionDesign(false);
+                setShowDigitalStorytelling(false);
+                setShowGaming(false);
+                setShowRoboGames(false);
+                setShowSpotLight(false);
+              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+                setShowIndoorSports(false);
+                setShowWomensIndoorSports(false);
+                setShowMensTeamSports(false);
+                setShowWomensTeamSports(false);
+              } else if (showSportsDetails || showCulturals || showParaSports) {
                 setShowSportsDetails(false);
                 setShowCulturals(false);
                 setShowParaSports(false);
@@ -440,7 +562,7 @@ const EventsInfo: React.FC = () => {
 
         {/* Main Cards Section */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
-          {!showSportsDetails && !showParaSports && !showCulturals && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && (
+          {!showSportsDetails && !showParaSports && !showCulturals && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-10">
@@ -461,7 +583,7 @@ const EventsInfo: React.FC = () => {
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                     <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
-                      PERFORMING ARTS,VISUAL<br />ARTS,LITERARY,FASHION
+                      CULTURALS
                     </h2>
                   </div>
                 </div>
@@ -762,17 +884,41 @@ const EventsInfo: React.FC = () => {
           )}
 
           {/* Culturals Section */}
-          {showCulturals && (
+          {showCulturals && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full h-full flex flex-col relative z-20">
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
                 <div className="w-full max-w-6xl">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
                     {culturalsCards.map((card, index) => {
+                      const handleCardClick = () => {
+                        if (card.title === "Dance") {
+                          setShowDance(true);
+                        } else if (card.title === "Music") {
+                          setShowMusic(true);
+                        } else if (card.title === "Theatre") {
+                          setShowTheatre(true);
+                        } else if (card.title === "Literature") {
+                          setShowLiterature(true);
+                        } else if (card.title === "Visual Arts") {
+                          setShowVisualArts(true);
+                        } else if (card.title === "Fashion Design") {
+                          setShowFashionDesign(true);
+                        } else if (card.title === "Digital Storytelling & Creative Media") {
+                          setShowDigitalStorytelling(true);
+                        } else if (card.title === "Gaming") {
+                          setShowGaming(true);
+                        } else if (card.title === "Robo Games") {
+                          setShowRoboGames(true);
+                        } else if (card.title === "Spot Light") {
+                          setShowSpotLight(true);
+                        }
+                      };
                       return (
                         <div 
                           key={index} 
                           className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          onClick={handleCardClick}
                           style={{
                             background: 'rgba(180, 150, 200, 0.35)',
                             backdropFilter: 'blur(15px)',
@@ -797,6 +943,396 @@ const EventsInfo: React.FC = () => {
                         </div>
                       );
                     })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Dance Section */}
+          {showDance && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {danceCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Music Section */}
+          {showMusic && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {musicCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Theatre Section */}
+          {showTheatre && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {theatreCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Literature Section */}
+          {showLiterature && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {literatureCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Visual Arts Section */}
+          {showVisualArts && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {visualArtsCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Fashion Design Section */}
+          {showFashionDesign && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {fashionDesignCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Digital Storytelling & Creative Media Section */}
+          {showDigitalStorytelling && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {digitalStorytellingCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Gaming Section */}
+          {showGaming && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {gamingCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Robo Games Section */}
+          {showRoboGames && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {roboGamesCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Spot Light Section */}
+          {showSpotLight && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {spotLightCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        style={{
+                          background: 'rgba(180, 150, 200, 0.35)',
+                          backdropFilter: 'blur(15px)',
+                          WebkitBackdropFilter: 'blur(15px)',
+                          border: '1px solid rgba(255, 255, 255, 0.18)',
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                          height: '280px',
+                          width: '100%',
+                          maxWidth: '280px'
+                        }}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -2063,13 +2063,24 @@ Do you want to proceed with registration?`;
 
       {/* Top-Left Menu Icon - Only show when menu is closed */}
       {!showPageMenu && (
-        <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
-          <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-            <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+        <>
+          <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
+            <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+            </div>
           </div>
-        </div>
+          
+          {/* Gaurada Image beside hamburger */}
+          <div className="fixed top-1 left-16 z-60">
+            <img 
+              src={`${import.meta.env.BASE_URL}garuda.png`}
+              alt="Garuda"
+              className="h-20 w-auto object-contain"
+            />
+          </div>
+        </>
       )}
 
       {/* Top-Right Vignan Logo - Only show when menu is closed */}
@@ -2085,6 +2096,16 @@ Do you want to proceed with registration?`;
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-4 xl:pt-2 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+        {/* National Level Youth Festival Text */}
+        <div className="z-20 relative w-full px-4 mb-4">
+          <h2 className="text-white text-lg md:text-2xl font-semibold" style={{
+            fontFamily: 'serif',
+            letterSpacing: '0.05em'
+          }}>
+            A National Level Youth Festival - 19<sup>th</sup> Edition
+          </h2>
+        </div>
+        
         <div className="flex justify-center items-center z-20 relative w-full px-0">
           <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
         </div>

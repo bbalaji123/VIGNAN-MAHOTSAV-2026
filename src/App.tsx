@@ -12,6 +12,7 @@ import Schedule from './Schedule';
 import ParaSports from './ParaSports';
 import Collaboration from './Collaboration';
 import Zonals from './Zonals';
+import Bangalore from './Bangalore';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/para-sports" element={<ParaSports />} />
           <Route path="/collaboration" element={<Collaboration />} />
           <Route path="/zonals" element={<Zonals />} />
+          <Route path="/zonals/bangalore" element={<Bangalore />} />
         </Routes>
       </Router>
     </div>

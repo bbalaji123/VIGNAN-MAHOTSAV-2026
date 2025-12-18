@@ -80,58 +80,111 @@ const CampusAmbassador: React.FC = () => {
 
       <style>
         {`
-          .flower-container-mobile {
-            width: 600px;
-            height: 600px;
-            overflow: hidden;
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          
+
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+          }
+
+          @keyframes sunRotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @keyframes moonStatic {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
           .flower-inner {
             position: absolute;
             width: 100%;
             height: 100%;
           }
-          
-          .flower-container-mobile:first-of-type .flower-inner {
-            top: -48%;
-            right: -48%;
+
+          .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            text-align: center;
           }
-          
-          .flower-container-mobile:nth-of-type(2) .flower-inner {
-            bottom: -48%;
-            left: -48%;
+
+          .back-button {
+            position: absolute;
+            top: 8rem;
+            left: 2rem;
+            z-index: 1000;
+            background: linear-gradient(135deg, #e48ab9, #c96ba1);
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(228, 138, 185, 0.4);
+            text-transform: uppercase;
           }
-          
-          @media (max-width: 768px) {
-            .flower-container-mobile {
-              width: 300px;
-              height: 300px;
-            }
-            
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -40%;
-              right: -40%;
-            }
-            
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -40%;
-              left: -40%;
-            }
+
+          .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(228, 138, 185, 0.6);
           }
-          
-          @keyframes petalsRotateAnticlockwise {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(-360deg); }
+
+          .mahotsav-logo {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            z-index: 999;
+            width: 400px;
+            height: auto;
           }
-          
-          @keyframes sunRotateClockwise {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(720deg); }
+
+          .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            margin-bottom: 3rem;
+            line-height: 1.2;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.1s;
           }
-          
-          @keyframes moonStatic {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+
+          .hero-register-btn {
+            background: linear-gradient(135deg, #e48ab9, #c96ba1);
+            color: #fff;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 20px rgba(228, 138, 185, 0.4);
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+          }
+
+          .hero-register-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(228, 138, 185, 0.6);
           }
 
           .ambassador-content {
@@ -241,6 +294,21 @@ const CampusAmbassador: React.FC = () => {
           }
 
           @media (max-width: 768px) {
+            .hero-title {
+              font-size: 2.5rem;
+            }
+
+            .hero-register-btn {
+              padding: 0.875rem 2rem;
+              font-size: 1rem;
+            }
+
+            .mahotsav-logo {
+              width: 140px;
+              top: 1rem;
+              left: 1rem;
+            }
+
             .ambassador-title {
               font-size: 2rem;
             }
@@ -257,20 +325,46 @@ const CampusAmbassador: React.FC = () => {
             .ambassador-section {
               padding: 1.5rem;
             }
+
+            .back-button {
+              top: 6.5rem;
+              left: 1rem;
+              padding: 0.5rem 1rem;
+              font-size: 0.9rem;
+            }
           }
         `}
       </style>
 
+      {/* Mahotsav Logo */}
+      <img 
+        src={`${import.meta.env.BASE_URL}image.png`}
+        alt="Vignan Mahotsav 2026"
+        className="mahotsav-logo"
+      />
+
       {/* Back to Dashboard Button */}
       <button 
         onClick={handleBackToDashboard}
-        className="circular-back-button"
+        className="back-button"
         aria-label="Go back"
       >
+        BACK
       </button>
 
+      {/* Hero Section */}
+      <div className="hero-section">
+        <h1 className="hero-title">CAMPUS AMBASSDOR</h1>
+        <button 
+          onClick={handleRegisterLogin}
+          className="hero-register-btn"
+        >
+          Click Here To Register
+        </button>
+      </div>
+
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center min-h-screen py-20">
+      <div className="flex-1 flex items-center justify-center py-20">
         <div className="ambassador-content">
           <h1 className="ambassador-title">MAHOTSAV CREW</h1>
           <h2 className="ambassador-subtitle">Vignan Mahotsav Campus Ambassador Program</h2>
@@ -473,16 +567,6 @@ const CampusAmbassador: React.FC = () => {
             </h3>
             <p className="contact-person">Mr. Brahma Teja : +91 8185865120</p>
             <p className="contact-person">Ms. Venkata Jagathi : +91 8341430174</p>
-
-            {/* Register/Login Button */}
-            <div className="text-center">
-              <button 
-                onClick={handleRegisterLogin}
-                className="register-btn"
-              >
-                Register / Login
-              </button>
-            </div>
           </div>
         </div>
       </div>

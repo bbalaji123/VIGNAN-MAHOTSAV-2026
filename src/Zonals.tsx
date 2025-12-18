@@ -9,6 +9,10 @@ const Zonals: React.FC = () => {
     navigate('/');
   };
 
+  const handleCityClick = (city: string) => {
+    navigate(`/zonals/${city.toLowerCase()}`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
       backgroundImage: 'url("/Background-redesign.png")',
@@ -136,48 +140,68 @@ const Zonals: React.FC = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 80vh;
-            padding: 2rem;
+            padding: 4rem 2rem 2rem 2rem;
+            padding-top: 6rem;
           }
 
           .zonals-title {
-            font-size: 3.5rem;
-            font-weight: bold;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4rem;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #fdee71, #e48ab9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(253, 238, 113, 0.3);
+            margin-bottom: 4rem;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.1em;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.1s;
           }
 
-          .zonals-subtitle {
-            font-size: 2.5rem;
-            font-weight: 600;
-            text-align: center;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(253, 238, 113, 0.6);
-            margin-bottom: 1.5rem;
+          .city-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.3s;
           }
 
-          .zonals-text {
-            font-size: 1.5rem;
+          .city-card {
+            background: rgba(184, 147, 189, 0.7);
+            border: 3px solid rgba(198, 142, 107, 0.8);
+            border-radius: 20px;
+            padding: 6rem 3rem;
+            min-width: 250px;
+            width: 280px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+          }
+
+          .city-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(184, 147, 189, 0.5);
+            background: rgba(184, 147, 189, 0.85);
+          }
+
+          .city-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000000;
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.5s;
+            text-transform: lowercase;
           }
 
           .back-button {
@@ -206,12 +230,19 @@ const Zonals: React.FC = () => {
               font-size: 2.5rem;
             }
 
-            .zonals-subtitle {
-              font-size: 1.8rem;
+            .city-cards-container {
+              gap: 1.5rem;
             }
 
-            .zonals-text {
-              font-size: 1.2rem;
+            .city-card {
+              min-width: 200px;
+              width: 240px;
+              height: 250px;
+              padding: 4rem 2rem;
+            }
+
+            .city-name {
+              font-size: 1.5rem;
             }
 
             .back-button {
@@ -224,14 +255,29 @@ const Zonals: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <button onClick={handleBackClick} className="circular-back-button" aria-label="Go back">
+      <button onClick={handleBackClick} className="back-button" aria-label="Go back">
+        BACK
       </button>
 
       {/* Main Content */}
       <div className="zonals-content">
         <h1 className="zonals-title">ZONALS</h1>
-        <h2 className="zonals-subtitle">A New Treasure Awaits...</h2>
-        <p className="zonals-text">Coming Soon to the Seven Seas!</p>
+        
+        {/* City Cards Container */}
+        <div className="city-cards-container">
+          <div className="city-card" onClick={() => handleCityClick('bangalore')}>
+            <span className="city-name">bangalore</span>
+          </div>
+          <div className="city-card">
+            <span className="city-name">vizag</span>
+          </div>
+          <div className="city-card">
+            <span className="city-name">hyderabad</span>
+          </div>
+          <div className="city-card">
+            <span className="city-name">tirupati</span>
+          </div>
+        </div>
       </div>
     </div>
   );

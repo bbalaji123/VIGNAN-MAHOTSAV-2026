@@ -489,6 +489,220 @@ const Dashboard: React.FC = () => {
       ]
     }
   };
+
+  const culturalEventsData = {
+    "Classical Dance Solo": {
+      title: "DANCE",
+      subtitle: "Classical Dance Solo",
+      rules: [
+        "The classical dance performed can be from any of the approved schools of dance, such as Kathak, Kathakali, Bharat Natyam, Manipuri, Kuchipudi, Mohiniyattam, or Odissi.",
+        "Participants will be allowed up to 10 minutes, which includes preparation time. Maximum three accompanists are permissible. Audio tracks are also permitted.",
+        "The selected song(s) must not appear in movies or shows. However, if an original song is present in a movie, the original composition should be used.",
+        "Judgment will be based on the qualities like Tal, Technique, Rhythm, Abhinaya or Expression, Costumes, Footwork and general impression."
+      ],
+      prizes: {
+        first: "Rs. 4000",
+        second: "Rs. 3000",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Singing Idol": {
+      title: "MUSIC",
+      subtitle: "Singing Idol",
+      rules: [
+        "This competition consists a total of 4 rounds, with eliminations occurring after the first and third rounds.",
+        "Any songs that may lead to controversies are not allowed.",
+        "Karaoke is not allowed in the first round.",
+        "Karaoke must be used mandatorily for 2nd, 3rd and 4th rounds.",
+        "Medleys will not be entertained and the Karaoke tracks are to be submitted to the coordinators before the commencement of event.",
+        "Judgement will be based on Pitch, Scale, and Rhythm, voice modulation, selection of song and stage presence.",
+        "1st round: 2 minutes (one pallavi and one charanam without karaoke)",
+        "2nd round: 3 minutes (Fast beat song with karaoke)",
+        "3rd round: 3 minutes (Melody with karaoke)",
+        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman / K V Mahadevan/ MM Keeravani / Mani Sharma. Karaoke is must)",
+        "Promotion to the final round: Average scores from the 2nd and 3rd rounds will be utilized for promotion to the final round.",
+        "Declaration of the IDOL: The final score will be calculated as a composite of 40% of the average scores from the 2nd and 3rd rounds, and 60% of the score from the 4th round performance."
+      ],
+      prizes: {
+        first: "Rs. 4000",
+        second: "Rs. 3000",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Dancing Star - Western Solo": {
+      title: "DANCE",
+      subtitle: "Dancing Star - Western Dance Solo",
+      rules: [
+        "There will be an elimination round. Max time in this round will be 2 minutes.",
+        "The final round can be performed as an extension of the preliminaries or as a new composition. The maximum duration for the final performance shall not exceed 4 minutes.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Any audio or track that are offensive, criticising or hurt others feelings must be avoided. This includes for ex. AI generated spoofs.",
+        "Judgement will be based on choreography, selection of songs, expression and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 4000",
+        second: "Rs. 3000",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Group Singing": {
+      title: "MUSIC",
+      subtitle: "Group Singing",
+      rules: [
+        "A performing group must consist of a minimum of 4 singers and a maximum of 6 singers.",
+        "The performance may be accompanied by either a live band (maximum of 3 accompanists) or a karaoke track.",
+        "A participant (singer) is limited to performing with only one team. However, accompanists are permitted to perform with multiple teams.",
+        "Folk song / Film song of any language can be chosen for performance, any songs of that may be lead to controversies are not allowed.",
+        "Maximum time allowed for the group song is 5 minutes which does not include setting time. The setting time for a group shall not exceed 3 minutes.",
+        "Judgement will be strictly on the basis of quality of singing only. Things like make-up, costumes and actions of the team are not considered for judgement."
+      ],
+      prizes: {
+        first: "Rs. 5000",
+        second: "Rs. 3500",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Skit": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Skit",
+      rules: [
+        "A minimum of 4 and a maximum of 8 participants are allowed to participate in one item.",
+        "The maximum time allotted for each team is 8 minutes.",
+        "The use of make-up, drapery and background music is allowed. Personal remarks, aspersions, character assassination is not allowed.",
+        "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected.",
+        "Following the conclusion of the skit, it is essential for the team to promptly exit the stage, ensuring that all props and personal belongings they brought are removed, leaving the stage clear and uncluttered.",
+        "The item will be judged basically on the qualities like theme, work on acting, script work, dialogues and overall impression."
+      ],
+      prizes: {
+        first: "Rs. 8000",
+        second: "Rs. 5000",
+        third: "Rs. 4000"
+      },
+      contacts: []
+    },
+    "Dancing Jodi - Western Duo": {
+      title: "DANCE",
+      subtitle: "Dancing Star - Western Dance Duo",
+      rules: [
+        "This is a dual dance competition and must feature exactly two dancers.",
+        "The choice of the genre is left to the team.",
+        "The duo can be a Boy/Boy (BB), Boy/Girl (BG), or Girl/Girl (GG) pairing.",
+        "The maximum duration of the performance should not exceed 4 minutes.",
+        "The audio track must be submitted in pen drive to the coordinator before the event starts.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
+        "Judgement will be based on choreography, song selection, synchronization and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 4000",
+        second: "Rs. 3000",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Mime": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Mime",
+      rules: [
+        "Minimum 3 and Maximum of 8 participants are allowed to participate in a team.",
+        "Judgment will most likely be based on the qualities like idea, creativity of presentation, use of make-up, general impression.",
+        "Duration of performance shall be for maximum of 5 minutes",
+        "Background music with no vocals is allowed."
+      ],
+      prizes: {
+        first: "Rs. 6000",
+        second: "Rs. 4000",
+        third: "Rs. 2000"
+      },
+      contacts: []
+    },
+    "Singing Jodi": {
+      title: "MUSIC",
+      subtitle: "Singing Jodi",
+      rules: [
+        "This is a Jodi singing competition (Each performance must feature exactly two singers).",
+        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
+        "The maximum duration of the performance shall be 4 minutes.",
+        "The maximum time for Stage/ Instruments setting is 3 minutes",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Judgment will be made on the qualities like, pitch, rhythm, coordination and general impression."
+      ],
+      prizes: {
+        first: "Rs. 3000",
+        second: "Rs. 2000",
+        third: "Rs. 1000"
+      },
+      contacts: []
+    },
+    "Group Dance": {
+      title: "DANCE",
+      subtitle: "Group Dance Competition",
+      rules: [
+        "Participants are free to choose any genre, such as Bollywood, hip-hop, contemporary, salsa, classical, semi-classical, mass, and folk, etc.",
+        "There should be a minimum of 4 members on the stage at any point of time and a maximum of 10 members per team.",
+        "The maximum duration of performance is 6 minutes. An elimination round will be held if necessary.",
+        "In case of using movie songs or movie references in the audio tracks, any sort of controversial elements is to be avoided.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
+        "Judgment will be based on the following: choreography, creativity in presentation, track selection, formations, costume, synchronization, and overall performance.",
+        "Note: If the performance portrays any specific theme, it is strongly advised to avoid repetitive and routine themes, such as Kanchana etc. Themes are encouraged to be youth-centric, thought-provoking or crowd pulling."
+      ],
+      prizes: {
+        first: "Rs. 15000",
+        second: "Rs. 12000",
+        third: "Rs. 8000"
+      },
+      contacts: []
+    },
+    "Short Film Making": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Short Film Making",
+      rules: [
+        "Submission Method: Participants must submit their short film using the Google Drive or YouTube link provided in the registration form.",
+        "Deadline: The last date for submitting the short film is January 25th, 2026 by 9:00 AM.",
+        "Modification: Once submitted, no further modifications to the film are allowed.",
+        "Eligibility: Only short films released between March 2025 to January 2026 are eligible for the competition.",
+        "Duration: The short film duration should not exceed 15 minutes, including titles and end credits.",
+        "Theme: The short film may address any theme, including social issues, fiction, love, drama, or thriller.",
+        "Format: The submission must be a visually engaging video, such as a vlog, documentary, or short story that incorporates camera work.",
+        "Judging Criteria: The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 20000",
+        second: "Rs. 15000",
+        third: "Rs. 12000"
+      },
+      contacts: []
+    },
+    "Haute Couture": {
+      title: "FASHION COMPETITIONS",
+      subtitle: "Haute Couture (Fashion Themed Ramp Walk)",
+      rules: [
+        "The teams should bring their own costumes and must present a theme.",
+        "Teams would be awarded points on the basis of their performance in theme, Formation, Creativity in designing the Costumes & Walk.",
+        "Any sort of obscenity in dressing or vulgarity in presentation will not be entertained.",
+        "Any no. of teams can participate from an institute.",
+        "The slot for the final event is 8 to 10 minutes.",
+        "Members limit 8 to 12 for a team."
+      ],
+      prizes: {
+        first: "Rs. 20000",
+        second: "Rs. 15000",
+        third: "Rs. 12000"
+      },
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
+    }
+  };
+  
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
@@ -1314,17 +1528,45 @@ const Dashboard: React.FC = () => {
       'Para Cricket Men': 'Para Sports',
       'Para Sports Competition': 'Para Sports',
       
-      // Cultural events - using generic sports structure
-      'Classical Dance Competition': 'Chess', // Using individual event structure
-      'Western Music Band Competition': 'Football', // Using team event structure
-      'Solo Singing Competition': 'Chess',
-      'Drama & Theatre Competition': 'Football',
-      'Fashion Show': 'Chess',
-      'Folk Dance Competition': 'Chess',
-      'Stand-up Comedy Competition': 'Chess',
-      'Art & Painting Exhibition': 'Chess',
-      'Poetry & Literature Competition': 'Chess',
-      'DJ & Music Production Battle': 'Chess'
+      // Cultural events - Dance
+      'Classical Dance Competition': 'Classical Dance Solo',
+      'Classical Dance Solo': 'Classical Dance Solo',
+      'Western Dance Solo': 'Dancing Star - Western Solo',
+      'Dancing Star - Western Solo': 'Dancing Star - Western Solo',
+      'Dancing Star - Westren Solo': 'Dancing Star - Western Solo',
+      'Western Dance Duo': 'Dancing Jodi - Western Duo',
+      'Dancing Jodi - Westren Duo': 'Dancing Jodi - Western Duo',
+      'Dancing Jodi - Western Duo': 'Dancing Jodi - Western Duo',
+      'Group Dance Competition': 'Group Dance',
+      'Group Dance': 'Group Dance',
+      
+      // Cultural events - Music
+      'Solo Singing Competition': 'Singing Idol',
+      'Singing Idol': 'Singing Idol',
+      'Group Singing': 'Group Singing',
+      'Group Singing Competition': 'Group Singing',
+      'Singing Jodi': 'Singing Jodi',
+      'Singing Duo': 'Singing Jodi',
+      
+      // Cultural events - Theatre
+      'Drama & Theatre Competition': 'Skit',
+      'Skit': 'Skit',
+      'Skit Competition': 'Skit',
+      'Mime': 'Mime',
+      'Mime Competition': 'Mime',
+      'Short Film Making': 'Short Film Making',
+      'Short Film Competition': 'Short Film Making',
+      
+      // Cultural events - Fashion
+      'Fashion Show': 'Haute Couture',
+      'Haute Couture': 'Haute Couture',
+      'Fashion Competition': 'Haute Couture',
+      
+      // Other cultural events
+      'Stand-up Comedy Competition': 'Singing Idol',
+      'Art & Painting Exhibition': 'Singing Idol',
+      'Poetry & Literature Competition': 'Singing Idol',
+      'DJ & Music Production Battle': 'Singing Idol'
     };
     
     // Try to find the event name using the original title first, then the mapped title
@@ -1354,13 +1596,36 @@ const Dashboard: React.FC = () => {
         eventName = 'Hockey';
       } else if (lowerTitle.includes('athletics') || lowerTitle.includes('track')) {
         eventName = 'Men\'s Athletics';
+      } else if (lowerTitle.includes('classical') && lowerTitle.includes('dance')) {
+        eventName = 'Classical Dance Solo';
+      } else if (lowerTitle.includes('western') && lowerTitle.includes('solo')) {
+        eventName = 'Dancing Star - Western Solo';
+      } else if (lowerTitle.includes('western') && lowerTitle.includes('duo')) {
+        eventName = 'Dancing Jodi - Western Duo';
+      } else if (lowerTitle.includes('group') && lowerTitle.includes('dance')) {
+        eventName = 'Group Dance';
+      } else if (lowerTitle.includes('singing idol')) {
+        eventName = 'Singing Idol';
+      } else if (lowerTitle.includes('group') && lowerTitle.includes('singing')) {
+        eventName = 'Group Singing';
+      } else if (lowerTitle.includes('singing') && lowerTitle.includes('jodi')) {
+        eventName = 'Singing Jodi';
+      } else if (lowerTitle.includes('skit')) {
+        eventName = 'Skit';
+      } else if (lowerTitle.includes('mime')) {
+        eventName = 'Mime';
+      } else if (lowerTitle.includes('short film')) {
+        eventName = 'Short Film Making';
+      } else if (lowerTitle.includes('haute couture') || lowerTitle.includes('fashion')) {
+        eventName = 'Haute Couture';
       }
     }
     
     console.log('Mapped event name:', eventName);
     
-    // Check if event data exists before navigating
-    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData];
+    // Check if event data exists in either sports or cultural events before navigating
+    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] || 
+                        culturalEventsData[eventName as keyof typeof culturalEventsData];
     
     if (eventExists || eventName) {
       // Navigate to the new event detail page
@@ -4725,7 +4990,7 @@ Do you want to proceed with registration?`;
         position: 'relative',
         marginLeft: 'calc(50% - 50vw)',
         marginRight: 'calc(50% - 50vw)',
-        marginTop: '150px',
+        marginTop: '80px',
         marginBottom: '0',
         padding: '0',
         boxSizing: 'border-box'
@@ -4740,7 +5005,7 @@ Do you want to proceed with registration?`;
           maxWidth: '500px',
           background: 'linear-gradient(135deg, rgba(139, 69, 139, 0.95), rgba(75, 0, 130, 0.95))',
           borderRadius: '20px',
-          padding: '30px',
+          padding: '20px',
           boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
           zIndex: 10,
           backdropFilter: 'blur(10px)'
@@ -4752,12 +5017,12 @@ Do you want to proceed with registration?`;
         <div style={{
           maxWidth: '1400px',
           margin: '0 auto',
-          padding: '40px 40px 0 40px'
+          padding: '20px 30px 0 30px'
         }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '60px'
+            gap: '30px'
           }}>
           {/* Logo Section */}
           <div>
@@ -4765,23 +5030,82 @@ Do you want to proceed with registration?`;
               src={`${import.meta.env.BASE_URL}image.png`}
               alt="Mahotsav 2026" 
               style={{
-                height: '120px',
+                height: '80px',
                 objectFit: 'contain',
-                marginBottom: '20px'
+                marginBottom: '15px'
               }}
             />
+            {/* Social Media Icons */}
+            <h3 style={{
+              color: '#fff',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              marginBottom: '15px',
+              letterSpacing: '1px'
+            }}>FOLLOW US ON :</h3>
+            <div style={{
+              display: 'flex',
+              gap: '15px',
+              marginBottom: '15px'
+            }}>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s',
+                border: '2px solid transparent'
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/919493033592" target="_blank" rel="noopener noreferrer" style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s',
+                border: '2px solid transparent'
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.3s',
+                border: '2px solid transparent'
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Contact Us Section */}
           <div>
             <h3 style={{
               color: '#fff',
-              fontSize: '1.5rem',
+              fontSize: '1.1rem',
               fontWeight: 'bold',
-              marginBottom: '25px',
+              marginBottom: '15px',
               letterSpacing: '1px'
             }}>CONTACT US :</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -4808,9 +5132,9 @@ Do you want to proceed with registration?`;
           <div>
             <h3 style={{
               color: '#fff',
-              fontSize: '1.5rem',
+              fontSize: '1.1rem',
               fontWeight: 'bold',
-              marginBottom: '25px',
+              marginBottom: '15px',
               letterSpacing: '1px'
             }}>LOCATION :</h3>
             <div style={{ display: 'flex', alignItems: 'start', gap: '12px', marginBottom: '15px' }}>
@@ -4842,75 +5166,6 @@ Do you want to proceed with registration?`;
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/>
                 <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-          </div>
-          </div>
-
-          {/* Social Media Section */}
-          <div style={{
-            marginTop: '50px',
-            paddingTop: '30px',
-            paddingBottom: '30px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            textAlign: 'center'
-          }}>
-            <h3 style={{
-            color: '#fff',
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            marginBottom: '20px',
-            letterSpacing: '1px'
-          }}>FOLLOW US ON :</h3>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '20px',
-            marginBottom: '20px'
-          }}>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.3s',
-              border: '2px solid transparent'
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="https://wa.me/919493033592" target="_blank" rel="noopener noreferrer" style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.3s',
-              border: '2px solid transparent'
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.3s',
-              border: '2px solid transparent'
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
             </a>
           </div>

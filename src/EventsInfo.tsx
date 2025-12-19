@@ -216,6 +216,7 @@ const EventsInfo: React.FC = () => {
     
     // Map event titles to their detail page names
     const eventNameMapping: { [key: string]: string } = {
+      // Sports events
       "Men's Athletics": "Men's Athletics",
       "Women's Athletics": "Men's Athletics",
       "Chess Championship": "Chess",
@@ -226,7 +227,64 @@ const EventsInfo: React.FC = () => {
       "Artistic Yogasana": "Artistic Yogasana",
       "Taekwondo": "Taekwondo",
       "Cricket Championship": "Cricket Championship",
-      "Tennikoit": "Tennikoit"
+      "Tennikoit": "Tennikoit",
+      
+      // Cultural events - Dance
+      "Classical Dance Solo": "Classical Dance Solo",
+      "Dancing Star – Western Solo": "Dancing Star - Western Solo",
+      "Dancing Jodi – Western Duo": "Dancing Jodi - Western Duo",
+      "Spot Dance - Jodi": "Spot Dance - Jodi",
+      "Group Dance (10 no.)": "Group Dance",
+      
+      // Cultural events - Music
+      "Singing Idol": "Singing Idol",
+      "Group Singing (6 no.)": "Group Singing",
+      "Singing Jodi": "Singing Jodi",
+      "Classical/Light Vocal Solo": "Classical Light Vocal Solo",
+      "Western Vocal Solo": "Western Vocal Solo",
+      "Instrumental Solo": "Instrumental Solo",
+      "Anthyakshari": "Anthyakshari",
+      
+      // Cultural events - Theatre
+      "Skit": "Skit",
+      "Mime": "Mime",
+      "Short Film Making": "Short Film Making",
+      "Mono Action": "Mono Action",
+      "Spot Ad Making": "Spot Ad Making",
+      
+      // Cultural events - Literature
+      "Shayari (Hindi)": "Shayari - Hindi",
+      "On Spot Creative Content Writing": "On Spot Creative Content Writing",
+      "Telugu Vyasa Rachana": "Telugu Vyaasa Rachana",
+      "JAM": "JAM",
+      "Dumb Charades": "Dumb Charades",
+      "Quiz": "Quiz",
+      "Word Master": "Word Master",
+      "Master Orator": "Master Orator",
+      "Dialogue Dhamaka (HINDI)": "Dialogue Dhamaka",
+      
+      // Cultural events - Visual Arts
+      "Rangoli": "Rangoli",
+      "Clay Modelling": "Clay Modelling",
+      "Collage": "Collage",
+      "Mandala Art": "Mandala Art",
+      "Face Painting": "Face Painting",
+      "Pencil Sketching": "Pencil Sketching",
+      "Theme Painting": "Theme Painting",
+      "Texart": "Texart",
+      "Craftvilla": "Craftvilla",
+      
+      // Cultural events - Fashion Design
+      "Haute Couture": "Haute Couture",
+      "T-Shirt Designing": "T-Shirt Designing",
+      "Mehandi": "Mehandi",
+      
+      // Cultural events - Spot Light
+      "Mahotsav Got Talent": "Mahotsav Got Talent",
+      "Mr. and Ms. Mahotsav": "Mr. and Ms. Mahotsav",
+      
+      // Cultural events - Digital Storytelling
+      "Online Photography": "Online Photography"
     };
     
     let eventName = eventTitle;
@@ -959,6 +1017,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -998,6 +1057,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1037,6 +1097,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1076,6 +1137,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1115,6 +1177,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1154,6 +1217,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1193,6 +1257,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1232,6 +1297,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1271,6 +1337,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
@@ -1310,6 +1377,7 @@ const EventsInfo: React.FC = () => {
                       <div 
                         key={index} 
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',

@@ -492,6 +492,182 @@ const EventDetail: React.FC = () => {
         { name: "Mr. P. Murali", phone: "+91 7207049397" },
         { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
       ]
+    },
+    "Classical Dance Solo": {
+      title: "DANCE",
+      subtitle: "Classical Dance Solo",
+      rules: [
+        "The classical dance performed can be from any of the approved schools of dance, such as Kathak, Kathakali, Bharat Natyam, Manipuri, Kuchipudi, Mohiniyattam, or Odissi.",
+        "Participants will be allowed up to 10 minutes, which includes preparation time. Maximum three accompanists are permissible. Audio tracks are also permitted.",
+        "The selected song(s) must not appear in movies or shows. However, if an original song is present in a movie, the original composition should be used.",
+        "Judgment will be based on the qualities like Tal, Technique, Rhythm, Abhinaya or Expression, Costumes, Footwork and general impression."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Singing Idol": {
+      title: "MUSIC",
+      subtitle: "Singing Idol",
+      rules: [
+        "This competition consists a total of 4 rounds, with eliminations occurring after the first and third rounds.",
+        "Any songs that may lead to controversies are not allowed.",
+        "Karaoke is not allowed in the first round.",
+        "Karaoke must be used mandatorily for 2nd, 3rd and 4th rounds.",
+        "Medleys will not be entertained and the Karaoke tracks are to be submitted to the coordinators before the commencement of event.",
+        "Judgement will be based on Pitch, Scale, and Rhythm, voice modulation, selection of song and stage presence.",
+        "1st round: 2 minutes (one pallavi and one charanam without karaoke)",
+        "2nd round: 3 minutes (Fast beat song with karaoke)",
+        "3rd round: 3 minutes (Melody with karaoke)",
+        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman / K V Mahadevan/ MM Keeravani / Mani Sharma. Karaoke is must)",
+        "Promotion to the final round: Average scores from the 2nd and 3rd rounds will be utilized for promotion to the final round.",
+        "Declaration of the IDOL: The final score will be calculated as a composite of 40% of the average scores from the 2nd and 3rd rounds, and 60% of the score from the 4th round performance."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Dancing Star - Western Solo": {
+      title: "DANCE",
+      subtitle: "Dancing Star - Western Dance Solo",
+      rules: [
+        "There will be an elimination round. Max time in this round will be 2 minutes.",
+        "The final round can be performed as an extension of the preliminaries or as a new composition. The maximum duration for the final performance shall not exceed 4 minutes.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Any audio or track that are offensive, criticising or hurt others feelings must be avoided. This includes for ex. AI generated spoofs.",
+        "Judgement will be based on choreography, selection of songs, expression and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Group Singing": {
+      title: "MUSIC",
+      subtitle: "Group Singing",
+      rules: [
+        "A performing group must consist of a minimum of 4 singers and a maximum of 6 singers.",
+        "The performance may be accompanied by either a live band (maximum of 3 accompanists) or a karaoke track.",
+        "A participant (singer) is limited to performing with only one team. However, accompanists are permitted to perform with multiple teams.",
+        "Folk song / Film song of any language can be chosen for performance, any songs of that may be lead to controversies are not allowed.",
+        "Maximum time allowed for the group song is 5 minutes which does not include setting time. The setting time for a group shall not exceed 3 minutes.",
+        "Judgement will be strictly on the basis of quality of singing only. Things like make-up, costumes and actions of the team are not considered for judgement."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 3,500",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Skit": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Skit",
+      rules: [
+        "A minimum of 4 and a maximum of 8 participants are allowed to participate in one item.",
+        "The maximum time allotted for each team is 8 minutes.",
+        "The use of make-up, drapery and background music is allowed. Personal remarks, aspersions, character assassination is not allowed.",
+        "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected.",
+        "Following the conclusion of the skit, it is essential for the team to promptly exit the stage, ensuring that all props and personal belongings they brought are removed, leaving the stage clear and uncluttered.",
+        "The item will be judged basically on the qualities like theme, work on acting, script work, dialogues and overall impression."
+      ],
+      prizes: {
+        first: "Rs. 8,000",
+        second: "Rs. 5,000",
+        third: "Rs. 4,000"
+      },
+      contacts: []
+    },
+    "Dancing Jodi - Western Duo": {
+      title: "DANCE",
+      subtitle: "Dancing Star - Western Dance Duo",
+      rules: [
+        "This is a dual dance competition and must feature exactly two dancers.",
+        "The choice of the genre is left to the team.",
+        "The duo can be a Boy/Boy (BB), Boy/Girl (BG), or Girl/Girl (GG) pairing.",
+        "The maximum duration of the performance should not exceed 4 minutes.",
+        "The audio track must be submitted in pen drive to the coordinator before the event starts.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
+        "Judgement will be based on choreography, song selection, synchronization and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Group Dance": {
+      title: "DANCE",
+      subtitle: "Group Dance Competition",
+      rules: [
+        "Participants are free to choose any genre, such as Bollywood, hip-hop, contemporary, salsa, classical, semi-classical, mass, and folk, etc.",
+        "There should be a minimum of 4 members on the stage at any point of time and a maximum of 10 members per team.",
+        "The maximum duration of performance is 6 minutes. An elimination round will be held if necessary.",
+        "In case of using movie songs or movie references in the audio tracks, any sort of controversial elements is to be avoided.",
+        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
+        "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
+        "Judgment will be based on the following: choreography, creativity in presentation, track selection, formations, costume, synchronization, and overall performance.",
+        "Note: If the performance portrays any specific theme, it is strongly advised to avoid repetitive and routine themes, such as Kanchana etc. Themes are encouraged to be youth-centric, thought-provoking or crowd pulling."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 12,000",
+        third: "Rs. 8,000"
+      },
+      contacts: []
+    },
+    "Short Film Making": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Short Film Making",
+      rules: [
+        "Submission Method: Participants must submit their short film using the Google Drive or YouTube link provided in the registration form.",
+        "Deadline: The last date for submitting the short film is January 25th, 2026 by 9:00 AM.",
+        "Modification: Once submitted, no further modifications to the film are allowed.",
+        "Eligibility: Only short films released between March 2025 to January 2026 are eligible for the competition.",
+        "Duration: The short film duration should not exceed 15 minutes, including titles and end credits.",
+        "Theme: The short film may address any theme, including social issues, fiction, love, drama, or thriller.",
+        "Format: The submission must be a visually engaging video, such as a vlog, documentary, or short story that incorporates camera work.",
+        "Judging Criteria: The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 20,000",
+        second: "Rs. 15,000",
+        third: "Rs. 12,000"
+      },
+      contacts: []
+    },
+    "Haute Couture": {
+      title: "FASHION COMPETITIONS",
+      subtitle: "Haute Couture (Fashion Themed Ramp Walk)",
+      rules: [
+        "The teams should bring their own costumes and must present a theme.",
+        "Teams would be awarded points on the basis of their performance in theme, Formation, Creativity in designing the Costumes & Walk.",
+        "Any sort of obscenity in dressing or vulgarity in presentation will not be entertained.",
+        "Any no. of teams can participate from an institute.",
+        "The slot for the final event is 8 to 10 minutes.",
+        "Members limit 8 to 12 for a team."
+      ],
+      prizes: {
+        first: "Rs. 20,000",
+        second: "Rs. 15,000",
+        third: "Rs. 12,000"
+      },
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     }
   };
 

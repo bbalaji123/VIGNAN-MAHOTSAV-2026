@@ -5323,6 +5323,7 @@ html, body {
   justify-content: center;
   gap: 15px;
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .highlights-indicator {

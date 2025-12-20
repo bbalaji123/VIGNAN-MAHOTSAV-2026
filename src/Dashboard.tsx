@@ -48,6 +48,7 @@ const Dashboard: React.FC = () => {
   const [currentParaCricketSlide, setCurrentParaCricketSlide] = useState(0);
   const [showCulturals, setShowCulturals] = useState(false);
   const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
+  const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
   
   // Highlights carousel state
   const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
@@ -2454,8 +2455,8 @@ Do you want to proceed with registration?`;
         </div>
       </section>
 
-      {/* The Icon Component - Fixed position flower - Only show until About Us section */}
-      {!visibleSections.has('throwbacks') && <AnimatedIcon />}
+      {/* The Icon Component - Fixed position flower - Hide in Gallery and Throwback sections */}
+      {!visibleSections.has('throwback') && !visibleSections.has('throwbacks') && <AnimatedIcon />}
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
@@ -4040,7 +4041,7 @@ Do you want to proceed with registration?`;
           marginBottom: '80px',
           textAlign: 'center',
           fontFamily: 'Bradley Hand, cursive'
-        }}>Throwbacks</h2>
+        }}>Gallery</h2>
 
         <div style={{
           width: '100%',
@@ -4126,6 +4127,301 @@ Do you want to proceed with registration?`;
           textAlign: 'center',
           fontStyle: 'italic'
         }}>Hover to pause • Swipe through memories</p>
+      </section>
+
+      {/* Throwback Section */}
+      <section 
+        className={`dashboard-section throwback-section section-animate section-animate-right ${visibleSections.has('throwback') ? 'visible animate-in' : ''}`}
+        data-section-id="throwback"
+        ref={(el) => registerSection('throwback', el)}
+        style={{
+          minHeight: '100vh',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+          padding: '140px 20px 40px',
+          overflow: 'visible'
+        }}
+      >
+        <h2 style={{
+          fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+          fontWeight: 'bold',
+          background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          marginBottom: 'clamp(30px, 5vh, 50px)',
+          textAlign: 'center',
+          fontFamily: 'Bradley Hand, cursive',
+          zIndex: 10,
+          position: 'relative'
+        }}>Throwback</h2>
+
+        {/* Flower Container with Lock System */}
+        <div style={{
+          width: '100%',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: isThrowbackUnlocked ? 'clamp(60px, 12vw, 180px)' : '0',
+          transition: 'gap 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+          padding: '0 clamp(20px, 5vw, 80px)',
+          position: 'relative',
+          maxHeight: 'calc(100vh - 200px)'
+        }}>
+          {/* Left Half (Full flower when locked) */}
+          <div style={{
+            width: 'clamp(200px, 35vw, 450px)',
+            height: 'clamp(200px, 35vw, 450px)',
+            position: 'relative',
+            overflow: 'visible',
+            transform: isThrowbackUnlocked ? 'translateX(-8vw)' : 'translateX(0)',
+            transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+            flexShrink: 0,
+            marginRight: isThrowbackUnlocked ? '0' : 'auto',
+            marginLeft: isThrowbackUnlocked ? '0' : 'auto'
+          }}>
+            {/* Petals Layer - Left Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}petals.png`}
+              alt=""
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                animation: isThrowbackUnlocked ? 'none' : 'rotateAntiClockwise 40s linear infinite',
+                clipPath: isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)',
+                transition: 'clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+              }}
+            />
+            
+            {/* Sun Layer - Left Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}sun.png`}
+              alt=""
+              style={{ 
+                width: '40%', 
+                height: '40%', 
+                display: 'block',
+                position: 'absolute',
+                top: '30%',
+                left: '30%',
+                animation: 'rotateClockwise 20s linear infinite',
+                transformOrigin: 'center center'
+              }}
+            />
+            
+            {/* Moon Layer - Left Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.png`}
+              alt=""
+              style={{ 
+                width: '39.5%', 
+                height: '39.5%', 
+                display: 'block',
+                position: 'absolute',
+                top: '30.8%',
+                left: '30.8%',
+                pointerEvents: 'none'
+              }}
+            />
+          </div>
+
+          {/* Right Half */}
+          {isThrowbackUnlocked && (
+            <div style={{
+              width: 'clamp(200px, 35vw, 450px)',
+              height: 'clamp(200px, 35vw, 450px)',
+              position: 'relative',
+              overflow: 'visible',
+              transform: 'translateX(8vw)',
+              transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              flexShrink: 0
+            }}>
+            {/* Petals Layer - Right Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}petals.png`}
+              alt=""
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                display: 'block',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                animation: 'none',
+                clipPath: 'inset(0 0 0 50%)',
+                transition: 'clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+              }}
+            />
+            
+            {/* Sun Layer - Right Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}sun.png`}
+              alt=""
+              style={{ 
+                width: '40%', 
+                height: '40%', 
+                display: 'block',
+                position: 'absolute',
+                top: '30%',
+                left: '30%',
+                animation: 'rotateClockwise 20s linear infinite',
+                transformOrigin: 'center center'
+              }}
+            />
+            
+            {/* Moon Layer - Right Half */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.png`}
+              alt=""
+              style={{ 
+                width: '39.5%', 
+                height: '39.5%', 
+                display: 'block',
+                position: 'absolute',
+                top: '30.8%',
+                left: '30.8%',
+                pointerEvents: 'none'
+              }}
+            />
+          </div>
+          )}
+
+          {/* Center Glow Effect on Unlock */}
+          {isThrowbackUnlocked && (
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '2px',
+              height: '80%',
+              background: 'linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.8), rgba(255, 165, 0, 0.8), transparent)',
+              boxShadow: '0 0 40px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 165, 0, 0.6)',
+              animation: 'glowBeam 1s ease-out',
+              pointerEvents: 'none',
+              zIndex: 50
+            }} />
+          )}
+
+          {/* Lock Icon - Positioned relative to main container */}
+          <div 
+            onClick={() => setIsThrowbackUnlocked(!isThrowbackUnlocked)}
+            style={{
+              position: 'absolute',
+              top: isThrowbackUnlocked ? 'auto' : '50%',
+              left: isThrowbackUnlocked ? 'auto' : '50%',
+              bottom: isThrowbackUnlocked ? '20px' : 'auto',
+              right: isThrowbackUnlocked ? '20px' : 'auto',
+              transform: isThrowbackUnlocked 
+                ? 'rotate(45deg) scale(0.8)' 
+                : 'translate(-50%, -50%)',
+              width: 'clamp(50px, 8vw, 80px)',
+              height: 'clamp(50px, 8vw, 80px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              zIndex: 100,
+              animation: isThrowbackUnlocked ? 'none' : 'lockPulse 2s ease-in-out infinite',
+              transition: 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              opacity: isThrowbackUnlocked ? 0.7 : 1
+            }}
+            onMouseEnter={(e) => {
+              if (!isThrowbackUnlocked) {
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.1)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isThrowbackUnlocked) {
+                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
+              }
+            }}
+          >
+            <svg 
+              width="70%" 
+              height="70%" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="#8B5CF6"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                transform: isThrowbackUnlocked ? 'rotate(-45deg)' : 'rotate(0deg)',
+                transition: 'transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))'
+              }}
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d={isThrowbackUnlocked ? "M7 11V7a5 5 0 0 1 9 0" : "M7 11V7a5 5 0 0 1 10 0v4"} />
+            </svg>
+          </div>
+        </div>
+
+        <p style={{
+          marginTop: '30px',
+          marginBottom: '200px',
+          fontSize: '1.2rem',
+          color: 'rgba(255, 255, 255, 0.6)',
+          textAlign: 'center',
+          fontStyle: 'italic',
+          zIndex: 10,
+          position: 'relative'
+        }}>Memories in bloom</p>
+
+        <style>{`
+          @keyframes rotateAntiClockwise {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(-360deg);
+            }
+          }
+          
+          @keyframes rotateClockwise {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+
+          @keyframes lockPulse {
+            0%, 100% {
+              filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6));
+              transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+              filter: drop-shadow(0 0 16px rgba(139, 92, 246, 0.9));
+              transform: translate(-50%, -50%) scale(1.1);
+            }
+          }
+
+          @keyframes glowBeam {
+            0% {
+              opacity: 0;
+              height: 0%;
+            }
+            50% {
+              opacity: 1;
+              height: 100%;
+            }
+            100% {
+              opacity: 0;
+              height: 100%;
+            }
+          }
+        `}</style>
       </section>
 
       {/* Events Info Modal */}
@@ -4257,7 +4553,18 @@ Do you want to proceed with registration?`;
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
-              <button className="close-btn" onClick={handleCloseSubModal}>�</button>
+              <button 
+                className="close-btn" 
+                onClick={(e) => { 
+                  e.preventDefault();
+                  e.stopPropagation(); 
+                  console.log('Close button clicked');
+                  setActiveSubModal(null);
+                }}
+                type="button"
+              >
+                ×
+              </button>
             </div>
             <div className="sub-modal-body">
               {activeSubModal === 'EVENTS' && (
@@ -4271,7 +4578,7 @@ Do you want to proceed with registration?`;
                       <div className="events-category-grid">
                       {/* Sports Events */}
                       <div className="event-category-card">
-                        <h3>? Sports Events ({getFilteredSportsEvents().length})</h3>
+                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredSportsEvents().length > 0 ? (
                             getFilteredSportsEvents().map((event) => (
@@ -4313,7 +4620,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Cultural Events */}
                       <div className="event-category-card">
-                        <h3>?? Cultural Events ({getFilteredCulturalEvents().length})</h3>
+                        <h3>🎭 Cultural Events ({getFilteredCulturalEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredCulturalEvents().length > 0 ? (
                             getFilteredCulturalEvents().map((event) => (
@@ -4355,7 +4662,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Para Sports Events */}
                       <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>? Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
                         {getFilteredParaSportsEvents().length === 0 && (
                           <div>
                             <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
@@ -4451,7 +4758,7 @@ Do you want to proceed with registration?`;
                           className="register-events-btn"
                           onClick={handleRegisterForEvents}
                         >
-                          ?? Register for Events ({tempSelectedEvents.size})
+                          ✅ Register for Events ({tempSelectedEvents.size})
                         </button>
                       )}
                     </div>
@@ -4998,7 +5305,7 @@ Do you want to proceed with registration?`;
         {/* Countdown Timer */}
         <div style={{
           position: 'absolute',
-          top: '-190px',
+          top: '-140px',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '90%',

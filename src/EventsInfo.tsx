@@ -301,6 +301,17 @@ const EventsInfo: React.FC = () => {
     else if (showWomensIndoorSports) fromSection = 'womensIndoorSports';
     else if (showMensTeamSports) fromSection = 'mensTeamSports';
     else if (showWomensTeamSports) fromSection = 'womensTeamSports';
+    else if (showDance) fromSection = 'dance';
+    else if (showMusic) fromSection = 'music';
+    else if (showTheatre) fromSection = 'theatre';
+    else if (showLiterature) fromSection = 'literature';
+    else if (showVisualArts) fromSection = 'visualArts';
+    else if (showFashionDesign) fromSection = 'fashionDesign';
+    else if (showDigitalStorytelling) fromSection = 'digitalStorytelling';
+    else if (showGaming) fromSection = 'gaming';
+    else if (showRoboGames) fromSection = 'roboGames';
+    else if (showSpotLight) fromSection = 'spotLight';
+    else if (showParaSports) fromSection = 'paraSports';
     
     console.log('Navigating to event:', eventName, 'from section:', fromSection);
     navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection } });
@@ -362,23 +373,71 @@ const EventsInfo: React.FC = () => {
 
   // Restore section state when returning from event detail
   useEffect(() => {
-    const state = location.state as { fromSection?: string } | null;
-    if (state?.fromSection) {
-      setShowSportsDetails(true);
-      switch (state.fromSection) {
-        case 'indoorSports':
-          setShowIndoorSports(true);
-          break;
-        case 'womensIndoorSports':
-          setShowWomensIndoorSports(true);
-          break;
-        case 'mensTeamSports':
-          setShowMensTeamSports(true);
-          break;
-        case 'womensTeamSports':
-          setShowWomensTeamSports(true);
-          break;
+    const state = location.state as { openSection?: string } | null;
+    if (state?.openSection) {
+      const section = state.openSection;
+      
+      // Handle sports sections
+      if (['indoorSports', 'womensIndoorSports', 'mensTeamSports', 'womensTeamSports'].includes(section)) {
+        setShowSportsDetails(true);
+        
+        switch (section) {
+          case 'indoorSports':
+            setShowIndoorSports(true);
+            break;
+          case 'womensIndoorSports':
+            setShowWomensIndoorSports(true);
+            break;
+          case 'mensTeamSports':
+            setShowMensTeamSports(true);
+            break;
+          case 'womensTeamSports':
+            setShowWomensTeamSports(true);
+            break;
+        }
       }
+      // Handle cultural sections
+      else if (['dance', 'music', 'theatre', 'literature', 'visualArts', 'fashionDesign', 'digitalStorytelling', 'gaming', 'roboGames', 'spotLight'].includes(section)) {
+        setShowCulturals(true);
+        
+        switch (section) {
+          case 'dance':
+            setShowDance(true);
+            break;
+          case 'music':
+            setShowMusic(true);
+            break;
+          case 'theatre':
+            setShowTheatre(true);
+            break;
+          case 'literature':
+            setShowLiterature(true);
+            break;
+          case 'visualArts':
+            setShowVisualArts(true);
+            break;
+          case 'fashionDesign':
+            setShowFashionDesign(true);
+            break;
+          case 'digitalStorytelling':
+            setShowDigitalStorytelling(true);
+            break;
+          case 'gaming':
+            setShowGaming(true);
+            break;
+          case 'roboGames':
+            setShowRoboGames(true);
+            break;
+          case 'spotLight':
+            setShowSpotLight(true);
+            break;
+        }
+      }
+      // Handle para sports section
+      else if (section === 'paraSports') {
+        setShowParaSports(true);
+      }
+      
       // Clear the state to prevent issues on refresh
       window.history.replaceState({}, document.title);
     }

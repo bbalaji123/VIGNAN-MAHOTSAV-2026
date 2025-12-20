@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 interface EventDetailData {
   title: string;
@@ -20,7 +20,22 @@ interface EventDetailData {
 const EventDetail: React.FC = () => {
   const { eventName } = useParams<{ eventName: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isDownloading, setIsDownloading] = useState(false);
+  
+  // Get the section we came from for smart back navigation
+  const fromSection = location.state?.fromSection || '';
+
+  // Smart back navigation handler
+  const handleBack = () => {
+    if (fromSection) {
+      // Navigate to /events-info with the specific section to open
+      navigate('/events-info', { state: { openSection: fromSection } });
+    } else {
+      // Default behavior - go back in history
+      navigate(-1);
+    }
+  };
 
   // Event data
   const eventDetailsData: { [key: string]: EventDetailData } = {
@@ -775,7 +790,7 @@ const EventDetail: React.FC = () => {
         <div className="text-center text-white">
           <h2 className="text-4xl mb-8">Event Not Found</h2>
           <button 
-            onClick={() => navigate(-1)} 
+            onClick={handleBack} 
             className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
           >
             Go Back
@@ -803,7 +818,7 @@ const EventDetail: React.FC = () => {
               className="h-16 md:h-20 object-contain"
             />
             <button 
-              onClick={() => navigate(-1)}
+              onClick={handleBack}
               className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
             >
               ← Back

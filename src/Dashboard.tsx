@@ -18,6 +18,14 @@ const Dashboard: React.FC = () => {
   const [currentEventSlide, setCurrentEventSlide] = useState(0);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
+  
+  // Counter animation states
+  const [footfall, setFootfall] = useState(0);
+  const [colleges, setColleges] = useState(0);
+  const [events, setEvents] = useState(0);
+  const [onlineAudience, setOnlineAudience] = useState(0);
+  const [cashPrizes, setCashPrizes] = useState(0);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   const eventInfoCards = [
     { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
@@ -981,6 +989,99 @@ const Dashboard: React.FC = () => {
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate]);
+
+  // Counter animation effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Reset counters to 0 when section comes into view
+            setFootfall(0);
+            setColleges(0);
+            setEvents(0);
+            setOnlineAudience(0);
+            setCashPrizes(0);
+            
+            // Small delay before starting animation
+            setTimeout(() => {
+              // Animate footfall to 20000
+              let footfallCount = 0;
+              const footfallInterval = setInterval(() => {
+                footfallCount += 500;
+                if (footfallCount >= 20000) {
+                  setFootfall(20000);
+                  clearInterval(footfallInterval);
+                } else {
+                  setFootfall(footfallCount);
+                }
+              }, 15);
+              
+              // Animate colleges to 350
+              let collegesCount = 0;
+              const collegesInterval = setInterval(() => {
+                collegesCount += 10;
+                if (collegesCount >= 350) {
+                  setColleges(350);
+                  clearInterval(collegesInterval);
+                } else {
+                  setColleges(collegesCount);
+                }
+              }, 15);
+              
+              // Animate events to 80
+              let eventsCount = 0;
+              const eventsInterval = setInterval(() => {
+                eventsCount += 2;
+                if (eventsCount >= 80) {
+                  setEvents(80);
+                  clearInterval(eventsInterval);
+                } else {
+                  setEvents(eventsCount);
+                }
+              }, 15);
+              
+              // Animate online audience to 500000
+              let audienceCount = 0;
+              const audienceInterval = setInterval(() => {
+                audienceCount += 12500;
+                if (audienceCount >= 500000) {
+                  setOnlineAudience(500000);
+                  clearInterval(audienceInterval);
+                } else {
+                  setOnlineAudience(audienceCount);
+                }
+              }, 15);
+              
+              // Animate cash prizes to 15
+              let prizesCount = 0;
+              const prizesInterval = setInterval(() => {
+                prizesCount += 1;
+                if (prizesCount >= 15) {
+                  setCashPrizes(15);
+                  clearInterval(prizesInterval);
+                } else {
+                  setCashPrizes(prizesCount);
+                }
+              }, 40);
+            }, 100);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const currentRef = statsRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
 
   // Scroll tracking for throwback section
   useEffect(() => {
@@ -2349,7 +2450,7 @@ Do you want to proceed with registration?`;
   }, [showProfileDropdown]);
 
   return (
-    <div className={`w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
+    <div className={`dashboard-container w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
          style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0"}}>
       
       {/* Sunlight Effect */}
@@ -3840,7 +3941,7 @@ Do you want to proceed with registration?`;
             textAlign: 'center',
             fontSize: '4rem',
             fontWeight: 'bold',
-            color: '#FFD700',
+            color: '#fdee71',
             marginBottom: '60px',
             textTransform: 'uppercase',
             letterSpacing: '3px',
@@ -3852,7 +3953,7 @@ Do you want to proceed with registration?`;
             <h3 className="theme-name" style={{
                 fontSize: '2.5rem',
                 fontWeight: 'bold',
-                color: '#FFEB3B',
+                color: '#fdee71',
                 marginBottom: '30px',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 fontFamily: 'coffee+tea demo, sans-serif'
@@ -3872,7 +3973,7 @@ Do you want to proceed with registration?`;
           </div>
           
           {/* Stats Bar */}
-          <div style={{
+          <div ref={statsRef} style={{
             background: 'rgba(200, 180, 220, 0.9)',
             borderRadius: '30px',
             padding: '40px 20px',
@@ -3890,29 +3991,29 @@ Do you want to proceed with registration?`;
               {/* Footfall */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👣</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '5px' }}>20,000+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>TOTAL FOOTFALL</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🎓</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '5px' }}>350+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>COLLEGES</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
               </div>
               
               {/* Events */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '5px' }}>80+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>EVENTS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📱</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '5px' }}>5,00,000+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>ONLINE AUDIANCE</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
               </div>
               
               {/* Editions */}
@@ -3937,15 +4038,15 @@ Do you want to proceed with registration?`;
                     color: '#1a1a1a'
                   }}>18</div>
                 </div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '0.85rem', marginBottom: '5px' }}>18 EDITIONS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>OF FESTIVITIES</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px' }}>18 EDITIONS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>OF FESTIVITIES</div>
               </div>
               
               {/* Cash Prizes */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.25rem', marginBottom: '5px' }}>15+ LACKS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '0.85rem' }}>CASH PRIZES</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
               </div>
             </div>
           </div>
@@ -4052,16 +4153,19 @@ Do you want to proceed with registration?`;
           overflow: 'hidden'
         }}
       >
-        <h2 style={{
-          fontSize: 'clamp(2.5rem, 8vw, 4rem)',
-          fontWeight: 'bold',
-          background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          marginBottom: '80px',
-          textAlign: 'center',
-          fontFamily: 'Bradley Hand, cursive'
-        }}>Gallery</h2>
+        <h2
+      style={{
+    fontSize: 'clamp(2.5rem, 8vw, 4rem)',
+    fontWeight: 'bold',
+    color: '#fdee71',
+    marginBottom: '80px',
+    textAlign: 'center',
+    fontFamily: 'Woodtrap, sans-serif'
+  }}
+>
+  Gallery
+</h2>
+
 
         <div style={{
           width: '100%',
@@ -4079,7 +4183,7 @@ Do you want to proceed with registration?`;
                   className="throwback-card"
                   style={{
                     background: `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.3)', 'rgba(255, 105, 180, 0.3)', 'rgba(0, 255, 255, 0.3)', 'rgba(138, 43, 226, 0.3)', 'rgba(50, 205, 50, 0.3)'][i % 5]}, rgba(0, 0, 0, 0.1))`,
-                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`
+                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`,color: '#fdee71'
                   }}
                 >
                   <div 
@@ -4166,18 +4270,20 @@ Do you want to proceed with registration?`;
           overflow: 'visible'
         }}
       >
-        <h2 style={{
-          fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-          fontWeight: 'bold',
-          background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          marginBottom: 'clamp(30px, 5vh, 50px)',
-          textAlign: 'center',
-          fontFamily: 'Bradley Hand, cursive',
-          zIndex: 10,
-          position: 'relative'
-        }}>Throwback</h2>
+        <h2
+  style={{
+    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+    fontWeight: 'bold',
+    color: '#fdee71',
+    marginBottom: 'clamp(30px, 5vh, 50px)',
+    textAlign: 'center',
+    fontFamily: 'Bradley Hand, cursive',
+    zIndex: 10,
+    position: 'relative'
+  }}
+>
+  Throwback
+</h2>
 
         {/* Flower Container with Lock System */}
         <div style={{

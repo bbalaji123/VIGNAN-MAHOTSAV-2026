@@ -894,23 +894,23 @@ const EventDetail: React.FC = () => {
               </h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>First</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.first}</span>
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>First</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.first}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Second</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.second}</span>
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Second</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
                   <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Third</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.third}</span>
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Third</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
                   <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Fourth</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.fourth}</span>
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Fourth</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>

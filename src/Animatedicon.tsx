@@ -220,10 +220,10 @@ const AnimatedIcon: React.FC = () => {
         >
           {/* Sun (middle layer, rotating clockwise) */}
           <image 
-            x="360" 
-            y="360" 
-            width="280" 
-            height="280"
+            x="340" 
+            y="340" 
+            width="320" 
+            height="320"
             href={`${import.meta.env.BASE_URL}sun.png`}
           />
         </g>
@@ -231,8 +231,7 @@ const AnimatedIcon: React.FC = () => {
         {/* 
           STATIC MOON (CRITICAL)
           - Placed OUTSIDE the rotating <g> so it does NOT inherit rotation
-          - Uses EXACT same x, y, width, height as sun for perfect overlap
-          - Creates eclipse effect by overlaying the sun
+          - Centered over the sun to create eclipse effect
           - No animation, no transform, completely static
         */}
         <image 
@@ -241,6 +240,7 @@ const AnimatedIcon: React.FC = () => {
           width="280" 
           height="280"
           href={`${import.meta.env.BASE_URL}moon.png`}
+          style={{ zIndex: 10 }}
         />
       </svg>
       

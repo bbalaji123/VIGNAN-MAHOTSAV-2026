@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import FlowerComponent from './components/FlowerComponent';
 
 const Zonals: React.FC = () => {
   const navigate = useNavigate();
@@ -23,58 +24,30 @@ const Zonals: React.FC = () => {
     }}>
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
-          <img 
-            src={`${import.meta.env.BASE_URL}petals.png`}
-            alt="Flower Petals"
-            className="absolute inset-0 w-full h-full object-contain"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img 
-              src={`${import.meta.env.BASE_URL}sun.png`}
-              alt="Sun"
-              className="absolute w-1/3 h-1/3 object-contain"
-              style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
-            />
-            <img 
-              src={`${import.meta.env.BASE_URL}moon.png`}
-              alt="Moon"
-              className="absolute w-1/3 h-1/3 object-contain"
-              style={{ 
-                zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
-              }}
-            />
-          </div>
-        </div>
+        <FlowerComponent 
+          size="100%"
+          sunSize="50%"
+          moonSize="43%"
+          sunTop="25%"
+          sunLeft="25%"
+          moonTop="28.5%"
+          moonLeft="28.5%"
+          showPetalRotation={true}
+        />
       </div>
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
-        <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center' }}>
-          <img 
-            src={`${import.meta.env.BASE_URL}petals.png`}
-            alt="Flower Petals"
-            className="absolute inset-0 w-full h-full object-contain"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img 
-              src={`${import.meta.env.BASE_URL}sun.png`}
-              alt="Sun"
-              className="absolute w-1/3 h-1/3 object-contain"
-              style={{ animation: 'sunRotateClockwise 20s linear infinite' }}
-            />
-            <img 
-              src={`${import.meta.env.BASE_URL}moon.png`}
-              alt="Moon"
-              className="absolute w-1/3 h-1/3 object-contain"
-              style={{ 
-                zIndex: 10,
-                animation: 'moonStatic 20s linear infinite'
-              }}
-            />
-          </div>
-        </div>
+        <FlowerComponent 
+          size="100%"
+          sunSize="50%"
+          moonSize="43%"
+          sunTop="25%"
+          sunLeft="25%"
+          moonTop="28.5%"
+          moonLeft="28.5%"
+          showPetalRotation={true}
+        />
       </div>
 
       <style>

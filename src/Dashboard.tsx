@@ -5,6 +5,7 @@ import AnimatedIcon from './Animatedicon';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
+import FlowerComponent from './components/FlowerComponent';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
@@ -49,6 +50,7 @@ const Dashboard: React.FC = () => {
   const [showCulturals, setShowCulturals] = useState(false);
   const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
+  const [throwbackScrollProgress, setThrowbackScrollProgress] = useState(0);
   
   // Highlights carousel state
   const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
@@ -978,6 +980,38 @@ const Dashboard: React.FC = () => {
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate]);
+
+  // Scroll tracking for throwback section
+  useEffect(() => {
+    const handleScroll = () => {
+      const throwbackSection = document.querySelector('[data-section-id="throwback"]');
+      if (!throwbackSection) return;
+
+      const rect = throwbackSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate when section enters viewport (from bottom)
+      const startPoint = windowHeight; // Section just entering from bottom
+      const endPoint = windowHeight * 0.2; // Section 80% visible
+      
+      // Calculate progress (0 to 1)
+      let progress = 0;
+      if (rect.top <= startPoint && rect.top >= endPoint) {
+        progress = (startPoint - rect.top) / (startPoint - endPoint);
+        progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
+      } else if (rect.top < endPoint) {
+        progress = 1;
+      }
+      
+      setThrowbackScrollProgress(progress);
+      setIsThrowbackUnlocked(progress > 0.3); // Unlock at 30% scroll
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Time-based theme detection
   useEffect(() => {
@@ -2471,62 +2505,34 @@ Do you want to proceed with registration?`;
           {/* Floating Flower - Top Right */}
           <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <img 
-                src={`${import.meta.env.BASE_URL}petals.png`}
-                alt="Flower Petals"
-                className="absolute inset-0 w-full h-full object-contain"
-                style={{ border: 'none', outline: 'none' }}
+              <FlowerComponent 
+                size="100%"
+                sunSize="50%"
+                moonSize="43%"
+                sunTop="25%"
+                sunLeft="25%"
+                moonTop="28.5%"
+                moonLeft="28.5%"
+                showPetalRotation={true}
+                opacity={1}
               />
-              <div className="absolute inset-0 flex items-center justify-center" style={{ border: 'none', outline: 'none' }}>
-                <img 
-                  src={`${import.meta.env.BASE_URL}sun.png`}
-                  alt="Sun"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ animation: 'sunRotateClockwise 20s linear infinite', border: 'none', outline: 'none' }}
-                />
-                <img 
-                  src={`${import.meta.env.BASE_URL}moon.png`}
-                  alt="Moon"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ 
-                    zIndex: 10,
-                    animation: 'moonStatic 120s linear infinite',
-                    border: 'none',
-                    outline: 'none'
-                  }}
-                />
-              </div>
             </div>
           </div>
 
           {/* Floating Flower - Bottom Left */}
           <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <img 
-                src={`${import.meta.env.BASE_URL}petals.png`}
-                alt="Flower Petals"
-                className="absolute inset-0 w-full h-full object-contain"
-                style={{ border: 'none', outline: 'none' }}
+              <FlowerComponent 
+                size="100%"
+                sunSize="50%"
+                moonSize="43%"
+                sunTop="25%"
+                sunLeft="25%"
+                moonTop="28.5%"
+                moonLeft="28.5%"
+                showPetalRotation={true}
+                opacity={1}
               />
-              <div className="absolute inset-0 flex items-center justify-center" style={{ border: 'none', outline: 'none' }}>
-                <img 
-                  src={`${import.meta.env.BASE_URL}sun.png`}
-                  alt="Sun"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ animation: 'sunRotateClockwise 20s linear infinite', border: 'none', outline: 'none' }}
-                />
-                <img 
-                  src={`${import.meta.env.BASE_URL}moon.png`}
-                  alt="Moon"
-                  className="absolute w-1/3 h-1/3 object-contain"
-                  style={{ 
-                    zIndex: 10,
-                    animation: 'moonStatic 120s linear infinite',
-                    border: 'none',
-                    outline: 'none'
-                  }}
-                />
-              </div>
             </div>
           </div>
           
@@ -4173,125 +4179,49 @@ Do you want to proceed with registration?`;
           maxHeight: 'calc(100vh - 200px)'
         }}>
           {/* Left Half (Full flower when locked) */}
-          <div style={{
-            width: 'clamp(200px, 35vw, 450px)',
-            height: 'clamp(200px, 35vw, 450px)',
-            position: 'relative',
-            overflow: 'visible',
-            transform: isThrowbackUnlocked ? 'translateX(-8vw)' : 'translateX(0)',
-            transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-            flexShrink: 0,
-            marginRight: isThrowbackUnlocked ? '0' : 'auto',
-            marginLeft: isThrowbackUnlocked ? '0' : 'auto'
-          }}>
-            {/* Petals Layer - Left Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}petals.png`}
-              alt=""
-              style={{ 
-                width: '100%', 
-                height: '100%', 
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                animation: isThrowbackUnlocked ? 'none' : 'rotateAntiClockwise 40s linear infinite',
-                clipPath: isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)',
-                transition: 'clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
-              }}
-            />
-            
-            {/* Sun Layer - Left Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}sun.png`}
-              alt=""
-              style={{ 
-                width: '40%', 
-                height: '40%', 
-                display: 'block',
-                position: 'absolute',
-                top: '30%',
-                left: '30%',
-                animation: 'rotateClockwise 20s linear infinite',
-                transformOrigin: 'center center'
-              }}
-            />
-            
-            {/* Moon Layer - Left Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}moon.png`}
-              alt=""
-              style={{ 
-                width: '39.5%', 
-                height: '39.5%', 
-                display: 'block',
-                position: 'absolute',
-                top: '30.8%',
-                left: '30.8%',
-                pointerEvents: 'none'
-              }}
-            />
-          </div>
+          <FlowerComponent 
+            size="clamp(200px, 35vw, 450px)"
+            sunSize="45%"
+            moonSize="39.5%"
+            sunTop="28%"
+            sunLeft="28%"
+            moonTop="30.8%"
+            moonLeft="30.8%"
+            showPetalRotation={true}
+            petalAnimation={isThrowbackUnlocked ? 'none' : 'rotateAntiClockwise 40s linear infinite'}
+            clipPath={isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)'}
+            clipPathTransition="clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+            style={{
+              overflow: 'visible',
+              transform: isThrowbackUnlocked ? 'translateX(-8vw)' : 'translateX(0)',
+              transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              flexShrink: 0,
+              marginRight: isThrowbackUnlocked ? '0' : 'auto',
+              marginLeft: isThrowbackUnlocked ? '0' : 'auto'
+            }}
+          />
 
           {/* Right Half */}
           {isThrowbackUnlocked && (
-            <div style={{
-              width: 'clamp(200px, 35vw, 450px)',
-              height: 'clamp(200px, 35vw, 450px)',
-              position: 'relative',
-              overflow: 'visible',
-              transform: 'translateX(8vw)',
-              transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-              flexShrink: 0
-            }}>
-            {/* Petals Layer - Right Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}petals.png`}
-              alt=""
-              style={{ 
-                width: '100%', 
-                height: '100%', 
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                animation: 'none',
-                clipPath: 'inset(0 0 0 50%)',
-                transition: 'clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+            <FlowerComponent 
+              size="clamp(200px, 35vw, 450px)"
+              sunSize="45%"
+              moonSize="39.5%"
+              sunTop="28%"
+              sunLeft="28%"
+              moonTop="30.8%"
+              moonLeft="30.8%"
+              showPetalRotation={true}
+              petalAnimation="none"
+              clipPath="inset(0 0 0 50%)"
+              clipPathTransition="clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+              style={{
+                overflow: 'visible',
+                transform: 'translateX(8vw)',
+                transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                flexShrink: 0
               }}
             />
-            
-            {/* Sun Layer - Right Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}sun.png`}
-              alt=""
-              style={{ 
-                width: '40%', 
-                height: '40%', 
-                display: 'block',
-                position: 'absolute',
-                top: '30%',
-                left: '30%',
-                animation: 'rotateClockwise 20s linear infinite',
-                transformOrigin: 'center center'
-              }}
-            />
-            
-            {/* Moon Layer - Right Half */}
-            <img 
-              src={`${import.meta.env.BASE_URL}moon.png`}
-              alt=""
-              style={{ 
-                width: '39.5%', 
-                height: '39.5%', 
-                display: 'block',
-                position: 'absolute',
-                top: '30.8%',
-                left: '30.8%',
-                pointerEvents: 'none'
-              }}
-            />
-          </div>
           )}
 
           {/* Center Glow Effect on Unlock */}
@@ -4311,9 +4241,8 @@ Do you want to proceed with registration?`;
             }} />
           )}
 
-          {/* Lock Icon - Positioned relative to main container */}
+          {/* Lock Icon - Display only (no click) */}
           <div 
-            onClick={() => setIsThrowbackUnlocked(!isThrowbackUnlocked)}
             style={{
               position: 'absolute',
               top: isThrowbackUnlocked ? 'auto' : '50%',

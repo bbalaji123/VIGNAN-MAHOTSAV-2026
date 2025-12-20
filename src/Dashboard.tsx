@@ -2546,7 +2546,7 @@ Do you want to proceed with registration?`;
 
           {/* Menu Title */}
           <div className="text-center pt-6 pb-4 md:pt-8 md:pb-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)'}}>MENU</h1>
+            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
@@ -3823,6 +3823,7 @@ Do you want to proceed with registration?`;
         className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
+        style={{ fontFamily: 'coffee+tea demo, sans-serif' }}
       >
         <div className="about-theme-container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
           <h2 className="about-theme-title" style={{
@@ -3833,7 +3834,8 @@ Do you want to proceed with registration?`;
             marginBottom: '60px',
             textTransform: 'uppercase',
             letterSpacing: '3px',
-            textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)'
+            textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
+            fontFamily: 'coffee+tea demo, sans-serif'
           }}>ABOUT THEME</h2>
           
           <div style={{ marginBottom: '40px' }}>
@@ -3842,7 +3844,8 @@ Do you want to proceed with registration?`;
                 fontWeight: 'bold',
                 color: '#FFEB3B',
                 marginBottom: '30px',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                fontFamily: 'coffee+tea demo, sans-serif'
               }}>Mahotsav 2026 - The Eternal Harmony</h3>
               
               <p className="theme-description" style={{
@@ -3851,7 +3854,8 @@ Do you want to proceed with registration?`;
                 color: '#FFFFFF',
                 textAlign: 'justify',
                 fontWeight: '400',
-                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)'
+                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
+                fontFamily: 'coffee+tea demo, sans-serif'
               }}>
                 Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ₹17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
               </p>

@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import AboutUs from './components/AboutUs';
 import EventDetail from './EventDetail';
 import EventsInfo from './EventsInfo';
 import CampusAmbassador from './CampusAmbassador';
@@ -21,7 +20,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/events-info" element={<EventsInfo />} />
           <Route path="/event/:eventName" element={<EventDetail />} />
           <Route path="/campus-ambassador" element={<CampusAmbassador />} />

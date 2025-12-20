@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
 
+/* Custom Font - Coffee+Tea Demo */
+@font-face {
+  font-family: 'coffee+tea demo';
+  src: url('/coffee+teademo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Reset browser spacing */
 html, body {
   margin: 0;
@@ -23,11 +31,36 @@ html, body {
 /* Global font for all headings, subheadings, and buttons */
 h1, h2, h3, h4, h5, h6,
 button,
-.menu-grid-card span,
 .indoor-sports-card span,
 .highlight-card span,
 .culturals-card span {
   font-family: 'Baloo 2', cursive, sans-serif !important;
+}
+
+/* Coffee+Tea Demo font for menu cards */
+.menu-title-heading,
+.menu-grid-card,
+.menu-grid-card span,
+.menu-grid-card h1,
+.menu-grid-card h2,
+.menu-grid-card h3,
+.menu-grid-card h4,
+.menu-grid-card h5,
+.menu-grid-card h6 {
+  font-family: 'coffee+tea demo', sans-serif !important;
+}
+
+/* Coffee+Tea Demo font specifically for About Theme section */
+.about-theme-section,
+.about-theme-section h1,
+.about-theme-section h2,
+.about-theme-section h3,
+.about-theme-section h4,
+.about-theme-section h5,
+.about-theme-section h6,
+.about-theme-section p,
+.about-theme-section div {
+  font-family: 'coffee+tea demo', sans-serif !important;
 }
 
 /* Circular Back Navigation Button */

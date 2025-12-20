@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import BackButton from './components/BackButton';
 
 interface EventDetailData {
   title: string;
@@ -801,7 +802,7 @@ const EventDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen" style={{
+    <div className="min-h-screen event-detail-page" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -809,31 +810,52 @@ const EventDetail: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       <div className="min-h-screen p-4 md:p-8">
-        {/* Header with Logo and Back Button */}
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-4">
-            <img 
-              src={`${import.meta.env.BASE_URL}image.png`}
-              alt="Vignan Mahotsav" 
-              className="h-16 md:h-20 object-contain"
-            />
-            <button 
-              onClick={handleBack}
-              className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
-            >
-              ← Back
-            </button>
+        {/* Header: Logo + Back Button + Title */}
+        <div className="mb-8">
+          {/* Desktop layout */}
+          <div className="hidden md:grid md:grid-cols-3 md:items-start mb-6">
+            {/* Left column: Logo and Back button stacked */}
+            <div className="flex flex-col items-start gap-3">
+              <img 
+                src={`${import.meta.env.BASE_URL}image.png`}
+                alt="Vignan Mahotsav" 
+                style={{height: '5rem', objectFit: 'contain', marginTop: '-3rem'}}
+              />
+              <BackButton 
+                className="!static !top-auto !left-auto"
+                onClick={handleBack}
+              />
+            </div>
+            
+            {/* Center column: Title */}
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '32px'}}>
+              <h1 style={{fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                {eventData.title}
+              </h1>
+              <h2 style={{fontSize: '1.875rem', fontWeight: '600', color: '#e9d5ff', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                {eventData.subtitle}
+              </h2>
+            </div>
+            
+            {/* Right column: Empty (for balance) */}
+            <div></div>
           </div>
-        </div>
 
-        {/* Title Section */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
-            {eventData.title}
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
-            {eventData.subtitle}
-          </h2>
+          {/* Mobile layout */}
+          <div className="md:hidden flex flex-col items-center gap-3 mb-6 pt-0">
+            <BackButton 
+              className="!static !top-auto !left-auto"
+              onClick={handleBack}
+            />
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                {eventData.title}
+              </h1>
+              <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                {eventData.subtitle}
+              </h2>
+            </div>
+          </div>
         </div>
 
         {/* Content Grid */}
@@ -848,14 +870,14 @@ const EventDetail: React.FC = () => {
 
           {/* Rules Section */}
           <div className="p-6">
-            <h3 className="text-2xl font-bold mb-4 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+            <h3 className="text-2xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
               Rules:
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-5">
               {eventData.rules.map((rule, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="text-yellow-400 font-bold text-lg mt-0.5 shrink-0">•</span>
-                  <span className="text-white text-sm md:text-base leading-relaxed" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'}}>
+                <li key={index} className="flex items-start gap-4">
+                  <span className="text-yellow-400 font-bold text-lg mt-1 shrink-0">•</span>
+                  <span className="text-white text-base md:text-lg leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
                     {rule}
                   </span>
                 </li>
@@ -867,28 +889,28 @@ const EventDetail: React.FC = () => {
           <div className="space-y-6">
             {/* Cash Prizes */}
             <div className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Cash Prizes:
               </h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]">First</span>
-                  <span className="font-semibold">- {eventData.prizes.first}</span>
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>First</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.first}</span>
                 </div>
                 <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]">Second</span>
-                  <span className="font-semibold">- {eventData.prizes.second}</span>
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Second</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
                   <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]">Third</span>
-                    <span className="font-semibold">- {eventData.prizes.third}</span>
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Third</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
                   <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]">Fourth</span>
-                    <span className="font-semibold">- {eventData.prizes.fourth}</span>
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Fourth</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>
@@ -896,13 +918,13 @@ const EventDetail: React.FC = () => {
 
             {/* Contact Information */}
             <div className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Contact no:
               </h3>
               <div className="space-y-3">
                 {eventData.contacts.map((contact, index) => (
                   <div key={index} className="text-white text-sm md:text-base">
-                    <div className="font-semibold">{contact.name}: {contact.phone}</div>
+                    <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
                   </div>
                 ))}
               </div>

@@ -96,6 +96,13 @@ button {
   font-family: 'Woodtrap', sans-serif !important;
 }
 
+/* Woodtrap font for event detail page headings */
+.event-detail-page h1,
+.event-detail-page h2,
+.event-detail-page h3 {
+  font-family: 'Woodtrap', sans-serif !important;
+}
+
 /* BackToSchool font for event card sub-headings */
 .event-card-title,
 .text-yellow-300 {

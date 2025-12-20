@@ -586,64 +586,133 @@ const EventsInfo: React.FC = () => {
 
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Logo and heading row */}
-        <div className="w-full pb-4 px-8 relative z-20 flex items-center gap-69" style={{paddingTop: "32px"}}>
-          <img 
-            src={`${import.meta.env.BASE_URL}image.png`}
-            alt="Vignan Mahotsav" 
-            className="h-16 md:h-20 object-contain"
-          />
-          <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
-            fontFamily: 'Woodtrap, sans-serif',
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-          }}>
-            {showIndoorSports ? 'Indoor Sports' : 
-             showWomensIndoorSports ? "Women's Indoor Sports" : 
-             showMensTeamSports ? "Men's Team Field Sports" : 
-             showWomensTeamSports ? "Women's Team Field Sports" :
-             showDance ? 'Dance' :
-             showMusic ? 'Music' :
-             showTheatre ? 'Theatre' :
-             showLiterature ? 'Literature' :
-             showVisualArts ? 'Visual Arts' :
-             showFashionDesign ? 'Fashion Design' :
-             showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
-             showGaming ? 'Gaming' :
-             showRoboGames ? 'Robo Games' :
-             showSpotLight ? 'Spot Light' :
-             showSportsDetails ? 'sports and games' : 
-             showCulturals ? 'culturals' :
-             'EVENTS'}
-          </h1>
-        </div>
+        {/* Header: Logo + Title + Back Button */}
+        <div className="w-full px-8 relative z-20" style={{paddingTop: "32px"}}>
+          {/* Desktop layout - Logo left, Title center, Back below logo */}
+          <div className="hidden md:grid md:grid-cols-3 md:items-start">
+            {/* Left column: Logo and Back button stacked */}
+            <div className="flex flex-col items-start gap-3">
+              <img 
+                src={`${import.meta.env.BASE_URL}image.png`}
+                alt="Vignan Mahotsav" 
+                className="h-16 md:h-20 object-contain"
+              />
+              <BackButton 
+                className="!static !top-auto !left-auto"
+                onClick={() => {
+                if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                  setShowDance(false);
+                  setShowMusic(false);
+                  setShowTheatre(false);
+                  setShowLiterature(false);
+                  setShowVisualArts(false);
+                  setShowFashionDesign(false);
+                  setShowDigitalStorytelling(false);
+                  setShowGaming(false);
+                  setShowRoboGames(false);
+                  setShowSpotLight(false);
+                } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+                  setShowIndoorSports(false);
+                  setShowWomensIndoorSports(false);
+                  setShowMensTeamSports(false);
+                  setShowWomensTeamSports(false);
+                } else if (showSportsDetails || showCulturals || showParaSports) {
+                  setShowSportsDetails(false);
+                  setShowCulturals(false);
+                  setShowParaSports(false);
+                } else {
+                  navigate('/');
+                }
+              }} />
+            </div>
+            
+            {/* Center column: Title */}
+            <div className="flex items-start justify-center">
+              <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
+                fontFamily: 'Woodtrap, sans-serif',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              }}>
+                {showIndoorSports ? 'Indoor Sports' : 
+                 showWomensIndoorSports ? "Women's Indoor Sports" : 
+                 showMensTeamSports ? "Men's Team Field Sports" : 
+                 showWomensTeamSports ? "Women's Team Field Sports" :
+                 showDance ? 'Dance' :
+                 showMusic ? 'Music' :
+                 showTheatre ? 'Theatre' :
+                 showLiterature ? 'Literature' :
+                 showVisualArts ? 'Visual Arts' :
+                 showFashionDesign ? 'Fashion Design' :
+                 showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+                 showGaming ? 'Gaming' :
+                 showRoboGames ? 'Robo Games' :
+                 showSpotLight ? 'Spot Light' :
+                 showSportsDetails ? 'sports and games' : 
+                 showCulturals ? 'culturals' :
+                 'EVENTS'}
+              </h1>
+            </div>
+            
+            {/* Right column: Empty (for balance) */}
+            <div></div>
+          </div>
 
-        {/* Back button - on left */}
-        <div className="w-full px-8 pb-4 relative z-20" style={{paddingTop: "6px"}}>
-          <BackButton onClick={() => {
-            if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
-              setShowDance(false);
-              setShowMusic(false);
-              setShowTheatre(false);
-              setShowLiterature(false);
-              setShowVisualArts(false);
-              setShowFashionDesign(false);
-              setShowDigitalStorytelling(false);
-              setShowGaming(false);
-              setShowRoboGames(false);
-              setShowSpotLight(false);
-            } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
-              setShowIndoorSports(false);
-              setShowWomensIndoorSports(false);
-              setShowMensTeamSports(false);
-              setShowWomensTeamSports(false);
-            } else if (showSportsDetails || showCulturals || showParaSports) {
-              setShowSportsDetails(false);
-              setShowCulturals(false);
-              setShowParaSports(false);
-            } else {
-              navigate('/');
-            }
-          }} />
+          {/* Mobile layout - Logo and Back button centered, stacked */}
+          <div className="md:hidden flex flex-col items-center gap-3 pb-4">
+            <img 
+              src={`${import.meta.env.BASE_URL}image.png`}
+              alt="Vignan Mahotsav" 
+              className="h-16 object-contain"
+            />
+            <BackButton 
+              className="!static !top-auto !left-auto"
+              onClick={() => {
+              if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                setShowDance(false);
+                setShowMusic(false);
+                setShowTheatre(false);
+                setShowLiterature(false);
+                setShowVisualArts(false);
+                setShowFashionDesign(false);
+                setShowDigitalStorytelling(false);
+                setShowGaming(false);
+                setShowRoboGames(false);
+                setShowSpotLight(false);
+              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+                setShowIndoorSports(false);
+                setShowWomensIndoorSports(false);
+                setShowMensTeamSports(false);
+                setShowWomensTeamSports(false);
+              } else if (showSportsDetails || showCulturals || showParaSports) {
+                setShowSportsDetails(false);
+                setShowCulturals(false);
+                setShowParaSports(false);
+              } else {
+                navigate('/');
+              }
+            }} />
+            <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
+              fontFamily: 'Woodtrap, sans-serif',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+            }}>
+              {showIndoorSports ? 'Indoor Sports' : 
+               showWomensIndoorSports ? "Women's Indoor Sports" : 
+               showMensTeamSports ? "Men's Team Field Sports" : 
+               showWomensTeamSports ? "Women's Team Field Sports" :
+               showDance ? 'Dance' :
+               showMusic ? 'Music' :
+               showTheatre ? 'Theatre' :
+               showLiterature ? 'Literature' :
+               showVisualArts ? 'Visual Arts' :
+               showFashionDesign ? 'Fashion Design' :
+               showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+               showGaming ? 'Gaming' :
+               showRoboGames ? 'Robo Games' :
+               showSpotLight ? 'Spot Light' :
+               showSportsDetails ? 'sports and games' : 
+               showCulturals ? 'culturals' :
+               'EVENTS'}
+            </h1>
+          </div>
         </div>
 
         {/* Main Cards Section */}

@@ -4361,58 +4361,7 @@ Do you want to proceed with registration?`;
             }} />
           )}
 
-          {/* Lock Icon - Display only (no click) */}
-          <div 
-            style={{
-              position: 'absolute',
-              top: isThrowbackUnlocked ? 'auto' : '50%',
-              left: isThrowbackUnlocked ? 'auto' : '50%',
-              bottom: isThrowbackUnlocked ? '20px' : 'auto',
-              right: isThrowbackUnlocked ? '20px' : 'auto',
-              transform: isThrowbackUnlocked 
-                ? 'rotate(45deg) scale(0.8)' 
-                : 'translate(-50%, -50%)',
-              width: 'clamp(50px, 8vw, 80px)',
-              height: 'clamp(50px, 8vw, 80px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 100,
-              animation: isThrowbackUnlocked ? 'none' : 'lockPulse 2s ease-in-out infinite',
-              transition: 'all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-              opacity: isThrowbackUnlocked ? 0.7 : 1
-            }}
-            onMouseEnter={(e) => {
-              if (!isThrowbackUnlocked) {
-                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.1)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isThrowbackUnlocked) {
-                e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)';
-              }
-            }}
-          >
-            <svg 
-              width="70%" 
-              height="70%" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="#8B5CF6"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{
-                transform: isThrowbackUnlocked ? 'rotate(-45deg)' : 'rotate(0deg)',
-                transition: 'transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))'
-              }}
-            >
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d={isThrowbackUnlocked ? "M7 11V7a5 5 0 0 1 9 0" : "M7 11V7a5 5 0 0 1 10 0v4"} />
-            </svg>
-          </div>
+          {/* Lock Icon removed */}
         </div>
 
         <p style={{
@@ -5373,12 +5322,12 @@ Do you want to proceed with registration?`;
         <div style={{
           maxWidth: '1400px',
           margin: '0 auto',
-          padding: '20px 30px 0 30px'
+          padding: '40px 40px 0 40px'
         }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '30px'
+            gap: '50px'
           }}>
           {/* Logo Section */}
           <div>
@@ -5388,7 +5337,7 @@ Do you want to proceed with registration?`;
               style={{
                 height: '80px',
                 objectFit: 'contain',
-                marginBottom: '15px'
+                marginBottom: '25px'
               }}
             />
             {/* Social Media Icons */}
@@ -5396,13 +5345,13 @@ Do you want to proceed with registration?`;
               color: '#fff',
               fontSize: '1rem',
               fontWeight: 'bold',
-              marginBottom: '15px',
+              marginBottom: '20px',
               letterSpacing: '1px'
             }}>FOLLOW US ON :</h3>
             <div style={{
               display: 'flex',
-              gap: '15px',
-              marginBottom: '15px'
+              gap: '20px',
+              marginBottom: '20px'
             }}>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{
                 width: '40px',
@@ -5458,10 +5407,10 @@ Do you want to proceed with registration?`;
               color: '#fff',
               fontSize: '1.1rem',
               fontWeight: 'bold',
-              marginBottom: '15px',
+              marginBottom: '20px',
               letterSpacing: '1px'
             }}>CONTACT US :</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -5490,20 +5439,20 @@ Do you want to proceed with registration?`;
               color: '#fff',
               fontSize: '1.1rem',
               fontWeight: 'bold',
-              marginBottom: '15px',
+              marginBottom: '20px',
               letterSpacing: '1px'
             }}>LOCATION :</h3>
-            <div style={{ display: 'flex', alignItems: 'start', gap: '12px', marginBottom: '15px' }}>
+            <div style={{ display: 'flex', alignItems: 'start', gap: '15px', marginBottom: '20px' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginTop: '4px', flexShrink: 0 }}>
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
                 <circle cx="12" cy="10" r="3"/>
               </svg>
-              <p style={{ color: '#fff', fontSize: '1rem', lineHeight: '1.6', margin: 0 }}>
+              <p style={{ color: '#fff', fontSize: '1rem', lineHeight: '1.8', margin: 0 }}>
                 VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH (DEEMED TO BE UNIVERSITY), VADLAMUDI, GUNTUR, A.P -522213
               </p>
             </div>
             <a 
-              href="https://maps.google.com/?q=Vignan+University+Guntur" 
+              href="https://maps.app.goo.gl/5pufqAcYqKrQCyQZ6" 
               target="_blank" 
               rel="noopener noreferrer"
               style={{

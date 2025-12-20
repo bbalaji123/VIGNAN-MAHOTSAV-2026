@@ -2396,9 +2396,9 @@ Do you want to proceed with registration?`;
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-20 xl:pt-16 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-4 left-0 right-0 z-20 w-full px-4">
+        <div className="absolute top-20 left-0 right-0 z-20 w-full px-4 pt-8">
           <h2 className="text-white text-sm md:text-lg font-semibold" style={{
             fontFamily: 'serif',
             letterSpacing: '0.05em',
@@ -2410,7 +2410,7 @@ Do you want to proceed with registration?`;
           </h2>
         </div>
         
-        <div className="flex justify-center items-center z-20 relative w-full px-0">
+        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "60px"}}>
           <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
         </div>
         <style>{`
@@ -2540,17 +2540,29 @@ Do you want to proceed with registration?`;
             </div>
           </div>
           
-          {/* Back Button */}
-          <BackButton onClick={() => setShowPageMenu(false)} />
           {/* Menu Title */}
-          <div className="text-center pt-6 pb-4 md:pt-8 md:pb-6">
+          <div className="text-center" style={{marginTop: "30px", paddingBottom: "2px"}}>
             <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
-          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6">
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6" style={{marginTop: "-90px"}}>
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+              {/* Back Button - positioned above HOME card */}
+              <div className="col-span-2 md:col-span-4 flex justify-start mb-2">
+                <button
+                  onClick={() => setShowPageMenu(false)}
+                  className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
+                  aria-label="Go back"
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}BackButton.svg`}
+                    alt="Back"
+                    className="w-full h-full object-contain"
+                  />
+                </button>
+              </div>
               {/* HOME */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"

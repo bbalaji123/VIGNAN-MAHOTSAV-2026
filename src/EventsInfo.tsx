@@ -587,7 +587,7 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Logo and heading row */}
-        <div className="w-full pt-8 pb-4 px-8 relative z-20 flex items-center gap-69">
+        <div className="w-full pb-4 px-8 relative z-20 flex items-center gap-69" style={{paddingTop: "32px"}}>
           <img 
             src={`${import.meta.env.BASE_URL}image.png`}
             alt="Vignan Mahotsav" 
@@ -618,7 +618,7 @@ const EventsInfo: React.FC = () => {
         </div>
 
         {/* Back button - on left */}
-        <div className="w-full px-8 pb-4 relative z-20">
+        <div className="w-full px-8 pb-4 relative z-20" style={{paddingTop: "6px"}}>
           <BackButton onClick={() => {
             if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
               setShowDance(false);

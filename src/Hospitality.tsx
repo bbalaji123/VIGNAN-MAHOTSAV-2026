@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import GarudaBubble from './GarudaBubble';
 import FlowerComponent from './components/FlowerComponent';
+import BackButton from './components/BackButton';
 
 const Hospitality: React.FC = () => {
   const navigate = useNavigate();

@@ -80,6 +80,7 @@ const Dashboard: React.FC = () => {
   const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
   const [throwbackScrollProgress, setThrowbackScrollProgress] = useState(0);
+  const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
   
   // Highlights carousel state
   const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
@@ -1132,36 +1133,43 @@ const Dashboard: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll tracking for throwback section
+  // Scroll tracking for throwback section - flower open/close animation
   useEffect(() => {
-    const handleScroll = () => {
+    // Use a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
       const throwbackSection = document.querySelector('[data-section-id="throwback"]');
-      if (!throwbackSection) return;
-
-      const rect = throwbackSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // Calculate when section enters viewport (from bottom)
-      const startPoint = windowHeight; // Section just entering from bottom
-      const endPoint = windowHeight * 0.2; // Section 80% visible
-      
-      // Calculate progress (0 to 1)
-      let progress = 0;
-      if (rect.top <= startPoint && rect.top >= endPoint) {
-        progress = (startPoint - rect.top) / (startPoint - endPoint);
-        progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
-      } else if (rect.top < endPoint) {
-        progress = 1;
+      if (!throwbackSection) {
+        console.log('Throwback section not found');
+        return;
       }
-      
-      setThrowbackScrollProgress(progress);
-      setIsThrowbackUnlocked(progress > 0.3); // Unlock at 30% scroll
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            console.log('Throwback intersection:', entry.isIntersecting, entry.intersectionRatio);
+            if (entry.isIntersecting) {
+              // Section entering viewport - open flower
+              setIsThrowbackUnlocked(true);
+            } else {
+              // Section leaving viewport - close flower
+              setIsThrowbackUnlocked(false);
+            }
+          });
+        },
+        {
+          threshold: 0.1, // Trigger when 10% of section is visible
+          rootMargin: '0px' // No margin offset
+        }
+      );
+
+      observer.observe(throwbackSection);
+
+      return () => {
+        observer.disconnect();
+      };
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Time-based theme detection
@@ -4148,9 +4156,9 @@ Do you want to proceed with registration?`;
             min-width: 100px;
             height: clamp(140px, 20vw, 200px);
             border-radius: 15px;
-            overflow: hidden;
+            overflow: visible;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
           }
 
@@ -4167,6 +4175,8 @@ Do you want to proceed with registration?`;
 
           .throwback-card:hover {
             transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            z-index: 10;
           }
 
           .throwback-card img {
@@ -4224,15 +4234,17 @@ Do you want to proceed with registration?`;
           gap: '40px'
         }}>
           {/* Row 1 - Moving Left */}
-          <div style={{ overflow: 'hidden', width: '100%' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row">
               {[...Array(10)].map((_, i) => (
                 <div 
                   key={`row1-${i}`}
                   className="throwback-card"
+                  onClick={() => setSelectedPhoto({ row: 1, index: i })}
                   style={{
-                    background: `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.3)', 'rgba(255, 105, 180, 0.3)', 'rgba(0, 255, 255, 0.3)', 'rgba(138, 43, 226, 0.3)', 'rgba(50, 205, 50, 0.3)'][i % 5]}, rgba(0, 0, 0, 0.1))`,
-                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`,color: '#fdee71'
+                    background: `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
+                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`,color: '#fdee71',
+                    cursor: 'pointer'
                   }}
                 >
                   <div 
@@ -4247,15 +4259,17 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Row 2 - Moving Right */}
-          <div style={{ overflow: 'hidden', width: '100%' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row scroll-row-2">
               {[...Array(10)].map((_, i) => (
                 <div 
                   key={`row2-${i}`}
                   className="throwback-card"
+                  onClick={() => setSelectedPhoto({ row: 2, index: i })}
                   style={{
-                    background: `linear-gradient(135deg, ${['rgba(255, 127, 80, 0.3)', 'rgba(147, 112, 219, 0.3)', 'rgba(255, 215, 0, 0.3)', 'rgba(0, 191, 255, 0.3)', 'rgba(255, 20, 147, 0.3)'][i % 5]}, rgba(0, 0, 0, 0.1))`,
-                    border: `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5]}`
+                    background: `linear-gradient(135deg, ${['rgba(255, 127, 80, 0.5)', 'rgba(147, 112, 219, 0.5)', 'rgba(255, 215, 0, 0.5)', 'rgba(0, 191, 255, 0.5)', 'rgba(255, 20, 147, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
+                    border: `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5]}`,
+                    cursor: 'pointer'
                   }}
                 >
                   <div 
@@ -4270,15 +4284,17 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Row 3 - Moving Left */}
-          <div style={{ overflow: 'hidden', width: '100%' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row scroll-row-3">
               {[...Array(10)].map((_, i) => (
                 <div 
                   key={`row3-${i}`}
                   className="throwback-card"
+                  onClick={() => setSelectedPhoto({ row: 3, index: i })}
                   style={{
-                    background: `linear-gradient(135deg, ${['rgba(218, 165, 32, 0.3)', 'rgba(138, 43, 226, 0.3)', 'rgba(0, 255, 255, 0.3)', 'rgba(255, 105, 180, 0.3)', 'rgba(50, 205, 50, 0.3)'][i % 5]}, rgba(0, 0, 0, 0.1))`,
-                    border: `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5]}`
+                    background: `linear-gradient(135deg, ${['rgba(218, 165, 32, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
+                    border: `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5]}`,
+                    cursor: 'pointer'
                   }}
                 >
                   <div 
@@ -5569,6 +5585,119 @@ Do you want to proceed with registration?`;
           </div>
         </div>
       </footer>
+
+      {/* Photo Modal */}
+      {selectedPhoto && (
+        <div
+          onClick={() => setSelectedPhoto(null)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+            cursor: 'pointer'
+          }}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setSelectedPhoto(null)}
+            style={{
+              position: 'absolute',
+              top: '30px',
+              right: '30px',
+              width: '50px',
+              height: '50px',
+              border: 'none',
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              color: '#fff',
+              fontSize: '2rem',
+              cursor: 'pointer',
+              borderRadius: '50%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(10px)',
+              zIndex: 10000
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            ✕
+          </button>
+
+          {/* Photo Content */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: '90%',
+              maxWidth: '800px',
+              height: '80vh',
+              borderRadius: '20px',
+              background: (() => {
+                const row = selectedPhoto.row;
+                const i = selectedPhoto.index;
+                if (row === 1) {
+                  return `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
+                } else if (row === 2) {
+                  return `linear-gradient(135deg, ${['rgba(255, 127, 80, 0.5)', 'rgba(147, 112, 219, 0.5)', 'rgba(255, 215, 0, 0.5)', 'rgba(0, 191, 255, 0.5)', 'rgba(255, 20, 147, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
+                } else {
+                  return `linear-gradient(135deg, ${['rgba(218, 165, 32, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
+                }
+              })(),
+              border: (() => {
+                const row = selectedPhoto.row;
+                const i = selectedPhoto.index;
+                if (row === 1) {
+                  return `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`;
+                } else if (row === 2) {
+                  return `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5]}`;
+                } else {
+                  return `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5]}`;
+                }
+              })(),
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              cursor: 'default'
+            }}
+          >
+            <div
+              style={{
+                fontSize: '3rem',
+                fontWeight: 'bold',
+                color: (() => {
+                  const row = selectedPhoto.row;
+                  const i = selectedPhoto.index;
+                  if (row === 1) {
+                    return ['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5];
+                  } else if (row === 2) {
+                    return ['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5];
+                  } else {
+                    return ['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5];
+                  }
+                })()
+              }}
+            >
+              Photo {selectedPhoto.row === 1 ? selectedPhoto.index + 1 : selectedPhoto.row === 2 ? selectedPhoto.index + 11 : selectedPhoto.index + 21}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

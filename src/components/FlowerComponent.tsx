@@ -33,7 +33,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
   petalAnimation = '',
   clipPathTransition = 'none'
 }) => {
-  const defaultPetalAnimation = showPetalRotation ? 'rotateAntiClockwise 40s linear infinite' : 'none';
+  const defaultPetalAnimation = showPetalRotation ? 'petalsRotateAnticlockwise 40s linear infinite' : 'none';
   
   return (
     <div 
@@ -74,7 +74,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
           position: 'absolute',
           top: sunTop,
           left: sunLeft,
-          animation: 'rotateClockwise 20s linear infinite',
+          animation: 'sunRotateClockwise 20s linear infinite',
           transformOrigin: 'center center'
         }}
       />

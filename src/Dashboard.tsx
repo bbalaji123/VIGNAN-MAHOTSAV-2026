@@ -2375,7 +2375,7 @@ Do you want to proceed with registration?`;
           {/* Gaurada Image beside hamburger */}
           <div className="fixed top-1 left-16 z-60">
             <img 
-              src={`${import.meta.env.BASE_URL}garuda.png`}
+              src={`${import.meta.env.BASE_URL}Garuda.avif`}
               alt="Garuda"
               className="h-20 w-auto object-contain"
             />
@@ -4188,7 +4188,7 @@ Do you want to proceed with registration?`;
             moonTop="30.8%"
             moonLeft="30.8%"
             showPetalRotation={true}
-            petalAnimation={isThrowbackUnlocked ? 'none' : 'rotateAntiClockwise 40s linear infinite'}
+            petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
             clipPath={isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)'}
             clipPathTransition="clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
             style={{

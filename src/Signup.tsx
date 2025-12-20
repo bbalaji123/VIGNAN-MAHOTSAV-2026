@@ -275,14 +275,6 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
       <h3>🎓 Academic Information</h3>
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="college">College Name *</label>
-          <CollegeSelect
-            value={signupFormData.college || ''}
-            onChange={onCollegeChange}
-            required
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="registerId">Register ID</label>
           <input
             type="text"
@@ -292,6 +284,14 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
             onChange={onInputChange}
             placeholder="Enter your register ID"
             className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="college">College Name *</label>
+          <CollegeSelect
+            value={signupFormData.college || ''}
+            onChange={onCollegeChange}
+            required
           />
         </div>
       </div>
@@ -304,7 +304,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
             name="state"
             value={signupFormData.state || ''}
             onChange={onInputChange}
-            className="form-input"
+            className="form-input form-select"
             required
           >
             <option value="">-- Select your state --</option>
@@ -322,7 +322,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
             name="district"
             value={signupFormData.district || ''}
             onChange={onInputChange}
-            className="form-input"
+            className="form-input form-select"
             required
             disabled={!signupFormData.state}
           >

@@ -36,6 +36,8 @@ export interface SignupData {
   userType?: string;
   participationType?: string;
   referenceId?: string;
+  state?: string;
+  district?: string;
 }
 
 export interface ApiResponse {

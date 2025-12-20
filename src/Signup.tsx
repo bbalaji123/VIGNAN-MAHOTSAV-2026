@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Signup.css';
 import LoadingAnimation from './components/LoadingAnimation';
 import CollegeSelect from './components/CollegeSelect';
@@ -131,7 +131,6 @@ const Signup: React.FC<SignupProps> = ({
                     <option value="">Select gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>
@@ -139,43 +138,11 @@ const Signup: React.FC<SignupProps> = ({
 
             {/* Step 2: Academic Information */}
             {signupStep === 2 && (
-              <div className="form-section">
-                <h3>🎓 Academic Information</h3>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="college">College Name *</label>
-                    <CollegeSelect
-                      value={signupFormData.college || ''}
-                      onChange={onCollegeChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="registerId">Register ID</label>
-                    <input
-                      type="text"
-                      id="registerId"
-                      name="registerId"
-                      value={signupFormData.registerId || ''}
-                      onChange={onInputChange}
-                      placeholder="Enter your register ID"
-                      className="form-input"
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="referenceId">Reference ID</label>
-                  <input
-                    type="text"
-                    id="referenceId"
-                    name="referenceId"
-                    value={signupFormData.referenceId || ''}
-                    onChange={onInputChange}
-                    placeholder="Enter reference ID (optional)"
-                    className="form-input"
-                  />
-                </div>
-              </div>
+              <AcademicInfoStep
+                signupFormData={signupFormData}
+                onInputChange={onInputChange}
+                onCollegeChange={onCollegeChange}
+              />
             )}
 
             {/* Step 3: Contact Information */}
@@ -255,6 +222,131 @@ const Signup: React.FC<SignupProps> = ({
             </div>
           </form>
         </div>
+      </div>
+    </div>
+  );
+};
+
+// Academic Info Step Component with State and District dropdowns
+interface AcademicInfoStepProps {
+  signupFormData: SignupData;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onCollegeChange: (value: string) => void;
+}
+
+const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
+  signupFormData,
+  onInputChange,
+  onCollegeChange
+}) => {
+  const [states, setStates] = useState<Array<{ no: string; name: string }>>([]);
+  const [districts, setDistricts] = useState<Array<{ no: string; sno: string; name: string }>>([]);
+  const [filteredDistricts, setFilteredDistricts] = useState<Array<{ no: string; sno: string; name: string }>>([]);
+
+  useEffect(() => {
+    // Load states
+    fetch('/state.json')
+      .then(res => res.json())
+      .then(data => setStates(data))
+      .catch(err => console.error('Error loading states:', err));
+
+    // Load districts
+    fetch('/district.json')
+      .then(res => res.json())
+      .then(data => setDistricts(data))
+      .catch(err => console.error('Error loading districts:', err));
+  }, []);
+
+  useEffect(() => {
+    // Filter districts based on selected state
+    if (signupFormData.state && districts.length > 0) {
+      const selectedState = states.find(s => s.name === signupFormData.state);
+      if (selectedState) {
+        const filtered = districts.filter(d => d.sno === selectedState.no);
+        setFilteredDistricts(filtered);
+      }
+    } else {
+      setFilteredDistricts([]);
+    }
+  }, [signupFormData.state, districts, states]);
+
+  return (
+    <div className="form-section">
+      <h3>🎓 Academic Information</h3>
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="college">College Name *</label>
+          <CollegeSelect
+            value={signupFormData.college || ''}
+            onChange={onCollegeChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="registerId">Register ID</label>
+          <input
+            type="text"
+            id="registerId"
+            name="registerId"
+            value={signupFormData.registerId || ''}
+            onChange={onInputChange}
+            placeholder="Enter your register ID"
+            className="form-input"
+          />
+        </div>
+      </div>
+      
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="state">State *</label>
+          <select
+            id="state"
+            name="state"
+            value={signupFormData.state || ''}
+            onChange={onInputChange}
+            className="form-input"
+            required
+          >
+            <option value="">-- Select your state --</option>
+            {states.map(state => (
+              <option key={state.no} value={state.name}>
+                {state.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="district">District *</label>
+          <select
+            id="district"
+            name="district"
+            value={signupFormData.district || ''}
+            onChange={onInputChange}
+            className="form-input"
+            required
+            disabled={!signupFormData.state}
+          >
+            <option value="">-- Select your district --</option>
+            {filteredDistricts.map(district => (
+              <option key={district.no} value={district.name}>
+                {district.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="referenceId">Referal code</label>
+        <input
+          type="text"
+          id="referenceId"
+          name="referenceId"
+          value={signupFormData.referenceId || ''}
+          onChange={onInputChange}
+          placeholder="Enter referal code (optional)"
+          className="form-input"
+        />
       </div>
     </div>
   );

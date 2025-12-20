@@ -755,7 +755,9 @@ const Dashboard: React.FC = () => {
     dateOfBirth: '',
     userType: 'participant',
     participationType: 'none',
-    referenceId: ''
+    referenceId: '',
+    state: '',
+    district: ''
   });
   const [signupStep, setSignupStep] = useState(1);
   const totalSteps = 3;
@@ -1190,6 +1192,29 @@ const Dashboard: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Prevent scrolling and pause animations when photo modal is open
+  useEffect(() => {
+    if (selectedPhoto) {
+      document.body.style.overflow = 'hidden';
+      // Add class to pause animations
+      const scrollRows = document.querySelectorAll('.scroll-row');
+      scrollRows.forEach(row => {
+        (row as HTMLElement).style.animationPlayState = 'paused';
+      });
+    } else {
+      document.body.style.overflow = '';
+      // Resume animations
+      const scrollRows = document.querySelectorAll('.scroll-row');
+      scrollRows.forEach(row => {
+        (row as HTMLElement).style.animationPlayState = 'running';
+      });
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedPhoto]);
 
   // Scroll detection for sunlight effect and flower parallax
   useEffect(() => {
@@ -1980,7 +2005,9 @@ const Dashboard: React.FC = () => {
           dateOfBirth: '',
           userType: 'visitor',
           participationType: 'none',
-          referenceId: ''
+          referenceId: '',
+          state: '',
+          district: ''
         });
       } else {
         setSubmitMessage({
@@ -2532,7 +2559,7 @@ Do you want to proceed with registration?`;
           </div>
           
           {/* Gaurada Image beside hamburger */}
-          <div className="fixed top-1 left-16 z-60">
+          <div className="absolute top-1 left-16 z-60">
             <img 
               src={`${import.meta.env.BASE_URL}Garuda.avif`}
               alt="Garuda"
@@ -2544,7 +2571,7 @@ Do you want to proceed with registration?`;
 
       {/* Top-Right Vignan Logo - Only show when menu is closed */}
       {!showPageMenu && (
-        <div className="vignan-logo-top">
+        <div className="vignan-logo-top" style={{ position: 'absolute' }}>
           <img 
             src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
             alt="Vignan Logo"

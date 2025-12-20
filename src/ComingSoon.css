@@ -1,0 +1,190 @@
+/* ================= FONT ================= */
+@font-face {
+  font-family: "coffee-tea";
+  src: url("/src/fonts/coffee-tea.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* ================= PAGE ================= */
+.main-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: coffee-tea, sans-serif;
+}
+
+/* ================= BACKGROUND LAYERS ================= */
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("./img/Background-redesign.avif") center/cover no-repeat;
+  z-index: 1;
+}
+
+.gold {
+  position: absolute;
+  width: 65vw;
+  height: 61vh;
+  left: 15vw;
+  top: -9.4vh;
+  background: url("./img/Mahotsav-gold.avif") center/contain no-repeat;
+  z-index: 2;
+}
+
+.flower {
+  position: absolute;
+  width: 67.9vw;
+  height: 110.7vh;
+  left: 16.5vw;
+  top: 32.1vh;
+  background: url("./img/flower.avif") center/contain no-repeat;
+  z-index: 3;
+}
+
+.vignan-logo {
+  position: absolute;
+  width: 21.3vw;
+  height: 21.3vh;
+  right: 0;
+  top: -3vh;
+  background: url("./img/Vignan-logo.avif") center/contain no-repeat;
+  z-index: 4;
+}
+
+/* ================= TIMER ================= */
+:root {
+  --gold-yellow: #FBC02D;
+  --white: #FFFFFF;
+  --off-white: #E0E0E0;
+}
+
+.timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 14px;
+  padding: 25px 30px;
+  border-radius: 16px;
+  background: rgba(61, 0, 84, 0.75);
+  color: var(--white);
+  box-shadow: 0 0 30px rgba(223, 160, 0, 0.822);
+  animation: timerGlow 1.5s infinite alternate;
+  z-index: 5;
+}
+
+@keyframes timerGlow {
+  from { box-shadow: 0 0 20px rgba(255, 191, 29, 0.542); }
+  to { box-shadow: 0 0 35px rgba(251,192,45,0.8); }
+}
+
+/* ================= TIME UNIT ================= */
+.time-unit {
+  width: 70px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= DIGIT ================= */
+.digit {
+  width: 80%;
+  height: 60px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-yellow);
+  text-shadow: 0 0 12px rgba(251,192,45,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.digit.change {
+  animation: rotateOnce 0.45s ease-out;
+}
+
+@keyframes rotateOnce {
+  0% { transform: scale(1) rotateX(0deg); }
+  50% { transform: scale(1.2) rotateX(180deg); }
+  100% { transform: scale(1) rotateX(360deg); }
+}
+
+/* ================= LABEL ================= */
+.label {
+  font-size: 1.5rem;
+  color: var(--off-white);
+  margin-top: 6px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* MAIN CONTAINER */
+  .main-container {
+    height: 100dvh; /* better mobile viewport handling */
+  }
+
+  /* BACKGROUND stays same */
+  .background {
+    background-position: center;
+  }
+
+  /* ================= GOLD CENTER ================= */
+  .gold {
+    width: 90vw;
+    height: 45vh;
+    left: 50%;
+    top: 5vh;
+    transform: translateX(-50%);
+  }
+
+  /* ================= FLOWER ADJUST ================= */
+  .flower {
+    width: 100vw;
+    height: 80vh;
+    left: 50%;
+    top: 45vh;
+    transform: translateX(-50%);
+  }
+
+  /* ================= LOGO CENTER ================= */
+  .vignan-logo {
+    width: 80vw;
+    height: 18vh;
+    left: 50%;
+    right: auto;
+    top: 2vh;
+    transform: translateX(-50%);
+  }
+
+  /* ================= TIMER ================= */
+  /* .timer {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 18px 20px;
+    top: 65%;
+  }
+
+  .time-unit {
+    width: 60px;
+    height: 80px;
+  }
+
+  .digit {
+    font-size: 2rem;
+    height: 45px;
+  }
+
+  .label {
+    font-size: 1.1rem;
+  } */
+}

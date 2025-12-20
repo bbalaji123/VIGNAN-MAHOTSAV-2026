@@ -27,6 +27,26 @@ const Dashboard: React.FC = () => {
   const [cashPrizes, setCashPrizes] = useState(0);
   const statsRef = useRef<HTMLDivElement>(null);
 
+  // Timer countdown state
+  const eventDate = new Date("Feb 5, 2026 00:00:00").getTime();
+  const getTimeLeft = () => {
+    const now = Date.now();
+    const diff = eventDate - now;
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+    };
+  };
+  const [time, setTime] = useState(getTimeLeft);
+  const [animate, setAnimate] = useState({
+    days: false,
+    hours: false,
+    minutes: false,
+    seconds: false,
+  });
+
   const eventInfoCards = [
     { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
     { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
@@ -1081,6 +1101,35 @@ const Dashboard: React.FC = () => {
         observer.unobserve(currentRef);
       }
     };
+  }, []);
+
+  // Timer countdown effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newTime = getTimeLeft();
+
+      setTime(prev => {
+        setAnimate({
+          days: prev.days !== newTime.days,
+          hours: prev.hours !== newTime.hours,
+          minutes: prev.minutes !== newTime.minutes,
+          seconds: prev.seconds !== newTime.seconds,
+        });
+
+        setTimeout(() => {
+          setAnimate({
+            days: false,
+            hours: false,
+            minutes: false,
+            seconds: false,
+          });
+        }, 400);
+
+        return newTime;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Scroll tracking for throwback section
@@ -4364,16 +4413,62 @@ Do you want to proceed with registration?`;
           {/* Lock Icon removed */}
         </div>
 
-        <p style={{
+        {/* Countdown Timer */}
+        <div style={{
           marginTop: '30px',
-          marginBottom: '200px',
-          fontSize: '1.2rem',
-          color: 'rgba(255, 255, 255, 0.6)',
-          textAlign: 'center',
-          fontStyle: 'italic',
+          position: 'relative',
+          display: 'flex',
+          gap: '20px',
+          padding: '25px 35px',
+          borderRadius: '16px',
+          background: 'rgba(61, 0, 84, 0.75)',
+          color: '#FFFFFF',
+          boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+          animation: 'timerGlow 1.5s infinite alternate',
           zIndex: 10,
-          position: 'relative'
-        }}>Memories in bloom</p>
+          marginBottom: '200px',
+          justifyContent: 'center'
+        }}>
+          {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
+            <div key={unit} style={{
+              width: '85px',
+              height: '90px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div 
+                className={animate[unit] ? 'timer-digit-change' : ''}
+                style={{
+                  width: '100%',
+                  height: '60px',
+                  fontSize: '2.6rem',
+                  fontWeight: '800',
+                  fontFamily: 'Poppins, sans-serif',
+                  color: '#FBC02D',
+                  textShadow: '0 0 12px rgba(251,192,45,0.7)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                {time[unit]}
+              </div>
+              <div style={{
+                fontSize: '1.5rem',
+                color: '#E0E0E0',
+                marginTop: '6px',
+                letterSpacing: '0.5px',
+                whiteSpace: 'nowrap',
+                textAlign: 'center',
+                fontFamily: 'BackToSchool, sans-serif'
+              }}>
+                {unit.charAt(0).toUpperCase() + unit.slice(1)}
+              </div>
+            </div>
+          ))}
+        </div>
 
         <style>{`
           @keyframes rotateAntiClockwise {
@@ -4418,6 +4513,21 @@ Do you want to proceed with registration?`;
               opacity: 0;
               height: 100%;
             }
+          }
+
+          @keyframes timerGlow {
+            from { box-shadow: 0 0 20px rgba(255, 191, 29, 0.542); }
+            to { box-shadow: 0 0 35px rgba(251,192,45,0.8); }
+          }
+
+          .timer-digit-change {
+            animation: rotateOnce 0.45s ease-out;
+          }
+
+          @keyframes rotateOnce {
+            0% { transform: scale(1) rotateX(0deg); }
+            50% { transform: scale(1.2) rotateX(180deg); }
+            100% { transform: scale(1) rotateX(360deg); }
           }
         `}</style>
       </section>
@@ -5300,24 +5410,6 @@ Do you want to proceed with registration?`;
         padding: '0',
         boxSizing: 'border-box'
       }}>
-        {/* Countdown Timer */}
-        <div style={{
-          position: 'absolute',
-          top: '-140px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '90%',
-          maxWidth: '500px',
-          background: 'linear-gradient(135deg, rgba(139, 69, 139, 0.95), rgba(75, 0, 130, 0.95))',
-          borderRadius: '20px',
-          padding: '20px',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
-          zIndex: 10,
-          backdropFilter: 'blur(10px)'
-        }}>
-          <CountdownTimer targetDate={new Date('2026-02-05T00:00:00')} />
-        </div>
-
         {/* Footer Content Wrapper */}
         <div style={{
           maxWidth: '1400px',
@@ -5477,107 +5569,6 @@ Do you want to proceed with registration?`;
           </div>
         </div>
       </footer>
-    </div>
-  );
-};
-
-// Countdown Timer Component
-const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const difference = targetDate.getTime() - new Date().getTime();
-      
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
-        });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      gap: '20px',
-      flexWrap: 'wrap'
-    }}>
-      <div style={{ textAlign: 'center', flex: '1 1 80px' }}>
-        <div style={{
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          color: '#FFD700',
-          lineHeight: 1,
-          marginBottom: '8px'
-        }}>{timeLeft.days}</div>
-        <div style={{
-          fontSize: '1.1rem',
-          color: '#fff',
-          fontWeight: '500',
-          fontFamily: 'Georgia, serif'
-        }}>Days</div>
-      </div>
-      <div style={{ textAlign: 'center', flex: '1 1 80px' }}>
-        <div style={{
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          color: '#FFD700',
-          lineHeight: 1,
-          marginBottom: '8px'
-        }}>{timeLeft.hours}</div>
-        <div style={{
-          fontSize: '1.1rem',
-          color: '#fff',
-          fontWeight: '500',
-          fontFamily: 'Georgia, serif'
-        }}>Hours</div>
-      </div>
-      <div style={{ textAlign: 'center', flex: '1 1 80px' }}>
-        <div style={{
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          color: '#FFD700',
-          lineHeight: 1,
-          marginBottom: '8px'
-        }}>{timeLeft.minutes}</div>
-        <div style={{
-          fontSize: '1.1rem',
-          color: '#fff',
-          fontWeight: '500',
-          fontFamily: 'Georgia, serif'
-        }}>Minutes</div>
-      </div>
-      <div style={{ textAlign: 'center', flex: '1 1 80px' }}>
-        <div style={{
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          color: '#FFD700',
-          lineHeight: 1,
-          marginBottom: '8px'
-        }}>{timeLeft.seconds}</div>
-        <div style={{
-          fontSize: '1.1rem',
-          color: '#fff',
-          fontWeight: '500',
-          fontFamily: 'Georgia, serif'
-        }}>Seconds</div>
-      </div>
     </div>
   );
 };

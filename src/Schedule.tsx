@@ -537,8 +537,7 @@ const Schedule: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <button onClick={handleBackClick} className="circular-back-button" aria-label="Go back">
-      </button>
+      <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
       <div className="schedule-content">

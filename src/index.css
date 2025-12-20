@@ -9,6 +9,22 @@
   font-style: normal;
 }
 
+/* Custom Font - Woodtrap */
+@font-face {
+  font-family: 'Woodtrap';
+  src: url('/Woodtrap.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Custom Font - BackToSchool */
+@font-face {
+  font-family: 'BackToSchool';
+  src: url('/BackToSchool.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Reset browser spacing */
 html, body {
   margin: 0;
@@ -30,11 +46,21 @@ html, body {
 
 /* Global font for all headings, subheadings, and buttons */
 h1, h2, h3, h4, h5, h6,
-button,
 .indoor-sports-card span,
 .highlight-card span,
 .culturals-card span {
   font-family: 'Baloo 2', cursive, sans-serif !important;
+}
+
+/* Coffee+Tea Demo font for all buttons */
+button {
+  font-family: 'coffee+tea demo', sans-serif !important;
+}
+
+/* Override for specific event page elements */
+.events-info-page h2,
+.events-info-page .text-white {
+  font-family: 'BackToSchool', sans-serif !important;
 }
 
 /* Coffee+Tea Demo font for menu cards */
@@ -61,6 +87,19 @@ button,
 .about-theme-section p,
 .about-theme-section div {
   font-family: 'coffee+tea demo', sans-serif !important;
+}
+
+/* Woodtrap font for event section headings */
+.events-heading,
+.event-category-heading,
+.events-page-heading {
+  font-family: 'Woodtrap', sans-serif !important;
+}
+
+/* BackToSchool font for event card sub-headings */
+.event-card-title,
+.text-yellow-300 {
+  font-family: 'BackToSchool', sans-serif !important;
 }
 
 /* Circular Back Navigation Button */

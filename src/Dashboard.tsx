@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import BackButton from './components/BackButton';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
 import EventRegistrationModal from './EventRegistrationModal';
@@ -2395,12 +2396,15 @@ Do you want to proceed with registration?`;
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-4 xl:pt-2 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
-        {/* National Level Youth Festival Text */}
-        <div className="z-20 relative w-full px-4 mb-4">
-          <h2 className="text-white text-lg md:text-2xl font-semibold" style={{
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-20 xl:pt-16 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+        {/* National Level Youth Festival Text - Positioned absolutely */}
+        <div className="absolute top-4 left-0 right-0 z-20 w-full px-4">
+          <h2 className="text-white text-sm md:text-lg font-semibold" style={{
             fontFamily: 'serif',
-            letterSpacing: '0.05em'
+            letterSpacing: '0.05em',
+            textAlign: 'left',
+            paddingLeft: '22%',
+            marginBottom: '0'
           }}>
             A National Level Youth Festival - 19<sup>th</sup> Edition
           </h2>
@@ -2537,13 +2541,7 @@ Do you want to proceed with registration?`;
           </div>
           
           {/* Back Button */}
-          <button 
-            className="circular-back-button"
-            onClick={() => setShowPageMenu(false)}
-            aria-label="Go back"
-          >
-          </button>
-
+          <BackButton onClick={() => setShowPageMenu(false)} />
           {/* Menu Title */}
           <div className="text-center pt-6 pb-4 md:pt-8 md:pb-6">
             <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
@@ -2600,7 +2598,7 @@ Do you want to proceed with registration?`;
                 }}
               >
                 <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">EVENTS</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'Woodtrap, sans-serif'}}>EVENTS</span>
               </div>
 
               {/* PROFILE */}
@@ -3155,7 +3153,7 @@ Do you want to proceed with registration?`;
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <h2>MUSIC EVENTS</h2>
+                <h2 className="event-category-heading">MUSIC EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>�</button>
             </div>
@@ -3202,7 +3200,7 @@ Do you want to proceed with registration?`;
                 <button className="indoor-sports-back-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <h2>DANCE EVENTS</h2>
+                <h2 className="event-category-heading">DANCE EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>�</button>
             </div>
@@ -3296,7 +3294,7 @@ Do you want to proceed with registration?`;
                 <button className="indoor-sports-back-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <h2>LITERATURE EVENTS</h2>
+                <h2 className="event-category-heading">LITERATURE EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>�</button>
             </div>
@@ -3437,7 +3435,7 @@ Do you want to proceed with registration?`;
                 <button className="indoor-sports-back-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <h2>SPOT LIGHT EVENTS</h2>
+                <h2 className="event-category-heading">SPOT LIGHT EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>�</button>
             </div>

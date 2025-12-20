@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import { getEventsByType, type Event } from './services/api';
 import FlowerComponent from './components/FlowerComponent';
+import BackButton from './components/BackButton';
 
 const EventsInfo: React.FC = () => {
   const navigate = useNavigate();
@@ -445,7 +446,7 @@ const EventsInfo: React.FC = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden" style={{
+    <div className="min-h-screen flex flex-col relative overflow-hidden events-info-page" style={{
       backgroundImage: 'url("/Background-redesign.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -592,8 +593,8 @@ const EventsInfo: React.FC = () => {
             alt="Vignan Mahotsav" 
             className="h-16 md:h-20 object-contain"
           />
-          <h1 className="text-4xl md:text-6xl font-bold text-white" style={{
-            fontFamily: 'Bradley Hand, cursive',
+          <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
+            fontFamily: 'Woodtrap, sans-serif',
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
           }}>
             {showIndoorSports ? 'Indoor Sports' : 
@@ -618,36 +619,31 @@ const EventsInfo: React.FC = () => {
 
         {/* Back button - on left */}
         <div className="w-full px-8 pb-4 relative z-20">
-          <button 
-            onClick={() => {
-              if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
-                setShowDance(false);
-                setShowMusic(false);
-                setShowTheatre(false);
-                setShowLiterature(false);
-                setShowVisualArts(false);
-                setShowFashionDesign(false);
-                setShowDigitalStorytelling(false);
-                setShowGaming(false);
-                setShowRoboGames(false);
-                setShowSpotLight(false);
-              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
-                setShowIndoorSports(false);
-                setShowWomensIndoorSports(false);
-                setShowMensTeamSports(false);
-                setShowWomensTeamSports(false);
-              } else if (showSportsDetails || showCulturals || showParaSports) {
-                setShowSportsDetails(false);
-                setShowCulturals(false);
-                setShowParaSports(false);
-              } else {
-                navigate('/');
-              }
-            }}
-            className="bg-pink-300 hover:bg-pink-400 text-purple-900 font-bold py-3 px-10 rounded-full transition-all duration-300 text-base shadow-lg"
-          >
-            BACK
-          </button>
+          <BackButton onClick={() => {
+            if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+              setShowDance(false);
+              setShowMusic(false);
+              setShowTheatre(false);
+              setShowLiterature(false);
+              setShowVisualArts(false);
+              setShowFashionDesign(false);
+              setShowDigitalStorytelling(false);
+              setShowGaming(false);
+              setShowRoboGames(false);
+              setShowSpotLight(false);
+            } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+              setShowIndoorSports(false);
+              setShowWomensIndoorSports(false);
+              setShowMensTeamSports(false);
+              setShowWomensTeamSports(false);
+            } else if (showSportsDetails || showCulturals || showParaSports) {
+              setShowSportsDetails(false);
+              setShowCulturals(false);
+              setShowParaSports(false);
+            } else {
+              navigate('/');
+            }
+          }} />
         </div>
 
         {/* Main Cards Section */}
@@ -672,7 +668,7 @@ const EventsInfo: React.FC = () => {
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                       CULTURALS
                     </h2>
                   </div>
@@ -694,7 +690,7 @@ const EventsInfo: React.FC = () => {
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                       SPORTS AND GAMES
                     </h2>
                   </div>
@@ -727,7 +723,7 @@ const EventsInfo: React.FC = () => {
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                       ROBO WARS & GAMING
                     </h2>
                   </div>

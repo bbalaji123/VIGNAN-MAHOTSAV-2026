@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackButton from './components/BackButton';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
 
@@ -228,9 +229,7 @@ const Zonals: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <button onClick={handleBackClick} className="back-button" aria-label="Go back">
-        BACK
-      </button>
+      <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
       <div className="zonals-content">

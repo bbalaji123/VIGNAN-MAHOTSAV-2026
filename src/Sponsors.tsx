@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import BackButton from './components/BackButton';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
 
@@ -204,8 +205,7 @@ const Sponsors: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <button onClick={handleBackClick} className="circular-back-button" aria-label="Go back">
-      </button>
+      <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
       <div className="sponsors-content">

@@ -425,7 +425,7 @@ const Hospitality: React.FC = () => {
                 <td>88852 84355</td>
               </tr>
               <tr>
-                <td>Ajith anna</td>
+                <td>Ajith</td>
                 <td>93461 93840</td>
               </tr>
               <tr>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
+import BackButton from './components/BackButton';
 
 const Schedule: React.FC = () => {
   const navigate = useNavigate();

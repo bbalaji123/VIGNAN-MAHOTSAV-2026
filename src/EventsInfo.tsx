@@ -27,6 +27,7 @@ const EventsInfo: React.FC = () => {
   const [showGaming, setShowGaming] = useState(false);
   const [showRoboGames, setShowRoboGames] = useState(false);
   const [showSpotLight, setShowSpotLight] = useState(false);
+  const [showRoboWarsGaming, setShowRoboWarsGaming] = useState(false);
 
   // Carousel states
   const [currentSportsSlide, setCurrentSportsSlide] = useState(2);
@@ -81,7 +82,10 @@ const EventsInfo: React.FC = () => {
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
     { title: "Spot Light", subtitle: "Special Events" },
-    { title: "Digital Storytelling & Creative Media", subtitle: "" },
+    { title: "Digital Storytelling & Creative Media", subtitle: "" }
+  ];
+
+  const roboWarsGamingCards = [
     { title: "Gaming", subtitle: "" },
     { title: "Robo Games", subtitle: "" }
   ];
@@ -611,6 +615,11 @@ const EventsInfo: React.FC = () => {
                   setShowGaming(false);
                   setShowRoboGames(false);
                   setShowSpotLight(false);
+                  if (showGaming || showRoboGames) {
+                    setShowRoboWarsGaming(true);
+                  }
+                } else if (showRoboWarsGaming) {
+                  setShowRoboWarsGaming(false);
                 } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
                   setShowIndoorSports(false);
                   setShowWomensIndoorSports(false);
@@ -646,6 +655,7 @@ const EventsInfo: React.FC = () => {
                  showGaming ? 'Gaming' :
                  showRoboGames ? 'Robo Games' :
                  showSpotLight ? 'Spot Light' :
+                 showRoboWarsGaming ? 'Robo Wars & Gaming' :
                  showSportsDetails ? 'sports and games' : 
                  showCulturals ? 'culturals' :
                  'EVENTS'}
@@ -677,6 +687,11 @@ const EventsInfo: React.FC = () => {
                 setShowGaming(false);
                 setShowRoboGames(false);
                 setShowSpotLight(false);
+                if (showGaming || showRoboGames) {
+                  setShowRoboWarsGaming(true);
+                }
+              } else if (showRoboWarsGaming) {
+                setShowRoboWarsGaming(false);
               } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
                 setShowIndoorSports(false);
                 setShowWomensIndoorSports(false);
@@ -717,10 +732,10 @@ const EventsInfo: React.FC = () => {
 
         {/* Main Cards Section */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
-          {!showSportsDetails && !showParaSports && !showCulturals && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
+          {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-10">
+              <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
                   className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
@@ -737,49 +752,64 @@ const EventsInfo: React.FC = () => {
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
-                      CULTURALS
+                    <h2 className="text-white text-xs font-bold tracking-wide leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                      PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
                     </h2>
                   </div>
                 </div>
 
-                {/* Card 2 - Sports and Games */}
-                <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                  onClick={handleSportsCardClick}
-                  style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '350px',
-                    width: '300px',
-                    maxWidth: '100%'
-                  }}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
-                      SPORTS AND GAMES
-                    </h2>
+                {/* Card 2 - Sports and Games with Button Below */}
+                <div className="relative flex flex-col items-center gap-8">
+                  <div 
+                    className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    onClick={handleSportsCardClick}
+                    style={{
+                      background: 'rgba(180, 150, 200, 0.35)',
+                      backdropFilter: 'blur(15px)',
+                      WebkitBackdropFilter: 'blur(15px)',
+                      border: '1px solid rgba(255, 255, 255, 0.18)',
+                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                      height: '350px',
+                      width: '300px',
+                      maxWidth: '100%'
+                    }}
+                  >
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                      <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                        SPORTS AND GAMES
+                      </h2>
+                    </div>
                   </div>
-                  {/* Download Rulebook button - positioned under this card */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2" style={{ top: '370px' }}>
-                    <button 
-                      className="bg-pink-300 hover:bg-pink-400 text-purple-900 font-bold py-3 px-10 rounded-full transition-all duration-300 text-sm shadow-lg whitespace-nowrap"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open('https://saturnalia.in/rulebook', '_blank');
-                      }}
-                    >
-                      DOWNLOAD RULEBOOK
-                    </button>
-                  </div>
+                  {/* Download Rulebook button */}
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open('https://saturnalia.in/rulebook', '_blank');
+                    }}
+                    style={{
+                      backgroundColor: '#f9a8d4',
+                      color: '#581c87',
+                      fontWeight: 'bold',
+                      padding: '10px 60px',
+                      borderRadius: '6px',
+                      fontSize: '18px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.3s ease',
+                      whiteSpace: 'nowrap'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f472b6'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f9a8d4'}
+                  >
+                    DOWNLOAD RULEBOOK
+                  </button>
                 </div>
 
                 {/* Card 3 - Robo Wars & Gaming */}
                 <div 
                   className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  onClick={() => setShowRoboWarsGaming(true)}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
                     backdropFilter: 'blur(15px)',
@@ -1498,6 +1528,55 @@ const EventsInfo: React.FC = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Robo Wars & Gaming Section */}
+          {showRoboWarsGaming && !showGaming && !showRoboGames && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                    {roboWarsGamingCards.map((card, index) => {
+                      const handleCardClick = () => {
+                        if (card.title === "Gaming") {
+                          setShowGaming(true);
+                        } else if (card.title === "Robo Games") {
+                          setShowRoboGames(true);
+                        }
+                      };
+                      return (
+                        <div 
+                          key={index} 
+                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          onClick={handleCardClick}
+                          style={{
+                            background: 'rgba(180, 150, 200, 0.35)',
+                            backdropFilter: 'blur(15px)',
+                            WebkitBackdropFilter: 'blur(15px)',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                            height: '280px',
+                            width: '100%',
+                            maxWidth: '280px'
+                          }}
+                        >
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                            <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                              {card.title}
+                            </h2>
+                            {card.subtitle && (
+                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                                {card.subtitle}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

@@ -235,6 +235,15 @@ body::-webkit-scrollbar {
   }
 }
 
+@keyframes counterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Animated Icon Component - Mobile First */
 .animated-icon-container {
   position: fixed;

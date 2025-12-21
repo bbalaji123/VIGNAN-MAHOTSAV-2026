@@ -4865,10 +4865,10 @@ Do you want to proceed with registration?`;
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
                                   <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">?? {event.date}</p>}
-                                  {event.venue && <p className="event-meta">?? {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">??? {event.category}</p>}
+                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
+                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
+                                  {event.prizePool && <p className="event-meta">🏆 {event.prizePool}</p>}
+                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
                                 </div>
                               </label>
                             ))
@@ -4891,7 +4891,7 @@ Do you want to proceed with registration?`;
                             userProfileData.gender || 'unknown'
                           );
                           const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `?${totalAmount}`;
+                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `₹${totalAmount}`;
                           return (
                             <div className="price-preview">
                               Total: {formattedAmount}
@@ -5113,11 +5113,11 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseUserIdPopup}>
           <div className="userid-popup-content" onClick={(e) => e.stopPropagation()}>
             <div className="userid-popup-header">
-              <h2>?? Registration Successful!</h2>
+              <h2>🎉 Registration Successful!</h2>
             </div>
             <div className="userid-popup-body">
               <div className="userid-display">
-                <div className="success-icon">?</div>
+                <div className="success-icon">✓</div>
                 <h3>Your Mahotsav ID</h3>
                 <div className="userid-box">
                   <span className="userid-text">{generatedUserId}</span>
@@ -5127,7 +5127,7 @@ Do you want to proceed with registration?`;
                   <span className="password-text">{generatedPassword}</span>
                 </div>
                 <div className="screenshot-note">
-                  <span className="screenshot-icon">??</span>
+                  <span className="screenshot-icon">💡</span>
                   <p>Please take a screenshot of this page to save your credentials!</p>
                 </div>
                 <p className="userid-instructions">

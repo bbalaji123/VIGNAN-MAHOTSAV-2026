@@ -784,7 +784,10 @@ const EventsInfo: React.FC = () => {
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
-                      window.open('https://saturnalia.in/rulebook', '_blank');
+                      const link = document.createElement('a');
+                      link.href = '/Mahostav Rules Book 2025.pdf';
+                      link.download = 'Mahostav Rules Book 2025.pdf';
+                      link.click();
                     }}
                     style={{
                       backgroundColor: '#f9a8d4',

@@ -81,6 +81,7 @@ const Dashboard: React.FC = () => {
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
   const [throwbackScrollProgress, setThrowbackScrollProgress] = useState(0);
   const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
+  const [selectedYear, setSelectedYear] = useState<'2023' | '2024' | '2025'>('2023');
   
   // Highlights carousel state
   const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
@@ -1159,7 +1160,7 @@ const Dashboard: React.FC = () => {
           });
         },
         {
-          threshold: 0.1, // Trigger when 10% of section is visible
+          threshold: 0.5, // Trigger when 50% of section is visible (half of the flower)
           rootMargin: '0px' // No margin offset
         }
       );
@@ -2659,7 +2660,7 @@ Do you want to proceed with registration?`;
         {/* Action Buttons - Register for events and login when not logged in */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#e48ab9] to-[#c96ba1] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-[#c96ba1] hover:to-[#522566] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#FFD700] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -4347,7 +4348,7 @@ Do you want to proceed with registration?`;
 
       {/* Throwback Section */}
       <section 
-        className={`dashboard-section throwback-section section-animate section-animate-right ${visibleSections.has('throwback') ? 'visible animate-in' : ''}`}
+        className="dashboard-section throwback-section"
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
         style={{
@@ -4385,7 +4386,7 @@ Do you want to proceed with registration?`;
           justifyContent: 'center',
           alignItems: 'center',
           gap: isThrowbackUnlocked ? 'clamp(60px, 12vw, 180px)' : '0',
-          transition: 'gap 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+          transition: 'gap 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
           padding: '0 clamp(20px, 5vw, 80px)',
           position: 'relative',
           maxHeight: 'calc(100vh - 200px)'
@@ -4402,11 +4403,11 @@ Do you want to proceed with registration?`;
             showPetalRotation={true}
             petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
             clipPath={isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)'}
-            clipPathTransition="clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+            clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
             style={{
               overflow: 'visible',
               transform: isThrowbackUnlocked ? 'translateX(-8vw)' : 'translateX(0)',
-              transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               flexShrink: 0,
               marginRight: isThrowbackUnlocked ? '0' : 'auto',
               marginLeft: isThrowbackUnlocked ? '0' : 'auto'
@@ -4426,31 +4427,123 @@ Do you want to proceed with registration?`;
               showPetalRotation={true}
               petalAnimation="none"
               clipPath="inset(0 0 0 50%)"
-              clipPathTransition="clip-path 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+              clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
               style={{
                 overflow: 'visible',
                 transform: 'translateX(8vw)',
-                transition: 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
                 flexShrink: 0
               }}
             />
           )}
 
-          {/* Center Glow Effect on Unlock */}
+          {/* Year buttons and photo card */}
           {isThrowbackUnlocked && (
             <div style={{
               position: 'absolute',
-              top: '50%',
+              top: '0',
               left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '2px',
-              height: '80%',
-              background: 'linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.8), rgba(255, 165, 0, 0.8), transparent)',
-              boxShadow: '0 0 40px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 165, 0, 0.6)',
-              animation: 'glowBeam 1s ease-out',
+              transform: 'translateX(-50%)',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              paddingTop: '40px',
+              gap: '30px',
               pointerEvents: 'none',
-              zIndex: 50
-            }} />
+              zIndex: 60
+            }}>
+              {/* Year buttons */}
+              <div style={{
+                display: 'flex',
+                gap: '20px',
+                pointerEvents: 'auto'
+              }}>
+                {(['2023', '2024', '2025'] as const).map(year => (
+                  <button 
+                    key={year} 
+                    onClick={() => setSelectedYear(year)}
+                    style={{
+                      padding: '12px 35px',
+                      borderRadius: '20px',
+                      background: selectedYear === year 
+                        ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
+                        : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
+                      border: 'none',
+                      color: 'white',
+                      fontSize: '1.2rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      boxShadow: selectedYear === year 
+                        ? '0 6px 20px rgba(0, 0, 0, 0.3)'
+                        : '0 4px 15px rgba(0, 0, 0, 0.2)',
+                      transition: 'all 0.3s ease',
+                      transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
+                    }}
+                  >
+                    {year}
+                  </button>
+                ))}
+              </div>
+
+              {/* Photo card */}
+              <div style={{
+                width: '300px',
+                height: '300px',
+                background: 'white',
+                borderRadius: '8px',
+                border: '12px solid #4a47a3',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                transition: 'all 0.4s ease'
+              }}>
+                {/* Photo area */}
+                <div style={{
+                  flex: 1,
+                  background: selectedYear === '2023' 
+                    ? 'linear-gradient(to bottom, #87CEEB 0%, #E8F4F8 50%, #90EE90 100%)'
+                    : selectedYear === '2024'
+                    ? 'linear-gradient(to bottom, #FFB6C1 0%, #FFC0CB 50%, #FFD700 100%)'
+                    : 'linear-gradient(to bottom, #B0E0E6 0%, #ADD8E6 50%, #87CEEB 100%)',
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'background 0.4s ease'
+                }}>
+                  {/* Cloud */}
+                  <div style={{
+                    width: '80px',
+                    height: '40px',
+                    background: 'white',
+                    borderRadius: '50px',
+                    position: 'absolute',
+                    top: '40px',
+                    right: '60px',
+                    boxShadow: 'inset 0 -5px 10px rgba(0, 0, 0, 0.05)'
+                  }} />
+                  
+                  {/* Hills */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    width: '100%',
+                    height: '40%',
+                    display: 'flex',
+                    alignItems: 'flex-end'
+                  }}>
+                    <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
+                      <path d="M0,120 Q75,40 150,80 T300,60 L300,120 Z" fill={selectedYear === '2023' ? '#78BE20' : selectedYear === '2024' ? '#90EE90' : '#4CAF50'} />
+                      <path d="M0,120 Q100,60 200,100 T300,90 L300,120 Z" fill={selectedYear === '2023' ? '#9ACD32' : selectedYear === '2024' ? '#A8E6A3' : '#66BB6A'} opacity="0.8" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
 
           {/* Lock Icon removed */}
@@ -5488,7 +5581,7 @@ Do you want to proceed with registration?`;
               gap: '20px',
               marginBottom: '20px'
             }}>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={{
+              <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" style={{
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
@@ -5503,7 +5596,7 @@ Do you want to proceed with registration?`;
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
               </a>
-              <a href="https://wa.me/919493033592" target="_blank" rel="noopener noreferrer" style={{
+              <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" style={{
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
@@ -5518,7 +5611,7 @@ Do you want to proceed with registration?`;
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{
+              <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" style={{
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',

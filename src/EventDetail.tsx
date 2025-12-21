@@ -940,7 +940,7 @@ const EventDetail: React.FC = () => {
             onClick={handleDownloadPDF}
             disabled={isDownloading}
           >
-            {isDownloading ? '⏳ Downloading...' : '📄 Download PDF'}
+            {isDownloading ? '⏳ Downloading...' : '📄 Download'}
           </button>
           
           <button 

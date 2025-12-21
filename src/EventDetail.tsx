@@ -40,6 +40,50 @@ const EventDetail: React.FC = () => {
 
   // Event data
   const eventDetailsData: { [key: string]: EventDetailData } = {
+    "Men's Athletics": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TRACK & FIELD (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "Everyone should report at least 30 mins before scheduled time.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+      ]
+    },
+    "Women's Athletics": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TRACK & FIELD (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "Everyone should report at least 30 mins before scheduled time.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+      ]
+    },
     "Chess": {
       title: "INDIVIDUAL EVENTS",
       subtitle: "CHESS (Men & Women)",
@@ -585,6 +629,96 @@ const EventDetail: React.FC = () => {
       },
       contacts: []
     },
+    "Singing Jodi": {
+      title: "MUSIC",
+      subtitle: "Singing Jodi",
+      rules: [
+        "This is a Jodi singing competition (Each performance must feature exactly two singers).",
+        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
+        "The maximum duration of the performance shall be 4 minutes.",
+        "The maximum time for Stage/ Instruments setting is 3 minutes",
+        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
+        "Judgment will be made on the qualities like, pitch, rhythm, coordination and general impression."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Classical Light Vocal Solo": {
+      title: "MUSIC",
+      subtitle: "Classical/Light Vocal Solo",
+      rules: [
+        "This is a solo singing competition for classical or light vocal music.",
+        "The participant can choose any classical or light music composition.",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "The maximum time for Stage/Instruments setting is 3 minutes.",
+        "The number of accompanists should not exceed two.",
+        "Judgment will be made on the qualities like pitch, rhythm, voice modulation, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Western Vocal Solo": {
+      title: "MUSIC",
+      subtitle: "Western Vocal Solo",
+      rules: [
+        "This is a solo singing competition for western vocal music.",
+        "The participant can choose any western song in any language.",
+        "The maximum duration of the performance shall be 4 minutes.",
+        "The maximum time for Stage/Instruments setting is 3 minutes.",
+        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
+        "Judgment will be made on the qualities like pitch, rhythm, voice quality, stage presence, and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Anthyakshari Duo": {
+      title: "MUSIC",
+      subtitle: "Anthyakshari Duo",
+      rules: [
+        "This is a duo singing competition in Anthyakshari format (Each team must have exactly two participants).",
+        "Participants will sing songs based on letters or themes provided by the coordinators.",
+        "The maximum time for each round shall be as decided by the coordinators.",
+        "Songs can be in any Indian language.",
+        "Film songs as well as non-film songs are allowed.",
+        "Judgment will be based on quickness, accuracy, voice quality, and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Instrumental Solo": {
+      title: "MUSIC",
+      subtitle: "Instrumental Solo",
+      rules: [
+        "This is a solo instrumental music competition.",
+        "Participants can play any instrument of their choice (Indian or Western).",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "The maximum time for Stage/Instruments setting is 3 minutes.",
+        "The number of accompanists should not exceed one.",
+        "Judgment will be made on the qualities like rhythm, melody, technique, and overall impression."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
     "Skit": {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Skit",
@@ -600,6 +734,22 @@ const EventDetail: React.FC = () => {
         first: "Rs. 8,000",
         second: "Rs. 5,000",
         third: "Rs. 4,000"
+      },
+      contacts: []
+    },
+    "Mime": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Mime",
+      rules: [
+        "Minimum 3 and Maximum of 8 participants are allowed to participate in a team.",
+        "Judgment will most likely be based on the qualities like idea, creativity of presentation, use of make-up, general impression.",
+        "Duration of performance shall be for maximum of 5 minutes.",
+        "Background music with no vocals is allowed."
+      ],
+      prizes: {
+        first: "Rs. 6,000",
+        second: "Rs. 4,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -624,6 +774,25 @@ const EventDetail: React.FC = () => {
       },
       contacts: []
     },
+    "Spot Dance - Jodi": {
+      title: "DANCE",
+      subtitle: "Spot Dance - Jodi",
+      rules: [
+        "This is a dual spot dance competition and must feature exactly two dancers.",
+        "The duo can be a Boy/Boy (BB), Boy/Girl (BG), or Girl/Girl (GG) pairing.",
+        "Participants must dance to the music provided on the spot by the coordinators.",
+        "The genre and song will be unknown to participants before the performance.",
+        "The maximum duration of the performance will be determined by the coordinators.",
+        "Participants should report at least 30 minutes before the scheduled time.",
+        "Judgment will be based on spontaneity, rhythm, coordination, and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
     "Group Dance": {
       title: "DANCE",
       subtitle: "Group Dance Competition",
@@ -644,23 +813,371 @@ const EventDetail: React.FC = () => {
       },
       contacts: []
     },
-    "Short Film Making": {
+    "Mono Action": {
       title: "THEATRE & CINEMATOGRAPHY",
-      subtitle: "Short Film Making",
+      subtitle: "Mono Action",
       rules: [
-        "Submission Method: Participants must submit their short film using the Google Drive or YouTube link provided in the registration form.",
-        "Deadline: The last date for submitting the short film is January 25th, 2026 by 9:00 AM.",
-        "Modification: Once submitted, no further modifications to the film are allowed.",
-        "Eligibility: Only short films released between March 2025 to January 2026 are eligible for the competition.",
-        "Duration: The short film duration should not exceed 15 minutes, including titles and end credits.",
-        "Theme: The short film may address any theme, including social issues, fiction, love, drama, or thriller.",
-        "Format: The submission must be a visually engaging video, such as a vlog, documentary, or short story that incorporates camera work.",
-        "Judging Criteria: The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation."
+        "This is a solo acting performance where one participant portrays multiple characters.",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "Props and background music are allowed but should be minimal.",
+        "The performance should showcase the participant's ability to switch between different characters seamlessly.",
+        "The use of make-up and costume changes is allowed within the time limit.",
+        "Judgment will be based on acting skills, character portrayal, voice modulation, expression, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 20,000",
-        second: "Rs. 15,000",
-        third: "Rs. 12,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Spot Ad Making": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "On the Spot Ad Making",
+      rules: [
+        "Teams should consist of a minimum of 3 and a maximum of 6 participants.",
+        "The topic/product for the advertisement will be given on the spot.",
+        "Participants will be given 30 minutes for preparation.",
+        "The maximum duration of the advertisement performance shall be 3 minutes.",
+        "Props are allowed, but teams must arrange them within the preparation time.",
+        "The advertisement should be creative, engaging, and effectively promote the given product/topic.",
+        "Judgment will be based on creativity, presentation, teamwork, message delivery, and entertainment value."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 4,000",
+        third: "Rs. 3,000"
+      },
+      contacts: []
+    },
+    "Dialogue Dhamaka": {
+      title: "THEATRE & CINEMATOGRAPHY",
+      subtitle: "Dialogue Dhamaka (Hindi)",
+      rules: [
+        "This is a solo dialogue delivery competition in Hindi language.",
+        "Participants can choose dialogues from movies, plays, or their own creations.",
+        "The maximum duration of the performance shall be 3 minutes.",
+        "Props and background music are allowed but should complement the dialogue delivery.",
+        "The performance should showcase powerful delivery, emotion, and expression.",
+        "Judgment will be based on voice modulation, expression, dialogue selection, impact, and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Master Orator": {
+      title: "LITERATURE",
+      subtitle: "Master Orator",
+      rules: [
+        "This is a solo public speaking competition.",
+        "Participants will be given a topic on the spot.",
+        "Preparation time: 5 minutes.",
+        "The maximum duration of the speech shall be 3-5 minutes.",
+        "Participants can speak in English, Hindi, or Telugu.",
+        "The speech should be well-structured with introduction, body, and conclusion.",
+        "Judgment will be based on content, delivery, confidence, language proficiency, and overall impact."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "On Spot Creative Content Writing": {
+      title: "LITERATURE",
+      subtitle: "Spot Creative Writing",
+      rules: [
+        "This is an individual creative writing competition.",
+        "Topic will be given on the spot.",
+        "Participants can write in English, Hindi, or Telugu.",
+        "Duration: 1 hour for writing.",
+        "The content can be in the form of a story, essay, poem, or article.",
+        "Handwritten entries only. Pen and paper will be provided.",
+        "Judgment will be based on creativity, language, expression, originality, and relevance to the topic."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Telugu Vyaasa Rachana": {
+      title: "LITERATURE",
+      subtitle: "Telugu Vyaasa Rachana",
+      rules: [
+        "This is a Telugu essay writing competition.",
+        "Topic will be given on the spot.",
+        "Duration: 1 hour for writing.",
+        "Handwritten entries only. Pen and paper will be provided.",
+        "The essay should be written only in Telugu language.",
+        "Judgment will be based on content quality, language proficiency, expression, and relevance to the topic."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Shayari - Hindi": {
+      title: "LITERATURE",
+      subtitle: "Shayari - Hindi",
+      rules: [
+        "This is a Hindi Shayari recitation competition.",
+        "Participants can present their own creation or famous Shayari.",
+        "The maximum duration of the performance shall be 3 minutes.",
+        "The Shayari must be in Hindi language only.",
+        "Participants should focus on emotion, expression, and delivery.",
+        "Judgment will be based on content, voice modulation, expression, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "JAM": {
+      title: "LITERATURE",
+      subtitle: "JAM (Just A Minute)",
+      rules: [
+        "This is an impromptu speaking competition.",
+        "Participants will be given a topic and must speak continuously for one minute.",
+        "Repetition, hesitation, and deviation from the topic will lead to point deduction.",
+        "Participants can speak in English or Hindi.",
+        "Multiple rounds will be conducted to determine the winner.",
+        "Judgment will be based on fluency, presence of mind, vocabulary, and adherence to rules."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Dumb Charades": {
+      title: "LITERATURE",
+      subtitle: "Dumb Charades",
+      rules: [
+        "This is a team event with 2 participants per team.",
+        "One participant will act out movie names/phrases without speaking while the other guesses.",
+        "Movie names can be from any language (Hindi, Telugu, English, etc.).",
+        "Time limit for each round will be decided by coordinators.",
+        "Teams will compete in multiple rounds.",
+        "Judgment will be based on correct guesses within the time limit."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Quiz": {
+      title: "LITERATURE",
+      subtitle: "Quiz Wiz",
+      rules: [
+        "This is a team quiz competition with 3 participants per team.",
+        "Questions will cover various topics including general knowledge, current affairs, science, sports, entertainment, etc.",
+        "Multiple rounds will be conducted (written, buzzer, rapid fire, etc.).",
+        "Teams should maintain discipline and follow quiz etiquette.",
+        "Umpire's decision will be final.",
+        "Judgment will be based on correct answers and speed."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Word Master": {
+      title: "LITERATURE",
+      subtitle: "Word Master",
+      rules: [
+        "This is an individual word game competition.",
+        "Participants will compete in word-building, vocabulary, and language skills challenges.",
+        "Rounds may include word chain, scrabble-style games, crosswords, or similar activities.",
+        "Time limits will be specified for each round.",
+        "Participants should have strong vocabulary and quick thinking.",
+        "Judgment will be based on correct words, speed, and creativity."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Story telling": {
+      title: "LITERATURE",
+      subtitle: "Story Telling",
+      rules: [
+        "This is a solo storytelling competition.",
+        "Participants can narrate a story of their choice (folk tale, moral story, personal experience, or fiction).",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "Stories can be narrated in English, Hindi, or Telugu.",
+        "Use of props and expressions is encouraged.",
+        "Judgment will be based on storytelling skills, voice modulation, expression, engagement, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Theme Painting": {
+      title: "VISUAL ARTS",
+      subtitle: "Theme Painting",
+      rules: [
+        "This is an individual painting competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Canvas/drawing sheet will be provided.",
+        "Participants must bring their own painting materials (watercolors, acrylics, oil paints, brushes, etc.).",
+        "The painting should be based on the given theme.",
+        "Judgment will be based on creativity, color usage, theme interpretation, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Clay Modelling": {
+      title: "VISUAL ARTS",
+      subtitle: "Clay Modelling",
+      rules: [
+        "This is an individual clay modeling competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Clay will be provided by the organizers.",
+        "Participants can bring their own modeling tools.",
+        "The model should be based on the given theme.",
+        "Judgment will be based on creativity, skill, theme interpretation, and finishing."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Rangoli": {
+      title: "VISUAL ARTS",
+      subtitle: "Rangoli",
+      rules: [
+        "This is a team event with 2 participants per team.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Space will be provided for creating the rangoli.",
+        "Teams must bring their own rangoli colors, flowers, or materials.",
+        "The rangoli should be based on the given theme.",
+        "Judgment will be based on creativity, color combination, design, and neatness."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Mehandi": {
+      title: "VISUAL ARTS",
+      subtitle: "Mehandi (Henna Art)",
+      rules: [
+        "This is a team event with 2 participants (one artist and one model).",
+        "Duration: 1.5 hours.",
+        "Mehandi cones and other materials must be brought by the participants.",
+        "The design should be creative and intricate.",
+        "Judgment will be based on design complexity, neatness, creativity, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Collage": {
+      title: "VISUAL ARTS",
+      subtitle: "Collage",
+      rules: [
+        "This is an individual collage making competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 1.5 hours.",
+        "Chart paper will be provided.",
+        "Participants must bring their own materials (magazines, newspapers, colors, glue, scissors, etc.).",
+        "The collage should be based on the given theme.",
+        "Judgment will be based on creativity, theme interpretation, arrangement, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Face Painting": {
+      title: "VISUAL ARTS",
+      subtitle: "Face Painting",
+      rules: [
+        "This is a team event with 2 participants (one artist and one model).",
+        "Theme will be announced on the spot.",
+        "Duration: 1 hour.",
+        "Participants must bring their own face painting colors and brushes.",
+        "Only face painting is allowed (no body painting).",
+        "The design should be based on the given theme.",
+        "Judgment will be based on creativity, skill, theme interpretation, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Pencil Sketching": {
+      title: "VISUAL ARTS",
+      subtitle: "Pencil Sketching",
+      rules: [
+        "This is an individual pencil sketching competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 1.5 hours.",
+        "Drawing sheet will be provided.",
+        "Participants must bring their own pencils, erasers, and shading tools.",
+        "Only pencil sketching is allowed (no colors).",
+        "Judgment will be based on creativity, shading, proportion, theme interpretation, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: []
+    },
+    "Mandala Art": {
+      title: "VISUAL ARTS",
+      subtitle: "Mandala Art",
+      rules: [
+        "This is an individual mandala art competition.",
+        "Duration: 2 hours.",
+        "Drawing sheet will be provided.",
+        "Participants must bring their own materials (pens, pencils, colors, etc.).",
+        "The mandala design should be intricate and symmetric.",
+        "Judgment will be based on complexity, symmetry, creativity, neatness, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -684,6 +1201,317 @@ const EventDetail: React.FC = () => {
         { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
         { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
       ]
+    },
+    "Craftvilla": {
+      title: "FASHION COMPETITIONS",
+      subtitle: "Craft Villa (Accessory Design)",
+      rules: [
+        "This is an individual or team event (maximum 2 participants).",
+        "Participants need to create fashion accessories using crafts.",
+        "Duration: 2 hours.",
+        "Participants must bring their own materials.",
+        "Accessories can include jewelry, bags, headbands, belts, or any wearable items.",
+        "The design should be creative, wearable, and aesthetically appealing.",
+        "Judgment will be based on creativity, craftsmanship, design, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Texart": {
+      title: "FASHION COMPETITIONS",
+      subtitle: "Texart (Fashion Sketching)",
+      rules: [
+        "This is an individual fashion sketching competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Drawing sheet will be provided.",
+        "Participants must bring their own sketching and coloring materials.",
+        "The sketch should showcase fashion design concepts based on the theme.",
+        "Judgment will be based on creativity, design concept, sketching skills, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
+      },
+      contacts: []
+    },
+    "T-Shirt Designing": {
+      title: "FASHION COMPETITIONS",
+      subtitle: "T-Shirt Designing",
+      rules: [
+        "This is an individual T-shirt designing competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Plain T-shirt will be provided.",
+        "Participants must bring their own fabric colors, brushes, and designing materials.",
+        "The design should be creative and based on the given theme.",
+        "Judgment will be based on creativity, theme interpretation, color usage, and overall design."
+      ],
+      prizes: {
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
+      },
+      contacts: []
+    },
+    "Mahotsav Got Talent": {
+      title: "SPOT LIGHT",
+      subtitle: "Mahotsav Got Talent",
+      rules: [
+        "This is an open talent show where participants can showcase any unique talent.",
+        "The performance can be solo or group (maximum 5 participants).",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "Participants can perform magic, mimicry, beatboxing, stand-up comedy, unique musical performances, or any other special talent.",
+        "Participants must bring their own props if required.",
+        "Judgment will be based on uniqueness, skill level, entertainment value, and overall performance."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Mr. and Ms. Mahotsav": {
+      title: "SPOT LIGHT",
+      subtitle: "Mr. and Ms. Mahotsav",
+      rules: [
+        "This is an individual personality competition for male and female categories.",
+        "Participants will go through multiple rounds including introduction, talent round, question-answer, and ramp walk.",
+        "Participants should come in formal/ethnic attire for introduction round.",
+        "Talent round: Showcase any talent (singing, dancing, mimicry, etc.) - 2 minutes max.",
+        "Participants should be confident, well-spoken, and presentable.",
+        "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000",
+        third: "Rs. 7,000"
+      },
+      contacts: []
+    },
+    "Online Photography": {
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
+      subtitle: "Theme Photography (Online)",
+      rules: [
+        "This is an online photography competition.",
+        "Theme will be announced on the event page.",
+        "Participants must submit their photographs via Google Form link provided.",
+        "Submission deadline will be announced.",
+        "Maximum 3 photographs can be submitted per participant.",
+        "Photographs should be original and clicked by the participant only.",
+        "Basic editing is allowed, but heavy manipulation is not permitted.",
+        "Judgment will be based on creativity, composition, theme interpretation, and technical quality."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Digital Poster Making": {
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
+      subtitle: "Digital Poster Making",
+      rules: [
+        "This is an individual digital poster making competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Participants must bring their own laptops with design software installed.",
+        "The poster should be created digitally using tools like Photoshop, Illustrator, Canva, or any design software.",
+        "Final submission should be in JPG/PNG format with minimum 300 DPI resolution.",
+        "Judgment will be based on creativity, design, theme interpretation, and visual impact."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Mahotsav Digital Chronicle": {
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
+      subtitle: "Mahotsav Digital Chronicle",
+      rules: [
+        "This is a team event (2-3 participants) to document the Mahotsav event.",
+        "Teams will capture the essence of Mahotsav through photos, videos, and creative content.",
+        "The chronicle can be in the form of a digital magazine, blog, vlog, or social media content series.",
+        "Teams must submit their final chronicle by the end of the event.",
+        "Content should be original and captured during the Mahotsav event.",
+        "Judgment will be based on creativity, coverage, storytelling, and overall presentation."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Reel Making": {
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
+      subtitle: "Reel Making",
+      rules: [
+        "This is an individual or duo reel making competition.",
+        "Theme will be announced on the spot.",
+        "Duration: Maximum 60 seconds per reel.",
+        "Participants must create and edit the reel during the event (2 hours editing time).",
+        "The reel should be creative, engaging, and based on the given theme.",
+        "Participants must bring their own phones/cameras for shooting and editing.",
+        "Judgment will be based on creativity, editing skills, theme interpretation, and engagement factor."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: []
+    },
+    "Valorant": {
+      title: "GAMING",
+      subtitle: "Valorant (PC)",
+      rules: [
+        "This is a team-based tactical shooter game competition.",
+        "Team size: 5 players per team.",
+        "Tournament format will be announced by coordinators (knockout/league).",
+        "All matches will be played on the provided PCs.",
+        "Players must report 30 minutes before their scheduled match.",
+        "Standard Valorant competitive rules apply.",
+        "Use of any cheats, hacks, or exploits will lead to immediate disqualification.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000",
+        third: "Rs. 7,000"
+      },
+      contacts: []
+    },
+    "E-Football": {
+      title: "GAMING",
+      subtitle: "E-Football (PC)",
+      rules: [
+        "This is an individual e-football gaming competition.",
+        "Game: EA Sports FC or eFootball (will be specified).",
+        "Tournament format: Knockout basis.",
+        "All matches will be played on the provided PCs.",
+        "Match duration: Standard game time settings.",
+        "Players must report 30 minutes before their scheduled match.",
+        "No external controllers allowed unless specified by coordinators.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Counter Strike": {
+      title: "GAMING",
+      subtitle: "Counter Strike (PC)",
+      rules: [
+        "This is a team-based first-person shooter game competition.",
+        "Team size: 5 players per team.",
+        "Game: Counter-Strike 2 or CS:GO (will be specified).",
+        "Tournament format will be announced by coordinators.",
+        "All matches will be played on the provided PCs.",
+        "Players must report 30 minutes before their scheduled match.",
+        "Standard CS competitive rules apply.",
+        "Use of any cheats, hacks, or exploits will lead to immediate disqualification.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 15,000",
+        second: "Rs. 10,000",
+        third: "Rs. 7,000"
+      },
+      contacts: []
+    },
+    "Smash Karts": {
+      title: "GAMING",
+      subtitle: "Smash Karts (PC)",
+      rules: [
+        "This is an individual kart racing game competition.",
+        "Tournament format: Multiple rounds with point system.",
+        "All matches will be played on the provided PCs.",
+        "Players must report 30 minutes before their scheduled match.",
+        "Standard game rules apply.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 8,000",
+        second: "Rs. 5,000",
+        third: "Rs. 3,000"
+      },
+      contacts: []
+    },
+    "Line Follower Robot": {
+      title: "ROBO WARS & GAMING",
+      subtitle: "Line Follower Robot",
+      rules: [
+        "This is a team event (maximum 4 members per team).",
+        "Robots must follow a black line on a white surface autonomously.",
+        "The robot that completes the track in minimum time wins.",
+        "Robot specifications and track details will be provided before the event.",
+        "Teams must bring their own robots.",
+        "The robot should be completely autonomous (no manual control during the run).",
+        "Multiple rounds may be conducted.",
+        "Any robot causing damage to the track will be disqualified.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Bot Wrestling": {
+      title: "ROBO WARS & GAMING",
+      subtitle: "Bot Wrestling",
+      rules: [
+        "This is a team event (maximum 4 members per team).",
+        "Two robots compete in a wrestling arena to push the opponent out or immobilize them.",
+        "Robot weight and dimension specifications will be provided before the event.",
+        "Teams must bring their own robots.",
+        "Both wired and wireless robots are allowed.",
+        "Use of flame-throwers, liquids, or hazardous materials is strictly prohibited.",
+        "Tournament format: Knockout basis.",
+        "Match duration will be specified by coordinators.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 12,000",
+        second: "Rs. 8,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
+    },
+    "Robo Races": {
+      title: "ROBO WARS & GAMING",
+      subtitle: "Robo Races",
+      rules: [
+        "This is a team event (maximum 4 members per team).",
+        "Robots must complete a racing track with obstacles in minimum time.",
+        "Robot specifications and track details will be provided before the event.",
+        "Teams must bring their own robots.",
+        "Both wired and wireless robots are allowed.",
+        "The robot can be manually controlled or autonomous.",
+        "Multiple rounds may be conducted.",
+        "Any robot causing damage to the track will be disqualified.",
+        "Coordinator's decision will be final."
+      ],
+      prizes: {
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
+      },
+      contacts: []
     }
   };
 

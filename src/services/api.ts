@@ -529,3 +529,33 @@ export const checkSavedEvents = async (userId: string, eventIds: string[]): Prom
     };
   }
 };
+
+// Get user profile data
+export const getUserProfile = async (userId: string): Promise<ApiResponse & { data?: any }> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/user/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: 'Failed to fetch user profile',
+      error: error.message,
+    };
+  }
+};
+
+// Get user's registered events
+export const getUserRegisteredEvents = async (userId: string): Promise<EventsResponse & { data?: any }> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: 'Failed to fetch registered events',
+      error: error.message,
+    };
+  }
+};

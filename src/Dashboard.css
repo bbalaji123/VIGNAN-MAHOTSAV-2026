@@ -8168,90 +8168,95 @@ html, body {
 
 .profile-header-section {
   text-align: center;
-  padding: 20px 0;
+  padding: 15px 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .profile-avatar {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, var(--mahotsav-yellow) 0%, #ffed4a 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #522566;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
   box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
 }
 
 .profile-header-section h3 {
   color: var(--mahotsav-yellow);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .profile-info-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .profile-info-section h4 {
   color: var(--mahotsav-yellow);
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .profile-info-grid {
   display: grid;
-  gap: 15px;
+  gap: 12px;
 }
 
 .profile-info-item {
   background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
+  padding: 12px 15px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-left: 4px solid var(--mahotsav-yellow);
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .info-label {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
+  min-width: 120px;
 }
 
 .info-value {
   font-weight: 700;
   color: #fff;
   text-align: right;
+  word-break: break-word;
+  flex: 1;
 }
 
 .profile-stats-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .profile-stats-section h4 {
   color: var(--mahotsav-yellow);
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 12px;
 }
 
 .stat-box {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   text-align: center;
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -8265,7 +8270,7 @@ html, body {
 }
 
 .stat-box .stat-number {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--mahotsav-yellow);
   margin-bottom: 5px;
@@ -8279,12 +8284,14 @@ html, body {
 .profile-actions {
   display: flex;
   gap: 15px;
-  margin-top: 30px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .profile-action-btn {
   flex: 1;
-  padding: 15px;
+  padding: 12px 15px;
   border: none;
   border-radius: 12px;
   font-size: 1rem;
@@ -8313,6 +8320,163 @@ html, body {
   background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Profile Registered Events Section */
+.profile-registered-events-section {
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.profile-registered-events-section h4 {
+  color: var(--mahotsav-yellow);
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.registered-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.registered-event-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 4px solid var(--mahotsav-pink-1);
+  transition: all 0.3s ease;
+}
+
+.registered-event-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.event-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.event-item-header h5 {
+  color: var(--mahotsav-yellow);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.event-type-badge {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: white;
+  text-transform: capitalize;
+}
+
+.event-item-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.event-item-details .event-meta {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.no-events-registered {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.no-events-registered p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.browse-events-btn {
+  background: linear-gradient(135deg, var(--mahotsav-pink-1), var(--mahotsav-pink-2));
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.browse-events-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(228, 138, 185, 0.4);
+}
+
+.loading-profile {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.profile-modal-expanded {
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-modal-expanded .login-modal-body {
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+  padding: 20px 38px 36px;
+}
+
+/* Scrollbar for profile modal body */
+.profile-modal-expanded .login-modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-modal-expanded .login-modal-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.profile-modal-expanded .login-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.5);
+  border-radius: 4px;
+}
+
+.profile-modal-expanded .login-modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.7);
+}
+
+/* Scrollbar for registered events section */
+.profile-registered-events-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.profile-registered-events-section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.profile-registered-events-section::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.5);
+  border-radius: 3px;
+}
+
+.profile-registered-events-section::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.7);
 }
 
 /* Additional Utility Classes */

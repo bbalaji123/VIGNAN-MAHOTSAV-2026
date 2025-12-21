@@ -269,6 +269,30 @@ router.get('/registration/:id', async (req, res) => {
   }
 });
 
+// Get registration by userId
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const registration = await Registration.findOne({ userId: req.params.userId }).select('-password');
+    if (!registration) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User not found' 
+      });
+    }
+    res.status(200).json({
+      success: true,
+      data: registration
+    });
+  } catch (error) {
+    console.error('Fetch error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching user',
+      error: error.message 
+    });
+  }
+});
+
 // Login endpoint
 router.post('/login', async (req, res) => {
   try {

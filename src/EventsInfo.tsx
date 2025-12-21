@@ -253,44 +253,87 @@ const EventsInfo: React.FC = () => {
       
       // Cultural events - Theatre
       "Skit": "Skit",
+      "Skit (8 no.)": "Skit",
       "Mime": "Mime",
-      "Short Film Making": "Short Film Making",
+      "Mime (6 no.)": "Mime",
       "Mono Action": "Mono Action",
       "Spot Ad Making": "Spot Ad Making",
+      "On the Spot Ad making": "Spot Ad Making",
+      "Dialogue Dhamakha": "Dialogue Dhamaka",
       
       // Cultural events - Literature
       "Shayari (Hindi)": "Shayari - Hindi",
+      "Shayari – Hindi": "Shayari - Hindi",
       "On Spot Creative Content Writing": "On Spot Creative Content Writing",
+      "Spot Creative writing": "On Spot Creative Content Writing",
       "Telugu Vyasa Rachana": "Telugu Vyaasa Rachana",
+      "Telugu Vyaasa rachana": "Telugu Vyaasa Rachana",
       "JAM": "JAM",
+      "Impromptu (JAM)": "JAM",
       "Dumb Charades": "Dumb Charades",
+      "Dumb charades (2 no.)": "Dumb Charades",
       "Quiz": "Quiz",
+      "Quiz wiz (3 no.)": "Quiz",
       "Word Master": "Word Master",
       "Master Orator": "Master Orator",
+      "Story telling": "Story telling",
       "Dialogue Dhamaka (HINDI)": "Dialogue Dhamaka",
       
       // Cultural events - Visual Arts
       "Rangoli": "Rangoli",
+      "Rangoli (2 no.)": "Rangoli",
       "Clay Modelling": "Clay Modelling",
+      "Clay modelling": "Clay Modelling",
       "Collage": "Collage",
       "Mandala Art": "Mandala Art",
+      "Mandala": "Mandala Art",
       "Face Painting": "Face Painting",
       "Pencil Sketching": "Pencil Sketching",
       "Theme Painting": "Theme Painting",
       "Texart": "Texart",
-      "Craftvilla": "Craftvilla",
+      "Mehandi": "Mehandi",
       
       // Cultural events - Fashion Design
       "Haute Couture": "Haute Couture",
+      "Haute Couture - Theme Ramp walk (12 no.)": "Haute Couture",
       "T-Shirt Designing": "T-Shirt Designing",
-      "Mehandi": "Mehandi",
+      "T-Shirt designing": "T-Shirt Designing",
+      "Texart (Fashion sketching)": "Texart",
+      "Craftvilla": "Craftvilla",
+      "Craft villa ( Accessory design)": "Craftvilla",
       
       // Cultural events - Spot Light
       "Mahotsav Got Talent": "Mahotsav Got Talent",
       "Mr. and Ms. Mahotsav": "Mr. and Ms. Mahotsav",
+      "Mr. Mahotsav": "Mr. and Ms. Mahotsav",
+      "Ms. Mahotsav": "Mr. and Ms. Mahotsav",
       
       // Cultural events - Digital Storytelling
-      "Online Photography": "Online Photography"
+      "Short Film Making": "Short Film Making",
+      "Short film": "Short Film Making",
+      "Online Photography": "Online Photography",
+      "Theme Photography (Online)": "Online Photography",
+      "Digital Poster Making": "Digital Poster Making",
+      "Digital Poster making": "Digital Poster Making",
+      "Mahotsav Digital Chronicle": "Mahotsav Digital Chronicle",
+      "Reel Making": "Reel Making",
+      
+      // Gaming events
+      "Valorant": "Valorant",
+      "Valorant (PC)": "Valorant",
+      "E-Football": "E-Football",
+      "E- Football (PC)": "E-Football",
+      "Counter Strike": "Counter Strike",
+      "Counter Strike (PC)": "Counter Strike",
+      "Smash Karts": "Smash Karts",
+      "Smash Karts (PC)": "Smash Karts",
+      
+      // Robo Wars events
+      "Line Follower Robot": "Line Follower Robot",
+      "Line follower robot": "Line Follower Robot",
+      "Bot Wrestling": "Bot Wrestling",
+      "Robo Races": "Robo Races",
+      "Robo races": "Robo Races"
     };
     
     let eventName = eventTitle;
@@ -317,6 +360,7 @@ const EventsInfo: React.FC = () => {
     else if (showGaming) fromSection = 'gaming';
     else if (showRoboGames) fromSection = 'roboGames';
     else if (showSpotLight) fromSection = 'spotLight';
+    else if (showRoboWarsGaming) fromSection = 'roboWarsGaming';
     else if (showParaSports) fromSection = 'paraSports';
     
     console.log('Navigating to event:', eventName, 'from section:', fromSection);
@@ -403,7 +447,7 @@ const EventsInfo: React.FC = () => {
         }
       }
       // Handle cultural sections
-      else if (['dance', 'music', 'theatre', 'literature', 'visualArts', 'fashionDesign', 'digitalStorytelling', 'gaming', 'roboGames', 'spotLight'].includes(section)) {
+      else if (['dance', 'music', 'theatre', 'literature', 'visualArts', 'fashionDesign', 'digitalStorytelling', 'spotLight'].includes(section)) {
         setShowCulturals(true);
         
         switch (section) {
@@ -428,15 +472,22 @@ const EventsInfo: React.FC = () => {
           case 'digitalStorytelling':
             setShowDigitalStorytelling(true);
             break;
-          case 'gaming':
-            setShowGaming(true);
-            break;
-          case 'roboGames':
-            setShowRoboGames(true);
-            break;
           case 'spotLight':
             setShowSpotLight(true);
             break;
+        }
+      }
+      // Handle robo wars & gaming sections
+      else if (['gaming', 'roboGames', 'roboWarsGaming'].includes(section)) {
+        if (section === 'roboWarsGaming') {
+          setShowRoboWarsGaming(true);
+        } else {
+          setShowRoboWarsGaming(true);
+          if (section === 'gaming') {
+            setShowGaming(true);
+          } else if (section === 'roboGames') {
+            setShowRoboGames(true);
+          }
         }
       }
       // Handle para sports section

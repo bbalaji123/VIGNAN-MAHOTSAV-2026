@@ -7,7 +7,7 @@ import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserProfile, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -157,6 +157,28 @@ const Dashboard: React.FC = () => {
 
   const eventDetailsData = {
     "Men's Athletics": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TRACK & FIELD (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "Everyone should report at least 30 mins before scheduled time.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
+        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
+        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+      ]
+    },
+    "Women's Athletics": {
       title: "INDIVIDUAL EVENTS",
       subtitle: "TRACK & FIELD (Men & Women)",
       rules: [
@@ -790,6 +812,8 @@ const Dashboard: React.FC = () => {
   const [paraSportsSelected, setParaSportsSelected] = useState(false);
   const [regularEventsSelected, setRegularEventsSelected] = useState(false);
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
+  const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -2350,6 +2374,32 @@ Do you want to proceed with registration?`;
     setShowProfileModal(false);
   };
 
+  const handleOpenProfile = async () => {
+    if (!userProfileData.userId) {
+      return;
+    }
+    
+    setShowProfileModal(true);
+    setIsLoadingProfile(true);
+    
+    try {
+      // Fetch user's registered events
+      const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
+      console.log('📊 Registered events result:', registrationsResult);
+      
+      if (registrationsResult.success && registrationsResult.data) {
+        setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
+      } else {
+        setUserRegisteredEvents([]);
+      }
+    } catch (error) {
+      console.error('Error fetching profile data:', error);
+      setUserRegisteredEvents([]);
+    } finally {
+      setIsLoadingProfile(false);
+    }
+  };
+
   const handleCloseEventChecklist = () => {
     setShowEventChecklistModal(false);
   };
@@ -2570,8 +2620,8 @@ Do you want to proceed with registration?`;
         </>
       )}
 
-      {/* Top-Right Vignan Logo - Only show when menu is closed */}
-      {!showPageMenu && (
+      {/* Top-Right Vignan Logo - Only show on main dashboard (hide when menu, modals, or submodals are open) */}
+      {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
           <img 
             src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
@@ -2802,7 +2852,7 @@ Do you want to proceed with registration?`;
               {/* PROFILE */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={async (e) => { e.preventDefault(); if (userProfileData.userId) { await fetchUserSavedEvents(userProfileData.userId); } setShowMyEventsModal(true); setShowPageMenu(false); }}
+                onClick={(e) => { e.preventDefault(); setActiveSubModal('PROFILE'); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -4385,57 +4435,81 @@ Do you want to proceed with registration?`;
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: isThrowbackUnlocked ? 'clamp(60px, 12vw, 180px)' : '0',
-          transition: 'gap 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-          padding: '0 clamp(20px, 5vw, 80px)',
           position: 'relative',
-          maxHeight: 'calc(100vh - 200px)'
+          maxHeight: 'calc(100vh - 200px)',
+          padding: '0'
         }}>
-          {/* Left Half (Full flower when locked) */}
-          <FlowerComponent 
-            size="clamp(200px, 35vw, 450px)"
-            sunSize="45%"
-            moonSize="39.5%"
-            sunTop="28%"
-            sunLeft="28%"
-            moonTop="30.8%"
-            moonLeft="30.8%"
-            showPetalRotation={true}
-            petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
-            clipPath={isThrowbackUnlocked ? 'inset(0 50% 0 0)' : 'inset(0 0 0 0)'}
-            clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-            style={{
-              overflow: 'visible',
-              transform: isThrowbackUnlocked ? 'translateX(-8vw)' : 'translateX(0)',
+          {/* Container for both flower halves */}
+          <div style={{
+            position: 'relative',
+            width: 'clamp(200px, 35vw, 450px)',
+            height: 'clamp(200px, 35vw, 450px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            {/* Left Half */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: isThrowbackUnlocked 
+                ? 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)' 
+                : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-              flexShrink: 0,
-              marginRight: isThrowbackUnlocked ? '0' : 'auto',
-              marginLeft: isThrowbackUnlocked ? '0' : 'auto'
-            }}
-          />
+              width: 'clamp(200px, 35vw, 450px)',
+              height: 'clamp(200px, 35vw, 450px)',
+              overflow: 'visible'
+            }}>
+              <FlowerComponent 
+                size="clamp(200px, 35vw, 450px)"
+                sunSize="45%"
+                moonSize="39.5%"
+                sunTop="28%"
+                sunLeft="28%"
+                moonTop="30.8%"
+                moonLeft="30.8%"
+                showPetalRotation={true}
+                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                clipPath="inset(0 50% 0 0)"
+                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                style={{
+                  overflow: 'visible'
+                }}
+              />
+            </div>
 
-          {/* Right Half */}
-          {isThrowbackUnlocked && (
-            <FlowerComponent 
-              size="clamp(200px, 35vw, 450px)"
-              sunSize="45%"
-              moonSize="39.5%"
-              sunTop="28%"
-              sunLeft="28%"
-              moonTop="30.8%"
-              moonLeft="30.8%"
-              showPetalRotation={true}
-              petalAnimation="none"
-              clipPath="inset(0 0 0 50%)"
-              clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-              style={{
-                overflow: 'visible',
-                transform: 'translateX(8vw)',
-                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-                flexShrink: 0
-              }}
-            />
-          )}
+            {/* Right Half */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: isThrowbackUnlocked 
+                ? 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)' 
+                : 'translate(-50%, -50%)',
+              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
+              width: 'clamp(200px, 35vw, 450px)',
+              height: 'clamp(200px, 35vw, 450px)',
+              overflow: 'visible'
+            }}>
+              <FlowerComponent 
+                size="clamp(200px, 35vw, 450px)"
+                sunSize="45%"
+                moonSize="39.5%"
+                sunTop="28%"
+                sunLeft="28%"
+                moonTop="30.8%"
+                moonLeft="30.8%"
+                showPetalRotation={true}
+                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                clipPath="inset(0 0 0 50%)"
+                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                style={{
+                  overflow: 'visible'
+                }}
+              />
+            </div>
+          </div>
 
           {/* Year buttons and photo card */}
           {isThrowbackUnlocked && (
@@ -5012,13 +5086,13 @@ Do you want to proceed with registration?`;
               
               {activeSubModal === 'PROFILE' && (
                 <div className="sub-cards-grid">
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={handleOpenProfile}>
                     <h3>VIEW PROFILE</h3>
                   </div>
                   <div className="sub-card">
                     <h3>EDIT PROFILE</h3>
                   </div>
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={() => setShowMyEventsModal(true)}>
                     <h3>MY EVENTS</h3>
                   </div>
                   <div className="sub-card">
@@ -5298,61 +5372,122 @@ Do you want to proceed with registration?`;
       {/* Profile Modal */}
       {showProfileModal && (
         <div className="login-modal-overlay" onClick={handleCloseProfile}>
-          <div className="login-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="login-modal-content profile-modal-expanded" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>?? My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>�</button>
+              <h2>👤 My Profile</h2>
+              <button className="close-btn" onClick={handleCloseProfile}>×</button>
             </div>
             <div className="login-modal-body">
-              <div className="profile-details">
-                <div className="profile-header-section">
-                  <div className="profile-avatar">
-                    {userProfileData.name.charAt(0).toUpperCase()}
-                  </div>
-                  <h3>{userProfileData.name}</h3>
+              {isLoadingProfile ? (
+                <div className="loading-profile">
+                  <p>Loading profile data...</p>
                 </div>
-                
-                <div className="profile-info-section">
-                  <h4>?? Personal Information</h4>
-                  <div className="profile-info-grid">
-                    <div className="profile-info-item">
-                      <span className="info-label">Full Name:</span>
-                      <span className="info-value">{userProfileData.name}</span>
+              ) : (
+                <div className="profile-details">
+                  <div className="profile-header-section">
+                    <div className="profile-avatar">
+                      {userProfileData.name.charAt(0).toUpperCase()}
                     </div>
-                    <div className="profile-info-item">
-                      <span className="info-label">Email:</span>
-                      <span className="info-value">{userProfileData.email}</span>
-                    </div>
-                    <div className="profile-info-item">
-                      <span className="info-label">Mahotsav ID:</span>
-                      <span className="info-value">{userProfileData.userId || 'MH26000001'}</span>
-                    </div>
-                    <div className="profile-info-item">
-                      <span className="info-label">Registration Date:</span>
-                      <span className="info-value">{new Date().toLocaleDateString()}</span>
+                    <h3>{userProfileData.name}</h3>
+                  </div>
+                  
+                  <div className="profile-info-section">
+                    <h4>📋 Personal Information</h4>
+                    <div className="profile-info-grid">
+                      <div className="profile-info-item">
+                        <span className="info-label">Full Name:</span>
+                        <span className="info-value">{userProfileData.name}</span>
+                      </div>
+                      <div className="profile-info-item">
+                        <span className="info-label">Email:</span>
+                        <span className="info-value">{userProfileData.email}</span>
+                      </div>
+                      <div className="profile-info-item">
+                        <span className="info-label">Mahotsav ID:</span>
+                        <span className="info-value">{userProfileData.userId || 'MH26000001'}</span>
+                      </div>
+                      {userProfileData.gender && (
+                        <div className="profile-info-item">
+                          <span className="info-label">Gender:</span>
+                          <span className="info-value">{userProfileData.gender}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
 
-                <div className="profile-stats-section">
-                  <h4>?? Activity Summary</h4>
-                  <div className="stats-grid">
-                    <div className="stat-box">
-                      <div className="stat-number">{eventRegistrationsCount}</div>
-                      <div className="stat-label">Events Registered</div>
-                    </div>
-                    <div className="stat-box">
-                      <div className="stat-number">0</div>
-                      <div className="stat-label">Events Completed</div>
+                  <div className="profile-stats-section">
+                    <h4>📊 Activity Summary</h4>
+                    <div className="stats-grid">
+                      <div className="stat-box">
+                        <div className="stat-number">{userRegisteredEvents.length}</div>
+                        <div className="stat-label">Events Registered</div>
+                      </div>
+                      <div className="stat-box">
+                        <div className="stat-number">0</div>
+                        <div className="stat-label">Events Completed</div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="profile-actions">
-                  <button className="profile-action-btn edit-btn">?? Edit Profile</button>
-                  <button className="profile-action-btn logout-btn" onClick={handleLogout}>?? Logout</button>
+                  {/* Registered Events Section */}
+                  <div className="profile-registered-events-section">
+                    <h4>🎯 Registered Events</h4>
+                    {userRegisteredEvents.length > 0 ? (
+                      <div className="registered-events-list">
+                        {userRegisteredEvents.map((registration: any, index: number) => (
+                          <div key={index} className="registered-event-item">
+                            <div className="event-item-header">
+                              <h5>{registration.eventId?.eventName || 'Event'}</h5>
+                              <span className="event-type-badge">
+                                {registration.eventId?.eventType === 'sports' ? '⚽' : 
+                                 registration.eventId?.eventType === 'parasports' ? '♿' : '🎭'} 
+                                {registration.eventId?.eventType || 'Event'}
+                              </span>
+                            </div>
+                            <div className="event-item-details">
+                              {registration.eventId?.venue && (
+                                <p className="event-meta">📍 {registration.eventId.venue}</p>
+                              )}
+                              {registration.eventId?.date && (
+                                <p className="event-meta">📅 {registration.eventId.date}</p>
+                              )}
+                              {registration.registrationType && (
+                                <p className="event-meta">👥 {registration.registrationType === 'individual' ? 'Individual' : 'Team'}</p>
+                              )}
+                              {registration.teamName && (
+                                <p className="event-meta">🏆 Team: {registration.teamName}</p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="no-events-registered">
+                        <p>You haven't registered for any events yet.</p>
+                        <button 
+                          className="browse-events-btn"
+                          onClick={() => {
+                            setShowProfileModal(false);
+                            setActiveSubModal('EVENTS');
+                            fetchEvents();
+                            if (userProfileData.userId) {
+                              fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+                                setTempSelectedEvents(savedEventIds);
+                              });
+                            }
+                          }}
+                        >
+                          Browse Events
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="profile-actions">
+                    <button className="profile-action-btn logout-btn" onClick={handleLogout}>🚪 Logout</button>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -5477,8 +5612,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>?? My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>�</button>
+              <h2>🎯 My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">

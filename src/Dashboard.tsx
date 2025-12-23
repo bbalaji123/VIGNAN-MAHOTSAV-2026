@@ -1267,10 +1267,10 @@ const Dashboard: React.FC = () => {
         if (sectionId) {
           setVisibleSections(prev => {
             const newSet = new Set(prev);
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
               // Section is entering viewport - add it
               newSet.add(sectionId);
-            } else {
+            } else if (!entry.isIntersecting || entry.intersectionRatio < 0.05) {
               // Section is leaving viewport - remove it for re-animation
               newSet.delete(sectionId);
             }
@@ -4069,9 +4069,9 @@ Do you want to proceed with registration?`;
         className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
-        style={{ fontFamily: 'coffee+tea demo, sans-serif' }}
+        style={{ fontFamily: 'coffee+tea demo, sans-serif', position: 'relative' }}
       >
-        <div className="about-theme-container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px' }}>
+        <div className="about-theme-container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px', position: 'relative' }}>
           <h2 className="about-theme-title" style={{
             textAlign: 'center',
             fontSize: '4rem',
@@ -4084,7 +4084,28 @@ Do you want to proceed with registration?`;
             fontFamily: 'coffee+tea demo, sans-serif'
           }}>ABOUT THEME</h2>
           
-          <div style={{ marginBottom: '40px' }}>
+          {/* Garuda Logo */}
+          <div style={{
+            position: 'absolute',
+            left: '-90px',
+            top: '120px',
+            width: 'clamp(200px, 25vw, 400px)',
+            height: 'auto',
+            zIndex: 1
+          }}>
+            <img 
+              src="/Garuda.avif" 
+              alt="Garuda Logo"
+              style={{
+                width: '100%',
+                height: 'auto',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 0 20px rgba(253, 238, 113, 0.3))'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
                 fontSize: '2.5rem',
                 fontWeight: 'bold',
@@ -4459,7 +4480,8 @@ Do you want to proceed with registration?`;
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
-              overflow: 'visible'
+              overflow: 'visible',
+              zIndex: 10
             }}>
               <FlowerComponent 
                 size="clamp(200px, 35vw, 450px)"
@@ -4490,7 +4512,8 @@ Do you want to proceed with registration?`;
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
-              overflow: 'visible'
+              overflow: 'visible',
+              zIndex: 10
             }}>
               <FlowerComponent 
                 size="clamp(200px, 35vw, 450px)"
@@ -4512,28 +4535,28 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Year buttons and photo card */}
-          {isThrowbackUnlocked && (
-            <div style={{
-              position: 'absolute',
-              top: '0',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              paddingTop: '40px',
-              gap: '30px',
-              pointerEvents: 'none',
-              zIndex: 60
-            }}>
+          <div style={{
+            position: 'absolute',
+            top: '0',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            paddingTop: '40px',
+            gap: '30px',
+            pointerEvents: isThrowbackUnlocked ? 'auto' : 'none',
+            zIndex: 5,
+            opacity: isThrowbackUnlocked ? 1 : 0,
+            transition: 'opacity 1.5s ease 0.5s'
+          }}>
               {/* Year buttons */}
               <div style={{
                 display: 'flex',
-                gap: '20px',
-                pointerEvents: 'auto'
+                gap: '20px'
               }}>
                 {(['2023', '2024', '2025'] as const).map(year => (
                   <button 
@@ -4618,7 +4641,6 @@ Do you want to proceed with registration?`;
                 </div>
               </div>
             </div>
-          )}
 
           {/* Lock Icon removed */}
         </div>

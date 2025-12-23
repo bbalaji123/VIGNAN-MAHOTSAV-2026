@@ -129,6 +129,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.1s;
+            font-family: 'Woodtrap', sans-serif !important;
           }
 
           .collaboration-subtitle {
@@ -142,6 +143,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.3s;
+            font-family: 'Woodtrap', sans-serif !important;
           }
 
           .collaboration-text {
@@ -152,6 +154,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.5s;
+            font-family: 'Woodtrap', sans-serif !important;
           }
 
           .back-button {

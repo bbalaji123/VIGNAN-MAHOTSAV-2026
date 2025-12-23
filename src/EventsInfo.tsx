@@ -540,18 +540,18 @@ const EventsInfo: React.FC = () => {
         {`
           /* Flower positioning - Desktop */
           .flower-top-right {
-            top: -15%;
-            right: -8%;
-            width: 450px;
-            height: 450px;
+            top: -28%;
+            right: -13%;
+            width: 500px;
+            height: 500px;
             opacity: 0.3;
           }
           
           .flower-bottom-left {
-            bottom: -15%;
-            left: -8%;
-            width: 450px;
-            height: 450px;
+            bottom: -28%;
+            left: -13%;
+            width: 500px;
+            height: 500px;
             opacity: 0.3;
           }
           
@@ -565,13 +565,13 @@ const EventsInfo: React.FC = () => {
             }
             
             .flower-top-right {
-              top: -10% !important;
-              right: -10% !important;
+              top: -12% !important;
+              right: -12% !important;
             }
             
             .flower-bottom-left {
-              bottom: -10% !important;
-              left: -10% !important;
+              bottom: -12% !important;
+              left: -12% !important;
             }
           }
           

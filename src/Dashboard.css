@@ -5603,14 +5603,14 @@ html, body {
 }
 
 .corner-flower-tr .corner-flower-img {
-  top: -120px;
-  right: -120px;
+  top: -80px;
+  right: -80px;
   transform: scaleX(-1);
 }
 
 .corner-flower-bl .corner-flower-img {
-  bottom: -120px;
-  left: -120px;
+  bottom: -80px;
+  left: -80px;
   transform: scaleY(-1);
 }
 

@@ -2786,7 +2786,7 @@ Do you want to proceed with registration?`;
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
               {/* Back Button - positioned above HOME card */}
-              <div className="col-span-2 md:col-span-4 flex justify-start mb-2">
+              <div className="col-span-2 md:col-span-4 flex justify-start mb-2" style={{ marginLeft: '-190px' }}>
                 <button
                   onClick={() => setShowPageMenu(false)}
                   className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
@@ -4308,7 +4308,7 @@ Do you want to proceed with registration?`;
           position: 'relative',
           padding: '120px 20px 80px',
           marginTop: '0',
-          overflow: 'hidden'
+          overflow: 'visible'
         }}
       >
         <h2
@@ -4770,12 +4770,39 @@ Do you want to proceed with registration?`;
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
             <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
             
-            {/* Corner Flowers for Events Information - only a sliver shows in each corner */}
-            <div className="corner-flower corner-flower-tr">
-              <img src="/flower.svg" alt="" className="corner-flower-img" />
+            {/* Corner Flowers for Events Information */}
+            {/* Floating Flower - Top Right */}
+            <div className="fixed -top-16 -right-16 md:-top-32 md:-right-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+              <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
+                <FlowerComponent 
+                  size="100%"
+                  sunSize="50%"
+                  moonSize="43%"
+                  sunTop="25%"
+                  sunLeft="25%"
+                  moonTop="28.5%"
+                  moonLeft="28.5%"
+                  showPetalRotation={true}
+                  opacity={1}
+                />
+              </div>
             </div>
-            <div className="corner-flower corner-flower-bl">
-              <img src="/flower.svg" alt="" className="corner-flower-img" />
+
+            {/* Floating Flower - Bottom Left */}
+            <div className="fixed -bottom-16 -left-16 md:-bottom-32 md:-left-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+              <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
+                <FlowerComponent 
+                  size="100%"
+                  sunSize="50%"
+                  moonSize="43%"
+                  sunTop="25%"
+                  sunLeft="25%"
+                  moonTop="28.5%"
+                  moonLeft="28.5%"
+                  showPetalRotation={true}
+                  opacity={1}
+                />
+              </div>
             </div>
             
             <div className="events-navigation">

@@ -30,6 +30,7 @@ export interface SignupData {
   password: string;
   phone?: string;
   college?: string;
+  branch?: string;
   dateOfBirth: string;
   gender?: string;
   registerId?: string;

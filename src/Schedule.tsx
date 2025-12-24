@@ -116,13 +116,25 @@ const Schedule: React.FC = () => {
           .schedule-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             position: relative;
             z-index: 1;
           }
+          
+          @media (min-width: 640px) {
+            .schedule-content {
+              padding: 1.5rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .schedule-content {
+              padding: 2rem;
+            }
+          }
 
           .schedule-title {
-            font-size: 3.5rem;
+            font-size: 2rem;
             font-weight: bold;
             text-align: center;
             margin-bottom: 1rem;
@@ -136,40 +148,42 @@ const Schedule: React.FC = () => {
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.1s;
           }
+          
+          @media (min-width: 640px) {
+            .schedule-title {
+              font-size: 2.5rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .schedule-title {
+              font-size: 3.5rem;
+            }
+          }
 
           .schedule-subtitle {
-            font-size: 1.8rem;
+            font-size: 1.125rem;
             font-weight: 600;
             text-align: center;
             color: #ffffff;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.3s;
           }
-
-          .schedule-layout {
-            display: grid;
-            grid-template-columns: 230px 1fr 230px;
-            gap: 3rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.5s;
-            align-items: start;
+          
+          @media (min-width: 640px) {
+            .schedule-subtitle {
+              font-size: 1.25rem;
+            }
           }
-
-          .sidebar-left {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-          }
-
-          .sidebar-right {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+          
+          @media (min-width: 1024px) {
+            .schedule-subtitle {
+              font-size: 1.8rem;
+              margin-bottom: 2rem;
+            }
           }
 
           .category-button {
@@ -177,14 +191,29 @@ const Schedule: React.FC = () => {
             border: 1px solid rgba(253, 238, 113, 0.3);
             border-radius: 10px;
             color: #ffffff;
-            padding: 0.9rem 1.2rem;
+            padding: 0.75rem 1rem;
+            min-height: 44px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.875rem;
             letter-spacing: 0.3px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+            touch-action: manipulation;
+          }
+          
+          @media (min-width: 640px) {
+            .category-button {
+              padding: 0.9rem 1.2rem;
+              font-size: 0.95rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .category-button {
+              padding: 1rem 1.25rem;
+            }
           }
 
           .category-button:hover {
@@ -203,9 +232,23 @@ const Schedule: React.FC = () => {
           .main-content {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
-            padding: 2.5rem;
-            min-height: 600px;
+            padding: 1rem;
+            min-height: 400px;
             border: 2px solid rgba(253, 238, 113, 0.2);
+          }
+          
+          @media (min-width: 640px) {
+            .main-content {
+              padding: 1.5rem;
+              min-height: 500px;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .main-content {
+              padding: 2.5rem;
+              min-height: 600px;
+            }
           }
 
           .event-table {
@@ -217,51 +260,115 @@ const Schedule: React.FC = () => {
           .event-table th {
             background: linear-gradient(135deg, #fdee71, #e48ab9);
             color: #000;
-            padding: 1rem 1.5rem;
+            padding: 0.625rem 0.75rem;
             text-align: left;
             font-weight: 700;
             border: 1px solid rgba(253, 238, 113, 0.3);
-            font-size: 1rem;
-            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
           }
 
           .event-table td {
             color: #ffffff;
-            padding: 1rem 1.5rem;
+            padding: 0.625rem 0.75rem;
             border: 1px solid rgba(253, 238, 113, 0.3);
             background: rgba(0, 0, 0, 0.3);
+            font-size: 0.75rem;
+          }
+          
+          @media (min-width: 640px) {
+            .event-table th,
+            .event-table td {
+              padding: 0.75rem 1rem;
+              font-size: 0.875rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .event-table th {
+              padding: 1rem 1.5rem;
+              font-size: 1rem;
+              letter-spacing: 0.5px;
+            }
+            
+            .event-table td {
+              padding: 1rem 1.5rem;
+              font-size: 1rem;
+            }
           }
 
           .bottom-buttons {
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 2.5rem;
-            margin-top: 3rem;
+            align-items: stretch;
+            gap: 1rem;
+            margin-top: 2rem;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.7s;
           }
+          
+          @media (min-width: 640px) {
+            .bottom-buttons {
+              flex-direction: row;
+              align-items: center;
+              gap: 1.5rem;
+              margin-top: 2.5rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .bottom-buttons {
+              gap: 2.5rem;
+              margin-top: 3rem;
+            }
+          }
 
           .schedule-action-button {
             background: linear-gradient(135deg, #e48ab9, #c96ba1);
             color: #ffffff;
-            padding: 0.9rem 2.5rem;
+            padding: 0.75rem 1.5rem;
+            min-height: 48px;
+            width: 100%;
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
             box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
-            font-size: 1rem;
-            letter-spacing: 0.8px;
+            font-size: 0.875rem;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
+            touch-action: manipulation;
+          }
+          
+          @media (min-width: 640px) {
+            .schedule-action-button {
+              width: auto;
+              padding: 0.9rem 2rem;
+              font-size: 0.95rem;
+              letter-spacing: 0.7px;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .schedule-action-button {
+              padding: 0.9rem 2.5rem;
+              font-size: 1rem;
+              letter-spacing: 0.8px;
+            }
           }
 
           .schedule-action-button:hover {
             background: linear-gradient(135deg, #fdee71, #e48ab9);
             transform: translateY(-3px);
             box-shadow: 0 8px 30px rgba(253, 238, 113, 0.6);
+          }
+          
+          .schedule-action-button:active {
+            transform: scale(0.98);
           }
 
           .schedule-action-button.active {
@@ -300,9 +407,24 @@ const Schedule: React.FC = () => {
 
           .parasports-cards-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            padding: 2rem 0;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1rem 0;
+          }
+          
+          @media (min-width: 768px) {
+            .parasports-cards-container {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 2rem;
+              padding: 1.5rem 0;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .parasports-cards-container {
+              gap: 2.5rem;
+              padding: 2rem 0;
+            }
           }
 
           @keyframes neonPulse {
@@ -332,12 +454,25 @@ const Schedule: React.FC = () => {
             background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.95));
             border: 3px solid rgba(253, 238, 113, 0.6);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1.25rem;
             position: relative;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.4s ease;
             animation: neonPulse 3s infinite;
+            touch-action: manipulation;
+          }
+          
+          @media (min-width: 640px) {
+            .neon-card {
+              padding: 1.5rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .neon-card {
+              padding: 2rem;
+            }
           }
 
           .neon-card::before {
@@ -372,16 +507,30 @@ const Schedule: React.FC = () => {
 
           .card-icon-area {
             width: 100%;
-            height: 300px;
+            height: 200px;
             background: rgba(0, 0, 0, 0.6);
             border: 2px solid rgba(253, 238, 113, 0.3);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             position: relative;
             overflow: hidden;
+          }
+          
+          @media (min-width: 640px) {
+            .card-icon-area {
+              height: 250px;
+              margin-bottom: 1.25rem;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .card-icon-area {
+              height: 300px;
+              margin-bottom: 1.5rem;
+            }
           }
 
           .card-icon-area::after {
@@ -404,7 +553,7 @@ const Schedule: React.FC = () => {
           }
 
           .card-title {
-            font-size: 1.8rem;
+            font-size: 1.25rem;
             font-weight: bold;
             text-align: center;
             background: linear-gradient(135deg, #fdee71, #e48ab9);
@@ -412,8 +561,22 @@ const Schedule: React.FC = () => {
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
+          }
+          
+          @media (min-width: 640px) {
+            .card-title {
+              font-size: 1.5rem;
+              letter-spacing: 0.75px;
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .card-title {
+              font-size: 1.8rem;
+              letter-spacing: 1px;
+            }
           }
 
           .card-subtitle {
@@ -458,82 +621,7 @@ const Schedule: React.FC = () => {
             transform: rotate(45deg);
           }
 
-          @media (max-width: 1024px) {
-            .schedule-layout {
-              grid-template-columns: 1fr;
-            }
-
-            .sidebar-left,
-            .sidebar-right {
-              width: 100%;
-              gap: 0.75rem;
-            }
-
-            .sidebar-right {
-              margin-top: 1rem;
-            }
-
-            .category-button {
-              padding: 1rem 1.25rem;
-            }
-          }
-
-          @media (max-width: 768px) {
-            .schedule-content {
-              padding: 1rem;
-            }
-
-            .schedule-title {
-              font-size: 2.5rem;
-            }
-
-            .schedule-subtitle {
-              font-size: 1.25rem;
-            }
-
-            .main-content {
-              padding: 1.5rem;
-            }
-
-            .event-table th,
-            .event-table td {
-              padding: 0.75rem;
-              font-size: 0.9rem;
-            }
-
-            .bottom-buttons {
-              flex-direction: column;
-              gap: 1rem;
-            }
-
-            .schedule-action-button {
-              width: 100%;
-              padding: 1rem 2rem;
-            }
-
-            .back-button {
-              top: 1rem;
-              left: 1rem;
-              padding: 0.5rem 1rem;
-            }
-
-            .parasports-cards-container {
-              grid-template-columns: 1fr;
-              gap: 1.5rem;
-            }
-
-            .neon-card {
-              padding: 1.5rem;
-            }
-
-            .card-icon-area {
-              height: 250px;
-            }
-
-            .card-title {
-              font-size: 1.5rem;
-            }
-          }
+          /* Mobile-first responsive styles handled by Tailwind classes in JSX */
         `}
       </style>
 
@@ -545,9 +633,10 @@ const Schedule: React.FC = () => {
         <h1 className="schedule-title">SCHEDULE</h1>
         <h2 className="schedule-subtitle">EVENT DETAILS</h2>
 
-        <div className="schedule-layout">
+        {/* Mobile: Stack vertically, Desktop: 3-column grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[230px_1fr_230px] gap-4 lg:gap-12 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.5s_forwards]">
           {/* Left Sidebar - Cultural Categories */}
-          <div className="sidebar-left">
+          <div className="flex flex-col gap-3">
             {culturalCategories.map((category) => (
               <button
                 key={category}
@@ -564,7 +653,7 @@ const Schedule: React.FC = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="main-content">
+          <div className="main-content order-first lg:order-none">
             {showParaSports ? (
               <div className="parasports-cards-container">
                 {/* Card 1 - Para Athletics */}
@@ -588,30 +677,32 @@ const Schedule: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <table className="event-table">
-                <thead>
-                  <tr>
-                    <th>Event</th>
-                    <th>Category</th>
-                    <th>Day</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Venue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colSpan={6} className="coming-soon">
-                      Event schedule coming soon...
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="overflow-x-auto">
+                <table className="event-table">
+                  <thead>
+                    <tr>
+                      <th>Event</th>
+                      <th>Category</th>
+                      <th>Day</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Venue</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colSpan={6} className="coming-soon">
+                        Event schedule coming soon...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
 
           {/* Right Sidebar - Sports Categories */}
-          <div className="sidebar-right">
+          <div className="flex flex-col gap-3">
             {sportsCategories.map((category) => (
               <button
                 key={category}

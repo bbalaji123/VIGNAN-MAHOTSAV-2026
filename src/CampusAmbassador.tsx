@@ -266,44 +266,12 @@ const CampusAmbassador: React.FC = () => {
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
           }
 
-          @media (max-width: 768px) {
-            .hero-title {
-              font-size: 2.5rem;
-            }
+          /* Mobile-first responsive styles handled by Tailwind classes in JSX */
 
-            .hero-register-btn {
-              padding: 0.875rem 2rem;
-              font-size: 1rem;
-            }
-
-            .mahotsav-logo {
-              width: 140px;
-              top: 1rem;
-              left: 1rem;
-            }
-
-            .ambassador-title {
-              font-size: 2rem;
-            }
-            
-            .ambassador-subtitle {
-              font-size: 1.2rem;
-            }
-            
-            .ambassador-content {
-              padding: 1rem;
-              margin-left: 0;
-            }
-            
-            .ambassador-section {
-              padding: 1.5rem;
-            }
-
-            .back-button {
-              top: 6.5rem;
-              left: 1rem;
-              padding: 0.5rem 1rem;
-              font-size: 0.9rem;
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0);
             }
           }
         `}
@@ -313,45 +281,65 @@ const CampusAmbassador: React.FC = () => {
       <img 
         src={`${import.meta.env.BASE_URL}image.png`}
         alt="Vignan Mahotsav 2026"
-        className="mahotsav-logo"
+        className="absolute top-4 left-4 sm:top-6 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-[999]"
       />
 
       {/* Back to Dashboard Button */}
       <button 
         onClick={handleBackToDashboard}
-        className="back-button"
+        className="absolute top-20 sm:top-28 md:top-32 left-4 sm:left-8 z-[1000] min-h-[48px] px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 uppercase touch-manipulation active:scale-95"
+        style={{
+          background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
+          color: '#fff',
+          border: 'none',
+          boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)'
+        }}
         aria-label="Go back"
       >
         BACK
       </button>
 
       {/* Hero Section */}
-      <div className="hero-section">
-        <h1 className="hero-title">CAMPUS AMBASSDOR</h1>
+      <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 sm:mb-12 leading-tight tracking-wide opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]" style={{
+          textShadow: '0 4px 20px rgba(255, 255, 255, 0.3)'
+        }}>CAMPUS AMBASSDOR</h1>
         <button 
           onClick={handleRegisterLogin}
-          className="hero-register-btn"
+          className="min-h-[48px] px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg uppercase transition-all duration-300 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards] touch-manipulation active:scale-95"
+          style={{
+            background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
+            color: '#fff',
+            border: 'none',
+            boxShadow: '0 5px 20px rgba(228, 138, 185, 0.4)'
+          }}
         >
           Click Here To Register
         </button>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center py-20">
-        <div className="ambassador-content">
-          <h1 className="ambassador-title">MAHOTSAV CREW</h1>
-          <h2 className="ambassador-subtitle">Vignan Mahotsav Campus Ambassador Program</h2>
+      <div className="flex-1 flex items-center justify-center py-12 sm:py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 lg:ml-[15%] opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8" style={{
+            background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
+          }}>MAHOTSAV CREW</h1>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-center text-red-500 mb-8 sm:mb-12">Vignan Mahotsav Campus Ambassador Program</h2>
 
           {/* Introduction Section */}
-          <h3 className="section-title">1. Introduction</h3>
-          <div className="section-content">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">1. Introduction</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
             <p>Mahotsav Crew- The Vignan Mahotsav 2026 Campus Ambassador (CA) Program is a student-driven initiative that empowers enthusiastic individuals to represent Vignan Mahotsav in their respective colleges. The program's primary goal is to promote the fest, expand outreach, and foster intercollegiate engagement through innovative campaigns and personal networks. It's a unique leadership opportunity to be the face of one of South India's largest cultural festivals.</p>
             <p>Being part of the Mahotsav Crew is not just about promotion — it is about becoming the face of a movement that celebrates youth, culture, and collaboration. For many, it becomes a memorable journey filled with opportunities, recognition, and unforgettable experiences.</p>
           </div>
 
           {/* Eligibility Criteria Section */}
-          <h3 className="section-title">2. Eligibility Criteria</h3>
-          <div className="section-content">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">2. Eligibility Criteria</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
             <p>To become a Mahotsav Crew Campus Ambassador for Vignan Mahotsav 2026, the applicant must:</p>
             <p><strong>2.1 Current Enrollment:</strong> Must be a student in a recognized college/university (UG/PG).</p>
             <p><strong>2.2 Communication Skills:</strong> Able to connect and interact confidently with peers.</p>
@@ -362,13 +350,15 @@ const CampusAmbassador: React.FC = () => {
           </div>
 
           {/* Points Allotment Rules Section */}
-          <h3 className="section-title">3. Points Allotment Rules</h3>
-          <div className="section-content">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">3. Points Allotment Rules</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
             <p>Campus Ambassadors will earn points based on their engagement and efforts across various categories.</p>
             
-            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Outreach & Promotion</h4>
+            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Outreach & Promotion</h4>
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
             <table style={{ 
-              width: '100%', 
+              width: '100%',
+              minWidth: '500px',
               borderCollapse: 'collapse', 
               marginBottom: '2rem',
               background: 'rgba(0, 0, 0, 0.3)',
@@ -377,33 +367,36 @@ const CampusAmbassador: React.FC = () => {
             }}>
               <thead>
                 <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Activity</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Points</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Resharing /Reposting official posts on social media</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/post</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Resharing /Reposting official posts on social media</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/post</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Sharing in WhatsApp groups (50-100 mem) to (100-200 mem)</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/group to 10 points/group</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Sharing in WhatsApp groups (50-100 mem) to (100-200 mem)</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/group to 10 points/group</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Creating original content (reels/blogs/memes)</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>15 points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Creating original content (reels/blogs/memes)</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>15 points</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Organizing on-campus promotional events</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>20 points/event</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Organizing on-campus promotional events</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/event</td>
                 </tr>
               </tbody>
             </table>
+            </div>
 
-            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Referrals & Signups</h4>
+            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Referrals & Signups</h4>
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
             <table style={{ 
-              width: '100%', 
+              width: '100%',
+              minWidth: '500px',
               borderCollapse: 'collapse', 
               marginBottom: '2rem',
               background: 'rgba(0, 0, 0, 0.3)',
@@ -412,29 +405,32 @@ const CampusAmbassador: React.FC = () => {
             }}>
               <thead>
                 <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Activity</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Points</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Referring a friend/Surrounding Colleges Students to sign up as a CA</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>20 points/referral</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Referring a friend/Surrounding Colleges Students to sign up as a CA</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/referral</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Registering participants for Mahotsav</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>5 points/attendee</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Registering participants for Mahotsav</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/attendee</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bridging team Mahotsav & Student Council of colleges</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>10 points/college</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bridging team Mahotsav & Student Council of colleges</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>10 points/college</td>
                 </tr>
               </tbody>
             </table>
+            </div>
 
-            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>C. Performance Multipliers</h4>
+            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>C. Performance Multipliers</h4>
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
             <table style={{ 
-              width: '100%', 
+              width: '100%',
+              minWidth: '500px',
               borderCollapse: 'collapse', 
               marginBottom: '2rem',
               background: 'rgba(0, 0, 0, 0.3)',
@@ -443,30 +439,33 @@ const CampusAmbassador: React.FC = () => {
             }}>
               <thead>
                 <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Special Cases</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Multiplier</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Special Cases</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Multiplier</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>For colleges located at long distances</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Total Points= 4 x (multiplier + 1) x (number of participants)</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For colleges located at long distances</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Total Points= 4 x (multiplier + 1) x (number of participants)</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>For exceeding 50+ attendee registrations</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bonus 50 points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For exceeding 50+ attendee registrations</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bonus 50 points</td>
                 </tr>
               </tbody>
             </table>
-            <p style={{ fontStyle: 'italic', color: '#fbbf24' }}>➢ 4 x (multiplier + 1) x (number of participants) points Multiplier = (distance between VFSTR and admitted institute (in kms) /1000) * number of people. Get students to participate in events</p>
+            </div>
+            <p style={{ fontStyle: 'italic', color: '#fbbf24', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>➢ 4 x (multiplier + 1) x (number of participants) points Multiplier = (distance between VFSTR and admitted institute (in kms) /1000) * number of people. Get students to participate in events</p>
           </div>
 
           {/* Incentives & Rewards Section */}
-          <h3 className="section-title">4. Incentives & Rewards (Extending this Based on Targets)</h3>
-          <div className="section-content">
-            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Rewards Based on Milestones</h4>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">4. Incentives & Rewards (Extending this Based on Targets)</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
+            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Rewards Based on Milestones</h4>
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
             <table style={{ 
-              width: '100%', 
+              width: '100%',
+              minWidth: '600px',
               borderCollapse: 'collapse', 
               marginBottom: '2rem',
               background: 'rgba(0, 0, 0, 0.3)',
@@ -475,71 +474,75 @@ const CampusAmbassador: React.FC = () => {
             }}>
               <thead>
                 <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Tier</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Milestone</th>
-                  <th style={{ padding: '1rem', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Reward</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Tier</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Milestone</th>
+                  <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Reward</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Bronze</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>100+ Points</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bronze</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>100+ Points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Silver</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>150+ Points</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tier+ Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Silver</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>150+ Points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tier+ Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Gold</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>200+ Points</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Gold</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>200+ Points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Platinum</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>250+ points</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Platinum</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ points</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Diamond</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)</td>
-                  <td style={{ padding: '1rem', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Diamond</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)</td>
+                  <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</td>
                 </tr>
               </tbody>
             </table>
+            </div>
 
-            <h4 style={{ color: '#fbbf24', fontSize: '1.2rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
-            <p>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
-            <p>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
-            <p>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
+            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
           </div>
 
           {/* Code of Conduct Section */}
-          <h3 className="section-title">5. Code of Conduct</h3>
-          <div className="section-content">
-            <p>All Campus Ambassadors must:</p>
-            <p>1. Maintain professionalism and uphold the brand reputation.</p>
-            <p>2. Avoid spamming, false/misleading promotions.</p>
-            <p>3. Respect the rules and policies of their own institutions during all promotional activities.</p>
-            <p>4. Submit updates and progress reports when requested.</p>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">5. Code of Conduct</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>All Campus Ambassadors must:</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>1. Maintain professionalism and uphold the brand reputation.</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>2. Avoid spamming, false/misleading promotions.</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>3. Respect the rules and policies of their own institutions during all promotional activities.</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>4. Submit updates and progress reports when requested.</p>
           </div>
 
           {/* Program Duration & Review Section */}
-          <h3 className="section-title">6. Program Duration & Review</h3>
-          <div className="section-content">
-            <p>The program will run from [Dec 2025] to [Feb 2026].</p>
-            <p>Monthly performance reviews will be conducted based on point submissions and engagement.</p>
-            <p>Final awards will be based on cumulative performance throughout the duration.</p>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 mt-6 sm:mt-8">6. Program Duration & Review</h3>
+          <div className="text-white leading-relaxed sm:leading-loose text-sm sm:text-base mb-6 sm:mb-8">
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>The program will run from [Dec 2025] to [Feb 2026].</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Monthly performance reviews will be conducted based on point submissions and engagement.</p>
+            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Final awards will be based on cumulative performance throughout the duration.</p>
           </div>
 
           {/* Contact Information */}
-          <div className="contact-info">
-            <h3 className="section-title" style={{ marginBottom: '1rem' }}>
+          <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg" style={{
+            background: 'rgba(228, 138, 185, 0.1)',
+            border: '2px solid rgba(228, 138, 185, 0.3)'
+          }}>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6">
               For any inquiries regarding the Campus Ambassador Program, please contact:
             </h3>
-            <p className="contact-person">Mr. Brahma Teja : +91 8185865120</p>
-            <p className="contact-person">Ms. Venkata Jagathi : +91 8341430174</p>
+            <p className="text-base sm:text-lg md:text-xl text-white mb-2">Mr. Brahma Teja : +91 8185865120</p>
+            <p className="text-base sm:text-lg md:text-xl text-white">Ms. Venkata Jagathi : +91 8341430174</p>
           </div>
         </div>
       </div>

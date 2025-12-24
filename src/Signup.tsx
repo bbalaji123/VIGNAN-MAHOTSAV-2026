@@ -58,7 +58,7 @@ const Signup: React.FC<SignupProps> = ({
         
         <div className="login-modal-header">
           <h2>Join Mahotsav 2026</h2>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="signup-close-btn" onClick={onClose}>×</button>
         </div>
         
         {/* Progress Steps */}
@@ -292,6 +292,18 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
             value={signupFormData.college || ''}
             onChange={onCollegeChange}
             required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="branch">Branch</label>
+          <input
+            type="text"
+            id="branch"
+            name="branch"
+            value={signupFormData.branch || ''}
+            onChange={onInputChange}
+            placeholder="Enter your branch"
+            className="form-input"
           />
         </div>
       </div>

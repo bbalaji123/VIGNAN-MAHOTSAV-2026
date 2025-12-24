@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import './Dashboard.css';
@@ -6,6 +6,7 @@ import FlowerComponent from './components/FlowerComponent';
 
 const Collaboration: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedYear, setSelectedYear] = useState<number>(2025);
 
   const handleBackClick = () => {
     navigate('/');
@@ -110,9 +111,10 @@ const Collaboration: React.FC = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 80vh;
             padding: 2rem;
+            padding-top: 6rem;
           }
 
           .collaboration-title {
@@ -130,6 +132,110 @@ const Collaboration: React.FC = () => {
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.1s;
             font-family: 'Woodtrap', sans-serif !important;
+          }
+
+          .year-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+          }
+
+          .year-tab {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            background: rgba(255, 182, 193, 0.6);
+            color: white;
+            font-size: 1.5rem;
+            aspect-ratio: 16 / 9;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'BackToSchool', sans-serif;
+          }
+
+          .year-tab:hover {
+            background: rgba(255, 182, 193, 0.8);
+            transform: scale(1.05);
+          }
+
+          .year-tab.active {
+            background: rgba(255, 182, 193, 1);
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.5);
+          }
+
+          .media-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            background: linear-gradient(180deg, rgba(255, 182, 193, 0.3) 0%, rgba(253, 238, 113, 0.3) 100%);
+            border: 3px solid rgba(59, 130, 246, 0.5);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          }
+
+          .photo-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(180deg, #FFB6C1 0%, #FFF 30%, #FFE97F 70%, #90EE90 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .audio-player {
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 50px;
+            overflow: hidden;
+          }
+
+          .collaboration-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+          }
+
+          .collaboration-image-card {
+            position: relative;
+            width: 100%;
+            max-height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+          }
+
+          .collaboration-image-card:nth-child(1) { animation-delay: 0.1s; }
+          .collaboration-image-card:nth-child(2) { animation-delay: 0.2s; }
+          .collaboration-image-card:nth-child(3) { animation-delay: 0.3s; }
+          .collaboration-image-card:nth-child(4) { animation-delay: 0.4s; }
+          .collaboration-image-card:nth-child(5) { animation-delay: 0.5s; }
+          .collaboration-image-card:nth-child(6) { animation-delay: 0.6s; }
+          .collaboration-image-card:nth-child(7) { animation-delay: 0.7s; }
+          .collaboration-image-card:nth-child(8) { animation-delay: 0.8s; }
+          .collaboration-image-card:nth-child(n+9) { animation-delay: 0.9s; }
+
+          .collaboration-image-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.4);
+          }
+
+          .collaboration-image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
           }
 
           .collaboration-subtitle {
@@ -183,12 +289,9 @@ const Collaboration: React.FC = () => {
               font-size: 2.5rem;
             }
 
-            .collaboration-subtitle {
-              font-size: 1.8rem;
-            }
-
-            .collaboration-text {
-              font-size: 1.2rem;
+            .collaboration-grid {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
             }
 
             .back-button {
@@ -206,8 +309,58 @@ const Collaboration: React.FC = () => {
       {/* Main Content */}
       <div className="collaboration-content">
         <h1 className="collaboration-title">COLLABORATION</h1>
-        <h2 className="collaboration-subtitle">A New Treasure Awaits...</h2>
-        <p className="collaboration-text">Coming Soon to the Seven Seas!</p>
+        
+        {/* Year Tabs */}
+        <div className="year-tabs">
+          <button 
+            className={`year-tab ${selectedYear === 2023 ? 'active' : ''}`}
+            onClick={() => setSelectedYear(2023)}
+          >
+            2023
+          </button>
+          <button 
+            className={`year-tab ${selectedYear === 2024 ? 'active' : ''}`}
+            onClick={() => setSelectedYear(2024)}
+          >
+            2024
+          </button>
+          <button 
+            className={`year-tab ${selectedYear === 2025 ? 'active' : ''}`}
+            onClick={() => setSelectedYear(2025)}
+          >
+            2025
+          </button>
+        </div>
+
+        {/* Media Container with Photo Frame and Audio */}
+        <div className="media-container">
+          <div className="photo-frame">
+            <img 
+              src={`${import.meta.env.BASE_URL}collaboration/collaborations/${selectedYear === 2023 ? '3' : selectedYear === 2024 ? '10' : '20'}.avif`}
+              alt={`Collaboration ${selectedYear}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+          <audio 
+            controls 
+            className="audio-player"
+            src={`${import.meta.env.BASE_URL}collaboration/${selectedYear}.mp3`}
+          >
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        
+        <div className="collaboration-grid">
+          {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,28, 29, 30, 32].map((num) => (
+            <div key={num} className="collaboration-image-card">
+              <img 
+                src={`${import.meta.env.BASE_URL}collaboration/collaborations/${num}.avif`}
+                alt={`Collaboration ${num}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

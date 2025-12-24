@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
   const [currentEventSlide, setCurrentEventSlide] = useState(0);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
-  
+
   // Counter animation states
   const [footfall, setFootfall] = useState(0);
   const [colleges, setColleges] = useState(0);
@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
   const [selectedYear, setSelectedYear] = useState<'2023' | '2024' | '2025'>('2023');
-  
+
   // Touch swipe state for carousels
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -748,13 +748,13 @@ const Dashboard: React.FC = () => {
       ]
     }
   };
-  
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [] = useState(0);
-  
+
   // Animation state for sections
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
@@ -808,11 +808,11 @@ const Dashboard: React.FC = () => {
   const getSelectedEventsGender = () => {
     const selectedEventsArray = Array.from(tempSelectedEvents);
     const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
-    
+
     let hasMaleEvents = false;
     let hasFemaleEvents = false;
     let hasMixedEvents = false;
-    
+
     for (const eventId of selectedEventsArray) {
       const event = allEvents.find(e => e._id === eventId);
       if (event) {
@@ -821,7 +821,7 @@ const Dashboard: React.FC = () => {
         else if (event.gender === 'mixed') hasMixedEvents = true;
       }
     }
-    
+
     return { hasMaleEvents, hasFemaleEvents, hasMixedEvents };
   };
 
@@ -831,15 +831,15 @@ const Dashboard: React.FC = () => {
     if (tempSelectedEvents.has(event._id)) {
       return false;
     }
-    
+
     // If already registered for this event, disable
     if (selectedEvents.has(event._id)) {
       return true;
     }
-    
+
     const { hasMaleEvents, hasFemaleEvents } = getSelectedEventsGender();
     const isParaSports = paraSportsEvents.some(pe => pe._id === event._id);
-    
+
     // Para sports logic
     if (isParaSports) {
       // Para sports can't be selected if regular events are selected
@@ -849,17 +849,17 @@ const Dashboard: React.FC = () => {
       if (paraSportsSelected) {
         return true;
       }
-      
+
       // Gender-based restrictions for regular events
       if (event.gender === 'male' && hasFemaleEvents) {
         return true; // Can't select male events if female events are selected
       }
-      
+
       if (event.gender === 'female' && hasMaleEvents) {
         return true; // Can't select female events if male events are selected
       }
     }
-    
+
     // Mixed events are always allowed (unless para sports conflict)
     return false;
   };
@@ -869,25 +869,25 @@ const Dashboard: React.FC = () => {
     const userGender = userProfileData.gender;
     console.log('?? Filtering events - User gender:', userGender, 'User profile:', userProfileData);
     console.log('?? Events to filter:', events.length, 'events');
-    
+
     if (userGender === 'female') {
       // Female users can only see female and mixed gender events
-      const filtered = events.filter(event => 
+      const filtered = events.filter(event =>
         event.gender === 'female' || event.gender === 'mixed'
       );
       console.log('?? Female user - showing', filtered.length, 'events (female + mixed only)');
       return filtered;
     }
-    
+
     if (userGender === 'male') {
       // Male users can only see male and mixed gender events  
-      const filtered = events.filter(event => 
+      const filtered = events.filter(event =>
         event.gender === 'male' || event.gender === 'mixed'
       );
       console.log('?? Male user - showing', filtered.length, 'events (male + mixed only)');
       return filtered;
     }
-    
+
     // For non-logged in users or other genders, show all events
     console.log('?? Non-logged user or other gender - showing all', events.length, 'events');
     return events;
@@ -909,8 +909,8 @@ const Dashboard: React.FC = () => {
   // Functions to filter cultural events by category (with gender filtering)
   const getMusicEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
-      event.eventName?.toLowerCase().includes('singing') || 
+    return filteredEvents.filter(event =>
+      event.eventName?.toLowerCase().includes('singing') ||
       event.eventName?.toLowerCase().includes('music') ||
       event.category?.toLowerCase().includes('music')
     );
@@ -918,7 +918,7 @@ const Dashboard: React.FC = () => {
 
   const getDanceEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('dance') ||
       event.category?.toLowerCase().includes('dance')
     );
@@ -926,7 +926,7 @@ const Dashboard: React.FC = () => {
 
   const getTheatreEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('theatre') ||
       event.eventName?.toLowerCase().includes('drama') ||
       event.category?.toLowerCase().includes('theatre')
@@ -935,7 +935,7 @@ const Dashboard: React.FC = () => {
 
   const getLiteratureEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('literature') ||
       event.eventName?.toLowerCase().includes('poetry') ||
       event.eventName?.toLowerCase().includes('writing') ||
@@ -945,7 +945,7 @@ const Dashboard: React.FC = () => {
 
   const getVisualArtsEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('art') ||
       event.eventName?.toLowerCase().includes('painting') ||
       event.eventName?.toLowerCase().includes('photography') ||
@@ -955,7 +955,7 @@ const Dashboard: React.FC = () => {
 
   const getFashionDesignEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('fashion') ||
       event.eventName?.toLowerCase().includes('design') ||
       event.category?.toLowerCase().includes('fashion')
@@ -964,7 +964,7 @@ const Dashboard: React.FC = () => {
 
   const getSpotLightEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('spotlight') ||
       event.eventName?.toLowerCase().includes('talent') ||
       event.category?.toLowerCase().includes('spotlight')
@@ -973,7 +973,7 @@ const Dashboard: React.FC = () => {
 
   const getIndoorSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('chess') ||
       event.eventName?.toLowerCase().includes('table tennis') ||
       event.eventName?.toLowerCase().includes('badminton') ||
@@ -985,7 +985,7 @@ const Dashboard: React.FC = () => {
 
   const getTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('cricket') ||
       event.eventName?.toLowerCase().includes('football') ||
       event.eventName?.toLowerCase().includes('volleyball') ||
@@ -1003,11 +1003,11 @@ const Dashboard: React.FC = () => {
   const visualArtsCards = convertEventsToCards(getVisualArtsEvents());
   const fashionDesignCards = convertEventsToCards(getFashionDesignEvents());
   const spotLightCards = convertEventsToCards(getSpotLightEvents());
-  
+
   // Sports event cards (with gender filtering)
   const indoorSportsCards = convertEventsToCards(getIndoorSportsEvents());
   const teamSportsCards = convertEventsToCards(getTeamSportsEvents());
-  
+
   // Para sports cards (with gender filtering)
   const paraSportsCards = convertEventsToCards(getFilteredParaSportsEvents());
 
@@ -1039,7 +1039,7 @@ const Dashboard: React.FC = () => {
             setEvents(0);
             setOnlineAudience(0);
             setCashPrizes(0);
-            
+
             // Small delay before starting animation
             setTimeout(() => {
               // Animate footfall to 20000
@@ -1053,7 +1053,7 @@ const Dashboard: React.FC = () => {
                   setFootfall(footfallCount);
                 }
               }, 15);
-              
+
               // Animate colleges to 350
               let collegesCount = 0;
               const collegesInterval = setInterval(() => {
@@ -1065,7 +1065,7 @@ const Dashboard: React.FC = () => {
                   setColleges(collegesCount);
                 }
               }, 15);
-              
+
               // Animate events to 80
               let eventsCount = 0;
               const eventsInterval = setInterval(() => {
@@ -1077,7 +1077,7 @@ const Dashboard: React.FC = () => {
                   setEvents(eventsCount);
                 }
               }, 15);
-              
+
               // Animate online audience to 500000
               let audienceCount = 0;
               const audienceInterval = setInterval(() => {
@@ -1089,7 +1089,7 @@ const Dashboard: React.FC = () => {
                   setOnlineAudience(audienceCount);
                 }
               }, 15);
-              
+
               // Animate cash prizes to 15
               let prizesCount = 0;
               const prizesInterval = setInterval(() => {
@@ -1297,55 +1297,55 @@ const Dashboard: React.FC = () => {
     console.log('?? User gender for filtering:', userGender);
     setLoadingEvents(true);
     try {
-        // Test API connection first
-        console.log('?? Testing API connection...');
-        const testResponse = await fetch('/api/events').catch(() => null);
-        if (!testResponse) {
-          console.warn('?? Backend server may not be running. Using production API...');
-        }
-
-        // Fetch sports events with gender filter if user is logged in
-        console.log('?? Fetching sports events...');
-        const sportsResponse = await getEventsByType('sports', userGender);
-        console.log('? Sports response:', sportsResponse);
-        if (sportsResponse.success && sportsResponse.data) {
-          setSportsEvents(sportsResponse.data);
-          console.log(`? Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
-        } else {
-          console.warn('?? No sports events loaded:', sportsResponse.message);
-        }
-
-        // Fetch culturals events with gender filter if user is logged in
-        console.log('?? Fetching cultural events...');
-        const culturalsResponse = await getEventsByType('culturals', userGender);
-        console.log('?? Culturals response:', culturalsResponse);
-        if (culturalsResponse.success && culturalsResponse.data) {
-          setCulturalEvents(culturalsResponse.data);
-          console.log(`? Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
-        } else {
-          console.warn('?? No cultural events loaded:', culturalsResponse.message);
-        }
-
-        // Fetch para sports events with gender filter if user is logged in
-        console.log('?? Fetching para sports events...');
-        const paraSportsResponse = await getEventsByType('parasports', userGender);
-        console.log('? Para Sports response:', paraSportsResponse);
-        if (paraSportsResponse.success && paraSportsResponse.data) {
-          setParaSportsEvents(paraSportsResponse.data);
-          console.log(`? Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
-        } else {
-          console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
-        }
-      } catch (error) {
-        console.error('? Error fetching events:', error);
-        console.log('?? Troubleshooting tips:');
-        console.log('   1. Make sure backend server is running: npm start');
-        console.log('   2. Check if MongoDB is connected');
-        console.log('   3. Verify API endpoints are working');
-      } finally {
-        setLoadingEvents(false);
-        console.log('? Finished loading events');
+      // Test API connection first
+      console.log('?? Testing API connection...');
+      const testResponse = await fetch('/api/events').catch(() => null);
+      if (!testResponse) {
+        console.warn('?? Backend server may not be running. Using production API...');
       }
+
+      // Fetch sports events with gender filter if user is logged in
+      console.log('?? Fetching sports events...');
+      const sportsResponse = await getEventsByType('sports', userGender);
+      console.log('? Sports response:', sportsResponse);
+      if (sportsResponse.success && sportsResponse.data) {
+        setSportsEvents(sportsResponse.data);
+        console.log(`? Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
+      } else {
+        console.warn('?? No sports events loaded:', sportsResponse.message);
+      }
+
+      // Fetch culturals events with gender filter if user is logged in
+      console.log('?? Fetching cultural events...');
+      const culturalsResponse = await getEventsByType('culturals', userGender);
+      console.log('?? Culturals response:', culturalsResponse);
+      if (culturalsResponse.success && culturalsResponse.data) {
+        setCulturalEvents(culturalsResponse.data);
+        console.log(`? Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
+      } else {
+        console.warn('?? No cultural events loaded:', culturalsResponse.message);
+      }
+
+      // Fetch para sports events with gender filter if user is logged in
+      console.log('?? Fetching para sports events...');
+      const paraSportsResponse = await getEventsByType('parasports', userGender);
+      console.log('? Para Sports response:', paraSportsResponse);
+      if (paraSportsResponse.success && paraSportsResponse.data) {
+        setParaSportsEvents(paraSportsResponse.data);
+        console.log(`? Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
+      } else {
+        console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
+      }
+    } catch (error) {
+      console.error('? Error fetching events:', error);
+      console.log('?? Troubleshooting tips:');
+      console.log('   1. Make sure backend server is running: npm start');
+      console.log('   2. Check if MongoDB is connected');
+      console.log('   3. Verify API endpoints are working');
+    } finally {
+      setLoadingEvents(false);
+      console.log('? Finished loading events');
+    }
   }, [isLoggedIn, userProfileData.gender]);
 
   // Fetch events on component mount
@@ -1394,24 +1394,24 @@ const Dashboard: React.FC = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showSportsDetails, nextSportsSlide, prevSportsSlide]);
-  
+
   // Touch swipe handlers for culturals carousel
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchEnd = (carouselType: 'sports' | 'culturals' | 'events') => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (carouselType === 'sports') {
       if (isLeftSwipe) {
         nextSportsSlide();
@@ -1432,7 +1432,7 @@ const Dashboard: React.FC = () => {
       }
     }
   };
-  
+
   const prevEventSlide = () => {
     setCurrentEventSlide((prev) => (prev - 1 + eventInfoCards.length) % eventInfoCards.length);
   };
@@ -1649,85 +1649,85 @@ const Dashboard: React.FC = () => {
 
   const handleEventDetailClick = (eventTitle: string) => {
     console.log('Event clicked:', eventTitle);
-    
+
     // Create a comprehensive mapping from database event names to URL-friendly names
     const eventNameMapping: { [key: string]: string } = {
       // Chess events
       'Chess Championship': 'Chess',
       'Chess Tournament': 'Chess',
       'Chess': 'Chess',
-      
+
       // Table Tennis events
       'Table Tennis Tournament': 'Table Tennis',
       'Table Tennis Championship': 'Table Tennis',
       'Table Tennis': 'Table Tennis',
-      
+
       // Badminton events
       'Badminton Championship': 'Table Tennis', // Assuming same structure
       'Badminton Tournament': 'Table Tennis',
-      
+
       // Athletics events
       'Athletics Championship': 'Men\'s Athletics',
       'Track & Field': 'Men\'s Athletics',
-      
+
       // Taekwondo events
       'Taekwondo Championship': 'Taekwondo',
       'Taekwondo Tournament': 'Taekwondo',
-      
+
       // Volleyball events
       'Volleyball Tournament': 'Volley ball',
       'Volleyball Championship': 'Volley ball',
       'Volley Ball Tournament': 'Volley ball',
-      
+
       // Basketball events
       'Basketball Tournament': 'Basket ball',
       'Basketball Championship': 'Basket ball',
       'Basket Ball Tournament': 'Basket ball',
-      
+
       // Football events
       'Football Championship': 'Football',
       'Football Tournament': 'Football',
-      
+
       // Cricket events
       'Cricket Tournament - Men': 'Football', // Using similar team sport structure
       'Cricket Tournament - Women': 'Football',
       'Cricket Tournament': 'Football',
       'Cricket Championship': 'Football',
-      
+
       // Kabaddi events
       'Kabaddi Tournament': 'Kabaddi',
       'Kabaddi Championship': 'Kabaddi',
-      
+
       // Hockey events
       'Hockey Tournament': 'Hockey',
       'Hockey Championship': 'Hockey',
-      
+
       // Kho-Kho events
       'Kho-Kho Tournament': 'Kho-Kho',
       'Kho-Kho Championship': 'Kho-Kho',
-      
+
       // Swimming events
       'Swimming Competition': 'Men\'s Athletics', // Using individual sports structure
       'Swimming Championship': 'Men\'s Athletics',
-      
+
       // Throwball events
       'Throwball Tournament': 'Throw ball',
       'Throwball Championship': 'Throw ball',
-      
+
       // Tennikoit events
       'Tennikoit Tournament': 'Tennikoit',
       'Tennikoit Championship': 'Tennikoit',
-      
+
       // Yoga events
       'Yoga Competition': 'Traditional Yogasana',
       'Traditional Yogasana Competition': 'Traditional Yogasana',
       'Artistic Yogasana Competition': 'Artistic Yogasana',
-      
+
       // Para Sports events
       'Para Athletics': 'Para Sports',
       'Para Cricket Men': 'Para Sports',
       'Para Sports Competition': 'Para Sports',
-      
+
       // Cultural events - Dance
       'Classical Dance Competition': 'Classical Dance Solo',
       'Classical Dance Solo': 'Classical Dance Solo',
@@ -1739,7 +1739,7 @@ const Dashboard: React.FC = () => {
       'Dancing Jodi - Western Duo': 'Dancing Jodi - Western Duo',
       'Group Dance Competition': 'Group Dance',
       'Group Dance': 'Group Dance',
-      
+
       // Cultural events - Music
       'Solo Singing Competition': 'Singing Idol',
       'Singing Idol': 'Singing Idol',
@@ -1747,7 +1747,7 @@ const Dashboard: React.FC = () => {
       'Group Singing Competition': 'Group Singing',
       'Singing Jodi': 'Singing Jodi',
       'Singing Duo': 'Singing Jodi',
-      
+
       // Cultural events - Theatre
       'Drama & Theatre Competition': 'Skit',
       'Skit': 'Skit',
@@ -1756,19 +1756,19 @@ const Dashboard: React.FC = () => {
       'Mime Competition': 'Mime',
       'Short Film Making': 'Short Film Making',
       'Short Film Competition': 'Short Film Making',
-      
+
       // Cultural events - Fashion
       'Fashion Show': 'Haute Couture',
       'Haute Couture': 'Haute Couture',
       'Fashion Competition': 'Haute Couture',
-      
+
       // Other cultural events
       'Stand-up Comedy Competition': 'Singing Idol',
       'Art & Painting Exhibition': 'Singing Idol',
       'Poetry & Literature Competition': 'Singing Idol',
       'DJ & Music Production Battle': 'Singing Idol'
     };
-    
+
     // Try to find the event name using the original title first, then the mapped title
     let eventName = eventTitle;
     if (eventNameMapping[eventTitle]) {
@@ -1820,13 +1820,13 @@ const Dashboard: React.FC = () => {
         eventName = 'Haute Couture';
       }
     }
-    
+
     console.log('Mapped event name:', eventName);
-    
+
     // Check if event data exists in either sports or cultural events before navigating
-    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] || 
-                        culturalEventsData[eventName as keyof typeof culturalEventsData];
-    
+    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] ||
+      culturalEventsData[eventName as keyof typeof culturalEventsData];
+
     if (eventExists || eventName) {
       // Navigate to the new event detail page
       navigate(`/event/${encodeURIComponent(eventName)}`);
@@ -1967,15 +1967,15 @@ const Dashboard: React.FC = () => {
 
     try {
       const result = await registerUser(submissionData);
-      
+
       if (result.success && result.data?.userId) {
         setGeneratedUserId(result.data.userId);
         setGeneratedPassword(password);
         setShowUserIdPopup(true);
-        
+
         // Store the generated userId
         localStorage.setItem('generatedUserId', result.data.userId);
-        
+
         // Reset form after showing popup
         setSignupFormData({
           name: '',
@@ -2048,13 +2048,13 @@ const Dashboard: React.FC = () => {
 
     try {
       const result = await forgotPassword(forgotPasswordEmail);
-      
+
       if (result.success) {
         setResetMessage({
           type: 'success',
           text: `Password recovery email sent to ${forgotPasswordEmail}. Please check your inbox!`
         });
-        
+
         // Close modal and show login after 3 seconds
         setTimeout(() => {
           handleCloseForgotPassword();
@@ -2092,15 +2092,15 @@ const Dashboard: React.FC = () => {
         setShowLoginModal(true);
         return;
       }
-      
+
       if (userProfileData.userType === 'visitor') {
         alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
         return;
       }
-      
+
       // Open modal immediately
       setActiveSubModal(cardName);
-      
+
       // Fetch events and user data in background
       fetchEvents();
       if (isLoggedIn && userProfileData.userId) {
@@ -2122,87 +2122,87 @@ const Dashboard: React.FC = () => {
   // Calculate registration price based on gender and selected events
   const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
     const selectedEventsArray = Array.from(selectedEventIds);
-    
+
     console.log('?? PRICE CALCULATION START');
     console.log('   - Gender:', gender);
     console.log('   - Gender type:', typeof gender);
     console.log('   - Events count:', selectedEventsArray.length);
     console.log('   - Event IDs:', selectedEventsArray);
-    
+
     // If no events selected, return 0
     if (selectedEventsArray.length === 0) {
       console.log('   - No events selected, returning 0');
       return 0;
     }
-    
+
     // Check if para sports events are selected
-    const hasParaSports = selectedEventsArray.some(eventId => 
+    const hasParaSports = selectedEventsArray.some(eventId =>
       paraSportsEvents.some(event => event._id === eventId)
     );
-    
+
     if (hasParaSports) {
       console.log('   - Para sports selected - FREE');
       return 0;
     }
-    
+
     // Check event types
-    const hasSports = selectedEventsArray.some(eventId => 
+    const hasSports = selectedEventsArray.some(eventId =>
       sportsEvents.some(event => event._id === eventId)
     );
-    
-    const hasCulturals = selectedEventsArray.some(eventId => 
+
+    const hasCulturals = selectedEventsArray.some(eventId =>
       culturalEvents.some(event => event._id === eventId)
     );
-    
+
     console.log('   - Has sports:', hasSports);
     console.log('   - Has culturals:', hasCulturals);
     console.log('   - Sports events in state:', sportsEvents.length);
     console.log('   - Cultural events in state:', culturalEvents.length);
-    
+
     // EXPLICIT FEMALE LOGIC - ALWAYS ?250 FOR SINGLE TYPE
     const normalizedGender = gender?.toLowerCase();
 
     if (normalizedGender === 'female') {
       console.log('   - ? FEMALE USER DETECTED');
-      
+
       if (hasSports && hasCulturals) {
         console.log('   - ?? Female: Sports + Culturals = ?350');
         return 350;
       }
-      
+
       if (hasSports && !hasCulturals) {
         console.log('   - ?? Female: Sports ONLY = ?250');
         return 250;
       }
-      
+
       if (hasCulturals && !hasSports) {
         console.log('   - ?? Female: Culturals ONLY = ?250');
         return 250;
       }
-      
+
       console.log('   - ? Female user but no sports/culturals detected');
     }
-    
+
     // MALE LOGIC
     if (normalizedGender === 'male') {
       console.log('   - ? MALE USER DETECTED');
-      
+
       if (hasSports && hasCulturals) {
         console.log('   - ?? Male: Sports + Culturals = ?350');
         return 350;
       }
-      
+
       if (hasSports && !hasCulturals) {
         console.log('   - ?? Male: Sports ONLY = ?350');
         return 350;
       }
-      
+
       if (hasCulturals && !hasSports) {
         console.log('   - ?? Male: Culturals ONLY = ?250');
         return 250;
       }
     }
-    
+
     // Fallback for users without gender info - charge as per event mix
     if (hasSports && hasCulturals) {
       console.log('   - ?? Fallback: Sports + Culturals = ?350');
@@ -2230,12 +2230,12 @@ const Dashboard: React.FC = () => {
       handleCloseSubModal();
       return;
     }
-    
+
     if (userProfileData.userType === 'visitor') {
       alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
       return;
     }
-    
+
     if (tempSelectedEvents.size === 0) {
       alert('Please select at least one event!');
       return;
@@ -2244,7 +2244,7 @@ const Dashboard: React.FC = () => {
     const eventIds = Array.from(tempSelectedEvents);
     const userGender = userProfileData.gender || 'male'; // Default to male if not specified
     const totalAmount = calculateRegistrationPrice(tempSelectedEvents, userGender);
-    
+
     // Get selected event names
     const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
     const selectedEventNames = eventIds.map(eventId => {
@@ -2255,7 +2255,7 @@ const Dashboard: React.FC = () => {
     // Create confirmation message
     const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
     const priceText = totalAmount === 0 ? 'FREE' : `?${totalAmount}`;
-    
+
     const confirmationMessage = `
 ?? REGISTRATION CONFIRMATION
 ????????????????????????????
@@ -2272,23 +2272,23 @@ ${eventsList}
 Do you want to proceed with registration?`;
 
     const confirmed = window.confirm(confirmationMessage);
-    
+
     if (!confirmed) {
       return;
     }
 
     try {
       const result = await saveMyEvents(userProfileData.userId!, eventIds);
-      
+
       if (result.success) {
         const savedEventIds = await fetchUserSavedEvents(userProfileData.userId!);
         setTempSelectedEvents(savedEventIds); // Keep the registered events selected
         handleCloseSubModal();
-        
-        const successMessage = totalAmount === 0 
+
+        const successMessage = totalAmount === 0
           ? `? Successfully registered for ${eventIds.length} event(s) for FREE!`
           : `? Successfully registered for ${eventIds.length} event(s)! Total amount: ?${totalAmount}`;
-          
+
         alert(successMessage);
       } else {
         alert(result.message || 'Failed to register. Please try again.');
@@ -2313,7 +2313,7 @@ Do you want to proceed with registration?`;
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
     localStorage.removeItem('isLoggedIn');
-    
+
     // Redirect to main page
     window.location.href = '/';
   };
@@ -2327,15 +2327,15 @@ Do you want to proceed with registration?`;
     if (!userProfileData.userId) {
       return;
     }
-    
+
     setShowProfileModal(true);
     setIsLoadingProfile(true);
-    
+
     try {
       // Fetch user's registered events
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
       console.log('📊 Registered events result:', registrationsResult);
-      
+
       if (registrationsResult.success && registrationsResult.data) {
         setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
       } else {
@@ -2370,10 +2370,10 @@ Do you want to proceed with registration?`;
     }
 
     const eventIds = Array.from(selectedEvents);
-    
+
     try {
       const result = await saveMyEvents(userProfileData.userId, eventIds);
-      
+
       if (result.success) {
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
@@ -2406,11 +2406,11 @@ Do you want to proceed with registration?`;
     try {
       // Call the real login API
       const result = await loginUser(loginFormData.identifier, loginFormData.password);
-      
+
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;
         console.log('?? Login success - User data:', { userId, name, email, userType, gender });
-        
+
         // Ensure all required fields are present
         if (!userId || !name || !email) {
           setLoginMessage({
@@ -2420,10 +2420,10 @@ Do you want to proceed with registration?`;
           setIsLoggingIn(false);
           return;
         }
-        
+
         setIsLoggedIn(true);
         setLoggedInUserName(name);
-        
+
         // Store user profile data
         const profileData = {
           name: name,
@@ -2434,10 +2434,10 @@ Do you want to proceed with registration?`;
         };
         setUserProfileData(profileData);
         console.log('?? Storing user profile:', profileData);
-        
+
         setShowLoginModal(false);
         setLoginFormData({ identifier: '', password: '' });
-        
+
         // Store in localStorage
         localStorage.setItem('userName', name);
         localStorage.setItem('userEmail', email);
@@ -2447,7 +2447,7 @@ Do you want to proceed with registration?`;
           localStorage.setItem('userGender', gender);
         }
         localStorage.setItem('isLoggedIn', 'true');
-        
+
         // Fetch user's saved events from database
         await fetchUserSavedEvents(userId);
       } else {
@@ -2470,12 +2470,12 @@ Do you want to proceed with registration?`;
   // Check if user is already logged in on component mount
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
-    const storedUserEmail = localStorage.getItem('userEmail'); 
+    const storedUserEmail = localStorage.getItem('userEmail');
     const storedUserId = localStorage.getItem('userId');
     const storedUserType = localStorage.getItem('userType');
     const storedUserGender = localStorage.getItem('userGender');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
-    
+
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
       setIsLoggedIn(true);
       setLoggedInUserName(storedUserName);
@@ -2488,7 +2488,7 @@ Do you want to proceed with registration?`;
       };
       setUserProfileData(profileData);
       console.log('?? Loading user profile from localStorage:', profileData);
-      
+
       // Fetch user's saved events from database
       if (storedUserId) {
         fetchUserSavedEvents(storedUserId);
@@ -2527,8 +2527,8 @@ Do you want to proceed with registration?`;
 
   return (
     <div className={`dashboard-container w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-         style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0"}}>
-      
+      style={{ background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0" }}>
+
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
         <div className="sunlight-rays ray-1"></div>
@@ -2544,15 +2544,15 @@ Do you want to proceed with registration?`;
         <>
           <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
             <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
             </div>
           </div>
-          
+
           {/* Gaurada Image beside hamburger */}
           <div className="absolute top-1 left-16 z-60">
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}Garuda.avif`}
               alt="Garuda"
               className="h-20 w-auto object-contain"
@@ -2564,18 +2564,18 @@ Do you want to proceed with registration?`;
       {/* Top-Right Vignan Logo - Only show on main dashboard (hide when menu, modals, or submodals are open) */}
       {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
-          <img 
+          <img
             src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
             alt="Vignan Logo"
             className="vignan-logo-img"
           />
         </div>
       )}
-     
+
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{ background: "transparent" }} >
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-20 left-0 right-0 z-20 w-full px-4 pt-8">
+        <div className="absolute top-12 left-0 right-0 z-20 w-full px-4 pt-8">
           <h2 className="text-white text-sm md:text-lg font-semibold" style={{
             fontFamily: 'serif',
             letterSpacing: '0.05em',
@@ -2586,9 +2586,9 @@ Do you want to proceed with registration?`;
             A National Level Youth Festival - 19<sup>th</sup> Edition
           </h2>
         </div>
-        
-        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "60px"}}>
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
+
+        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{ marginTop: "-50px", display: "flex", justifyContent: "center" }}>
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{ width: "45%", height: "auto", maxWidth: "1000px" }} />
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2647,7 +2647,7 @@ Do you want to proceed with registration?`;
             }
           }
         `}</style>
-        
+
         {/* Action Buttons - Register for events and login when not logged in */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
@@ -2675,7 +2675,7 @@ Do you want to proceed with registration?`;
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible" 
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible"
           style={{
             backgroundImage: 'url("/Background-redesign.png")',
             backgroundSize: 'cover',
@@ -2686,7 +2686,7 @@ Do you want to proceed with registration?`;
           {/* Floating Flower - Top Right */}
           <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="100%"
                 sunSize="50%"
                 moonSize="43%"
@@ -2703,7 +2703,7 @@ Do you want to proceed with registration?`;
           {/* Floating Flower - Bottom Left */}
           <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="100%"
                 sunSize="50%"
                 moonSize="43%"
@@ -2716,346 +2716,346 @@ Do you want to proceed with registration?`;
               />
             </div>
           </div>
-          
+
           {/* Menu Title */}
-          <div className="text-center" style={{marginTop: "30px", paddingBottom: "2px"}}>
-            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
+          <div className="text-center" style={{ marginTop: "30px", paddingBottom: "2px" }}>
+            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important' }}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
-          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6" style={{marginTop: "-90px"}}>
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6" style={{ marginTop: "-90px" }}>
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-              {/* Back Button - positioned above HOME card */}
-              <div className="col-span-2 md:col-span-4 flex justify-start mb-2" style={{ marginLeft: '-190px' }}>
-                <button
-                  onClick={() => setShowPageMenu(false)}
-                  className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
-                  aria-label="Go back"
+                {/* Back Button - positioned above HOME card */}
+                <div className="col-span-2 md:col-span-4 flex justify-start mb-2" style={{ marginLeft: '-190px' }}>
+                  <button
+                    onClick={() => setShowPageMenu(false)}
+                    className="w-40 h-20 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
+                    aria-label="Go back"
+                  >
+                    <img
+                      src={`${import.meta.env.BASE_URL}BACK.avif`}
+                      alt="Back"
+                      className="w-full h-full object-contain"
+                    />
+                  </button>
+                </div>
+                {/* HOME */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
+                  style={{
+                    transformStyle: 'preserve-3d'
+                  }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
                 >
-                  <img
-                    src={`${import.meta.env.BASE_URL}BackButton.svg`}
-                    alt="Back"
-                    className="w-full h-full object-contain"
-                  />
-                </button>
-              </div>
-              {/* HOME */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
-                 style={{ 
-                  transformStyle: 'preserve-3d'
-                }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
-              </div>
+                  <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
+                </div>
 
-              {/* EVENTS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={handleEventsInfoClick}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'Woodtrap, sans-serif'}}>EVENTS</span>
-              </div>
+                {/* EVENTS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={handleEventsInfoClick}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide" style={{ fontFamily: 'Woodtrap, sans-serif' }}>EVENTS</span>
+                </div>
 
-              {/* PROFILE */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={(e) => { e.preventDefault(); setActiveSubModal('PROFILE'); setShowPageMenu(false); }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
-              </div>
+                {/* PROFILE */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={(e) => { e.preventDefault(); setActiveSubModal('PROFILE'); setShowPageMenu(false); }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
+                </div>
 
-              {/* SCHEDULE */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/schedule');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
-              </div>
+                {/* SCHEDULE */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/schedule');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
+                </div>
 
-              {/* COLLABORATION */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/collaboration');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
-              </div>
+                {/* COLLABORATION */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/collaboration');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
+                </div>
 
-              {/* ZONALS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/zonals');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
-              </div>
+                {/* ZONALS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/zonals');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
+                </div>
 
-              {/* PARA SPORTS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/para-sports');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/para sports.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
-              </div>
+                {/* PARA SPORTS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/para-sports');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/para sports.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
+                </div>
 
-              {/* HOSPITALITY */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/hospitality');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
-              </div>
+                {/* HOSPITALITY */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/hospitality');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
+                </div>
 
-              {/* CAMPUS AMBASSADOR */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
-              </div>
+                {/* CAMPUS AMBASSADOR */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
+                </div>
 
-              {/* SPONSORS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/sponsors');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
-              </div>
+                {/* SPONSORS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/sponsors');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
+                </div>
 
-              {/* OUR TEAM */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/our-team');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
-              </div>
+                {/* OUR TEAM */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/our-team');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
+                </div>
 
-              {/* MAP */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/campus-map');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
+                {/* MAP */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/campus-map');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       )}
 
@@ -3079,8 +3079,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentParaSportsSlide + index) % paraSportsCards.length;
                   const card = paraSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleParaSportsClick(card.title)}
                     >
@@ -3132,8 +3132,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentParaAthleticsSlide + index) % paraAthleticsMenCards.length;
                   const card = paraAthleticsMenCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                     >
                       <div className="indoor-sport-card-poster-background">
@@ -3184,8 +3184,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentParaCricketSlide + index) % paraCricketMenCards.length;
                   const card = paraCricketMenCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                     >
                       <div className="indoor-sport-card-poster-background">
@@ -3231,7 +3231,7 @@ Do you want to proceed with registration?`;
             </div>
             <div className="culturals-navigation">
               <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>?</button>
-              <div 
+              <div
                 className="culturals-carousel-3d-container"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
@@ -3241,12 +3241,12 @@ Do you want to proceed with registration?`;
                   {culturalsCards.map((card, index) => {
                     const isActive = index === currentCulturalsSlide;
                     const offset = index - currentCulturalsSlide;
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front of semicircle
                       transform = 'translateX(0) translateY(0) translateZ(250px) rotateY(0deg) scale(1.08)';
@@ -3290,10 +3290,10 @@ Do you want to proceed with registration?`;
                       opacity = 0.15;
                       filter = 'brightness(0.2)';
                     }
-                    
+
                     return (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className={`cultural-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isActive ? () => handleCulturalsClick(card.title) : () => setCurrentCulturalsSlide(index)}
                         style={{
@@ -3675,7 +3675,7 @@ Do you want to proceed with registration?`;
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
-              <div 
+              <div
                 className="sports-carousel-3d-container"
                 onTouchStart={handleSportsTouchStart}
                 onTouchMove={handleSportsTouchMove}
@@ -3686,12 +3686,12 @@ Do you want to proceed with registration?`;
                     const isActive = index === currentSportsSlide;
                     const offset = index - currentSportsSlide;
                     const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front (Glide style)
                       transform = 'translateX(-50%) translateY(-50%) translateZ(0) rotateY(0deg) scale(1)';
@@ -3735,10 +3735,10 @@ Do you want to proceed with registration?`;
                       opacity = 0.2;
                       filter = 'brightness(0.3)';
                     }
-                    
+
                     return (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isClickable && isActive ? () => {
                           if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
@@ -3809,8 +3809,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentIndoorSlide + index) % indoorSportsCards.length;
                   const card = indoorSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3863,8 +3863,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentWomenIndoorSlide + index) % womenIndoorSportsCards.length;
                   const card = womenIndoorSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3917,8 +3917,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentMenTeamSlide + index) % menTeamSportsCards.length;
                   const card = menTeamSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3971,8 +3971,8 @@ Do you want to proceed with registration?`;
                   const cardIndex = (currentWomenTeamSlide + index) % womenTeamSportsCards.length;
                   const card = womenTeamSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -4006,7 +4006,7 @@ Do you want to proceed with registration?`;
       )}
 
       {/* About Theme Section */}
-      <section 
+      <section
         className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
@@ -4024,7 +4024,7 @@ Do you want to proceed with registration?`;
             textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
             fontFamily: 'coffee+tea demo, sans-serif'
           }}>ABOUT THEME</h2>
-          
+
           {/* Garuda Logo */}
           <div style={{
             position: 'absolute',
@@ -4034,8 +4034,8 @@ Do you want to proceed with registration?`;
             height: 'auto',
             zIndex: 1
           }}>
-            <img 
-              src="/Garuda.avif" 
+            <img
+              src="/Garuda.avif"
               alt="Garuda Logo"
               style={{
                 width: '100%',
@@ -4048,33 +4048,44 @@ Do you want to proceed with registration?`;
 
           <div style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
-                fontSize: '2.5rem',
-                fontWeight: 'bold',
-                color: '#fdee71',
-                marginBottom: '30px',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-                fontFamily: 'coffee+tea demo, sans-serif'
-              }}>Mahotsav 2026 - The Eternal Harmony</h3>
-              
-              <p className="theme-description" style={{
-                fontSize: '1.25rem',
-                lineHeight: '1.9',
-                color: '#FFFFFF',
-                textAlign: 'justify',
-                fontWeight: '400',
-                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
-                fontFamily: 'coffee+tea demo, sans-serif'
-              }}>
-                Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ₹17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
-              </p>
+              fontSize: '2.5rem',
+              fontWeight: 'bold',
+              color: '#fdee71',
+              marginBottom: '30px',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+              fontFamily: 'coffee+tea demo, sans-serif'
+            }}>Mahotsav 2026 - The Eternal Harmony</h3>
+
+            <p className="theme-description" style={{
+              fontSize: '1.25rem',
+              lineHeight: '1.9',
+              color: '#FFFFFF',
+              textAlign: 'justify',
+              fontWeight: '400',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
+              fontFamily: 'coffee+tea demo, sans-serif'
+            }}>
+              Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ₹17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
+            </p>
           </div>
-          
+
           {/* Stats Bar */}
-          <div ref={statsRef} style={{
-            background: 'rgba(200, 180, 220, 0.9)',
+          <div ref={statsRef} className="stats-card-backtoschool" style={{
+            // background: 'rgba(255, 255, 255, 0.15)',
+            // backdropFilter: 'blur(10px)',
+            // WebkitBackdropFilter: 'blur(10px)',
+
+
+            background: 'linear-gradient(135deg, rgba(231, 237, 165, 0.27),rgba(231, 237, 165, 0.27))',
+
+
+            backdropFilter: 'blur(30px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(30px) saturate(160%)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
             borderRadius: '30px',
             padding: '40px 20px',
-            marginTop: '40px'
+            marginTop: '40px',
+            boxShadow: '6px 6px 32px 8px rgba(202, 224, 56, 0.37)'
           }}>
             <div style={{
               display: 'flex',
@@ -4086,37 +4097,37 @@ Do you want to proceed with registration?`;
               margin: '0 auto'
             }}>
               {/* Footfall */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👣</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
+              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' , }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px', color: 'black' }}><i className="fa-solid fa-people-group"></i></div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>{footfall.toLocaleString()}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>TOTAL FOOTFALL</div>
               </div>
-              
+
               {/* Colleges */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🎓</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}><i className="fa-sharp fa-solid fa-graduation-cap"></i></div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>{colleges}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>COLLEGES</div>
               </div>
-              
+
               {/* Events */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>{events}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>EVENTS</div>
               </div>
-              
+
               {/* Online Audience */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📱</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>{onlineAudience.toLocaleString()}+</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>ONLINE AUDIANCE</div>
               </div>
-              
+
               {/* Editions */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ 
-                  fontSize: '3rem', 
+                <div style={{
+                  fontSize: '3rem',
                   marginBottom: '10px',
                   display: 'flex',
                   justifyContent: 'center',
@@ -4132,18 +4143,19 @@ Do you want to proceed with registration?`;
                     justifyContent: 'center',
                     fontSize: '1.5rem',
                     fontWeight: 'bold',
-                    color: '#1a1a1a'
+                    color: '#645858ff',
+                    fontFamily: 'BackToSchool, sans-serif'
                   }}>18</div>
                 </div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px' }}>18 EDITIONS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>OF FESTIVITIES</div>
+                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>18 EDITIONS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>OF FESTIVITIES</div>
               </div>
-              
+
               {/* Cash Prizes */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px', color: 'black' }}><i className="fa-solid fa-trophy"></i> </div>
+                <div style={{ color: '#e2da0aff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', fontFamily: 'BackToSchool, sans-serif' }}>{cashPrizes}+ LAKHS</div>
+                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem', fontFamily: 'BackToSchool, sans-serif' }}>CASH PRIZES</div>
               </div>
             </div>
           </div>
@@ -4236,7 +4248,7 @@ Do you want to proceed with registration?`;
           }
         `}
       </style>
-      <section 
+      <section
         className={`dashboard-section throwbacks-section section-animate section-animate-left ${visibleSections.has('throwbacks') ? 'visible animate-in' : ''}`}
         data-section-id="throwbacks"
         ref={(el) => registerSection('throwbacks', el)}
@@ -4253,17 +4265,17 @@ Do you want to proceed with registration?`;
         }}
       >
         <h2
-      style={{
-    fontSize: 'clamp(2.5rem, 8vw, 4rem)',
-    fontWeight: 'bold',
-    color: '#fdee71',
-    marginBottom: '80px',
-    textAlign: 'center',
-    fontFamily: 'Woodtrap, sans-serif'
-  }}
->
-  Gallery
-</h2>
+          style={{
+            fontSize: 'clamp(2.5rem, 8vw, 4rem)',
+            fontWeight: 'bold',
+            color: '#fdee71',
+            marginBottom: '80px',
+            textAlign: 'center',
+            fontFamily: 'Woodtrap, sans-serif'
+          }}
+        >
+          Gallery
+        </h2>
 
 
         <div style={{
@@ -4277,17 +4289,17 @@ Do you want to proceed with registration?`;
           <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row">
               {[...Array(10)].map((_, i) => (
-                <div 
+                <div
                   key={`row1-${i}`}
                   className="throwback-card"
                   onClick={() => setSelectedPhoto({ row: 1, index: i })}
                   style={{
                     background: `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
-                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`,color: '#fdee71',
+                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`, color: '#fdee71',
                     cursor: 'pointer'
                   }}
                 >
-                  <div 
+                  <div
                     className="card-placeholder"
                     style={{ color: ['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5] }}
                   >
@@ -4302,7 +4314,7 @@ Do you want to proceed with registration?`;
           <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row scroll-row-2">
               {[...Array(10)].map((_, i) => (
-                <div 
+                <div
                   key={`row2-${i}`}
                   className="throwback-card"
                   onClick={() => setSelectedPhoto({ row: 2, index: i })}
@@ -4312,7 +4324,7 @@ Do you want to proceed with registration?`;
                     cursor: 'pointer'
                   }}
                 >
-                  <div 
+                  <div
                     className="card-placeholder"
                     style={{ color: ['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5] }}
                   >
@@ -4327,7 +4339,7 @@ Do you want to proceed with registration?`;
           <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
             <div className="scroll-row scroll-row-3">
               {[...Array(10)].map((_, i) => (
-                <div 
+                <div
                   key={`row3-${i}`}
                   className="throwback-card"
                   onClick={() => setSelectedPhoto({ row: 3, index: i })}
@@ -4337,7 +4349,7 @@ Do you want to proceed with registration?`;
                     cursor: 'pointer'
                   }}
                 >
-                  <div 
+                  <div
                     className="card-placeholder"
                     style={{ color: ['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5] }}
                   >
@@ -4359,7 +4371,7 @@ Do you want to proceed with registration?`;
       </section>
 
       {/* Throwback Section */}
-      <section 
+      <section
         className="dashboard-section throwback-section"
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
@@ -4376,19 +4388,19 @@ Do you want to proceed with registration?`;
         }}
       >
         <h2
-  style={{
-    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-    fontWeight: 'bold',
-    color: '#fdee71',
-    marginBottom: 'clamp(30px, 5vh, 50px)',
-    textAlign: 'center',
-    fontFamily: 'Bradley Hand, cursive',
-    zIndex: 10,
-    position: 'relative'
-  }}
->
-  Throwback
-</h2>
+          style={{
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+            fontWeight: 'bold',
+            color: '#fdee71',
+            marginBottom: 'clamp(30px, 5vh, 50px)',
+            textAlign: 'center',
+            fontFamily: 'Bradley Hand, cursive',
+            zIndex: 10,
+            position: 'relative'
+          }}
+        >
+          Throwback
+        </h2>
 
         {/* Flower Container with Lock System */}
         <div style={{
@@ -4415,8 +4427,8 @@ Do you want to proceed with registration?`;
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)' 
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)'
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4424,7 +4436,7 @@ Do you want to proceed with registration?`;
               overflow: 'visible',
               zIndex: 10
             }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="clamp(200px, 35vw, 450px)"
                 sunSize="45%"
                 moonSize="39.5%"
@@ -4447,8 +4459,8 @@ Do you want to proceed with registration?`;
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)' 
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)'
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4456,7 +4468,7 @@ Do you want to proceed with registration?`;
               overflow: 'visible',
               zIndex: 10
             }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="clamp(200px, 35vw, 450px)"
                 sunSize="45%"
                 moonSize="39.5%"
@@ -4494,94 +4506,94 @@ Do you want to proceed with registration?`;
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s'
           }}>
-              {/* Year buttons */}
-              <div style={{
-                display: 'flex',
-                gap: '20px'
-              }}>
-                {(['2023', '2024', '2025'] as const).map(year => (
-                  <button 
-                    key={year} 
-                    onClick={() => setSelectedYear(year)}
-                    style={{
-                      padding: '12px 35px',
-                      borderRadius: '20px',
-                      background: selectedYear === year 
-                        ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
-                        : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
-                      border: 'none',
-                      color: 'white',
-                      fontSize: '1.2rem',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      boxShadow: selectedYear === year 
-                        ? '0 6px 20px rgba(0, 0, 0, 0.3)'
-                        : '0 4px 15px rgba(0, 0, 0, 0.2)',
-                      transition: 'all 0.3s ease',
-                      transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
-                    }}
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
+            {/* Year buttons */}
+            <div style={{
+              display: 'flex',
+              gap: '20px'
+            }}>
+              {(['2023', '2024', '2025'] as const).map(year => (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  style={{
+                    padding: '12px 35px',
+                    borderRadius: '20px',
+                    background: selectedYear === year
+                      ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
+                      : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
+                    border: 'none',
+                    color: 'white',
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: selectedYear === year
+                      ? '0 6px 20px rgba(0, 0, 0, 0.3)'
+                      : '0 4px 15px rgba(0, 0, 0, 0.2)',
+                    transition: 'all 0.3s ease',
+                    transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
+                  }}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
 
-              {/* Photo card */}
+            {/* Photo card */}
+            <div style={{
+              width: '300px',
+              height: '300px',
+              background: 'white',
+              borderRadius: '8px',
+              border: '12px solid #4a47a3',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+              transition: 'all 0.4s ease'
+            }}>
+              {/* Photo area */}
               <div style={{
-                width: '300px',
-                height: '300px',
-                background: 'white',
-                borderRadius: '8px',
-                border: '12px solid #4a47a3',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                transition: 'all 0.4s ease'
-              }}>
-                {/* Photo area */}
-                <div style={{
-                  flex: 1,
-                  background: selectedYear === '2023' 
-                    ? 'linear-gradient(to bottom, #87CEEB 0%, #E8F4F8 50%, #90EE90 100%)'
-                    : selectedYear === '2024'
+                flex: 1,
+                background: selectedYear === '2023'
+                  ? 'linear-gradient(to bottom, #87CEEB 0%, #E8F4F8 50%, #90EE90 100%)'
+                  : selectedYear === '2024'
                     ? 'linear-gradient(to bottom, #FFB6C1 0%, #FFC0CB 50%, #FFD700 100%)'
                     : 'linear-gradient(to bottom, #B0E0E6 0%, #ADD8E6 50%, #87CEEB 100%)',
-                  position: 'relative',
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.4s ease'
+              }}>
+                {/* Cloud */}
+                <div style={{
+                  width: '80px',
+                  height: '40px',
+                  background: 'white',
+                  borderRadius: '50px',
+                  position: 'absolute',
+                  top: '40px',
+                  right: '60px',
+                  boxShadow: 'inset 0 -5px 10px rgba(0, 0, 0, 0.05)'
+                }} />
+
+                {/* Hills */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '0',
+                  width: '100%',
+                  height: '40%',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.4s ease'
+                  alignItems: 'flex-end'
                 }}>
-                  {/* Cloud */}
-                  <div style={{
-                    width: '80px',
-                    height: '40px',
-                    background: 'white',
-                    borderRadius: '50px',
-                    position: 'absolute',
-                    top: '40px',
-                    right: '60px',
-                    boxShadow: 'inset 0 -5px 10px rgba(0, 0, 0, 0.05)'
-                  }} />
-                  
-                  {/* Hills */}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    width: '100%',
-                    height: '40%',
-                    display: 'flex',
-                    alignItems: 'flex-end'
-                  }}>
-                    <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
-                      <path d="M0,120 Q75,40 150,80 T300,60 L300,120 Z" fill={selectedYear === '2023' ? '#78BE20' : selectedYear === '2024' ? '#90EE90' : '#4CAF50'} />
-                      <path d="M0,120 Q100,60 200,100 T300,90 L300,120 Z" fill={selectedYear === '2023' ? '#9ACD32' : selectedYear === '2024' ? '#A8E6A3' : '#66BB6A'} opacity="0.8" />
-                    </svg>
-                  </div>
+                  <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
+                    <path d="M0,120 Q75,40 150,80 T300,60 L300,120 Z" fill={selectedYear === '2023' ? '#78BE20' : selectedYear === '2024' ? '#90EE90' : '#4CAF50'} />
+                    <path d="M0,120 Q100,60 200,100 T300,90 L300,120 Z" fill={selectedYear === '2023' ? '#9ACD32' : selectedYear === '2024' ? '#A8E6A3' : '#66BB6A'} opacity="0.8" />
+                  </svg>
                 </div>
               </div>
             </div>
+          </div>
 
           {/* Lock Icon removed */}
         </div>
@@ -4611,7 +4623,7 @@ Do you want to proceed with registration?`;
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <div 
+              <div
                 className={animate[unit] ? 'timer-digit-change' : ''}
                 style={{
                   width: '100%',
@@ -4710,12 +4722,12 @@ Do you want to proceed with registration?`;
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
             <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
-            
+
             {/* Corner Flowers for Events Information */}
             {/* Floating Flower - Top Right */}
             <div className="fixed -top-16 -right-16 md:-top-32 md:-right-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-                <FlowerComponent 
+                <FlowerComponent
                   size="100%"
                   sunSize="50%"
                   moonSize="43%"
@@ -4732,7 +4744,7 @@ Do you want to proceed with registration?`;
             {/* Floating Flower - Bottom Left */}
             <div className="fixed -bottom-16 -left-16 md:-bottom-32 md:-left-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-                <FlowerComponent 
+                <FlowerComponent
                   size="100%"
                   sunSize="50%"
                   moonSize="43%"
@@ -4745,10 +4757,10 @@ Do you want to proceed with registration?`;
                 />
               </div>
             </div>
-            
+
             <div className="events-navigation">
               <button className="events-nav-btn prev" onClick={prevEventSlide}>◀</button>
-              <div 
+              <div
                 className="events-carousel-3d-container"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
@@ -4757,12 +4769,12 @@ Do you want to proceed with registration?`;
                 <div className="events-carousel-3d-wrapper">
                   {eventInfoCards.map((card, index) => {
                     const offset = index - currentEventSlide;
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front
                       transform = 'translateX(0) translateY(0) translateZ(200px) rotateY(0deg) scale(1)';
@@ -4787,7 +4799,7 @@ Do you want to proceed with registration?`;
                       zIndex = 0;
                       opacity = 0;
                     }
-                    
+
                     return (
                       <div
                         key={index}
@@ -4861,11 +4873,11 @@ Do you want to proceed with registration?`;
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
-              <button 
-                className="close-btn" 
-                onClick={(e) => { 
+              <button
+                className="close-btn"
+                onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   console.log('Close button clicked');
                   setActiveSubModal(null);
                 }}
@@ -4884,160 +4896,160 @@ Do you want to proceed with registration?`;
                   ) : (
                     <>
                       <div className="events-category-grid">
-                      {/* Sports Events */}
-                      <div className="event-category-card">
-                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredSportsEvents().length > 0 ? (
-                            getFilteredSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No sports events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Cultural Events */}
-                      <div className="event-category-card">
-                        <h3>🎭 Cultural Events ({getFilteredCulturalEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredCulturalEvents().length > 0 ? (
-                            getFilteredCulturalEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No cultural events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Para Sports Events */}
-                      <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
-                        {getFilteredParaSportsEvents().length === 0 && (
-                          <div>
-                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
-                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px'}}>
-                              ?? Retry Loading Events
-                            </button>
+                        {/* Sports Events */}
+                        <div className="event-category-card">
+                          <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
+                          <div className="event-list">
+                            {getFilteredSportsEvents().length > 0 ? (
+                              getFilteredSportsEvents().map((event) => (
+                                <label key={event._id} className="event-item event-checkbox-item">
+                                  <input
+                                    type="checkbox"
+                                    className="event-checkbox"
+                                    checked={tempSelectedEvents.has(event._id)}
+                                    disabled={isEventDisabled(event)}
+                                    onChange={() => {
+                                      // Only allow changes if not already registered
+                                      if (!selectedEvents.has(event._id)) {
+                                        const newSelection = new Set(tempSelectedEvents);
+                                        const wasSelected = newSelection.has(event._id);
+                                        if (wasSelected) {
+                                          newSelection.delete(event._id);
+                                        } else {
+                                          newSelection.add(event._id);
+                                        }
+                                        const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id));
+                                        setRegularEventsSelected(hasRegularEvents);
+                                        setTempSelectedEvents(newSelection);
+                                      }
+                                    }}
+                                  />
+                                  <div className="event-item-content">
+                                    <h4>{event.eventName}</h4>
+                                    {isLoggedIn && (
+                                      <small className="event-gender">({event.gender})</small>
+                                    )}
+                                  </div>
+                                </label>
+                              ))
+                            ) : (
+                              <p>No sports events available at the moment.</p>
+                            )}
                           </div>
-                        )}
-                        <div className="event-list">
-                          {getFilteredParaSportsEvents().length > 0 ? (
-                            getFilteredParaSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)}
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => {
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id) && !regularEventsSelected) {
-                                      const newSelection = new Set(tempSelectedEvents);
-                                      const wasSelected = newSelection.has(event._id);
-                                      
-                                      if (wasSelected) {
-                                        newSelection.delete(event._id);
-                                      } else {
-                                        newSelection.add(event._id);
+                        </div>
+
+                        {/* Cultural Events */}
+                        <div className="event-category-card">
+                          <h3>🎭 Cultural Events ({getFilteredCulturalEvents().length})</h3>
+                          <div className="event-list">
+                            {getFilteredCulturalEvents().length > 0 ? (
+                              getFilteredCulturalEvents().map((event) => (
+                                <label key={event._id} className="event-item event-checkbox-item">
+                                  <input
+                                    type="checkbox"
+                                    className="event-checkbox"
+                                    checked={tempSelectedEvents.has(event._id)}
+                                    disabled={isEventDisabled(event)}
+                                    onChange={() => {
+                                      // Only allow changes if not already registered
+                                      if (!selectedEvents.has(event._id)) {
+                                        const newSelection = new Set(tempSelectedEvents);
+                                        const wasSelected = newSelection.has(event._id);
+                                        if (wasSelected) {
+                                          newSelection.delete(event._id);
+                                        } else {
+                                          newSelection.add(event._id);
+                                        }
+                                        const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id));
+                                        setRegularEventsSelected(hasRegularEvents);
+                                        setTempSelectedEvents(newSelection);
                                       }
-                                      
-                                      // Check if any para sports events are selected
-                                      const hasParaSportsSelected = getFilteredParaSportsEvents().some(pe => 
-                                        newSelection.has(pe._id)
-                                      );
-                                      
-                                      setParaSportsSelected(hasParaSportsSelected);
-                                      
-                                      // If selecting para sports, remove all regular events
-                                      if (!wasSelected && hasParaSportsSelected) {
-                                        [...getFilteredSportsEvents(), ...getFilteredCulturalEvents()].forEach(e => {
-                                          newSelection.delete(e._id);
-                                        });
-                                        setRegularEventsSelected(false);
-                                      }
-                                      
-                                      setTempSelectedEvents(newSelection);
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">🏆 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No para sports events available at the moment.</p>
+                                    }}
+                                  />
+                                  <div className="event-item-content">
+                                    <h4>{event.eventName}</h4>
+                                    {isLoggedIn && (
+                                      <small className="event-gender">({event.gender})</small>
+                                    )}
+                                  </div>
+                                </label>
+                              ))
+                            ) : (
+                              <p>No cultural events available at the moment.</p>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Para Sports Events */}
+                        <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
+                          <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                          {getFilteredParaSportsEvents().length === 0 && (
+                            <div>
+                              <p style={{ color: '#c96ba1', fontWeight: 'bold' }}>?? No para sports events loaded. Server might be down.</p>
+                              <button onClick={() => fetchEvents()} style={{ padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px' }}>
+                                ?? Retry Loading Events
+                              </button>
+                            </div>
                           )}
+                          <div className="event-list">
+                            {getFilteredParaSportsEvents().length > 0 ? (
+                              getFilteredParaSportsEvents().map((event) => (
+                                <label key={event._id} className="event-item event-checkbox-item">
+                                  <input
+                                    type="checkbox"
+                                    className="event-checkbox"
+                                    checked={tempSelectedEvents.has(event._id)}
+                                    disabled={isEventDisabled(event)}
+                                    onChange={() => {
+                                      // Only allow changes if not already registered
+                                      if (!selectedEvents.has(event._id) && !regularEventsSelected) {
+                                        const newSelection = new Set(tempSelectedEvents);
+                                        const wasSelected = newSelection.has(event._id);
+
+                                        if (wasSelected) {
+                                          newSelection.delete(event._id);
+                                        } else {
+                                          newSelection.add(event._id);
+                                        }
+
+                                        // Check if any para sports events are selected
+                                        const hasParaSportsSelected = getFilteredParaSportsEvents().some(pe =>
+                                          newSelection.has(pe._id)
+                                        );
+
+                                        setParaSportsSelected(hasParaSportsSelected);
+
+                                        // If selecting para sports, remove all regular events
+                                        if (!wasSelected && hasParaSportsSelected) {
+                                          [...getFilteredSportsEvents(), ...getFilteredCulturalEvents()].forEach(e => {
+                                            newSelection.delete(e._id);
+                                          });
+                                          setRegularEventsSelected(false);
+                                        }
+
+                                        setTempSelectedEvents(newSelection);
+                                      }
+                                    }}
+                                  />
+                                  <div className="event-item-content">
+                                    <h4>{event.eventName}</h4>
+                                    <p>{event.description || 'No description available'}</p>
+                                    {event.date && <p className="event-meta">📅 {event.date}</p>}
+                                    {event.venue && <p className="event-meta">📍 {event.venue}</p>}
+                                    {event.prizePool && <p className="event-meta">🏆 {event.prizePool}</p>}
+                                    {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  </div>
+                                </label>
+                              ))
+                            ) : (
+                              <p>No para sports events available at the moment.</p>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </>
                   )}
-                  
+
                   <div className="events-modal-footer">
                     <div className="selected-count">
                       Selected: {tempSelectedEvents.size} event(s)
@@ -5062,7 +5074,7 @@ Do you want to proceed with registration?`;
                         Cancel
                       </button>
                       {tempSelectedEvents.size > 0 && (
-                        <button 
+                        <button
                           className="register-events-btn"
                           onClick={handleRegisterForEvents}
                         >
@@ -5073,7 +5085,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'PROFILE' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card" onClick={handleOpenProfile}>
@@ -5090,7 +5102,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'SCHEDULE' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5107,7 +5119,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'COLLABORATION' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5124,7 +5136,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'ZONALS' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5141,7 +5153,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CRICKET' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5158,7 +5170,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'HOSPITALITY' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5175,7 +5187,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CAMPUS AMBASSADOR' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5192,7 +5204,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'SPONSORS' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5209,7 +5221,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CERTIFICATES' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5226,7 +5238,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'OUR TEAM' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5243,7 +5255,7 @@ Do you want to proceed with registration?`;
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'MAP' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5311,14 +5323,14 @@ Do you want to proceed with registration?`;
               <p className="forgot-password-instructions">
                 Enter your registered email address and we'll send your login credentials to your inbox.
               </p>
-              
+
               <form className="forgot-password-form" onSubmit={handleForgotPasswordSubmit}>
                 {resetMessage && (
                   <div className={`submit-message ${resetMessage.type}`}>
                     {resetMessage.text}
                   </div>
                 )}
-                
+
                 <div className="form-group">
                   <label htmlFor="forgot-email">Email Address</label>
                   <input
@@ -5332,22 +5344,22 @@ Do you want to proceed with registration?`;
                     required
                   />
                 </div>
-                
-                <button 
-                  type="submit" 
+
+                <button
+                  type="submit"
                   className="forgot-password-submit-btn"
                   disabled={isSendingReset}
                 >
                   {isSendingReset ? '?? Sending...' : '?? Send Password to Email'}
                 </button>
-                
+
                 <div className="back-to-login">
-                  <button 
-                    type="button" 
-                    onClick={() => { 
-                      setShowForgotPasswordModal(false); 
-                      setShowLoginModal(true); 
-                    }} 
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowForgotPasswordModal(false);
+                      setShowLoginModal(true);
+                    }}
                     className="back-to-login-btn"
                   >
                     ? Back to Login
@@ -5380,7 +5392,7 @@ Do you want to proceed with registration?`;
                     </div>
                     <h3>{userProfileData.name}</h3>
                   </div>
-                  
+
                   <div className="profile-info-section">
                     <h4>📋 Personal Information</h4>
                     <div className="profile-info-grid">
@@ -5429,8 +5441,8 @@ Do you want to proceed with registration?`;
                             <div className="event-item-header">
                               <h5>{registration.eventId?.eventName || 'Event'}</h5>
                               <span className="event-type-badge">
-                                {registration.eventId?.eventType === 'sports' ? '⚽' : 
-                                 registration.eventId?.eventType === 'parasports' ? '♿' : '🎭'} 
+                                {registration.eventId?.eventType === 'sports' ? '⚽' :
+                                  registration.eventId?.eventType === 'parasports' ? '♿' : '🎭'}
                                 {registration.eventId?.eventType || 'Event'}
                               </span>
                             </div>
@@ -5454,7 +5466,7 @@ Do you want to proceed with registration?`;
                     ) : (
                       <div className="no-events-registered">
                         <p>You haven't registered for any events yet.</p>
-                        <button 
+                        <button
                           className="browse-events-btn"
                           onClick={() => {
                             setShowProfileModal(false);
@@ -5506,7 +5518,7 @@ Do you want to proceed with registration?`;
               <p className="checklist-instructions">
                 Browse and select events you're interested in, then save them to your My Events collection.
               </p>
-              
+
               {loadingEvents ? (
                 <div className="loading-events">
                   <p>Loading events...</p>
@@ -5571,8 +5583,8 @@ Do you want to proceed with registration?`;
 
                   {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && (
                     <p className="no-events-message">
-                      {isLoggedIn && userProfileData.gender === 'female' 
-                        ? "No events available for female participants at the moment." 
+                      {isLoggedIn && userProfileData.gender === 'female'
+                        ? "No events available for female participants at the moment."
                         : "No events available at the moment."
                       }
                     </p>
@@ -5584,7 +5596,7 @@ Do you want to proceed with registration?`;
                 <div className="selected-count">
                   Selected: {selectedEvents.size} event(s)
                 </div>
-                <button 
+                <button
                   className="save-events-btn"
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
@@ -5609,7 +5621,7 @@ Do you want to proceed with registration?`;
               <p className="checklist-instructions">
                 These are your registered events. Click the delete button to remove any event you don't want to participate in.
               </p>
-              
+
               {myEvents.length > 0 ? (
                 <div className="my-events-list">
                   {myEvents.map((event) => (
@@ -5682,151 +5694,151 @@ Do you want to proceed with registration?`;
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '50px'
           }}>
-          {/* Logo Section */}
-          <div>
-            <img 
-              src={`${import.meta.env.BASE_URL}image.png`}
-              alt="Mahotsav 2026" 
-              style={{
-                height: '80px',
-                objectFit: 'contain',
-                marginBottom: '25px'
-              }}
-            />
-            {/* Social Media Icons */}
-            <h3 style={{
-              color: '#fff',
-              fontSize: '1rem',
-              fontWeight: 'bold',
-              marginBottom: '20px',
-              letterSpacing: '1px'
-            }}>FOLLOW US ON :</h3>
-            <div style={{
-              display: 'flex',
-              gap: '20px',
-              marginBottom: '20px'
-            }}>
-              <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
-              <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* Contact Us Section */}
-          <div>
-            <h3 style={{
-              color: '#fff',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              marginBottom: '20px',
-              letterSpacing: '1px'
-            }}>CONTACT US :</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m2 7 10 6 10-6"/>
-                </svg>
-                <span style={{ color: '#fff', fontSize: '1rem' }}>mahotsav@vignan.ac.in</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-                <span style={{ color: '#fff', fontSize: '1rem' }}>+91 94930 33592</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-                <span style={{ color: '#fff', fontSize: '1rem' }}>+91 90305 57363</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Location Section */}
-          <div>
-            <h3 style={{
-              color: '#fff',
-              fontSize: '1.1rem',
-              fontWeight: 'bold',
-              marginBottom: '20px',
-              letterSpacing: '1px'
-            }}>LOCATION :</h3>
-            <div style={{ display: 'flex', alignItems: 'start', gap: '15px', marginBottom: '20px' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginTop: '4px', flexShrink: 0 }}>
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              <p style={{ color: '#fff', fontSize: '1rem', lineHeight: '1.8', margin: 0 }}>
-                VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH (DEEMED TO BE UNIVERSITY), VADLAMUDI, GUNTUR, A.P -522213
-              </p>
-            </div>
-            <a 
-              href="https://maps.app.goo.gl/5pufqAcYqKrQCyQZ6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{
-                color: '#a78bfa',
+            {/* Logo Section */}
+            <div>
+              <img
+                src={`${import.meta.env.BASE_URL}image.avif`}
+                alt="Mahotsav 2026"
+                style={{
+                  height: '80px',
+                  objectFit: 'contain',
+                  marginBottom: '25px'
+                }}
+              />
+              {/* Social Media Icons */}
+              <h3 style={{
+                color: '#fff',
                 fontSize: '1rem',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                marginTop: '10px',
-                transition: 'color 0.3s'
-              }}
-            >
-              VIEW ON GOOGLE MAPS
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-          </div>
+                fontWeight: 'bold',
+                marginBottom: '20px',
+                letterSpacing: '1px'
+              }}>FOLLOW US ON :</h3>
+              <div style={{
+                display: 'flex',
+                gap: '20px',
+                marginBottom: '20px'
+              }}>
+                <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                </a>
+                <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Contact Us Section */}
+            <div>
+              <h3 style={{
+                color: '#fff',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                marginBottom: '20px',
+                letterSpacing: '1px'
+              }}>CONTACT US :</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m2 7 10 6 10-6" />
+                  </svg>
+                  <span style={{ color: '#fff', fontSize: '1rem' }}>mahotsav@vignan.ac.in</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  <span style={{ color: '#fff', fontSize: '1rem' }}>+91 94930 33592</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  <span style={{ color: '#fff', fontSize: '1rem' }}>+91 90305 57363</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Location Section */}
+            <div>
+              <h3 style={{
+                color: '#fff',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                marginBottom: '20px',
+                letterSpacing: '1px'
+              }}>LOCATION :</h3>
+              <div style={{ display: 'flex', alignItems: 'start', gap: '15px', marginBottom: '20px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginTop: '4px', flexShrink: 0 }}>
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p style={{ color: '#fff', fontSize: '1rem', lineHeight: '1.8', margin: 0 }}>
+                  VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH (DEEMED TO BE UNIVERSITY), VADLAMUDI, GUNTUR, A.P -522213
+                </p>
+              </div>
+              <a
+                href="https://maps.app.goo.gl/5pufqAcYqKrQCyQZ6"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#a78bfa',
+                  fontSize: '1rem',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginTop: '10px',
+                  transition: 'color 0.3s'
+                }}
+              >
+                VIEW ON GOOGLE MAPS
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>

@@ -651,18 +651,16 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Classical/Light Vocal Solo",
       rules: [
-        "The maximum duration of the performance shall not exceed 6 minutes.",
-        "The item can be presented in either Hindusthani, Carnatic or Light Vocal styles.",
-        "Maximum number of accompanists permitted is two. A Shruthi box must be used (Accompanists must also be registered).",
-        "Movie songs are not allowed under this item.",
-        "For Light Vocal, only non-film songs/ geet/ ghazal/ bhajan/ shabad and abhangas can be presented.",
-        "Sufficient thought and care must be exercised in the choice of Raga and composition.",
-        "Judgement will be based on the qualities like Taal, Selection of Raga, Composition and general impression."
+        "This is a solo singing competition for classical or light vocal music.",
+        "The participant can choose any classical or light music composition.",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "The maximum time for Stage/Instruments setting is 3 minutes.",
+        "The number of accompanists should not exceed two.",
+        "Judgment will be made on the qualities like pitch, rhythm, voice modulation, and overall presentation."
       ],
-
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -671,16 +669,16 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Western Vocal Solo",
       rules: [
-        "The maximum duration for the performance shall be 4 minutes.",
-        "The maximum time for Stage/ Instruments setting is 2 minutes.",
-        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence. ",
-        "The songs language can be either in English or any other Foreign language.",
-        "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
-        
+        "This is a solo singing competition for western vocal music.",
+        "The participant can choose any western song in any language.",
+        "The maximum duration of the performance shall be 4 minutes.",
+        "The maximum time for Stage/Instruments setting is 3 minutes.",
+        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
+        "Judgment will be made on the qualities like pitch, rhythm, voice quality, stage presence, and overall performance."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -691,8 +689,7 @@ const EventDetail: React.FC = () => {
       rules: [
         "The event will be having 3 - 4 rounds.",
         "First round will be written test on the questions about movie songs and personalities.",
-        "The details of remaining rounds will be announced on spot."
-  
+        "The details of remaining rounds will be announced on spot"
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -706,14 +703,14 @@ const EventDetail: React.FC = () => {
       subtitle: "Instrumental Solo",
       rules: [
         "This category is open to all types of instruments, including Western or Classical, and Percussion or Non-Percussion.",
-        "No per-processed or programmed sounds/loops are allowed in the performance.",
+        "No pre-processed or programmed sounds/loops are allowed in the performance.",
         "Item can be presented in any style or genre.",
         "Participants must bring their own instruments.",
         "Duration of performance shall be between 4 to 5 min.",
         "Time for stage/ Instruments setting is maximum 3 minutes.",
-        "Maximum number of accompanists is two. (if required).",
-        "Judges may ask for specific changes in the performance and request a subsequent performance if deemed necessary. ",
-        "Judging will be based on the following criteria: ",
+        "Maximum number of accompanists is two. (if required)",
+        "Judges may ask for specific changes in the performance and request a subsequent performance if deemed necessary.",
+        "Judging will be based on the following criteria:",
         "Mastery of the instrument and proficiency.",
         "Complexity and difficulty of the piece/Music performed.",
         "Musicality, expression, and dynamics.",
@@ -825,16 +822,17 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Mono Action",
       rules: [
-        "This is an individual competition.",
-        "Each participant artist will be given 4 minutes.",
-        "The participant is required to perform an act of any theme. ",
-        "Obscenity and offensive gestures are strictly prohibited.",
-        "Judgement will be based on acting, dialogue delivery, stage presence and overall impression."
+        "This is a solo acting performance where one participant portrays multiple characters.",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "Props and background music are allowed but should be minimal.",
+        "The performance should showcase the participant's ability to switch between different characters seamlessly.",
+        "The use of make-up and costume changes is allowed within the time limit.",
+        "Judgment will be based on acting skills, character portrayal, voice modulation, expression, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: "Rs. 1,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -842,18 +840,18 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "On the Spot Ad Making",
       rules: [
-        "A maximum of 4 participants are allowed to participate in a team.",
-        "The items or item names will be given 1 minute before the presentation.",
-        "The maximum time allotted for preparation for each team is 5 minutes.",
-        "The maximum time allowed to showcase their talent is 2 – 3 minutes.",
-        "Judgment will most likely be based on the qualities like idea, creativity of presentation, general impression.",
-        "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected."
-
+        "Teams should consist of a minimum of 3 and a maximum of 6 participants.",
+        "The topic/product for the advertisement will be given on the spot.",
+        "Participants will be given 30 minutes for preparation.",
+        "The maximum duration of the advertisement performance shall be 3 minutes.",
+        "Props are allowed, but teams must arrange them within the preparation time.",
+        "The advertisement should be creative, engaging, and effectively promote the given product/topic.",
+        "Judgment will be based on creativity, presentation, teamwork, message delivery, and entertainment value."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: "Rs. 1,000"
+        first: "Rs. 5,000",
+        second: "Rs. 4,000",
+        third: "Rs. 3,000"
       },
       contacts: []
     },
@@ -861,14 +859,16 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Dialogue Dhamaka (Hindi)",
       rules: [
-        "It is an individual competition.",
-        "Participants have the flexibility to deliver a dialogue from any movie or they can write their own script for a dialogue in any language.",
-        "Each student is allowed to perform for a minimum of 2 minute and a maximum of 4 minutes.",
-        "Your performance will be evaluated based on key criteria i.e., voice, fluency, facial expressions, gestures, dialogue delivery, stage presence and overall impression."
+        "This is a solo dialogue delivery competition in Hindi language.",
+        "Participants can choose dialogues from movies, plays, or their own creations.",
+        "The maximum duration of the performance shall be 3 minutes.",
+        "Props and background music are allowed but should complement the dialogue delivery.",
+        "The performance should showcase powerful delivery, emotion, and expression.",
+        "Judgment will be based on voice modulation, expression, dialogue selection, impact, and overall performance."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -877,18 +877,16 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Master Orator",
       rules: [
-        "This is a solo public speaking competition.",
-        "Participants will be given a topic on the spot.",
-        "Preparation time: 5 minutes.",
-        "The maximum duration of the speech shall be 3-5 minutes.",
-        "Participants can speak in English, Hindi, or Telugu.",
-        "The speech should be well-structured with introduction, body, and conclusion.",
-        "Judgment will be based on content, delivery, confidence, language proficiency, and overall impact."
+        "Speaking Time: Each participant will be given 3 minutes for delivering content.",
+        "First Round Topic: The topic for the first round will be provided one day before the competition and will be sent to the participants' respective emails.",
+        "Second Round (Extempore): The second round will be Extempore. The topic will be given on the spot and participants will have 25 seconds as buffer time for preparation.",
+        "Judgment will be based on the following: Content delivery, fluency, and relevance to the topic given.",
+        "The winner will be awarded the title of \"Master Orator\"."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: "Rs. 1,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -896,17 +894,14 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Spot Creative Writing",
       rules: [
-        "This is an individual creative writing competition.",
-        "Topic will be given on the spot.",
-        "Participants can write in English, Hindi, or Telugu.",
-        "Duration: 1 hour for writing.",
-        "The content can be in the form of a story, essay, poem, or article.",
-        "Handwritten entries only. Pen and paper will be provided.",
-        "Judgment will be based on creativity, language, expression, originality, and relevance to the topic."
+        "1. Creative writing is defined as any writing of the participant's own composition.",
+        "2. Participants are required to write an essay on a particular topic that will be given on the spot.",
+        "3. The written submissions are to be submitted within the specified duration.",
+        "4. The word limit for the competition is 800 words."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -915,16 +910,13 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Telugu Vyaasa Rachana",
       rules: [
-        "This is a Telugu essay writing competition.",
-        "Topic will be given on the spot.",
-        "Duration: 1 hour for writing.",
-        "Handwritten entries only. Pen and paper will be provided.",
-        "The essay should be written only in Telugu language.",
-        "Judgment will be based on content quality, language proficiency, expression, and relevance to the topic."
+        "Telugu Vyaasa Rachana is defined as any writing of the participant's own composition.",
+        "Participants are required to write an essay in Telugu on a particular topic that will be given on the spot.",
+        "The written submissions are to be submitted within the specified duration."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -933,34 +925,56 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Shayari - Hindi",
       rules: [
-        "This is a Hindi Shayari recitation competition.",
-        "Participants can present their own creation or famous Shayari.",
-        "The maximum duration of the performance shall be 3 minutes.",
-        "The Shayari must be in Hindi language only.",
-        "Participants should focus on emotion, expression, and delivery.",
-        "Judgment will be based on content, voice modulation, expression, and overall presentation."
+        "Participants should present their own composed Shayari on one of the following themes: “PATRIOTISM / LOVE / FORGIVING”.",
+        "Participants are supposed to re-write the Shayari composed by them on the selected topic on the spot without seeing and a hard copy of the Shayari shall be submitted to the judges.",
+        "The Shayari must be performed on the stage.",
+        "The minimum number of lines should be 6 to 8.",
+        "Each participant should submit only one entry.",
+        "The judgment criteria would be based on the Impact, Creativity, Relevance to the theme."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
     },
     "JAM": {
-      title: "LITERATURE",
-      subtitle: "JAM (Just A Minute)",
+      title: "Rules",
+      subtitle: "",
       rules: [
-        "This is an impromptu speaking competition.",
-        "Participants will be given a topic and must speak continuously for one minute.",
-        "Repetition, hesitation, and deviation from the topic will lead to point deduction.",
-        "Participants can speak in English or Hindi.",
-        "Multiple rounds will be conducted to determine the winner.",
-        "Judgment will be based on fluency, presence of mind, vocabulary, and adherence to rules."
+        "This competition is designed for those who enjoy speaking impromptu.",
+        "After the topic is given, 25 seconds will be provided as buffer time.",
+        "Following the buffer time, the participant must talk for a maximum of one minute regarding the given topic.",
+        "",
+        "Game play and Scoring:",
+        "The game proceeds in rounds with contestants attempting to interrupt the speaker by correctly identifying errors.",
+        "Action",
+        "Points Awarded",
+        "Successful Jam (Justified Interruption)",
+        "+5 Points to the interrupter (who then takes over as speaker).",
+        "Unsuccessful Jam (Unjustified Interruption)",
+        "-2 Points to the interrupter.",
+        "Speaking Successfully (Until Jammed or Time-Out)",
+        "+1 Point for every 10 seconds of error-free speech (to be tracked by the timekeeper).",
+        "",
+        "One of the contestants will begin speaking on the given topic.",
+        "Any other contestant can 'jam' (interrupt) the speaker by stating the reason for the interruption.",
+        "If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
+        "If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
+        "The contestant with the maximum points at the end of the given time will be declared the winner.",
+        "",
+        "Judicial Clarification: Valid Jamming Reasons",
+        "For the purpose of consistency, justified interruptions (successful jams) may be called for the following reasons, among others:",
+        "Hesitation/Stammering (a prolonged pause or repetition).",
+        "Repetition (of a word or phrase, excluding articles/prepositions).",
+        "Grammatical Error (a clear error in syntax or grammar).",
+        "Deviation from the Topic (a complete shift away from the theme).",
+        "Failure to use a specific word/phrase (if mandated by the topic card)."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -969,85 +983,140 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Dumb Charades",
       rules: [
-        "This is a team event with 2 participants per team.",
-        "One participant will act out movie names/phrases without speaking while the other guesses.",
-        "Movie names can be from any language (Hindi, Telugu, English, etc.).",
-        "Time limit for each round will be decided by coordinators.",
-        "Teams will compete in multiple rounds.",
-        "Judgment will be based on correct guesses within the time limit."
+        "Team Composition and Time Limits",
+        "Participation is strictly limited to teams of two (2) members.",
+        "The maximum time allotted for a team to successfully enact and guess one word/phrase is 90 seconds (1 minute 30 seconds).",
+        "The competition will consist of multiple rounds. Each team will attempt to guess a predetermined number of clues (e.g., 5 clues) per turn.",
+        "Gameplay",
+        "Word/Phrase Cards: Teams will be provided with clue cards containing a word, phrase, or movie title (in any language).",
+        "Roles: One member of the team will act out the clue (The Enactor), and the other member will guess the clue (The Guesser).",
+        "Non-Verbal Rule: The Enactor must perform the charade using only gestures, body movements, and facial expressions. No lip movements, pointing to written words, or sounds are allowed. Any violation of this rule will result in the immediate cancellation of the current clue and a penalty.",
+        "Passing: Teams are permitted to pass on a clue if they are unable to guess it within a reasonable time. The team may only return to a passed clue if they complete all others within the 90-second limit.",
+        "Scoring and Judging",
+        "Scoring: Points will be awarded for each successfully guessed clue.",
+        "3 Points for each correctly guessed movie/phrase.",
+        "Penalty: -2 Points will be deducted for any infringement of the non-verbal rule (lip movement, sound).",
+        "Winning: The team with the highest total score after all rounds will be declared the winner. In case of a tie, a sudden death round will be conducted.",
+        "Conduct",
+        "Electronic Devices: The use of any electronic device, including mobile phones, to search for clues or assist in guessing is strictly prohibited and will result in disqualification.",
+        "Audience Assistance: Audience members are not allowed to prompt, shout, or assist the guessing team. Any deliberate attempt to assist will be penalized at the judge's discretion.",
+        "Judge's Decision: The decision of the Judge/Coordinator on the validity of the guess and any rule violations is final.",
+        "Cash Prizes:",
+        "First - Rs. 2000",
+        "Second - Rs. 1500",
+        "Third - Rs. 1000",
+        "Contact no:"
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
     },
+
     "Quiz": {
       title: "LITERATURE",
       subtitle: "Quiz Wiz",
       rules: [
-        "This is a team quiz competition with 3 participants per team.",
-        "Questions will cover various topics including general knowledge, current affairs, science, sports, entertainment, etc.",
-        "Multiple rounds will be conducted (written, buzzer, rapid fire, etc.).",
-        "Teams should maintain discipline and follow quiz etiquette.",
-        "Umpire's decision will be final.",
-        "Judgment will be based on correct answers and speed."
+        "This competition is designed to test participants' knowledge across a wide spectrum of subjects.",
+        "I. Registration and Team Composition",
+        "Team Size: Participation is strictly limited to teams of three (3) members.",
+        "Team Formation: Teams are permitted regardless of college affiliation. However, all participants must be registered students.",
+        "Conduct: Any attempt by a team to disrupt or \"mess the atmosphere\" of the contest through unfair means or unsportsmanlike conduct will result in immediate disqualification.",
+        "II. Event Structure and Rounds",
+        "The competition will consist of a maximum of three rounds. The Quizmaster reserves the right to modify the number or type of rounds based on the number of participating teams.",
+        "Round 1: This will be a written round containing questions covering various topics.",
+        "Round 2: Knowledge Dropping (Mechanism to be Defined by Quizmaster): This will be a multi-answer or visual round where points may be awarded for each correct piece of information provided, testing deep knowledge in a specific area.",
+        "Round 3: Speeding Test (Buzzer Round): This is a rapid-fire round where the fastest correct answer wins points.",
+        "III. General Rules of Conduct",
+        "Electronic Devices: The use of any electronic gadgets, including but not limited to mobile phones, laptops, smartwatches, or any external material (printed or digital) is strictly prohibited. Violation will result in immediate disqualification of the entire team.",
+        "Stationery: All necessary stationery (pens, paper) will be provided by the organizers. Participants are not allowed to bring any loose paper, personal pens, or external writing material into the competition area.",
+        "Subject Areas: Questions will cover History, Mythology, Literature, Social Sciences, General World Affairs, and current events.",
+        "Discipline: Arguments or aggressive disputes with the contestants, the Quizmaster, or the coordinators over questions or answers are strictly prohibited and will lead to the immediate elimination of the offending team.",
+        "Quizmaster's Decision: The decision of the Quizmaster on all matters, including questions, answers, and scoring, is final and binding.",
+        "IV. Scoring and Tie-Breaker (Essential additions)",
+        "Scoring System: (To be announced before the start of Round 1). Points will be allocated for correct answers, and negative marking may be applied for incorrect answers in the buzzer rounds.",
+        "Tie-Breaker: In the event of a tie for the top position, a sudden death question or a separate tie-breaker round will be conducted to determine the winner.",
+        "Cash Prizes:",
+        "First - Rs. 3000",
+        "Second - Rs. 2000",
+        "Third - Rs. 1500"
       ],
       prizes: {
-        first: "Rs. 5,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,500"
       },
       contacts: []
     },
+
     "Word Master": {
       title: "LITERATURE",
       subtitle: "Word Master",
       rules: [
-        "This is an individual word game competition.",
-        "Participants will compete in word-building, vocabulary, and language skills challenges.",
-        "Rounds may include word chain, scrabble-style games, crosswords, or similar activities.",
-        "Time limits will be specified for each round.",
-        "Participants should have strong vocabulary and quick thinking.",
-        "Judgment will be based on correct words, speed, and creativity."
+        "This multi-stage event tests participants' comprehensive command of vocabulary, spelling, and analytical word skills.",
+        "I. Event Structure and Flow",
+        "The competition is a series of elimination rounds, consisting of four distinct events:",
+        "Round 1: Words Worth — Vocabulary / Word Knowledge",
+        "Round 2: Spell Bee — Spelling Accuracy",
+        "Round 3: Solving Crosswords — Word Definition / Grid Solving",
+        "Round 4 (Finals): Solving Anagrams — Analytical Word Rearrangement",
+        "II. General Rules and Timing",
+        "Format: This is an individual competition.",
+        "Timing: The specific time limits for Solving Anagrams and Solving Crosswords will be announced on the spot by the coordinator.",
+        "Progression: Contestants will be filtered based on performance in each preceding round to advance to the next stage.",
+        "Device Usage: The use of any electronic device, mobile phone, or external reference material is strictly prohibited and will result in immediate disqualification.",
+        "Scoring criteria: Scoring will be based on accuracy and time taken to complete the task",
+        "Cash Prizes:",
+        "First - Rs. 2000",
+        "Second - Rs. 1500",
+        "Third - Rs. 1000",
+        "Contact no:"
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
     },
+
     "Story telling": {
       title: "LITERATURE",
       subtitle: "Story Telling",
       rules: [
-        "This is a solo storytelling competition.",
-        "Participants can narrate a story of their choice (folk tale, moral story, personal experience, or fiction).",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "Stories can be narrated in English, Hindi, or Telugu.",
-        "Use of props and expressions is encouraged.",
-        "Judgment will be based on storytelling skills, voice modulation, expression, engagement, and overall presentation."
+        "This competition provides a platform to explore the ancient art of storytelling and captivate the audience through powerful oratory skills.",
+        "Performance Details:",
+        "Time Limit: The maximum duration for the performance is 6 minutes. A warning bell will sound at 5 minutes, and the final bell will sound at 6 minutes, at which point the participant must conclude their story.",
+        "Language: The performance may be delivered in English or Telugu.",
+        "Theme/Genre: The participant is free to choose any theme or genre (e.g., Folk Tale, Personal Narrative, Historical, Fiction, etc.).",
+        "Aids and Props: The use of simple, hand-held props is permitted, but elaborate sets or background music/audio tracks are not allowed.",
+        "Content and Originality:",
+        "Source Material: The story presented may be original (composed by the participant) or adapted from an existing published work. If adapted, the source must be verbally acknowledged at the start or end of the performance.",
+        "Content Restriction: The story must be suitable for a general audience. Vulgarity, offensive insinuations, or content that promotes hate speech or discrimination is strictly prohibited.",
+        "Judging Criteria:",
+        "The performance will be evaluated on the qualities like Narrative Arc and Content, Vocal Modulation, Expression and Gestures, Audience Engagement and adherence to Time Limit."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
     },
+
     "Theme Painting": {
       title: "VISUAL ARTS",
-      subtitle: "Theme Painting",
+      subtitle: "On Spot Theme Painting",
       rules: [
-        "This is an individual painting competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Canvas/drawing sheet will be provided.",
-        "Participants must bring their own painting materials (watercolors, acrylics, oil paints, brushes, etc.).",
-        "The painting should be based on the given theme.",
-        "Judgment will be based on creativity, color usage, theme interpretation, and overall presentation."
+        "The theme for the painting will be given to the participants on the spot.",
+        "The maximum time for the participant in completing the painting shall not exceed 2 hours and 30 minutes.",
+        "Painting should be done on the A3 size drawing paper provided by the organisers.",
+        "Participants are permitted to use any medium, including pencil colors, oil colors, watercolors, poster colors, or pastel colors.",
+        "Candidates are responsible for bringing their own materials, such as brushes, paints, palettes, etc. Only the A3 drawing paper will be provided by the organizers.",
+        "Participants may be required to provide a verbal description or explanation of their painting to the judges, if deemed necessary by the judging panel.",
+        "The use of any mobile phones, internet, or other electronic devices is strictly prohibited during the competition."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -1056,136 +1125,155 @@ const EventDetail: React.FC = () => {
       },
       contacts: []
     },
+
     "Clay Modelling": {
       title: "VISUAL ARTS",
       subtitle: "Clay Modelling",
       rules: [
-        "This is an individual clay modeling competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Clay will be provided by the organizers.",
-        "Participants can bring their own modeling tools.",
-        "The model should be based on the given theme.",
-        "Judgment will be based on creativity, skill, theme interpretation, and finishing."
+        "The specific theme for the clay model will be given to the participants on the spot.",
+        "The maximum time allocated for the competition shall not exceed 2 hours and 30 minutes.",
+        "The necessary clay material will be provided to all participants by the organizers.",
+        "Specific details regarding the required size, additional topic clarification, and any other specific rules will be announced on the spot at the start of the competition.",
+        "Participants must bring their own modelling tools (e.g., sculpting tools, wires, knives).",
+        "Judgement will be based on Creativity & Interpretation of the theme, technique & finish, three dimensionality & form.",
+        "The use of any mobile phones, internet, or external reference images/materials is strictly prohibited."
       ],
       prizes: {
-        first: "Rs. 4,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
+
     "Rangoli": {
       title: "VISUAL ARTS",
       subtitle: "Rangoli",
       rules: [
-        "This is a team event with 2 participants per team.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Space will be provided for creating the rangoli.",
-        "Teams must bring their own rangoli colors, flowers, or materials.",
-        "The rangoli should be based on the given theme.",
-        "Judgment will be based on creativity, color combination, design, and neatness."
+        "A team may consist of a maximum of two (2) members.",
+        "The maximum time allocated for the competition shall not exceed 2 hours and 30 minutes.",
+        "Participants are responsible for bringing all their own materials.",
+        "Only one medium is permitted for the design. The allowed mediums are: Colours, Flower Petals or Saw – dust or Pulses or Rice.",
+        "The medium and form of expression can be free-hand, pictorial, or descriptive.",
+        "Participants must prepare their Rangoli design within the space provided by the organizers.",
+        "The use of any mobile phones or internet for reference or assistance is strictly prohibited during the competition.",
+        "Judgement will be based on overall impact and visual appeal, creativity and interpretation of theme (if a theme is announced), clarity, symmetry and detailing, aesthetic use of chosen medium."
       ],
       prizes: {
-        first: "Rs. 4,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
+
     "Mehandi": {
-      title: "VISUAL ARTS",
+      title: "FINE ARTS",
       subtitle: "Mehandi (Henna Art)",
       rules: [
-        "This is a team event with 2 participants (one artist and one model).",
-        "Duration: 1.5 hours.",
-        "Mehandi cones and other materials must be brought by the participants.",
-        "The design should be creative and intricate.",
-        "Judgment will be based on design complexity, neatness, creativity, and overall presentation."
+        "The due credit will be given on originality, creativity, decorative art with aesthetic sense.",
+        "Use of hand print, any kind of Mold and any kind of decorative material is not allowed.",
+        "Participants have to bring their own Mehandi and other materials required for it.",
+        "Duration will not be more than 2 hours 30 minutes.",
+        "The Mehandi must be extended to the palmer side forearm with minimum 6 inch length of both hands of the model.",
+        "Any kind of mobile or internet usage will be prohibited."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
     },
+
     "Collage": {
-      title: "VISUAL ARTS",
+      title: "FINE ARTS",
       subtitle: "Collage",
       rules: [
-        "This is an individual collage making competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 1.5 hours.",
-        "Chart paper will be provided.",
-        "Participants must bring their own materials (magazines, newspapers, colors, glue, scissors, etc.).",
-        "The collage should be based on the given theme.",
-        "Judgment will be based on creativity, theme interpretation, arrangement, and overall presentation."
+        "Theme will be given on the spot on the given topic, sheet size A3.",
+        "Duration will not be more than 2 hours 30 minutes.",
+        "Participants shall bring their own scissors, pasting and other material required for contest.",
+        "Collage has to be prepared from old magazines brought by the participants.",
+        "Any kind of mobile or internet usage will be prohibited.",
+        "Judgement will be based on creativity, theme interpretation, arrangement, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
     },
+
     "Face Painting": {
-      title: "VISUAL ARTS",
+      title: "FINE ARTS",
       subtitle: "Face Painting",
       rules: [
-        "This is a team event with 2 participants (one artist and one model).",
-        "Theme will be announced on the spot.",
-        "Duration: 1 hour.",
-        "Participants must bring their own face painting colors and brushes.",
-        "Only face painting is allowed (no body painting).",
-        "The design should be based on the given theme.",
-        "Judgment will be based on creativity, skill, theme interpretation, and overall presentation."
+        "The participants can paint on the face of the model with a theme of their own choice.",
+        "Duration will not be more than 2 hours 30 minutes.",
+        "The due credit will be given on originality, creativity, decorative art with aesthetic sense.",
+        "Any kind of mobile or internet usage will be prohibited."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
     },
+
     "Pencil Sketching": {
-      title: "VISUAL ARTS",
+      title: "FINE ARTS",
       subtitle: "Pencil Sketching",
       rules: [
-        "This is an individual pencil sketching competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 1.5 hours.",
-        "Drawing sheet will be provided.",
-        "Participants must bring their own pencils, erasers, and shading tools.",
-        "Only pencil sketching is allowed (no colors).",
-        "Judgment will be based on creativity, shading, proportion, theme interpretation, and overall presentation."
+        "Theme will be declared on the spot.",
+        "Participants should bring their own materials needed for drawing like pencil, eraser, etc. Only drawing sheet will be provided.",
+        "Size of the painting will be A3 size drawing paper.",
+        "Duration will not be more than 2 hour 30 min.",
+        "Usage of mobile will be prohibited.",
+        "Judgement will be decided on the creativity, technique and proper usage of theme."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
     },
+
     "Mandala Art": {
-      title: "VISUAL ARTS",
+      title: "FINE ARTS",
       subtitle: "Mandala Art",
       rules: [
-        "This is an individual mandala art competition.",
-        "Duration: 2 hours.",
-        "Drawing sheet will be provided.",
-        "Participants must bring their own materials (pens, pencils, colors, etc.).",
-        "The mandala design should be intricate and symmetric.",
-        "Judgment will be based on complexity, symmetry, creativity, neatness, and overall presentation."
+        "Theme will be given on spot.",
+        "Participants must adhere to the given theme or create original, thematic mandalas if open-ended.",
+        "A3 sheet will be given.",
+        "All artwork must be original; Any kind of mobile or internet usage will be prohibited.",
+        "Entries are judged based on creativity, technique, adherence to theme, and visual appeal."
       ],
       prizes: {
         first: "Rs. 3,000",
         second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
     },
+
     "Haute Couture": {
       title: "FASHION COMPETITIONS",
       subtitle: "Haute Couture (Fashion Themed Ramp Walk)",
@@ -1211,124 +1299,117 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "Craft Villa (Accessory Design)",
       rules: [
-        "Items allowed:",
-        "Paper Quelling",
-        "Beaded accessories design",
-        "Antique accessories design",
-        "Fabric/threaded Jewellery",
-        "Leather Accessories design",
-        "Tribal Jewellery",
-        "Wood accessories design",
-        "Wealth from waste",
-        "Greeting cards",
-        "a. Maximum of 2 people can be in a team. ",
-        "b. The teams should bring their own required materials."
+        "This is an individual or team event (maximum 2 participants).",
+        "Participants need to create fashion accessories using crafts.",
+        "Duration: 2 hours.",
+        "Participants must bring their own materials.",
+        "Accessories can include jewelry, bags, headbands, belts, or any wearable items.",
+        "The design should be creative, wearable, and aesthetically appealing.",
+        "Judgment will be based on creativity, craftsmanship, design, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: "Rs. 1,000"
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
       },
-      contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
-      ]
+      contacts: []
     },
     "Texart": {
       title: "FASHION COMPETITIONS",
       subtitle: "Texart (Fashion Sketching)",
       rules: [
-        "Theme will be given on the spot .",
-        "This is a solo event .",
-        "Participants should bring their own materials.",
-        "Drawing sheets will be provided to all the participants .",
-        "Designing should be done within the stipulated time provided."
+        "This is an individual fashion sketching competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Drawing sheet will be provided.",
+        "Participants must bring their own sketching and coloring materials.",
+        "The sketch should showcase fashion design concepts based on the theme.",
+        "Judgment will be based on creativity, design concept, sketching skills, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: "Rs. 1,000"
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
       },
-      contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
-      ]
+      contacts: []
     },
     "T-Shirt Designing": {
       title: "FASHION COMPETITIONS",
       subtitle: "T-Shirt Designing",
       rules: [
-        "Only T- Shirts will be provided (with additional charge of Rs.150)",
-        "Team of 1 or 2 participants",
+        "This is an individual T-shirt designing competition.",
+        "Theme will be announced on the spot.",
+        "Duration: 2 hours.",
+        "Plain T-shirt will be provided.",
+        "Participants must bring their own fabric colors, brushes, and designing materials.",
+        "The design should be creative and based on the given theme.",
+        "Judgment will be based on creativity, theme interpretation, color usage, and overall design."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: "Rs. 1,000"
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
       },
-      contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
-      ]
+      contacts: []
     },
     "Mahotsav Got Talent": {
       title: "SPOT LIGHT",
       subtitle: "Mahotsav Got Talent",
       rules: [
-        "The participant can be solo or group with no team limit.",
-        "Performance can be of any art or skill – Dance, music, special skills etc., that has an ‘X’ factor unlike the routine performances.",
-        "Judgement will be based on the overall impression created by the participants."
+        "This is an open talent show where participants can showcase any unique talent.",
+        "The performance can be solo or group (maximum 5 participants).",
+        "The maximum duration of the performance shall be 5 minutes.",
+        "Participants can perform magic, mimicry, beatboxing, stand-up comedy, unique musical performances, or any other special talent.",
+        "Participants must bring their own props if required.",
+        "Judgment will be based on uniqueness, skill level, entertainment value, and overall performance."
       ],
       prizes: {
-        first: "Rs. 7,000",
-        second: "Rs. 5,000",
-        third: "Rs. 3,000"
+        first: "Rs. 10,000",
+        second: "Rs. 7,000",
+        third: "Rs. 5,000"
       },
-      contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
-      ]
+      contacts: []
     },
     "Mr. and Ms. Mahotsav": {
       title: "SPOT LIGHT",
       subtitle: "Mr. and Ms. Mahotsav",
       rules: [
-        "It is a multiple round event where the participant will be tested on various capabilities like talent, presentation skills etc.,",
-        "Winners will be awarded with the title of Mr. / Ms. Mahotsav along with a crowning ceremony.",
-        "Details of Rounds:",
-        "Round 1:It is a written round on personality assessment based questions.",
-        "Round 2 : It is a Talent Round. Any talent that you posses can be exhibited within the time limit of 2 to 3 minutes.",
-        "Round 3 : Participants should present their perspective on the given real time or general situation given by the jury."
+        "This is an individual personality competition for male and female categories.",
+        "Participants will go through multiple rounds including introduction, talent round, question-answer, and ramp walk.",
+        "Participants should come in formal/ethnic attire for introduction round.",
+        "Talent round: Showcase any talent (singing, dancing, mimicry, etc.) - 2 minutes max.",
+        "Participants should be confident, well-spoken, and presentable.",
+        "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
       ],
       prizes: {
-        first: "Rs. 4,000",
-        second: "Rs. 4,000",
-      },
-      contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
-      ]
-    },
-    "Online Photography": {
-      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
-      subtitle: "Theme Photography (Online)",
-      rules: [
-        "This is an online photography competition.",
-        "Theme will be announced on the event page.",
-        "Participants must submit their photographs via Google Form link provided.",
-        "Submission deadline will be announced.",
-        "Maximum 3 photographs can be submitted per participant.",
-        "Photographs should be original and clicked by the participant only.",
-        "Basic editing is allowed, but heavy manipulation is not permitted.",
-        "Judgment will be based on creativity, composition, theme interpretation, and technical quality."
-      ],
-      prizes: {
-        first: "Rs. 5,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 15,000",
+        second: "Rs. 10,000",
+        third: "Rs. 7,000"
       },
       contacts: []
     },
+    "Online Photography": {
+      title: "FINE ARTS",
+      subtitle: "Online Photography",
+      rules: [
+        "Photograph should be taken using DSLR camera.",
+        "Participant must provide RAW photo and EDITED photo , Minor editing is allowed.",
+        "Participants must choose a theme from Nature/ Workman ship / Wild life / Street photography and submit 2 photographs of the chosen theme in prescribed format.",
+        "Photograph must be in JPEG format only.",
+        "Photograph size must be 1920x1080 pixels.",
+        "Google and Stock images are not considerable."
+      ],
+      prizes: {
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
+      },
+      contacts: [
+        "Ms. G. Sai pranathi - +91 6300149575",
+        "Ms. Ch. Tharini - +91 9866646418"
+      ]
+    },
+
     "Digital Poster Making": {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Digital Poster Making",
@@ -1689,11 +1770,11 @@ const EventDetail: React.FC = () => {
               className="!static !top-auto !left-auto"
               onClick={handleBack}
             />
-            <div className="text-center px-4">
-              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 {eventData.title}
               </h1>
-              <h2 className="text-xl sm:text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 {eventData.subtitle}
               </h2>
             </div>
@@ -1705,21 +1786,21 @@ const EventDetail: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-6 max-w-7xl items-center">
           {/* Poster */}
           <div className="flex justify-center lg:justify-start">
-            <div className="w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
+            <div className="w-64 h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
               <span>POSTER of EVENT</span>
             </div>
           </div>
 
           {/* Rules Section */}
-          <div className="p-4 sm:p-6">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
               Rules:
             </h3>
-            <ul className="space-y-4 sm:space-y-5">
+            <ul className="space-y-5">
               {eventData.rules.map((rule, index) => (
-                <li key={index} className="flex items-start gap-3 sm:gap-4">
-                  <span className="text-yellow-400 font-bold text-base sm:text-lg mt-0.5 sm:mt-1 shrink-0">•</span>
-                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
+                <li key={index} className="flex items-start gap-4">
+                  <span className="text-yellow-400 font-bold text-lg mt-1 shrink-0">•</span>
+                  <span className="text-white text-base md:text-lg leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
                     {rule}
                   </span>
                 </li>
@@ -1730,43 +1811,43 @@ const EventDetail: React.FC = () => {
           {/* Prizes and Contact Section */}
           <div className="space-y-6">
             {/* Cash Prizes */}
-            <div className="p-4 sm:p-6">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="p-6">
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Cash Prizes:
               </h3>
-              <div className="space-y-2 sm:space-y-3">
-                <div className="flex items-center gap-2 sm:gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>First</span>
-                  <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.first}</span>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>First</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.first}</span>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Second</span>
-                  <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.second}</span>
+                <div className="flex items-center gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Second</span>
+                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
-                  <div className="flex items-center gap-2 sm:gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Third</span>
-                    <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.third}</span>
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Third</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
-                  <div className="flex items-center gap-2 sm:gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Fourth</span>
-                    <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.fourth}</span>
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Fourth</span>
+                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Contact Information */}
-            <div className="p-4 sm:p-6">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="p-6">
+              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Contact no:
               </h3>
-              <div className="space-y-2 sm:space-y-3">
+              <div className="space-y-3">
                 {eventData.contacts.map((contact, index) => (
-                  <div key={index} className="text-white text-xs sm:text-sm md:text-base">
-                    <div className="font-semibold break-words" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
+                  <div key={index} className="text-white text-sm md:text-base">
+                    <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
                   </div>
                 ))}
               </div>
@@ -1778,7 +1859,7 @@ const EventDetail: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-8 mb-8 px-4">
           <button 
-            className="bg-red-500 hover:bg-red-600 active:scale-95 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg w-full sm:w-auto sm:min-w-[200px] min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleDownloadPDF}
             disabled={isDownloading}
           >
@@ -1786,7 +1867,7 @@ const EventDetail: React.FC = () => {
           </button>
           
           <button 
-            className="bg-pink-400 hover:bg-pink-500 active:scale-95 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg w-full sm:w-auto sm:min-w-[200px] min-h-[48px] touch-manipulation"
+            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px]"
             onClick={() => {
               // Add to events functionality
               alert('Event added to your list!');

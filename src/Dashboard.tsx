@@ -563,12 +563,11 @@ const Dashboard: React.FC = () => {
         "Karaoke must be used mandatorily for 2nd, 3rd and 4th rounds.",
         "Medleys will not be entertained and the Karaoke tracks are to be submitted to the coordinators before the commencement of event.",
         "Judgement will be based on Pitch, Scale, and Rhythm, voice modulation, selection of song and stage presence.",
+        "Individual round specifications:",
         "1st round: 2 minutes (one pallavi and one charanam without karaoke)",
         "2nd round: 3 minutes (Fast beat song with karaoke)",
-        "3rd round: 3 minutes (Melody with karaoke)",
-        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman / K V Mahadevan/ MM Keeravani / Mani Sharma. Karaoke is must)",
-        "Promotion to the final round: Average scores from the 2nd and 3rd rounds will be utilized for promotion to the final round.",
-        "Declaration of the IDOL: The final score will be calculated as a composite of 40% of the average scores from the 2nd and 3rd rounds, and 60% of the score from the 4th round performance."
+        "3rd round: 3 minutes (Melody with karaoke) ",
+        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman / K V Mahadevan/ MM Keeravani / Mani Sharma. Karaoke is must)"
       ],
       prizes: {
         first: "Rs. 4000",

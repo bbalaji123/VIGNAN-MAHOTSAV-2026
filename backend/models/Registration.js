@@ -30,6 +30,10 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  branch: {
+    type: String,
+    trim: true
+  },
   dateOfBirth: {
     type: String,
     trim: true

@@ -2575,7 +2575,7 @@ Do you want to proceed with registration?`;
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-20 left-0 right-0 z-20 w-full px-4 pt-8">
+        <div className="absolute top-32 sm:top-20 left-0 right-0 z-20 w-full px-4 pt-8">
           <h2 className="text-white text-sm md:text-lg font-semibold" style={{
             fontFamily: 'serif',
             letterSpacing: '0.05em',
@@ -2587,71 +2587,22 @@ Do you want to proceed with registration?`;
           </h2>
         </div>
         
-        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "60px"}}>
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
+        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "0px"}}>
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
         </div>
         <style>{`
-          @media (min-width: 768px) {
-            .animate-fadeInDown {
-              margin-left: 5% !important;
-            }
-          }
+          /* Responsive adjustments handled by Tailwind classes in JSX */
           
-          /* Mobile view adjustments for flower overlap */
-          @media (max-width: 767px) {
-            .flower-container-mobile {
-              width: 150px !important;
-              height: 150px !important;
-              opacity: 0.25 !important;
-            }
-            
-            /* Adjust all dashboard sections for mobile */
-            .about-theme-section,
-            .highlights-section,
-            .dashboard-section {
-              padding-left: 15px !important;
-              padding-right: 15px !important;
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-            }
-            
-            .about-theme-container {
-              padding-left: 10px !important;
-              padding-right: 10px !important;
-              max-width: 100% !important;
-            }
-            
-            .theme-content {
-              padding-left: 20px !important;
-              padding-right: 20px !important;
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-            }
-            
-            .theme-description {
-              padding-left: 5px !important;
-              padding-right: 5px !important;
-            }
-            
-            .highlights-navigation {
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-              padding-left: 5px !important;
-              padding-right: 5px !important;
-            }
-            
-            /* Ensure content has proper z-index above flowers */
-            section {
-              position: relative;
-              z-index: 20 !important;
-            }
+          section {
+            position: relative;
+            z-index: 20 !important;
           }
         `}</style>
         
         {/* Action Buttons - Register for events and login when not logged in */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 mb-4 justify-center items-center z-20 relative px-4 w-full">
           {isLoggedIn ? (
-            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#FFD700] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button className="w-36 sm:w-48 sm:max-w-none md:w-52 lg:w-56 xl:w-60 min-h-[48px] bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#FFD700] hover:-translate-y-1 hover:shadow-lg active:scale-95 flex items-center justify-center touch-manipulation" onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -2665,7 +2616,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
+            <button className="w-36 sm:w-48 sm:max-w-none md:w-52 lg:w-56 xl:w-60 min-h-[48px] bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg active:scale-95 flex items-center justify-center touch-manipulation" onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -4026,11 +3977,9 @@ Do you want to proceed with registration?`;
           }}>ABOUT THEME</h2>
           
           {/* Garuda Logo */}
-          <div style={{
+          <div className="garuda-about-logo" style={{
             position: 'absolute',
-            left: '-80px',
-            top: '180px',
-            width: 'clamp(200px, 25vw, 350px)',
+            width: 'clamp(120px, 20vw, 350px)',
             height: 'auto',
             zIndex: 1
           }}>
@@ -4045,6 +3994,21 @@ Do you want to proceed with registration?`;
               }}
             />
           </div>
+          <style>{`
+            .garuda-about-logo {
+              top: -120px;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+            
+            @media (min-width: 768px) {
+              .garuda-about-logo {
+                top: 180px;
+                left: -80px;
+                transform: none;
+              }
+            }
+          `}</style>
 
           <div style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
@@ -4070,80 +4034,69 @@ Do you want to proceed with registration?`;
           </div>
           
           {/* Stats Bar */}
-          <div ref={statsRef} style={{
-            background: 'rgba(200, 180, 220, 0.9)',
-            borderRadius: '30px',
-            padding: '40px 20px',
-            marginTop: '40px'
+          <div ref={statsRef} className="rounded-2xl sm:rounded-3xl p-12 sm:p-14 md:p-16 lg:p-14 mt-8 sm:mt-10" style={{
+            background: 'rgba(200, 180, 220, 0.9)'
           }}>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '30px',
-              maxWidth: '1200px',
-              margin: '0 auto'
-            }}>
-              {/* Footfall */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👣</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
-              </div>
-              
-              {/* Colleges */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🎓</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
-              </div>
-              
-              {/* Events */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
-              </div>
-              
-              {/* Online Audience */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📱</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
-              </div>
-              
-              {/* Editions */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ 
-                  fontSize: '3rem', 
-                  marginBottom: '10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%',
-                    border: '4px solid #1a1a1a',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.5rem',
-                    fontWeight: 'bold',
-                    color: '#1a1a1a'
-                  }}>18</div>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 max-w-6xl mx-auto">
+              {/* Left Column - 3 items */}
+              <div className="flex flex-col gap-6 sm:gap-8">
+                {/* Footfall */}
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">👣</div>
+                  <div className="text-gray-900 font-bold text-xl sm:text-2xl md:text-3xl mb-1">{footfall.toLocaleString()}+</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">TOTAL FOOTFALL</div>
                 </div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px' }}>18 EDITIONS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>OF FESTIVITIES</div>
+                
+                {/* Events */}
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">👥</div>
+                  <div className="text-gray-900 font-bold text-xl sm:text-2xl md:text-3xl mb-1">{events}+</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">EVENTS</div>
+                </div>
+                
+                {/* Cash Prizes */}
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">🏆</div>
+                  <div className="text-gray-900 font-bold text-xl sm:text-2xl md:text-3xl mb-1">{cashPrizes}+ LACKS</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">CASH PRIZES</div>
+                </div>
               </div>
               
-              {/* Cash Prizes */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
+              {/* Middle - Editions (featured) - only visible on desktop */}
+              <div className="hidden lg:flex justify-center items-center">
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 flex justify-center items-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-4 sm:border-5 border-gray-900 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">18</div>
+                  </div>
+                  <div className="text-gray-900 font-bold text-base sm:text-lg md:text-xl mb-1">18 EDITIONS</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">OF FESTIVITIES</div>
+                </div>
+              </div>
+              
+              {/* Right Column - 3 items */}
+              <div className="flex flex-col gap-6 sm:gap-8">
+                {/* Colleges */}
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">🎓</div>
+                  <div className="text-gray-900 font-bold text-xl sm:text-2xl md:text-3xl mb-1">{colleges}+</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">COLLEGES</div>
+                </div>
+                
+                {/* Online Audience */}
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3">📱</div>
+                  <div className="text-gray-900 font-bold text-xl sm:text-2xl md:text-3xl mb-1">{onlineAudience.toLocaleString()}+</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">ONLINE AUDIANCE</div>
+                </div>
+                
+                {/* Editions - mobile only */}
+                <div className="text-center lg:hidden">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 flex justify-center items-center">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-3 sm:border-4 border-gray-900 flex items-center justify-center text-xl sm:text-2xl font-bold text-gray-900">18</div>
+                  </div>
+                  <div className="text-gray-900 font-bold text-sm sm:text-base mb-1">18 EDITIONS</div>
+                  <div className="text-gray-900 font-semibold text-xs sm:text-sm md:text-base">OF FESTIVITIES</div>
+                </div>
               </div>
             </div>
           </div>
@@ -4191,7 +4144,7 @@ Do you want to proceed with registration?`;
 
           .throwback-card {
             flex-shrink: 0;
-            width: calc((100vw - 80px) / 3);
+            width: calc((100vw - 60px) / 3);
             max-width: 280px;
             min-width: 100px;
             height: clamp(140px, 20vw, 200px);
@@ -4201,15 +4154,14 @@ Do you want to proceed with registration?`;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
           }
-
-          @media (max-width: 768px) {
+          
+          @media (min-width: 768px) {
             .throwback-card {
-              width: calc((100vw - 60px) / 3);
-              gap: 10px;
+              width: calc((100vw - 80px) / 3);
             }
             
             .scroll-row {
-              gap: 10px;
+              gap: 20px;
             }
           }
 
@@ -4587,36 +4539,21 @@ Do you want to proceed with registration?`;
         </div>
 
         {/* Countdown Timer */}
-        <div style={{
-          marginTop: '30px',
-          position: 'relative',
-          display: 'flex',
-          gap: '20px',
-          padding: '25px 35px',
-          borderRadius: '16px',
+        <div className="mt-6 sm:mt-8 relative flex flex-wrap gap-3 sm:gap-4 md:gap-5 lg:gap-6 px-4 sm:px-6 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl mb-12 sm:mb-32 md:mb-40 lg:mb-48 justify-center" style={{
           background: 'rgba(61, 0, 84, 0.75)',
           color: '#FFFFFF',
-          boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+          boxShadow: '0 0 20px rgba(223, 160, 0, 0.6), 0 0 30px rgba(223, 160, 0, 0.4)',
           animation: 'timerGlow 1.5s infinite alternate',
-          zIndex: 10,
-          marginBottom: '200px',
-          justifyContent: 'center'
+          zIndex: 10
         }}>
           {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
-            <div key={unit} style={{
-              width: '85px',
-              height: '90px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
+            <div key={unit} className="w-16 h-20 sm:w-20 sm:h-24 md:w-24 md:h-28 lg:w-28 lg:h-32 flex flex-col items-center justify-center">
               <div 
                 className={animate[unit] ? 'timer-digit-change' : ''}
                 style={{
                   width: '100%',
-                  height: '60px',
-                  fontSize: '2.6rem',
+                  height: '50%',
+                  fontSize: 'clamp(1.5rem, 5vw, 2.6rem)',
                   fontWeight: '800',
                   fontFamily: 'Poppins, sans-serif',
                   color: '#FBC02D',
@@ -4629,9 +4566,9 @@ Do you want to proceed with registration?`;
                 {time[unit]}
               </div>
               <div style={{
-                fontSize: '1.5rem',
+                fontSize: 'clamp(0.75rem, 2.5vw, 1.5rem)',
                 color: '#E0E0E0',
-                marginTop: '6px',
+                marginTop: '4px',
                 letterSpacing: '0.5px',
                 whiteSpace: 'nowrap',
                 textAlign: 'center',

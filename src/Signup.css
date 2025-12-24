@@ -17,9 +17,9 @@
 /* ================= Card ================= */
 .signup-modal-content {
   position: relative;
-  width: 550px;
-  max-width: 95%;
-  max-height: 85vh;
+  width: calc(100% - 1.5rem);
+  max-width: 550px;
+  max-height: 90vh;
 
   background: linear-gradient(
     135deg,
@@ -28,28 +28,61 @@
   );
 
   backdrop-filter: blur(30px) saturate(160%);
-  border-radius: 28px;
+  border-radius: 20px;
   border: 1.5px solid rgba(255, 200, 230, 0.45);
 
   box-shadow:
     0 35px 90px rgba(0, 0, 0, 0.45),
     inset 0 1px 1px rgba(255, 255, 255, 0.45);
 
-  padding: 36px;
+  padding: 24px 20px;
   overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .signup-modal-content {
+    width: calc(100% - 2rem);
+    max-width: 550px;
+    border-radius: 24px;
+    padding: 30px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signup-modal-content {
+    width: 550px;
+    max-width: 95%;
+    max-height: 85vh;
+    border-radius: 28px;
+    padding: 36px;
+  }
 }
 
 /* ================= Close Button ================= */
 .signup-close-btn {
   position: absolute;
-  top: 16px;
-  right: 18px;
+  top: 12px;
+  right: 12px;
   background: none;
   border: none;
   color: #ffffff;
-  font-size: 26px;
+  font-size: 24px;
   cursor: pointer;
   opacity: 0.85;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+@media (min-width: 1024px) {
+  .signup-close-btn {
+    top: 16px;
+    right: 18px;
+    font-size: 26px;
+  }
 }
 
 .signup-close-btn:hover {
@@ -60,14 +93,38 @@
 .signup-modal-body {
   width: 100%;
   overflow-y: auto;
-  padding-top: 20px;
+  padding-top: 14px;
+}
+
+@media (min-width: 480px) {
+  .signup-modal-body {
+    padding-top: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signup-modal-body {
+    padding-top: 20px;
+  }
 }
 
 /* ================= FORM ================= */
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 18px; /* ✔ equal spacing for every field */
+  gap: 14px;
+}
+
+@media (min-width: 480px) {
+  .signup-form {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signup-form {
+    gap: 18px; /* ✔ equal spacing for every field */
+  }
 }
 
 /* ================= FORM GROUP ================= */
@@ -79,24 +136,41 @@
 
 /* ================= Labels ================= */
 .signup-form .form-group label {
-  margin-bottom: 6px;
-  font-size: 0.74rem;
+  margin-bottom: 4px;
+  font-size: 0.7rem;
   font-weight: 500;
   color: #ffffff;
+}
+
+@media (min-width: 1024px) {
+  .signup-form .form-group label {
+    margin-bottom: 6px;
+    font-size: 0.74rem;
+  }
 }
 
 /* ================= Inputs & Select ================= */
 .signup-form .form-group input,
 .signup-form .form-group select {
   width: 100%;
-  padding: 12px 16px;
+  padding: 11px 14px;
+  min-height: 44px;
   border-radius: 10px;
   border: 1px solid rgba(255,182,193,0.4);
   background: rgba(255,255,255,0.12);
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   outline: none;
+  touch-action: manipulation;
+}
+
+@media (min-width: 1024px) {
+  .signup-form .form-group input,
+  .signup-form .form-group select {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
 }
 
 /* ================= Placeholders ================= */
@@ -118,12 +192,22 @@
 .signup-submit-btn {
   width: 100%;
   padding: 14px;
+  min-height: 48px;
   border-radius: 20px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
+  touch-action: manipulation;
+}
+
+@media (min-width: 1024px) {
+  .signup-prev-btn,
+  .signup-next-btn,
+  .signup-submit-btn {
+    font-size: 1rem;
+  }
 }
 
 /* ================= NEXT & SUBMIT (SAME STYLE) ================= */
@@ -163,24 +247,13 @@
 }
 
 /* ================= Responsive ================= */
-@media (max-width: 768px) {
-  .signup-modal-content {
-    width: 92%;
-    padding: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .signup-modal-content {
-    width: 95%;
-    padding: 22px;
-  }
-}
+/* Removed - using mobile-first approach instead */
 
 /* ================= FORM ROW ================= */
 .signup-form .form-row {
   display: flex;
-  gap: 18px;            /* space between columns */
+  flex-direction: column;
+  gap: 14px;
   width: 100%;
 }
 
@@ -188,8 +261,16 @@
 .signup-form .form-row .form-group {
   flex: 1;
 }
-@media (max-width: 768px) {
+
+@media (min-width: 640px) {
   .signup-form .form-row {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signup-form .form-row {
+    gap: 18px; /* space between columns */
   }
 }

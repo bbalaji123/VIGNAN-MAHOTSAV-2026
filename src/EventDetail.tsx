@@ -1675,11 +1675,11 @@ const EventDetail: React.FC = () => {
               className="!static !top-auto !left-auto"
               onClick={handleBack}
             />
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="text-center px-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 {eventData.title}
               </h1>
-              <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h2 className="text-xl sm:text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 {eventData.subtitle}
               </h2>
             </div>
@@ -1691,21 +1691,21 @@ const EventDetail: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-6 max-w-7xl items-center">
           {/* Poster */}
           <div className="flex justify-center lg:justify-start">
-            <div className="w-64 h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
+            <div className="w-48 h-64 sm:w-56 sm:h-72 lg:w-64 lg:h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
               <span>POSTER of EVENT</span>
             </div>
           </div>
 
           {/* Rules Section */}
-          <div className="p-6">
-            <h3 className="text-2xl font-bold mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+          <div className="p-4 sm:p-6">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
               Rules:
             </h3>
-            <ul className="space-y-5">
+            <ul className="space-y-4 sm:space-y-5">
               {eventData.rules.map((rule, index) => (
-                <li key={index} className="flex items-start gap-4">
-                  <span className="text-yellow-400 font-bold text-lg mt-1 shrink-0">•</span>
-                  <span className="text-white text-base md:text-lg leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
+                <li key={index} className="flex items-start gap-3 sm:gap-4">
+                  <span className="text-yellow-400 font-bold text-base sm:text-lg mt-0.5 sm:mt-1 shrink-0">•</span>
+                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
                     {rule}
                   </span>
                 </li>
@@ -1716,43 +1716,43 @@ const EventDetail: React.FC = () => {
           {/* Prizes and Contact Section */}
           <div className="space-y-6">
             {/* Cash Prizes */}
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="p-4 sm:p-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Cash Prizes:
               </h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>First</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.first}</span>
+              <div className="space-y-2 sm:space-y-3">
+                <div className="flex items-center gap-2 sm:gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>First</span>
+                  <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.first}</span>
                 </div>
-                <div className="flex items-center gap-3 text-white">
-                  <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Second</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.second}</span>
+                <div className="flex items-center gap-2 sm:gap-3 text-white">
+                  <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Second</span>
+                  <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
-                  <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Third</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.third}</span>
+                  <div className="flex items-center gap-2 sm:gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Third</span>
+                    <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
-                  <div className="flex items-center gap-3 text-white">
-                    <span className="font-bold text-yellow-400 min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>Fourth</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif', fontSize: '1.125rem'}}>- {eventData.prizes.fourth}</span>
+                  <div className="flex items-center gap-2 sm:gap-3 text-white">
+                    <span className="font-bold text-yellow-400 min-w-[70px] sm:min-w-[80px] text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>Fourth</span>
+                    <span className="font-semibold text-base sm:text-lg" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Contact Information */}
-            <div className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <div className="p-4 sm:p-6">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Contact no:
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {eventData.contacts.map((contact, index) => (
-                  <div key={index} className="text-white text-sm md:text-base">
-                    <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
+                  <div key={index} className="text-white text-xs sm:text-sm md:text-base">
+                    <div className="font-semibold break-words" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
                   </div>
                 ))}
               </div>
@@ -1764,7 +1764,7 @@ const EventDetail: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-8 mb-8 px-4">
           <button 
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-red-500 hover:bg-red-600 active:scale-95 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg w-full sm:w-auto sm:min-w-[200px] min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             onClick={handleDownloadPDF}
             disabled={isDownloading}
           >
@@ -1772,7 +1772,7 @@ const EventDetail: React.FC = () => {
           </button>
           
           <button 
-            className="bg-pink-400 hover:bg-pink-500 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 shadow-lg text-lg min-w-[200px]"
+            className="bg-pink-400 hover:bg-pink-500 active:scale-95 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg w-full sm:w-auto sm:min-w-[200px] min-h-[48px] touch-manipulation"
             onClick={() => {
               // Add to events functionality
               alert('Event added to your list!');

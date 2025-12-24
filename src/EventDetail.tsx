@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from './components/BackButton';
+import FlowerComponent from './components/FlowerComponent';
 
 interface EventDetailData {
   title: string;
@@ -1184,8 +1185,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1206,8 +1207,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1226,8 +1227,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1248,8 +1249,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1269,8 +1270,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1405,8 +1406,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        "Ms. G. Sai pranathi - +91 6300149575",
-        "Ms. Ch. Tharini - +91 9866646418"
+        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
+        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
       ]
     },
 
@@ -1730,9 +1731,25 @@ const EventDetail: React.FC = () => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
-      <div className="min-h-screen p-4 md:p-8">
+      {/* Decorative Flower - Top Right Corner */}
+      <div style={{position: 'fixed', top: '-250px', right: '-250px', width: '600px', height: '600px', zIndex: 1, pointerEvents: 'none', opacity: 0.3}}>
+        <FlowerComponent 
+          size="100%"
+          sunSize="50%"
+          moonSize="43%"
+          sunTop="25%"
+          sunLeft="25%"
+          moonTop="28.5%"
+          moonLeft="28.5%"
+          showPetalRotation={true}
+        />
+      </div>
+
+      <div className="min-h-screen p-4 md:p-8" style={{position: 'relative', zIndex: 10}}>
         {/* Header: Logo + Back Button + Title */}
         <div className="mb-8">
           {/* Desktop layout */}
@@ -1740,9 +1757,9 @@ const EventDetail: React.FC = () => {
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
               <img 
-                src={`${import.meta.env.BASE_URL}image.png`}
+                src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                style={{height: '5rem', objectFit: 'contain', marginTop: '-3rem'}}
+                style={{height: '8rem', objectFit: 'contain', marginTop: '-5rem'}}
               />
               <BackButton 
                 className="!static !top-auto !left-auto"

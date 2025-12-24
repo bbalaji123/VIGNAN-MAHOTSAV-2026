@@ -2587,8 +2587,8 @@ Do you want to proceed with registration?`;
           </h2>
         </div>
         
-        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "60px"}}>
-          <img src={`${import.meta.env.BASE_URL}image.png`} alt="Vignan Mahotsav" className="w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "80%", height: "90%", maxWidth: "none", marginLeft: "5%", marginRight: "0"}} />
+        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "50%", height: "60%", maxWidth: "none", marginLeft: "-10px", marginRight: "20px"}} />
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2734,7 +2734,7 @@ Do you want to proceed with registration?`;
                   aria-label="Go back"
                 >
                   <img
-                    src={`${import.meta.env.BASE_URL}BackButton.svg`}
+                    src={`${import.meta.env.BASE_URL}BACK.avif`}
                     alt="Back"
                     className="w-full h-full object-contain"
                   />
@@ -5685,7 +5685,7 @@ Do you want to proceed with registration?`;
           {/* Logo Section */}
           <div>
             <img 
-              src={`${import.meta.env.BASE_URL}image.png`}
+              src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Mahotsav 2026" 
               style={{
                 height: '80px',

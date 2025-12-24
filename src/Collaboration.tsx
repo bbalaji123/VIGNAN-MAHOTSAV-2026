@@ -6,7 +6,6 @@ import FlowerComponent from './components/FlowerComponent';
 
 const Collaboration: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedYear, setSelectedYear] = useState<number>(2025);
 
   const handleBackClick = () => {
     navigate('/');
@@ -207,13 +206,14 @@ const Collaboration: React.FC = () => {
           .collaboration-image-card {
             position: relative;
             width: 100%;
-            max-height: 300px;
+            aspect-ratio: 16 / 9;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             opacity: 0;
             animation: fadeInUp 0.6s ease-out forwards;
+            background: rgba(0, 0, 0, 0.2);
           }
 
           .collaboration-image-card:nth-child(1) { animation-delay: 0.1s; }
@@ -233,9 +233,10 @@ const Collaboration: React.FC = () => {
 
           .collaboration-image-card img {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
             object-fit: cover;
+            object-position: center;
           }
 
           .collaboration-subtitle {
@@ -310,51 +311,11 @@ const Collaboration: React.FC = () => {
       <div className="collaboration-content">
         <h1 className="collaboration-title">COLLABORATION</h1>
         
-        {/* Year Tabs */}
-        <div className="year-tabs">
-          <button 
-            className={`year-tab ${selectedYear === 2023 ? 'active' : ''}`}
-            onClick={() => setSelectedYear(2023)}
-          >
-            2023
-          </button>
-          <button 
-            className={`year-tab ${selectedYear === 2024 ? 'active' : ''}`}
-            onClick={() => setSelectedYear(2024)}
-          >
-            2024
-          </button>
-          <button 
-            className={`year-tab ${selectedYear === 2025 ? 'active' : ''}`}
-            onClick={() => setSelectedYear(2025)}
-          >
-            2025
-          </button>
-        </div>
-
-        {/* Media Container with Photo Frame and Audio */}
-        <div className="media-container">
-          <div className="photo-frame">
-            <img 
-              src={`${import.meta.env.BASE_URL}collaboration/collaborations/${selectedYear === 2023 ? '3' : selectedYear === 2024 ? '10' : '20'}.avif`}
-              alt={`Collaboration ${selectedYear}`}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
-          <audio 
-            controls 
-            className="audio-player"
-            src={`${import.meta.env.BASE_URL}collaboration/${selectedYear}.mp3`}
-          >
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        
         <div className="collaboration-grid">
-          {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,28, 29, 30, 32].map((num) => (
+          {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30, 32].map((num) => (
             <div key={num} className="collaboration-image-card">
               <img 
-                src={`${import.meta.env.BASE_URL}collaboration/collaborations/${num}.avif`}
+                src={`/collaboration/collaborations/${num}.avif`}
                 alt={`Collaboration ${num}`}
                 loading="lazy"
               />

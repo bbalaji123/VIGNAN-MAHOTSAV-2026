@@ -648,7 +648,7 @@ const EventsInfo: React.FC = () => {
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
               <img 
-                src={`${import.meta.env.BASE_URL}image.png`}
+                src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
                 className="h-16 md:h-20 object-contain"
               />
@@ -720,7 +720,7 @@ const EventsInfo: React.FC = () => {
           {/* Mobile layout - Logo and Back button centered, stacked */}
           <div className="md:hidden flex flex-col items-center gap-3 pb-4">
             <img 
-              src={`${import.meta.env.BASE_URL}image.png`}
+              src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Vignan Mahotsav" 
               className="h-16 object-contain"
             />
@@ -1101,7 +1101,7 @@ const EventsInfo: React.FC = () => {
               <div className="inline-indoor-sports-container">
                 <div className="mb-4">
                   <img 
-                    src={`${import.meta.env.BASE_URL}image.png`}
+                    src={`${import.meta.env.BASE_URL}image.avif`}
                     alt="Vignan Mahotsav" 
                     className="h-16 md:h-20 object-contain"
                   />

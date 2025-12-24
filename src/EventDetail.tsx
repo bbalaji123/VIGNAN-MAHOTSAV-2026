@@ -651,16 +651,18 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Classical/Light Vocal Solo",
       rules: [
-        "This is a solo singing competition for classical or light vocal music.",
-        "The participant can choose any classical or light music composition.",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "The maximum time for Stage/Instruments setting is 3 minutes.",
-        "The number of accompanists should not exceed two.",
-        "Judgment will be made on the qualities like pitch, rhythm, voice modulation, and overall presentation."
+        "The maximum duration of the performance shall not exceed 6 minutes.",
+        "The item can be presented in either Hindusthani, Carnatic or Light Vocal styles.",
+        "Maximum number of accompanists permitted is two. A Shruthi box must be used (Accompanists must also be registered).",
+        "Movie songs are not allowed under this item.",
+        "For Light Vocal, only non-film songs/ geet/ ghazal/ bhajan/ shabad and abhangas can be presented.",
+        "Sufficient thought and care must be exercised in the choice of Raga and composition.",
+        "Judgement will be based on the qualities like Taal, Selection of Raga, Composition and general impression."
       ],
+
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -669,16 +671,16 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Western Vocal Solo",
       rules: [
-        "This is a solo singing competition for western vocal music.",
-        "The participant can choose any western song in any language.",
-        "The maximum duration of the performance shall be 4 minutes.",
-        "The maximum time for Stage/Instruments setting is 3 minutes.",
-        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
-        "Judgment will be made on the qualities like pitch, rhythm, voice quality, stage presence, and overall performance."
+        "The maximum duration for the performance shall be 4 minutes.",
+        "The maximum time for Stage/ Instruments setting is 2 minutes.",
+        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence. ",
+        "The songs language can be either in English or any other Foreign language.",
+        "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
+        
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -687,16 +689,14 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Anthyakshari Duo",
       rules: [
-        "This is a duo singing competition in Anthyakshari format (Each team must have exactly two participants).",
-        "Participants will sing songs based on letters or themes provided by the coordinators.",
-        "The maximum time for each round shall be as decided by the coordinators.",
-        "Songs can be in any Indian language.",
-        "Film songs as well as non-film songs are allowed.",
-        "Judgment will be based on quickness, accuracy, voice quality, and overall performance."
+        "The event will be having 3 - 4 rounds.",
+        "First round will be written test on the questions about movie songs and personalities.",
+        "The details of remaining rounds will be announced on spot."
+  
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -705,16 +705,24 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Instrumental Solo",
       rules: [
-        "This is a solo instrumental music competition.",
-        "Participants can play any instrument of their choice (Indian or Western).",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "The maximum time for Stage/Instruments setting is 3 minutes.",
-        "The number of accompanists should not exceed one.",
-        "Judgment will be made on the qualities like rhythm, melody, technique, and overall impression."
+        "This category is open to all types of instruments, including Western or Classical, and Percussion or Non-Percussion.",
+        "No per-processed or programmed sounds/loops are allowed in the performance.",
+        "Item can be presented in any style or genre.",
+        "Participants must bring their own instruments.",
+        "Duration of performance shall be between 4 to 5 min.",
+        "Time for stage/ Instruments setting is maximum 3 minutes.",
+        "Maximum number of accompanists is two. (if required).",
+        "Judges may ask for specific changes in the performance and request a subsequent performance if deemed necessary. ",
+        "Judging will be based on the following criteria: ",
+        "Mastery of the instrument and proficiency.",
+        "Complexity and difficulty of the piece/Music performed.",
+        "Musicality, expression, and dynamics.",
+        "Composition and overall impression.",
+        "Adaptability to on-the-spot changes as directed by judges."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -817,17 +825,16 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Mono Action",
       rules: [
-        "This is a solo acting performance where one participant portrays multiple characters.",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "Props and background music are allowed but should be minimal.",
-        "The performance should showcase the participant's ability to switch between different characters seamlessly.",
-        "The use of make-up and costume changes is allowed within the time limit.",
-        "Judgment will be based on acting skills, character portrayal, voice modulation, expression, and overall presentation."
+        "This is an individual competition.",
+        "Each participant artist will be given 4 minutes.",
+        "The participant is required to perform an act of any theme. ",
+        "Obscenity and offensive gestures are strictly prohibited.",
+        "Judgement will be based on acting, dialogue delivery, stage presence and overall impression."
       ],
       prizes: {
-        first: "Rs. 4,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -835,18 +842,18 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "On the Spot Ad Making",
       rules: [
-        "Teams should consist of a minimum of 3 and a maximum of 6 participants.",
-        "The topic/product for the advertisement will be given on the spot.",
-        "Participants will be given 30 minutes for preparation.",
-        "The maximum duration of the advertisement performance shall be 3 minutes.",
-        "Props are allowed, but teams must arrange them within the preparation time.",
-        "The advertisement should be creative, engaging, and effectively promote the given product/topic.",
-        "Judgment will be based on creativity, presentation, teamwork, message delivery, and entertainment value."
+        "A maximum of 4 participants are allowed to participate in a team.",
+        "The items or item names will be given 1 minute before the presentation.",
+        "The maximum time allotted for preparation for each team is 5 minutes.",
+        "The maximum time allowed to showcase their talent is 2 – 3 minutes.",
+        "Judgment will most likely be based on the qualities like idea, creativity of presentation, general impression.",
+        "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected."
+
       ],
       prizes: {
-        first: "Rs. 5,000",
-        second: "Rs. 4,000",
-        third: "Rs. 3,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -854,16 +861,14 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Dialogue Dhamaka (Hindi)",
       rules: [
-        "This is a solo dialogue delivery competition in Hindi language.",
-        "Participants can choose dialogues from movies, plays, or their own creations.",
-        "The maximum duration of the performance shall be 3 minutes.",
-        "Props and background music are allowed but should complement the dialogue delivery.",
-        "The performance should showcase powerful delivery, emotion, and expression.",
-        "Judgment will be based on voice modulation, expression, dialogue selection, impact, and overall performance."
+        "It is an individual competition.",
+        "Participants have the flexibility to deliver a dialogue from any movie or they can write their own script for a dialogue in any language.",
+        "Each student is allowed to perform for a minimum of 2 minute and a maximum of 4 minutes.",
+        "Your performance will be evaluated based on key criteria i.e., voice, fluency, facial expressions, gestures, dialogue delivery, stage presence and overall impression."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: []
@@ -1206,94 +1211,103 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "Craft Villa (Accessory Design)",
       rules: [
-        "This is an individual or team event (maximum 2 participants).",
-        "Participants need to create fashion accessories using crafts.",
-        "Duration: 2 hours.",
-        "Participants must bring their own materials.",
-        "Accessories can include jewelry, bags, headbands, belts, or any wearable items.",
-        "The design should be creative, wearable, and aesthetically appealing.",
-        "Judgment will be based on creativity, craftsmanship, design, and overall presentation."
+        "Items allowed:",
+        "Paper Quelling",
+        "Beaded accessories design",
+        "Antique accessories design",
+        "Fabric/threaded Jewellery",
+        "Leather Accessories design",
+        "Tribal Jewellery",
+        "Wood accessories design",
+        "Wealth from waste",
+        "Greeting cards",
+        "a. Maximum of 2 people can be in a team. ",
+        "b. The teams should bring their own required materials."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     },
     "Texart": {
       title: "FASHION COMPETITIONS",
       subtitle: "Texart (Fashion Sketching)",
       rules: [
-        "This is an individual fashion sketching competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Drawing sheet will be provided.",
-        "Participants must bring their own sketching and coloring materials.",
-        "The sketch should showcase fashion design concepts based on the theme.",
-        "Judgment will be based on creativity, design concept, sketching skills, and overall presentation."
+        "Theme will be given on the spot .",
+        "This is a solo event .",
+        "Participants should bring their own materials.",
+        "Drawing sheets will be provided to all the participants .",
+        "Designing should be done within the stipulated time provided."
       ],
       prizes: {
-        first: "Rs. 8,000",
-        second: "Rs. 6,000",
-        third: "Rs. 4,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     },
     "T-Shirt Designing": {
       title: "FASHION COMPETITIONS",
       subtitle: "T-Shirt Designing",
       rules: [
-        "This is an individual T-shirt designing competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Plain T-shirt will be provided.",
-        "Participants must bring their own fabric colors, brushes, and designing materials.",
-        "The design should be creative and based on the given theme.",
-        "Judgment will be based on creativity, theme interpretation, color usage, and overall design."
+        "Only T- Shirts will be provided (with additional charge of Rs.150)",
+        "Team of 1 or 2 participants",
       ],
       prizes: {
-        first: "Rs. 8,000",
-        second: "Rs. 6,000",
-        third: "Rs. 4,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     },
     "Mahotsav Got Talent": {
       title: "SPOT LIGHT",
       subtitle: "Mahotsav Got Talent",
       rules: [
-        "This is an open talent show where participants can showcase any unique talent.",
-        "The performance can be solo or group (maximum 5 participants).",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "Participants can perform magic, mimicry, beatboxing, stand-up comedy, unique musical performances, or any other special talent.",
-        "Participants must bring their own props if required.",
-        "Judgment will be based on uniqueness, skill level, entertainment value, and overall performance."
+        "The participant can be solo or group with no team limit.",
+        "Performance can be of any art or skill – Dance, music, special skills etc., that has an ‘X’ factor unlike the routine performances.",
+        "Judgement will be based on the overall impression created by the participants."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 7,000",
+        second: "Rs. 5,000",
+        third: "Rs. 3,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     },
     "Mr. and Ms. Mahotsav": {
       title: "SPOT LIGHT",
       subtitle: "Mr. and Ms. Mahotsav",
       rules: [
-        "This is an individual personality competition for male and female categories.",
-        "Participants will go through multiple rounds including introduction, talent round, question-answer, and ramp walk.",
-        "Participants should come in formal/ethnic attire for introduction round.",
-        "Talent round: Showcase any talent (singing, dancing, mimicry, etc.) - 2 minutes max.",
-        "Participants should be confident, well-spoken, and presentable.",
-        "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
+        "It is a multiple round event where the participant will be tested on various capabilities like talent, presentation skills etc.,",
+        "Winners will be awarded with the title of Mr. / Ms. Mahotsav along with a crowning ceremony.",
+        "Details of Rounds:",
+        "Round 1:It is a written round on personality assessment based questions.",
+        "Round 2 : It is a Talent Round. Any talent that you posses can be exhibited within the time limit of 2 to 3 minutes.",
+        "Round 3 : Participants should present their perspective on the given real time or general situation given by the jury."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000",
-        third: "Rs. 7,000"
+        first: "Rs. 4,000",
+        second: "Rs. 4,000",
       },
-      contacts: []
+      contacts: [
+        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
+        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+      ]
     },
     "Online Photography": {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",

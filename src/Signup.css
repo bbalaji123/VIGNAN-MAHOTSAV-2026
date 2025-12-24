@@ -274,3 +274,30 @@
     gap: 18px; /* space between columns */
   }
 }
+/* ================= Card ================= */
+.signup-modal-content {
+  position: relative;
+  width: 550px;
+  max-width: 95%;
+  max-height: 85vh;          /* limit modal height to viewport */
+  
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 213, 0.35),
+    rgba(190, 90, 190, 0.25)
+  );
+
+  backdrop-filter: blur(30px) saturate(160%);
+  border-radius: 28px;
+  border: 1.5px solid rgba(255, 200, 230, 0.45);
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+
+  padding: 36px;
+
+  /* ✅ Vertical scroll only */
+  overflow-y: auto;       /* allow vertical scroll */
+  overflow-x: hidden;     /* prevent horizontal scroll */
+}

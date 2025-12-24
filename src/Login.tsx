@@ -164,7 +164,7 @@ const Login: React.FC<LoginProps> = ({
               className="login-submit-btn"
               disabled={isLoggingIn}
             >
-              {isLoggingIn ? '⏳ Logging in...' : '🔑 Login'}
+              {isLoggingIn ? '⏳ Logging in...' : 'Login'}
             </button>
 
             <div className="signup-link">

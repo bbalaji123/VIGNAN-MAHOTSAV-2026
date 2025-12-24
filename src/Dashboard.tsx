@@ -1,13 +1,12 @@
 ﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import BackButton from './components/BackButton';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserProfile, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -79,17 +78,8 @@ const Dashboard: React.FC = () => {
   const [showCulturals, setShowCulturals] = useState(false);
   const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(0);
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
-  const [throwbackScrollProgress, setThrowbackScrollProgress] = useState(0);
   const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
   const [selectedYear, setSelectedYear] = useState<'2023' | '2024' | '2025'>('2023');
-  
-  // Highlights carousel state
-  const [currentHighlightSlide, setCurrentHighlightSlide] = useState(0);
-  const highlightCards = [
-    { day: "Day ONE", title: "Exciting Day One Highlights", description: "Cultural performances, inauguration ceremony, and opening events that set the stage for an amazing festival.", video: "day 1.mp4" },
-    { day: "Day TWO", title: "Exciting Day Two Highlights", description: "Main events, competitions, technical exhibitions, and spectacular performances by renowned artists.", video: "day 2.mp4" },
-    { day: "Day THREE", title: "Exciting Day Three Highlights", description: "Grand finale, award ceremonies, closing performances, and memorable moments to conclude the festival.", video: "day 3.mp4" }
-  ];
   
   // Touch swipe state for carousels
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -799,7 +789,7 @@ const Dashboard: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [, setLoggedInUserName] = useState<string>('');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  const [loginFormData, setLoginFormData] = useState({ email: '', password: '' });
+  const [loginFormData, setLoginFormData] = useState({ identifier: '', password: '' });
   const [loginMessage, setLoginMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -808,7 +798,6 @@ const Dashboard: React.FC = () => {
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
   const [myEvents, setMyEvents] = useState<Event[]>([]);
   const [tempSelectedEvents, setTempSelectedEvents] = useState<Set<string>>(new Set());
-  const [eventRegistrationsCount] = useState(0);
   const [paraSportsSelected, setParaSportsSelected] = useState(false);
   const [regularEventsSelected, setRegularEventsSelected] = useState(false);
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
@@ -1444,45 +1433,12 @@ const Dashboard: React.FC = () => {
     }
   };
   
-  const nextHighlightSlide = () => {
-    setCurrentHighlightSlide((prev) => (prev + 1) % highlightCards.length);
-  };
-
   const prevEventSlide = () => {
     setCurrentEventSlide((prev) => (prev - 1 + eventInfoCards.length) % eventInfoCards.length);
   };
 
   const nextEventSlide = () => {
     setCurrentEventSlide((prev) => (prev + 1) % eventInfoCards.length);
-  };
-
-  const prevHighlightSlide = () => {
-    setCurrentHighlightSlide((prev) => (prev - 1 + highlightCards.length) % highlightCards.length);
-  };
-
-  // Touch swipe handling for highlights carousel
-  const [highlightTouchStart, setHighlightTouchStart] = useState<number | null>(null);
-  const [highlightTouchEnd, setHighlightTouchEnd] = useState<number | null>(null);
-
-  const handleHighlightTouchStart = (e: React.TouchEvent) => {
-    setHighlightTouchEnd(null);
-    setHighlightTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleHighlightTouchMove = (e: React.TouchEvent) => {
-    setHighlightTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleHighlightTouchEnd = () => {
-    if (!highlightTouchStart || !highlightTouchEnd) return;
-    const distance = highlightTouchStart - highlightTouchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    if (isLeftSwipe) {
-      nextHighlightSlide();
-    } else if (isRightSwipe) {
-      prevHighlightSlide();
-    }
   };
 
   // Touch swipe handling for sports carousel
@@ -1885,7 +1841,7 @@ const Dashboard: React.FC = () => {
 
   const handleCloseLogin = () => {
     setShowLoginModal(false);
-    setLoginFormData({ email: '', password: '' });
+    setLoginFormData({ identifier: '', password: '' });
     setLoginMessage(null);
   };
 
@@ -2057,13 +2013,6 @@ const Dashboard: React.FC = () => {
     setGeneratedPassword(null);
     setShowSignupModal(false);
     setShowLoginModal(true);
-  };
-
-  const handleForgotPasswordClick = () => {
-    setShowLoginModal(false);
-    setShowForgotPasswordModal(true);
-    setResetMessage(null);
-    setForgotPasswordEmail('');
   };
 
   const handleCloseForgotPassword = () => {
@@ -2439,21 +2388,13 @@ Do you want to proceed with registration?`;
     }
   };
 
-  const handleLoginInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoggingIn(true);
     setLoginMessage(null);
 
     // Validate required fields
-    if (!loginFormData.email || !loginFormData.password) {
+    if (!loginFormData.identifier || !loginFormData.password) {
       setLoginMessage({
         type: 'error',
         text: 'Please enter email/userId and password'
@@ -2464,7 +2405,7 @@ Do you want to proceed with registration?`;
 
     try {
       // Call the real login API
-      const result = await loginUser(loginFormData.email, loginFormData.password);
+      const result = await loginUser(loginFormData.identifier, loginFormData.password);
       
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;
@@ -2495,7 +2436,7 @@ Do you want to proceed with registration?`;
         console.log('?? Storing user profile:', profileData);
         
         setShowLoginModal(false);
-        setLoginFormData({ email: '', password: '' });
+        setLoginFormData({ identifier: '', password: '' });
         
         // Store in localStorage
         localStorage.setItem('userName', name);
@@ -4087,9 +4028,9 @@ Do you want to proceed with registration?`;
           {/* Garuda Logo */}
           <div style={{
             position: 'absolute',
-            left: '-90px',
-            top: '120px',
-            width: 'clamp(200px, 25vw, 400px)',
+            left: '-80px',
+            top: '180px',
+            width: 'clamp(200px, 25vw, 350px)',
             height: 'auto',
             zIndex: 1
           }}>
@@ -4889,11 +4830,11 @@ Do you want to proceed with registration?`;
         showLoginModal={showLoginModal}
         onClose={handleCloseLogin}
         loginFormData={loginFormData}
-        onInputChange={handleLoginInputChange}
-        onSubmit={handleLoginSubmit}
+        setLoginFormData={setLoginFormData}
+        onSubmitApi={handleLoginSubmit}
         isLoggingIn={isLoggingIn}
         loginMessage={loginMessage}
-        onForgotPasswordClick={handleForgotPasswordClick}
+        setLoginMessage={setLoginMessage}
         onSignupClick={handleSignupClick}
       />
 

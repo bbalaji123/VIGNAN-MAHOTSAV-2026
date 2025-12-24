@@ -28,8 +28,8 @@
   width: 550px;
   max-width: 95%;
   min-height: 420px;
-  max-height: 85vh;              /* ⭐ LIMIT HEIGHT */
-  overflow: hidden;              /* ⭐ PREVENT OUTER SCROLL */
+  max-height: 85vh;
+  overflow: hidden;
 
   background: linear-gradient(
     135deg,
@@ -132,18 +132,14 @@
   flex-direction: column;
   align-items: center;
 
-  overflow-y: auto;              /* ⭐ SCROLL ENABLED */
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,182,193,0.6) transparent;
 }
 
-/* Custom Scrollbar (Chrome / Edge) */
+/* Custom Scrollbar */
 .signup-modal-body::-webkit-scrollbar {
   width: 6px;
-}
-
-.signup-modal-body::-webkit-scrollbar-track {
-  background: transparent;
 }
 
 .signup-modal-body::-webkit-scrollbar-thumb {
@@ -171,9 +167,23 @@
   width: 100%;
 }
 
+/* ✅ ALL PLACEHOLDERS – PURE BLACK */
 .signup-form .form-input::placeholder,
-.signup-form .form-select option {
-  color: rgba(255, 255, 255, 0.7);
+.signup-form .form-select::placeholder {
+  color: #000000;
+  opacity: 1;
+}
+
+.signup-form .form-input::-webkit-input-placeholder {
+  color: #000000;
+}
+
+.signup-form .form-input::-moz-placeholder {
+  color: #000000;
+}
+
+.signup-form .form-input:-ms-input-placeholder {
+  color: #000000;
 }
 
 /* Form Section Headers */
@@ -216,17 +226,6 @@
     padding: 28px;
     border-radius: 24px;
   }
-
-  .signup-modal-content::before {
-    top: -10px;
-    right: -10px;
-    width: 100px;
-    height: 100px;
-  }
-
-  .signup-modal-body {
-    padding: 28px 25px 32px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -235,17 +234,6 @@
     padding: 24px;
     border-radius: 20px;
   }
-
-  .signup-modal-content::before {
-    top: -5px;
-    right: -5px;
-    width: 80px;
-    height: 80px;
-  }
-
-  .signup-modal-body {
-    padding: 20px 18px;
-  }
 }
 
 @media (max-width: 375px) {
@@ -253,14 +241,5 @@
     width: 96%;
     padding: 18px;
     border-radius: 18px;
-  }
-
-  .signup-modal-content::before {
-    width: 60px;
-    height: 60px;
-  }
-
-  .signup-modal-body {
-    padding: 15px 12px;
   }
 }

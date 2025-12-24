@@ -1,409 +1,198 @@
 /* ============================================
-   LOGIN PAGE STYLES
-   Eternal Harmony Theme - Mahotsav 2026
+   LOGIN PAGE – PINK GLASS CARD
    ============================================ */
 
-/* Modal Overlay */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ============================================
+   Background Wrapper (Image stays visible)
+   ============================================ */
 .login-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.85) 50%, rgba(15, 52, 96, 0.8) 100%);
-  backdrop-filter: blur(10px);
+  inset: 0;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  padding: 20px;
 }
 
-/* Main Modal Container */
+/* ============================================
+   Glassy Pink Login Card
+   ============================================ */
 .login-modal-content {
-  background: linear-gradient(165deg, rgba(82, 37, 102, 0.75) 0%, rgba(37, 150, 190, 0.68) 100%);
-  backdrop-filter: blur(24px);
-  border-radius: 32px 8px 32px 8px;
-  width: 100%;
-  max-width: min(500px, 95vw);
-  max-height: 90vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 2px solid transparent;
-  border-image: linear-gradient(135deg, rgba(228, 138, 185, 0.3), rgba(253, 238, 113, 0.2), rgba(37, 150, 190, 0.3)) 1;
-  box-shadow: 
-    0 24px 64px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 0 1px rgba(82, 37, 102, 0.2);
-  animation: harmonyEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  padding-right: 5px;
   position: relative;
-  overflow: visible;
-}
 
-/* Symbolic Harmony Element - Concentric circles representing balance */
-.login-modal-content::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, 
-    transparent 30%, 
-    rgba(253, 238, 113, 0.08) 30%, 
-    rgba(253, 238, 113, 0.08) 35%, 
-    transparent 35%,
-    transparent 50%,
-    rgba(228, 138, 185, 0.06) 50%,
-    rgba(228, 138, 185, 0.06) 55%,
-    transparent 55%,
-    transparent 70%,
-    rgba(37, 150, 190, 0.05) 70%,
-    rgba(37, 150, 190, 0.05) 75%,
-    transparent 75%
-  );
-  border-radius: 50%;
-  pointer-events: none;
-  animation: harmonicPulse 4s ease-in-out infinite;
-}
-
-/* Harmony Flow Line - Bottom unity element */
-.login-modal-content::after {
-  content: '';
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(228, 138, 185, 0.4) 20%,
-    rgba(253, 238, 113, 0.5) 50%,
-    rgba(228, 138, 185, 0.4) 80%,
-    transparent
-  );
-  border-radius: 2px;
-  filter: blur(1px);
-}
-
-@keyframes harmonyEnter {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes harmonicPulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05) rotate(180deg);
-  }
-}
-
-/* Modal Header */
-.login-modal-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 36px 38px 24px;
-  border-bottom: 2px solid transparent;
-  border-image: linear-gradient(90deg, 
-    transparent, 
-    rgba(253, 238, 113, 0.3) 30%,
-    rgba(228, 138, 185, 0.25) 50%,
-    rgba(253, 238, 113, 0.3) 70%,
-    transparent
-  ) 1;
-  position: relative;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 520px;
+  min-height: 420px;
+  max-height: 80vh;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 213, 0.35),
+    rgba(190, 90, 190, 0.25)
+  );
+
+  backdrop-filter: blur(30px) saturate(160%);
+  -webkit-backdrop-filter: blur(30px) saturate(160%);
+
+  border-radius: 28px;
+  border: 1.5px solid rgba(255, 200, 230, 0.45);
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+
+  padding: 36px 34px;
+  overflow: hidden;
 }
 
-/* Lotus-inspired symbolic element at header */
-.login-modal-header::before {
-  content: '';
+/* ============================================
+   Close Button
+   ============================================ */
+.close-btn {
   position: absolute;
-  top: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 6px;
-  background: radial-gradient(ellipse, 
-    rgba(253, 238, 113, 0.6) 0%,
-    rgba(228, 138, 185, 0.4) 50%,
-    transparent 100%
-  );
-  border-radius: 50%;
-  filter: blur(2px);
+  top: 16px;
+  right: 18px;
+
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 400;
+  cursor: pointer;
+
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.login-modal-header {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-top: 8px;
 }
 
 .login-modal-header h2 {
-  color: rgba(255, 255, 255, 0.96);
+  color: #ffffff;
   font-size: 1.7rem;
-  margin: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(253, 238, 113, 0.1);
   font-weight: 500;
-  letter-spacing: 0.5px;
-  position: relative;
+  text-shadow: 0 0 18px rgba(255, 180, 220, 0.6);
 }
 
-/* Sacred dot accent */
-.login-modal-header h2::after {
-  content: '•';
-  color: rgba(253, 238, 113, 0.7);
-  margin-left: 8px;
-  font-size: 0.6em;
-  vertical-align: middle;
-  animation: sacredGlow 3s ease-in-out infinite;
-}
-
-@keyframes sacredGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; text-shadow: 0 0 8px rgba(253, 238, 113, 0.8); }
-}
-
-/* Modal Body */
+/* ============================================
+   Body
+   ============================================ */
 .login-modal-body {
-  padding: 32px 38px 36px;
-  position: relative;
+  width: 100%;
 }
 
-/* Subtle side harmony indicators */
-.login-modal-body::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 40%;
-  background: linear-gradient(180deg,
-    transparent,
-    rgba(228, 138, 185, 0.15) 30%,
-    rgba(253, 238, 113, 0.1) 50%,
-    rgba(228, 138, 185, 0.15) 70%,
-    transparent
-  );
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-/* Login Form */
+/* ============================================
+   Form
+   ============================================ */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
-/* Form Submit Button */
+/* ============================================
+   Input Fields
+   ============================================ */
+.login-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.login-form input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ============================================
+   Login Button
+   ============================================ */
 .login-submit-btn {
-  background: linear-gradient(135deg, #e48ab9 0%, #c96ba1 60%, #522566 100%);
-  color: white;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 14px;
   border: none;
-  padding: 15px 28px;
-  border-radius: 28px 10px 28px 10px;
+
+  background: linear-gradient(135deg, #ff9ecb, #c96ba1);
+  color: #fff;
+
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 8px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 
-    0 6px 18px rgba(201, 107, 161, 0.35),
-    inset 0 -2px 8px rgba(82, 37, 102, 0.3);
-  letter-spacing: 0.3px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-}
 
-.login-submit-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(253, 238, 113, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
-
-.login-submit-btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.login-submit-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
+  box-shadow: 0 10px 25px rgba(201, 107, 161, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .login-submit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 
-    0 10px 28px rgba(201, 107, 161, 0.45),
-    inset 0 -2px 8px rgba(82, 37, 102, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(201, 107, 161, 0.6);
 }
 
-.login-submit-btn:active {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 4px 12px rgba(201, 107, 161, 0.3),
-    inset 0 2px 6px rgba(82, 37, 102, 0.4);
-}
-
-.login-submit-btn:disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-/* Login Link Styles */
+/* ============================================
+   Signup Text
+   ============================================ */
 .signup-link {
+  margin-top: 18px;
   text-align: center;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.92rem;
-  letter-spacing: 0.3px;
+  font-size: 0.9rem;
+  color: #ffffff;
+
 }
 
 .signup-btn {
   background: none;
   border: none;
-  color: #fdee71;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: inherit;
+  color: #ffffff;
   font-weight: 600;
-  transition: all 0.3s ease;
-  position: relative;
-  padding: 0 2px;
+  cursor: pointer;
 }
 
-.signup-btn::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #fdee71 50%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.signup-btn:hover {
-  color: #ffed4a;
-  text-shadow: 0 0 8px rgba(253, 238, 113, 0.35);
-}
-
-.signup-btn:hover::after {
-  opacity: 1;
-}
-
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-  .login-modal-content {
-    width: 92%;
-    margin: 15px;
-    max-height: 88vh;
-    border-radius: 24px;
-  }
-  
-  .login-modal-content::before {
-    top: -10px;
-    right: -10px;
-    width: 120px;
-    height: 120px;
-  }
-  
-  .login-modal-header {
-    padding: 28px 30px 20px;
-  }
-  
-  .login-modal-header h2 {
-    font-size: 1.6rem;
-  }
-  
-  .login-modal-body {
-    padding: 28px 25px 32px;
-  }
-  
-  .login-submit-btn {
-    padding: 16px 24px;
-    font-size: 1rem;
-  }
-}
-
+/* ============================================
+   Mobile Responsive (No Scroll)
+   ============================================ */
 @media (max-width: 480px) {
   .login-modal-content {
-    width: 94%;
-    margin: 10px;
-    max-height: 90vh;
-    border-radius: 20px;
-    border-width: 2px;
-  }
-  
-  .login-modal-content::before {
-    top: -5px;
-    right: -5px;
-    width: 100px;
-    height: 100px;
-  }
-  
-  .login-modal-header {
-    padding: 25px 25px 15px;
-  }
-  
-  .login-modal-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  .login-modal-body {
-    padding: 25px 20px;
-  }
-  
-  .login-submit-btn {
-    padding: 14px 20px;
-    font-size: 0.95rem;
+    width: 92%;
+    min-height: auto;
+    padding: 28px 22px;
   }
 }
+/* Common input text style */
+.login-form .form-input {
+  color: #ffffff; /* matches password input text */
+  background: transparent; /* keep background consistent */
+  font-weight: 500;
+}
 
-@media (max-width: 375px) {
-  .login-modal-content {
-    width: 96%;
-    margin: 8px;
-    border-radius: 18px;
-  }
-  
-  .login-modal-content::before {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .login-modal-header {
-    padding: 20px 20px 12px;
-  }
-  
-  .login-modal-header h2 {
-    font-size: 1.3rem;
-  }
-  
-  .login-modal-body {
-    padding: 20px 15px;
-  }
-  
-  .login-submit-btn {
-    padding: 12px 18px;
-    font-size: 0.9rem;
-  }
+/* Optional: placeholder color matching */
+.login-form .form-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }

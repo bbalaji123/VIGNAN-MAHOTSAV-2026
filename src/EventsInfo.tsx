@@ -555,7 +555,44 @@ const EventsInfo: React.FC = () => {
             opacity: 0.3;
           }
           
-          /* Responsive flower positioning handled by Tailwind classes in JSX */
+          /* Responsive flower positioning */
+          @media (max-width: 768px) {
+            .flower-top-right,
+            .flower-bottom-left {
+              width: 350px !important;
+              height: 350px !important;
+              opacity: 0.25 !important;
+            }
+            
+            .flower-top-right {
+              top: -12% !important;
+              right: -12% !important;
+            }
+            
+            .flower-bottom-left {
+              bottom: -12% !important;
+              left: -12% !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .flower-top-right,
+            .flower-bottom-left {
+              width: 250px !important;
+              height: 250px !important;
+              opacity: 0.2 !important;
+            }
+            
+            .flower-top-right {
+              top: -8% !important;
+              right: -12% !important;
+            }
+            
+            .flower-bottom-left {
+              bottom: -8% !important;
+              left: -12% !important;
+            }
+          }
         
           @keyframes petalsRotateAnticlockwise {
             from { transform: rotate(0deg); }
@@ -577,7 +614,28 @@ const EventsInfo: React.FC = () => {
             to { transform: rotate(-360deg); }
           }
           
-          /* Responsive adjustments handled by Tailwind classes in JSX */
+          /* Responsive adjustments for mobile */
+          @media (max-width: 768px) {
+            .events-header-title {
+              font-size: 3rem !important;
+            }
+            
+            .events-cards-container > div {
+              width: 280px !important;
+              height: 320px !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .events-header-title {
+              font-size: 2.5rem !important;
+            }
+            
+            .events-cards-container > div {
+              width: 260px !important;
+              height: 300px !important;
+            }
+          }
         `}
       </style>
 
@@ -630,7 +688,7 @@ const EventsInfo: React.FC = () => {
             
             {/* Center column: Title */}
             <div className="flex items-start justify-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white events-page-heading" style={{
+              <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
                 fontFamily: 'Woodtrap, sans-serif',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
               }}>
@@ -698,7 +756,7 @@ const EventsInfo: React.FC = () => {
                 navigate('/');
               }
             }} />
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white events-page-heading text-center" style={{
+            <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
               fontFamily: 'Woodtrap, sans-serif',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
@@ -728,10 +786,10 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-6 sm:gap-8 md:gap-12 mb-10">
+              <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 active:scale-100 touch-manipulation"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
@@ -739,22 +797,22 @@ const EventsInfo: React.FC = () => {
                     WebkitBackdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '280px',
-                    width: '240px',
+                    height: '350px',
+                    width: '300px',
                     maxWidth: '100%'
                   }}
                 >
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-center">
-                    <h2 className="text-white text-xs sm:text-sm font-bold tracking-wide leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h2 className="text-white text-xs font-bold tracking-wide leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                       PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
                     </h2>
                   </div>
                 </div>
 
                 {/* Card 2 - Sports and Games with Button Below */}
-                <div className="relative flex flex-col items-center gap-6 sm:gap-8">
+                <div className="relative flex flex-col items-center gap-8">
                   <div 
-                    className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 active:scale-100 touch-manipulation"
+                    className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
                     style={{
                       background: 'rgba(180, 150, 200, 0.35)',
@@ -762,12 +820,12 @@ const EventsInfo: React.FC = () => {
                       WebkitBackdropFilter: 'blur(15px)',
                       border: '1px solid rgba(255, 255, 255, 0.18)',
                       boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                      height: '280px',
-                      width: '240px',
+                      height: '350px',
+                      width: '300px',
                       maxWidth: '100%'
                     }}
                   >
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-center">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                       <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                         SPORTS AND GAMES
                       </h2>
@@ -786,20 +844,17 @@ const EventsInfo: React.FC = () => {
                       backgroundColor: '#f9a8d4',
                       color: '#581c87',
                       fontWeight: 'bold',
-                      padding: '12px 24px',
+                      padding: '10px 60px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: '18px',
                       border: 'none',
                       cursor: 'pointer',
                       boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                       transition: 'all 0.3s ease',
-                      whiteSpace: 'nowrap',
-                      minHeight: '48px',
-                      touchAction: 'manipulation'
+                      whiteSpace: 'nowrap'
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f472b6'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f9a8d4'}
-                    className="text-xs sm:text-sm md:text-base px-6 sm:px-10 md:px-12 lg:px-16"
                   >
                     DOWNLOAD RULEBOOK
                   </button>
@@ -807,7 +862,7 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 3 - Robo Wars & Gaming */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 active:scale-100 touch-manipulation"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={() => setShowRoboWarsGaming(true)}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
@@ -815,12 +870,12 @@ const EventsInfo: React.FC = () => {
                     WebkitBackdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '280px',
-                    width: '240px',
+                    height: '350px',
+                    width: '300px',
                     maxWidth: '100%'
                   }}
                 >
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-center">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                     <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
                       ROBO WARS & GAMING
                     </h2>

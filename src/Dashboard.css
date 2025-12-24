@@ -12320,3 +12320,8 @@ html {
     max-width: 1800px;
   }
 }
+
+/* Stats Card with BackToSchool Font */
+.stats-card-backtoschool div {
+  font-family: 'BackToSchool', sans-serif !important;
+}

@@ -117,7 +117,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
   if (isLoading) {
     return (
       <select 
-        className="w-full p-3 rounded-xl border-2 border-white/20 bg-white/10 text-white text-base cursor-not-allowed opacity-60"
+        className="w-full p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base cursor-not-allowed opacity-60"
         disabled
       >
         <option>Loading colleges...</option>
@@ -131,8 +131,8 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
         <select
           value={value || ''}
           onChange={handleSelectChange}
-          className="w-full p-3 pr-10 rounded-xl border-2 border-white/20 bg-white/10 text-white text-base 
-                     cursor-pointer appearance-none transition-all duration-300
+          className="w-full p-2.5 pr-10 sm:p-3 sm:pr-10 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
+                     cursor-pointer appearance-none transition-all duration-300 touch-manipulation
                      focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30
                      bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%3E%3cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3c%2Fpolyline%3E%3c%2Fsvg%3E')]
                      bg-no-repeat bg-[right_12px_center] bg-[length:16px]
@@ -154,8 +154,8 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             value={otherCollegeName}
             onChange={handleOtherCollegeChange}
             placeholder="Enter your college name"
-            className="flex-1 min-w-0 p-3 rounded-xl border-2 border-white/20 bg-white/10 text-white text-base
-                       transition-all duration-300 placeholder:text-white/50
+            className="flex-1 min-w-0 p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base
+                       transition-all duration-300 placeholder:text-white/50 touch-manipulation
                        focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30"
             required={required}
             autoFocus
@@ -163,9 +163,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
           <div className="flex gap-1 shrink-0">
             <button 
               type="button" 
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-green-500 to-teal-500 text-white
-                         flex items-center justify-center cursor-pointer transition-all duration-200
-                         hover:scale-105 hover:shadow-lg hover:shadow-green-500/40
+              className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-green-500 to-teal-500 text-white
+                         flex items-center justify-center cursor-pointer transition-all duration-200 touch-manipulation
+                         hover:scale-105 hover:shadow-lg hover:shadow-green-500/40 active:scale-95
                          disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               onClick={handleConfirmOther}
               disabled={!otherCollegeName.trim()}
@@ -174,9 +174,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             </button>
             <button 
               type="button" 
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-red-500 to-red-400 text-white
-                         flex items-center justify-center cursor-pointer transition-all duration-200
-                         hover:scale-105 hover:shadow-lg hover:shadow-red-500/40"
+              className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-red-500 to-red-400 text-white
+                         flex items-center justify-center cursor-pointer transition-all duration-200 touch-manipulation
+                         hover:scale-105 hover:shadow-lg hover:shadow-red-500/40 active:scale-95"
               onClick={handleCancelOther}
             >
               ✕

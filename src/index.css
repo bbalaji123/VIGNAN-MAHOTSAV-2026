@@ -174,27 +174,6 @@ button {
   transform: translateX(-5px) scale(0.98);
 }
 
-@media (max-width: 768px) {
-  .circular-back-button {
-    top: 0.3rem;
-    left: 0.3rem;
-    width: 42px;
-    height: 42px;
-  }
-  
-  .circular-back-button::before {
-    width: 18px;
-    height: 2px;
-  }
-  
-  .circular-back-button::after {
-    width: 8px;
-    height: 8px;
-    border-left-width: 2px;
-    border-bottom-width: 2px;
-  }
-}
-
 /* Global Background Image */
 html, body, #root {
   margin: 0;
@@ -272,16 +251,23 @@ html, body, #root {
 
 /* Custom component styles */
 .btn-primary {
-  padding: 2.5rem 1rem;
+  padding: 1rem 0.75rem;
   background: rgba(22, 33, 62, 0.9);
   color: #facc15;
   border: 2px solid #facc15;
   border-radius: 0.5rem;
-  font-size: 1.25rem;
+  font-size: 0.875rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .btn-primary {
+    padding: 2.5rem 1rem;
+    font-size: 1.25rem;
+  }
 }
 
 .btn-primary:hover {
@@ -292,16 +278,23 @@ html, body, #root {
 }
 
 .btn-secondary {
-  padding: 2.5rem 1rem;
+  padding: 1rem 0.75rem;
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border: none;
   border-radius: 0.5rem;
-  font-size: 1.25rem;
+  font-size: 0.875rem;
   font-weight: bold;
   text-transform: lowercase;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .btn-secondary {
+    padding: 2.5rem 1rem;
+    font-size: 1.25rem;
+  }
 }
 
 .btn-secondary:hover {

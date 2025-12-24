@@ -53,46 +53,6 @@ const Zonals: React.FC = () => {
 
       <style>
         {`
-          .flower-container-mobile {
-            width: 500px;
-            height: 500px;
-            position: fixed;
-            overflow: visible;
-          }
-          
-          .flower-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-          }
-          
-          .flower-container-mobile:first-of-type .flower-inner {
-            top: -50%;
-            right: -50%;
-          }
-          
-          .flower-container-mobile:nth-of-type(2) .flower-inner {
-            bottom: -50%;
-            left: -50%;
-          }
-          
-          @media (max-width: 768px) {
-            .flower-container-mobile {
-              width: 300px;
-              height: 300px;
-            }
-            
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -40%;
-              right: -40%;
-            }
-            
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -40%;
-              left: -40%;
-            }
-          }
-          
           @keyframes petalsRotateAnticlockwise {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
@@ -109,122 +69,6 @@ const Zonals: React.FC = () => {
               transform: translateY(0);
             }
           }
-
-          .zonals-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 80vh;
-            padding: 4rem 2rem 2rem 2rem;
-            padding-top: 6rem;
-          }
-
-          .zonals-title {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #ffffff;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            letter-spacing: 0.1em;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.1s;
-          }
-
-          .city-cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            max-width: 1400px;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.3s;
-          }
-
-          .city-card {
-            background: rgba(184, 147, 189, 0.7);
-            border: 3px solid rgba(198, 142, 107, 0.8);
-            border-radius: 20px;
-            padding: 6rem 3rem;
-            min-width: 250px;
-            width: 280px;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-          }
-
-          .city-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(184, 147, 189, 0.5);
-            background: rgba(184, 147, 189, 0.85);
-          }
-
-          .city-name {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #000000;
-            text-align: center;
-            text-transform: lowercase;
-          }
-
-          .back-button {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-            background: linear-gradient(135deg, #fdee71, #e48ab9);
-            color: #000;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 5px 15px rgba(253, 238, 113, 0.4);
-          }
-
-          .back-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(253, 238, 113, 0.6);
-          }
-
-          @media (max-width: 768px) {
-            .zonals-title {
-              font-size: 2.5rem;
-            }
-
-            .city-cards-container {
-              gap: 1.5rem;
-            }
-
-            .city-card {
-              min-width: 200px;
-              width: 240px;
-              height: 250px;
-              padding: 4rem 2rem;
-            }
-
-            .city-name {
-              font-size: 1.5rem;
-            }
-
-            .back-button {
-              top: 1rem;
-              left: 1rem;
-              padding: 0.5rem 1rem;
-            }
-          }
         `}
       </style>
 
@@ -232,22 +76,44 @@ const Zonals: React.FC = () => {
       <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
-      <div className="zonals-content">
-        <h1 className="zonals-title">ZONALS</h1>
+      <div className="flex flex-col items-center justify-start min-h-[80vh] px-4 sm:px-6 md:px-8 pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-8 sm:pb-12">
+        <h1 
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12 sm:mb-16 md:mb-20 text-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]"
+          style={{
+            fontFamily: 'Cinzel Decorative, serif',
+            textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
+            letterSpacing: '0.1em'
+          }}
+        >
+          ZONALS
+        </h1>
         
         {/* City Cards Container */}
-        <div className="city-cards-container">
-          <div className="city-card" onClick={() => handleCityClick('bangalore')}>
-            <span className="city-name">bangalore</span>
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-[1400px] w-full opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]">
+          <div 
+            onClick={() => handleCityClick('bangalore')} 
+            className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] p-12 sm:p-16 lg:p-24 min-w-[200px] w-[240px] sm:w-[280px] h-[250px] sm:h-[300px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
+            style={{ touchAction: 'manipulation' }}
+          >
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black text-center lowercase">bangalore</span>
           </div>
-          <div className="city-card">
-            <span className="city-name">vizag</span>
+          <div 
+            className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] p-12 sm:p-16 lg:p-24 min-w-[200px] w-[240px] sm:w-[280px] h-[250px] sm:h-[300px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
+            style={{ touchAction: 'manipulation' }}
+          >
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black text-center lowercase">vizag</span>
           </div>
-          <div className="city-card">
-            <span className="city-name">hyderabad</span>
+          <div 
+            className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] p-12 sm:p-16 lg:p-24 min-w-[200px] w-[240px] sm:w-[280px] h-[250px] sm:h-[300px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
+            style={{ touchAction: 'manipulation' }}
+          >
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black text-center lowercase">hyderabad</span>
           </div>
-          <div className="city-card">
-            <span className="city-name">tirupati</span>
+          <div 
+            className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] p-12 sm:p-16 lg:p-24 min-w-[200px] w-[240px] sm:w-[280px] h-[250px] sm:h-[300px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
+            style={{ touchAction: 'manipulation' }}
+          >
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-black text-center lowercase">tirupati</span>
           </div>
         </div>
       </div>

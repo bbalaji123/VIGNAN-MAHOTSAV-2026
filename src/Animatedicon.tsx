@@ -202,7 +202,7 @@ const AnimatedIcon: React.FC = () => {
             y="0" 
             width="1000" 
             height="1000"
-            href={`${import.meta.env.BASE_URL}petals.png`}
+            href={`${import.meta.env.BASE_URL}petals.avif`}
           />
         </g>
         
@@ -224,7 +224,7 @@ const AnimatedIcon: React.FC = () => {
             y="340" 
             width="320" 
             height="320"
-            href={`${import.meta.env.BASE_URL}sun.png`}
+            href={`${import.meta.env.BASE_URL}sun.avif`}
           />
         </g>
         
@@ -239,7 +239,7 @@ const AnimatedIcon: React.FC = () => {
           y="360" 
           width="280" 
           height="280"
-          href={`${import.meta.env.BASE_URL}moon.png`}
+          href={`${import.meta.env.BASE_URL}moon.avif`}
           style={{ zIndex: 10 }}
         />
       </svg>

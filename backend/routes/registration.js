@@ -5,10 +5,16 @@ import { generateUserId } from '../utils/idGenerator.js';
 
 const router = express.Router();
 
+// Get branches
+router.get('/branches', (req, res) => {
+  const branches = ['CSE', 'ECE', 'ME', 'CE', 'IT', 'EEE', 'CIVIL', 'CHEM', 'BIO', 'MCA', 'MBA', 'Other'];
+  res.json({ branches });
+});
+
 // Create new registration
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, phone, college, dateOfBirth, gender, registerId, userType, participationType } = req.body;
+    const { name, email, password, phone, college, branch, dateOfBirth, gender, registerId, userType, participationType } = req.body;
 
     // Validate required fields
     if (!name || !email || !password) {
@@ -67,6 +73,7 @@ router.post('/register', async (req, res) => {
           password, // Note: In production, you should hash passwords before storing
           phone,
           college,
+          branch,
           dateOfBirth,
           gender,
           registerId,

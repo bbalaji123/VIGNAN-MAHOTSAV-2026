@@ -57,13 +57,11 @@
   position: absolute;
   top: 16px;
   right: -50px;
-
   background: none;
   border: none;
   color: #ffffff;
   font-size: 26px;
   cursor: pointer;
-
   opacity: 0.85;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -73,7 +71,7 @@
   transform: scale(1.1);
 }
 
-/* Symbolic Harmony Element */
+/* Decorative Elements */
 .signup-modal-content::before {
   content: '';
   position: absolute;
@@ -88,11 +86,9 @@
     transparent 100%
   );
   border-radius: 50%;
-  pointer-events: none;
   animation: harmonicPulse 4s ease-in-out infinite;
 }
 
-/* Harmony Flow Line */
 .signup-modal-content::after {
   content: '';
   position: absolute;
@@ -107,7 +103,6 @@
     rgba(255,182,193,0.3),
     transparent
   );
-  border-radius: 2px;
   filter: blur(1px);
 }
 
@@ -118,36 +113,19 @@
 }
 
 @keyframes harmonicPulse {
-  0%, 100% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.05) rotate(180deg); }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
 }
 
-/* Signup Modal Body */
+/* Body */
 .signup-modal-body {
   padding: 32px 38px 36px;
-  position: relative;
   flex: 1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,182,193,0.6) transparent;
 }
 
-/* Custom Scrollbar */
-.signup-modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.signup-modal-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 182, 193, 0.6);
-  border-radius: 10px;
-}
-
-/* Signup Form */
+/* Form */
 .signup-form {
   display: flex;
   flex-direction: column;
@@ -155,7 +133,7 @@
   width: 100%;
 }
 
-/* Input Fields */
+/* Inputs */
 .signup-form .form-input,
 .signup-form .form-select {
   color: white;
@@ -167,26 +145,26 @@
   width: 100%;
 }
 
-/* ✅ ALL PLACEHOLDERS – PURE BLACK */
+/* ✅ PLACEHOLDERS – LIGHT BLACK */
 .signup-form .form-input::placeholder,
 .signup-form .form-select::placeholder {
-  color: #000000;
+  color: rgba(0, 0, 0, 0.6);
   opacity: 1;
 }
 
 .signup-form .form-input::-webkit-input-placeholder {
-  color: #000000;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .signup-form .form-input::-moz-placeholder {
-  color: #000000;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .signup-form .form-input:-ms-input-placeholder {
-  color: #000000;
+  color: rgba(0, 0, 0, 0.6);
 }
 
-/* Form Section Headers */
+/* Section Headers */
 .signup-form h3 {
   color: #fdee71;
   font-size: 1.05rem;
@@ -202,7 +180,46 @@
   border-radius: 20px;
   padding: 14px 28px;
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s ease;
+}
+
+/* ✅ NEXT BUTTON – PINK */
+.signup-next-btn {
+  background: linear-gradient(
+    135deg,
+    #ff2f92,
+    #e6007e
+  );
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 25px rgba(230, 0, 126, 0.45);
+}
+
+.signup-next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(230, 0, 126, 0.6);
+}
+
+/* ✅ CREATE ACCOUNT / SUBMIT BUTTON – SAME AS NEXT */
+.signup-submit-btn {
+  background: linear-gradient(
+    135deg,
+    #ff2f92,
+    #e6007e
+  );
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(230, 0, 126, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.signup-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(230, 0, 126, 0.6);
 }
 
 /* Links */
@@ -215,16 +232,14 @@
 
 .signup-link .login-btn-link {
   color: #fdee71;
-  text-decoration: none;
   font-weight: 600;
 }
 
-/* Responsive Adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   .signup-modal-content {
     width: 92%;
     padding: 28px;
-    border-radius: 24px;
   }
 }
 
@@ -232,7 +247,6 @@
   .signup-modal-content {
     width: 94%;
     padding: 24px;
-    border-radius: 20px;
   }
 }
 
@@ -240,6 +254,5 @@
   .signup-modal-content {
     width: 96%;
     padding: 18px;
-    border-radius: 18px;
   }
 }

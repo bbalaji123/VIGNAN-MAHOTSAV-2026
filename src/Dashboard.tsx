@@ -135,7 +135,13 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 834124 0966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+
+      ]
     },
     "Singing Idol": {
       title: "MUSIC",
@@ -159,7 +165,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Dancing Star - Western Solo": {
       title: "DANCE",
@@ -177,7 +187,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
+        {name: "Ms. Asritha", phone: "+91 7386 889772"},
+        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+      ]
     },
     "Group Singing": {
       title: "MUSIC",
@@ -195,7 +210,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3500",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 8328009698"},
+        {name: "Ms. Varshitha", phone: "+91 8712347513"}
+      ]
     },
     "Skit": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -213,7 +232,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 5000",
         third: "Rs. 4000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Dancing Jodi - Western Duo": {
       title: "DANCE",
@@ -234,7 +256,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
+        {name: "Ms. Asritha", phone: "+91 7386 889772"},
+        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+      ]
     },
     "Mime": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -250,7 +277,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 4000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Singing Jodi": {
       title: "MUSIC",
@@ -268,7 +298,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 2000",
         third: "Rs. 1000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Group Dance": {
       title: "DANCE",
@@ -288,7 +322,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 12000",
         third: "Rs. 8000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Short Film Making": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -308,7 +347,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 15000",
         third: "Rs. 12000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Haute Couture": {
       title: "FASHION COMPETITIONS",
@@ -327,8 +369,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 12000"
       },
       contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
       ]
     }
   };

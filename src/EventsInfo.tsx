@@ -795,7 +795,7 @@ const EventsInfo: React.FC = () => {
               <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px]"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[200px] md:max-w-[200px] h-[200px] md:h-[200px]"
                   onClick={handleCulturalsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
@@ -814,7 +814,7 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 2 - Sports and Games (without button on mobile) */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px] md:mb-0"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[200px] md:max-w-[300px] h-[200px] md:h-[350px] md:mb-0"
                   onClick={handleSportsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
@@ -833,7 +833,7 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 3 - Para Sports */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px]"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[200px] md:max-w-[300px] h-[200px] md:h-[350px]"
                   onClick={handleParaSportsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
@@ -852,7 +852,7 @@ const EventsInfo: React.FC = () => {
               </div>
               
               {/* Download Rulebook button - shown at bottom on mobile, below sports card on desktop */}
-              <div className="flex justify-center mt-12 mb-16 md:mt-0 md:mb-0 md:hidden">
+              <div className="flex justify-center mt-16 mb-20 md:mt-0 md:mb-0 md:hidden">
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();

@@ -4211,12 +4211,13 @@ Do you want to proceed with registration?`;
 
           @media (max-width: 768px) {
             .throwback-card {
-              width: calc((100vw - 60px) / 3);
-              gap: 10px;
+              width: calc((100vw - 40px) / 1.5);
+              height: clamp(120px, 18vw, 160px);
+              max-width: 500px;
             }
             
             .scroll-row {
-              gap: 10px;
+              gap: 20px;
             }
           }
 
@@ -4278,10 +4279,10 @@ Do you want to proceed with registration?`;
           maxWidth: '100vw',
           display: 'flex',
           flexDirection: 'column',
-          gap: '40px'
+          gap: window.innerWidth <= 768 ? '15px' : '40px'
         }}>
           {/* Row 1 - Moving Left */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: window.innerWidth <= 768 ? '10px 0' : '20px 0' }}>
             <div className="scroll-row">
               {[...Array(10)].map((_, i) => (
                 <div 
@@ -4306,7 +4307,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Row 2 - Moving Right */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: window.innerWidth <= 768 ? '10px 0' : '20px 0' }}>
             <div className="scroll-row scroll-row-2">
               {[...Array(10)].map((_, i) => (
                 <div 
@@ -4331,7 +4332,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Row 3 - Moving Left */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
+          <div style={{ overflow: 'visible', width: '100%', padding: window.innerWidth <= 768 ? '10px 0' : '20px 0' }}>
             <div className="scroll-row scroll-row-3">
               {[...Array(10)].map((_, i) => (
                 <div 
@@ -4424,7 +4425,9 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)' 
+                ? window.innerWidth <= 768 
+                  ? 'translate(calc(-50% - clamp(150px, 40vw, 200px)), -50%)'
+                  : 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)' 
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4456,7 +4459,9 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)' 
+                ? window.innerWidth <= 768 
+                  ? 'translate(calc(-50% + clamp(150px, 40vw, 200px)), -50%)'
+                  : 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)' 
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4505,21 +4510,21 @@ Do you want to proceed with registration?`;
               {/* Year buttons */}
               <div style={{
                 display: 'flex',
-                gap: '20px'
+                gap: 'clamp(10px, 2vw, 20px)'
               }}>
                 {(['2023', '2024', '2025'] as const).map(year => (
                   <button 
                     key={year} 
                     onClick={() => setSelectedYear(year)}
                     style={{
-                      padding: '12px 35px',
-                      borderRadius: '20px',
+                      padding: window.innerWidth <= 768 ? '8px 18px' : '12px 35px',
+                      borderRadius: window.innerWidth <= 768 ? '15px' : '20px',
                       background: selectedYear === year 
                         ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
                         : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
                       border: 'none',
                       color: 'white',
-                      fontSize: '1.2rem',
+                      fontSize: window.innerWidth <= 768 ? '0.9rem' : '1.2rem',
                       fontWeight: 'bold',
                       cursor: 'pointer',
                       boxShadow: selectedYear === year 
@@ -4536,11 +4541,12 @@ Do you want to proceed with registration?`;
 
               {/* Photo card */}
               <div style={{
-                width: '300px',
-                height: '300px',
+                width: window.innerWidth <= 768 ? 'clamp(240px, 70vw, 280px)' : '300px',
+                height: window.innerWidth <= 768 ? 'auto' : '300px',
+                aspectRatio: window.innerWidth <= 768 ? '16/9' : 'auto',
                 background: 'white',
                 borderRadius: '8px',
-                border: '12px solid #4a47a3',
+                border: window.innerWidth <= 768 ? '8px solid #4a47a3' : '12px solid #4a47a3',
                 boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -4595,7 +4601,7 @@ Do you want to proceed with registration?`;
         </div>
 
         {/* Countdown Timer */}
-        <div className="mt-6 sm:mt-8 md:mt-10 relative flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 lg:py-7 rounded-xl sm:rounded-2xl mb-40 sm:mb-48 md:mb-56 lg:mb-64" style={{
+        <div className="mt-6 sm:mt-8 md:mt-10 relative flex flex-nowrap justify-center gap-2 sm:gap-4 md:gap-5 lg:gap-6 px-2 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 lg:py-7 rounded-xl sm:rounded-2xl mb-40 sm:mb-48 md:mb-56 lg:mb-64" style={{
           background: 'rgba(61, 0, 84, 0.75)',
           color: '#FFFFFF',
           boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
@@ -4611,7 +4617,7 @@ Do you want to proceed with registration?`;
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '80px',
+              minWidth: 'clamp(50px, 18vw, 80px)',
               flex: '1 1 auto'
             }}>
               <div 
@@ -5663,15 +5669,7 @@ Do you want to proceed with registration?`;
       )}
 
       {/* Footer Section */}
-      <footer className="w-full bg-black lg:bg-black relative mt-12 sm:mt-16 md:mt-20" style={{
-        background: 'transparent'
-      }}>
-        {/* Mobile-only background wrapper */}
-        <div className="lg:hidden absolute inset-0 bg-transparent" />
-        
-        {/* Desktop-only background */}
-        <div className="hidden lg:block absolute inset-0 bg-black" />
-        
+      <footer className="w-full bg-black relative mt-12 sm:mt-16 md:mt-20">
         {/* Footer Content Wrapper */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-8 sm:py-10 md:py-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 items-center lg:items-start text-center lg:text-left">

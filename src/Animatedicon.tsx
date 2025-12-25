@@ -14,8 +14,6 @@ const AnimatedIcon: React.FC = () => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       
-      console.log('Scroll Y:', scrollY); // Debug log
-      
       // Detect device type based on screen size
       const isSmallMobile = vw < 480;  // Small phones
       const isMobile = vw < 768;        // Regular phones

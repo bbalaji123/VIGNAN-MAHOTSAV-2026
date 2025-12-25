@@ -633,7 +633,7 @@ const EventsInfo: React.FC = () => {
           
           .event-card:hover {
             transform: perspective(500px) rotateX(12deg) scale(1);
-            z-index: 50;
+            z-index: 5;
           }
           
           .event-card-image {
@@ -646,7 +646,7 @@ const EventsInfo: React.FC = () => {
             object-fit: cover;
             object-position: center center;
             transition: transform 1s ease-in-out;
-            z-index: 100;
+            z-index: 0;
             opacity: 1;
             border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
           }
@@ -698,7 +698,7 @@ const EventsInfo: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                className="h-28 md:h-32 object-contain"
+                className="h-46 md:h-54 object-contain -mt-20"
               />
               <BackButton 
                 className="!static !top-auto !left-auto"
@@ -735,8 +735,8 @@ const EventsInfo: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
+            <div className="flex items-start justify-start">
+              <h1 className="text-2xl md:text-4xl font-bold text-white events-page-heading whitespace-nowrap" style={{
                 fontFamily: 'Woodtrap, sans-serif',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
               }}>
@@ -756,7 +756,7 @@ const EventsInfo: React.FC = () => {
                  showSpotLight ? 'Spot Light' :
                  showRoboWarsGaming ? 'Robo Wars & Gaming' :
                  showSportsDetails ? 'sports and games' : 
-                 showCulturals ? 'culturals' :
+                 showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
                  'EVENTS'}
               </h1>
             </div>
@@ -770,7 +770,7 @@ const EventsInfo: React.FC = () => {
             <img 
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Vignan Mahotsav" 
-              className="h-24 object-contain"
+              className="h-32 object-contain"
             />
             <BackButton 
               className="!static !top-auto !left-auto"
@@ -804,7 +804,7 @@ const EventsInfo: React.FC = () => {
                 navigate('/');
               }
             }} />
-            <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
+            <h1 className="text-4xl font-bold text-white events-page-heading text-center whitespace-nowrap" style={{
               fontFamily: 'Woodtrap, sans-serif',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
@@ -823,7 +823,7 @@ const EventsInfo: React.FC = () => {
                showRoboGames ? 'Robo Games' :
                showSpotLight ? 'Spot Light' :
                showSportsDetails ? 'sports and games' : 
-               showCulturals ? 'culturals' :
+               showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
                'EVENTS'}
             </h1>
           </div>
@@ -840,9 +840,9 @@ const EventsInfo: React.FC = () => {
                   className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
                   style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
+                    backgroundImage: 'url(/card-bg.avif)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                   }}
@@ -860,9 +860,9 @@ const EventsInfo: React.FC = () => {
                     className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
                     style={{
-                      background: 'rgba(180, 150, 200, 0.35)',
-                      backdropFilter: 'blur(15px)',
-                      WebkitBackdropFilter: 'blur(15px)',
+                      backgroundImage: 'url(/card-bg.avif)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
                       border: '1px solid rgba(255, 255, 255, 0.18)',
                       boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                     }}
@@ -907,9 +907,9 @@ const EventsInfo: React.FC = () => {
                   className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={() => setShowRoboWarsGaming(true)}
                   style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
+                    backgroundImage: 'url(/card-bg.avif)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                   }}
@@ -1195,12 +1195,12 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300"
+                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 group hover:scale-105 overflow-hidden"
                           onClick={handleCardClick}
                           style={{
-                            background: 'rgba(180, 150, 200, 0.35)',
-                            backdropFilter: 'blur(15px)',
-                            WebkitBackdropFilter: 'blur(15px)',
+                            backgroundImage: 'url(/card-bg.avif)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
                             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                           }}
@@ -1209,20 +1209,14 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
-                              className="event-card-image"
+                              className="event-card-image transition-transform duration-300 group-hover:-translate-y-4"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
-                          <div className={`absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent ${
-                            card.title === "Music" ? "z-20" : ""
-                          }`}>
-                            <h2 className="text-white text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
+                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300 group-hover:scale-125 group-hover:text-yellow-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
                               {card.title}
                             </h2>
-                            {card.subtitle && (
-                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
-                                {card.subtitle}
-                              </p>
-                            )}
                           </div>
                         </div>
                       );
@@ -1245,9 +1239,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1285,9 +1279,9 @@ const EventsInfo: React.FC = () => {
                         className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                         }}
@@ -1322,9 +1316,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1362,9 +1356,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1402,9 +1396,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1442,9 +1436,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1482,9 +1476,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1522,9 +1516,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1562,9 +1556,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',
@@ -1602,9 +1596,9 @@ const EventsInfo: React.FC = () => {
                         className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
+                          backgroundImage: 'url(/card-bg.avif)',
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
                           height: '480px',

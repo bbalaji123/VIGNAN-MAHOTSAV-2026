@@ -92,7 +92,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
           left: moonLeft,
           pointerEvents: 'none',
           zIndex: 10,
-          animation: 'counterRotate 120s linear infinite',
+          animation: 'none',
           transformOrigin: 'center center'
         }}
       />

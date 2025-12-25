@@ -15,7 +15,7 @@ const Hospitality: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
-      backgroundImage: 'url("/Background-redesign.png")',
+      backgroundImage: 'url("/Background-redesign.avif")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',

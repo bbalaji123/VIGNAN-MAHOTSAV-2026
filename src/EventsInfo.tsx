@@ -502,7 +502,7 @@ const EventsInfo: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden events-info-page" style={{
-      backgroundImage: 'url("/Background-redesign.png")',
+      backgroundImage: 'url("/Background-redesign.avif")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -614,15 +614,63 @@ const EventsInfo: React.FC = () => {
             to { transform: rotate(-360deg); }
           }
           
+          /* Global Event Card Dimensions - 3:4 Aspect Ratio */
+          .event-card {
+            width: 210px;
+            height: 280px;
+            max-width: 100%;
+            margin: 0 -20px;
+          }
+          
+          /* Card Hover Effect - Global */
+          .event-card {
+            position: relative;
+            overflow: visible;
+            transition: transform 0.5s ease;
+            border-radius: 1.5rem;
+            transform-style: preserve-3d;
+          }
+          
+          .event-card:hover {
+            transform: perspective(500px) rotateX(12deg) scale(1);
+            z-index: 50;
+          }
+          
+          .event-card-image {
+            position: absolute;
+            top: 45%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            transition: transform 1s ease-in-out;
+            z-index: 100;
+            opacity: 1;
+            border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+          }
+          
+          .event-card:hover .event-card-image {
+            transform: translate(-50%, -50%) scale(1.3);
+            z-index: 100;
+          }
+          
+          /* Global Grid Gap Styles */
+          .grid {
+            row-gap: 2.5rem !important;
+            column-gap: 0 !important;
+          }
+          
           /* Responsive adjustments for mobile */
           @media (max-width: 768px) {
             .events-header-title {
               font-size: 3rem !important;
             }
             
-            .events-cards-container > div {
-              width: 280px !important;
-              height: 320px !important;
+            .event-card {
+              width: 270px !important;
+              height: 360px !important;
             }
           }
           
@@ -631,9 +679,9 @@ const EventsInfo: React.FC = () => {
               font-size: 2.5rem !important;
             }
             
-            .events-cards-container > div {
-              width: 260px !important;
-              height: 300px !important;
+            .event-card {
+              width: 240px !important;
+              height: 320px !important;
             }
           }
         `}
@@ -642,7 +690,7 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header: Logo + Title + Back Button */}
-        <div className="w-full px-8 relative z-20" style={{paddingTop: "32px"}}>
+        <div className="w-full px-8 relative z-20" style={{paddingTop: "10px"}}>
           {/* Desktop layout - Logo left, Title center, Back below logo */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start">
             {/* Left column: Logo and Back button stacked */}
@@ -650,7 +698,7 @@ const EventsInfo: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                className="h-16 md:h-20 object-contain"
+                className="h-28 md:h-32 object-contain"
               />
               <BackButton 
                 className="!static !top-auto !left-auto"
@@ -722,7 +770,7 @@ const EventsInfo: React.FC = () => {
             <img 
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Vignan Mahotsav" 
-              className="h-16 object-contain"
+              className="h-24 object-contain"
             />
             <BackButton 
               className="!static !top-auto !left-auto"
@@ -789,17 +837,14 @@ const EventsInfo: React.FC = () => {
               <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
                     backdropFilter: 'blur(15px)',
                     WebkitBackdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '350px',
-                    width: '300px',
-                    maxWidth: '100%'
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
@@ -812,17 +857,14 @@ const EventsInfo: React.FC = () => {
                 {/* Card 2 - Sports and Games with Button Below */}
                 <div className="relative flex flex-col items-center gap-8">
                   <div 
-                    className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
                     style={{
                       background: 'rgba(180, 150, 200, 0.35)',
                       backdropFilter: 'blur(15px)',
                       WebkitBackdropFilter: 'blur(15px)',
                       border: '1px solid rgba(255, 255, 255, 0.18)',
-                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                      height: '350px',
-                      width: '300px',
-                      maxWidth: '100%'
+                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                     }}
                   >
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
@@ -862,17 +904,14 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 3 - Robo Wars & Gaming */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={() => setShowRoboWarsGaming(true)}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
                     backdropFilter: 'blur(15px)',
                     WebkitBackdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '350px',
-                    width: '300px',
-                    maxWidth: '100%'
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
@@ -891,7 +930,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
                                          card.title === "Men's Individual &" || 
@@ -910,9 +949,9 @@ const EventsInfo: React.FC = () => {
                             WebkitBackdropFilter: 'blur(15px)',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
                             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                            height: '280px',
-                            width: '100%',
-                            maxWidth: '280px'
+                            height: '480px',
+                            width: '360px',
+                            maxWidth: '360px'
                           }}
                         >
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -940,7 +979,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {indoorSportsCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -952,9 +991,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -980,7 +1019,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {indoorSportsCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -992,9 +1031,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1020,7 +1059,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {mensTeamSportsCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1032,9 +1071,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1060,7 +1099,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {womensTeamSportsCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1072,9 +1111,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1103,7 +1142,7 @@ const EventsInfo: React.FC = () => {
                   <img 
                     src={`${import.meta.env.BASE_URL}image.avif`}
                     alt="Vignan Mahotsav" 
-                    className="h-16 md:h-20 object-contain"
+                    className="h-28 md:h-32 object-contain"
                   />
                 </div>
                 <div className="inline-indoor-sports-header">
@@ -1128,7 +1167,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
@@ -1156,20 +1195,26 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300"
                           onClick={handleCardClick}
                           style={{
                             background: 'rgba(180, 150, 200, 0.35)',
                             backdropFilter: 'blur(15px)',
                             WebkitBackdropFilter: 'blur(15px)',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
-                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                            height: '280px',
-                            width: '100%',
-                            maxWidth: '280px'
+                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                           }}
                         >
-                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          {card.title === "Music" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}music.avif`}
+                              alt="Music"
+                              className="event-card-image"
+                            />
+                          )}
+                          <div className={`absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent ${
+                            card.title === "Music" ? "z-20" : ""
+                          }`}>
                             <h2 className="text-white text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
                               {card.title}
                             </h2>
@@ -1193,7 +1238,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {danceCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1205,9 +1250,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1233,21 +1278,18 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {musicCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                         style={{
                           background: 'rgba(180, 150, 200, 0.35)',
                           backdropFilter: 'blur(15px)',
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1273,7 +1315,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {theatreCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1285,9 +1327,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1313,7 +1355,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {literatureCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1325,9 +1367,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1353,7 +1395,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {visualArtsCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1365,9 +1407,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1393,7 +1435,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {fashionDesignCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1405,9 +1447,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1433,7 +1475,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {digitalStorytellingCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1445,9 +1487,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1473,7 +1515,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {gamingCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1485,9 +1527,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1513,7 +1555,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {roboGamesCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1525,9 +1567,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1553,7 +1595,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
                     {spotLightCards.map((card, index) => (
                       <div 
                         key={index} 
@@ -1565,9 +1607,9 @@ const EventsInfo: React.FC = () => {
                           WebkitBackdropFilter: 'blur(15px)',
                           border: '1px solid rgba(255, 255, 255, 0.18)',
                           boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '280px',
-                          width: '100%',
-                          maxWidth: '280px'
+                          height: '480px',
+                          width: '360px',
+                          maxWidth: '360px'
                         }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1613,9 +1655,9 @@ const EventsInfo: React.FC = () => {
                             WebkitBackdropFilter: 'blur(15px)',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
                             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                            height: '280px',
-                            width: '100%',
-                            maxWidth: '280px'
+                            height: '480px',
+                            width: '360px',
+                            maxWidth: '360px'
                           }}
                         >
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1643,3 +1685,4 @@ const EventsInfo: React.FC = () => {
 };
 
 export default EventsInfo;
+

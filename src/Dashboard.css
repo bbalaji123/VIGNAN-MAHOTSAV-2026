@@ -382,7 +382,7 @@ body::-webkit-scrollbar {
     width: 100vw;
     overflow-x: hidden;
     position: relative;
-    background-image: url('/Background-redesign.png');
+    background-image: url('/Background-redesign.avif');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -391,7 +391,7 @@ body::-webkit-scrollbar {
 
 /* Full Background Extension */
 .single-page-app.full-bg {
-  background-image: url('/Background-redesign.png');
+  background-image: url('/Background-redesign.avif');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

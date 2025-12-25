@@ -41,7 +41,7 @@ const AnimatedIcon: React.FC = () => {
       let progress = scrollY / scrollRange;
       progress = Math.min(1, Math.max(0, progress));
 
-      // Opacity fade effect - fade out in middle, fade in from right
+      // Opacity fade effect - fade out in middle, fade in from right with reduced opacity
       let newOpacity = 1;
       if (progress < 0.4) {
         // First 40% - fade out
@@ -50,8 +50,8 @@ const AnimatedIcon: React.FC = () => {
         // Middle 20% - completely invisible
         newOpacity = 0;
       } else {
-        // Last 40% - fade in from right
-        newOpacity = (progress - 0.6) / 0.4;
+        // Last 40% - fade in from right with reduced opacity (0.3 instead of 1)
+        newOpacity = ((progress - 0.6) / 0.4) * 0.3;
       }
       setOpacity(newOpacity);
 

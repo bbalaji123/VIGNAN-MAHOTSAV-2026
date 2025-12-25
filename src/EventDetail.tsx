@@ -1706,7 +1706,7 @@ const EventDetail: React.FC = () => {
   if (!eventData) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
-        backgroundImage: 'url("/Background-redesign.png")',
+        backgroundImage: 'url("/Background-redesign.avif")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
@@ -1727,7 +1727,7 @@ const EventDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen event-detail-page" style={{
-      backgroundImage: 'url("/Background-redesign.png")',
+      backgroundImage: 'url("/Background-redesign.avif")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -1759,7 +1759,7 @@ const EventDetail: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                style={{height: '8rem', objectFit: 'contain', marginTop: '-5rem'}}
+                style={{height: '12rem', objectFit: 'contain', marginTop: '-2rem'}}
               />
               <BackButton 
                 className="!static !top-auto !left-auto"

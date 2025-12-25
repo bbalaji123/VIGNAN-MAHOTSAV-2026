@@ -80,6 +80,7 @@ const Dashboard: React.FC = () => {
   const [isThrowbackUnlocked, setIsThrowbackUnlocked] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
   const [selectedYear, setSelectedYear] = useState<'2023' | '2024' | '2025'>('2023');
+  const [currentDay, setCurrentDay] = useState<1 | 2 | 3>(1);
   
   // Touch swipe state for carousels
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -1148,6 +1149,22 @@ const Dashboard: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Auto-rotate throwback videos every 15 seconds
+  useEffect(() => {
+    if (!isThrowbackUnlocked) return;
+    
+    const interval = setInterval(() => {
+      setCurrentDay((prev) => (prev === 3 ? 1 : (prev + 1) as 1 | 2 | 3));
+    }, 15000); // 15 seconds
+    
+    return () => clearInterval(interval);
+  }, [isThrowbackUnlocked]);
+
+  // Reset to Day 1 when year changes
+  useEffect(() => {
+    setCurrentDay(1);
+  }, [selectedYear]);
 
   // Scroll tracking for throwback section - flower open/close animation
   useEffect(() => {
@@ -2551,11 +2568,11 @@ Do you want to proceed with registration?`;
           </div>
           
           {/* Gaurada Image beside hamburger */}
-          <div className="absolute top-1 left-16 z-60">
+          <div className="absolute top-7 left-16 z-60">
             <img 
               src={`${import.meta.env.BASE_URL}Garuda.avif`}
               alt="Garuda"
-              className="h-20 w-auto object-contain"
+              className="h-24 w-auto object-contain"
             />
           </div>
         </>
@@ -2575,20 +2592,11 @@ Do you want to proceed with registration?`;
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-20 left-0 right-0 z-20 w-full px-4 pt-8">
-          <h2 className="text-white text-sm md:text-lg font-semibold" style={{
-            fontFamily: 'serif',
-            letterSpacing: '0.05em',
-            textAlign: 'left',
-            paddingLeft: '22%',
-            marginBottom: '0'
-          }}>
-            A National Level Youth Festival - 19<sup>th</sup> Edition
-          </h2>
+        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4">
         </div>
         
         <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
-          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "50%", height: "60%", maxWidth: "none", marginLeft: "-10px", marginRight: "20px"}} />
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{width: "50%", height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2649,9 +2657,9 @@ Do you want to proceed with registration?`;
         `}</style>
         
         {/* Action Buttons - Register for events and login when not logged in */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-16 sm:mt-20 mb-4 justify-center items-center z-20 relative px-4 w-full">
+        <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '-18rem', marginBottom: '1rem', marginLeft: '2.5rem', marginRight: 'auto', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
-            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#FFD700] hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={() => {
+            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
               // Open modal immediately
               setActiveSubModal('EVENTS');
               // Fetch events in background
@@ -2665,7 +2673,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button className="w-44 h-12 sm:w-48 sm:h-14 md:w-52 lg:w-56 xl:w-60 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-base sm:text-lg md:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center" onClick={handleLoginClick}>Register/Login</button>
+            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -2677,7 +2685,7 @@ Do you want to proceed with registration?`;
       {showPageMenu && (
         <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible" 
           style={{
-            backgroundImage: 'url("/Background-redesign.png")',
+            backgroundImage: 'url("/Background-redesign.avif")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
@@ -4059,7 +4067,7 @@ Do you want to proceed with registration?`;
               <p className="theme-description" style={{
                 fontSize: '1.25rem',
                 lineHeight: '1.9',
-                color: '#FFFFFF',
+                color: '#f5e210ff',
                 textAlign: 'justify',
                 fontWeight: '400',
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
@@ -4416,7 +4424,7 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(120px, 20vw, 280px)), -50%)' 
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)' 
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4448,7 +4456,7 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(120px, 20vw, 280px)), -50%)' 
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)' 
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
@@ -4504,8 +4512,9 @@ Do you want to proceed with registration?`;
                     key={year} 
                     onClick={() => setSelectedYear(year)}
                     style={{
-                      padding: '12px 35px',
+                      padding: '8px 26px',
                       borderRadius: '20px',
+                      marginTop: '-20px',
                       background: selectedYear === year 
                         ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
                         : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
@@ -4526,59 +4535,82 @@ Do you want to proceed with registration?`;
                 ))}
               </div>
 
-              {/* Photo card */}
-              <div style={{
-                width: '300px',
-                height: '300px',
-                background: 'white',
-                borderRadius: '8px',
-                border: '12px solid #4a47a3',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-                transition: 'all 0.4s ease'
-              }}>
-                {/* Photo area */}
-                <div style={{
-                  flex: 1,
-                  background: selectedYear === '2023' 
-                    ? 'linear-gradient(to bottom, #87CEEB 0%, #E8F4F8 50%, #90EE90 100%)'
-                    : selectedYear === '2024'
-                    ? 'linear-gradient(to bottom, #FFB6C1 0%, #FFC0CB 50%, #FFD700 100%)'
-                    : 'linear-gradient(to bottom, #B0E0E6 0%, #ADD8E6 50%, #87CEEB 100%)',
+              {/* Video card */}
+              <div 
+                style={{
+                  width: 'clamp(300px, 51vw, 485px)',
+                  aspectRatio: '16/9',
+                  background: '#000',
+                  borderRadius: '8px',
+                  border: '3px solid rgba(223, 160, 0, 0.822)',
+                  boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+                  overflow: 'hidden',
+                  transition: 'all 0.4s ease',
                   position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.4s ease'
-                }}>
-                  {/* Cloud */}
-                  <div style={{
-                    width: '80px',
-                    height: '40px',
-                    background: 'white',
-                    borderRadius: '50px',
+                  cursor: 'pointer',
+                  padding: 0,
+                  marginTop: '10px'
+                }}
+                onClick={() => {
+                  const videoId = selectedYear === '2023' 
+                    ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
+                    : selectedYear === '2024'
+                    ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
+                    : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk';
+                  window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                }}
+              >
+                {/* YouTube Video Embed */}
+                <iframe
+                  key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
+                  width="100%"
+                  height="100%"
+                  src={isThrowbackUnlocked ? `https://www.youtube.com/embed/${
+                    selectedYear === '2023' 
+                      ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
+                      : selectedYear === '2024'
+                      ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
+                      : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
+                  }?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0` : 'about:blank'}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{
+                    border: 'none',
+                    display: 'block',
+                    pointerEvents: 'none',
                     position: 'absolute',
-                    top: '40px',
-                    right: '60px',
-                    boxShadow: 'inset 0 -5px 10px rgba(0, 0, 0, 0.05)'
-                  }} />
-                  
-                  {/* Hills */}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '0',
+                    top: 0,
+                    left: 0,
                     width: '100%',
-                    height: '40%',
-                    display: 'flex',
-                    alignItems: 'flex-end'
-                  }}>
-                    <svg width="100%" height="100%" viewBox="0 0 300 120" preserveAspectRatio="none">
-                      <path d="M0,120 Q75,40 150,80 T300,60 L300,120 Z" fill={selectedYear === '2023' ? '#78BE20' : selectedYear === '2024' ? '#90EE90' : '#4CAF50'} />
-                      <path d="M0,120 Q100,60 200,100 T300,90 L300,120 Z" fill={selectedYear === '2023' ? '#9ACD32' : selectedYear === '2024' ? '#A8E6A3' : '#66BB6A'} opacity="0.8" />
-                    </svg>
-                  </div>
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+                {/* Click overlay for better interaction */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  zIndex: 5,
+                  background: 'transparent'
+                }} />
+                {/* Day indicator */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '10px',
+                  right: '10px',
+                  background: 'rgba(0, 0, 0, 0.7)',
+                  color: 'white',
+                  padding: '5px 12px',
+                  borderRadius: '15px',
+                  fontSize: '0.9rem',
+                  fontWeight: 'bold',
+                  zIndex: 10
+                }}>
+                  Day {currentDay}
                 </div>
               </div>
             </div>

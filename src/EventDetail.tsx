@@ -1609,8 +1609,8 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
       ],
       prizes: {
-        Men: "Rs. 4,000",
-        Women: "Rs. 4,000"
+        first: "Rs. 4,000 (Mr. Mahotsav - Men)",
+        second: "Rs. 4,000 (Ms. Mahotsav - Women)"
       },
       contacts: [
          {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},

@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
+import BackButton from './components/BackButton';
 
 const CampusAmbassador: React.FC = () => {
+  // Local state to control the incentives modal
+  const [showIncentivesModal, setShowIncentivesModal] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleBackToDashboard = () => {
-    navigate('/');
-  };
+  // Back navigation handled by `BackButton` (navigate(-1))
 
   const handleRegisterLogin = () => {
-    // Navigate to home page and trigger login modal
-    navigate('/', { state: { openLogin: true } });
+    // Instead of navigating to the signup/login, show the Incentives & Rewards modal
+    setShowIncentivesModal(true);
   };
 
   return (
@@ -279,44 +281,97 @@ const CampusAmbassador: React.FC = () => {
 
       {/* Mahotsav Logo */}
       <img 
-        src={`${import.meta.env.BASE_URL}image.png`}
+        src={`${import.meta.env.BASE_URL}image.avif`}
         alt="Vignan Mahotsav 2026"
         className="absolute top-4 left-4 sm:top-6 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-[999]"
       />
 
-      {/* Back to Dashboard Button */}
-      <button 
-        onClick={handleBackToDashboard}
-        className="absolute top-20 sm:top-28 md:top-32 left-4 sm:left-8 z-[1000] min-h-[48px] px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 uppercase touch-manipulation active:scale-95"
-        style={{
-          background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
-          color: '#fff',
-          border: 'none',
-          boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)'
-        }}
-        aria-label="Go back"
-      >
-        BACK
-      </button>
+      {/* Back button (uses BackButton component to navigate back) */}
+      <BackButton className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-[1000]" />
 
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-8 sm:mb-12 leading-tight tracking-wide opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]" style={{
           textShadow: '0 4px 20px rgba(255, 255, 255, 0.3)'
-        }}>CAMPUS AMBASSDOR</h1>
-        <button 
+        }}>MAHOTSAV CREW</h1>
+        <button
           onClick={handleRegisterLogin}
-          className="min-h-[48px] px-6 sm:px-8 md:px-12 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg uppercase transition-all duration-300 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards] touch-manipulation active:scale-95"
-          style={{
-            background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
-            color: '#fff',
-            border: 'none',
-            boxShadow: '0 5px 20px rgba(228, 138, 185, 0.4)'
-          }}
+          className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 xl:w-64 xl:h-16 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg lg:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]"
         >
-          Click Here To Register
+          Register/Login
         </button>
       </div>
+
+      {/* Incentives & Rewards Modal (glass morphism) */}
+      {showIncentivesModal && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center px-4 animate-[fadeIn_0.3s_ease-out_forwards]">
+          <div
+            className="absolute inset-0 bg-black/50 animate-[fadeIn_0.2s_ease-out_forwards]"
+            onClick={() => setShowIncentivesModal(false)}
+          />
+          <div className="relative w-full max-w-4xl max-h-[85vh] overflow-auto rounded-xl p-5 scrollbar-hide animate-[dropdownFade_0.4s_ease-out_forwards]" style={{
+              margin: '0 auto',
+              boxSizing: 'border-box',
+              width: 'min(95vw, 900px)',
+              minWidth: '320px',
+              maxWidth: '900px',
+              maxHeight: '85vh',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              background: 'rgba(199, 205, 28, 0.06)',
+              backdropFilter: 'blur(8px) saturate(120%)',
+              WebkitBackdropFilter: 'blur(8px) saturate(120%)',
+              border: '1px solid rgba(255,255,255,0.12)'
+            }}>
+            <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
+            <button
+              onClick={() => setShowIncentivesModal(false)}
+              style={{ position: 'absolute', right: 12, top: 12, cursor: 'pointer' }}
+              className="text-white bg-transparent hover:opacity-90 hover:scale-110 transition-all duration-200 p-2 rounded"
+              aria-label="Close incentives modal"
+            >
+              ✕
+            </button>
+
+           <div style={{ background: '#5b2d82', borderRadius: 14, padding: '32px 28px', color: '#fff' }}>
+             <h2 style={{ textAlign: 'center', fontSize: '1.75rem', fontWeight: 600, color: '#fbbf24', marginBottom: '1.5rem', fontStyle: 'italic' }}>Here's what being a Campus Ambassador (CA) gets you:</h2>
+
+             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Bronze (100+ Points):</span>{' '}
+                 <span style={{ color: '#fff' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</span>
+               </div>
+               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Silver (150+ Points):</span>{' '}
+                 <span style={{ color: '#fff' }}>Receive the benefits of previous tier + Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</span>
+               </div>
+               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Gold (200+ Points):</span>{' '}
+                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</span>
+               </div>
+               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Platinum (250+ Points):</span>{' '}
+                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</span>
+               </div>
+               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Diamond (250+ Points / Scope of Zonal at your respective Venue - Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore):</span>{' '}
+                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</span>
+               </div>
+             </div>
+
+
+             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+               <button
+                 onClick={() => { setShowIncentivesModal(false); navigate('/', { state: { openLogin: true } }); }}
+                 className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+               >
+                 Register/Login
+               </button>
+             </div>
+           </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center py-12 sm:py-16 md:py-20">
@@ -509,10 +564,10 @@ const CampusAmbassador: React.FC = () => {
             </table>
             </div>
 
-            <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
-            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
-            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
-            <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
+              <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
+              <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
           </div>
 
           {/* Code of Conduct Section */}
@@ -548,6 +603,6 @@ const CampusAmbassador: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default CampusAmbassador;

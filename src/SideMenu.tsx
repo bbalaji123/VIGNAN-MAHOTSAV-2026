@@ -126,9 +126,9 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
               <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-amber-400">Menu</h2>
             </div>
             
-            {/* Back Button - Mobile Only */}
+            {/* Back Button */}
             {showBackButton && (
-              <div className="md:hidden mb-4">
+              <div className="mb-4">
                 <BackButton 
                   className="!static !top-auto !left-auto"
                   onClick={() => {

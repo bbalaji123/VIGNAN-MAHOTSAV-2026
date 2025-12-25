@@ -642,7 +642,7 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header: Logo + Title + Back Button */}
-        <div className="w-full px-8 relative z-20" style={{paddingTop: "32px"}}>
+        <div className="w-full px-8 relative z-20" style={{paddingTop: "clamp(16px, 4vw, 32px)"}}>
           {/* Desktop layout - Logo left, Title center, Back below logo */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start">
             {/* Left column: Logo and Back button stacked */}
@@ -717,67 +717,73 @@ const EventsInfo: React.FC = () => {
             <div></div>
           </div>
 
-          {/* Mobile layout - Logo and Back button centered, stacked */}
-          <div className="md:hidden flex flex-col items-center gap-3 pb-4">
-            <img 
-              src={`${import.meta.env.BASE_URL}image.avif`}
-              alt="Vignan Mahotsav" 
-              className="h-16 object-contain"
-            />
-            <BackButton 
-              className="!static !top-auto !left-auto"
-              onClick={() => {
-              if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
-                setShowDance(false);
-                setShowMusic(false);
-                setShowTheatre(false);
-                setShowLiterature(false);
-                setShowVisualArts(false);
-                setShowFashionDesign(false);
-                setShowDigitalStorytelling(false);
-                setShowGaming(false);
-                setShowRoboGames(false);
-                setShowSpotLight(false);
-                if (showGaming || showRoboGames) {
-                  setShowRoboWarsGaming(true);
+          {/* Mobile layout - Back button left, Logo and Title centered */}
+          <div className="md:hidden flex flex-col gap-3 pb-4">
+            {/* Back button on the left */}
+            <div className="w-full flex justify-start">
+              <BackButton 
+                className="!static !top-auto !left-auto"
+                onClick={() => {
+                if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                  setShowDance(false);
+                  setShowMusic(false);
+                  setShowTheatre(false);
+                  setShowLiterature(false);
+                  setShowVisualArts(false);
+                  setShowFashionDesign(false);
+                  setShowDigitalStorytelling(false);
+                  setShowGaming(false);
+                  setShowRoboGames(false);
+                  setShowSpotLight(false);
+                  if (showGaming || showRoboGames) {
+                    setShowRoboWarsGaming(true);
+                  }
+                } else if (showRoboWarsGaming) {
+                  setShowRoboWarsGaming(false);
+                } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+                  setShowIndoorSports(false);
+                  setShowWomensIndoorSports(false);
+                  setShowMensTeamSports(false);
+                  setShowWomensTeamSports(false);
+                } else if (showSportsDetails || showCulturals || showParaSports) {
+                  setShowSportsDetails(false);
+                  setShowCulturals(false);
+                  setShowParaSports(false);
+                } else {
+                  navigate('/');
                 }
-              } else if (showRoboWarsGaming) {
-                setShowRoboWarsGaming(false);
-              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
-                setShowIndoorSports(false);
-                setShowWomensIndoorSports(false);
-                setShowMensTeamSports(false);
-                setShowWomensTeamSports(false);
-              } else if (showSportsDetails || showCulturals || showParaSports) {
-                setShowSportsDetails(false);
-                setShowCulturals(false);
-                setShowParaSports(false);
-              } else {
-                navigate('/');
-              }
-            }} />
-            <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
-              fontFamily: 'Woodtrap, sans-serif',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-            }}>
-              {showIndoorSports ? 'Indoor Sports' : 
-               showWomensIndoorSports ? "Women's Indoor Sports" : 
-               showMensTeamSports ? "Men's Team Field Sports" : 
-               showWomensTeamSports ? "Women's Team Field Sports" :
-               showDance ? 'Dance' :
-               showMusic ? 'Music' :
-               showTheatre ? 'Theatre' :
-               showLiterature ? 'Literature' :
-               showVisualArts ? 'Visual Arts' :
-               showFashionDesign ? 'Fashion Design' :
-               showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
-               showGaming ? 'Gaming' :
-               showRoboGames ? 'Robo Games' :
-               showSpotLight ? 'Spot Light' :
-               showSportsDetails ? 'sports and games' : 
-               showCulturals ? 'culturals' :
-               'EVENTS'}
-            </h1>
+              }} />
+            </div>
+            {/* Logo and Title centered */}
+            <div className="flex flex-col items-center gap-2">
+              <img 
+                src={`${import.meta.env.BASE_URL}image.avif`}
+                alt="Vignan Mahotsav" 
+                className="h-20 md:h-16 object-contain"
+              />
+              <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
+                fontFamily: 'Woodtrap, sans-serif',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              }}>
+                {showIndoorSports ? 'Indoor Sports' : 
+                 showWomensIndoorSports ? "Women's Indoor Sports" : 
+                 showMensTeamSports ? "Men's Team Field Sports" : 
+                 showWomensTeamSports ? "Women's Team Field Sports" :
+                 showDance ? 'Dance' :
+                 showMusic ? 'Music' :
+                 showTheatre ? 'Theatre' :
+                 showLiterature ? 'Literature' :
+                 showVisualArts ? 'Visual Arts' :
+                 showFashionDesign ? 'Fashion Design' :
+                 showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+                 showGaming ? 'Gaming' :
+                 showRoboGames ? 'Robo Games' :
+                 showSpotLight ? 'Spot Light' :
+                 showSportsDetails ? 'sports and games' : 
+                 showCulturals ? 'culturals' :
+                 'EVENTS'}
+              </h1>
+            </div>
           </div>
         </div>
 
@@ -785,21 +791,18 @@ const EventsInfo: React.FC = () => {
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
           {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
-              {/* Three Cards - exact spacing from reference */}
-              <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
+              {/* Three Cards - stacked vertically on mobile, horizontal on desktop */}
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px]"
                   onClick={handleCulturalsCardClick}
                   style={{
                     background: 'rgba(180, 150, 200, 0.35)',
                     backdropFilter: 'blur(15px)',
                     WebkitBackdropFilter: 'blur(15px)',
                     border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '350px',
-                    width: '300px',
-                    maxWidth: '100%'
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                   }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
@@ -809,29 +812,84 @@ const EventsInfo: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Card 2 - Sports and Games with Button Below */}
-                <div className="relative flex flex-col items-center gap-8">
-                  <div 
-                    className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                    onClick={handleSportsCardClick}
-                    style={{
-                      background: 'rgba(180, 150, 200, 0.35)',
-                      backdropFilter: 'blur(15px)',
-                      WebkitBackdropFilter: 'blur(15px)',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
-                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                      height: '350px',
-                      width: '300px',
-                      maxWidth: '100%'
-                    }}
-                  >
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                      <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
-                        SPORTS AND GAMES
-                      </h2>
-                    </div>
+                {/* Card 2 - Sports and Games (without button on mobile) */}
+                <div 
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px] md:mb-0"
+                  onClick={handleSportsCardClick}
+                  style={{
+                    background: 'rgba(180, 150, 200, 0.35)',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
+                  }}
+                >
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                      SPORTS AND GAMES
+                    </h2>
                   </div>
-                  {/* Download Rulebook button */}
+                </div>
+
+                {/* Card 3 - Para Sports */}
+                <div 
+                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 w-full max-w-[250px] md:max-w-[300px] h-[220px] md:h-[350px]"
+                  onClick={handleParaSportsCardClick}
+                  style={{
+                    background: 'rgba(180, 150, 200, 0.35)',
+                    backdropFilter: 'blur(15px)',
+                    WebkitBackdropFilter: 'blur(15px)',
+                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
+                  }}
+                >
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                      PARA SPORTS
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Download Rulebook button - shown at bottom on mobile, below sports card on desktop */}
+              <div className="flex justify-center mt-12 mb-16 md:mt-0 md:mb-0 md:hidden">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const link = document.createElement('a');
+                    link.href = '/Mahostav Rules Book 2025.pdf';
+                    link.download = 'Mahostav Rules Book 2025.pdf';
+                    link.click();
+                  }}
+                  style={{
+                    backgroundColor: '#f9a8d4',
+                    color: '#581c87',
+                    fontWeight: 'bold',
+                    padding: '10px 60px',
+                    borderRadius: '6px',
+                    fontSize: '18px',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 15px rgba(249, 168, 212, 0.4)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#fbcfe8';
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f9a8d4';
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  Download Rulebook
+                </button>
+              </div>
+              
+              {/* Desktop: Download button below sports card */}
+              <div className="hidden md:flex md:flex-row md:items-start md:justify-center md:gap-12">
+                <div className="w-[300px]"></div> {/* Spacer for card 1 */}
+                <div className="flex flex-col items-center gap-8 w-[300px]">
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
@@ -859,28 +917,7 @@ const EventsInfo: React.FC = () => {
                     DOWNLOAD RULEBOOK
                   </button>
                 </div>
-
-                {/* Card 3 - Robo Wars & Gaming */}
-                <div 
-                  className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                  onClick={() => setShowRoboWarsGaming(true)}
-                  style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                    height: '350px',
-                    width: '300px',
-                    maxWidth: '100%'
-                  }}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
-                      ROBO WARS & GAMING
-                    </h2>
-                  </div>
-                </div>
+                <div className="w-[300px]"></div> {/* Spacer for card 3 */}
               </div>
             </div>
           )}

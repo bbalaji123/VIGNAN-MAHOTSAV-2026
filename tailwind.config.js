@@ -7,12 +7,12 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xs': '375px',
-        'sm': '480px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
+        'xs': '475px',
+        // sm: '640px' (default Tailwind)
+        // md: '768px' (default Tailwind)
+        // lg: '1024px' (default Tailwind)
+        // xl: '1280px' (default Tailwind)
+        // 2xl: '1536px' (default Tailwind)
       },
       colors: {
         // Mahotsav 2026 Approved Color Palette

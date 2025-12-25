@@ -6,6 +6,7 @@ import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
+import Gallery, { galleryImages } from './Gallery';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
@@ -666,33 +667,6 @@ const Dashboard: React.FC = () => {
   
   // Para sports cards (with gender filtering)
   const paraSportsCards = convertEventsToCards(getFilteredParaSportsEvents());
-
-  // Static list of gallery AVIF images used across the gallery & modal
-  const galleryImages: string[] = [
-    'concert.avif',
-    'DSC00450.avif',
-    'DSC01072.avif',
-    'DSC01155.avif',
-    'DSC02701.avif',
-    'DSC02791.avif',
-    'DSC03380.avif',
-    'DSC03545.avif',
-    'DSC04008.avif',
-    'DSC08105.avif',
-    'DSC_0325.avif',
-    'DSC_0952.avif',
-    'DSC_7978.avif',
-    'DSC_9968.avif',
-    'IMG-20250128-WA0179.avif',
-    'IMG-20250610-WA0061.avif',
-    'IMG-20250610-WA0075.avif',
-    '_MR16501.avif'
-  ];
-
-  // Group gallery images into three rows for the scrolling gallery
-  const row1Images = galleryImages.slice(0, 6);
-  const row2Images = galleryImages.slice(6, 12);
-  const row3Images = galleryImages.slice(12, 18);
 
   // Additional card assignments for compatibility
   const womenIndoorSportsCards = indoorSportsCards;
@@ -3962,150 +3936,12 @@ Do you want to proceed with registration?`;
           }
         `}
       </style>
-      <section 
-        className={`dashboard-section throwbacks-section `}
-        data-section-id="throwbacks"
-        ref={(el) => registerSection('throwbacks', el)}
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          padding: '120px 20px 80px',
-          marginTop: '0',
-          overflow: 'visible'
-        }}
-      >
-        <h2
-      style={{
-    fontSize: 'clamp(2.5rem, 8vw, 4rem)',
-    fontWeight: 'bold',
-    color: '#fdee71',
-    marginBottom: '80px',
-    textAlign: 'center',
-    fontFamily: 'Woodtrap, sans-serif'
-  }}
->
-  Gallery
-</h2>
-
-
-        <div style={{
-          width: '100%',
-          maxWidth: '100vw',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '40px'
-        }}>
-          {/* Row 1 - Moving Left (continuous) */}
-          <div style={{ overflow: 'hidden', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row">
-              {[...row1Images, ...row1Images].map((img, i) => {
-                const originalIndex = i % row1Images.length;
-                return (
-                  <div 
-                    key={`row1-${i}`}
-                    className="throwback-card"
-                    onClick={() => setSelectedPhoto({ row: 1, index: originalIndex })}
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.3)',
-                      border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32', '#FFD700'][originalIndex % 6]}`,
-                      cursor: 'pointer',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <img 
-                      src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${img}`}
-                      alt={`Gallery ${originalIndex + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Row 2 - Moving Right (continuous) */}
-          <div style={{ overflow: 'hidden', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row scroll-row-2">
-              {[...row2Images, ...row2Images].map((img, i) => {
-                const originalIndex = i % row2Images.length;
-                const globalIndex = row1Images.length + originalIndex;
-                return (
-                  <div 
-                    key={`row2-${i}`}
-                    className="throwback-card"
-                    onClick={() => setSelectedPhoto({ row: 2, index: globalIndex })}
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.3)',
-                      border: `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493', '#FF7F50'][originalIndex % 6]}`,
-                      cursor: 'pointer',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <img 
-                      src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${img}`}
-                      alt={`Gallery ${globalIndex + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Row 3 - Moving Left (continuous) */}
-          <div style={{ overflow: 'hidden', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row scroll-row-3">
-              {[...row3Images, ...row3Images].map((img, i) => {
-                const originalIndex = i % row3Images.length;
-                const globalIndex = row1Images.length + row2Images.length + originalIndex;
-                return (
-                  <div 
-                    key={`row3-${i}`}
-                    className="throwback-card"
-                    onClick={() => setSelectedPhoto({ row: 3, index: globalIndex })}
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.3)',
-                      border: `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32', '#DAA520'][originalIndex % 6]}`,
-                      cursor: 'pointer',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    <img 
-                      src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${img}`}
-                      alt={`Gallery ${globalIndex + 1}`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        <p style={{
-          marginTop: '60px',
-          fontSize: '1.2rem',
-          color: 'rgba(255, 255, 255, 0.6)',
-          textAlign: 'center',
-          fontStyle: 'italic'
-        }}>Hover to pause • Swipe through memories</p>
-      </section>
+      
+      {/* Gallery Section */}
+      <Gallery 
+        onPhotoClick={(row, index) => setSelectedPhoto({ row, index })}
+        registerSection={registerSection}
+      />
 
       {/* Throwback Section */}
       <section 

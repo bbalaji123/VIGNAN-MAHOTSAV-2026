@@ -104,11 +104,16 @@ export default {
         'modalSlideIn': 'modalSlideIn 0.3s ease',
         'fadeIn': 'fadeIn 0.3s ease-out',
         'dropdownSlideIn': 'dropdownSlideIn 0.3s ease-out',
+        'dropdownFade': 'dropdownFade 0.4s ease-out',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
+        },
+        dropdownFade: {
+          '0%': { opacity: '0', transform: 'translateY(-20px) scale(0.95)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
         marquee: {
           '0%': { transform: 'translateX(0)' },

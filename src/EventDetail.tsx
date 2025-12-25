@@ -58,9 +58,13 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+        { name: "Ms. Md.Karishma", phone: "+91 73868 57843" },
+        { name: "Mr. G.Srinu", phone: "+91 93928 34630" },
+        { name: "Ms. Hima", phone: "+91 85208 22204" },
+        { name: "Mr. Hemanth", phone: "+91 74160 65745" },
+        { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
+        { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
+  
       ]
     },
     "Women's Athletics": {
@@ -80,9 +84,12 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
+        { name: "Ms. Md.Karishma", phone: "+91 73868 57843" },
+        { name: "Mr. G.Srinu", phone: "+91 93928 34630" },
+        { name: "Ms. Hima", phone: "+91 85208 22204" },
+        { name: "Mr. Hemanth", phone: "+91 74160 65745" },
+        { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
+        { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
       ]
     },
     "Chess": {
@@ -103,8 +110,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 4,000"
       },
       contacts: [
-        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+      
       ]
     },
     "Table Tennis": {
@@ -126,8 +137,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000"
       },
       contacts: [
-        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
-        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" }
+         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+  
       ]
     },
     "Tennikoit": {
@@ -146,8 +161,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500"
       },
       contacts: [
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" },
-        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" }
+         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
       ]
     },
     "Traditional Yogasana": {
@@ -169,8 +187,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
       contacts: [
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+    
       ]
     },
     "Artistic Yogasana": {
@@ -192,8 +214,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
       contacts: [
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+      
       ]
     },
     "Taekwondo": {
@@ -215,8 +241,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
-        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" }
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
       ]
     },
     "Volley ball (Men)": {
@@ -241,9 +270,13 @@ const EventDetail: React.FC = () => {
         fourth: "Rs. 3,000"
       },
       contacts: [
-        { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Volley ball (Women)": {
@@ -266,9 +299,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" }
+       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Basket ball (Men)": {
@@ -286,15 +323,17 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 30,000",
-        second: "Rs. 20,000",
-        third: "Rs. 7,000",
-        fourth: "Rs. 3,000"
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
+       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Basket ball (Women)": {
@@ -316,9 +355,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Kabaddi (Men)": {
@@ -339,15 +382,17 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 30,000",
-        second: "Rs. 20,000",
-        third: "Rs. 7,000",
-        fourth: "Rs. 3,000"
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" },
-        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Kabaddi (Women)": {
@@ -371,10 +416,15 @@ const EventDetail: React.FC = () => {
         first: "Rs. 15,000",
         second: "Rs. 10,000"
       },
-      contacts: [
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" },
-        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+      contacts: 
+      [
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Kho-Kho (Men)": {
@@ -393,14 +443,16 @@ const EventDetail: React.FC = () => {
       ],
       prizes: {
         first: "Rs. 30,000",
-        second: "Rs. 20,000",
-        third: "Rs. 7,000",
-        fourth: "Rs. 3,000"
+        second: "Rs. 20,000"
       },
       contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
+       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Kho-Kho (Women)": {
@@ -422,9 +474,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Hockey (Men)": {
@@ -442,15 +498,17 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 30,000",
-        second: "Rs. 20,000",
-        third: "Rs. 7,000",
-        fourth: "Rs. 3,000"
+        first: "Rs. 15,000",
+        second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Hockey (Women)": {
@@ -472,9 +530,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Throw ball": {
@@ -497,9 +559,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" },
-        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" },
-        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Football (Men)": {
@@ -524,9 +590,13 @@ const EventDetail: React.FC = () => {
         fourth: "Rs. 3,000"
       },
       contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Football (Women)": {
@@ -549,9 +619,13 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
     "Classical Dance Solo": {
@@ -568,7 +642,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. Ch. Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B. Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Singing Idol": {
       title: "MUSIC",
@@ -592,7 +671,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Dancing Star - Western Solo": {
       title: "DANCE",
@@ -610,7 +693,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch. Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B. Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Group Singing": {
       title: "MUSIC",
@@ -628,7 +716,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,500",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Singing Jodi": {
       title: "MUSIC",
@@ -646,7 +738,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Classical Light Vocal Solo": {
       title: "MUSIC",
@@ -660,11 +756,15 @@ const EventDetail: React.FC = () => {
         "Judgment will be made on the qualities like pitch, rhythm, voice modulation, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Western Vocal Solo": {
       title: "MUSIC",
@@ -678,11 +778,15 @@ const EventDetail: React.FC = () => {
         "Judgment will be made on the qualities like pitch, rhythm, voice quality, stage presence, and overall performance."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Anthyakshari Duo": {
       title: "MUSIC",
@@ -697,7 +801,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Instrumental Solo": {
       title: "MUSIC",
@@ -723,7 +831,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Skit": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -741,7 +853,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 5,000",
         third: "Rs. 4,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Mime": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -757,7 +872,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 4,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Dancing Jodi - Western Duo": {
       title: "DANCE",
@@ -778,7 +896,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Spot Dance - Jodi": {
       title: "DANCE",
@@ -795,9 +918,14 @@ const EventDetail: React.FC = () => {
       prizes: {
         first: "Rs. 3,000",
         second: "Rs. 2,000",
-        third: "Rs. 1,000"
+        third: "Rs. 1,500"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Group Dance": {
       title: "DANCE",
@@ -817,7 +945,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 12,000",
         third: "Rs. 8,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Mono Action": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -831,11 +964,14 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on acting skills, character portrayal, voice modulation, expression, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 4,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Spot Ad Making": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -850,11 +986,14 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, presentation, teamwork, message delivery, and entertainment value."
       ],
       prizes: {
-        first: "Rs. 5,000",
-        second: "Rs. 4,000",
-        third: "Rs. 3,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Dialogue Dhamaka": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -868,11 +1007,14 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on voice modulation, expression, dialogue selection, impact, and overall performance."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Master Orator": {
       title: "LITERATURE",
@@ -889,7 +1031,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
     "On Spot Creative Content Writing": {
       title: "LITERATURE",
@@ -905,7 +1052,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
     "Telugu Vyaasa Rachana": {
       title: "LITERATURE",
@@ -920,7 +1072,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
     "Shayari - Hindi": {
       title: "LITERATURE",
@@ -938,11 +1095,16 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
     "JAM": {
       title: "Rules",
-      subtitle: "",
+      subtitle: "LITERATURE",
       rules: [
         "This competition is designed for those who enjoy speaking impromptu.",
         "After the topic is given, 25 seconds will be provided as buffer time.",
@@ -978,7 +1140,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
     "Dumb Charades": {
       title: "LITERATURE",
@@ -1013,7 +1180,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
 
     "Quiz": {
@@ -1049,7 +1221,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000",
         third: "Rs. 1,500"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
 
     "Word Master": {
@@ -1080,7 +1257,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
 
     "Story telling": {
@@ -1104,7 +1286,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
+        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
+        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
+        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+      ]
     },
 
     "Theme Painting": {
@@ -1124,7 +1311,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+      ]
     },
 
     "Clay Modelling": {
@@ -1144,7 +1335,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+      ]
     },
 
     "Rangoli": {
@@ -1165,7 +1360,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+      ]
     },
 
     "Mehandi": {
@@ -1185,8 +1384,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1207,8 +1407,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1227,8 +1428,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1249,8 +1451,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1265,13 +1468,14 @@ const EventDetail: React.FC = () => {
         "Entries are judged based on creativity, technique, adherence to theme, and visual appeal."
       ],
       prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1292,8 +1496,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 12,000"
       },
       contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+        {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
       ]
     },
     "Craftvilla": {
@@ -1309,11 +1515,16 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, craftsmanship, design, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+      ]
     },
     "Texart": {
       title: "FASHION COMPETITIONS",
@@ -1328,11 +1539,16 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, design concept, sketching skills, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 8,000",
-        second: "Rs. 6,000",
-        third: "Rs. 4,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+      ]
     },
     "T-Shirt Designing": {
       title: "FASHION COMPETITIONS",
@@ -1347,11 +1563,16 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, theme interpretation, color usage, and overall design."
       ],
       prizes: {
-        first: "Rs. 8,000",
-        second: "Rs. 6,000",
-        third: "Rs. 4,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. ,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+      ]
     },
     "Mahotsav Got Talent": {
       title: "SPOT LIGHT",
@@ -1365,11 +1586,16 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on uniqueness, skill level, entertainment value, and overall performance."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 7,000",
+        second: "Rs. 5,000",
+        third: "Rs. 3,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+      ]
     },
     "Mr. and Ms. Mahotsav": {
       title: "SPOT LIGHT",
@@ -1383,11 +1609,15 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000",
-        third: "Rs. 7,000"
+        Men: "Rs. 4,000",
+        Women: "Rs. 4,000"
       },
-      contacts: []
+      contacts: [
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+      ]
     },
     "Online Photography": {
       title: "FINE ARTS",
@@ -1406,8 +1636,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Ms. G. Sai pranathi", phone: "+91 6300149575" },
-        { name: "Ms. Ch. Tharini", phone: "+91 9866646418" }
+        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
+        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
+        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
       ]
     },
 
@@ -1424,9 +1655,9 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, design, theme interpretation, and visual impact."
       ],
       prizes: {
-        first: "Rs. 5,000",
-        second: "Rs. 3,000",
-        third: "Rs. 2,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -1442,9 +1673,9 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, coverage, storytelling, and overall presentation."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -1461,7 +1692,7 @@ const EventDetail: React.FC = () => {
         "Judgment will be based on creativity, editing skills, theme interpretation, and engagement factor."
       ],
       prizes: {
-        first: "Rs. 5,000",
+        first: "Rs. 4,000",
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
@@ -1481,9 +1712,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000",
-        third: "Rs. 7,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -1501,9 +1732,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -1522,9 +1753,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000",
-        third: "Rs. 7,000"
+        first: "Rs. 4,000",
+        second: "Rs. 3,000",
+        third: "Rs. 2,000"
       },
       contacts: []
     },
@@ -1540,9 +1771,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 8,000",
-        second: "Rs. 5,000",
-        third: "Rs. 3,000"
+        first: "Rs. 2,000",
+        second: "Rs. 1,500",
+        third: "Rs. 1,000"
       },
       contacts: []
     },
@@ -1561,9 +1792,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
       },
       contacts: []
     },
@@ -1582,9 +1813,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 12,000",
-        second: "Rs. 8,000",
-        third: "Rs. 5,000"
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
       },
       contacts: []
     },
@@ -1603,9 +1834,9 @@ const EventDetail: React.FC = () => {
         "Coordinator's decision will be final."
       ],
       prizes: {
-        first: "Rs. 10,000",
-        second: "Rs. 7,000",
-        third: "Rs. 5,000"
+        first: "Rs. 8,000",
+        second: "Rs. 6,000",
+        third: "Rs. 4,000"
       },
       contacts: []
     }

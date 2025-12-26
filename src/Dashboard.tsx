@@ -6,6 +6,7 @@ import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
+import Gallery, { galleryImages } from './Gallery';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
@@ -61,6 +62,16 @@ const Dashboard: React.FC = () => {
     { title: "Women's Team Field", subtitle: "Sports" }
   ];
 
+  const culturalsCards = [
+    { title: "Music", subtitle: "Singing & Instruments" },
+    { title: "Dance", subtitle: "Classical & Western" },
+    { title: "Theatre", subtitle: "Drama & Cinematography" },
+    { title: "Literature", subtitle: "Poetry & Writing" },
+    { title: "Visual Arts", subtitle: "Arts & Craft" },
+    { title: "Fashion Design", subtitle: "Fashion & Styling" },
+    { title: "Spot Light", subtitle: "Special Events" }
+  ];
+
   const [showIndoorSports, setShowIndoorSports] = useState(false);
   const [currentIndoorSlide, setCurrentIndoorSlide] = useState(0);
   const [showWomenIndoorSports, setShowWomenIndoorSports] = useState(false);
@@ -106,436 +117,9 @@ const Dashboard: React.FC = () => {
   const [showSpotLight, setShowSpotLight] = useState(false);
   const [currentSpotLightSlide, setCurrentSpotLightSlide] = useState(0);
 
-  // Gender-based pricing structure
-  const getPricingForUser = () => {
-    const normalizedGender = userProfileData.gender?.toLowerCase();
-
-    if (normalizedGender === 'female') {
-      return {
-        sports: 250,
-        culturals: 250,
-        both: 350
-      };
-    }
-
-    // Default to male pricing (covers explicit male users + unknown gender)
-    return {
-      sports: 350,
-      culturals: 250,
-      both: 350
-    };
-  };
-
-  // Convert database events to card format for display
-  const convertEventsToCards = (events: Event[]) => {
-    return events.map(event => ({
-      title: event.eventName,
-      subtitle: event.category || event.eventType || "Event"
-    }));
-  };
-
-
-
-  const culturalsCards = [
-    { title: "Music", subtitle: "Singing & Instruments" },
-    { title: "Dance", subtitle: "Classical & Western" },
-    { title: "Theatre", subtitle: "Drama & Cinematography" },
-    { title: "Literature", subtitle: "Poetry & Writing" },
-    { title: "Visual Arts", subtitle: "Arts & Craft" },
-    { title: "Fashion Design", subtitle: "Fashion & Styling" },
-    { title: "Spot Light", subtitle: "Special Events" }
-  ];
-
-  const eventDetailsData = {
-    "Men's Athletics": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TRACK & FIELD (Men & Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "All participants must come with a proper sports attire.",
-        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
-        "Everyone should report at least 30 mins before scheduled time.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: "Rs. 1,000"
-      },
-      contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
-      ]
-    },
-    "Women's Athletics": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TRACK & FIELD (Men & Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "All participants must come with a proper sports attire.",
-        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
-        "Everyone should report at least 30 mins before scheduled time.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: "Rs. 1,000"
-      },
-      contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" }
-      ]
-    },
-    "Chess": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "CHESS (Men & Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Chess Tournament is conducted in Swiss League system.",
-        "Everyone should report at least 30 mins before scheduled match time.",
-        "All India Chess Federation Rules & Regulations are adopted for the competition.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Tie breaks is as following: A. Buchholz B. Buchholz but 1 C. Sonneburn burger D. Direct encounter E. Great number of victories",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 6,000",
-        second: "Rs. 4,000",
-        third: ""
-      },
-      contacts: [
-        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
-      ]
-    },
-    "Table Tennis": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TABLE TENNIS - Singles (Men & Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Everyone should report at least 30 mins before scheduled match time.",
-        "Matches are conducted on knock out basis and are played to 11 points.",
-        "All player must come with a proper sports attire.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "There will be only three sets for each match.",
-        "Five sets will be conducted for semifinals and finals.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 3,000",
-        second: "Rs. 2,000",
-        third: ""
-      },
-      contacts: [
-        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
-        { name: "Ms. K. Deepika Siva Gowri", phone: "+91 9390335366" }
-      ]
-    },
-    "Tennikoit": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TENNIKOIT � Singles (Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "All participants must come with a proper sports attire.",
-        "Participants should report at least 30 mins before scheduled time.",
-        "The match is played as the best of 3 sets, 21+21+15 points.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: ""
-      },
-      contacts: [
-        { name: "Ms. Y. Lavanya", phone: "+91 9063809790" },
-        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" }
-      ]
-    },
-    "Traditional Yogasana": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Everyone should report at least 30 mins before scheduled match time.",
-        "All participants must come with a proper sports attire.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Syllabus, Rules & Regulations for the Yogasana events: A. Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat B. Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
-        "Link to refer syllabus: https://www.yogasanabharat.com/code",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: ""
-      },
-      contacts: [
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
-      ]
-    },
-    "Artistic Yogasana": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Everyone should report at least 30 mins before scheduled match time.",
-        "All participants must come with a proper sports attire.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Syllabus, Rules & Regulations for the Yogasana events: A. Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat B. Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
-        "Link to refer syllabus: https://www.yogasanabharat.com/code",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
-        third: ""
-      },
-      contacts: [
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" }
-      ]
-    },
-    "Taekwondo": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "TAEKWONDO (Men & Women)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Everyone should report at least 30 mins before scheduled match time.",
-        "Men Weight Categories (U-54, U-58, U-63, U-68, U-74, U-80, U-87, above 87).",
-        "Women Weight Categories (U-46, U-49, U-53, U-57, U-62, U-67, U-73, above 73).",
-        "World Taekwondo (WT) new competition rules are applicable.",
-        "Senior men and women kyorugi competitions only.",
-        "All participants must come with a proper sports attire.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 1,500",
-        second: "Rs. 1,000",
-        third: ""
-      },
-      contacts: [
-        { name: "Mr. U. Om Shri", phone: "+91 9347775310" },
-        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" }
-      ]
-    },
-    "Volley ball": {
-      title: "TEAM EVENTS",
-      subtitle: "VOLLEY BALL (Men & Women)",
-      rules: [
-        "Team strength is 6+4 players.",
-        "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Mr. V Rajesh", phone: "+91 98661 46676" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" }
-      ]
-    },
-    "Basket ball": {
-      title: "TEAM EVENTS",
-      subtitle: "BASKET BALL (Men & Women)",
-      rules: [
-        "Team strength is 5+5 players.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Ms. Ch. Jyothika", phone: "+91 6301174427" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" },
-        { name: "Ms. Ch. Manvitha", phone: "+91 94928 31319" }
-      ]
-    },
-    "Kabaddi": {
-      title: "TEAM EVENTS",
-      subtitle: "KABADDI (Men & Women)",
-      rules: [
-        "Team strength is 7+3 players.",
-        "Pro Kabaddi rules & Regulations are applicable.",
-        "All matches will be conducted on the kabaddi mat.",
-        "Player may wear mat shoes or can play with barefoot.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" },
-        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
-      ]
-    },
-    "Football": {
-      title: "TEAM EVENTS",
-      subtitle: "FOOTBALL (Men & Women)",
-      rules: [
-        "Team strength is 7+3 players.",
-        "The time of each half will be informed before the commencement of tournament.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. P. Murali", phone: "+91 7207049397" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
-      ]
-    },
-    "Kho-Kho": {
-      title: "TEAM EVENTS",
-      subtitle: "KHO-KHO (Men & Women)",
-      rules: [
-        "Team strength is 9+3 players.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. N. Gopi Chandu", phone: "+91 9014360039" },
-        { name: "Ms. E. Nikhitha", phone: "+91 6281464539" }
-      ]
-    },
-    "Hockey": {
-      title: "TEAM EVENTS",
-      subtitle: "HOCKEY (Men & Women)",
-      rules: [
-        "Team strength is 7+3 players.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Men: Rs. 30,000 | Women: Rs. 15,000",
-        second: "Men: Rs. 20,000 | Women: Rs. 10,000",
-        third: "Men: Rs. 7,000",
-        fourth: "Men: Rs. 3,000"
-      },
-      contacts: [
-        { name: "Mr. B. Bala", phone: "+91 7981216560" },
-        { name: "Mr. G. Siva Rama Krishna", phone: "+91 6309959419" },
-        { name: "Ms. M. Poojitha", phone: "+91 8374697597" }
-      ]
-    },
-    "Throw ball": {
-      title: "TEAM EVENTS",
-      subtitle: "THROWBALL (Women)",
-      rules: [
-        "Team limit is 9+1 players.",
-        "The match is played as the best of 3 sets, 25+25+15 points.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
-      },
-      contacts: [
-        { name: "Ms. P. Syam Keerthi", phone: "+91 8886161616" },
-        { name: "Ms. K. Vaishnavi", phone: "+91 7729838501" },
-        { name: "Ms. Ch. Bhavana", phone: "+91 9346557223" }
-      ]
-    },
-    "Para Sports": {
-      title: "INDIVIDUAL EVENTS",
-      subtitle: "PARA SPORTS (Men)",
-      rules: [
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "In Para sports only two events:100Mts,400Mts (Men only) under Hand amputee, Leg amputee and visual impairment categories.",
-        "Players must report at least before 30 minutes at respective grounds.",
-        "All participants must come with a proper sports attire.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
-      ],
-      prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500"
-      },
-      contacts: [
-        { name: "Mr. S. Badari Ajith", phone: "+91 9346193840" },
-        { name: "Mr. M. Manikanta", phone: "+91 7672069471" }
-      ]
-    }
-  };
+  // Placeholder for legacy sports/cultural event metadata that was previously
+  // inlined as a large object. Currently only used for existence checks.
+  const eventDetailsData = {} as const;
 
   const culturalEventsData = {
     "Classical Dance Solo": {
@@ -552,7 +136,13 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 834124 0966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+
+      ]
     },
     "Singing Idol": {
       title: "MUSIC",
@@ -576,7 +166,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Dancing Star - Western Solo": {
       title: "DANCE",
@@ -594,7 +188,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
+        {name: "Ms. Asritha", phone: "+91 7386 889772"},
+        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+      ]
     },
     "Group Singing": {
       title: "MUSIC",
@@ -612,7 +211,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3500",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 8328009698"},
+        {name: "Ms. Varshitha", phone: "+91 8712347513"}
+      ]
     },
     "Skit": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -630,7 +233,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 5000",
         third: "Rs. 4000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Dancing Jodi - Western Duo": {
       title: "DANCE",
@@ -651,7 +257,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 3000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
+        {name: "Ms. Asritha", phone: "+91 7386 889772"},
+        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+      ]
     },
     "Mime": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -667,7 +278,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 4000",
         third: "Rs. 2000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Singing Jodi": {
       title: "MUSIC",
@@ -685,7 +299,11 @@ const Dashboard: React.FC = () => {
         second: "Rs. 2000",
         third: "Rs. 1000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
+        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
+        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+      ]
     },
     "Group Dance": {
       title: "DANCE",
@@ -705,7 +323,12 @@ const Dashboard: React.FC = () => {
         second: "Rs. 12000",
         third: "Rs. 8000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
+        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
+        {name: "Ms. Asritha", phone: "+91 73868 89772"},
+        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+      ]
     },
     "Short Film Making": {
       title: "THEATRE & CINEMATOGRAPHY",
@@ -725,7 +348,10 @@ const Dashboard: React.FC = () => {
         second: "Rs. 15000",
         third: "Rs. 12000"
       },
-      contacts: []
+      contacts: [
+        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
+        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+      ]
     },
     "Haute Couture": {
       title: "FASHION COMPETITIONS",
@@ -744,8 +370,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 12000"
       },
       contacts: [
-        { name: "Ms. U. Varshitha", phone: "+91 8790300977" },
-        { name: "Mr. Fuzel Akther", phone: "+91 9603382796" }
+         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
+        {name: "Ms. Sara", phone: "+91 94904 84233"},
+        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
+        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
       ]
     }
   };
@@ -905,6 +533,34 @@ const Dashboard: React.FC = () => {
 
   const getFilteredParaSportsEvents = () => {
     return isLoggedIn ? filterEventsByGender(paraSportsEvents) : paraSportsEvents;
+  };
+
+  // Pricing helper for gender-based registration fees
+  const getPricingForUser = () => {
+    const normalizedGender = userProfileData.gender?.toLowerCase();
+
+    if (normalizedGender === 'female') {
+      return {
+        sports: 250,
+        culturals: 250,
+        both: 350
+      };
+    }
+
+    // Default to male pricing (covers explicit male users + unknown gender)
+    return {
+      sports: 350,
+      culturals: 250,
+      both: 350
+    };
+  };
+
+  // Convert database events to simple card format for carousels
+  const convertEventsToCards = (events: Event[]): { title: string; subtitle: string }[] => {
+    return events.map((event) => ({
+      title: event.eventName,
+      subtitle: event.category || (event as any).eventType || 'Event'
+    }));
   };
 
   // Functions to filter cultural events by category (with gender filtering)
@@ -1255,7 +911,7 @@ const Dashboard: React.FC = () => {
       setIsScrolled(scrollPosition > windowHeight * 0.5);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -1296,6 +952,42 @@ const Dashboard: React.FC = () => {
     return () => {
       observer.disconnect();
     };
+  }, []);
+
+  // IntersectionObserver-based lazy loading for gallery images
+  useEffect(() => {
+    // Defer if there is no gallery on the current view
+    const container = document.querySelector('.gallery-grid');
+    if (!container) return;
+
+    const images = container.querySelectorAll<HTMLImageElement>('img[data-src]');
+    if (!images.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target as HTMLImageElement;
+          const dataSrc = img.getAttribute('data-src');
+          if (dataSrc) {
+            // Swap in the real AVIF source once image is near viewport
+            img.src = dataSrc;
+            img.removeAttribute('data-src');
+          }
+          obs.unobserve(entry.target);
+        });
+      },
+      {
+        root: null,
+        // Start loading slightly before the image enters the viewport
+        rootMargin: '200px 0px',
+        threshold: 0.1
+      }
+    );
+
+    images.forEach((img) => observer.observe(img));
+
+    return () => observer.disconnect();
   }, []);
 
   // Helper function to register section refs
@@ -3233,7 +2925,7 @@ Do you want to proceed with registration?`;
                 <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
                   ? Back
                 </button>
-                <h2>CULTURAL CATEGORIES</h2>
+                <h2>PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>�</button>
             </div>
@@ -4244,127 +3936,12 @@ Do you want to proceed with registration?`;
           }
         `}
       </style>
-      <section 
-        className={`dashboard-section throwbacks-section section-animate section-animate-left ${visibleSections.has('throwbacks') ? 'visible animate-in' : ''}`}
-        data-section-id="throwbacks"
-        ref={(el) => registerSection('throwbacks', el)}
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          padding: '120px 20px 80px',
-          marginTop: '0',
-          overflow: 'visible'
-        }}
-      >
-        <h2
-      style={{
-    fontSize: 'clamp(2.5rem, 8vw, 4rem)',
-    fontWeight: 'bold',
-    color: '#fdee71',
-    marginBottom: '80px',
-    textAlign: 'center',
-    fontFamily: 'Woodtrap, sans-serif'
-  }}
->
-  Gallery
-</h2>
-
-
-        <div style={{
-          width: '100%',
-          maxWidth: '100vw',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '40px'
-        }}>
-          {/* Row 1 - Moving Left */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row">
-              {[...Array(10)].map((_, i) => (
-                <div 
-                  key={`row1-${i}`}
-                  className="throwback-card"
-                  onClick={() => setSelectedPhoto({ row: 1, index: i })}
-                  style={{
-                    background: `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
-                    border: `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`,color: '#fdee71',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div 
-                    className="card-placeholder"
-                    style={{ color: ['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5] }}
-                  >
-                    Photo {i + 1}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Row 2 - Moving Right */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row scroll-row-2">
-              {[...Array(10)].map((_, i) => (
-                <div 
-                  key={`row2-${i}`}
-                  className="throwback-card"
-                  onClick={() => setSelectedPhoto({ row: 2, index: i })}
-                  style={{
-                    background: `linear-gradient(135deg, ${['rgba(255, 127, 80, 0.5)', 'rgba(147, 112, 219, 0.5)', 'rgba(255, 215, 0, 0.5)', 'rgba(0, 191, 255, 0.5)', 'rgba(255, 20, 147, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
-                    border: `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5]}`,
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div 
-                    className="card-placeholder"
-                    style={{ color: ['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5] }}
-                  >
-                    Photo {i + 11}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Row 3 - Moving Left */}
-          <div style={{ overflow: 'visible', width: '100%', padding: '20px 0' }}>
-            <div className="scroll-row scroll-row-3">
-              {[...Array(10)].map((_, i) => (
-                <div 
-                  key={`row3-${i}`}
-                  className="throwback-card"
-                  onClick={() => setSelectedPhoto({ row: 3, index: i })}
-                  style={{
-                    background: `linear-gradient(135deg, ${['rgba(218, 165, 32, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`,
-                    border: `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5]}`,
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div 
-                    className="card-placeholder"
-                    style={{ color: ['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5] }}
-                  >
-                    Photo {i + 21}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <p style={{
-          marginTop: '60px',
-          fontSize: '1.2rem',
-          color: 'rgba(255, 255, 255, 0.6)',
-          textAlign: 'center',
-          fontStyle: 'italic'
-        }}>Hover to pause • Swipe through memories</p>
-      </section>
+      
+      {/* Gallery Section */}
+      <Gallery 
+        onPhotoClick={(row, index) => setSelectedPhoto({ row, index })}
+        registerSection={registerSection}
+      />
 
       {/* Throwback Section */}
       <section 
@@ -5916,62 +5493,33 @@ Do you want to proceed with registration?`;
             ✕
           </button>
 
-          {/* Photo Content */}
+          {/* Photo Content - reuse AVIF gallery image for modal view */}
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '90%',
-              maxWidth: '800px',
-              height: '80vh',
+              maxWidth: '900px',
+              maxHeight: '80vh',
               borderRadius: '20px',
-              background: (() => {
-                const row = selectedPhoto.row;
-                const i = selectedPhoto.index;
-                if (row === 1) {
-                  return `linear-gradient(135deg, ${['rgba(255, 215, 0, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
-                } else if (row === 2) {
-                  return `linear-gradient(135deg, ${['rgba(255, 127, 80, 0.5)', 'rgba(147, 112, 219, 0.5)', 'rgba(255, 215, 0, 0.5)', 'rgba(0, 191, 255, 0.5)', 'rgba(255, 20, 147, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
-                } else {
-                  return `linear-gradient(135deg, ${['rgba(218, 165, 32, 0.5)', 'rgba(138, 43, 226, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(255, 105, 180, 0.5)', 'rgba(50, 205, 50, 0.5)'][i % 5]}, rgba(0, 0, 0, 0.3))`;
-                }
-              })(),
-              border: (() => {
-                const row = selectedPhoto.row;
-                const i = selectedPhoto.index;
-                if (row === 1) {
-                  return `3px solid ${['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5]}`;
-                } else if (row === 2) {
-                  return `3px solid ${['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5]}`;
-                } else {
-                  return `3px solid ${['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5]}`;
-                }
-              })(),
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+              overflow: 'hidden',
+              background: 'rgba(0,0,0,0.85)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               cursor: 'default'
             }}
           >
-            <div
+            <img
+              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.index]}`}
+              alt={`Gallery ${selectedPhoto.index + 1}`}
               style={{
-                fontSize: '3rem',
-                fontWeight: 'bold',
-                color: (() => {
-                  const row = selectedPhoto.row;
-                  const i = selectedPhoto.index;
-                  if (row === 1) {
-                    return ['#FFD700', '#FF69B4', '#00FFFF', '#8B2BE2', '#32CD32'][i % 5];
-                  } else if (row === 2) {
-                    return ['#FF7F50', '#9370DB', '#FFD700', '#00BFFF', '#FF1493'][i % 5];
-                  } else {
-                    return ['#DAA520', '#8B2BE2', '#00FFFF', '#FF69B4', '#32CD32'][i % 5];
-                  }
-                })()
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
               }}
-            >
-              Photo {selectedPhoto.row === 1 ? selectedPhoto.index + 1 : selectedPhoto.row === 2 ? selectedPhoto.index + 11 : selectedPhoto.index + 21}
-            </div>
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       )}

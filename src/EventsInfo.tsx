@@ -616,14 +616,10 @@ const EventsInfo: React.FC = () => {
           
           /* Global Event Card Dimensions - 3:4 Aspect Ratio */
           .event-card {
-            width: 210px;
-            height: 280px;
-            max-width: 100%;
-            margin: 0 -20px;
-          }
-          
-          /* Card Hover Effect - Global */
-          .event-card {
+            width: 280px;
+            height: 380px;
+            max-width: 280px;
+            margin: 0 -30px;
             position: relative;
             overflow: visible;
             transition: transform 0.5s ease;
@@ -631,9 +627,10 @@ const EventsInfo: React.FC = () => {
             transform-style: preserve-3d;
           }
           
+          /* Card Hover Effect - Global */
           .event-card:hover {
             transform: perspective(500px) rotateX(12deg) scale(1);
-            z-index: 50;
+            z-index: 5;
           }
           
           .event-card-image {
@@ -646,7 +643,7 @@ const EventsInfo: React.FC = () => {
             object-fit: cover;
             object-position: center center;
             transition: transform 1s ease-in-out;
-            z-index: 100;
+            z-index: 0;
             opacity: 1;
             border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
           }
@@ -658,8 +655,8 @@ const EventsInfo: React.FC = () => {
           
           /* Global Grid Gap Styles */
           .grid {
-            row-gap: 2.5rem !important;
-            column-gap: 0 !important;
+            row-gap: 3rem !important;
+            column-gap: 15 !important;
           }
           
           /* Responsive adjustments for mobile */
@@ -684,6 +681,112 @@ const EventsInfo: React.FC = () => {
               height: 320px !important;
             }
           }
+
+          /* Header Elements */
+          .events-logo {
+            height: 16rem;
+            object-fit: contain;
+            margin-top: -2rem;
+          }
+
+          .events-title {
+            font-family: 'Woodtrap, sans-serif';
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+          }
+
+          .events-back-button-container {
+            margin-top: -6rem;
+          }
+
+          @media (min-width: 768px) {
+            .events-logo {
+              height: 16rem;
+              margin-top: -6rem;
+            }
+
+            .events-title {
+              font-size: 2.25rem;
+            }
+          }
+
+          /* Main Category Cards */
+          .category-card {
+            background-image: url(/card-bg.avif);
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+          }
+
+          .category-card-title {
+            font-family: 'BackToSchool, sans-serif';
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+          }
+
+          /* Sub-category Cards (Glass effect) */
+          .subcategory-card {
+            background: rgba(180, 150, 200, 0.35);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            height: 380px;
+            width: 280px;
+            max-width: 280px;
+            padding-bottom: 5rem;
+          }
+
+          /* Cultural Event Cards (with background image) */
+          .cultural-event-card {
+            background-image: url(/card-bg.avif);
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            height: 380px;
+            width: 280px;
+            max-width: 280px;
+            padding-bottom: 1rem;
+          }
+
+          .subcategory-card-title {
+            color: #fde047;
+            font-size: 0.875rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+          }
+
+          .subcategory-card-subtitle {
+            color: white;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+          }
+
+          /* Download Rulebook Button */
+          .download-rulebook-btn {
+            background-color: #f9a8d4;
+            color: #581c87;
+            font-weight: bold;
+            padding: 10px 60px;
+            border-radius: 6px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+          }
+
+          .download-rulebook-btn:hover {
+            background-color: #f472b6;
+          }
         `}
       </style>
 
@@ -698,11 +801,12 @@ const EventsInfo: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                className="h-28 md:h-32 object-contain"
+                className="events-logo"
               />
-              <BackButton 
-                className="!static !top-auto !left-auto"
-                onClick={() => {
+              <div className="events-back-button-container">
+                <BackButton 
+                  className="!static !top-auto !left-auto"
+                  onClick={() => {
                 if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
                   setShowDance(false);
                   setShowMusic(false);
@@ -732,14 +836,12 @@ const EventsInfo: React.FC = () => {
                   navigate('/');
                 }
               }} />
+              </div>
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-center">
-              <h1 className="text-4xl md:text-6xl font-bold text-white events-page-heading" style={{
-                fontFamily: 'Woodtrap, sans-serif',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-              }}>
+            <div className="flex items-start justify-start">
+              <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' : 
                  showWomensIndoorSports ? "Women's Indoor Sports" : 
                  showMensTeamSports ? "Men's Team Field Sports" : 
@@ -756,7 +858,7 @@ const EventsInfo: React.FC = () => {
                  showSpotLight ? 'Spot Light' :
                  showRoboWarsGaming ? 'Robo Wars & Gaming' :
                  showSportsDetails ? 'sports and games' : 
-                 showCulturals ? 'culturals' :
+                 showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
                  'EVENTS'}
               </h1>
             </div>
@@ -770,11 +872,12 @@ const EventsInfo: React.FC = () => {
             <img 
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Vignan Mahotsav" 
-              className="h-24 object-contain"
+              className="events-logo"
             />
-            <BackButton 
-              className="!static !top-auto !left-auto"
-              onClick={() => {
+            <div className="events-back-button-container">
+              <BackButton 
+                className="!static !top-auto !left-auto"
+                onClick={() => {
               if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
                 setShowDance(false);
                 setShowMusic(false);
@@ -804,10 +907,8 @@ const EventsInfo: React.FC = () => {
                 navigate('/');
               }
             }} />
-            <h1 className="text-4xl font-bold text-white events-page-heading text-center" style={{
-              fontFamily: 'Woodtrap, sans-serif',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-            }}>
+            </div>
+            <h1 className="events-title events-page-heading text-center">
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -823,7 +924,7 @@ const EventsInfo: React.FC = () => {
                showRoboGames ? 'Robo Games' :
                showSpotLight ? 'Spot Light' :
                showSportsDetails ? 'sports and games' : 
-               showCulturals ? 'culturals' :
+               showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
                'EVENTS'}
             </h1>
           </div>
@@ -837,18 +938,11 @@ const EventsInfo: React.FC = () => {
               <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
-                  className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
-                  style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
-                  }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-xs font-bold tracking-wide leading-tight" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                    <h2 className="category-card-title text-white text-xs font-bold tracking-wide leading-tight">
                       PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
                     </h2>
                   </div>
@@ -857,24 +951,18 @@ const EventsInfo: React.FC = () => {
                 {/* Card 2 - Sports and Games with Button Below */}
                 <div className="relative flex flex-col items-center gap-8">
                   <div 
-                    className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
-                    style={{
-                      background: 'rgba(180, 150, 200, 0.35)',
-                      backdropFilter: 'blur(15px)',
-                      WebkitBackdropFilter: 'blur(15px)',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
-                      boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
-                    }}
                   >
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                      <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                      <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
                         SPORTS AND GAMES
                       </h2>
                     </div>
                   </div>
                   {/* Download Rulebook button */}
                   <button 
+                    className="download-rulebook-btn"
                     onClick={(e) => {
                       e.stopPropagation();
                       const link = document.createElement('a');
@@ -882,21 +970,6 @@ const EventsInfo: React.FC = () => {
                       link.download = 'Mahostav Rules Book 2025.pdf';
                       link.click();
                     }}
-                    style={{
-                      backgroundColor: '#f9a8d4',
-                      color: '#581c87',
-                      fontWeight: 'bold',
-                      padding: '10px 60px',
-                      borderRadius: '6px',
-                      fontSize: '18px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-                      transition: 'all 0.3s ease',
-                      whiteSpace: 'nowrap'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f472b6'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f9a8d4'}
                   >
                     DOWNLOAD RULEBOOK
                   </button>
@@ -904,18 +977,11 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 3 - Robo Wars & Gaming */}
                 <div 
-                  className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={() => setShowRoboWarsGaming(true)}
-                  style={{
-                    background: 'rgba(180, 150, 200, 0.35)',
-                    backdropFilter: 'blur(15px)',
-                    WebkitBackdropFilter: 'blur(15px)',
-                    border: '1px solid rgba(255, 255, 255, 0.18)',
-                    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
-                  }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="text-white text-sm font-bold tracking-wide" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', fontFamily: 'BackToSchool, sans-serif'}}>
+                    <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
                       ROBO WARS & GAMING
                     </h2>
                   </div>
@@ -928,9 +994,10 @@ const EventsInfo: React.FC = () => {
           {showSportsDetails && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && (
             <div className="w-full h-full flex flex-col relative z-20">
               {/* Cards Grid - centered */}
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-1">
+
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
                                          card.title === "Men's Individual &" || 
@@ -941,25 +1008,15 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
-                          style={{
-                            background: 'rgba(180, 150, 200, 0.35)',
-                            backdropFilter: 'blur(15px)',
-                            WebkitBackdropFilter: 'blur(15px)',
-                            border: '1px solid rgba(255, 255, 255, 0.18)',
-                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                            height: '480px',
-                            width: '360px',
-                            maxWidth: '360px'
-                          }}
                         >
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                            <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            <h2 className="subcategory-card-title">
                               {card.title}
                             </h2>
                             {card.subtitle && (
-                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              <p className="subcategory-card-subtitle">
                                 {card.subtitle}
                               </p>
                             )}
@@ -977,31 +1034,21 @@ const EventsInfo: React.FC = () => {
           {showIndoorSports && (
             <div className="w-full h-full flex flex-col relative z-20">
               {/* Cards Grid - centered */}
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {indoorSportsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1017,31 +1064,21 @@ const EventsInfo: React.FC = () => {
           {/* Women's Indoor Sports Section */}
           {showWomensIndoorSports && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {indoorSportsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1057,31 +1094,21 @@ const EventsInfo: React.FC = () => {
           {/* Men's Team Field Sports Section */}
           {showMensTeamSports && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {mensTeamSportsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title, 'Men')}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1097,31 +1124,21 @@ const EventsInfo: React.FC = () => {
           {/* Women's Team Field Sports Section */}
           {showWomensTeamSports && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {womensTeamSportsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title, 'Women')}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1167,7 +1184,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
@@ -1195,12 +1212,12 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300"
+                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 group hover:scale-105 overflow-hidden"
                           onClick={handleCardClick}
                           style={{
-                            background: 'rgba(180, 150, 200, 0.35)',
-                            backdropFilter: 'blur(15px)',
-                            WebkitBackdropFilter: 'blur(15px)',
+                            backgroundImage: 'url(/card-bg.avif)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
                             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                           }}
@@ -1209,20 +1226,14 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
-                              className="event-card-image"
+                              className="event-card-image transition-transform duration-300 group-hover:-translate-y-4"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
-                          <div className={`absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent ${
-                            card.title === "Music" ? "z-20" : ""
-                          }`}>
-                            <h2 className="text-white text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
+                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300 group-hover:scale-125 group-hover:text-yellow-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
                               {card.title}
                             </h2>
-                            {card.subtitle && (
-                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
-                                {card.subtitle}
-                              </p>
-                            )}
                           </div>
                         </div>
                       );
@@ -1236,31 +1247,21 @@ const EventsInfo: React.FC = () => {
           {/* Dance Section */}
           {showDance && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {danceCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1276,28 +1277,21 @@ const EventsInfo: React.FC = () => {
           {/* Music Section */}
           {showMusic && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {musicCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1313,31 +1307,21 @@ const EventsInfo: React.FC = () => {
           {/* Theatre Section */}
           {showTheatre && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {theatreCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1353,31 +1337,21 @@ const EventsInfo: React.FC = () => {
           {/* Literature Section */}
           {showLiterature && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {literatureCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1393,31 +1367,21 @@ const EventsInfo: React.FC = () => {
           {/* Visual Arts Section */}
           {showVisualArts && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {visualArtsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1433,31 +1397,21 @@ const EventsInfo: React.FC = () => {
           {/* Fashion Design Section */}
           {showFashionDesign && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {fashionDesignCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1473,31 +1427,21 @@ const EventsInfo: React.FC = () => {
           {/* Digital Storytelling & Creative Media Section */}
           {showDigitalStorytelling && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {digitalStorytellingCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1513,31 +1457,21 @@ const EventsInfo: React.FC = () => {
           {/* Gaming Section */}
           {showGaming && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {gamingCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1553,31 +1487,21 @@ const EventsInfo: React.FC = () => {
           {/* Robo Games Section */}
           {showRoboGames && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {roboGamesCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1593,31 +1517,21 @@ const EventsInfo: React.FC = () => {
           {/* Spot Light Section */}
           {showSpotLight && (
             <div className="w-full h-full flex flex-col relative z-20">
-              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-12 pt-4">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{rowGap: '2.5rem', columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
                     {spotLightCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
-                        style={{
-                          background: 'rgba(180, 150, 200, 0.35)',
-                          backdropFilter: 'blur(15px)',
-                          WebkitBackdropFilter: 'blur(15px)',
-                          border: '1px solid rgba(255, 255, 255, 0.18)',
-                          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                          height: '480px',
-                          width: '360px',
-                          maxWidth: '360px'
-                        }}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                          <h2 className="subcategory-card-title">
                             {card.title}
                           </h2>
                           {card.subtitle && (
-                            <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                            <p className="subcategory-card-subtitle">
                               {card.subtitle}
                             </p>
                           )}
@@ -1647,25 +1561,15 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={handleCardClick}
-                          style={{
-                            background: 'rgba(180, 150, 200, 0.35)',
-                            backdropFilter: 'blur(15px)',
-                            WebkitBackdropFilter: 'blur(15px)',
-                            border: '1px solid rgba(255, 255, 255, 0.18)',
-                            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-                            height: '480px',
-                            width: '360px',
-                            maxWidth: '360px'
-                          }}
                         >
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                            <h2 className="text-yellow-300 text-sm font-bold tracking-wide uppercase" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                            <h2 className="subcategory-card-title">
                               {card.title}
                             </h2>
                             {card.subtitle && (
-                              <p className="text-white text-xs mt-1" style={{textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>
+                              <p className="subcategory-card-subtitle">
                                 {card.subtitle}
                               </p>
                             )}

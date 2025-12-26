@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Dashboard from './Dashboard';
 import EventDetail from './EventDetail';
 import EventsInfo from './EventsInfo';
@@ -12,6 +13,17 @@ import ParaSports from './ParaSports';
 import Collaboration from './Collaboration';
 import Zonals from './Zonals';
 import Bangalore from './Bangalore';
+import Chennai from './Chennai';
+import Vizag from './Vizag';
+import Hyderabad from './Hyderabad';
+import Tirupathi from './Tirupathi';
+
+function ExternalRedirect({ url }: { url: string }) {
+  useEffect(() => {
+    window.location.href = url;
+  }, [url]);
+  return null;
+}
 
 function App() {
   return (
@@ -32,6 +44,11 @@ function App() {
           <Route path="/collaboration" element={<Collaboration />} />
           <Route path="/zonals" element={<Zonals />} />
           <Route path="/zonals/bangalore" element={<Bangalore />} />
+          <Route path="/zonals/chennai" element={<Chennai />} />
+          <Route path="/zonals/vizag" element={<Vizag />} />
+          <Route path="/zonals/hyderabad" element={<Hyderabad />} />
+          <Route path="/zonals/tirupathi" element={<Tirupathi />} />
+          <Route path="/guide" element={<ExternalRedirect url="https://vignan.ac.in/mahotsav/mahotsav2025/mahotsav_guide.php" />} />
         </Routes>
       </Router>
     </div>

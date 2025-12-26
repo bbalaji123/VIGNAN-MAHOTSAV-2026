@@ -1,0 +1,59 @@
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.scroll-row {
+  display: flex;
+  gap: 20px;
+  animation: scrollLeft 22s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.scroll-row-2 {
+  animation: scrollRight 24s linear infinite;
+}
+
+.scroll-row-3 {
+  animation-duration: 28s;
+}
+
+.scroll-paused {
+  animation-play-state: paused;
+}
+
+.scroll-row:hover {
+  animation-play-state: paused;
+}
+
+.throwback-card {
+  flex-shrink: 0;
+  width: 30vw;
+  max-width: 280px;
+  min-width: 120px;
+  height: clamp(140px, 20vw, 200px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.throwback-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}

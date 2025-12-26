@@ -17,6 +17,7 @@ import Chennai from './Chennai';
 import Vizag from './Vizag';
 import Hyderabad from './Hyderabad';
 import Tirupathi from './Tirupathi';
+import Guide from './Guide';
 
 function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
           <Route path="/zonals/vizag" element={<Vizag />} />
           <Route path="/zonals/hyderabad" element={<Hyderabad />} />
           <Route path="/zonals/tirupathi" element={<Tirupathi />} />
-          <Route path="/guide" element={<ExternalRedirect url="https://vignan.ac.in/mahotsav/mahotsav2025/mahotsav_guide.php" />} />
+          <Route path="/guide" element={<Guide />} />
         </Routes>
       </Router>
     </div>

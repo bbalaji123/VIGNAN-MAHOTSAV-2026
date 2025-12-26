@@ -7,7 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, getUserDetails, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -433,6 +433,8 @@ const Dashboard: React.FC = () => {
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+  const [showUserDetailsPage, setShowUserDetailsPage] = useState(false);
+  const [fullUserData, setFullUserData] = useState<any>(null);
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -2360,17 +2362,9 @@ Do you want to proceed with registration?`;
         <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '-18rem', marginBottom: '1rem', marginLeft: '2.5rem', marginRight: 'auto', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
-              // Open modal immediately
-              setActiveSubModal('EVENTS');
-              // Fetch events in background
-              if (isLoggedIn && userProfileData.userId) {
-                fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                  setTempSelectedEvents(savedEventIds);
-                });
-              } else {
-                setTempSelectedEvents(new Set());
-              }
-              fetchEvents();
+              console.log('Register button clicked');
+              setShowUserDetailsPage(true);
+              console.log('showUserDetailsPage set to true');
             }}>Register for Events</button>
           ) : (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
@@ -5528,6 +5522,157 @@ Do you want to proceed with registration?`;
               loading="lazy"
               decoding="async"
             />
+          </div>
+        </div>
+      )}
+
+      {/* User Details Page Modal */}
+      {showUserDetailsPage && (
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-[99999]" 
+          style={{
+            backgroundImage: 'url("/Background-redesign.avif")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed'
+          }}>
+          
+          {/* Floating Flowers */}
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
+            <FlowerComponent 
+              size="100%"
+              sunSize="50%"
+              moonSize="43%"
+              sunTop="25%"
+              sunLeft="25%"
+              moonTop="28.5%"
+              moonLeft="28.5%"
+              showPetalRotation={true}
+            />
+          </div>
+          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
+            <FlowerComponent 
+              size="100%"
+              sunSize="50%"
+              moonSize="43%"
+              sunTop="25%"
+              sunLeft="25%"
+              moonTop="28.5%"
+              moonLeft="28.5%"
+              showPetalRotation={true}
+            />
+          </div>
+
+          {/* Content Container */}
+          <div className="relative z-10 min-h-screen">
+            
+            {/* Close Button - Top Right */}
+            <button 
+              onClick={() => setShowUserDetailsPage(false)}
+              className="fixed top-4 right-4 md:top-6 md:right-6 w-12 h-12 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold transition-all hover:scale-110 z-50"
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            {/* Student Details Header with Logout Button */}
+            <div className="bg-red-500 py-4 px-6 flex justify-between items-center">
+              <h1 className="text-white text-xl md:text-2xl font-bold">Student Details</h1>
+              <button
+                onClick={() => setShowUserDetailsPage(false)}
+                className="px-6 py-2 bg-white text-red-500 font-bold rounded-md hover:bg-gray-100 transition-all"
+              >
+                Logout
+              </button>
+            </div>
+
+            {/* Main Content Area */}
+            <div className="p-6 md:p-12">
+              
+              {/* User Info Box - Structured like image 2 */}
+              <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-8 mb-8 max-w-4xl">
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">Reg No</span>
+                    <span className="text-white text-base md:text-lg">: {fullUserData?.userId || userProfileData?.userId || 'N/A'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">Unq ID</span>
+                    <span className="text-white text-base md:text-lg">: {fullUserData?.registerId || userProfileData?.registerId || 'N/A'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">Name</span>
+                    <span className="text-white text-base md:text-lg uppercase">: {fullUserData?.name || userProfileData?.name || 'N/A'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">DOB</span>
+                    <span className="text-white text-base md:text-lg">: {(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth) ? new Date(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('/').reverse().join('-') : 'N/A'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">College</span>
+                    <span className="text-white text-base md:text-lg">: {fullUserData?.college || userProfileData?.college || 'Vignan University'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">Branch</span>
+                    <span className="text-white text-base md:text-lg">: {fullUserData?.branch || userProfileData?.branch || 'N/A'}</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <span className="text-white text-sm md:text-base min-w-[140px]">PayStatus</span>
+                    <span className="text-white text-base md:text-lg">: {fullUserData?.paymentStatus || userProfileData?.paymentStatus || 'NOT PAID'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Event Details Section with Button on Right */}
+              <div className="flex justify-between items-start mb-6">
+                <h2 className="text-white text-xl md:text-2xl font-bold">Event Details</h2>
+                <button
+                  onClick={() => {
+                    setShowUserDetailsPage(false);
+                    setActiveSubModal('EVENTS');
+                    if (isLoggedIn && userProfileData.userId) {
+                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
+                        setTempSelectedEvents(savedEventIds);
+                      });
+                    } else {
+                      setTempSelectedEvents(new Set());
+                    }
+                    fetchEvents();
+                  }}
+                  className="px-8 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-md shadow-lg transition-all duration-200 hover:scale-105 uppercase"
+                >
+                  EDIT/REGISTER
+                </button>
+              </div>
+              
+              {/* Events Count Box */}
+              <div className="bg-gray-600/50 backdrop-blur-sm rounded-lg p-6 mb-8 max-w-4xl">
+                <p className="text-white text-base md:text-lg text-center">
+                  You are enrolled in {myEvents.length} events.
+                </p>
+              </div>
+              
+              {/* Events List Section */}
+              {myEvents.length > 0 && (
+                <div>
+                  <div className="bg-gray-700/40 rounded-lg p-6 max-w-sm">
+                    <h3 className="text-white text-base font-semibold mb-4 uppercase">EVENTS</h3>
+                    <div className="space-y-3">
+                      {myEvents.map((event, index) => (
+                        <div key={index} className="bg-yellow-400 text-black px-4 py-3 rounded-md font-semibold text-sm">
+                          {typeof event === 'string' ? event : event.eventName || 'Unknown Event'}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

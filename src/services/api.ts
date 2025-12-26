@@ -575,3 +575,18 @@ export const getUserRegisteredEvents = async (userId: string): Promise<EventsRes
     };
   }
 };
+
+// Get user details by userId
+export const getUserDetails = async (userId: string): Promise<any> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/user/${userId}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    return {
+      success: false,
+      message: 'Failed to fetch user details',
+      error: error.message,
+    };
+  }
+};

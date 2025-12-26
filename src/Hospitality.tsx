@@ -379,40 +379,40 @@ const Hospitality: React.FC = () => {
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FAQ's</h2>
             
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>1) From when can I avail accommodation?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>1 From when can I avail accommodation?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">Accommodation can be availed from 4th February, 2026 - 10 pm onwards.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>2) What documents and proofs are required while coming to Mahotsav?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>2 What documents and proofs are required while coming to Mahotsav?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">It is mandatory to bring the College ID card and bonafide certificate when you arrive at registration desk at Vignan University.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>3) Does the accommodation include food?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>3 Does the accommodation include food?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">No, but you can make use of the canteens/food stalls available during Mahotsav at your own expense. Whereas, for Sports & Games participants, Lunch will be provided</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>4) When can I come for registration and accommodation?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>4 When can I come for registration and accommodation?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">Accommodation and registration services can be availed from 4th Feb 2026, starting at 10 PM. The Registration and Hospitality desk will operate 24/7 until 5th Feb 2025. Please note that registrations and check-outs are paused during Inaugural and Valedictory functions, so kindly plan accordingly.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>5) Can I vacate earlier than the registered date?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>5 Can I vacate earlier than the registered date?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">Yes, however you have to inform to the coordinator regarding your check out.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>6) Whom and How should I approach for accommodation on arrival?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>6 Whom and How should I approach for accommodation on arrival?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">You have to report at the hospitality desk. You can contact Helpline numbers for any further help.<br />Helpline No: 88854 76252</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>7) Will Mahotsav guarantee security for my luggage and stuff?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>7 Will Mahotsav guarantee security for my luggage and stuff?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">The attendees are responsible for managing their own belongings, Mahotsav does not guarantee security of luggage or any personal belongings.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>8) Can I check out later than my scheduled time of checkout?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>8 Can I check out later than my scheduled time of checkout?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">You have to checkout at your given time only.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>9) Are Male and Female students provided with the same accommodations?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>9 Are Male and Female students provided with the same accommodations?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">No, male and female students would not be provided with the same accommodation.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>10) Can I expect to private room allotted to me?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>10 Can I expect to private room allotted to me?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">No, common halls will be arranged with decent washroom facilities.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>11) Is there any curfew for students?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>11 Is there any curfew for students?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">Yes, there will be a curfew for girl students. It will be informed during the allocation of room.</p>
 
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>12) What about the food provision inside the college?</strong></p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>12 What about the food provision inside the college?</strong></p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">You can make use of the canteens/food stalls available during Mahotsav at your own expense.</p>
           </div>
         )}
@@ -425,6 +425,3 @@ const Hospitality: React.FC = () => {
 };
 
 export default Hospitality;
-
-
-

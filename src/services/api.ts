@@ -22,7 +22,6 @@ const getApiBaseUrl = () => {
 const API_BASE_URL = getApiBaseUrl();
 
 // Log current API configuration (for debugging)
-console.log('🌐 API Base URL:', API_BASE_URL);
 
 export interface SignupData {
   name: string;
@@ -338,7 +337,6 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
       // If server is busy (409 conflict or 500 server busy), retry silently
       if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
         const delay = baseDelay * attempt; // Linear backoff
-        console.log(`Registration attempt ${attempt} - server busy, retrying in ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
@@ -348,7 +346,6 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
       // Network error - retry silently
       if (attempt < maxRetries) {
         const delay = baseDelay * attempt;
-        console.log(`Registration attempt ${attempt} - network error, retrying in ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
@@ -388,7 +385,6 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
       // If server is busy (409 conflict or 500 server busy), retry silently
       if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
         const delay = baseDelay * attempt; // Linear backoff
-        console.log(`Team registration attempt ${attempt} - server busy, retrying in ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
@@ -398,7 +394,6 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
       // Network error - retry silently
       if (attempt < maxRetries) {
         const delay = baseDelay * attempt;
-        console.log(`Team registration attempt ${attempt} - network error, retrying in ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
@@ -473,7 +468,6 @@ export const getMyEvents = async (userId: string): Promise<EventsResponse> => {
 // Add a single event to My Events
 export const addEventToMyEvents = async (userId: string, eventId: string): Promise<ApiResponse> => {
   try {
-    console.log('Making API request to add event:', { userId, eventId, url: `${API_BASE_URL}/add-event` });
     
     const response = await fetch(`${API_BASE_URL}/add-event`, {
       method: 'POST',
@@ -483,14 +477,11 @@ export const addEventToMyEvents = async (userId: string, eventId: string): Promi
       body: JSON.stringify({ userId, eventId }),
     });
 
-    console.log('API response status:', response.status, response.statusText);
-
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('API response data:', data);
     return data;
   } catch (error: any) {
     console.error('API Error in addEventToMyEvents:', error);

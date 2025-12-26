@@ -71,7 +71,7 @@ const Bangalore: React.FC = () => {
           .bangalore-content h6,
           .bangalore-content div,
           .bangalore-content span {
-            font-family: 'BackToSchool', sans-serif !important;
+            font-family: 'arial', sans-serif !important;
           }
         `}
       </style>
@@ -85,14 +85,17 @@ const Bangalore: React.FC = () => {
           <h1 className="bangalore-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
-              letterSpacing: '0.15em'
+              letterSpacing: '0.15em',
+              paddingTop: '20px'
             }}
           >
             BANGALORE
           </h1>
           <p className="bangalore-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
-              letterSpacing: '0.05em'
+              letterSpacing: '0.05em',
+              paddingBottom: '20px',
+              paddingTop: '10px'
             }}
           >
             (5-6 DEC,2025)
@@ -170,11 +173,9 @@ const Bangalore: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="bangalore-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+            <div className="bangalore-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' , paddingTop: '20px' }}>
               <div className="text-base sm:text-lg font-semibold">
-                <div>kjhhjkj - 09876789</div>
-                <div>iujk - 98765679</div>
-                <div>jk</div>
+                <div>Mrs.P. Sai Sowjanya - +91 99123 24909</div>
               </div>
             </div>
           </div>
@@ -185,7 +186,7 @@ const Bangalore: React.FC = () => {
               HOSTING PARTNER
             </div>
             <div className="w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/rcb.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+              <img src="/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>
@@ -193,20 +194,21 @@ const Bangalore: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="bangalore-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8">
-          <strong>Note : </strong>The semi finalists of each zone will be promoted to higher level rounds during 
-          Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.
+        <div className="bangalore-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8" style={{ fontFamily: 'arial, sans-serif !important' ,paddingTop: '20px', paddingBottom: '10px' }}>
+          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
+          <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="bangalore-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[50px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
+          className="bangalore-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
-            background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
+            background: '#0b112b',
             color: '#fff',
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
-            paddingTop: '20px'
+            padding: '8px 10px 8px 10px',
+            fontFamily: 'coffee, sans-serif !important'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

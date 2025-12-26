@@ -4636,7 +4636,9 @@ html, body {
 }
 
 .sports-card-poster-background {
-  background: rgba(200, 200, 200, 0.3);
+  background-image: url('/card-bg.avif');
+  background-size: cover;
+  background-position: center;
   border: 2px dashed #999;
   border-radius: 20px;
   height: 100%;

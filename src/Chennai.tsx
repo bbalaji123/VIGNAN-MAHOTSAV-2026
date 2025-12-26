@@ -86,8 +86,10 @@ const Chennai: React.FC = () => {
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
               letterSpacing: '0.15em',
-              paddingBottom: '10px',
-              paddingTop: '20px',
+              paddingTop: '25px',
+            paddingBottom: '25px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
             }}
           >
             CHENNAI

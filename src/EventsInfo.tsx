@@ -30,8 +30,8 @@ const EventsInfo: React.FC = () => {
   const [showRoboWarsGaming, setShowRoboWarsGaming] = useState(false);
 
   // Carousel states
-  const [currentSportsSlide, setCurrentSportsSlide] = useState(2);
-  const [currentCulturalsSlide, setCurrentCulturalsSlide] = useState(3);
+  const [, setCurrentSportsSlide] = useState(2);
+  const [, setCurrentCulturalsSlide] = useState(3);
 
   // Events data
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -194,7 +194,6 @@ const EventsInfo: React.FC = () => {
 
   // Handle event detail click with gender context
   const handleEventDetailClick = (eventTitle: string, gender?: string) => {
-    console.log('Event clicked:', eventTitle, 'Gender:', gender);
     
     // Check if it's Men's Individual & Indoor Sports
     if (eventTitle === "Men's Individual &") {
@@ -362,24 +361,19 @@ const EventsInfo: React.FC = () => {
     else if (showSpotLight) fromSection = 'spotLight';
     else if (showRoboWarsGaming) fromSection = 'roboWarsGaming';
     else if (showParaSports) fromSection = 'paraSports';
-    
-    console.log('Navigating to event:', eventName, 'from section:', fromSection);
     navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection } });
   };
 
   // Click handlers
   const handleSportsCardClick = () => {
-    console.log('Sports card clicked');
     setShowSportsDetails(true);
   };
 
   const handleParaSportsCardClick = () => {
-    console.log('Para Sports card clicked');
     setShowParaSports(true);
   };
 
   const handleCulturalsCardClick = () => {
-    console.log('Culturals card clicked');
     setShowCulturals(true);
   };
 
@@ -414,7 +408,6 @@ const EventsInfo: React.FC = () => {
         setCulturalEvents(culturalsResponse.data || []);
         setParaSportsEvents(paraSportsResponse.data || []);
       } catch (error) {
-        console.error('Error fetching events:', error);
       }
     };
 
@@ -518,7 +511,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={true}
+          showPetalRotation={false}
         />
       </div>
 
@@ -532,7 +525,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={true}
+          showPetalRotation={false}
         />
       </div>
 
@@ -544,7 +537,9 @@ const EventsInfo: React.FC = () => {
             right: -13%;
             width: 500px;
             height: 500px;
-            opacity: 0.3;
+            opacity: 0.3            git add .github/workflows/deploy.yml
+            git commit -m "Fix: Add enablement parameter to GitHub Pages deployment"
+            git push;
           }
           
           .flower-bottom-left {
@@ -622,7 +617,7 @@ const EventsInfo: React.FC = () => {
             margin: 0 -30px;
             position: relative;
             overflow: visible;
-            transition: transform 0.5s ease;
+            transition: transform 1.5s ease;
             border-radius: 1.5rem;
             transform-style: preserve-3d;
           }
@@ -642,7 +637,7 @@ const EventsInfo: React.FC = () => {
             height: 100%;
             object-fit: cover;
             object-position: center center;
-            transition: transform 1s ease-in-out;
+            transition: transform 0.5s ease-in-out;
             z-index: 0;
             opacity: 1;
             border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
@@ -727,11 +722,11 @@ const EventsInfo: React.FC = () => {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
 
-          /* Sub-category Cards (Glass effect) */
+          /* Sub-category Cards (with background image) */
           .subcategory-card {
-            background: rgba(180, 150, 200, 0.35);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background-image: url(/card-bg.avif);
+            background-size: cover;
+            background-position: center;
             border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
             height: 380px;
@@ -787,6 +782,52 @@ const EventsInfo: React.FC = () => {
           .download-rulebook-btn:hover {
             background-color: #f472b6;
           }
+
+          /* Inner Event Image Cards - Clean image-only cards */
+          .inner-event-card {
+            width: 280px;
+            height: 380px;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+          }
+
+          .inner-event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+          }
+
+          .inner-event-cards-container:hover .inner-event-card::before {
+            background: rgba(0, 0, 0, 0.6);
+          }
+
+          .inner-event-cards-container .inner-event-card:hover::before {
+            background: rgba(0, 0, 0, 0);
+          }
+
+          .inner-event-card:hover {
+            transform: scale(1.05);
+          }
+
+          .inner-event-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
         `}
       </style>
 
@@ -840,7 +881,7 @@ const EventsInfo: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-start">
+            <div className="flex items-start justify-start" style={showDance ? { marginLeft: '150px' } : {}}>
               <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' : 
                  showWomensIndoorSports ? "Women's Indoor Sports" : 
@@ -908,7 +949,7 @@ const EventsInfo: React.FC = () => {
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center">
+            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem' , paddingLeft: '90px'}}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -935,11 +976,12 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 mb-10">
+              <div className="flex flex-col md:flex-row items-start justify-center gap-15 md:gap-18 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
                   className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={handleCulturalsCardClick}
+                  style={{ margin: '0 16px' }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                     <h2 className="category-card-title text-white text-xs font-bold tracking-wide leading-tight">
@@ -953,6 +995,7 @@ const EventsInfo: React.FC = () => {
                   <div 
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
+                    style={{ margin: '0 16px' }}
                   >
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                       <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
@@ -979,6 +1022,7 @@ const EventsInfo: React.FC = () => {
                 <div 
                   className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                   onClick={() => setShowRoboWarsGaming(true)}
+                  style={{ margin: '0 16px' }}
                 >
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                     <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
@@ -1249,25 +1293,32 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {danceCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {danceCards.map((card, index) => {
+                      // Map dance card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Classical Dance Solo": "events/classical dance.avif",
+                        "Dancing Star – Western Solo": "events/dancig star.avif",
+                        "Dancing Jodi – Western Duo": "events/dancing jodi.avif",
+                        "Spot Dance - Jodi": "events/spot dance.avif",
+                        "Group Dance (10 no.)": "events/group dance.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

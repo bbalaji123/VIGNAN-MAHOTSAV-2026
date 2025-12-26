@@ -132,7 +132,7 @@ const Tirupathi: React.FC = () => {
                     <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'arial, sans-serif !important' }}>Basket ball</div>
                     <div className="text-base sm:text-lg" style={{ fontFamily: 'arial, sans-serif !important' }}>(5+5)</div>
                   </div>
-                  <div className="flex flex-col py-4">
+                  <div className="flex flex-col py-4 border-b border-white/30">
                     <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'arial, sans-serif !important' }}>Kabaddi</div>
                     <div className="text-base sm:text-lg" style={{ fontFamily: 'arial, sans-serif !important' }}>(7+3)</div>
                   </div>
@@ -172,11 +172,9 @@ const Tirupathi: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="tirupathi-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
+            <div className="tirupathi-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'backtoschool, sans-serif !important', paddingTop: '20px' }}>
               <div className="text-base sm:text-lg font-semibold">
-                <div>kjhhjkj - 09876789</div>
-                <div>iujk - 98765679</div>
-                <div>jk</div>
+                <div>Contact: Mr.Dhananjaya - +91 63019 96178</div>
               </div>
             </div>
           </div>
@@ -186,8 +184,8 @@ const Tirupathi: React.FC = () => {
             <div className="text-sm sm:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
-            <div className="w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/tirupati.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+            <div className="w-[200px] h-[200px] sm:w-[200px] sm:h-[200px] rounded-full bg-white/90 flex items-center justify-center p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
+              <img src="/Tirupati.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>
@@ -195,20 +193,24 @@ const Tirupathi: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="tirupathi-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8">
-          <strong>Note : </strong>The semi finalists of each zone will be promoted to higher level rounds during 
-          Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.
+        <div className="tirupathi-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8" style={{ fontFamily: 'arial, sans-serif !important',paddingBottom: '20px' ,paddingTop: '20px'}}>
+          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
+         <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="tirupathi-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[50px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
+          
+          className="tirupathi-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
-            background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
+            background: '#380c46',
             color: '#fff',
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
-            paddingTop: '20px'
+            paddingTop: '25px',
+            paddingBottom: '25px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
@@ -218,6 +220,12 @@ const Tirupathi: React.FC = () => {
             e.currentTarget.style.transform = 'translateY(0)';
             e.currentTarget.style.boxShadow = '0 5px 15px rgba(228, 138, 185, 0.4)';
           }}
+
+          onMouseDown={(e) => {
+            return e.currentTarget.style.transform = 'scale(0.95)';
+        
+          }}
+          onClick={() => window.open('https://forms.gle/oX1uq4mfmr3cwprw8', '_blank')}
         >
           CLICK HERE TO REGISTER
         </button>

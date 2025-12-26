@@ -71,7 +71,7 @@ const Hyderabad: React.FC = () => {
           .hyderabad-content h6,
           .hyderabad-content div,
           .hyderabad-content span {
-            font-family: 'BackToSchool', sans-serif !important;
+            font-family: 'arial', sans-serif !important;
           }
         `}
       </style>
@@ -85,14 +85,16 @@ const Hyderabad: React.FC = () => {
           <h1 className="hyderabad-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
-              letterSpacing: '0.15em'
+              letterSpacing: '0.15em',
+              paddingTop: '20px',
             }}
           >
             HYDERABAD
           </h1>
           <p className="hyderabad-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
-              letterSpacing: '0.05em'
+              letterSpacing: '0.05em',
+              paddingBottom: '20px',
             }}
           >
             (Dates: Reveal soon)
@@ -116,7 +118,7 @@ const Hyderabad: React.FC = () => {
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <div className="hyderabad-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px]" style={{ padding: '48px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0' }}>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0', paddingTop: '0px' ,paddingBottom: '15px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
               <div className="flex flex-col md:flex-row gap-8 sm:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
@@ -130,15 +132,20 @@ const Hyderabad: React.FC = () => {
                     <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Basket ball</div>
                     <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(5+5)</div>
                   </div>
-                  <div className="flex flex-col py-4">
+                  <div className="flex flex-col py-4 border-b border-white/30">
                     <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Kabaddi</div>
+                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
+
+                  </div>
+                  <div className="flex flex-col py-4 border-b border-white/30">
+                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Football</div>
                     <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-4 font-bold text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                  <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-4 font-bold text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important',paddingTop: '20px'}}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
@@ -170,11 +177,9 @@ const Hyderabad: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="hyderabad-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+            <div className="hyderabad-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important', paddingTop: '20px' }}>
               <div className="text-base sm:text-lg font-semibold">
-                <div>kjhhjkj - 09876789</div>
-                <div>iujk - 98765679</div>
-                <div>jk</div>
+                <div> Contact: Mr.Sk. Kadharbasha  - +91 81799 30666</div>
               </div>
             </div>
           </div>
@@ -193,20 +198,24 @@ const Hyderabad: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="hyderabad-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8">
-          <strong>Note : </strong>The semi finalists of each zone will be promoted to higher level rounds during 
-          Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.
+        <div className="hyderabad-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8" style={{ fontFamily: 'arial, sans-serif', paddingTop: '20px', paddingBottom: '20px' }}>
+          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
+          <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="hyderabad-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[50px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
+          className="hyderabad-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
-            background: 'linear-gradient(135deg, #e48ab9, #c96ba1)',
+            background: '#012b16',
             color: '#fff',
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
-            paddingTop: '20px'
+            fontFamily: 'coffee, sans-serif !important',
+            paddingTop: '20px',
+            paddingBottom: '20px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';
@@ -216,7 +225,12 @@ const Hyderabad: React.FC = () => {
             e.currentTarget.style.transform = 'translateY(0)';
             e.currentTarget.style.boxShadow = '0 5px 15px rgba(228, 138, 185, 0.4)';
           }}
-        >
+         onMouseDown={(e) => {
+            return e.currentTarget.style.transform = 'scale(0.95)';
+        
+          }}
+          onClick={() => window.open('https://forms.gle/yZ4dw5uhgDMnV95o9 ', '_blank')}   
+              >
           CLICK HERE TO REGISTER
         </button>
       </div>

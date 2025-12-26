@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
@@ -497,8 +497,6 @@ const Dashboard: React.FC = () => {
   // Filter events based on user gender - users only see events appropriate for their gender
   const filterEventsByGender = (events: Event[]) => {
     const userGender = userProfileData.gender;
-    console.log('?? Filtering events - User gender:', userGender, 'User profile:', userProfileData);
-    console.log('?? Events to filter:', events.length, 'events');
     
     if (userGender === 'female') {
       // Female users can only see female and mixed gender events
@@ -519,7 +517,6 @@ const Dashboard: React.FC = () => {
     }
     
     // For non-logged in users or other genders, show all events
-    console.log('?? Non-logged user or other gender - showing all', events.length, 'events');
     return events;
   };
 
@@ -829,14 +826,12 @@ const Dashboard: React.FC = () => {
     const timer = setTimeout(() => {
       const throwbackSection = document.querySelector('[data-section-id="throwback"]');
       if (!throwbackSection) {
-        console.log('Throwback section not found');
         return;
       }
 
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            console.log('Throwback intersection:', entry.isIntersecting, entry.intersectionRatio);
             if (entry.isIntersecting) {
               // Section entering viewport - open flower
               setIsThrowbackUnlocked(true);
@@ -1002,59 +997,42 @@ const Dashboard: React.FC = () => {
 
   // Function to fetch events from API
   const fetchEvents = useCallback(async () => {
-    console.log('?? Fetching events from API...');
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
-    console.log('?? User gender for filtering:', userGender);
     setLoadingEvents(true);
     try {
         // Test API connection first
-        console.log('?? Testing API connection...');
         const testResponse = await fetch('/api/events').catch(() => null);
         if (!testResponse) {
           console.warn('?? Backend server may not be running. Using production API...');
         }
 
         // Fetch sports events with gender filter if user is logged in
-        console.log('?? Fetching sports events...');
         const sportsResponse = await getEventsByType('sports', userGender);
-        console.log('? Sports response:', sportsResponse);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-          console.log(`? Loaded ${sportsResponse.data.length} sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
           console.warn('?? No sports events loaded:', sportsResponse.message);
         }
 
         // Fetch culturals events with gender filter if user is logged in
-        console.log('?? Fetching cultural events...');
         const culturalsResponse = await getEventsByType('culturals', userGender);
-        console.log('?? Culturals response:', culturalsResponse);
         if (culturalsResponse.success && culturalsResponse.data) {
           setCulturalEvents(culturalsResponse.data);
-          console.log(`? Loaded ${culturalsResponse.data.length} cultural events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
           console.warn('?? No cultural events loaded:', culturalsResponse.message);
         }
 
         // Fetch para sports events with gender filter if user is logged in
-        console.log('?? Fetching para sports events...');
         const paraSportsResponse = await getEventsByType('parasports', userGender);
-        console.log('? Para Sports response:', paraSportsResponse);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-          console.log(`? Loaded ${paraSportsResponse.data.length} para sports events ${userGender ? `for ${userGender} users` : ''}`);
         } else {
           console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
         console.error('? Error fetching events:', error);
-        console.log('?? Troubleshooting tips:');
-        console.log('   1. Make sure backend server is running: npm start');
-        console.log('   2. Check if MongoDB is connected');
-        console.log('   3. Verify API endpoints are working');
       } finally {
         setLoadingEvents(false);
-        console.log('? Finished loading events');
       }
   }, [isLoggedIn, userProfileData.gender]);
 
@@ -1066,7 +1044,6 @@ const Dashboard: React.FC = () => {
   // Refetch events when user login status or gender changes
   useEffect(() => {
     if (isLoggedIn && userProfileData.gender) {
-      console.log('?? User gender detected, refetching events for:', userProfileData.gender);
       fetchEvents();
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
@@ -1358,7 +1335,6 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEventDetailClick = (eventTitle: string) => {
-    console.log('Event clicked:', eventTitle);
     
     // Create a comprehensive mapping from database event names to URL-friendly names
     const eventNameMapping: { [key: string]: string } = {
@@ -1530,8 +1506,6 @@ const Dashboard: React.FC = () => {
         eventName = 'Haute Couture';
       }
     }
-    
-    console.log('Mapped event name:', eventName);
     
     // Check if event data exists in either sports or cultural events before navigating
     const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] || 
@@ -1840,15 +1814,8 @@ const Dashboard: React.FC = () => {
   const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
     const selectedEventsArray = Array.from(selectedEventIds);
     
-    console.log('?? PRICE CALCULATION START');
-    console.log('   - Gender:', gender);
-    console.log('   - Gender type:', typeof gender);
-    console.log('   - Events count:', selectedEventsArray.length);
-    console.log('   - Event IDs:', selectedEventsArray);
-    
     // If no events selected, return 0
     if (selectedEventsArray.length === 0) {
-      console.log('   - No events selected, returning 0');
       return 0;
     }
     
@@ -1858,7 +1825,6 @@ const Dashboard: React.FC = () => {
     );
     
     if (hasParaSports) {
-      console.log('   - Para sports selected - FREE');
       return 0;
     }
     
@@ -1871,71 +1837,50 @@ const Dashboard: React.FC = () => {
       culturalEvents.some(event => event._id === eventId)
     );
     
-    console.log('   - Has sports:', hasSports);
-    console.log('   - Has culturals:', hasCulturals);
-    console.log('   - Sports events in state:', sportsEvents.length);
-    console.log('   - Cultural events in state:', culturalEvents.length);
-    
     // EXPLICIT FEMALE LOGIC - ALWAYS ?250 FOR SINGLE TYPE
     const normalizedGender = gender?.toLowerCase();
 
     if (normalizedGender === 'female') {
-      console.log('   - ? FEMALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - ?? Female: Sports + Culturals = ?350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - ?? Female: Sports ONLY = ?250');
         return 250;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - ?? Female: Culturals ONLY = ?250');
         return 250;
       }
-      
-      console.log('   - ? Female user but no sports/culturals detected');
     }
     
     // MALE LOGIC
     if (normalizedGender === 'male') {
-      console.log('   - ? MALE USER DETECTED');
       
       if (hasSports && hasCulturals) {
-        console.log('   - ?? Male: Sports + Culturals = ?350');
         return 350;
       }
       
       if (hasSports && !hasCulturals) {
-        console.log('   - ?? Male: Sports ONLY = ?350');
         return 350;
       }
       
       if (hasCulturals && !hasSports) {
-        console.log('   - ?? Male: Culturals ONLY = ?250');
         return 250;
       }
     }
     
     // Fallback for users without gender info - charge as per event mix
     if (hasSports && hasCulturals) {
-      console.log('   - ?? Fallback: Sports + Culturals = ?350');
       return 350;
     }
     if (hasSports) {
-      console.log('   - ?? Fallback: Sports only = ?350');
       return 350;
     }
     if (hasCulturals) {
-      console.log('   - ?? Fallback: Culturals only = ?250');
       return 250;
     }
-
-    console.log('   - ? FALLBACK: Defaulting to ?0');
-    console.log('?? PRICE CALCULATION END');
     return 0;
   };
 
@@ -2051,7 +1996,6 @@ Do you want to proceed with registration?`;
     try {
       // Fetch user's registered events
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
-      console.log('📊 Registered events result:', registrationsResult);
       
       if (registrationsResult.success && registrationsResult.data) {
         setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
@@ -2126,7 +2070,6 @@ Do you want to proceed with registration?`;
       
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;
-        console.log('?? Login success - User data:', { userId, name, email, userType, gender });
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -2150,7 +2093,6 @@ Do you want to proceed with registration?`;
           gender: gender // No default value
         };
         setUserProfileData(profileData);
-        console.log('?? Storing user profile:', profileData);
         
         setShowLoginModal(false);
         setLoginFormData({ identifier: '', password: '' });
@@ -2204,7 +2146,6 @@ Do you want to proceed with registration?`;
         gender: storedUserGender || undefined // Convert null to undefined
       };
       setUserProfileData(profileData);
-      console.log('?? Loading user profile from localStorage:', profileData);
       
       // Fetch user's saved events from database
       if (storedUserId) {
@@ -2291,6 +2232,16 @@ Do you want to proceed with registration?`;
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+        {/* Left side image - 1.avif */}
+        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
+          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain" />
+        </div>
+        
+        {/* Right side image - 2.avif */}
+        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px' }}>
+          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain" />
+        </div>
+        
         {/* National Level Youth Festival Text - Positioned absolutely */}
         <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4">
         </div>
@@ -2373,7 +2324,7 @@ Do you want to proceed with registration?`;
               fetchEvents();
             }}>Register for Events</button>
           ) : (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
+            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
           )}
         </div>
       </section>
@@ -2778,7 +2729,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevParaSportsSlide}>?</button>
@@ -2831,7 +2782,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>PARA ATHLETICS MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevParaAthleticsSlide}>?</button>
@@ -2883,7 +2834,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>PARA CRICKET MEN</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevParaCricketSlide}>?</button>
@@ -2935,7 +2886,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>?</button>
             </div>
             <div className="culturals-navigation">
               <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>?</button>
@@ -3052,7 +3003,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2 className="event-category-heading">MUSIC EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMusic(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevMusicSlide}>?</button>
@@ -3099,7 +3050,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2 className="event-category-heading">DANCE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowDance(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevDanceSlide}>?</button>
@@ -3146,7 +3097,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>THEATRE & CINEMATOGRAPHY</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevTheatreSlide}>?</button>
@@ -3193,7 +3144,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2 className="event-category-heading">LITERATURE EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowLiterature(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevLiteratureSlide}>?</button>
@@ -3240,7 +3191,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>VISUAL ARTS & CRAFT</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevVisualArtsSlide}>?</button>
@@ -3287,7 +3238,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>FASHION DESIGN & STYLING</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevFashionDesignSlide}>?</button>
@@ -3334,7 +3285,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2 className="event-category-heading">SPOT LIGHT EVENTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowSpotLight(false); setShowCulturals(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevSpotLightSlide}>?</button>
@@ -3379,7 +3330,7 @@ Do you want to proceed with registration?`;
                 <button className="circular-back-button" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}></button>
                 <h2>SPORTS CATEGORIES</h2>
               </div>
-              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>�</button>
+              <button className="inline-sports-details-close-btn" onClick={() => { setShowSportsDetails(false); setShowPageMenu(true); }}>?</button>
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
@@ -3508,7 +3459,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevIndoorSlide}>?</button>
@@ -3562,7 +3513,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevWomenIndoorSlide}>?</button>
@@ -3616,7 +3567,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>MEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevMenTeamSlide}>?</button>
@@ -3670,7 +3621,7 @@ Do you want to proceed with registration?`;
                 </button>
                 <h2>WOMEN'S TEAM FIELD SPORTS</h2>
               </div>
-              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>�</button>
+              <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
             <div className="indoor-sports-navigation">
               <button className="indoor-sports-nav-btn prev" onClick={prevWomenTeamSlide}>?</button>
@@ -3748,8 +3699,7 @@ Do you want to proceed with registration?`;
               style={{
                 width: '100%',
                 height: 'auto',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 0 20px rgba(253, 238, 113, 0.3))'
+                objectFit: 'contain'
               }}
             />
           </div>
@@ -3773,7 +3723,7 @@ Do you want to proceed with registration?`;
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
                 fontFamily: 'coffee+tea demo, sans-serif'
               }}>
-                Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ₹17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
+                Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ?17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
               </p>
           </div>
           
@@ -3795,28 +3745,28 @@ Do you want to proceed with registration?`;
             }}>
               {/* Footfall */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👣</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
                 <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
                 <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🎓</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏫</div>
                 <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
                 <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
               </div>
               
               {/* Events */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
                 <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
                 <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>📱</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🌐</div>
                 <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
                 <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
               </div>
@@ -3849,7 +3799,7 @@ Do you want to proceed with registration?`;
               
               {/* Cash Prizes */}
               <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>💰</div>
                 <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
                 <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
               </div>
@@ -3947,7 +3897,7 @@ Do you want to proceed with registration?`;
       
       {/* Gallery Section */}
       <Gallery 
-        onPhotoClick={(row, index) => setSelectedPhoto({ row, index })}
+        onPhotoClick={(row: number, index: number) => setSelectedPhoto({ row, index })}
         registerSection={registerSection}
       />
 
@@ -4025,7 +3975,7 @@ Do you want to proceed with registration?`;
                 sunLeft="28%"
                 moonTop="30.8%"
                 moonLeft="30.8%"
-                showPetalRotation={true}
+                showPetalRotation={false}
                 petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
                 clipPath="inset(0 50% 0 0)"
                 clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
@@ -4057,7 +4007,7 @@ Do you want to proceed with registration?`;
                 sunLeft="28%"
                 moonTop="30.8%"
                 moonLeft="30.8%"
-                showPetalRotation={true}
+                showPetalRotation={false}
                 petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
                 clipPath="inset(0 0 0 50%)"
                 clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
@@ -4326,7 +4276,7 @@ Do you want to proceed with registration?`;
       {showEventsInfo && (
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
-            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>�</button>
+            <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>?</button>
             
             {/* Corner Flowers for Events Information */}
             {/* Floating Flower - Top Right */}
@@ -4364,7 +4314,7 @@ Do you want to proceed with registration?`;
             </div>
             
             <div className="events-navigation">
-              <button className="events-nav-btn prev" onClick={prevEventSlide}>◀</button>
+              <button className="events-nav-btn prev" onClick={prevEventSlide}>?</button>
               <div 
                 className="events-carousel-3d-container"
                 onTouchStart={onTouchStart}
@@ -4427,7 +4377,7 @@ Do you want to proceed with registration?`;
                   })}
                 </div>
               </div>
-              <button className="events-nav-btn next" onClick={nextEventSlide}>▶</button>
+              <button className="events-nav-btn next" onClick={nextEventSlide}>?</button>
             </div>
             <div className="events-carousel-indicators">
               {eventInfoCards.map((_, index) => (
@@ -4483,12 +4433,11 @@ Do you want to proceed with registration?`;
                 onClick={(e) => { 
                   e.preventDefault();
                   e.stopPropagation(); 
-                  console.log('Close button clicked');
                   setActiveSubModal(null);
                 }}
                 type="button"
               >
-                ×
+                �
               </button>
             </div>
             <div className="sub-modal-body">
@@ -4503,7 +4452,7 @@ Do you want to proceed with registration?`;
                       <div className="events-category-grid">
                       {/* Sports Events */}
                       <div className="event-category-card">
-                        <h3>⚽ Sports Events ({getFilteredSportsEvents().length})</h3>
+                        <h3>? Sports Events ({getFilteredSportsEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredSportsEvents().length > 0 ? (
                             getFilteredSportsEvents().map((event) => (
@@ -4545,7 +4494,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Cultural Events */}
                       <div className="event-category-card">
-                        <h3>🎭 Cultural Events ({getFilteredCulturalEvents().length})</h3>
+                        <h3>?? Cultural Events ({getFilteredCulturalEvents().length})</h3>
                         <div className="event-list">
                           {getFilteredCulturalEvents().length > 0 ? (
                             getFilteredCulturalEvents().map((event) => (
@@ -4587,7 +4536,7 @@ Do you want to proceed with registration?`;
                       
                       {/* Para Sports Events */}
                       <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>♿ Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
+                        <h3>? Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
                         {getFilteredParaSportsEvents().length === 0 && (
                           <div>
                             <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
@@ -4639,10 +4588,10 @@ Do you want to proceed with registration?`;
                                 <div className="event-item-content">
                                   <h4>{event.eventName}</h4>
                                   <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">📅 {event.date}</p>}
-                                  {event.venue && <p className="event-meta">📍 {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">🏆 {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">🏷️ {event.category}</p>}
+                                  {event.date && <p className="event-meta">?? {event.date}</p>}
+                                  {event.venue && <p className="event-meta">?? {event.venue}</p>}
+                                  {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
+                                  {event.category && <p className="event-meta">??? {event.category}</p>}
                                 </div>
                               </label>
                             ))
@@ -4665,7 +4614,7 @@ Do you want to proceed with registration?`;
                             userProfileData.gender || 'unknown'
                           );
                           const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `₹${totalAmount}`;
+                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `?${totalAmount}`;
                           return (
                             <div className="price-preview">
                               Total: {formattedAmount}
@@ -4683,7 +4632,7 @@ Do you want to proceed with registration?`;
                           className="register-events-btn"
                           onClick={handleRegisterForEvents}
                         >
-                          ✅ Register for Events ({tempSelectedEvents.size})
+                          ? Register for Events ({tempSelectedEvents.size})
                         </button>
                       )}
                     </div>
@@ -4887,11 +4836,11 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseUserIdPopup}>
           <div className="userid-popup-content" onClick={(e) => e.stopPropagation()}>
             <div className="userid-popup-header">
-              <h2>🎉 Registration Successful!</h2>
+              <h2>?? Registration Successful!</h2>
             </div>
             <div className="userid-popup-body">
               <div className="userid-display">
-                <div className="success-icon">✓</div>
+                <div className="success-icon">?</div>
                 <h3>Your Mahotsav ID</h3>
                 <div className="userid-box">
                   <span className="userid-text">{generatedUserId}</span>
@@ -4901,7 +4850,7 @@ Do you want to proceed with registration?`;
                   <span className="password-text">{generatedPassword}</span>
                 </div>
                 <div className="screenshot-note">
-                  <span className="screenshot-icon">💡</span>
+                  <span className="screenshot-icon">??</span>
                   <p>Please take a screenshot of this page to save your credentials!</p>
                 </div>
                 <p className="userid-instructions">
@@ -4922,7 +4871,7 @@ Do you want to proceed with registration?`;
           <div className="forgot-password-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>?? Forgot Password</h2>
-              <button className="close-btn" onClick={handleCloseForgotPassword}>�</button>
+              <button className="close-btn" onClick={handleCloseForgotPassword}>?</button>
             </div>
             <div className="forgot-password-modal-body">
               <p className="forgot-password-instructions">
@@ -4981,8 +4930,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={handleCloseProfile}>
           <div className="login-modal-content profile-modal-expanded" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>👤 My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>×</button>
+              <h2>?? My Profile</h2>
+              <button className="close-btn" onClick={handleCloseProfile}>�</button>
             </div>
             <div className="login-modal-body">
               {isLoadingProfile ? (
@@ -4999,7 +4948,7 @@ Do you want to proceed with registration?`;
                   </div>
                   
                   <div className="profile-info-section">
-                    <h4>📋 Personal Information</h4>
+                    <h4>?? Personal Information</h4>
                     <div className="profile-info-grid">
                       <div className="profile-info-item">
                         <span className="info-label">Full Name:</span>
@@ -5023,7 +4972,7 @@ Do you want to proceed with registration?`;
                   </div>
 
                   <div className="profile-stats-section">
-                    <h4>📊 Activity Summary</h4>
+                    <h4>?? Activity Summary</h4>
                     <div className="stats-grid">
                       <div className="stat-box">
                         <div className="stat-number">{userRegisteredEvents.length}</div>
@@ -5038,7 +4987,7 @@ Do you want to proceed with registration?`;
 
                   {/* Registered Events Section */}
                   <div className="profile-registered-events-section">
-                    <h4>🎯 Registered Events</h4>
+                    <h4>?? Registered Events</h4>
                     {userRegisteredEvents.length > 0 ? (
                       <div className="registered-events-list">
                         {userRegisteredEvents.map((registration: any, index: number) => (
@@ -5046,23 +4995,23 @@ Do you want to proceed with registration?`;
                             <div className="event-item-header">
                               <h5>{registration.eventId?.eventName || 'Event'}</h5>
                               <span className="event-type-badge">
-                                {registration.eventId?.eventType === 'sports' ? '⚽' : 
-                                 registration.eventId?.eventType === 'parasports' ? '♿' : '🎭'} 
+                                {registration.eventId?.eventType === 'sports' ? '?' : 
+                                 registration.eventId?.eventType === 'parasports' ? '?' : '??'} 
                                 {registration.eventId?.eventType || 'Event'}
                               </span>
                             </div>
                             <div className="event-item-details">
                               {registration.eventId?.venue && (
-                                <p className="event-meta">📍 {registration.eventId.venue}</p>
+                                <p className="event-meta">?? {registration.eventId.venue}</p>
                               )}
                               {registration.eventId?.date && (
-                                <p className="event-meta">📅 {registration.eventId.date}</p>
+                                <p className="event-meta">?? {registration.eventId.date}</p>
                               )}
                               {registration.registrationType && (
-                                <p className="event-meta">👥 {registration.registrationType === 'individual' ? 'Individual' : 'Team'}</p>
+                                <p className="event-meta">?? {registration.registrationType === 'individual' ? 'Individual' : 'Team'}</p>
                               )}
                               {registration.teamName && (
-                                <p className="event-meta">🏆 Team: {registration.teamName}</p>
+                                <p className="event-meta">?? Team: {registration.teamName}</p>
                               )}
                             </div>
                           </div>
@@ -5091,7 +5040,7 @@ Do you want to proceed with registration?`;
                   </div>
 
                   <div className="profile-actions">
-                    <button className="profile-action-btn logout-btn" onClick={handleLogout}>🚪 Logout</button>
+                    <button className="profile-action-btn logout-btn" onClick={handleLogout}>?? Logout</button>
                   </div>
                 </div>
               )}
@@ -5117,7 +5066,7 @@ Do you want to proceed with registration?`;
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>?? Select Events</h2>
-              <button className="close-btn" onClick={handleCloseEventChecklist}>�</button>
+              <button className="close-btn" onClick={handleCloseEventChecklist}>?</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -5219,8 +5168,8 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>🎯 My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
+              <h2>?? My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>�</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -5305,9 +5254,11 @@ Do you want to proceed with registration?`;
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Mahotsav 2026" 
               style={{
-                height: '80px',
+                height: '400px',
                 objectFit: 'contain',
-                marginBottom: '25px'
+                marginBottom: '-130px',
+                marginLeft: '-14px',
+                marginTop: '-160px'
               }}
             />
             {/* Social Media Icons */}
@@ -5321,7 +5272,7 @@ Do you want to proceed with registration?`;
             <div style={{
               display: 'flex',
               gap: '20px',
-              marginBottom: '20px'
+              marginBottom: '50px'
             }}>
               <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" style={{
                 width: '40px',
@@ -5432,7 +5383,8 @@ Do you want to proceed with registration?`;
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                marginTop: '10px',
+                marginTop: '-5px',
+                paddingLeft: '13px',
                 transition: 'color 0.3s'
               }}
             >
@@ -5498,7 +5450,7 @@ Do you want to proceed with registration?`;
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            ✕
+            ?
           </button>
 
           {/* Photo Content - reuse AVIF gallery image for modal view */}

@@ -71,7 +71,7 @@ const Tirupathi: React.FC = () => {
           .tirupathi-content h6,
           .tirupathi-content div,
           .tirupathi-content span {
-            font-family: 'BackToSchool', sans-serif !important;
+            font-family: 'arial', sans-serif !important;
           }
         `}
       </style>
@@ -85,14 +85,16 @@ const Tirupathi: React.FC = () => {
           <h1 className="tirupathi-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
-              letterSpacing: '0.15em'
+              letterSpacing: '0.15em',
+              paddingTop: '20px',
             }}
           >
             TIRUPATHI
           </h1>
           <p className="tirupathi-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
-              letterSpacing: '0.05em'
+              letterSpacing: '0.05em',
+              paddingBottom: '40px',
             }}
           >
             (5-6 JAN,2026)
@@ -116,50 +118,50 @@ const Tirupathi: React.FC = () => {
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <div className="tirupathi-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px]" style={{ padding: '48px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0' }}>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'arial, sans-serif !important', marginBottom: '0' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col md:flex-row gap-8 sm:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+              <div className="flex flex-col md:flex-row gap-8 sm:gap-12 text-white" style={{ fontFamily: 'arial, sans-serif !important' }}>
                 {/* Sports Column */}
                 <div className="flex flex-col gap-4 min-w-[150px]">
                   <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Volley ball</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(6+4)</div>
+                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'arial, sans-serif !important' }}>Volley ball</div>
+                    <div className="text-base sm:text-lg" style={{ fontFamily: 'arial, sans-serif !important' }}>(6+4)</div>
                   </div>
                   <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Basket ball</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(5+5)</div>
+                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'arial, sans-serif !important' }}>Basket ball</div>
+                    <div className="text-base sm:text-lg" style={{ fontFamily: 'arial, sans-serif !important' }}>(5+5)</div>
                   </div>
                   <div className="flex flex-col py-4">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Kabaddi</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
+                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'arial, sans-serif !important' }}>Kabaddi</div>
+                    <div className="text-base sm:text-lg" style={{ fontFamily: 'arial, sans-serif !important' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-4 font-bold text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                  <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-4 font-bold text-base sm:text-lg text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
                   </div>
                   <div className="flex flex-col gap-3">
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
                       <div className="font-semibold text-left">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
                       <div className="font-semibold text-left">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
                       <div className="font-semibold text-left">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
                       <div className="font-semibold text-left">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
@@ -170,7 +172,7 @@ const Tirupathi: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="tirupathi-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+            <div className="tirupathi-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'arial, sans-serif !important' }}>
               <div className="text-base sm:text-lg font-semibold">
                 <div>kjhhjkj - 09876789</div>
                 <div>iujk - 98765679</div>

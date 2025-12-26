@@ -184,14 +184,29 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
   };
 };
 
-export const loginUser = async (email: string, password: string): Promise<ApiResponse> => {
+export const loginUser = async (identifier: string | { mahotsavId?: string; regNo?: string; email?: string }, password: string): Promise<ApiResponse> => {
   try {
+    // Handle different identifier formats
+    let emailField: string;
+    
+    if (typeof identifier === 'string') {
+      emailField = identifier;
+    } else if (identifier.mahotsavId) {
+      emailField = identifier.mahotsavId;
+    } else if (identifier.regNo) {
+      emailField = identifier.regNo;
+    } else if (identifier.email) {
+      emailField = identifier.email;
+    } else {
+      emailField = '';
+    }
+    
     const response = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: emailField, password }),
     });
 
     const data = await response.json();

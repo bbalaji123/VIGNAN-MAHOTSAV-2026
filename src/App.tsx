@@ -20,7 +20,7 @@ import Tirupathi from './Tirupathi';
 
 function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => {
-    window.location.href = url;
+    window.location.replace(url);
   }, [url]);
   return null;
 }

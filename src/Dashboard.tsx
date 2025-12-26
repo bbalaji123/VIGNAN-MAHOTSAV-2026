@@ -394,6 +394,7 @@ const Dashboard: React.FC = () => {
     password: '',
     phone: '',
     college: '',
+    branch: '',
     dateOfBirth: '',
     userType: 'participant',
     participationType: 'none',
@@ -1564,10 +1565,13 @@ const Dashboard: React.FC = () => {
       password: '',
       phone: '',
       college: '',
+      branch: '',
       dateOfBirth: '',
       userType: 'participant',
       participationType: 'none',
-      referenceId: ''
+      referenceId: '',
+      state: '',
+      district: ''
     });
     setSubmitMessage(null);
   };
@@ -1581,10 +1585,13 @@ const Dashboard: React.FC = () => {
       password: '',
       phone: '',
       college: '',
+      branch: '',
       dateOfBirth: '',
       userType: 'participant',
       participationType: 'none',
-      referenceId: ''
+      referenceId: '',
+      state: '',
+      district: ''
     });
     setSubmitMessage(null);
     setShowUserIdPopup(false);
@@ -1692,6 +1699,7 @@ const Dashboard: React.FC = () => {
           password: '',
           phone: '',
           college: '',
+          branch: '',
           dateOfBirth: '',
           userType: 'visitor',
           participationType: 'none',
@@ -2097,13 +2105,13 @@ Do you want to proceed with registration?`;
     }
   };
 
-  const handleLoginSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLoginSubmit = async (payload: { mahotsavId?: string; regNo?: string; email?: string; password: string }) => {
     setIsLoggingIn(true);
     setLoginMessage(null);
 
     // Validate required fields
-    if (!loginFormData.identifier || !loginFormData.password) {
+    const identifier = payload.mahotsavId || payload.regNo || payload.email;
+    if (!identifier || !payload.password) {
       setLoginMessage({
         type: 'error',
         text: 'Please enter email/userId and password'
@@ -2113,8 +2121,8 @@ Do you want to proceed with registration?`;
     }
 
     try {
-      // Call the real login API
-      const result = await loginUser(loginFormData.identifier, loginFormData.password);
+      // Call the real login API with the identifier
+      const result = await loginUser(identifier, payload.password);
       
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender } = result.data;

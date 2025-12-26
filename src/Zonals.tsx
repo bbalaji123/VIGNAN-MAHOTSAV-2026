@@ -81,13 +81,15 @@ const Zonals: React.FC = () => {
       <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 lg:pt-8 pb-8 sm:pb-12">
+      <div className="flex flex-col items-center justify-center min-h-[50vh] px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 lg:pt-8 pb-8 sm:pb-12 mb-10">
         <h1 
-          className="zonals-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]"
+          className="zonals-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-10 sm:mb-10 md:mb-10 text-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]"
           style={{
             fontFamily: 'Woodtrap, sans-serif !important',
             textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
-            letterSpacing: '0.1em'
+            letterSpacing: '0.1em',
+            paddingBottom: '150px',
+            paddingTop: '10px'
           }}
         >
           ZONALS

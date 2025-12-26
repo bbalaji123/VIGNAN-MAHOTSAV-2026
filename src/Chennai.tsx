@@ -223,6 +223,10 @@ const Chennai: React.FC = () => {
             e.currentTarget.style.transform = 'translateY(0)';
             e.currentTarget.style.boxShadow = '0 5px 15px rgba(228, 138, 185, 0.4)';
           }}
+          onMouseDown={(e) => {
+            return e.currentTarget.style.transform = 'scale(0.95)';
+          }}
+          onClick={() => window.open('https://forms.gle/xeQnSdCy2HFRLEuJA', '_blank')}  
         >
           CLICK HERE TO REGISTER
         </button>

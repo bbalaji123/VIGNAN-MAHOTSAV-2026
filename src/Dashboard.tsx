@@ -2692,7 +2692,7 @@ Do you want to proceed with registration?`;
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2709,7 +2709,7 @@ Do you want to proceed with registration?`;
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -4745,7 +4745,7 @@ Do you want to proceed with registration?`;
             
             {/* Corner Flowers for Events Information */}
             {/* Floating Flower - Top Right */}
-            <div className="fixed -top-16 -right-16 md:-top-32 md:-right-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+            <div className="fixed -top-16 -right-16 md:-top-32 md:-right-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
                 <FlowerComponent 
                   size="100%"
@@ -4762,7 +4762,7 @@ Do you want to proceed with registration?`;
             </div>
 
             {/* Floating Flower - Bottom Left */}
-            <div className="fixed -bottom-16 -left-16 md:-bottom-32 md:-left-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]" style={{ border: 'none', outline: 'none' }}>
+            <div className="fixed -bottom-16 -left-16 md:-bottom-32 md:-left-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
                 <FlowerComponent 
                   size="100%"

@@ -120,55 +120,55 @@ const Chennai: React.FC = () => {
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="chennai-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px]" style={{ padding: '30px 48px 48px 48px', height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0', paddingTop: '0px' ,paddingBottom: '15px' }}>
+            <div className="chennai-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-12" style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider pb-2 sm:pb-4" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col md:flex-row gap-8 sm:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+              <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                 {/* Sports Column */}
-                <div className="flex flex-col gap-4 min-w-[150px]">
-                  <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Volley ball</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(6+4)</div>
+                <div className="flex flex-col gap-3 sm:gap-4 min-w-[120px] sm:min-w-[150px]">
+                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Volley ball</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(6+4)</div>
                   </div>
-                  <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Basket ball</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(5+5)</div>
+                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Basket ball</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(5+5)</div>
                   </div>
-                  <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Kabaddi</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
+                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Kabaddi</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
                   </div>
-                  <div className="flex flex-col py-4 border-b border-white/30">
-                    <div className="font-bold text-lg sm:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Football</div>
-                    <div className="text-base sm:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
+                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Football</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-4 font-bold text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important',paddingTop: '20px' }}>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-3 sm:mb-4 font-bold text-sm sm:text-base md:text-lg text-center pt-4 sm:pt-5" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important',paddingTop: '30px' }}>
+                  <div className="flex flex-col gap-2 sm:gap-3 pt-4 sm:pt-6 md:pt-8">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                       <div className="font-semibold text-left">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                       <div className="font-semibold text-left">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                       <div className="font-semibold text-left">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 sm:gap-8 text-base sm:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                       <div className="font-semibold text-left">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
@@ -179,19 +179,19 @@ const Chennai: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="chennai-content mt-4 sm:mt-6 text-white text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important',paddingTop: '16px' }}>
-              <div className="text-base sm:text-lg font-semibold">
+            <div className="chennai-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-3 sm:pt-4" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+              <div className="text-sm sm:text-base md:text-lg font-semibold">
                 <div>Contact: Mr. Raghavendra - +91 86863 66111</div>
               </div>
             </div>
           </div>
 
           {/* Hosting Partner */}
-          <div className="chennai-content flex flex-col items-center justify-center gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
-            <div className="text-sm sm:text-base font-semibold text-white uppercase tracking-widest">
+          <div className="chennai-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
+            <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
-            <div className="w-[200px] h-[200px] sm:w-[200px] sm:h-[200px] rounded-full bg-white/90 flex items-center justify-center p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
+            <div className="w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] md:w-[200px] md:h-[200px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
               <img src="/chennai1.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
@@ -200,14 +200,14 @@ const Chennai: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="chennai-content max-w-[1200px] mx-auto mt-12 sm:mt-16 text-center text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed px-4 sm:px-8" style={{paddingBottom: '20px',paddingTop: '20px' }}>
+        <div className="chennai-content max-w-[1200px] mx-auto mt-8 sm:mt-12 md:mt-16 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5">
           <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during</i>
           <i> Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="chennai-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
+          className="chennai-content block mx-auto mt-12 sm:mt-16 md:mt-20 min-h-[48px] sm:min-h-[56px] px-12 sm:px-16 md:px-20 lg:px-24 py-4 sm:py-5 md:py-6 rounded-[10px] font-semibold text-xs sm:text-sm md:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95 touch-manipulation"
           style={{
             border: '1.5px solid #fa68b1ff',
             background: '#db3a57ff',

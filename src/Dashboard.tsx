@@ -2249,12 +2249,12 @@ Do you want to proceed with registration?`;
         </div>
         
         {/* Logo */}
-        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
-          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
+        <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
         </div>
         
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
               console.log('Register button clicked');
@@ -2371,17 +2371,34 @@ Do you want to proceed with registration?`;
             </div>
           </div>
           
+          {/* Back Button - Outside Scroll (Mobile Only) */}
+          <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', padding: '0 20px', marginTop: '20px', marginBottom: '10px' }}>
+            <div className="menu-back-button-mobile">
+              <button
+                onClick={() => setShowPageMenu(false)}
+                className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
+                aria-label="Go back"
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}BACK.avif`}
+                  alt="Back"
+                  className="w-full h-full object-contain"
+                />
+              </button>
+            </div>
+          </div>
+
           {/* Menu Title */}
-          <div className="text-center" style={{marginTop: "30px", paddingBottom: "2px"}}>
+          <div className="text-center menu-title-container" style={{marginTop: "30px", paddingBottom: "2px"}}>
             <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
-          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6" style={{marginTop: "-90px"}}>
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6 menu-grid-container" style={{marginTop: "-90px"}}>
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-              {/* Back Button - positioned above HOME card */}
-              <div className="col-span-2 md:col-span-4 flex justify-start mb-2" style={{ marginLeft: '-190px' }}>
+              {/* Back Button - Inside Scroll (Desktop Only) */}
+              <div className="col-span-2 md:col-span-4 flex justify-start mb-2 menu-back-button-desktop" style={{ marginLeft: '-190px' }}>
                 <button
                   onClick={() => setShowPageMenu(false)}
                   className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
@@ -3682,10 +3699,6 @@ Do you want to proceed with registration?`;
           {/* Garuda Logo - Above title on mobile, left side on desktop */}
           <div className="garuda-about-theme" style={{
             position: 'absolute',
-            left: '50%',
-            top: '-120px',
-            transform: 'translateX(-50%)',
-            width: 'clamp(120px, 30vw, 200px)',
             height: 'auto',
             zIndex: 1
           }}>
@@ -4070,8 +4083,8 @@ Do you want to proceed with registration?`;
               <div 
                 className="throwback-video-card"
                 style={{
-                  width: 'clamp(320px, 85vw, 485px)',
-                  height: 'clamp(180px, 48vw, 273px)',
+                  width: 'clamp(280px, 70vw, 485px)',
+                  height: 'clamp(158px, 39.4vw, 273px)',
                   background: '#000',
                   borderRadius: '8px',
                   border: '3px solid rgba(223, 160, 0, 0.822)',

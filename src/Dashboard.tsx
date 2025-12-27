@@ -2260,7 +2260,7 @@ const Dashboard: React.FC = () => {
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2277,7 +2277,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"

@@ -507,7 +507,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={false}
+          showPetalRotation={true}
         />
       </div>
 
@@ -521,7 +521,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={false}
+          showPetalRotation={true}
         />
       </div>
 
@@ -533,9 +533,6 @@ const EventsInfo: React.FC = () => {
             right: -13%;
             width: 500px;
             height: 500px;
-            opacity: 0.3            git add .github/workflows/deploy.yml
-            git commit -m "Fix: Add enablement parameter to GitHub Pages deployment"
-            git push;
           }
           
           .flower-bottom-left {
@@ -543,7 +540,6 @@ const EventsInfo: React.FC = () => {
             left: -13%;
             width: 500px;
             height: 500px;
-            opacity: 0.3;
           }
           
           /* Responsive flower positioning */
@@ -552,7 +548,6 @@ const EventsInfo: React.FC = () => {
             .flower-bottom-left {
               width: 350px !important;
               height: 350px !important;
-              opacity: 0.25 !important;
             }
             
             .flower-top-right {
@@ -571,7 +566,6 @@ const EventsInfo: React.FC = () => {
             .flower-bottom-left {
               width: 250px !important;
               height: 250px !important;
-              opacity: 0.2 !important;
             }
             
             .flower-top-right {
@@ -839,6 +833,7 @@ const EventsInfo: React.FC = () => {
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
                 className="events-logo"
+                
               />
               <div className="events-back-button-container">
                 <BackButton 
@@ -877,7 +872,7 @@ const EventsInfo: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-start" style={showDance ? { marginLeft: '150px' } : {}}>
+            <div className="flex items-start justify-center">
               <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' : 
                  showWomensIndoorSports ? "Women's Indoor Sports" : 
@@ -945,7 +940,7 @@ const EventsInfo: React.FC = () => {
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem' }}>
+            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem'}}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -972,7 +967,7 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="events-main-cards-container flex flex-col md:flex-row items-center justify-center gap-15 md:gap-18 mb-10">
+              <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
                   className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
@@ -1229,6 +1224,7 @@ const EventsInfo: React.FC = () => {
                     src={`${import.meta.env.BASE_URL}image.avif`}
                     alt="Vignan Mahotsav" 
                     className="h-28 md:h-32 object-contain"
+                    
                   />
                 </div>
                 <div className="inline-indoor-sports-header">

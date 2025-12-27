@@ -1,0 +1,923 @@
+{
+"Sports":[
+ null,
+ {
+  "D": "S.No",
+  "Prize money for Sports": "Category",
+  "738500": "Event",
+  "Column4": "Medals",
+  "Column5": "First ",
+  "Column6": "Second",
+  "Column7": "Third",
+  "Column8": "Fourth",
+  "Column9": "Sub total"
+ },
+ {
+  "D": 1,
+  "Prize money for Sports": "Men's Athletics\n\nTrack & Field",
+  "738500": "100 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column8": 0,
+  "Column9": 6000
+ },
+ {
+  "D": 2,
+  "738500": "400 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 3,
+  "738500": "800 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 4,
+  "738500": "3 K",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 5,
+  "738500": "4 x 100 M Relay",
+  "Column4": 12,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column9": 6500
+ },
+ {
+  "D": 6,
+  "738500": "4 x 400 M Relay",
+  "Column4": 12,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column9": 6500
+ },
+ {
+  "D": 7,
+  "738500": "Long jump",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 8,
+  "738500": "Shot put",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 9,
+  "Prize money for Sports": "Women's Athletics\n\nTrack & Field",
+  "738500": "100 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 10,
+  "738500": "400 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 11,
+  "738500": "800 M",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 12,
+  "738500": "4 x 100 M Relay",
+  "Column4": 12,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column9": 6500
+ },
+ {
+  "D": 13,
+  "738500": "4 x 400 M Relay",
+  "Column4": 12,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column9": 6500
+ },
+ {
+  "D": 14,
+  "738500": "Long jump",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 15,
+  "738500": "Shot put",
+  "Column4": 3,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column9": 6000
+ },
+ {
+  "D": 16,
+  "Prize money for Sports": "Men's Individual & Indoor Sports",
+  "738500": "Chess",
+  "Column4": 2,
+  "Column5": 6000,
+  "Column6": 4000,
+  "Column9": 10000
+ },
+ {
+  "D": 17,
+  "738500": "Table Tennis",
+  "Column4": 2,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column9": 5000
+ },
+ {
+  "D": 18,
+  "738500": "Traditional Yogasana",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 19,
+  "738500": "Artistic Yogasana",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 20,
+  "738500": "Takewondo - under 8 wt. categories",
+  "Column4": 16,
+  "Column5": 1500,
+  "Column6": 1000,
+  "Column9": 2500
+ },
+ {
+  "D": 21,
+  "Prize money for Sports": "Women's Individual & Indoor Sports",
+  "738500": "Chess",
+  "Column4": 2,
+  "Column5": 6000,
+  "Column6": 4000,
+  "Column9": 10000
+ },
+ {
+  "D": 22,
+  "738500": "Table Tennis",
+  "Column4": 2,
+  "Column5": 3000,
+  "Column6": 2000,
+  "Column9": 5000
+ },
+ {
+  "D": 23,
+  "738500": "Traditional Yogasana",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 24,
+  "738500": "Artistic Yogasana",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 25,
+  "738500": "Takewondo - under 8 wt. categories",
+  "Column4": 16,
+  "Column5": 1500,
+  "Column6": 1000,
+  "Column9": 2500
+ },
+ {
+  "D": 26,
+  "738500": "Tennikoit",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "Prize money for Sports": "Men's Team Field Sports",
+  "738500": "Cricket Championship (13+2)*",
+  "Column4": 60,
+  "Column5": 50000,
+  "Column6": 30000,
+  "Column7": 20000,
+  "Column8": 10000,
+  "Column9": 110000
+ },
+ {
+  "D": 27,
+  "738500": "Volley ball (6+4)*",
+  "Column4": 40,
+  "Column5": 30000,
+  "Column6": 20000,
+  "Column7": 7000,
+  "Column8": 3000,
+  "Column9": 60000
+ },
+ {
+  "D": 28,
+  "738500": "Basket ball (5+5)*",
+  "Column4": 40,
+  "Column5": 30000,
+  "Column6": 20000,
+  "Column7": 7000,
+  "Column8": 3000,
+  "Column9": 60000
+ },
+ {
+  "D": 29,
+  "738500": "Kabaddi (7+3)*",
+  "Column4": 40,
+  "Column5": 30000,
+  "Column6": 20000,
+  "Column7": 7000,
+  "Column8": 3000,
+  "Column9": 60000
+ },
+ {
+  "D": 30,
+  "738500": "Foot ball (7+3)*",
+  "Column4": 20,
+  "Column5": 30000,
+  "Column6": 20000,
+  "Column7": 7000,
+  "Column8": 3000,
+  "Column9": 60000
+ },
+ {
+  "D": 31,
+  "738500": "Kho-Kho (9+3)*",
+  "Column4": 24,
+  "Column5": 30000,
+  "Column6": 20000,
+  "Column9": 50000
+ },
+ {
+  "D": 32,
+  "738500": "Hockey (7+3)*",
+  "Column4": 20,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 33,
+  "Prize money for Sports": "Women's Team Field Sports",
+  "738500": "Volley ball (6+4)*",
+  "Column4": 20,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 34,
+  "738500": "Basket ball (5+5)*",
+  "Column4": 20,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 35,
+  "738500": "Kabaddi (7+3)*",
+  "Column4": 20,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 36,
+  "738500": "Kho-Kho (9+3)*",
+  "Column4": 24,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 37,
+  "738500": "Throw ball (6+3)*",
+  "Column4": 18,
+  "Column5": 15000,
+  "Column6": 10000,
+  "Column9": 25000
+ },
+ {
+  "D": 38,
+  "Prize money for Sports": "Para Athletics\nMen",
+  "738500": "100 M - Hand Amputee",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 39,
+  "738500": "100 M - Leg Amputee",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 40,
+  "738500": "100 M - Visual impairment",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 41,
+  "738500": "400 M - Hand Amputee",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 42,
+  "738500": "400 M - Leg Amputee",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 43,
+  "738500": "400 M - Visual impairment",
+  "Column4": 2,
+  "Column5": 2000,
+  "Column6": 1500,
+  "Column9": 3500
+ },
+ {
+  "D": 48,
+  "Prize money for Sports": "Para Cricket Men",
+  "738500": "Cricket - Physically challenged",
+  "Column4": 25,
+  "Column5": 5000,
+  "Column6": 4000,
+  "Column9": 9000
+ },
+ {
+  "D": "Sports Cash Awards Total",
+  "Column4": 0,
+  "Column9": 738500
+ },
+ {
+  "D": "Medals count",
+  "Column4": 514
+ }
+],
+"Culturals":[
+ null,
+ {
+  "Column1": "S.No",
+  "5": "Category",
+  "Prize money for Performing arts, Visual arts, Fashion": "Event",
+  "Column4": "Count",
+  "488500": "1st Prize",
+  "Column6": "2nd Prize",
+  "Column7": "3rd Prize",
+  "Column8": "Sub Total"
+ },
+ {
+  "Column1": 1,
+  "5": "Dance",
+  "Prize money for Performing arts, Visual arts, Fashion": "Classical Dance Solo",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 2,
+  "Prize money for Performing arts, Visual arts, Fashion": "Dancing Star – Western Solo",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 3,
+  "Prize money for Performing arts, Visual arts, Fashion": "Dancing Jodi – Western Duo",
+  "Column4": 2,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 4,
+  "Prize money for Performing arts, Visual arts, Fashion": "Spot Dance - Jodi",
+  "Column4": 2,
+  "488500": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column8": 6500
+ },
+ {
+  "Column1": 5,
+  "Prize money for Performing arts, Visual arts, Fashion": "Group Dance (10 no.)",
+  "Column4": 10,
+  "488500": 15000,
+  "Column6": 12000,
+  "Column7": 8000,
+  "Column8": 35000
+ },
+ {
+  "Column1": 6,
+  "5": "Music",
+  "Prize money for Performing arts, Visual arts, Fashion": "Singing Idol",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 7,
+  "Prize money for Performing arts, Visual arts, Fashion": "Group Singing (6 no.)",
+  "Column4": 6,
+  "488500": 5000,
+  "Column6": 3500,
+  "Column7": 2000,
+  "Column8": 10500
+ },
+ {
+  "Column1": 8,
+  "Prize money for Performing arts, Visual arts, Fashion": "Singing Jodi",
+  "Column4": 2,
+  "488500": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column8": 6000
+ },
+ {
+  "Column1": 9,
+  "Prize money for Performing arts, Visual arts, Fashion": "Classical\/Light Vocal Solo",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 10,
+  "Prize money for Performing arts, Visual arts, Fashion": "Western Vocal Solo",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 11,
+  "Prize money for Performing arts, Visual arts, Fashion": "Anthyakshari Duo",
+  "Column4": 2,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 12,
+  "Prize money for Performing arts, Visual arts, Fashion": "Instrumental Solo",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 13,
+  "5": "Theatre",
+  "Prize money for Performing arts, Visual arts, Fashion": "Skit (8 no.)",
+  "Column4": 8,
+  "488500": 8000,
+  "Column6": 5000,
+  "Column7": 4000,
+  "Column8": 17000
+ },
+ {
+  "Column1": 14,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mime (6 no.)",
+  "Column4": 6,
+  "488500": 6000,
+  "Column6": 4000,
+  "Column7": 2000,
+  "Column8": 12000
+ },
+ {
+  "Column1": 15,
+  "Prize money for Performing arts, Visual arts, Fashion": "Dialogue Dhamakha",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 16,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mono Action",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 17,
+  "Prize money for Performing arts, Visual arts, Fashion": "On the Spot Ad making",
+  "Column4": 4,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 18,
+  "5": "Literature",
+  "Prize money for Performing arts, Visual arts, Fashion": "Master Orator",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 19,
+  "Prize money for Performing arts, Visual arts, Fashion": "Spot Creative writing",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 20,
+  "Prize money for Performing arts, Visual arts, Fashion": "Telugu Vyaasa rachana",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 21,
+  "Prize money for Performing arts, Visual arts, Fashion": "Shayari – Hindi",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 22,
+  "Prize money for Performing arts, Visual arts, Fashion": "Impromptu (JAM)",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 23,
+  "Prize money for Performing arts, Visual arts, Fashion": "Story telling",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 24,
+  "Prize money for Performing arts, Visual arts, Fashion": "Quiz wiz (3 no.)",
+  "Column4": 3,
+  "488500": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column8": 6500
+ },
+ {
+  "Column1": 25,
+  "Prize money for Performing arts, Visual arts, Fashion": "Word Master",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 26,
+  "Prize money for Performing arts, Visual arts, Fashion": "Dumb charades (2 no.)",
+  "Column4": 2,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 27,
+  "5": "Visual Arts & Craft",
+  "Prize money for Performing arts, Visual arts, Fashion": "Theme Painting",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 28,
+  "Prize money for Performing arts, Visual arts, Fashion": "Clay modelling",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 29,
+  "Prize money for Performing arts, Visual arts, Fashion": "Rangoli (2 no.)",
+  "Column4": 2,
+  "488500": 3000,
+  "Column6": 2000,
+  "Column7": 1000,
+  "Column8": 6000
+ },
+ {
+  "Column1": 30,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mehandi",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 31,
+  "Prize money for Performing arts, Visual arts, Fashion": "Collage",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 32,
+  "Prize money for Performing arts, Visual arts, Fashion": "Face Painting",
+  "Column4": 2,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 33,
+  "Prize money for Performing arts, Visual arts, Fashion": "Pencil Sketching",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 34,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mandala",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 35,
+  "5": "Fashion Design & Styling",
+  "Prize money for Performing arts, Visual arts, Fashion": "Haute Couture - Theme Ramp walk \n(12 no.)",
+  "Column4": 12,
+  "488500": 20000,
+  "Column6": 15000,
+  "Column7": 12000,
+  "Column8": 47000
+ },
+ {
+  "Column1": 36,
+  "Prize money for Performing arts, Visual arts, Fashion": "Craft villa ( Accessory design)",
+  "Column4": 2,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 37,
+  "Prize money for Performing arts, Visual arts, Fashion": "Texart (Fashion sketching)",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 38,
+  "Prize money for Performing arts, Visual arts, Fashion": "T-Shirt designing",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 39,
+  "5": "Digital Storytelling & Creative Media",
+  "Prize money for Performing arts, Visual arts, Fashion": "Short film",
+  "Column4": 5,
+  "488500": 20000,
+  "Column6": 15000,
+  "Column7": 12000,
+  "Column8": 47000
+ },
+ {
+  "Column1": 40,
+  "Prize money for Performing arts, Visual arts, Fashion": "Theme Photography (Online)",
+  "Column4": 1,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 41,
+  "Prize money for Performing arts, Visual arts, Fashion": "Digital Poster making",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 42,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mahotsav Digital Chronicle",
+  "Column4": 3,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 43,
+  "Prize money for Performing arts, Visual arts, Fashion": "Reel Making",
+  "Column4": 4,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 44,
+  "5": "Gaming",
+  "Prize money for Performing arts, Visual arts, Fashion": "Valorant (PC)",
+  "Column4": 5,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 45,
+  "Prize money for Performing arts, Visual arts, Fashion": "E- Football (PC)",
+  "Column4": 3,
+  "488500": 3000,
+  "Column6": 2000,
+  "Column7": 1500,
+  "Column8": 6500
+ },
+ {
+  "Column1": 46,
+  "Prize money for Performing arts, Visual arts, Fashion": "Counter Strike (PC)",
+  "Column4": 5,
+  "488500": 4000,
+  "Column6": 3000,
+  "Column7": 2000,
+  "Column8": 9000
+ },
+ {
+  "Column1": 47,
+  "Prize money for Performing arts, Visual arts, Fashion": "Smash Karts (PC)",
+  "Column4": 1,
+  "488500": 2000,
+  "Column6": 1500,
+  "Column7": 1000,
+  "Column8": 4500
+ },
+ {
+  "Column1": 48,
+  "5": "Robo Games",
+  "Prize money for Performing arts, Visual arts, Fashion": "Line follower robot",
+  "Column4": 4,
+  "488500": 8000,
+  "Column6": 6000,
+  "Column7": 4000,
+  "Column8": 18000
+ },
+ {
+  "Column1": 49,
+  "Prize money for Performing arts, Visual arts, Fashion": "Bot Wrestling",
+  "Column4": 4,
+  "488500": 8000,
+  "Column6": 6000,
+  "Column7": 4000,
+  "Column8": 18000
+ },
+ {
+  "Column1": 50,
+  "Prize money for Performing arts, Visual arts, Fashion": "Robo races",
+  "Column4": 4,
+  "488500": 8000,
+  "Column6": 6000,
+  "Column7": 4000,
+  "Column8": 18000
+ },
+ {
+  "Column1": 51,
+  "5": "Spot Light",
+  "Prize money for Performing arts, Visual arts, Fashion": "Mr. Mahotsav",
+  "Column4": 1,
+  "488500": 4000,
+  "Column8": 4000
+ },
+ {
+  "Column1": 52,
+  "Prize money for Performing arts, Visual arts, Fashion": "Ms. Mahotsav",
+  "Column4": 1,
+  "488500": 4000,
+  "Column8": 4000
+ },
+ {
+  "Column1": 53,
+  "Prize money for Performing arts, Visual arts, Fashion": "Mahotsav Got Talent ",
+  "Column4": 10,
+  "488500": 7000,
+  "Column6": 5000,
+  "Column7": 3000,
+  "Column8": 15000
+ },
+ {
+  "Prize money for Performing arts, Visual arts, Fashion": "Total cash prize estimate",
+  "Column4": 0,
+  "Column8": 488500
+ },
+ {
+  "Prize money for Performing arts, Visual arts, Fashion": "No of mementoes required",
+  "Column4": 420
+ }
+]
+}

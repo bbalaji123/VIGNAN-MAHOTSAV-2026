@@ -401,5 +401,93 @@ router.post('/forgot-password', async (req, res) => {
   }
 });
 
-export default router;
+// Save events for a participant
+router.post('/save-events', async (req, res) => {
+  try {
+    const { userId, events } = req.body;
 
+    if (!userId || !events || !Array.isArray(events)) {
+      return res.status(400).json({
+        success: false,
+        message: 'userId and events array are required'
+      });
+    }
+
+    // Find participant by userId
+    let participant = await Participant.findOne({ userId });
+
+    if (!participant) {
+      return res.status(404).json({
+        success: false,
+        message: 'Participant not found'
+      });
+    }
+
+    // Replace the entire registeredEvents array with new events
+    participant.registeredEvents = events.map(event => ({
+      eventName: event.eventName,
+      eventType: event.eventType,
+      category: event.category,
+      description: event.description,
+      fee: event.fee,
+      registeredAt: new Date()
+    }));
+
+    await participant.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Events saved successfully',
+      data: {
+        userId: participant.userId,
+        eventsCount: participant.registeredEvents.length
+      }
+    });
+  } catch (error) {
+    console.error('Save events error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error saving events',
+      error: error.message
+    });
+  }
+});
+
+// Get registered events for a participant
+router.get('/my-registrations/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'userId is required'
+      });
+    }
+
+    const participant = await Participant.findOne({ userId });
+
+    if (!participant) {
+      return res.status(404).json({
+        success: false,
+        message: 'Participant not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        events: participant.registeredEvents || []
+      }
+    });
+  } catch (error) {
+    console.error('Get registrations error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching registrations',
+      error: error.message
+    });
+  }
+});
+
+export default router;

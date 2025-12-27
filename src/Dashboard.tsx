@@ -433,8 +433,9 @@ const Dashboard: React.FC = () => {
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
-  const [showUserDetailsPage, setShowUserDetailsPage] = useState(false);
-  const [fullUserData] = useState<any>(null);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
+  const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -1049,6 +1050,65 @@ const Dashboard: React.FC = () => {
       fetchEvents();
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
+
+  // Fetch registration events from JSON
+  useEffect(() => {
+    const loadRegistrationEvents = async () => {
+      try {
+        const response = await fetch('/registration/registartion.json');
+        const data = await response.json();
+        setRegistrationEvents(data);
+      } catch (error) {
+        console.error('Error loading registration events:', error);
+      }
+    };
+    loadRegistrationEvents();
+  }, []);
+
+  // Load saved events from database when user logs in
+  useEffect(() => {
+    const loadUserEvents = async () => {
+      if (isLoggedIn && userProfileData.userId) {
+        try {
+          // Try to fetch from database first
+          const response = await fetch(`http://localhost:5000/api/my-registrations/${userProfileData.userId}`);
+          const result = await response.json();
+          
+          if (response.ok && result.success && result.data.events) {
+            setMyEvents(result.data.events);
+            // Also save to localStorage as backup
+            const storageKey = `myEvents_${userProfileData.userId}`;
+            localStorage.setItem(storageKey, JSON.stringify(result.data.events));
+          } else {
+            // Fallback to localStorage if API fails
+            const storageKey = `myEvents_${userProfileData.userId}`;
+            const savedEvents = localStorage.getItem(storageKey);
+            if (savedEvents) {
+              const events = JSON.parse(savedEvents);
+              setMyEvents(events);
+            }
+          }
+        } catch (error) {
+          console.error('Error loading user events from database:', error);
+          // Fallback to localStorage on error
+          const storageKey = `myEvents_${userProfileData.userId}`;
+          const savedEvents = localStorage.getItem(storageKey);
+          if (savedEvents) {
+            try {
+              const events = JSON.parse(savedEvents);
+              setMyEvents(events);
+            } catch (parseError) {
+              console.error('Error parsing saved events:', parseError);
+            }
+          }
+        }
+      } else {
+        setMyEvents([]);
+      }
+    };
+    
+    loadUserEvents();
+  }, [isLoggedIn, userProfileData.userId]);
 
   const handlePageMenuToggle = () => {
     setShowPageMenu(!showPageMenu);
@@ -1812,156 +1872,7 @@ const Dashboard: React.FC = () => {
     setActiveSubModal(null);
   };
 
-  // Calculate registration price based on gender and selected events
-  const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
-    const selectedEventsArray = Array.from(selectedEventIds);
-    
-    // If no events selected, return 0
-    if (selectedEventsArray.length === 0) {
-      return 0;
-    }
-    
-    // Check if para sports events are selected
-    const hasParaSports = selectedEventsArray.some(eventId => 
-      paraSportsEvents.some(event => event._id === eventId)
-    );
-    
-    if (hasParaSports) {
-      return 0;
-    }
-    
-    // Check event types
-    const hasSports = selectedEventsArray.some(eventId => 
-      sportsEvents.some(event => event._id === eventId)
-    );
-    
-    const hasCulturals = selectedEventsArray.some(eventId => 
-      culturalEvents.some(event => event._id === eventId)
-    );
-    
-    // EXPLICIT FEMALE LOGIC - ALWAYS ?250 FOR SINGLE TYPE
-    const normalizedGender = gender?.toLowerCase();
-
-    if (normalizedGender === 'female') {
-      
-      if (hasSports && hasCulturals) {
-        return 350;
-      }
-      
-      if (hasSports && !hasCulturals) {
-        return 250;
-      }
-      
-      if (hasCulturals && !hasSports) {
-        return 250;
-      }
-    }
-    
-    // MALE LOGIC
-    if (normalizedGender === 'male') {
-      
-      if (hasSports && hasCulturals) {
-        return 350;
-      }
-      
-      if (hasSports && !hasCulturals) {
-        return 350;
-      }
-      
-      if (hasCulturals && !hasSports) {
-        return 250;
-      }
-    }
-    
-    // Fallback for users without gender info - charge as per event mix
-    if (hasSports && hasCulturals) {
-      return 350;
-    }
-    if (hasSports) {
-      return 350;
-    }
-    if (hasCulturals) {
-      return 250;
-    }
-    return 0;
-  };
-
-  // Handle registration with pricing confirmation
-  const handleRegisterForEvents = async () => {
-    if (!isLoggedIn) {
-      alert('Please login to register for events!');
-      setShowLoginModal(true);
-      handleCloseSubModal();
-      return;
-    }
-    
-    if (userProfileData.userType === 'visitor') {
-      alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
-      return;
-    }
-    
-    if (tempSelectedEvents.size === 0) {
-      alert('Please select at least one event!');
-      return;
-    }
-
-    const eventIds = Array.from(tempSelectedEvents);
-    const userGender = userProfileData.gender || 'male'; // Default to male if not specified
-    const totalAmount = calculateRegistrationPrice(tempSelectedEvents, userGender);
-    
-    // Get selected event names
-    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
-    const selectedEventNames = eventIds.map(eventId => {
-      const event = allEvents.find(e => e._id === eventId);
-      return event ? event.eventName : 'Unknown Event';
-    });
-
-    // Create confirmation message
-    const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
-    const priceText = totalAmount === 0 ? 'FREE' : `?${totalAmount}`;
-    
-    const confirmationMessage = `
-?? REGISTRATION CONFIRMATION
-????????????????????????????
-
-?? Selected Events (${eventIds.length}):
-${eventsList}
-
-?? Participant: ${userProfileData.name}
-? Gender: ${userGender}
-?? Total Amount: ${priceText}
-
-????????????????????????????
-
-Do you want to proceed with registration?`;
-
-    const confirmed = window.confirm(confirmationMessage);
-    
-    if (!confirmed) {
-      return;
-    }
-
-    try {
-      const result = await saveMyEvents(userProfileData.userId!, eventIds);
-      
-      if (result.success) {
-        const savedEventIds = await fetchUserSavedEvents(userProfileData.userId!);
-        setTempSelectedEvents(savedEventIds); // Keep the registered events selected
-        handleCloseSubModal();
-        
-        const successMessage = totalAmount === 0 
-          ? `? Successfully registered for ${eventIds.length} event(s) for FREE!`
-          : `? Successfully registered for ${eventIds.length} event(s)! Total amount: ?${totalAmount}`;
-          
-        alert(successMessage);
-      } else {
-        alert(result.message || 'Failed to register. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error registering for events:', error);
-      alert('An error occurred while registering.');
-    }
-  };
+  
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -1988,7 +1899,15 @@ Do you want to proceed with registration?`;
   };
 
   const handleOpenProfile = async () => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      alert('Please login first to view your profile.');
+      setShowLoginModal(true);
+      return;
+    }
+    
     if (!userProfileData.userId) {
+      alert('Unable to load profile. Please try logging in again.');
       return;
     }
     
@@ -2024,6 +1943,14 @@ Do you want to proceed with registration?`;
       newSelected.add(eventId);
     }
     setSelectedEvents(newSelected);
+    
+    // Update para/regular selection status
+    const selectedEventsArray = Array.from(newSelected);
+    const hasPara = selectedEventsArray.some(id => paraSportsEvents.some(pe => pe._id === id));
+    const hasRegular = selectedEventsArray.some(id => sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id));
+    
+    setParaSportsSelected(hasPara);
+    setRegularEventsSelected(hasRegular);
   };
 
   const handleSaveSelectedEvents = async () => {
@@ -2247,7 +2174,6 @@ Do you want to proceed with registration?`;
         {/* National Level Youth Festival Text - Positioned absolutely */}
         <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
         </div>
-        
         {/* Logo */}
         <div className="flex justify-center items-center z-20 relative w-full px-0 pointer-events-none" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
           <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown pointer-events-none" style={{width: "50%", height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
@@ -2256,15 +2182,10 @@ Do you want to proceed with registration?`;
         {/* Action Buttons - separate container with mobile-specific positioning */}
         <div className="flex justify-center items-center mt-8 lg:-mt-72" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
-              console.log('Register button clicked');
-              setShowUserDetailsPage(true);
-              console.log('showUserDetailsPage set to true');
-            }}>Register for Events</button>
+            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleOpenProfile}>Register for Events</button>
           ) : (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
           )}
-        </div>
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2448,7 +2369,7 @@ Do you want to proceed with registration?`;
               {/* PROFILE */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={(e) => { e.preventDefault(); setShowProfileModal(true); setShowPageMenu(false); }}
+                onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -4739,6 +4660,26 @@ Do you want to proceed with registration?`;
               fontSize: '1.25rem',
 
             }}>
+              <button
+                onClick={handleCloseProfile}
+                style={{
+                  padding: '0.5rem 1.5rem',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  color: '#1f2937',
+                  fontWeight: 'bold',
+                  borderRadius: '0.375rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  position: 'absolute',
+                  left: '1.5rem',
+                  fontSize: '1.2rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Back
+              </button>
               <h1 style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
               <button
                 onClick={handleLogout}
@@ -4764,7 +4705,12 @@ Do you want to proceed with registration?`;
 
             {/* Main Content Area - Horizontally Centered */}
             <div style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
-              <div style={{ maxWidth: '2000px' }}>
+              {isLoadingProfile ? (
+                <div style={{ color: 'white', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
+                  Loading profile data...
+                </div>
+              ) : (
+                <div style={{ maxWidth: '2000px' }}>
               
               {/* User Info Box */}
               <div style={{
@@ -4852,7 +4798,7 @@ Do you want to proceed with registration?`;
                 border: '1px solid rgba(255, 255, 255, 0.3)'
               }}>
                 <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
-                  You are enrolled in {myEvents.length} events.
+                  You are enrolled in {userRegisteredEvents.length || myEvents.length} events.
                 </p>
               </div>
               
@@ -4872,7 +4818,10 @@ Do you want to proceed with registration?`;
                 {/* Events List Centered */}
                 <div style={{ width: '100%', maxWidth: '400px' }}>
                   <button
-                    onClick={() => setShowProfileModal(false)}
+                    onClick={() => {
+                      setShowProfileModal(false);
+                      setShowRegistrationModal(true);
+                    }}
                     style={{
                       color: '#fef3c7',
                       fontSize: '1rem',
@@ -4892,64 +4841,50 @@ Do you want to proceed with registration?`;
                       transition: 'all 0.3s'
                     }}
                     onMouseOver={(e) => {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.5)';
+                      e.currentTarget.style.background = 'rgba(30, 64, 236, 0.5)';
                       e.currentTarget.style.transform = 'scale(1.02)';
                     }}
                     onMouseOut={(e) => {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+                      e.currentTarget.style.background = 'rgba(23, 191, 237, 0.3)';
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >Register for Events</button>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    {myEvents.length > 0 ? (
-                      myEvents.map((event, index) => (
-                        <div key={index} style={{
-                          background: '#fef3c7',
-                          color: '#000',
-                          padding: '0.875rem 1rem',
-                          borderRadius: '0.5rem',
-                          fontWeight: '600',
-                          fontSize: '0.9375rem',
-                          textAlign: 'center'
-                        }}>
-                          {typeof event === 'string' ? event : event.eventName || 'MEN Track and Field'}
-                        </div>
-                      ))
-                    ) : (
-                      <button
-                        onClick={() => setShowMyEventsModal(true)}
-                        style={{
-                          background: '#fef3c7',
-                          color: '#000',
-                          padding: '0.875rem 1rem',
-                          borderRadius: '0.5rem',
-                          fontWeight: '600',
-                          fontSize: '0.9375rem',
-                          textAlign: 'center',
-                          border: 'none',
-                          cursor: 'pointer',
-                          width: '100%',
-                          transition: 'all 0.3s'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.background = '#fde68a';
-                          e.currentTarget.style.transform = 'scale(1.02)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.background = '#fef3c7';
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                        MY Events
-                      </button>
-                    )}
-                  </div>
+                  <button
+                    onClick={() => {
+                      setShowProfileModal(false);
+                      setShowMyEventsModal(true);
+                    }}
+                    style={{
+                      background: '#fef3c7',
+                      color: '#000',
+                      padding: '0.875rem 1rem',
+                      borderRadius: '0.5rem',
+                      fontWeight: '600',
+                      fontSize: '0.9375rem',
+                      textAlign: 'center',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = '#fde68a';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = '#fef3c7';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    MY Events
+                  </button>
                 </div>
               </div>
               </div>
+              )}
+              </div>
             </div>
           </div>
-        </div>
       )}
 
       {/* Event Registration Modal */}
@@ -4985,24 +4920,25 @@ Do you want to proceed with registration?`;
                   {/* Sports Events Section */}
                   {getFilteredSportsEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>? Sports Events
+                      <h3>Sports Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (?{getPricingForUser().sports} each)</span>
+                          <span className="pricing-info"> ({getPricingForUser().sports} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
                         {getFilteredSportsEvents().map((event) => (
-                          <label key={event._id} className="checklist-item">
+                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
                             <input
                               type="checkbox"
                               checked={selectedEvents.has(event._id)}
                               onChange={() => handleToggleEventSelection(event._id)}
+                              disabled={isEventDisabled(event)}
                             />
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">{event.date}</span>}
+                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -5013,24 +4949,25 @@ Do you want to proceed with registration?`;
                   {/* Cultural Events Section */}
                   {getFilteredCulturalEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>?? Cultural Events
+                      <h3>Cultural Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (?{getPricingForUser().culturals} each)</span>
+                          <span className="pricing-info"> ({getPricingForUser().culturals} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
                         {getFilteredCulturalEvents().map((event) => (
-                          <label key={event._id} className="checklist-item">
+                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
                             <input
                               type="checkbox"
                               checked={selectedEvents.has(event._id)}
                               onChange={() => handleToggleEventSelection(event._id)}
+                              disabled={isEventDisabled(event)}
                             />
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">{event.date}</span>}
+                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -5058,7 +4995,7 @@ Do you want to proceed with registration?`;
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
                 >
-                  ?? Save to My Events
+                  Save to My Events
                 </button>
               </div>
             </div>
@@ -5071,54 +5008,140 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>?? My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>�</button>
+              <h2>My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
-                These are your registered events. Click the delete button to remove any event you don't want to participate in.
+                These are your registered events.
               </p>
               
               {myEvents.length > 0 ? (
-                <div className="my-events-list">
-                  {myEvents.map((event) => (
-                    <div key={event._id} className="my-event-card">
-                      <div className="my-event-content">
-                        <div className="my-event-header">
-                          <h4>{event.eventName}</h4>
-                          <span className="event-type-badge">
-                            {event.eventType === 'sports' ? '?' : event.eventType === 'parasports' ? '??' : '??'} {event.eventType}
+                <div className="my-events-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {myEvents.map((event, index) => (
+                    <div key={event._id || index} style={{
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      padding: '1rem',
+                      borderRadius: '0.5rem',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                      position: 'relative'
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
+                        <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: '600', margin: 0, flex: 1 }}>
+                          {event.eventName}
+                        </h4>
+                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                          <span style={{
+                            background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
+                            color: 'white',
+                            padding: '0.25rem 0.75rem',
+                            borderRadius: '1rem',
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            textTransform: 'uppercase'
+                          }}>
+                            {event.eventType}
                           </span>
-                        </div>
-                        <p>{event.description || 'No description'}</p>
-                        <div className="event-details-grid">
-                          {event.date && <p className="event-meta">?? {event.date}</p>}
-                          {event.venue && <p className="event-meta">?? {event.venue}</p>}
-                          {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
-                        </div>
-                        <div className="event-registered-badge">
-                          ? Registered
+                          <button
+                            onClick={async () => {
+                              if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
+                                try {
+                                  const updatedEvents = myEvents.filter((_, i) => i !== index);
+                                  
+                                  // Update in database
+                                  const response = await fetch('http://localhost:5000/api/save-events', {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                      userId: userProfileData.userId,
+                                      events: updatedEvents
+                                    })
+                                  });
+
+                                  const result = await response.json();
+
+                                  if (response.ok && result.success) {
+                                    // Update localStorage
+                                    const storageKey = `myEvents_${userProfileData.userId}`;
+                                    localStorage.setItem(storageKey, JSON.stringify(updatedEvents));
+                                    
+                                    // Update state
+                                    setMyEvents(updatedEvents);
+                                    alert('Event removed successfully!');
+                                  } else {
+                                    throw new Error(result.message || 'Failed to remove event');
+                                  }
+                                } catch (error) {
+                                  console.error('Error removing event:', error);
+                                  alert('Failed to remove event. Please try again.');
+                                }
+                              }
+                            }}
+                            style={{
+                              background: '#ef4444',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '0.375rem',
+                              padding: '0.35rem 0.6rem',
+                              fontSize: '0.75rem',
+                              fontWeight: '600',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseOver={(e) => {
+                              e.currentTarget.style.background = '#dc2626';
+                            }}
+                            onMouseOut={(e) => {
+                              e.currentTarget.style.background = '#ef4444';
+                            }}
+                          >
+                            Remove
+                          </button>
                         </div>
                       </div>
+                      {event.category && (
+                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', margin: '0.5rem 0' }}>
+                          {event.category}
+                        </p>
+                      )}
+                      {event.description && (
+                        <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem', margin: '0.5rem 0 0 0' }}>
+                          {event.description}
+                        </p>
+                      )}
+                      {event.fee && (
+                        <p style={{ color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600', margin: '0.5rem 0 0 0' }}>
+                          Fee: ₹{event.fee}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="no-events-saved">
-                  <p>You haven't registered for any events yet.</p>
-                  <button className="browse-events-btn" onClick={() => {
-                    setShowMyEventsModal(false);
-                    setActiveSubModal('EVENTS');
-                    // Fetch data in background
-                    fetchEvents();
-                    if (isLoggedIn && userProfileData.userId) {
-                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                        setTempSelectedEvents(savedEventIds);
-                      });
-                    } else {
-                      setTempSelectedEvents(new Set());
-                    }
-                  }}>
+                <div className="no-events-saved" style={{ textAlign: 'center', padding: '2rem' }}>
+                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1rem' }}>
+                    You haven't registered for any events yet.
+                  </p>
+                  <button 
+                    className="browse-events-btn" 
+                    onClick={() => {
+                      setShowMyEventsModal(false);
+                      setShowRegistrationModal(true);
+                    }}
+                    style={{
+                      padding: '0.75rem 1.5rem',
+                      background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s'
+                    }}
+                  >
                     Browse Events
                   </button>
                 </div>
@@ -5385,6 +5408,488 @@ Do you want to proceed with registration?`;
               loading="lazy"
               decoding="async"
             />
+          </div>
+        </div>
+      )}
+
+      {/* Registration Modal with Events from JSON */}
+      {showRegistrationModal && (
+        <div 
+          className="login-modal-overlay" 
+          onClick={() => setShowRegistrationModal(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 10000,
+            backdropFilter: 'blur(10px)'
+          }}
+        >
+          <div 
+            className="registration-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(135deg, rgba(139, 69, 172, 0.95), rgba(88, 28, 135, 0.95))',
+              borderRadius: '1rem',
+              padding: '2rem',
+              width: '90%',
+              maxWidth: '900px',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+              border: '2px solid rgba(255, 255, 255, 0.2)'
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Register for Events</h2>
+              <button
+                onClick={() => setShowRegistrationModal(false)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '2rem',
+                  cursor: 'pointer',
+                  padding: 0,
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Sports Events Section */}
+            {registrationEvents.Sports && registrationEvents.Sports.length > 0 && (
+              <div style={{ marginBottom: '2rem' }}>
+                <h3 style={{ 
+                  color: '#fef3c7', 
+                  fontSize: '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '1rem',
+                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
+                  paddingBottom: '0.5rem'
+                }}>
+                  Sports Events
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {registrationEvents.Sports.map((event: any, index: number) => {
+                    if (!event || !event['738500'] || event['738500'] === 'Event') return null;
+                    
+                    const eventId = `sport-${index}`;
+                    const eventName = event['738500'];
+                    const category = event['Prize money for Sports'] || '';
+                    const isHeader = category && !event.D;
+                    
+                    // Gender-based filtering
+                    const userGender = userProfileData.gender?.toLowerCase();
+                    if (userGender && category) {
+                      const categoryLower = category.toLowerCase();
+                      if (userGender === 'male' && categoryLower.includes('women')) {
+                        return null; // Skip women's events for male users
+                      }
+                      if (userGender === 'female' && categoryLower.includes('men') && !categoryLower.includes('women')) {
+                        return null; // Skip men's events for female users
+                      }
+                    }
+                    
+                    if (isHeader) {
+                      return (
+                        <div key={eventId} style={{ 
+                          color: '#fbbf24', 
+                          fontWeight: 'bold', 
+                          fontSize: '1.1rem', 
+                          marginTop: '1rem',
+                          paddingLeft: '0.5rem'
+                        }}>
+                          {category}
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <label 
+                        key={eventId}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '0.5rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedRegistrationEvents.has(eventId)}
+                          onChange={() => {
+                            setSelectedRegistrationEvents(prev => {
+                              const newSet = new Set(prev);
+                              if (newSet.has(eventId)) {
+                                newSet.delete(eventId);
+                              } else {
+                                newSet.add(eventId);
+                              }
+                              return newSet;
+                            });
+                          }}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginRight: '1rem',
+                            cursor: 'pointer',
+                            accentColor: '#fbbf24'
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
+                            {eventName}
+                          </div>
+                          {category && !isHeader && (
+                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                              {category}
+                            </div>
+                          )}
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Cultural Events Section */}
+            {registrationEvents.Culturals && registrationEvents.Culturals.length > 0 && (
+              <div style={{ marginBottom: '2rem' }}>
+                <h3 style={{ 
+                  color: '#fef3c7', 
+                  fontSize: '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '1rem',
+                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
+                  paddingBottom: '0.5rem'
+                }}>
+                  Culturals Events
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {registrationEvents.Culturals.map((event: any, index: number) => {
+                    if (!event || !event['Prize money for Performing arts, Visual arts, Fashion'] || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
+                    
+                    const eventId = `cultural-${index}`;
+                    const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
+                    const category = event['5'] || '';
+                    const isHeader = category && !event.Column1;
+                    
+                    // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
+                    const userGender = userProfileData.gender?.toLowerCase();
+                    if (userGender && (category || eventName)) {
+                      const textToCheck = (category + ' ' + eventName).toLowerCase();
+                      if (userGender === 'male' && textToCheck.includes('ms.')) {
+                        return null; // Skip Ms. Mahotsav for male users
+                      }
+                      if (userGender === 'female' && textToCheck.includes('mr.') && !textToCheck.includes('mrs')) {
+                        return null; // Skip Mr. Mahotsav for female users
+                      }
+                    }
+                    
+                    if (isHeader) {
+                      return (
+                        <div key={eventId} style={{ 
+                          color: '#fbbf24', 
+                          fontWeight: 'bold', 
+                          fontSize: '1.1rem', 
+                          marginTop: '1rem',
+                          paddingLeft: '0.5rem'
+                        }}>
+                          {category}
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <label 
+                        key={eventId}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '0.5rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedRegistrationEvents.has(eventId)}
+                          onChange={() => {
+                            setSelectedRegistrationEvents(prev => {
+                              const newSet = new Set(prev);
+                              if (newSet.has(eventId)) {
+                                newSet.delete(eventId);
+                              } else {
+                                newSet.add(eventId);
+                              }
+                              return newSet;
+                            });
+                          }}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginRight: '1rem',
+                            cursor: 'pointer',
+                            accentColor: '#fbbf24'
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
+                            {eventName}
+                          </div>
+                          {category && !isHeader && (
+                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                              {category}
+                            </div>
+                          )}
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Footer with Submit Button */}
+            <div style={{ 
+              borderTop: '2px solid rgba(255, 255, 255, 0.3)', 
+              paddingTop: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem'
+            }}>
+              {/* Summary Section */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '1rem',
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '0.5rem'
+              }}>
+                <div>
+                  <div style={{ color: 'white', fontSize: '1rem', fontWeight: '600' }}>
+                    Selected: {selectedRegistrationEvents.size} event(s)
+                  </div>
+                  <div style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                    {(() => {
+                      // Calculate event types
+                      const selectedIds = Array.from(selectedRegistrationEvents);
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                      
+                      return `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
+                    })()}
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600' }}>
+                    Registration Fee
+                  </div>
+                  <div style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                    {(() => {
+                      const selectedIds = Array.from(selectedRegistrationEvents);
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                      const userGender = userProfileData.gender?.toLowerCase();
+                      
+                      let fee = 0;
+                      if (userGender === 'male') {
+                        if (hasSports || hasCulturals) {
+                          fee = 350; // Same fee regardless of selection
+                        }
+                      } else if (userGender === 'female') {
+                        if (hasSports && hasCulturals) {
+                          fee = 350; // Both
+                        } else if (hasSports) {
+                          fee = 350; // Sports only
+                        } else if (hasCulturals) {
+                          fee = 250; // Culturals only
+                        }
+                      } else {
+                        if (hasSports || hasCulturals) {
+                          fee = 350;
+                        }
+                      }
+                      
+                      return fee > 0 ? `₹${fee}` : '₹0';
+                    })()}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Submit Button */}
+              <button
+                onClick={async () => {
+                  if (selectedRegistrationEvents.size === 0) {
+                    alert('Please select at least one event');
+                    return;
+                  }
+                  
+                  if (!isLoggedIn || !userProfileData.userId) {
+                    alert('Please login to register for events');
+                    return;
+                  }
+                  
+                  // Calculate fee for confirmation message
+                  const selectedIds = Array.from(selectedRegistrationEvents);
+                  const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                  const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                  const userGender = userProfileData.gender?.toLowerCase();
+                  
+                  let fee = 0;
+                  if (userGender === 'male') {
+                    if (hasSports || hasCulturals) {
+                      fee = 350; // Same fee regardless of selection
+                    }
+                  } else if (userGender === 'female') {
+                    if (hasSports && hasCulturals) {
+                      fee = 350; // Both
+                    } else if (hasSports) {
+                      fee = 350; // Sports only
+                    } else if (hasCulturals) {
+                      fee = 250; // Culturals only
+                    }
+                  } else {
+                    if (hasSports || hasCulturals) {
+                      fee = 350;
+                    }
+                  }
+                  
+                  // Prepare events data to save
+                  const eventsToSave = selectedIds.map(id => {
+                    const [type, index] = id.split('-');
+                    const idx = parseInt(index);
+                    
+                    if (type === 'sport' && registrationEvents.Sports[idx]) {
+                      const event = registrationEvents.Sports[idx];
+                      return {
+                        _id: id,
+                        eventId: id,
+                        eventName: event['738500'],
+                        eventType: 'sports',
+                        category: event['Prize money for Sports'] || '',
+                        description: `${event['Prize money for Sports'] || ''} - ${event['738500']}`.trim(),
+                        fee: userProfileData.gender === 'male' ? 350 : 350
+                      };
+                    } else if (type === 'cultural' && registrationEvents.Culturals[idx]) {
+                      const event = registrationEvents.Culturals[idx];
+                      return {
+                        _id: id,
+                        eventId: id,
+                        eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
+                        eventType: 'culturals',
+                        category: event['5'] || '',
+                        description: `${event['5'] || ''} - ${event['Prize money for Performing arts, Visual arts, Fashion']}`.trim(),
+                        fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
+                      };
+                    }
+                    return null;
+                  }).filter(e => e !== null);
+                  
+                  try {
+                    // Save to database via API
+                    const response = await fetch('http://localhost:5000/api/save-events', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        userId: userProfileData.userId,
+                        events: eventsToSave
+                      })
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                      throw new Error(result.message || 'Failed to save events');
+                    }
+
+                    // Also save to localStorage as backup
+                    const storageKey = `myEvents_${userProfileData.userId}`;
+                    localStorage.setItem(storageKey, JSON.stringify(eventsToSave));
+                    
+                    // Update local state with the registered events
+                    setMyEvents(eventsToSave as any);
+                    
+                    const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
+                    alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);
+                    setShowRegistrationModal(false);
+                    setSelectedRegistrationEvents(new Set());
+                  } catch (error) {
+                    console.error('Error saving events:', error);
+                    alert('An error occurred while saving events to database. Please try again.');
+                  }
+                }}
+                disabled={selectedRegistrationEvents.size === 0}
+                style={{
+                  padding: '0.875rem 2rem',
+                  background: selectedRegistrationEvents.size === 0 ? 'rgba(156, 163, 175, 0.5)' : 'linear-gradient(to right, #fbbf24, #f59e0b)',
+                  color: 'white',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  borderRadius: '0.5rem',
+                  border: 'none',
+                  cursor: selectedRegistrationEvents.size === 0 ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s',
+                  textTransform: 'uppercase'
+                }}
+                onMouseOver={(e) => {
+                  if (selectedRegistrationEvents.size > 0) {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(251, 191, 36, 0.5)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Submit Registration
+              </button>
+            </div>
           </div>
         </div>
       )}

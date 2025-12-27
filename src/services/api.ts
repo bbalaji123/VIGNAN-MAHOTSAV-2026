@@ -55,6 +55,8 @@ export interface ApiResponse {
 }
 
 export interface Event {
+  fee: ReactNode;
+  fee: any;
   _id: string;
   eventName: string;
   eventType: 'sports' | 'culturals' | 'technical' | 'literary' | 'parasports';
@@ -73,6 +75,9 @@ export interface Event {
     contact: string;
   }>;
   isActive?: boolean;
+  fee?: number;
+  eventId?: string;
+  registeredAt?: Date | string;
 }
 
 export interface EventsResponse {

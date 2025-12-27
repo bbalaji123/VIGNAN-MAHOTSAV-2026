@@ -5,6 +5,222 @@
 }
 
 /* ============================================
+   MOBILE RESPONSIVE STYLES - FOOTER & SECTIONS
+   ============================================ */
+
+/* Footer responsive styles - Mobile only */
+@media (max-width: 640px) {
+  .footer-content {
+    padding: 20px 15px 0 15px !important;
+    text-align: center !important;
+  }
+  
+  .footer-content > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .footer-logo {
+    height: 180px !important;
+    margin-bottom: -50px !important;
+    margin-left: 0 !important;
+    margin-top: -70px !important;
+  }
+  
+  .footer-heading {
+    font-size: 0.75rem !important;
+    margin-bottom: 10px !important;
+    text-align: center !important;
+  }
+  
+  .footer-text {
+    font-size: 0.7rem !important;
+    text-align: center !important;
+  }
+  
+  .footer-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  .footer-link {
+    font-size: 0.7rem !important;
+    text-align: center !important;
+  }
+  
+  .footer-social {
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+    justify-content: center !important;
+  }
+  
+  .social-icon {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .social-icon svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* Restore desktop sizes for footer */
+@media (min-width: 641px) {
+  .footer-content {
+    padding: 40px 40px 0 40px !important;
+  }
+  
+  .footer-logo {
+    height: 400px !important;
+    margin-bottom: -130px !important;
+    margin-left: -14px !important;
+    margin-top: -160px !important;
+  }
+  
+  .footer-heading {
+    font-size: 1.1rem !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .footer-text {
+    font-size: 1rem !important;
+  }
+  
+  .footer-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  .footer-link {
+    font-size: 1rem !important;
+  }
+  
+  .footer-social {
+    gap: 20px !important;
+    margin-bottom: 50px !important;
+  }
+  
+  .social-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .social-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* Garuda logo in About Theme - Mobile only above title */
+@media (max-width: 1023px) {
+  .garuda-about-theme {
+    left: 50% !important;
+    top: -100px !important;
+    transform: translateX(-50%) !important;
+    width: clamp(120px, 30vw, 180px) !important;
+  }
+}
+
+/* Desktop - Garuda logo on left side */
+@media (min-width: 1024px) {
+  .garuda-about-theme {
+    left: -80px !important;
+    top: 180px !important;
+    transform: none !important;
+    width: clamp(200px, 25vw, 350px) !important;
+  }
+}
+
+/* Stats Grid - 2 columns on mobile */
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+}
+
+/* Stats Grid - Flexible on tablet */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+/* Stats Grid - Full row on desktop */
+@media (min-width: 1024px) {
+  .stats-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+  }
+}
+
+/* Throwback video card - better aspect ratio on mobile */
+@media (max-width: 640px) {
+  .throwback-video-card {
+    width: clamp(320px, 90vw, 485px) !important;
+    height: clamp(180px, 50.625vw, 273px) !important;
+  }
+}
+
+/* Restore desktop sizes for video card */
+@media (min-width: 641px) {
+  .throwback-video-card {
+    width: clamp(380px, 51vw, 485px) !important;
+    height: clamp(214px, 28.7vw, 273px) !important;
+  }
+}
+
+/* ============================================
+   ABOUT THEME SECTION - MOBILE GAP
+   ============================================ */
+
+/* Extra small mobile devices (320px - 374px) */
+@media (max-width: 374px) {
+  .about-theme-container {
+    padding-top: 90px !important;
+  }
+}
+
+/* Small mobile devices (375px - 424px) */
+@media (min-width: 375px) and (max-width: 424px) {
+  .about-theme-container {
+    padding-top: 100px !important;
+  }
+}
+
+/* Medium mobile devices (425px - 639px) */
+@media (min-width: 425px) and (max-width: 639px) {
+  .about-theme-container {
+    padding-top: 130px !important;
+  }
+}
+
+/* Large mobile / Small tablets (640px - 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .about-theme-container {
+    padding-top: 140px !important;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-theme-container {
+    padding-top: 200px !important;
+  }
+}
+
+/* Desktop - remove padding */
+@media (min-width: 1024px) {
+  .about-theme-container {
+    padding-top: 0 !important;
+  }
+}
+
+/* ============================================
    MAHOTSAV 2026 APPROVED COLOR PALETTE
    ============================================ */
 :root {

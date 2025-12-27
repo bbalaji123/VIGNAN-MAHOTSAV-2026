@@ -1963,8 +1963,23 @@ const Dashboard: React.FC = () => {
 
     const eventIds = Array.from(selectedEvents);
     
+    // Get full event objects from the selected IDs
+    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
+    const selectedEventObjects = eventIds.map(id => {
+      const event = allEvents.find(e => e._id === id);
+      if (!event) return null;
+      
+      return {
+        eventName: event.eventName,
+        eventType: event.eventType,
+        category: event.category,
+        description: event.description || '',
+        fee: event.fee || 0
+      };
+    }).filter(e => e !== null);
+    
     try {
-      const result = await saveMyEvents(userProfileData.userId, eventIds);
+      const result = await saveMyEvents(userProfileData.userId, selectedEventObjects);
       
       if (result.success) {
         // Fetch updated saved events from database

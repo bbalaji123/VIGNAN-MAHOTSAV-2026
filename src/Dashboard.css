@@ -2456,7 +2456,7 @@ body::-webkit-scrollbar {
 @media (max-width: 768px) {
   .vignan-logo-top {
     top: -10px;
-    right: -10px;
+    right: -05px !important;
   }
   
   .vignan-logo-img {
@@ -2467,7 +2467,7 @@ body::-webkit-scrollbar {
 @media (max-width: 480px) {
   .vignan-logo-top {
     top: -10px;
-    right: -10px;
+    right: -05px !important;
   }
   
   .vignan-logo-img {
@@ -6093,6 +6093,7 @@ html, body {
   background: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   padding: 40px;
+  padding-top: 60px;
   max-width: 1200px;
   width: 90%;
   position: relative;
@@ -6298,6 +6299,7 @@ html, body {
 @media (max-width: 768px) {
   .events-info-content {
     padding: 25px 15px;
+    padding-top: 55px;
     width: 95%;
   }
   
@@ -13061,6 +13063,12 @@ html {
   /* Show desktop card with button */
   .events-card-with-button-desktop {
     display: flex !important;
+    margin-top: 90px !important;
+  }
+  
+  /* Move download button further down on desktop */
+  .download-rulebook-desktop {
+    margin-top: 10px !important;
   }
   
   /* Ensure desktop title alignment remains unchanged */
@@ -13096,6 +13104,7 @@ html {
   /* Show mobile header container with back button */
   .menu-header-container-mobile {
     display: flex !important;
+    margin-top: 10px !important;
   }
   
   /* Hide desktop back button inside scroll */
@@ -13108,16 +13117,15 @@ html {
     margin-left: 0 !important;
   }
   
-  /* Move menu title down on mobile */
-  .menu-title-container {
-    margin-top: 20px !important;
-    padding-bottom: 20px !important;
+  /* Hide desktop menu title on mobile */
+  .menu-title-desktop {
+    display: none !important;
   }
   
   /* Adjust menu grid container */
   .menu-grid-container {
-    margin-top: 20px !important;
-    padding-top: 40px !important;
+    margin-top: -20px !important;
+    padding-top: 20px !important;
   }
 }
 
@@ -13182,10 +13190,10 @@ html {
   
   /* Restore original Garuda logo size and position on desktop */
   .garuda-about-theme {
-    left: -80px !important;
+    left: -300px !important;
     top: 180px !important;
     transform: none !important;
-    width: clamp(300px, 30vw, 500px) !important;
+    width: clamp(380px, 45vw, 600px) !important;
   }
   
   /* Ensure stats stay in one row on desktop */
@@ -13233,5 +13241,32 @@ html {
   /* Move login/register button higher on desktop */
   .hero-action-buttons {
     margin-top: -100px !important;
+  }
+}
+
+/* ============================================
+   EVENTS MODAL LOGO POSITIONING
+   ============================================ */
+
+/* Events modal logo positioning */
+.events-info-logo {
+  position: absolute;
+  top: 5px !important;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: clamp(120px, 25vw, 200px);
+}
+
+.events-logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .events-info-logo {
+    top: 10px !important;
+    width: clamp(180px, 20vw, 280px);
   }
 }

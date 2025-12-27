@@ -2385,12 +2385,12 @@ const Dashboard: React.FC = () => {
             />
           </div>
           
-          {/* Back Button - Outside Scroll (Mobile Only) */}
-          <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', padding: '0 20px', marginTop: '20px', marginBottom: '10px' }}>
+          {/* Back Button and Menu Title - Combined on Mobile */}
+          <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginTop: '10px', marginBottom: '10px' }}>
             <div className="menu-back-button-mobile">
               <button
                 onClick={() => setShowPageMenu(false)}
-                className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
+                className="w-24 h-12 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
                 aria-label="Go back"
               >
                 <img
@@ -2400,15 +2400,16 @@ const Dashboard: React.FC = () => {
                 />
               </button>
             </div>
+            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important', flex: 1, textAlign: 'center', marginRight: '96px'}}>MENU</h1>
           </div>
 
-          {/* Menu Title */}
-          <div className="text-center menu-title-container" style={{marginTop: "30px", paddingBottom: "2px"}}>
+          {/* Menu Title - Desktop Only */}
+          <div className="text-center menu-title-container menu-title-desktop" style={{marginTop: "10px", paddingBottom: "2px"}}>
             <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
-          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-140px)] px-4 md:px-6 menu-grid-container" style={{marginTop: "-90px"}}>
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-100px)] px-4 md:px-6 menu-grid-container" style={{marginTop: "-90px"}}>
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
               {/* Back Button - Inside Scroll (Desktop Only) */}
@@ -3989,8 +3990,8 @@ const Dashboard: React.FC = () => {
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)' 
-                : 'translate(-50%, -50%)',
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), calc(-50% + clamp(30px, 6vh, 80px)))' 
+                : 'translate(-50%, calc(-50% + clamp(30px, 6vh, 80px)))',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4021,8 +4022,8 @@ const Dashboard: React.FC = () => {
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)' 
-                : 'translate(-50%, -50%)',
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + 50px))' 
+                : 'translate(-50%, calc(-50% + 50px))',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',

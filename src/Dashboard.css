@@ -12981,3 +12981,240 @@ html {
 .stats-card-backtoschool div {
   font-family: 'BackToSchool', sans-serif !important;
 }
+
+/* Events Page Main Cards - Mobile Responsiveness */
+/* Hide desktop button container on mobile, show mobile button container */
+@media (max-width: 1023px) {
+  /* Center the cards container */
+  .events-main-cards-container {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Reduce card size on mobile */
+  .events-main-cards-container .event-card {
+    width: 240px !important;
+    height: 320px !important;
+  }
+  
+  /* Center event card titles - MOBILE ONLY */
+  .events-main-cards-container .category-card-title {
+    text-align: center !important;
+    width: 100%;
+    display: block;
+  }
+  
+  /* Center the text container inside cards */
+  .events-main-cards-container .event-card .absolute {
+    left: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  /* Hide desktop card with button */
+  .events-card-with-button-desktop {
+    display: none !important;
+  }
+  
+  /* Show mobile card (no button) */
+  .events-card-mobile-only {
+    display: block !important;
+  }
+  
+  /* Show mobile button container */
+  .events-button-mobile-container {
+    display: flex !important;
+  }
+}
+
+/* Desktop - hide mobile-only elements and preserve original layout */
+@media (min-width: 1024px) {
+  /* Hide mobile card */
+  .events-card-mobile-only {
+    display: none !important;
+  }
+  
+  /* Hide mobile button container */
+  .events-button-mobile-container {
+    display: none !important;
+  }
+  
+  /* Show desktop card with button */
+  .events-card-with-button-desktop {
+    display: flex !important;
+  }
+  
+  /* Ensure desktop title alignment remains unchanged */
+  .events-main-cards-container .category-card-title {
+    text-align: inherit;
+  }
+}
+
+/* Further reduce card size for smaller mobile devices */
+@media (max-width: 639px) {
+  .events-main-cards-container .event-card {
+    width: 220px !important;
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 424px) {
+  .events-main-cards-container .event-card {
+    width: 200px !important;
+    height: 280px !important;
+  }
+}
+
+@media (max-width: 374px) {
+  .events-main-cards-container .event-card {
+    width: 180px !important;
+    height: 260px !important;
+  }
+}
+
+/* Menu Page Mobile Adjustments */
+@media (max-width: 1023px) {
+  /* Show mobile header container with back button */
+  .menu-header-container-mobile {
+    display: flex !important;
+  }
+  
+  /* Hide desktop back button inside scroll */
+  .menu-back-button-desktop {
+    display: none !important;
+  }
+  
+  /* Back button aligned to left on mobile */
+  .menu-back-button-mobile {
+    margin-left: 0 !important;
+  }
+  
+  /* Move menu title down on mobile */
+  .menu-title-container {
+    margin-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+  
+  /* Adjust menu grid container */
+  .menu-grid-container {
+    margin-top: 20px !important;
+    padding-top: 40px !important;
+  }
+}
+
+/* Desktop - preserve original menu layout */
+@media (min-width: 1024px) {
+  /* Hide mobile header container */
+  .menu-header-container-mobile {
+    display: none !important;
+  }
+  
+  /* Show desktop back button inside scroll */
+  .menu-back-button-desktop {
+    display: flex !important;
+  }
+  
+  /* Original desktop styles */
+  .menu-title-container {
+    margin-top: 30px !important;
+  }
+  
+  .menu-grid-container {
+    margin-top: -90px !important;
+  }
+}
+
+/* About Theme Section - Center content on mobile */
+@media (max-width: 1023px) {
+  /* Center the theme name and description */
+  .about-theme-container > div {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    text-align: center !important;
+  }
+  
+  .theme-name {
+    text-align: center !important;
+  }
+  
+  .theme-description {
+    text-align: center !important;
+  }
+  
+  /* Center Garuda logo on mobile */
+  .garuda-about-theme {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: clamp(120px, 30vw, 180px) !important;
+  }
+}
+
+/* Desktop - preserve original layout */
+@media (min-width: 1024px) {
+  .about-theme-container > div {
+    padding-left: clamp(0px, 15vw, 380px) !important;
+    padding-right: clamp(20px, 5vw, 80px) !important;
+    text-align: left !important;
+  }
+  
+  .theme-description {
+    text-align: justify !important;
+  }
+  
+  /* Restore original Garuda logo size and position on desktop */
+  .garuda-about-theme {
+    left: -80px !important;
+    top: 180px !important;
+    transform: none !important;
+    width: clamp(300px, 30vw, 500px) !important;
+  }
+  
+  /* Ensure stats stay in one row on desktop */
+  .stats-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+  }
+}
+
+/* ============================================
+   EVENTS PAGE - DOWNLOAD BUTTON MOBILE SPACING
+   ============================================ */
+
+/* Mobile - Add spacing between last card and button */
+@media (max-width: 1023px) {
+  .events-button-mobile-container {
+    margin-top: clamp(40px, 8vw, 60px) !important;
+  }
+}
+
+/* Desktop - No additional margin */
+@media (min-width: 1024px) {
+  .events-button-mobile-container {
+    margin-top: 0 !important;
+  }
+}
+
+/* ============================================
+   MAHOTSAV LOGO - DESKTOP SPACING REDUCTION
+   ============================================ */
+
+/* Desktop only - Reduce spacing around Mahotsav logo */
+@media (min-width: 1024px) {
+  .mahotsav-logo-container {
+    margin-top: -120px !important;
+    margin-bottom: -100px !important;
+  }
+  
+  .mahotsav-logo-img {
+    margin-top: -80px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Move login/register button higher on desktop */
+  .hero-action-buttons {
+    margin-top: -100px !important;
+  }
+}

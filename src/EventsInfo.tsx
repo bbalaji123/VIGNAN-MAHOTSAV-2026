@@ -949,7 +949,7 @@ const EventsInfo: React.FC = () => {
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem' , paddingLeft: '90px'}}>
+            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem' }}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -976,7 +976,7 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="flex flex-col md:flex-row items-start justify-center gap-15 md:gap-18 mb-10">
+              <div className="events-main-cards-container flex flex-col md:flex-row items-center justify-center gap-15 md:gap-18 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
                   className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
@@ -990,8 +990,8 @@ const EventsInfo: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Card 2 - Sports and Games with Button Below */}
-                <div className="relative flex flex-col items-center gap-8">
+                {/* Card 2 - Sports and Games with Button Below (Desktop Only) */}
+                <div className="relative flex flex-col items-center gap-8 events-card-with-button-desktop">
                   <div 
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
@@ -1003,9 +1003,9 @@ const EventsInfo: React.FC = () => {
                       </h2>
                     </div>
                   </div>
-                  {/* Download Rulebook button */}
+                  {/* Download Rulebook button - Desktop */}
                   <button 
-                    className="download-rulebook-btn"
+                    className="download-rulebook-btn download-rulebook-desktop"
                     onClick={(e) => {
                       e.stopPropagation();
                       const link = document.createElement('a');
@@ -1016,6 +1016,19 @@ const EventsInfo: React.FC = () => {
                   >
                     DOWNLOAD RULEBOOK
                   </button>
+                </div>
+
+                {/* Card 2 - Sports and Games (Mobile - No Button) */}
+                <div 
+                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 events-card-mobile-only"
+                  onClick={handleSportsCardClick}
+                  style={{ margin: '0 16px' }}
+                >
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
+                      SPORTS AND GAMES
+                    </h2>
+                  </div>
                 </div>
 
                 {/* Card 3 - Robo Wars & Gaming */}
@@ -1030,6 +1043,22 @@ const EventsInfo: React.FC = () => {
                     </h2>
                   </div>
                 </div>
+              </div>
+              
+              {/* Download Rulebook button - Mobile (After all 3 cards) */}
+              <div className="events-button-mobile-container flex justify-center">
+                <button 
+                  className="download-rulebook-btn download-rulebook-mobile"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const link = document.createElement('a');
+                    link.href = '/Mahostav Rules Book 2025.pdf';
+                    link.download = 'Mahostav Rules Book 2025.pdf';
+                    link.click();
+                  }}
+                >
+                  DOWNLOAD RULEBOOK
+                </button>
               </div>
             </div>
           )}

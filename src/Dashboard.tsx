@@ -97,6 +97,7 @@ const Dashboard: React.FC = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const minSwipeDistance = 50;
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   // State for fetched events from database
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -436,6 +437,7 @@ const Dashboard: React.FC = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
   const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
+  const [isMuted, setIsMuted] = useState(false);
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -3963,7 +3965,7 @@ const Dashboard: React.FC = () => {
             justifyContent: 'flex-start',
             paddingTop: '40px',
             gap: '30px',
-            pointerEvents: isThrowbackUnlocked ? 'auto' : 'none',
+            pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s'
@@ -3971,7 +3973,8 @@ const Dashboard: React.FC = () => {
               {/* Year buttons */}
               <div style={{
                 display: 'flex',
-                gap: '20px'
+                gap: '20px',
+                pointerEvents: 'auto'
               }}>
                 {(['2023', '2024', '2025'] as const).map(year => (
                   <button 
@@ -4014,21 +4017,16 @@ const Dashboard: React.FC = () => {
                   overflow: 'hidden',
                   transition: 'all 0.4s ease',
                   position: 'relative',
-                  cursor: 'pointer',
+                  cursor: 'default',
                   padding: 0,
-                  marginTop: '10px'
-                }}
-                onClick={() => {
-                  const videoId = selectedYear === '2023' 
-                    ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
-                    : selectedYear === '2024'
-                    ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
-                    : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk';
-                  window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                  marginTop: '10px',
+                  pointerEvents: 'auto',
+                  zIndex: 100
                 }}
               >
                 {/* YouTube Video Embed */}
                 <iframe
+                  ref={videoRef}
                   key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
                   width="100%"
                   height="100%"
@@ -4038,32 +4036,23 @@ const Dashboard: React.FC = () => {
                       : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0` : 'about:blank'}
+                  }?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&enablejsapi=1` : 'about:blank'}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  title="Mahotsav Throwback Video"
                   style={{
                     border: 'none',
                     display: 'block',
-                    pointerEvents: 'none',
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
+                    zIndex: 1
                   }}
                 />
-                {/* Click overlay for better interaction */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  zIndex: 5,
-                  background: 'transparent'
-                }} />
                 {/* Day indicator */}
                 <div style={{
                   position: 'absolute',
@@ -4075,10 +4064,53 @@ const Dashboard: React.FC = () => {
                   borderRadius: '15px',
                   fontSize: '0.9rem',
                   fontWeight: 'bold',
-                  zIndex: 10
+                  zIndex: 2,
+                  pointerEvents: 'none'
                 }}>
                   Day {currentDay}
                 </div>
+                {/* Mute/Unmute button */}
+                <button
+                  onClick={() => {
+                    setIsMuted(!isMuted);
+                    if (videoRef.current && videoRef.current.contentWindow) {
+                      const command = isMuted ? '{"event":"command","func":"unMute","args":""}' : '{"event":"command","func":"mute","args":""}';
+                      videoRef.current.contentWindow.postMessage(command, '*');
+                    }
+                  }}
+                  style={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                    color: 'white',
+                    border: 'none',
+                    padding: '8px 12px',
+                    borderRadius: '50%',
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    zIndex: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '40px',
+                    height: '40px',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'auto'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.9)';
+                    e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
+                    e.currentTarget.style.transform = 'translateX(-50%) scale(1)';
+                  }}
+                >
+                  {isMuted ? '🔇' : '🔊'}
+                </button>
               </div>
             </div>
 

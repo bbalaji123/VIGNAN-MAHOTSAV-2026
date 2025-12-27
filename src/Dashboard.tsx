@@ -9,6 +9,21 @@ import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
 import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
+// Get API base URL from environment
+const getApiBaseUrl = () => {
+  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
+  const DEVELOPMENT_API = 'http://localhost:5000/api';
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      return PRODUCTION_API;
+    }
+  }
+  return DEVELOPMENT_API;
+};
+
+const API_BASE_URL = getApiBaseUrl();
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -1073,7 +1088,7 @@ const Dashboard: React.FC = () => {
       if (isLoggedIn && userProfileData.userId) {
         try {
           // Try to fetch from database first
-          const response = await fetch(`http://localhost:5000/api/my-registrations/${userProfileData.userId}`);
+          const response = await fetch(`${API_BASE_URL}/my-registrations/${userProfileData.userId}`);
           const result = await response.json();
           
           if (response.ok && result.success && result.data.events) {
@@ -5109,7 +5124,7 @@ const Dashboard: React.FC = () => {
                                   const updatedEvents = myEvents.filter((_, i) => i !== index);
                                   
                                   // Update in database
-                                  const response = await fetch('http://localhost:5000/api/save-events', {
+                                  const response = await fetch(`${API_BASE_URL}/save-events`, {
                                     method: 'POST',
                                     headers: {
                                       'Content-Type': 'application/json',
@@ -5890,7 +5905,7 @@ const Dashboard: React.FC = () => {
                   
                   try {
                     // Save to database via API
-                    const response = await fetch('http://localhost:5000/api/save-events', {
+                    const response = await fetch(`${API_BASE_URL}/save-events`, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',

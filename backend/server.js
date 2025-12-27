@@ -10,9 +10,6 @@ import { initializeQueue } from './utils/queue.js';
 
 // Import routes
 import registrationRoutes from './routes/registration.js';
-import eventsRoutes from './routes/events.js';
-import eventRegistrationRoutes from './routes/eventRegistration.js';
-import userEventsRoutes from './routes/userEvents.js';
 
 dotenv.config();
 
@@ -68,9 +65,6 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // API Routes
 app.use('/api', registrationRoutes);
-app.use('/api', eventsRoutes);
-app.use('/api', eventRegistrationRoutes);
-app.use('/api', userEventsRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {

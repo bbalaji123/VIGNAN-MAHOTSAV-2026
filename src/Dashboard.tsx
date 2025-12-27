@@ -7,7 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, getUserDetails, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -434,7 +434,7 @@ const Dashboard: React.FC = () => {
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   const [showUserDetailsPage, setShowUserDetailsPage] = useState(false);
-  const [fullUserData, setFullUserData] = useState<any>(null);
+  const [fullUserData] = useState<any>(null);
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -2235,22 +2235,22 @@ Do you want to proceed with registration?`;
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         {/* Left side image - 1.avif */}
-        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
-          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain" />
+        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
+          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
         </div>
         
         {/* Right side image - 2.avif */}
-        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px' }}>
-          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain" />
+        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px' }}>
+          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
         </div>
         
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4">
+        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
         </div>
         
         {/* Logo */}
-        <div className="flex justify-center items-center z-20 relative w-full px-0" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
-          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown" style={{height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
+        <div className="flex justify-center items-center z-20 relative w-full px-0 pointer-events-none" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[95%] sm:w-full max-w-none md:w-[95%] md:max-w-8xl lg:w-[92%] xl:w-[90%] object-contain bg-transparent border-none shadow-none animate-fadeInDown pointer-events-none" style={{width: "50%", height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
         </div>
         
         {/* Action Buttons - separate container with mobile-specific positioning */}
@@ -2264,6 +2264,7 @@ Do you want to proceed with registration?`;
           ) : (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
           )}
+        </div>
         </div>
         <style>{`
           @media (min-width: 768px) {
@@ -2447,7 +2448,7 @@ Do you want to proceed with registration?`;
               {/* PROFILE */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={(e) => { e.preventDefault(); setActiveSubModal('PROFILE'); setShowPageMenu(false); }}
+                onClick={(e) => { e.preventDefault(); setShowProfileModal(true); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -4438,221 +4439,6 @@ Do you want to proceed with registration?`;
               </button>
             </div>
             <div className="sub-modal-body">
-              {activeSubModal === 'EVENTS' && (
-                <div className="events-modal-container">
-                  {loadingEvents ? (
-                    <div className="loading-events">
-                      <p>Loading events...</p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="events-category-grid">
-                      {/* Sports Events */}
-                      <div className="event-category-card">
-                        <h3>? Sports Events ({getFilteredSportsEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredSportsEvents().length > 0 ? (
-                            getFilteredSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No sports events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Cultural Events */}
-                      <div className="event-category-card">
-                        <h3>?? Cultural Events ({getFilteredCulturalEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredCulturalEvents().length > 0 ? (
-                            getFilteredCulturalEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No cultural events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Para Sports Events */}
-                      <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>? Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
-                        {getFilteredParaSportsEvents().length === 0 && (
-                          <div>
-                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
-                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px'}}>
-                              ?? Retry Loading Events
-                            </button>
-                          </div>
-                        )}
-                        <div className="event-list">
-                          {getFilteredParaSportsEvents().length > 0 ? (
-                            getFilteredParaSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)}
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => {
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id) && !regularEventsSelected) {
-                                      const newSelection = new Set(tempSelectedEvents);
-                                      const wasSelected = newSelection.has(event._id);
-                                      
-                                      if (wasSelected) {
-                                        newSelection.delete(event._id);
-                                      } else {
-                                        newSelection.add(event._id);
-                                      }
-                                      
-                                      // Check if any para sports events are selected
-                                      const hasParaSportsSelected = getFilteredParaSportsEvents().some(pe => 
-                                        newSelection.has(pe._id)
-                                      );
-                                      
-                                      setParaSportsSelected(hasParaSportsSelected);
-                                      
-                                      // If selecting para sports, remove all regular events
-                                      if (!wasSelected && hasParaSportsSelected) {
-                                        [...getFilteredSportsEvents(), ...getFilteredCulturalEvents()].forEach(e => {
-                                          newSelection.delete(e._id);
-                                        });
-                                        setRegularEventsSelected(false);
-                                      }
-                                      
-                                      setTempSelectedEvents(newSelection);
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">?? {event.date}</p>}
-                                  {event.venue && <p className="event-meta">?? {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">??? {event.category}</p>}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No para sports events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    </>
-                  )}
-                  
-                  <div className="events-modal-footer">
-                    <div className="selected-count">
-                      Selected: {tempSelectedEvents.size} event(s)
-                      {tempSelectedEvents.size > 0 && (
-                        (() => {
-                          const totalAmount = calculateRegistrationPrice(
-                            tempSelectedEvents,
-                            userProfileData.gender || 'unknown'
-                          );
-                          const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `?${totalAmount}`;
-                          return (
-                            <div className="price-preview">
-                              Total: {formattedAmount}
-                            </div>
-                          );
-                        })()
-                      )}
-                    </div>
-                    <div className="modal-actions">
-                      <button className="close-modal-btn" onClick={handleCloseSubModal}>
-                        Cancel
-                      </button>
-                      {tempSelectedEvents.size > 0 && (
-                        <button 
-                          className="register-events-btn"
-                          onClick={handleRegisterForEvents}
-                        >
-                          ? Register for Events ({tempSelectedEvents.size})
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              {activeSubModal === 'PROFILE' && (
-                <div className="sub-cards-grid">
-                  <div className="sub-card" onClick={handleOpenProfile}>
-                    <h3>VIEW PROFILE</h3>
-                  </div>
-                  <div className="sub-card">
-                    <h3>EDIT PROFILE</h3>
-                  </div>
-                  <div className="sub-card" onClick={() => setShowMyEventsModal(true)}>
-                    <h3>MY EVENTS</h3>
-                  </div>
-                  <div className="sub-card">
-                    <h3>CERTIFICATES</h3>
-                  </div>
-                </div>
-              )}
               
               {activeSubModal === 'SCHEDULE' && (
                 <div className="sub-cards-grid">
@@ -4922,125 +4708,245 @@ Do you want to proceed with registration?`;
         </div>
       )}
 
-      {/* Profile Modal */}
+      {/* Profile Modal - New Design */}
       {showProfileModal && (
-        <div className="login-modal-overlay" onClick={handleCloseProfile}>
-          <div className="login-modal-content profile-modal-expanded" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>?? My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>�</button>
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 99999,
+          backgroundImage: 'url("/Background-redesign.avif")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          overflow: 'auto'
+        }}>
+
+          {/* Content Container */}
+          <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
+            
+            {/* Student Details Header with Logout Button */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(12px)',
+              padding: '0.5rem 1rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+              position: 'relative',
+              fontSize: '1.25rem',
+
+            }}>
+              <h1 style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
+              <button
+                onClick={handleLogout}
+                style={{
+                  padding: '0.5rem 1.5rem',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  color: '#1f2937',
+                  fontWeight: 'bold',
+                  borderRadius: '0.375rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  position: 'absolute',
+                  right: '1.5rem',
+                  fontSize: '1.2rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Logout
+              </button>
             </div>
-            <div className="login-modal-body">
-              {isLoadingProfile ? (
-                <div className="loading-profile">
-                  <p>Loading profile data...</p>
+
+            {/* Main Content Area - Horizontally Centered */}
+            <div style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
+              <div style={{ maxWidth: '2000px' }}>
+              
+              {/* User Info Box */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '100px 700px 100px 100px',
+                marginBottom: '1.5rem',
+                marginTop: '-10 px',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
+              }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Reg No</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: {userProfileData?.userId || 'N/A'}</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Unq ID</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: MH250395</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Name</span>
+                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase' }}>: {userProfileData?.name || 'N/A'}</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>DOB</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: 2005-01-18</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>College</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: Vignan University</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Branch</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: CSE-AIML</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>PayStatus</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: NOT PAID</span>
+                  </div>
                 </div>
-              ) : (
-                <div className="profile-details">
-                  <div className="profile-header-section">
-                    <div className="profile-avatar">
-                      {userProfileData.name.charAt(0).toUpperCase()}
-                    </div>
-                    <h3>{userProfileData.name}</h3>
-                  </div>
-                  
-                  <div className="profile-info-section">
-                    <h4>?? Personal Information</h4>
-                    <div className="profile-info-grid">
-                      <div className="profile-info-item">
-                        <span className="info-label">Full Name:</span>
-                        <span className="info-value">{userProfileData.name}</span>
-                      </div>
-                      <div className="profile-info-item">
-                        <span className="info-label">Email:</span>
-                        <span className="info-value">{userProfileData.email}</span>
-                      </div>
-                      <div className="profile-info-item">
-                        <span className="info-label">Mahotsav ID:</span>
-                        <span className="info-value">{userProfileData.userId || 'MH26000001'}</span>
-                      </div>
-                      {userProfileData.gender && (
-                        <div className="profile-info-item">
-                          <span className="info-label">Gender:</span>
-                          <span className="info-value">{userProfileData.gender}</span>
+              </div>
+
+              {/* Event Details Section with Button on Right */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
+                <button
+                  onClick={() => setShowProfileModal(false)}
+                  style={{
+                    padding: '0.75rem 2rem',
+                    background: '#3b82f6',
+                    color: 'white',
+                    fontSize: '0.875rem',
+                    fontWeight: 'bold',
+                    borderRadius: '0.375rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textTransform: 'uppercase'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = '#2563eb';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = '#3b82f6';
+                  }}
+                >
+                  EDIT/REGISTER
+                </button>
+              </div>
+              
+              {/* Events Count Box */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.25)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '1.5rem',
+                marginBottom: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
+              }}>
+                <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
+                  You are enrolled in {myEvents.length} events.
+                </p>
+              </div>
+              
+              {/* Combined Events and Welcome Section */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.25)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '2rem',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {/* Events List Centered */}
+                <div style={{ width: '100%', maxWidth: '400px' }}>
+                  <button
+                    onClick={() => setShowProfileModal(false)}
+                    style={{
+                      color: '#fef3c7',
+                      fontSize: '1rem',
+                      fontWeight: '700',
+                      marginBottom: '1rem',
+                      marginTop: 0,
+                      textTransform: 'uppercase',
+                      background: 'rgba(255, 255, 255, 0.3)',
+                      padding: '0.75rem',
+                      borderRadius: '0.375rem',
+                      textAlign: 'center',
+                      backdropFilter: 'blur(4px)',
+                      letterSpacing: '0.05em',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.5)';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >Register for Events</button>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {myEvents.length > 0 ? (
+                      myEvents.map((event, index) => (
+                        <div key={index} style={{
+                          background: '#fef3c7',
+                          color: '#000',
+                          padding: '0.875rem 1rem',
+                          borderRadius: '0.5rem',
+                          fontWeight: '600',
+                          fontSize: '0.9375rem',
+                          textAlign: 'center'
+                        }}>
+                          {typeof event === 'string' ? event : event.eventName || 'MEN Track and Field'}
                         </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="profile-stats-section">
-                    <h4>?? Activity Summary</h4>
-                    <div className="stats-grid">
-                      <div className="stat-box">
-                        <div className="stat-number">{userRegisteredEvents.length}</div>
-                        <div className="stat-label">Events Registered</div>
-                      </div>
-                      <div className="stat-box">
-                        <div className="stat-number">0</div>
-                        <div className="stat-label">Events Completed</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Registered Events Section */}
-                  <div className="profile-registered-events-section">
-                    <h4>?? Registered Events</h4>
-                    {userRegisteredEvents.length > 0 ? (
-                      <div className="registered-events-list">
-                        {userRegisteredEvents.map((registration: any, index: number) => (
-                          <div key={index} className="registered-event-item">
-                            <div className="event-item-header">
-                              <h5>{registration.eventId?.eventName || 'Event'}</h5>
-                              <span className="event-type-badge">
-                                {registration.eventId?.eventType === 'sports' ? '?' : 
-                                 registration.eventId?.eventType === 'parasports' ? '?' : '??'} 
-                                {registration.eventId?.eventType || 'Event'}
-                              </span>
-                            </div>
-                            <div className="event-item-details">
-                              {registration.eventId?.venue && (
-                                <p className="event-meta">?? {registration.eventId.venue}</p>
-                              )}
-                              {registration.eventId?.date && (
-                                <p className="event-meta">?? {registration.eventId.date}</p>
-                              )}
-                              {registration.registrationType && (
-                                <p className="event-meta">?? {registration.registrationType === 'individual' ? 'Individual' : 'Team'}</p>
-                              )}
-                              {registration.teamName && (
-                                <p className="event-meta">?? Team: {registration.teamName}</p>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                      ))
                     ) : (
-                      <div className="no-events-registered">
-                        <p>You haven't registered for any events yet.</p>
-                        <button 
-                          className="browse-events-btn"
-                          onClick={() => {
-                            setShowProfileModal(false);
-                            setActiveSubModal('EVENTS');
-                            fetchEvents();
-                            if (userProfileData.userId) {
-                              fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                                setTempSelectedEvents(savedEventIds);
-                              });
-                            }
-                          }}
-                        >
-                          Browse Events
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => setShowMyEventsModal(true)}
+                        style={{
+                          background: '#fef3c7',
+                          color: '#000',
+                          padding: '0.875rem 1rem',
+                          borderRadius: '0.5rem',
+                          fontWeight: '600',
+                          fontSize: '0.9375rem',
+                          textAlign: 'center',
+                          border: 'none',
+                          cursor: 'pointer',
+                          width: '100%',
+                          transition: 'all 0.3s'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = '#fde68a';
+                          e.currentTarget.style.transform = 'scale(1.02)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = '#fef3c7';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                        MY Events
+                      </button>
                     )}
                   </div>
-
-                  <div className="profile-actions">
-                    <button className="profile-action-btn logout-btn" onClick={handleLogout}>?? Logout</button>
-                  </div>
                 </div>
-              )}
+              </div>
+              </div>
             </div>
           </div>
         </div>
@@ -5479,157 +5385,6 @@ Do you want to proceed with registration?`;
               loading="lazy"
               decoding="async"
             />
-          </div>
-        </div>
-      )}
-
-      {/* User Details Page Modal */}
-      {showUserDetailsPage && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-[99999]" 
-          style={{
-            backgroundImage: 'url("/Background-redesign.avif")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}>
-          
-          {/* Floating Flowers */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
-            <FlowerComponent 
-              size="100%"
-              sunSize="50%"
-              moonSize="43%"
-              sunTop="25%"
-              sunLeft="25%"
-              moonTop="28.5%"
-              moonLeft="28.5%"
-              showPetalRotation={true}
-            />
-          </div>
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
-            <FlowerComponent 
-              size="100%"
-              sunSize="50%"
-              moonSize="43%"
-              sunTop="25%"
-              sunLeft="25%"
-              moonTop="28.5%"
-              moonLeft="28.5%"
-              showPetalRotation={true}
-            />
-          </div>
-
-          {/* Content Container */}
-          <div className="relative z-10 min-h-screen">
-            
-            {/* Close Button - Top Right */}
-            <button 
-              onClick={() => setShowUserDetailsPage(false)}
-              className="fixed top-4 right-4 md:top-6 md:right-6 w-12 h-12 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold transition-all hover:scale-110 z-50"
-              aria-label="Close"
-            >
-              ×
-            </button>
-
-            {/* Student Details Header with Logout Button */}
-            <div className="bg-red-500 py-4 px-6 flex justify-between items-center">
-              <h1 className="text-white text-xl md:text-2xl font-bold">Student Details</h1>
-              <button
-                onClick={() => setShowUserDetailsPage(false)}
-                className="px-6 py-2 bg-white text-red-500 font-bold rounded-md hover:bg-gray-100 transition-all"
-              >
-                Logout
-              </button>
-            </div>
-
-            {/* Main Content Area */}
-            <div className="p-6 md:p-12">
-              
-              {/* User Info Box - Structured like image 2 */}
-              <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-8 mb-8 max-w-4xl">
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Reg No</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.userId || userProfileData?.userId || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Unq ID</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.registerId || userProfileData?.registerId || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Name</span>
-                    <span className="text-white text-base md:text-lg uppercase">: {fullUserData?.name || userProfileData?.name || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">DOB</span>
-                    <span className="text-white text-base md:text-lg">: {(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth) ? new Date(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('/').reverse().join('-') : 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">College</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.college || userProfileData?.college || 'Vignan University'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Branch</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.branch || userProfileData?.branch || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">PayStatus</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.paymentStatus || userProfileData?.paymentStatus || 'NOT PAID'}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event Details Section with Button on Right */}
-              <div className="flex justify-between items-start mb-6">
-                <h2 className="text-white text-xl md:text-2xl font-bold">Event Details</h2>
-                <button
-                  onClick={() => {
-                    setShowUserDetailsPage(false);
-                    setActiveSubModal('EVENTS');
-                    if (isLoggedIn && userProfileData.userId) {
-                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                        setTempSelectedEvents(savedEventIds);
-                      });
-                    } else {
-                      setTempSelectedEvents(new Set());
-                    }
-                    fetchEvents();
-                  }}
-                  className="px-8 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-md shadow-lg transition-all duration-200 hover:scale-105 uppercase"
-                >
-                  EDIT/REGISTER
-                </button>
-              </div>
-              
-              {/* Events Count Box */}
-              <div className="bg-gray-600/50 backdrop-blur-sm rounded-lg p-6 mb-8 max-w-4xl">
-                <p className="text-white text-base md:text-lg text-center">
-                  You are enrolled in {myEvents.length} events.
-                </p>
-              </div>
-              
-              {/* Events List Section */}
-              {myEvents.length > 0 && (
-                <div>
-                  <div className="bg-gray-700/40 rounded-lg p-6 max-w-sm">
-                    <h3 className="text-white text-base font-semibold mb-4 uppercase">EVENTS</h3>
-                    <div className="space-y-3">
-                      {myEvents.map((event, index) => (
-                        <div key={index} className="bg-yellow-400 text-black px-4 py-3 rounded-md font-semibold text-sm">
-                          {typeof event === 'string' ? event : event.eventName || 'Unknown Event'}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       )}

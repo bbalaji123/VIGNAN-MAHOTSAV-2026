@@ -34,8 +34,8 @@ const EventsInfo: React.FC = () => {
   const [, setCurrentCulturalsSlide] = useState(3);
 
   // Events data
-  const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
-  const [culturalEvents, setCulturalEvents] = useState<Event[]>([]);
+  const [, setSportsEvents] = useState<Event[]>([]);
+  const [, setCulturalEvents] = useState<Event[]>([]);
   const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
 
   const sportsDetailCards = [
@@ -367,10 +367,6 @@ const EventsInfo: React.FC = () => {
   // Click handlers
   const handleSportsCardClick = () => {
     setShowSportsDetails(true);
-  };
-
-  const handleParaSportsCardClick = () => {
-    setShowParaSports(true);
   };
 
   const handleCulturalsCardClick = () => {

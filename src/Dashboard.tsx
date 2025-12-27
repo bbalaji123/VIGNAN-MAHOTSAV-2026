@@ -452,7 +452,6 @@ const Dashboard: React.FC = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
   const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
-  const [isMuted, setIsMuted] = useState(false);
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -2199,7 +2198,7 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Right side image - 2.avif */}
-        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px' }}>
+        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
           <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
         </div>
         
@@ -2214,9 +2213,36 @@ const Dashboard: React.FC = () => {
         {/* Action Buttons - separate container with mobile-specific positioning */}
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleOpenProfile}>Register for Events</button>
+            <button 
+              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
+              onClick={handleOpenProfile}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
+              }}
+            >Register for Events</button>
           ) : (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
+            <button 
+              className="register-login-btn"
+              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', boxShadow: '0 4px 15px rgba(236, 72, 153, 0.4)'}} 
+              onClick={handleLoginClick}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(236, 72, 153, 0.6)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #db2777, #be185d)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
+              }}
+            >Register/Login</button>
           )}
         </div>
         <style>{`
@@ -2304,8 +2330,25 @@ const Dashboard: React.FC = () => {
                 moonLeft="28.5%"
                 showPetalRotation={true}
                 opacity={1}
+                hideMoon={true}
               />
             </div>
+            {/* Static Moon - Not rotating */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.avif`}
+              alt="Moon"
+              style={{
+                position: 'absolute',
+                width: '43%',
+                height: '43%',
+                top: '28.5%',
+                left: '28.5%',
+                pointerEvents: 'none',
+                zIndex: 10,
+                animation: 'none',
+                transform: 'none'
+              }}
+            />
           </div>
 
           {/* Floating Flower - Bottom Left */}
@@ -2321,8 +2364,25 @@ const Dashboard: React.FC = () => {
                 moonLeft="28.5%"
                 showPetalRotation={true}
                 opacity={1}
+                hideMoon={true}
               />
             </div>
+            {/* Static Moon - Not rotating */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.avif`}
+              alt="Moon"
+              style={{
+                position: 'absolute',
+                width: '43%',
+                height: '43%',
+                top: '28.5%',
+                left: '28.5%',
+                pointerEvents: 'none',
+                zIndex: 10,
+                animation: 'none',
+                transform: 'none'
+              }}
+            />
           </div>
           
           {/* Back Button - Outside Scroll (Mobile Only) */}
@@ -3692,14 +3752,20 @@ const Dashboard: React.FC = () => {
           
           {/* Stats Bar */}
           <div ref={statsRef} style={{
-            background: 'rgba(200, 180, 220, 0.9)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
             borderRadius: '30px',
-            padding: '40px 20px',
-            marginTop: '40px'
+            padding: '40px 15px',
+            marginTop: '40px',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            maxWidth: '1200px',
+            margin: '40px auto 0'
           }}>
             <div className="stats-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
               justifyContent: 'center',
               alignItems: 'center',
               gap: '20px',
@@ -3707,35 +3773,35 @@ const Dashboard: React.FC = () => {
               margin: '0 auto'
             }}>
               {/* Footfall */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{footfall.toLocaleString()}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏫</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{colleges}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>COLLEGES</div>
               </div>
               
               {/* Events */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{events}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🌐</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{onlineAudience.toLocaleString()}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>ONLINE AUDIANCE</div>
               </div>
               
               {/* Editions */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ 
                   fontSize: '3rem', 
                   marginBottom: '10px',
@@ -3747,24 +3813,25 @@ const Dashboard: React.FC = () => {
                     width: '60px',
                     height: '60px',
                     borderRadius: '50%',
-                    border: '4px solid #1a1a1a',
+                    border: '4px solid #f5e210',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1.5rem',
                     fontWeight: 'bold',
-                    color: '#1a1a1a'
+                    color: '#ffffff',
+                    textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
                   }}>18</div>
                 </div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px' }}>18 EDITIONS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>OF FESTIVITIES</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>18 EDITIONS</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>OF FESTIVITIES</div>
               </div>
               
               {/* Cash Prizes */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '10px' }}>💰</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{cashPrizes}+ LACKS</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>CASH PRIZES</div>
               </div>
             </div>
           </div>
@@ -4066,7 +4133,7 @@ const Dashboard: React.FC = () => {
                       : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&enablejsapi=1` : 'about:blank'}
+                  }?autoplay=1&controls=1&modestbranding=1&rel=0` : 'about:blank'}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -4080,13 +4147,14 @@ const Dashboard: React.FC = () => {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    zIndex: 1
+                    zIndex: 1,
+                    pointerEvents: 'auto'
                   }}
                 />
                 {/* Day indicator */}
                 <div style={{
                   position: 'absolute',
-                  bottom: '10px',
+                  top: '10px',
                   right: '10px',
                   background: 'rgba(0, 0, 0, 0.7)',
                   color: 'white',
@@ -4099,48 +4167,6 @@ const Dashboard: React.FC = () => {
                 }}>
                   Day {currentDay}
                 </div>
-                {/* Mute/Unmute button */}
-                <button
-                  onClick={() => {
-                    setIsMuted(!isMuted);
-                    if (videoRef.current && videoRef.current.contentWindow) {
-                      const command = isMuted ? '{"event":"command","func":"unMute","args":""}' : '{"event":"command","func":"mute","args":""}';
-                      videoRef.current.contentWindow.postMessage(command, '*');
-                    }
-                  }}
-                  style={{
-                    position: 'absolute',
-                    bottom: '10px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: 'rgba(0, 0, 0, 0.7)',
-                    color: 'white',
-                    border: 'none',
-                    padding: '8px 12px',
-                    borderRadius: '50%',
-                    fontSize: '1.2rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    zIndex: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '40px',
-                    height: '40px',
-                    transition: 'all 0.3s ease',
-                    pointerEvents: 'auto'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.9)';
-                    e.currentTarget.style.transform = 'translateX(-50%) scale(1.1)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(0, 0, 0, 0.7)';
-                    e.currentTarget.style.transform = 'translateX(-50%) scale(1)';
-                  }}
-                >
-                  {isMuted ? '🔇' : '🔊'}
-                </button>
               </div>
             </div>
 
@@ -4286,8 +4312,26 @@ const Dashboard: React.FC = () => {
                   moonLeft="28.5%"
                   showPetalRotation={true}
                   opacity={1}
+                  hideMoon={true}
                 />
               </div>
+              {/* Static Moon - Not rotating */}
+              <img 
+                src={`${import.meta.env.BASE_URL}moon.avif`}
+                alt="Moon"
+                style={{
+                  position: 'absolute',
+                  width: '43%',
+                  height: '43%',
+                  top: '28.5%',
+                  left: '28.5%',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                  animation: 'none',
+                  transform: 'none',
+                  opacity: 0.25
+                }}
+              />
             </div>
 
             {/* Floating Flower - Bottom Left */}
@@ -4303,8 +4347,26 @@ const Dashboard: React.FC = () => {
                   moonLeft="28.5%"
                   showPetalRotation={true}
                   opacity={1}
+                  hideMoon={true}
                 />
               </div>
+              {/* Static Moon - Not rotating */}
+              <img 
+                src={`${import.meta.env.BASE_URL}moon.avif`}
+                alt="Moon"
+                style={{
+                  position: 'absolute',
+                  width: '43%',
+                  height: '43%',
+                  top: '28.5%',
+                  left: '28.5%',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                  animation: 'none',
+                  transform: 'none',
+                  opacity: 0.25
+                }}
+              />
             </div>
             
             <div className="events-navigation">
@@ -5453,7 +5515,7 @@ const Dashboard: React.FC = () => {
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            ?
+            ✕
           </button>
 
           {/* Photo Content - reuse AVIF gallery image for modal view */}
@@ -5473,8 +5535,8 @@ const Dashboard: React.FC = () => {
             }}
           >
             <img
-              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.index]}`}
-              alt={`Gallery ${selectedPhoto.index + 1}`}
+              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.row * 6 + selectedPhoto.index]}`}
+              alt={`Gallery ${selectedPhoto.row * 6 + selectedPhoto.index + 1}`}
               style={{
                 width: '100%',
                 height: '100%',

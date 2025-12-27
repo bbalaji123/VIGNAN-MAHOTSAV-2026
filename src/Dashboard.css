@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+/* Make moon static everywhere - no rotation */
+img[alt="Moon"],
+.moon-static {
+  animation: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
 /* ============================================
    MOBILE RESPONSIVE STYLES - FOOTER & SECTIONS
    ============================================ */
@@ -434,6 +442,15 @@ body::-webkit-scrollbar {
 }
 
 @keyframes moonStatic {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moonCounterRotate {
   from {
     transform: rotate(0deg);
   }

@@ -55,8 +55,6 @@ export interface ApiResponse {
 }
 
 export interface Event {
-  fee: ReactNode;
-  fee: any;
   _id: string;
   eventName: string;
   eventType: 'sports' | 'culturals' | 'technical' | 'literary' | 'parasports';

@@ -15,6 +15,7 @@ interface FlowerComponentProps {
   style?: React.CSSProperties;
   petalAnimation?: string;
   clipPathTransition?: string;
+  hideMoon?: boolean;
 }
 
 const FlowerComponent: React.FC<FlowerComponentProps> = ({
@@ -31,7 +32,8 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
   moonLeft = '30.8%',
   style = {},
   petalAnimation = '',
-  clipPathTransition = 'none'
+  clipPathTransition = 'none',
+  hideMoon = false
 }) => {
   const defaultPetalAnimation = showPetalRotation ? 'petalsRotateAnticlockwise 40s linear infinite' : 'none';
   
@@ -80,22 +82,27 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
       />
       
       {/* Moon Layer */}
-      <img 
-        src={`${import.meta.env.BASE_URL}moon.avif`}
-        alt="Moon"
-        style={{ 
-          width: moonSize, 
-          height: moonSize, 
-          display: 'block',
-          position: 'absolute',
-          top: moonTop,
-          left: moonLeft,
-          pointerEvents: 'none',
-          zIndex: 10,
-          animation: 'none',
-          transformOrigin: 'center center'
-        }}
-      />
+      {!hideMoon && (
+        <img 
+          src={`${import.meta.env.BASE_URL}moon.avif`}
+          alt="Moon"
+          className="moon-static"
+          style={{ 
+            width: moonSize, 
+            height: moonSize, 
+            display: 'block',
+            position: 'absolute',
+            top: moonTop,
+            left: moonLeft,
+            pointerEvents: 'none',
+            zIndex: 10,
+            animation: 'none !important',
+            transformOrigin: 'center center',
+            transform: 'none !important',
+            willChange: 'auto'
+          }}
+        />
+      )}
     </div>
   );
 };

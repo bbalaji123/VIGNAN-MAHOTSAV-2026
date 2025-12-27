@@ -1967,7 +1967,7 @@ const EventDetail: React.FC = () => {
       overflow: 'hidden'
     }}>
       {/* Decorative Flower - Top Right Corner */}
-      <div style={{position: 'fixed', top: '-250px', right: '-250px', width: '600px', height: '600px', zIndex: 1, pointerEvents: 'none', opacity: 0.3}}>
+      <div style={{position: 'fixed', top: '-250px', right: '-250px', width: '600px', height: '600px', zIndex: 1, pointerEvents: 'none', opacity: 0.8}}>
         <FlowerComponent 
           size="100%"
           sunSize="50%"

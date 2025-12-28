@@ -4338,22 +4338,6 @@ const Dashboard: React.FC = () => {
           {/* Lock Icon removed */}
         </div>
 
-        {/* Hint Text */}
-        <p style={{
-          marginTop: '20px',
-          fontSize: 'clamp(0.85rem, 2vw, 1rem)',
-          color: 'rgba(255, 255, 255, 0.8)',
-          textAlign: 'center',
-          fontFamily: 'Poppins, sans-serif',
-          zIndex: 10,
-          position: 'relative',
-          opacity: isThrowbackUnlocked ? 1 : 0,
-          transition: 'opacity 1.5s ease 1s',
-          fontStyle: 'italic'
-        }}>
-          Videos auto-rotate every 15 seconds • Select year to view memories
-        </p>
-
         {/* Countdown Timer */}
         <div 
           className="throwback-countdown-timer"
@@ -5782,25 +5766,25 @@ const Dashboard: React.FC = () => {
               letterSpacing: '1px'
             }}>CONTACT US :</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <a href="mailto:mahotsav@vignan.ac.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
                   <path d="m2 7 10 6 10-6"/>
                 </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem' }}>mahotsav@vignan.ac.in</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>mahotsav@vignan.ac.in</span>
+              </a>
+              <a href="tel:+919493033592" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem' }}>+91 94930 33592</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 94930 33592</span>
+              </a>
+              <a href="tel:+919030557363" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem' }}>+91 90305 57363</span>
-              </div>
+                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 90305 57363</span>
+              </a>
             </div>
           </div>
 

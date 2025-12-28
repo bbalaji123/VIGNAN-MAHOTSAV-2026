@@ -1980,17 +1980,17 @@ const EventDetail: React.FC = () => {
         />
       </div>
 
-      <div className="min-h-screen p-4 md:p-8" style={{position: 'relative', zIndex: 10}}>
+      <div className="min-h-screen" style={{position: 'relative', zIndex: 10, padding: '0px'}}>
         {/* Header: Logo + Back Button + Title */}
-        <div className="mb-8">
+        <div style={{margin: '0px', paddingTop: '8px', paddingLeft: '16px', paddingRight: '16px'}}>
           {/* Desktop layout */}
-          <div className="hidden md:grid md:grid-cols-3 md:items-start mb-6">
+          <div className="hidden md:grid md:grid-cols-3 md:items-start mb-4">
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                style={{height: '12rem', objectFit: 'contain', marginTop: '-2rem'}}
+                style={{height: '12rem', objectFit: 'contain', marginTop: '0rem'}}
               />
               <BackButton 
                 className="!static !top-auto !left-auto"
@@ -1999,7 +1999,7 @@ const EventDetail: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '32px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '8px'}}>
               <h1 style={{fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 {eventData.title}
               </h1>
@@ -2013,25 +2013,47 @@ const EventDetail: React.FC = () => {
           </div>
 
           {/* Mobile layout */}
-          <div className="md:hidden flex flex-col items-center gap-3 mb-6 pt-0">
-            <BackButton 
-              className="!static !top-auto !left-auto"
-              onClick={handleBack}
-            />
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
-                {eventData.title}
-              </h1>
-              <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
-                {eventData.subtitle}
-              </h2>
+          <div className="md:hidden flex flex-col items-center gap-3 mb-4 pt-0" style={{position: 'relative'}}>
+            {/* Mahotsav Logo - Top Center */}
+            <div style={{
+              position: 'absolute',
+              top: '0px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 100,
+              width: 'clamp(120px, 25vw, 200px)'
+            }}>
+              <img 
+                src={`${import.meta.env.BASE_URL}image.avif`}
+                alt="Vignan Mahotsav" 
+                style={{
+                  width: '100%',
+                  height: 'auto'
+                }}
+              />
+            </div>
+            
+            {/* Back Button and Titles with padding-top for logo space */}
+            <div style={{paddingTop: 'clamp(80px, 18vw, 130px)', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px'}}>
+              <BackButton 
+                className="!static !top-auto !left-auto"
+                onClick={handleBack}
+              />
+              <div className="text-center">
+                <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                  {eventData.title}
+                </h1>
+                <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                  {eventData.subtitle}
+                </h2>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Content Grid */}
-        <div className="flex justify-center items-center min-h-[calc(100vh-250px)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-4 sm:gap-6 max-w-7xl items-center px-4 sm:px-6 lg:px-0">
+        <div className="flex justify-center items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-4 sm:gap-6 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
           {/* Poster */}
           <div className="flex justify-center lg:justify-start">
             <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">

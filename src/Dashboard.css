@@ -158,11 +158,38 @@
   }
 }
 
-/* Throwback video card - better aspect ratio on mobile */
+/* Throwback video card - consistent sizing */
+.throwback-video-card {
+  width: clamp(280px, 70vw, 485px);
+  height: clamp(158px, 39.4vw, 273px);
+}
+
+/* Mobile - 90% viewport width for consistency across all devices */
 @media (max-width: 640px) {
   .throwback-video-card {
-    width: clamp(320px, 90vw, 485px) !important;
-    height: clamp(180px, 50.625vw, 273px) !important;
+    width: 90vw !important;
+    max-width: 90vw !important;
+    min-width: 90vw !important;
+    height: 270px !important;
+    max-height: 270px !important;
+    min-height: 270px !important;
+  }
+  
+  .throwback-video-card iframe {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* iPhone 12 Pro and similar dimensions (390x844) */
+@media (max-width: 640px) and (min-width: 360px) {
+  .throwback-video-card {
+    width: 90vw !important;
+    max-width: 90vw !important;
+    min-width: 90vw !important;
+    height: 220px !important;
+    max-height: 220px !important;
+    min-height: 220px !important;
   }
 }
 
@@ -171,6 +198,13 @@
   .throwback-video-card {
     width: clamp(380px, 51vw, 485px) !important;
     height: clamp(214px, 28.7vw, 273px) !important;
+  }
+}
+
+/* Mobile - push timer down to create space for video card */
+@media (max-width: 640px) {
+  .throwback-countdown-timer {
+    margin-top: 250px !important;
   }
 }
 

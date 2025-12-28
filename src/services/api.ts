@@ -51,6 +51,10 @@ export interface ApiResponse {
     email?: string;
     userType?: string;
     gender?: string;
+    branch?: string;
+    college?: string;
+    phone?: string;
+    dateOfBirth?: string;
   };
   error?: string;
 }

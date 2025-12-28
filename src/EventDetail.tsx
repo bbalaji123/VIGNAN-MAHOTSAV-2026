@@ -1914,6 +1914,84 @@ const EventDetail: React.FC = () => {
     }
   };
 
+  // Event image mapping
+  const eventImageMap: { [key: string]: string } = {
+    // Sports Events
+    "Chess": "events/chess.avif",
+    "Table Tennis": "events/Tabel Tennis.avif",
+    "Traditional Yogasana": "events/Traditional Yoga.avif",
+    "Artistic Yogasana": "events/Traditional Yoga.avif",
+    "Taekwondo": "events/Taekwando.avif",
+    "Tennikoit": "events/Tennikoit.avif",
+    "Volley ball (Men)": "events/volley ball.avif",
+    "Volley ball (Women)": "events/volley ball.avif",
+    "Basket ball (Men)": "events/basket ball.avif",
+    "Basket ball (Women)": "events/basket ball.avif",
+    "Kabaddi (Men)": "events/kabbadi.avif",
+    "Kabaddi (Women)": "events/kabbadi.avif",
+    "Kho-Kho (Men)": "events/kho kho.avif",
+    "Kho-Kho (Women)": "events/kho kho.avif",
+    "Hockey (Men)": "events/hockey.avif",
+    "Hockey (Women)": "events/hockey.avif",
+    "Throw ball": "events/throwball.avif",
+    "Football (Men)": "events/football men.avif",
+    "Football (Women)": "events/football men.avif",
+    // Dance Events
+    "Classical Dance Solo": "events/classical dance.avif",
+    "Dancing Star - Western Solo": "events/dancig star.avif",
+    "Dancing Jodi - Western Duo": "events/dancing jodi.avif",
+    "Spot Dance - Jodi": "events/spot dance.avif",
+    "Group Dance": "events/group dance.avif",
+    // Music Events
+    "Singing Idol": "events/singing idol.avif",
+    "Group Singing": "events/group singing.avif",
+    "Singing Jodi": "events/singing jodi.avif",
+    "Classical Light Vocal Solo": "events/classical or light vocal solo.avif",
+    "Western Vocal Solo": "events/Western vocal solo.avif",
+    "Anthyakshari Duo": "events/anthyakshari.avif",
+    "Instrumental Solo": "events/instrumental solo.avif",
+    // Theatre Events
+    "Skit": "events/skit.avif",
+    "Mime": "events/mime.avif",
+    "Mono Action": "events/Mono Action.avif",
+    "Spot Ad Making": "events/On Spot Ad Making.avif",
+    "Dialogue Dhamaka": "events/Dialogue Drama.avif",
+    // Literature Events
+    "Master Orator": "events/Master orator.avif",
+    "On Spot Creative Content Writing": "events/spot creative.avif",
+    "Telugu Vyaasa Rachana": "events/telugu vyasa rachana.avif",
+    "Shayari - Hindi": "events/Shayari hindi.avif",
+    "JAM": "events/impromptu.avif",
+    "Story telling": "events/story telling.avif",
+    "Quiz": "events/Quiz wiz.avif",
+    "Word Master": "events/word master.avif",
+    "Dumb Charades": "events/dumb chardes.avif",
+    // Visual Arts Events
+    "Theme Painting": "events/Theme Painting.avif",
+    "Clay Modelling": "events/clay modeling.avif",
+    "Rangoli": "events/Rangoli.avif",
+    "Mehandi": "events/Mehandi.avif",
+    "Collage": "events/collage.avif",
+    "Face Painting": "events/Face painting.avif",
+    "Pencil Sketching": "events/pencil Sketching.avif",
+    "Mandala Art": "events/Mandala Art.avif",
+    // Fashion Design Events
+    "Haute Couture": "events/Theme Ramp walk.avif",
+    "Craftvilla": "events/Craft villa.avif",
+    "Texart": "events/texart.avif",
+    "T-Shirt Designing": "events/T-shirt designing.avif",
+    // Digital Storytelling Events
+    "Online Photography": "events/Theme Photography.avif",
+    "Digital Poster Making": "events/Digital Poster Making.avif",
+    "Mahotsav Digital Chronicle": "events/MH-26 Digital Chronicle.avif",
+    "Reel Making": "events/reel making.avif",
+    // Gaming Events
+    "Valorant": "events/valorant.avif",
+    "E-Football": "events/E-Football.avif",
+    "Counter Strike": "events/Counter Strike.avif",
+    "Smash Karts": "events/smash kart.avif"
+  };
+
   const handleDownloadPDF = async () => {
     if (!eventData) return;
     
@@ -2138,20 +2216,30 @@ const EventDetail: React.FC = () => {
 
         {/* Content Grid */}
         <div className="flex justify-center items-start">
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_350px] gap-4 sm:gap-6 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-3 sm:gap-4 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
           {/* Poster */}
           <div className="flex justify-center lg:justify-start">
-            <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center shadow-2xl backdrop-blur-md">
-              <span>POSTER of EVENT</span>
+            <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
+              {eventName && eventImageMap[eventName] ? (
+                <img 
+                  src={`${import.meta.env.BASE_URL}${eventImageMap[eventName]}`}
+                  alt={eventName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center">
+                  <span>POSTER of EVENT</span>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Rules Section */}
-          <div className="p-4 sm:p-6">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+          <div className="p-3 sm:p-4">
+            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
               Rules:
             </h3>
-            <ul className="space-y-3 sm:space-y-5">
+            <ul className="space-y-2 sm:space-y-3">
               {eventData.rules.map((rule, index) => (
                 <li key={index} className="flex items-start gap-2 sm:gap-4">
                   <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
@@ -2164,9 +2252,9 @@ const EventDetail: React.FC = () => {
           </div>
 
           {/* Prizes and Contact Section */}
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-3 sm:space-y-4">
             {/* Cash Prizes */}
-            <div className="p-4 sm:p-6">
+            <div className="p-3 sm:p-4">
               <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                 Cash Prizes:
               </h3>
@@ -2200,11 +2288,22 @@ const EventDetail: React.FC = () => {
                 Contact no:
               </h3>
               <div className="space-y-2 sm:space-y-3">
-                {eventData.contacts.map((contact, index) => (
-                  <div key={index} className="text-white text-xs sm:text-sm md:text-base">
-                    <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>{contact.name}: {contact.phone}</div>
-                  </div>
-                ))}
+                {eventData.contacts.map((contact, index) => {
+                  // Determine prefix (Mr/Ms) based on name
+                  const prefix = contact.name.toLowerCase().includes('ms') || contact.name.toLowerCase().includes('miss') ? 'Ms.' : 'Mr.';
+                  // Clean name (remove existing Mr/Ms if present)
+                  const cleanName = contact.name.replace(/^(Mr\.?|Ms\.?|Miss)\s*/i, '').trim();
+                  // Format phone with +91 and space
+                  const formattedPhone = contact.phone.startsWith('+91') ? contact.phone : `+91 ${contact.phone.replace(/^\+?91\s*/, '')}`;
+                  
+                  return (
+                    <div key={index} className="text-white text-xs sm:text-sm md:text-base">
+                      <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>
+                        {prefix} {cleanName}: <a href={`tel:${formattedPhone.replace(/\s/g, '')}`} style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>{formattedPhone}</a>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

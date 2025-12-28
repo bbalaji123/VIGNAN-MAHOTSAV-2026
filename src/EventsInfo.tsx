@@ -48,7 +48,6 @@ const EventsInfo: React.FC = () => {
     { title: "Chess", subtitle: "" },
     { title: "Table Tennis", subtitle: "" },
     { title: "Traditional Yogasana", subtitle: "" },
-    { title: "Artistic Yogasana", subtitle: "" },
     { title: "Taekwondo", subtitle: "under 8 wt. categories" },
     { title: "Tennikoit", subtitle: "" }
   ];
@@ -191,7 +190,6 @@ const EventsInfo: React.FC = () => {
     "Throw ball": true,
     "Tennikoit": true,
     "Traditional Yogasana": true,
-    "Artistic Yogasana": true,
     "Taekwondo": true
   };
 
@@ -227,7 +225,6 @@ const EventsInfo: React.FC = () => {
       "Chess": "Chess",
       "Table Tennis": "Table Tennis",
       "Traditional Yogasana": "Traditional Yogasana",
-      "Artistic Yogasana": "Artistic Yogasana",
       "Taekwondo": "Taekwondo",
       "Cricket Championship": "Cricket Championship",
       "Tennikoit": "Tennikoit",
@@ -544,36 +541,38 @@ const EventsInfo: React.FC = () => {
           @media (max-width: 768px) {
             .flower-top-right,
             .flower-bottom-left {
-              width: 350px !important;
-              height: 350px !important;
+              width: 200px !important;
+              height: 200px !important;
+              opacity: 0.01 !important;
             }
             
             .flower-top-right {
-              top: -12% !important;
-              right: -12% !important;
+              top: -25% !important;
+              right: -25% !important;
             }
             
             .flower-bottom-left {
-              bottom: -12% !important;
-              left: -12% !important;
+              bottom: -25% !important;
+              left: -25% !important;
             }
           }
           
           @media (max-width: 480px) {
             .flower-top-right,
             .flower-bottom-left {
-              width: 250px !important;
-              height: 250px !important;
+              width: 160px !important;
+              height: 160px !important;
+              opacity: 0.01 !important;
             }
             
             .flower-top-right {
-              top: -8% !important;
-              right: -12% !important;
+              top: -25% !important;
+              right: -25% !important;
             }
             
             .flower-bottom-left {
-              bottom: -8% !important;
-              left: -12% !important;
+              bottom: -25% !important;
+              left: -25% !important;
             }
           }
         
@@ -1095,25 +1094,32 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {indoorSportsCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {indoorSportsCards.map((card, index) => {
+                      // Map indoor sports card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Chess": "events/chess.avif",
+                        "Table Tennis": "events/Tabel Tennis.avif",
+                        "Traditional Yogasana": "events/Traditional Yoga.avif",
+                        "Taekwondo": "events/Taekwando.avif",
+                        "Tennikoit": "events/Tennikoit.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1125,25 +1131,32 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {indoorSportsCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {indoorSportsCards.map((card, index) => {
+                      // Map indoor sports card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Chess": "events/chess.avif",
+                        "Table Tennis": "events/Tabel Tennis.avif",
+                        "Traditional Yogasana": "events/Traditional Yoga.avif",
+                        "Taekwondo": "events/Taekwando.avif",
+                        "Tennikoit": "events/Tennikoit.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1155,25 +1168,34 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {mensTeamSportsCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title, 'Men')}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {mensTeamSportsCards.map((card, index) => {
+                      // Map men's team sports card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Cricket Championship": "events/web- cricket.avif",
+                        "Volley ball": "events/volley ball.avif",
+                        "Basket ball": "events/basket ball.avif",
+                        "Kabaddi": "events/kabbadi.avif",
+                        "Football": "events/football men.avif",
+                        "Kho-Kho": "events/kho kho.avif",
+                        "Hockey": "events/hockey.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title, 'Men')}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1185,25 +1207,32 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {womensTeamSportsCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title, 'Women')}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {womensTeamSportsCards.map((card, index) => {
+                      // Map women's team sports card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Volley ball": "events/volley ball.avif",
+                        "Basket ball": "events/basket ball.avif",
+                        "Kabaddi": "events/kabbadi.avif",
+                        "Kho-Kho": "events/kho kho.avif",
+                        "Throw ball": "events/throwball.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title, 'Women')}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1348,25 +1377,34 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {musicCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {musicCards.map((card, index) => {
+                      // Map music card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Singing Idol": "events/singing idol.avif",
+                        "Group Singing (6 no.)": "events/group singing.avif",
+                        "Singing Jodi": "events/singing jodi.avif",
+                        "Classical/Light Vocal Solo": "events/classical or light vocal solo.avif",
+                        "Western Vocal Solo": "events/Western vocal solo.avif",
+                        "Anthyakshari Duo": "events/anthyakshari.avif",
+                        "Instrumental Solo": "events/instrumental solo.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1378,25 +1416,32 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {theatreCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {theatreCards.map((card, index) => {
+                      // Map theatre card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Skit (8 no.)": "events/skit.avif",
+                        "Mime (6 no.)": "events/mime.avif",
+                        "Dialogue Dhamakha": "events/Dialogue Drama.avif",
+                        "Mono Action": "events/Mono Action.avif",
+                        "On the Spot Ad making": "events/On Spot Ad Making.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1408,25 +1453,36 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {literatureCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {literatureCards.map((card, index) => {
+                      // Map literature card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Master Orator": "events/Master orator.avif",
+                        "Spot Creative writing": "events/spot creative.avif",
+                        "Telugu Vyaasa rachana": "events/telugu vyasa rachana.avif",
+                        "Shayari – Hindi": "events/Shayari hindi.avif",
+                        "Impromptu (JAM)": "events/impromptu.avif",
+                        "Story telling": "events/story telling.avif",
+                        "Quiz wiz (3 no.)": "events/Quiz wiz.avif",
+                        "Word Master": "events/word master.avif",
+                        "Dumb charades (2 no.)": "events/dumb chardes.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1438,25 +1494,35 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {visualArtsCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {visualArtsCards.map((card, index) => {
+                      // Map visual arts card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Theme Painting": "events/Theme Painting.avif",
+                        "Clay modelling": "events/clay modeling.avif",
+                        "Rangoli (2 no.)": "events/Rangoli.avif",
+                        "Mehandi": "events/Mehandi.avif",
+                        "Collage": "events/collage.avif",
+                        "Face Painting": "events/Face painting.avif",
+                        "Pencil Sketching": "events/pencil Sketching.avif",
+                        "Mandala": "events/Mandala Art.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1468,25 +1534,31 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {fashionDesignCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {fashionDesignCards.map((card, index) => {
+                      // Map fashion design card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Haute Couture - Theme Ramp walk (12 no.)": "events/Theme Ramp walk.avif",
+                        "Craft villa ( Accessory design)": "events/Craft villa.avif",
+                        "Texart (Fashion sketching)": "events/texart.avif",
+                        "T-Shirt designing": "events/T-shirt designing.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1498,25 +1570,32 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {digitalStorytellingCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {digitalStorytellingCards.map((card, index) => {
+                      // Map digital storytelling card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Short film": "events/Short Film.avif",
+                        "Theme Photography (Online)": "events/Theme Photography.avif",
+                        "Digital Poster making": "events/Digital Poster Making.avif",
+                        "Mahotsav Digital Chronicle": "events/MH-26 Digital Chronicle.avif",
+                        "Reel Making": "events/reel making.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1528,25 +1607,31 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {gamingCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {gamingCards.map((card, index) => {
+                      // Map gaming card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Valorant (PC)": "events/valorant.avif",
+                        "E- Football (PC)": "events/E-Football.avif",
+                        "Counter Strike (PC)": "events/Counter Strike.avif",
+                        "Smash Karts (PC)": "events/smash kart.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

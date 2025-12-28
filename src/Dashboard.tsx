@@ -440,7 +440,17 @@ const Dashboard: React.FC = () => {
   const [loginMessage, setLoginMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [userProfileData, setUserProfileData] = useState<{ name: string; email: string; userId?: string; userType?: string; gender?: string }>({ name: '', email: '' });
+  const [userProfileData, setUserProfileData] = useState<{ 
+    name: string; 
+    email: string; 
+    userId?: string; 
+    userType?: string; 
+    gender?: string;
+    branch?: string;
+    college?: string;
+    phone?: string;
+    dateOfBirth?: string;
+  }>({ name: '', email: '' });
   const [showEventChecklistModal, setShowEventChecklistModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
   const [myEvents, setMyEvents] = useState<Event[]>([]);
@@ -2032,7 +2042,9 @@ const Dashboard: React.FC = () => {
       const result = await loginUser(identifier, payload.password);
       
       if (result.success && result.data) {
-        const { userId, name, email, userType = 'visitor', gender } = result.data;
+        const { userId, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
+        
+        console.log('Login data received:', { userId, name, email, userType, gender, branch, college, phone, dateOfBirth });
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -2047,14 +2059,19 @@ const Dashboard: React.FC = () => {
         setIsLoggedIn(true);
         setLoggedInUserName(name);
         
-        // Store user profile data
+        // Store user profile data with all available fields
         const profileData = {
           name: name,
           email: email,
           userId: userId,
           userType: userType || 'visitor',
-          gender: gender // No default value
+          gender: gender, // No default value
+          branch: branch,
+          college: college,
+          phone: phone,
+          dateOfBirth: dateOfBirth
         };
+        console.log('Setting profile data:', profileData);
         setUserProfileData(profileData);
         
         setShowLoginModal(false);
@@ -2067,6 +2084,18 @@ const Dashboard: React.FC = () => {
         localStorage.setItem('userType', userType || 'visitor');
         if (gender) {
           localStorage.setItem('userGender', gender);
+        }
+        if (branch) {
+          localStorage.setItem('userBranch', branch);
+        }
+        if (college) {
+          localStorage.setItem('userCollege', college);
+        }
+        if (phone) {
+          localStorage.setItem('userPhone', phone);
+        }
+        if (dateOfBirth) {
+          localStorage.setItem('userDOB', dateOfBirth);
         }
         localStorage.setItem('isLoggedIn', 'true');
         
@@ -2116,6 +2145,10 @@ const Dashboard: React.FC = () => {
     const storedUserId = localStorage.getItem('userId');
     const storedUserType = localStorage.getItem('userType');
     const storedUserGender = localStorage.getItem('userGender');
+    const storedBranch = localStorage.getItem('userBranch');
+    const storedCollege = localStorage.getItem('userCollege');
+    const storedPhone = localStorage.getItem('userPhone');
+    const storedDOB = localStorage.getItem('userDOB');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
     
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
@@ -2126,8 +2159,20 @@ const Dashboard: React.FC = () => {
         email: storedUserEmail || '',
         userId: storedUserId,
         userType: storedUserType || 'visitor',
-        gender: storedUserGender || undefined // Convert null to undefined
+        gender: storedUserGender || undefined, // Convert null to undefined
+        branch: storedBranch || undefined,
+        college: storedCollege || undefined,
+        phone: storedPhone || undefined,
+        dateOfBirth: storedDOB || undefined
       };
+      console.log('Loading profile data from localStorage:', profileData);
+      console.log('Raw localStorage values:', {
+        branch: storedBranch,
+        college: storedCollege,
+        phone: storedPhone,
+        dob: storedDOB,
+        gender: storedUserGender
+      });
       setUserProfileData(profileData);
       
       // Fetch user's saved events from database
@@ -2237,7 +2282,8 @@ const Dashboard: React.FC = () => {
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
             <button 
-              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)', marginTop: '-100px', marginLeft: '90px'}} 
+              className="register-events-btn"
+              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
               onClick={handleOpenProfile}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
@@ -2254,8 +2300,8 @@ const Dashboard: React.FC = () => {
             <button 
               className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
-                marginTop: '-100px',
-                marginLeft: '90px',
+                marginTop: '0',
+                marginLeft: '0',
               }}
               onClick={handleLoginClick}
               onMouseEnter={(e) => {
@@ -3625,7 +3671,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
-                <h2>MEN'S TEAM FIELD SPORTS</h2>
+                <h2>TEAM FIELD SPORTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
@@ -3933,6 +3979,93 @@ const Dashboard: React.FC = () => {
             .scroll-row {
               gap: 10px;
             }
+
+            /* Center Register button in mobile */
+            .register-events-btn,
+            .register-login-btn {
+              position: relative !important;
+              margin-top: 0 !important;
+              margin-left: 0 !important;
+              left: auto !important;
+            }
+
+            /* Profile section mobile responsiveness */
+            .profile-info-box {
+              padding: 1.5rem !important;
+            }
+
+            /* Side menu flowers - barely visible in mobile */
+            .side-menu-flower-top,
+            .side-menu-flower-bottom {
+              opacity: 0.01 !important;
+            }
+
+            /* Hero section improvements */
+            .hero-action-buttons {
+              margin-top: 2rem !important;
+            }
+
+            /* Profile modal mobile improvements */
+            .profile-modal-header {
+              padding: 0.5rem !important;
+            }
+
+            .profile-back-btn,
+            .profile-logout-btn {
+              padding: 0.4rem 0.8rem !important;
+              font-size: 0.9rem !important;
+              left: 0.5rem !important;
+            }
+
+            .profile-logout-btn {
+              right: 0.5rem !important;
+              left: auto !important;
+            }
+
+            .profile-title {
+              font-size: 1.2rem !important;
+            }
+
+            .profile-content-area {
+              padding: 1rem !important;
+            }
+
+            .profile-content-wrapper {
+              max-width: 100% !important;
+            }
+          }
+
+          /* Desktop-only styles for flowers */
+          @media (min-width: 769px) {
+            .side-menu-flower-top {
+              top: -16rem !important;
+              right: -16rem !important;
+              width: 37.5rem !important;
+              height: 37.5rem !important;
+              opacity: 0.25 !important;
+            }
+
+            .side-menu-flower-bottom {
+              bottom: -16rem !important;
+              left: -16rem !important;
+              width: 37.5rem !important;
+              height: 37.5rem !important;
+              opacity: 0.25 !important;
+            }
+
+            /* Desktop positioning for Register button */
+            .register-events-btn,
+            .register-login-btn {
+              position: relative !important;
+              margin-top: -100px !important;
+              margin-left: 0 !important;
+              left: auto !important;
+            }
+
+            /* Desktop padding for profile */
+            .profile-info-box {
+              padding: 6.25rem 43.75rem 6.25rem 6.25rem !important;
+            }
           }
 
           .throwback-card:hover {
@@ -4093,7 +4226,8 @@ const Dashboard: React.FC = () => {
             pointerEvents: 'auto',
             zIndex: 15,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s'
+            transition: 'opacity 1.5s ease 0.5s',
+            marginBottom: '50px'
           }}>
             {(['2023', '2024', '2025'] as const).map(year => (
               <button 
@@ -4131,7 +4265,8 @@ const Dashboard: React.FC = () => {
             pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s'
+            transition: 'opacity 1.5s ease 0.5s',
+            marginTop: '50px'
           }}>
               {/* Video card */}
               <div 
@@ -5027,7 +5162,7 @@ const Dashboard: React.FC = () => {
           <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
             
             {/* Student Details Header with Logout Button */}
-            <div style={{
+            <div className="profile-modal-header" style={{
               background: 'rgba(255, 255, 255, 0.3)',
               backdropFilter: 'blur(12px)',
               padding: '0.5rem 1rem',
@@ -5041,6 +5176,7 @@ const Dashboard: React.FC = () => {
             }}>
               <button
                 onClick={handleCloseProfile}
+                className="profile-back-btn"
                 style={{
                   padding: '0.5rem 1.5rem',
                   background: 'rgba(255, 255, 255, 0.9)',
@@ -5059,9 +5195,10 @@ const Dashboard: React.FC = () => {
               >
                 Back
               </button>
-              <h1 style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
+              <h1 className="profile-title" style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
               <button
                 onClick={handleLogout}
+                className="profile-logout-btn"
                 style={{
                   padding: '0.5rem 1.5rem',
                   background: 'rgba(255, 255, 255, 0.9)',
@@ -5083,58 +5220,65 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Main Content Area - Horizontally Centered */}
-            <div style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
+            <div className="profile-content-area" style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
               {isLoadingProfile ? (
                 <div style={{ color: 'white', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
                   Loading profile data...
                 </div>
               ) : (
-                <div style={{ maxWidth: '2000px' }}>
+                <div className="profile-content-wrapper" style={{ maxWidth: '2000px', width: '100%' }}>
               
               {/* User Info Box */}
-              <div style={{
+              <div className="profile-info-box" style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 backdropFilter: 'blur(12px)',
                 borderRadius: '0.5rem',
-                padding: '100px 700px 100px 100px',
+                padding: '2rem',
                 marginBottom: '1.5rem',
-                marginTop: '-10 px',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
+                marginTop: '0',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                wordWrap: 'break-word',
+                overflowWrap: 'break-word'
               }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Reg No</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: {userProfileData?.userId || 'N/A'}</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Reg No</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Unq ID</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: MH250395</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Name</span>
+                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Name</span>
-                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase' }}>: {userProfileData?.name || 'N/A'}</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Email</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>DOB</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: 2005-01-18</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Gender</span>
+                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>College</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: Vignan University</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>DOB</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Branch</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: CSE-AIML</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>College</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>PayStatus</span>
-                    <span style={{ color: 'white', fontSize: '1rem' }}>: NOT PAID</span>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Branch</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Phone</span>
+                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
                   </div>
                 </div>
               </div>

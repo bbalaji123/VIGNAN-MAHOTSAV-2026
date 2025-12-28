@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CAModal.css';
 
 const API_BASE_URL = 'http://localhost:5000/api';
@@ -8,12 +8,28 @@ interface CASignupModalProps {
   onSignupSuccess: (caData: any) => void;
 }
 
+interface State {
+  no: string;
+  name: string;
+}
+
+interface District {
+  no: string;
+  name: string;
+  state: string;
+}
+
+interface College {
+  SNO: number;
+  Name: string;
+  State: string;
+  District: string;
+}
+
 const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    confirmPassword: '',
     phone: '',
     college: '',
     branch: '',
@@ -23,8 +39,74 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPasswordCard, setShowPasswordCard] = useState(false);
+  const [generatedPassword, setGeneratedPassword] = useState('');
+  const [generatedMCAId, setGeneratedMCAId] = useState('');
+  
+  // Dropdown data
+  const [states, setStates] = useState<State[]>([]);
+  const [districts, setDistricts] = useState<District[]>([]);
+  const [colleges, setColleges] = useState<College[]>([]);
+  const [filteredDistricts, setFilteredDistricts] = useState<District[]>([]);
+  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Load states, districts, and colleges on mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [statesRes, districtsRes, collegesRes] = await Promise.all([
+          fetch('/state.json'),
+          fetch('/district.json'),
+          fetch('/college.json')
+        ]);
+        
+        const statesData = await statesRes.json();
+        const districtsData = await districtsRes.json();
+        const collegesData = await collegesRes.json();
+        
+        setStates(statesData);
+        setDistricts(districtsData);
+        setColleges(collegesData);
+      } catch (error) {
+        console.error('Error loading dropdown data:', error);
+      }
+    };
+    
+    loadData();
+  }, []);
+
+  // Filter districts when state changes
+  useEffect(() => {
+    if (formData.state) {
+      const filtered = districts.filter(d => d.state === formData.state);
+      setFilteredDistricts(filtered);
+      // Reset district and college if state changes
+      setFormData(prev => ({ ...prev, district: '', college: '' }));
+    } else {
+      setFilteredDistricts([]);
+    }
+  }, [formData.state, districts]);
+
+  // Filter colleges when state or district changes
+  useEffect(() => {
+    if (formData.state) {
+      let filtered = colleges.filter(c => c.State.toUpperCase() === formData.state.toUpperCase());
+      
+      if (formData.district) {
+        filtered = filtered.filter(c => c.District.toUpperCase() === formData.district.toUpperCase());
+      }
+      
+      setFilteredColleges(filtered);
+      // Reset college if district changes
+      if (formData.district) {
+        setFormData(prev => ({ ...prev, college: '' }));
+      }
+    } else {
+      setFilteredColleges([]);
+    }
+  }, [formData.state, formData.district, colleges]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -36,16 +118,6 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     setError('');
 
     // Validation
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
-      return;
-    }
-
     if (!/^\d{10}$/.test(formData.phone)) {
       setError('Phone number must be 10 digits');
       return;
@@ -55,6 +127,18 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
       setError('Invalid email address');
       return;
     }
+
+    if (!formData.dateOfBirth) {
+      setError('Date of Birth is required');
+      return;
+    }
+
+    // Generate password from DOB (DDMMYYYY format)
+    const dob = new Date(formData.dateOfBirth);
+    const day = String(dob.getDate()).padStart(2, '0');
+    const month = String(dob.getMonth() + 1).padStart(2, '0');
+    const year = dob.getFullYear();
+    const password = `${day}${month}${year}`;
 
     setLoading(true);
 
@@ -67,7 +151,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          password: formData.password,
+          password: password,
           phone: formData.phone,
           college: formData.college,
           branch: formData.branch,
@@ -81,10 +165,13 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
       if (response.ok) {
         console.log('CA Signup Success:', data);
-        localStorage.setItem('caToken', data.token);
-        localStorage.setItem('caData', JSON.stringify(data.campusAmbassador));
-        console.log('Stored CA Data:', localStorage.getItem('caData'));
-        onSignupSuccess(data.campusAmbassador);
+        
+        // Store the generated password and MCA ID
+        setGeneratedPassword(password);
+        setGeneratedMCAId(data.campusAmbassador.mcaId || data.mcaId);
+        
+        // Show password card instead of proceeding to login
+        setShowPasswordCard(true);
       } else {
         console.error('CA Signup Error:', data);
         setError(data.message || 'Signup failed');
@@ -96,6 +183,65 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
       setLoading(false);
     }
   };
+
+  const handlePasswordCardClose = () => {
+    setShowPasswordCard(false);
+    onClose();
+  };
+
+  if (showPasswordCard) {
+    return (
+      <div className="ca-modal-overlay" onClick={handlePasswordCardClose}>
+        <div className="ca-modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px', textAlign: 'center' }}>
+          <button className="ca-modal-close" onClick={handlePasswordCardClose}>×</button>
+          <h2 className="ca-modal-title" style={{ color: '#FFD700', marginBottom: '30px' }}>Registration Successful! 🎉</h2>
+          
+          <div style={{ 
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+            padding: '30px', 
+            borderRadius: '15px',
+            marginBottom: '20px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+          }}>
+            <h3 style={{ color: '#FFD700', marginBottom: '20px', fontSize: '1.5rem' }}>Your Campus Ambassador Credentials</h3>
+            
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '15px' }}>
+              <p style={{ color: '#FFD700', marginBottom: '5px', fontSize: '0.9rem' }}>MCA ID</p>
+              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{generatedMCAId}</p>
+            </div>
+            
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px' }}>
+              <p style={{ color: '#FFD700', marginBottom: '5px', fontSize: '0.9rem' }}>Password (Your DOB)</p>
+              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{generatedPassword}</p>
+            </div>
+          </div>
+          
+          <p style={{ color: '#FFD700', marginBottom: '20px', fontSize: '0.9rem' }}>
+            ⚠️ Please save these credentials securely. You'll need them to login.
+          </p>
+          
+          <button 
+            onClick={handlePasswordCardClose}
+            style={{
+              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+              color: '#000',
+              border: 'none',
+              padding: '12px 30px',
+              borderRadius: '25px',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              transition: 'transform 0.2s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            Got it! Take me to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="ca-modal-overlay" onClick={onClose}>
@@ -130,32 +276,6 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
             />
           </div>
 
-          <div className="ca-form-row">
-            <div className="ca-form-group">
-              <label>Password *</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                placeholder="Min 6 characters"
-              />
-            </div>
-
-            <div className="ca-form-group">
-              <label>Confirm Password *</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                placeholder="Re-enter password"
-              />
-            </div>
-          </div>
-
           <div className="ca-form-group">
             <label>Phone Number *</label>
             <input
@@ -170,15 +290,73 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
           </div>
 
           <div className="ca-form-group">
-            <label>College *</label>
+            <label>Date of Birth *</label>
             <input
-              type="text"
+              type="date"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              required
+            />
+            <small style={{ color: '#FFD700', fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>
+              Your password will be auto-generated from your DOB (DDMMYYYY)
+            </small>
+          </div>
+
+          <div className="ca-form-group">
+            <label>State *</label>
+            <select
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              required
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
+            >
+              <option value="">Select State</option>
+              {states.map((state) => (
+                <option key={state.no} value={state.name}>
+                  {state.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="ca-form-group">
+            <label>District *</label>
+            <select
+              name="district"
+              value={formData.district}
+              onChange={handleChange}
+              required
+              disabled={!formData.state}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
+            >
+              <option value="">Select District</option>
+              {filteredDistricts.map((district) => (
+                <option key={district.no} value={district.name}>
+                  {district.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="ca-form-group">
+            <label>College *</label>
+            <select
               name="college"
               value={formData.college}
               onChange={handleChange}
               required
-              placeholder="Your college name"
-            />
+              disabled={!formData.state}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
+            >
+              <option value="">Select College</option>
+              {filteredColleges.map((college) => (
+                <option key={college.SNO} value={college.Name}>
+                  {college.Name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="ca-form-group">
@@ -190,43 +368,6 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               onChange={handleChange}
               required
               placeholder="E.g., CSE, ECE, etc."
-            />
-          </div>
-
-          <div className="ca-form-row">
-            <div className="ca-form-group">
-              <label>State *</label>
-              <input
-                type="text"
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                required
-                placeholder="Your state"
-              />
-            </div>
-
-            <div className="ca-form-group">
-              <label>District *</label>
-              <input
-                type="text"
-                name="district"
-                value={formData.district}
-                onChange={handleChange}
-                required
-                placeholder="Your district"
-              />
-            </div>
-          </div>
-
-          <div className="ca-form-group">
-            <label>Date of Birth *</label>
-            <input
-              type="date"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              required
             />
           </div>
 

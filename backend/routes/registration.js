@@ -381,7 +381,11 @@ router.post('/login', async (req, res) => {
         email: user.email,
         userType: user.userType,
         participationType: user.participationType,
-        gender: user.gender // Add gender field to login response
+        gender: user.gender,
+        branch: user.branch,
+        college: user.college,
+        phone: user.phone,
+        dateOfBirth: user.dateOfBirth
       }
     });
   } catch (error) {

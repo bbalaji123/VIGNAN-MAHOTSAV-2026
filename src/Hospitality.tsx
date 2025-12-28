@@ -295,28 +295,28 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Ashwin</td>
-                    <td >88852 84355</td>
+                    <td >Mr. Ashwin</td>
+                    <td ><a href="tel:+918885284355" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88852 84355</a></td>
                   </tr>
                   <tr >
-                    <td >Ajith anna</td>
-                    <td >93461 93840</td>
+                    <td >Mr. Ajith anna</td>
+                    <td ><a href="tel:+919346193840" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 93461 93840</a></td>
                   </tr>
                   <tr >
-                    <td >Hemanth</td>
-                    <td >88854 76252</td>
+                    <td >Mr. Hemanth</td>
+                    <td ><a href="tel:+918885476252" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88854 76252</a></td>
                   </tr>
                   <tr >
-                    <td >Phani</td>
-                    <td >95426 66866</td>
+                    <td >Mr. Phani</td>
+                    <td ><a href="tel:+919542666866" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 95426 66866</a></td>
                   </tr>
                   <tr >
-                    <td >Nawaz Basha</td>
-                    <td >99638 76989</td>
+                    <td >Mr. Nawaz Basha</td>
+                    <td ><a href="tel:+919963876989" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99638 76989</a></td>
                   </tr>
                   <tr >
-                    <td >Yeshwanth</td>
-                    <td >83091 90435</td>
+                    <td >Mr. Yeshwanth</td>
+                    <td ><a href="tel:+918309190435" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83091 90435</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -333,16 +333,16 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Yamini</td>
-                    <td >70939 12677</td>
+                    <td >Ms. Yamini</td>
+                    <td ><a href="tel:+917093912677" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 70939 12677</a></td>
                   </tr>
                   <tr >
-                    <td >Sravani</td>
-                    <td >90147 04929</td>
+                    <td >Ms. Sravani</td>
+                    <td ><a href="tel:+919014704929" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 90147 04929</a></td>
                   </tr>
                   <tr >
-                    <td >Bindhu</td>
-                    <td >99590 22317</td>
+                    <td >Ms. Bindhu</td>
+                    <td ><a href="tel:+919959022317" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99590 22317</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -359,12 +359,12 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Lohith</td>
-                    <td >8309751051</td>
+                    <td >Mr. Lohith</td>
+                    <td ><a href="tel:+918309751051" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83097 51051</a></td>
                   </tr>
                   <tr >
-                    <td >Sri Vatsav</td>
-                    <td >94419 34549</td>
+                    <td >Mr. Sri Vatsav</td>
+                    <td ><a href="tel:+919441934549" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 94419 34549</a></td>
                   </tr>
                 </tbody>
               </table>

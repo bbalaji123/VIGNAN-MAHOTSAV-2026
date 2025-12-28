@@ -2229,7 +2229,7 @@ const Dashboard: React.FC = () => {
             >Register for Events</button>
           ) : (
             <button 
-              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 marginTop: '-100px',
                 marginLeft: '90px',
@@ -2261,6 +2261,13 @@ const Dashboard: React.FC = () => {
               width: 150px !important;
               height: 150px !important;
               opacity: 0.25 !important;
+            }
+            
+            /* Center Register/Login button on mobile */
+            .register-login-btn {
+              margin-left: 50% !important;
+              transform: translateX(-50%) !important;
+              margin-top: -80px !important;
             }
             
             /* Adjust all dashboard sections for mobile */
@@ -3737,7 +3744,6 @@ const Dashboard: React.FC = () => {
                 fontWeight: 'bold',
                 color: '#fdee71',
                 marginBottom: '30px',
-                marginLeft: '150px',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 fontFamily: 'coffee+tea demo, sans-serif'
               }}>Mahotsav 2026 - The Eternal Harmony</h3>
@@ -4026,8 +4032,8 @@ const Dashboard: React.FC = () => {
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
-                : 'translate(-50%, calc(-50% + clamp(60px, 10vh, 120px)))',
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)' 
+                : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4136,11 +4142,12 @@ const Dashboard: React.FC = () => {
                       : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?autoplay=1&controls=1&modestbranding=1&rel=0` : 'about:blank'}
+                  }?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&enablejsapi=1` : ''}
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   title="Mahotsav Throwback Video"
+                  loading="lazy"
                   style={{
                     border: 'none',
                     display: 'block',
@@ -4175,6 +4182,22 @@ const Dashboard: React.FC = () => {
 
           {/* Lock Icon removed */}
         </div>
+
+        {/* Hint Text */}
+        <p style={{
+          marginTop: '20px',
+          fontSize: 'clamp(0.85rem, 2vw, 1rem)',
+          color: 'rgba(255, 255, 255, 0.8)',
+          textAlign: 'center',
+          fontFamily: 'Poppins, sans-serif',
+          zIndex: 10,
+          position: 'relative',
+          opacity: isThrowbackUnlocked ? 1 : 0,
+          transition: 'opacity 1.5s ease 1s',
+          fontStyle: 'italic'
+        }}>
+          Videos auto-rotate every 15 seconds • Select year to view memories
+        </p>
 
         {/* Countdown Timer */}
         <div 

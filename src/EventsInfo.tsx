@@ -532,7 +532,6 @@ const EventsInfo: React.FC = () => {
           showPetalRotation={true}
         />
       </div>
-
       <style>
         {`
           /* Flower positioning - Desktop */

@@ -798,12 +798,8 @@ const EventsInfo: React.FC = () => {
             pointer-events: none;
           }
 
-          .inner-event-cards-container:hover .inner-event-card::before {
+          .inner-event-card:hover::before {
             background: rgba(0, 0, 0, 0.6);
-          }
-
-          .inner-event-cards-container .inner-event-card:hover::before {
-            background: rgba(0, 0, 0, 0);
           }
 
           .inner-event-card:hover {
@@ -1278,7 +1274,7 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div 
                           key={index} 
-                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 group hover:scale-105 overflow-hidden"
+                          className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 overflow-hidden"
                           onClick={handleCardClick}
                           style={{
                             backgroundImage: 'url(/card-bg.avif)',
@@ -1292,12 +1288,12 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
-                              className="event-card-image transition-transform duration-300 group-hover:-translate-y-4"
+                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
-                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300 group-hover:scale-125 group-hover:text-yellow-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
+                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
                               {card.title}
                             </h2>
                           </div>
@@ -1386,7 +1382,7 @@ const EventsInfo: React.FC = () => {
                     {theatreCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1416,7 +1412,7 @@ const EventsInfo: React.FC = () => {
                     {literatureCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1446,7 +1442,7 @@ const EventsInfo: React.FC = () => {
                     {visualArtsCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1476,7 +1472,7 @@ const EventsInfo: React.FC = () => {
                     {fashionDesignCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1506,7 +1502,7 @@ const EventsInfo: React.FC = () => {
                     {digitalStorytellingCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1536,7 +1532,7 @@ const EventsInfo: React.FC = () => {
                     {gamingCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1566,7 +1562,7 @@ const EventsInfo: React.FC = () => {
                     {roboGamesCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
@@ -1596,7 +1592,7 @@ const EventsInfo: React.FC = () => {
                     {spotLightCards.map((card, index) => (
                       <div 
                         key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">

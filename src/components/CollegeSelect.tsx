@@ -1,33 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface College {
-  no: number;
-  dno: number;
-  name: string;
+  SNO: number;
+  Name: string;
+  State: string;
+  District: string;
 }
 
 interface CollegeSelectProps {
-  value: string;
   onChange: (value: string) => void;
   required?: boolean;
+  selectedState?: string;
+  selectedDistrict?: string;
 }
 
 const CollegeSelect: React.FC<CollegeSelectProps> = ({
-  value,
   onChange,
-  required = false
+  required = false,
+  selectedState = '',
+  selectedDistrict = ''
 }) => {
   const [colleges, setColleges] = useState<College[]>([]);
+  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherCollegeName, setOtherCollegeName] = useState('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Load colleges from JSON file
   useEffect(() => {
     const loadColleges = async () => {
       try {
         console.log('📚 Loading colleges...');
-        const response = await fetch('/collage.json');
+        const response = await fetch('/college.json');
         console.log('📚 Response status:', response.status);
         
         if (!response.ok) {
@@ -38,12 +59,12 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
         console.log('📚 Loaded colleges count:', data.length);
         
         // Filter out invalid entries
-        const validColleges = data.filter(c => c && c.name && typeof c.name === 'string');
+        const validColleges = data.filter(c => c && c.Name && typeof c.Name === 'string');
         
         // Remove duplicates (case-insensitive) and keep first occurrence
         const seen = new Set<string>();
         const uniqueColleges = validColleges.filter(college => {
-          const lowerName = college.name.toLowerCase().trim();
+          const lowerName = college.Name.toLowerCase().trim();
           if (seen.has(lowerName)) {
             return false;
           }
@@ -53,7 +74,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
         
         // Sort alphabetically by name
         const sortedColleges = uniqueColleges.sort((a, b) => 
-          a.name.localeCompare(b.name)
+          a.Name.localeCompare(b.Name)
         );
         
         console.log('📚 Unique colleges count:', sortedColleges.length);
@@ -67,16 +88,46 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     loadColleges();
   }, []);
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
-    if (selectedValue === '__other__') {
-      setShowOtherInput(true);
-      setOtherCollegeName('');
-      onChange('');
-    } else {
-      setShowOtherInput(false);
-      onChange(selectedValue);
+  // Filter colleges based on selected state and district
+  useEffect(() => {
+    if (!selectedState) {
+      setFilteredColleges([]);
+      return;
     }
+
+    let filtered = colleges.filter(c => 
+      c.State.toLowerCase() === selectedState.toLowerCase()
+    );
+
+    if (selectedDistrict) {
+      filtered = filtered.filter(c => 
+        c.District.toLowerCase() === selectedDistrict.toLowerCase()
+      );
+    }
+
+    // Apply search filter
+    if (searchTerm) {
+      filtered = filtered.filter(c =>
+        c.Name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredColleges(filtered);
+  }, [selectedState, selectedDistrict, colleges, searchTerm]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    setShowDropdown(true);
+    if (!term) {
+      onChange('');
+    }
+  };
+
+  const handleSelectCollege = (collegeName: string) => {
+    onChange(collegeName);
+    setSearchTerm(collegeName);
+    setShowDropdown(false);
   };
 
   const handleOtherCollegeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,18 +138,19 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
 
   const handleConfirmOther = () => {
     if (otherCollegeName.trim()) {
-      const exists = colleges.some(
-        c => c.name.toLowerCase() === otherCollegeName.trim().toLowerCase()
+      const exists = filteredColleges.some(
+        c => c.Name.toLowerCase() === otherCollegeName.trim().toLowerCase()
       );
       
-      if (!exists) {
+      if (!exists && selectedState) {
         const newCollege: College = {
-          no: colleges.length + 1,
-          dno: 0,
-          name: otherCollegeName.trim()
+          SNO: colleges.length + 1,
+          Name: otherCollegeName.trim(),
+          State: selectedState,
+          District: selectedDistrict || ''
         };
         const updatedColleges = [...colleges, newCollege].sort((a, b) => 
-          a.name.localeCompare(b.name)
+          a.Name.localeCompare(b.Name)
         );
         setColleges(updatedColleges);
       }
@@ -126,27 +178,48 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
   }
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full" ref={dropdownRef}>
       {!showOtherInput ? (
-        <select
-          value={value || ''}
-          onChange={handleSelectChange}
-          className="w-full p-2.5 pr-10 sm:p-3 sm:pr-10 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
-                     cursor-pointer appearance-none transition-all duration-300 touch-manipulation
+        <div className="relative">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onFocus={() => setShowDropdown(true)}
+            placeholder={!selectedState ? "Select state first" : filteredColleges.length === 0 ? "No colleges found" : "Search college..."}
+            disabled={!selectedState}
+            className="w-full p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
+                     cursor-text transition-all duration-300 touch-manipulation
                      focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30
-                     bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%3E%3cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3c%2Fpolyline%3E%3c%2Fsvg%3E')]
-                     bg-no-repeat bg-[right_12px_center] bg-[length:16px]
-                     [&>option]:bg-[#1a1a2e] [&>option]:text-white [&>option]:p-2"
-          required={required}
-        >
-          <option value="" disabled>-- Select your college --</option>
-          {colleges.map((college, index) => (
-            <option key={`${college.no}-${index}`} value={college.name}>
-              {college.name}
-            </option>
-          ))}
-          <option value="__other__">➕ Other (Not in list)</option>
-        </select>
+                     disabled:opacity-50 disabled:cursor-not-allowed
+                     placeholder:text-white/50"
+            required={required}
+          />
+          
+          {showDropdown && filteredColleges.length > 0 && selectedState && (
+            <div className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-[#1a1a2e] border-2 border-white/20 rounded-xl shadow-lg">
+              {filteredColleges.map((college, index) => (
+                <div
+                  key={`${college.SNO}-${index}`}
+                  onClick={() => handleSelectCollege(college.Name)}
+                  className="p-3 hover:bg-white/10 cursor-pointer text-white text-sm transition-colors duration-200 border-b border-white/10 last:border-b-0"
+                >
+                  {college.Name}
+                </div>
+              ))}
+              <div
+                onClick={() => {
+                  setShowOtherInput(true);
+                  setShowDropdown(false);
+                  setSearchTerm('');
+                }}
+                className="p-3 hover:bg-white/10 cursor-pointer text-orange-400 text-sm transition-colors duration-200 font-semibold sticky bottom-0 bg-[#1a1a2e] border-t-2 border-white/20"
+              >
+                ➕ Other (Not in list)
+              </div>
+            </div>
+          )}
+        </div>
       ) : (
         <div className="flex gap-2 items-center flex-wrap sm:flex-nowrap">
           <input

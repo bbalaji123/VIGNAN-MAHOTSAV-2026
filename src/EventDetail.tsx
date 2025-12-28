@@ -2044,7 +2044,7 @@ const EventDetail: React.FC = () => {
         right: '-150px',
         width: '450px',
         height: '450px',
-        opacity: 0.3
+        opacity: 0.7
       }}>
         <FlowerComponent 
           size="100%"

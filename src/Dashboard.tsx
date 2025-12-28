@@ -2073,8 +2073,25 @@ const Dashboard: React.FC = () => {
         // Fetch user's saved events from database
         await fetchUserSavedEvents(userId);
 
-        // After successful login, open the profile page/modal
-        await handleOpenProfile();
+        // After successful login, open the profile page/modal directly
+        setShowProfileModal(true);
+        setIsLoadingProfile(true);
+        
+        try {
+          // Fetch user's registered events
+          const registrationsResult = await getUserRegisteredEvents(userId);
+          
+          if (registrationsResult.success && registrationsResult.data) {
+            setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
+          } else {
+            setUserRegisteredEvents([]);
+          }
+        } catch (error) {
+          console.error('Error fetching profile data:', error);
+          setUserRegisteredEvents([]);
+        } finally {
+          setIsLoadingProfile(false);
+        }
       } else {
         setLoginMessage({
           type: 'error',
@@ -2220,7 +2237,7 @@ const Dashboard: React.FC = () => {
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
             <button 
-              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
+              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)', marginTop: '-100px', marginLeft: '90px'}} 
               onClick={handleOpenProfile}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
@@ -4999,7 +5016,7 @@ const Dashboard: React.FC = () => {
           width: '100%',
           height: '100%',
           zIndex: 99999,
-          backgroundImage: 'url("/Background-redesign.avif")',
+          backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

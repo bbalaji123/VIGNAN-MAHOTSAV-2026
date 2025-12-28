@@ -239,14 +239,6 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="college">College Name *</label>
-          <CollegeSelect
-            value={signupFormData.college || ''}
-            onChange={onCollegeChange}
-            required
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="branch">Branch</label>
           <input
             type="text"
@@ -297,6 +289,15 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
               </option>
             ))}
           </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="college">College Name *</label>
+          <CollegeSelect
+            onChange={onCollegeChange}
+            selectedState={signupFormData.state || ''}
+            selectedDistrict={signupFormData.district || ''}
+            required
+          />
         </div>
       </div>
 

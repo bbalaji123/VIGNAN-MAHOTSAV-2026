@@ -3993,8 +3993,8 @@ const Dashboard: React.FC = () => {
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
-                : 'translate(-50%, calc(-50% + clamp(60px, 10vh, 120px)))',
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)' 
+                : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4025,8 +4025,8 @@ const Dashboard: React.FC = () => {
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
-                : 'translate(-50%, calc(-50% + clamp(80px, 12vh, 150px)))',
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)' 
+                : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',

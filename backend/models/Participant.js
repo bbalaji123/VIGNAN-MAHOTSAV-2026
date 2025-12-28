@@ -48,8 +48,15 @@ const participantSchema = new mongoose.Schema({
     trim: true
   },
   registeredEvents: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Event'
+    eventName: String,
+    eventType: String,
+    category: String,
+    description: String,
+    fee: Number,
+    registeredAt: {
+      type: Date,
+      default: Date.now
+    }
   }],
   registeredAt: {
     type: Date,

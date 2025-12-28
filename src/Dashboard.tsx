@@ -7,7 +7,22 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, getUserDetails, type SignupData, type Event } from './services/api';
+import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+
+// Get API base URL from environment
+const getApiBaseUrl = () => {
+  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
+  const DEVELOPMENT_API = 'http://localhost:5000/api';
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      return PRODUCTION_API;
+    }
+  }
+  return DEVELOPMENT_API;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -97,6 +112,7 @@ const Dashboard: React.FC = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const minSwipeDistance = 50;
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   // State for fetched events from database
   const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
@@ -433,8 +449,9 @@ const Dashboard: React.FC = () => {
   const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
-  const [showUserDetailsPage, setShowUserDetailsPage] = useState(false);
-  const [fullUserData, setFullUserData] = useState<any>(null);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
+  const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -1049,6 +1066,65 @@ const Dashboard: React.FC = () => {
       fetchEvents();
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
+
+  // Fetch registration events from JSON
+  useEffect(() => {
+    const loadRegistrationEvents = async () => {
+      try {
+        const response = await fetch('/registration/registartion.json');
+        const data = await response.json();
+        setRegistrationEvents(data);
+      } catch (error) {
+        console.error('Error loading registration events:', error);
+      }
+    };
+    loadRegistrationEvents();
+  }, []);
+
+  // Load saved events from database when user logs in
+  useEffect(() => {
+    const loadUserEvents = async () => {
+      if (isLoggedIn && userProfileData.userId) {
+        try {
+          // Try to fetch from database first
+          const response = await fetch(`${API_BASE_URL}/my-registrations/${userProfileData.userId}`);
+          const result = await response.json();
+          
+          if (response.ok && result.success && result.data.events) {
+            setMyEvents(result.data.events);
+            // Also save to localStorage as backup
+            const storageKey = `myEvents_${userProfileData.userId}`;
+            localStorage.setItem(storageKey, JSON.stringify(result.data.events));
+          } else {
+            // Fallback to localStorage if API fails
+            const storageKey = `myEvents_${userProfileData.userId}`;
+            const savedEvents = localStorage.getItem(storageKey);
+            if (savedEvents) {
+              const events = JSON.parse(savedEvents);
+              setMyEvents(events);
+            }
+          }
+        } catch (error) {
+          console.error('Error loading user events from database:', error);
+          // Fallback to localStorage on error
+          const storageKey = `myEvents_${userProfileData.userId}`;
+          const savedEvents = localStorage.getItem(storageKey);
+          if (savedEvents) {
+            try {
+              const events = JSON.parse(savedEvents);
+              setMyEvents(events);
+            } catch (parseError) {
+              console.error('Error parsing saved events:', parseError);
+            }
+          }
+        }
+      } else {
+        setMyEvents([]);
+      }
+    };
+    
+    loadUserEvents();
+  }, [isLoggedIn, userProfileData.userId]);
 
   const handlePageMenuToggle = () => {
     setShowPageMenu(!showPageMenu);
@@ -1812,156 +1888,7 @@ const Dashboard: React.FC = () => {
     setActiveSubModal(null);
   };
 
-  // Calculate registration price based on gender and selected events
-  const calculateRegistrationPrice = (selectedEventIds: Set<string>, gender: string) => {
-    const selectedEventsArray = Array.from(selectedEventIds);
-    
-    // If no events selected, return 0
-    if (selectedEventsArray.length === 0) {
-      return 0;
-    }
-    
-    // Check if para sports events are selected
-    const hasParaSports = selectedEventsArray.some(eventId => 
-      paraSportsEvents.some(event => event._id === eventId)
-    );
-    
-    if (hasParaSports) {
-      return 0;
-    }
-    
-    // Check event types
-    const hasSports = selectedEventsArray.some(eventId => 
-      sportsEvents.some(event => event._id === eventId)
-    );
-    
-    const hasCulturals = selectedEventsArray.some(eventId => 
-      culturalEvents.some(event => event._id === eventId)
-    );
-    
-    // EXPLICIT FEMALE LOGIC - ALWAYS ?250 FOR SINGLE TYPE
-    const normalizedGender = gender?.toLowerCase();
-
-    if (normalizedGender === 'female') {
-      
-      if (hasSports && hasCulturals) {
-        return 350;
-      }
-      
-      if (hasSports && !hasCulturals) {
-        return 250;
-      }
-      
-      if (hasCulturals && !hasSports) {
-        return 250;
-      }
-    }
-    
-    // MALE LOGIC
-    if (normalizedGender === 'male') {
-      
-      if (hasSports && hasCulturals) {
-        return 350;
-      }
-      
-      if (hasSports && !hasCulturals) {
-        return 350;
-      }
-      
-      if (hasCulturals && !hasSports) {
-        return 250;
-      }
-    }
-    
-    // Fallback for users without gender info - charge as per event mix
-    if (hasSports && hasCulturals) {
-      return 350;
-    }
-    if (hasSports) {
-      return 350;
-    }
-    if (hasCulturals) {
-      return 250;
-    }
-    return 0;
-  };
-
-  // Handle registration with pricing confirmation
-  const handleRegisterForEvents = async () => {
-    if (!isLoggedIn) {
-      alert('Please login to register for events!');
-      setShowLoginModal(true);
-      handleCloseSubModal();
-      return;
-    }
-    
-    if (userProfileData.userType === 'visitor') {
-      alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
-      return;
-    }
-    
-    if (tempSelectedEvents.size === 0) {
-      alert('Please select at least one event!');
-      return;
-    }
-
-    const eventIds = Array.from(tempSelectedEvents);
-    const userGender = userProfileData.gender || 'male'; // Default to male if not specified
-    const totalAmount = calculateRegistrationPrice(tempSelectedEvents, userGender);
-    
-    // Get selected event names
-    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
-    const selectedEventNames = eventIds.map(eventId => {
-      const event = allEvents.find(e => e._id === eventId);
-      return event ? event.eventName : 'Unknown Event';
-    });
-
-    // Create confirmation message
-    const eventsList = selectedEventNames.map((name, index) => `${index + 1}. ${name}`).join('\n');
-    const priceText = totalAmount === 0 ? 'FREE' : `?${totalAmount}`;
-    
-    const confirmationMessage = `
-?? REGISTRATION CONFIRMATION
-????????????????????????????
-
-?? Selected Events (${eventIds.length}):
-${eventsList}
-
-?? Participant: ${userProfileData.name}
-? Gender: ${userGender}
-?? Total Amount: ${priceText}
-
-????????????????????????????
-
-Do you want to proceed with registration?`;
-
-    const confirmed = window.confirm(confirmationMessage);
-    
-    if (!confirmed) {
-      return;
-    }
-
-    try {
-      const result = await saveMyEvents(userProfileData.userId!, eventIds);
-      
-      if (result.success) {
-        const savedEventIds = await fetchUserSavedEvents(userProfileData.userId!);
-        setTempSelectedEvents(savedEventIds); // Keep the registered events selected
-        handleCloseSubModal();
-        
-        const successMessage = totalAmount === 0 
-          ? `? Successfully registered for ${eventIds.length} event(s) for FREE!`
-          : `? Successfully registered for ${eventIds.length} event(s)! Total amount: ?${totalAmount}`;
-          
-        alert(successMessage);
-      } else {
-        alert(result.message || 'Failed to register. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error registering for events:', error);
-      alert('An error occurred while registering.');
-    }
-  };
+  
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -1988,7 +1915,15 @@ Do you want to proceed with registration?`;
   };
 
   const handleOpenProfile = async () => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      alert('Please login first to view your profile.');
+      setShowLoginModal(true);
+      return;
+    }
+    
     if (!userProfileData.userId) {
+      alert('Unable to load profile. Please try logging in again.');
       return;
     }
     
@@ -2024,6 +1959,14 @@ Do you want to proceed with registration?`;
       newSelected.add(eventId);
     }
     setSelectedEvents(newSelected);
+    
+    // Update para/regular selection status
+    const selectedEventsArray = Array.from(newSelected);
+    const hasPara = selectedEventsArray.some(id => paraSportsEvents.some(pe => pe._id === id));
+    const hasRegular = selectedEventsArray.some(id => sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id));
+    
+    setParaSportsSelected(hasPara);
+    setRegularEventsSelected(hasRegular);
   };
 
   const handleSaveSelectedEvents = async () => {
@@ -2034,8 +1977,23 @@ Do you want to proceed with registration?`;
 
     const eventIds = Array.from(selectedEvents);
     
+    // Get full event objects from the selected IDs
+    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
+    const selectedEventObjects = eventIds.map(id => {
+      const event = allEvents.find(e => e._id === id);
+      if (!event) return null;
+      
+      return {
+        eventName: event.eventName,
+        eventType: event.eventType,
+        category: event.category,
+        description: event.description || '',
+        fee: event.fee || 0
+      };
+    }).filter(e => e !== null);
+    
     try {
-      const result = await saveMyEvents(userProfileData.userId, eventIds);
+      const result = await saveMyEvents(userProfileData.userId, selectedEventObjects);
       
       if (result.success) {
         // Fetch updated saved events from database
@@ -2235,19 +2193,18 @@ Do you want to proceed with registration?`;
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
         {/* Left side image - 1.avif */}
-        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
-          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain" />
+        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
+          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
         </div>
         
         {/* Right side image - 2.avif */}
-        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px' }}>
-          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain" />
+        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
+          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
         </div>
         
         {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4">
+        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
         </div>
-        
         {/* Logo */}
         <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
           <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
@@ -2256,13 +2213,39 @@ Do you want to proceed with registration?`;
         {/* Action Buttons - separate container with mobile-specific positioning */}
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
-              console.log('Register button clicked');
-              setShowUserDetailsPage(true);
-              console.log('showUserDetailsPage set to true');
-            }}>Register for Events</button>
+            <button 
+              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
+              onClick={handleOpenProfile}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
+              }}
+            >Register for Events</button>
           ) : (
-            <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #ec4899, #db2777)', color: 'white', borderRadius: '1rem', fontSize: '1.4rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={handleLoginClick}>Register/Login</button>
+            <button 
+              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              style={{
+                marginTop: '-100px',
+                marginLeft: '90px',
+              }}
+              onClick={handleLoginClick}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(236, 72, 153, 0.6)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #db2777, #be185d)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
+              }}
+            >Register/Login</button>
           )}
         </div>
         <style>{`
@@ -2338,7 +2321,7 @@ Do you want to proceed with registration?`;
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2350,12 +2333,29 @@ Do you want to proceed with registration?`;
                 moonLeft="28.5%"
                 showPetalRotation={true}
                 opacity={1}
+                hideMoon={true}
               />
             </div>
+            {/* Static Moon - Not rotating */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.avif`}
+              alt="Moon"
+              style={{
+                position: 'absolute',
+                width: '43%',
+                height: '43%',
+                top: '28.5%',
+                left: '28.5%',
+                pointerEvents: 'none',
+                zIndex: 10,
+                animation: 'none',
+                transform: 'none'
+              }}
+            />
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2367,8 +2367,25 @@ Do you want to proceed with registration?`;
                 moonLeft="28.5%"
                 showPetalRotation={true}
                 opacity={1}
+                hideMoon={true}
               />
             </div>
+            {/* Static Moon - Not rotating */}
+            <img 
+              src={`${import.meta.env.BASE_URL}moon.avif`}
+              alt="Moon"
+              style={{
+                position: 'absolute',
+                width: '43%',
+                height: '43%',
+                top: '28.5%',
+                left: '28.5%',
+                pointerEvents: 'none',
+                zIndex: 10,
+                animation: 'none',
+                transform: 'none'
+              }}
+            />
           </div>
           
           {/* Back Button and Menu Title - Combined on Mobile */}
@@ -2465,7 +2482,7 @@ Do you want to proceed with registration?`;
               {/* PROFILE */}
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={(e) => { e.preventDefault(); setActiveSubModal('PROFILE'); setShowPageMenu(false); }}
+                onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
                 style={{ transformStyle: 'preserve-3d' }}
                 onMouseMove={(e) => {
                   const card = e.currentTarget;
@@ -3720,6 +3737,7 @@ Do you want to proceed with registration?`;
                 fontWeight: 'bold',
                 color: '#fdee71',
                 marginBottom: '30px',
+                marginLeft: '150px',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 fontFamily: 'coffee+tea demo, sans-serif'
               }}>Mahotsav 2026 - The Eternal Harmony</h3>
@@ -3739,14 +3757,20 @@ Do you want to proceed with registration?`;
           
           {/* Stats Bar */}
           <div ref={statsRef} style={{
-            background: 'rgba(200, 180, 220, 0.9)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
             borderRadius: '30px',
-            padding: '40px 20px',
-            marginTop: '40px'
+            padding: '40px 15px',
+            marginTop: '40px',
+            boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+            maxWidth: '1200px',
+            margin: '40px auto 0'
           }}>
             <div className="stats-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
               justifyContent: 'center',
               alignItems: 'center',
               gap: '20px',
@@ -3754,35 +3778,35 @@ Do you want to proceed with registration?`;
               margin: '0 auto'
             }}>
               {/* Footfall */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{footfall.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>TOTAL FOOTFALL</div>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-people-group"></i></div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{footfall.toLocaleString()}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏫</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{colleges}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>COLLEGES</div>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-graduation-cap"></i></div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{colleges}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>COLLEGES</div>
               </div>
               
               {/* Events */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{events}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>EVENTS</div>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-trophy"></i></div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{events}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🌐</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>ONLINE AUDIANCE</div>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050'}}><i className="fa-solid fa-earth-africa"></i></div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{onlineAudience.toLocaleString()}+</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>ONLINE AUDIANCE</div>
               </div>
               
               {/* Editions */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
                 <div style={{ 
                   fontSize: '3rem', 
                   marginBottom: '10px',
@@ -3794,24 +3818,25 @@ Do you want to proceed with registration?`;
                     width: '60px',
                     height: '60px',
                     borderRadius: '50%',
-                    border: '4px solid #1a1a1a',
+                    border: '#1e3050 4px solid',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1.5rem',
                     fontWeight: 'bold',
-                    color: '#1a1a1a'
+                    color: '#ffffff',
+                    textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
                   }}>18</div>
                 </div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px' }}>18 EDITIONS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>OF FESTIVITIES</div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>18 EDITIONS</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>OF FESTIVITIES</div>
               </div>
               
               {/* Cash Prizes */}
-              <div style={{ textAlign: 'center', minWidth: '150px', flex: '1 1 150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>💰</div>
-                <div style={{ color: '#1a1a1a', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px' }}>{cashPrizes}+ LACKS</div>
-                <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '1rem' }}>CASH PRIZES</div>
+              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '10px', color: '#1e3050' }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
+                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{cashPrizes}+ LACKS</div>
+                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>CASH PRIZES</div>
               </div>
             </div>
           </div>
@@ -3969,8 +3994,8 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
-                : 'translate(-50%, calc(-50% + clamp(60px, 10vh, 120px)))',
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)' 
+                : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4042,7 +4067,7 @@ Do you want to proceed with registration?`;
             justifyContent: 'flex-start',
             paddingTop: '40px',
             gap: '30px',
-            pointerEvents: isThrowbackUnlocked ? 'auto' : 'none',
+            pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s'
@@ -4050,7 +4075,8 @@ Do you want to proceed with registration?`;
               {/* Year buttons */}
               <div style={{
                 display: 'flex',
-                gap: '20px'
+                gap: '20px',
+                pointerEvents: 'auto'
               }}>
                 {(['2023', '2024', '2025'] as const).map(year => (
                   <button 
@@ -4091,21 +4117,16 @@ Do you want to proceed with registration?`;
                   overflow: 'hidden',
                   transition: 'all 0.4s ease',
                   position: 'relative',
-                  cursor: 'pointer',
+                  cursor: 'default',
                   padding: 0,
-                  marginTop: '10px'
-                }}
-                onClick={() => {
-                  const videoId = selectedYear === '2023' 
-                    ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
-                    : selectedYear === '2024'
-                    ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
-                    : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk';
-                  window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+                  marginTop: '10px',
+                  pointerEvents: 'auto',
+                  zIndex: 100
                 }}
               >
                 {/* YouTube Video Embed */}
                 <iframe
+                  ref={videoRef}
                   key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
                   width="100%"
                   height="100%"
@@ -4115,36 +4136,28 @@ Do you want to proceed with registration?`;
                       : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0` : 'about:blank'}
+                  }?autoplay=1&controls=1&modestbranding=1&rel=0` : 'about:blank'}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  title="Mahotsav Throwback Video"
                   style={{
                     border: 'none',
                     display: 'block',
-                    pointerEvents: 'none',
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'cover',
+                    zIndex: 1,
+                    pointerEvents: 'auto'
                   }}
                 />
-                {/* Click overlay for better interaction */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  zIndex: 5,
-                  background: 'transparent'
-                }} />
                 {/* Day indicator */}
                 <div style={{
                   position: 'absolute',
-                  bottom: '10px',
+                  top: '10px',
                   right: '10px',
                   background: 'rgba(0, 0, 0, 0.7)',
                   color: 'white',
@@ -4152,7 +4165,8 @@ Do you want to proceed with registration?`;
                   borderRadius: '15px',
                   fontSize: '0.9rem',
                   fontWeight: 'bold',
-                  zIndex: 10
+                  zIndex: 2,
+                  pointerEvents: 'none'
                 }}>
                   Day {currentDay}
                 </div>
@@ -4303,8 +4317,26 @@ Do you want to proceed with registration?`;
                   moonLeft="28.5%"
                   showPetalRotation={true}
                   opacity={1}
+                  hideMoon={true}
                 />
               </div>
+              {/* Static Moon - Not rotating */}
+              <img 
+                src={`${import.meta.env.BASE_URL}moon.avif`}
+                alt="Moon"
+                style={{
+                  position: 'absolute',
+                  width: '43%',
+                  height: '43%',
+                  top: '28.5%',
+                  left: '28.5%',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                  animation: 'none',
+                  transform: 'none',
+                  opacity: 0.25
+                }}
+              />
             </div>
 
             {/* Floating Flower - Bottom Left */}
@@ -4320,8 +4352,26 @@ Do you want to proceed with registration?`;
                   moonLeft="28.5%"
                   showPetalRotation={true}
                   opacity={1}
+                  hideMoon={true}
                 />
               </div>
+              {/* Static Moon - Not rotating */}
+              <img 
+                src={`${import.meta.env.BASE_URL}moon.avif`}
+                alt="Moon"
+                style={{
+                  position: 'absolute',
+                  width: '43%',
+                  height: '43%',
+                  top: '28.5%',
+                  left: '28.5%',
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                  animation: 'none',
+                  transform: 'none',
+                  opacity: 0.25
+                }}
+              />
             </div>
             
             <div className="events-navigation">
@@ -4452,221 +4502,6 @@ Do you want to proceed with registration?`;
               </button>
             </div>
             <div className="sub-modal-body">
-              {activeSubModal === 'EVENTS' && (
-                <div className="events-modal-container">
-                  {loadingEvents ? (
-                    <div className="loading-events">
-                      <p>Loading events...</p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="events-category-grid">
-                      {/* Sports Events */}
-                      <div className="event-category-card">
-                        <h3>? Sports Events ({getFilteredSportsEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredSportsEvents().length > 0 ? (
-                            getFilteredSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No sports events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Cultural Events */}
-                      <div className="event-category-card">
-                        <h3>?? Cultural Events ({getFilteredCulturalEvents().length})</h3>
-                        <div className="event-list">
-                          {getFilteredCulturalEvents().length > 0 ? (
-                            getFilteredCulturalEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)} 
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => { 
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id)) {
-                                      const newSelection = new Set(tempSelectedEvents); 
-                                      const wasSelected = newSelection.has(event._id); 
-                                      if (wasSelected) { 
-                                        newSelection.delete(event._id); 
-                                      } else { 
-                                        newSelection.add(event._id); 
-                                      } 
-                                      const hasRegularEvents = [...sportsEvents, ...culturalEvents].some(e => newSelection.has(e._id)); 
-                                      setRegularEventsSelected(hasRegularEvents); 
-                                      setTempSelectedEvents(newSelection); 
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  {isLoggedIn && (
-                                    <small className="event-gender">({event.gender})</small>
-                                  )}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No cultural events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Para Sports Events */}
-                      <div className={`event-category-card para-sports-card ${regularEventsSelected ? 'disabled' : ''}`}>
-                        <h3>? Para Sports Events ({getFilteredParaSportsEvents().length})</h3>
-                        {getFilteredParaSportsEvents().length === 0 && (
-                          <div>
-                            <p style={{color: '#c96ba1', fontWeight: 'bold'}}>?? No para sports events loaded. Server might be down.</p>
-                            <button onClick={() => fetchEvents()} style={{padding: '5px 10px', margin: '5px', backgroundColor: '#522566', color: 'white', border: 'none', borderRadius: '4px'}}>
-                              ?? Retry Loading Events
-                            </button>
-                          </div>
-                        )}
-                        <div className="event-list">
-                          {getFilteredParaSportsEvents().length > 0 ? (
-                            getFilteredParaSportsEvents().map((event) => (
-                              <label key={event._id} className="event-item event-checkbox-item">
-                                <input
-                                  type="checkbox"
-                                  className="event-checkbox"
-                                  checked={tempSelectedEvents.has(event._id)}
-                                  disabled={isEventDisabled(event)}
-                                  onChange={() => {
-                                    // Only allow changes if not already registered
-                                    if (!selectedEvents.has(event._id) && !regularEventsSelected) {
-                                      const newSelection = new Set(tempSelectedEvents);
-                                      const wasSelected = newSelection.has(event._id);
-                                      
-                                      if (wasSelected) {
-                                        newSelection.delete(event._id);
-                                      } else {
-                                        newSelection.add(event._id);
-                                      }
-                                      
-                                      // Check if any para sports events are selected
-                                      const hasParaSportsSelected = getFilteredParaSportsEvents().some(pe => 
-                                        newSelection.has(pe._id)
-                                      );
-                                      
-                                      setParaSportsSelected(hasParaSportsSelected);
-                                      
-                                      // If selecting para sports, remove all regular events
-                                      if (!wasSelected && hasParaSportsSelected) {
-                                        [...getFilteredSportsEvents(), ...getFilteredCulturalEvents()].forEach(e => {
-                                          newSelection.delete(e._id);
-                                        });
-                                        setRegularEventsSelected(false);
-                                      }
-                                      
-                                      setTempSelectedEvents(newSelection);
-                                    }
-                                  }}
-                                />
-                                <div className="event-item-content">
-                                  <h4>{event.eventName}</h4>
-                                  <p>{event.description || 'No description available'}</p>
-                                  {event.date && <p className="event-meta">?? {event.date}</p>}
-                                  {event.venue && <p className="event-meta">?? {event.venue}</p>}
-                                  {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
-                                  {event.category && <p className="event-meta">??? {event.category}</p>}
-                                </div>
-                              </label>
-                            ))
-                          ) : (
-                            <p>No para sports events available at the moment.</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    </>
-                  )}
-                  
-                  <div className="events-modal-footer">
-                    <div className="selected-count">
-                      Selected: {tempSelectedEvents.size} event(s)
-                      {tempSelectedEvents.size > 0 && (
-                        (() => {
-                          const totalAmount = calculateRegistrationPrice(
-                            tempSelectedEvents,
-                            userProfileData.gender || 'unknown'
-                          );
-                          const isParaSelection = totalAmount === 0;
-                          const formattedAmount = isParaSelection ? 'FREE (Para sports)' : `?${totalAmount}`;
-                          return (
-                            <div className="price-preview">
-                              Total: {formattedAmount}
-                            </div>
-                          );
-                        })()
-                      )}
-                    </div>
-                    <div className="modal-actions">
-                      <button className="close-modal-btn" onClick={handleCloseSubModal}>
-                        Cancel
-                      </button>
-                      {tempSelectedEvents.size > 0 && (
-                        <button 
-                          className="register-events-btn"
-                          onClick={handleRegisterForEvents}
-                        >
-                          ? Register for Events ({tempSelectedEvents.size})
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              {activeSubModal === 'PROFILE' && (
-                <div className="sub-cards-grid">
-                  <div className="sub-card" onClick={handleOpenProfile}>
-                    <h3>VIEW PROFILE</h3>
-                  </div>
-                  <div className="sub-card">
-                    <h3>EDIT PROFILE</h3>
-                  </div>
-                  <div className="sub-card" onClick={() => setShowMyEventsModal(true)}>
-                    <h3>MY EVENTS</h3>
-                  </div>
-                  <div className="sub-card">
-                    <h3>CERTIFICATES</h3>
-                  </div>
-                </div>
-              )}
               
               {activeSubModal === 'SCHEDULE' && (
                 <div className="sub-cards-grid">
@@ -4936,128 +4771,262 @@ Do you want to proceed with registration?`;
         </div>
       )}
 
-      {/* Profile Modal */}
+      {/* Profile Modal - New Design */}
       {showProfileModal && (
-        <div className="login-modal-overlay" onClick={handleCloseProfile}>
-          <div className="login-modal-content profile-modal-expanded" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>?? My Profile</h2>
-              <button className="close-btn" onClick={handleCloseProfile}>�</button>
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 99999,
+          backgroundImage: 'url("/Background-redesign.avif")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          overflow: 'auto'
+        }}>
+
+          {/* Content Container */}
+          <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
+            
+            {/* Student Details Header with Logout Button */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(12px)',
+              padding: '0.5rem 1rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+              position: 'relative',
+              fontSize: '1.25rem',
+
+            }}>
+              <button
+                onClick={handleCloseProfile}
+                style={{
+                  padding: '0.5rem 1.5rem',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  color: '#1f2937',
+                  fontWeight: 'bold',
+                  borderRadius: '0.375rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  position: 'absolute',
+                  left: '1.5rem',
+                  fontSize: '1.2rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Back
+              </button>
+              <h1 style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
+              <button
+                onClick={handleLogout}
+                style={{
+                  padding: '0.5rem 1.5rem',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  color: '#1f2937',
+                  fontWeight: 'bold',
+                  borderRadius: '0.375rem',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s',
+                  position: 'absolute',
+                  right: '1.5rem',
+                  fontSize: '1.2rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
+              >
+                Logout
+              </button>
             </div>
-            <div className="login-modal-body">
+
+            {/* Main Content Area - Horizontally Centered */}
+            <div style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
               {isLoadingProfile ? (
-                <div className="loading-profile">
-                  <p>Loading profile data...</p>
+                <div style={{ color: 'white', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
+                  Loading profile data...
                 </div>
               ) : (
-                <div className="profile-details">
-                  <div className="profile-header-section">
-                    <div className="profile-avatar">
-                      {userProfileData.name.charAt(0).toUpperCase()}
-                    </div>
-                    <h3>{userProfileData.name}</h3>
-                  </div>
-                  
-                  <div className="profile-info-section">
-                    <h4>?? Personal Information</h4>
-                    <div className="profile-info-grid">
-                      <div className="profile-info-item">
-                        <span className="info-label">Full Name:</span>
-                        <span className="info-value">{userProfileData.name}</span>
-                      </div>
-                      <div className="profile-info-item">
-                        <span className="info-label">Email:</span>
-                        <span className="info-value">{userProfileData.email}</span>
-                      </div>
-                      <div className="profile-info-item">
-                        <span className="info-label">Mahotsav ID:</span>
-                        <span className="info-value">{userProfileData.userId || 'MH26000001'}</span>
-                      </div>
-                      {userProfileData.gender && (
-                        <div className="profile-info-item">
-                          <span className="info-label">Gender:</span>
-                          <span className="info-value">{userProfileData.gender}</span>
-                        </div>
-                      )}
-                    </div>
+                <div style={{ maxWidth: '2000px' }}>
+              
+              {/* User Info Box */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '100px 700px 100px 100px',
+                marginBottom: '1.5rem',
+                marginTop: '-10 px',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
+              }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Reg No</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: {userProfileData?.userId || 'N/A'}</span>
                   </div>
 
-                  <div className="profile-stats-section">
-                    <h4>?? Activity Summary</h4>
-                    <div className="stats-grid">
-                      <div className="stat-box">
-                        <div className="stat-number">{userRegisteredEvents.length}</div>
-                        <div className="stat-label">Events Registered</div>
-                      </div>
-                      <div className="stat-box">
-                        <div className="stat-number">0</div>
-                        <div className="stat-label">Events Completed</div>
-                      </div>
-                    </div>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Unq ID</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: MH250395</span>
                   </div>
 
-                  {/* Registered Events Section */}
-                  <div className="profile-registered-events-section">
-                    <h4>?? Registered Events</h4>
-                    {userRegisteredEvents.length > 0 ? (
-                      <div className="registered-events-list">
-                        {userRegisteredEvents.map((registration: any, index: number) => (
-                          <div key={index} className="registered-event-item">
-                            <div className="event-item-header">
-                              <h5>{registration.eventId?.eventName || 'Event'}</h5>
-                              <span className="event-type-badge">
-                                {registration.eventId?.eventType === 'sports' ? '?' : 
-                                 registration.eventId?.eventType === 'parasports' ? '?' : '??'} 
-                                {registration.eventId?.eventType || 'Event'}
-                              </span>
-                            </div>
-                            <div className="event-item-details">
-                              {registration.eventId?.venue && (
-                                <p className="event-meta">?? {registration.eventId.venue}</p>
-                              )}
-                              {registration.eventId?.date && (
-                                <p className="event-meta">?? {registration.eventId.date}</p>
-                              )}
-                              {registration.registrationType && (
-                                <p className="event-meta">?? {registration.registrationType === 'individual' ? 'Individual' : 'Team'}</p>
-                              )}
-                              {registration.teamName && (
-                                <p className="event-meta">?? Team: {registration.teamName}</p>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="no-events-registered">
-                        <p>You haven't registered for any events yet.</p>
-                        <button 
-                          className="browse-events-btn"
-                          onClick={() => {
-                            setShowProfileModal(false);
-                            setActiveSubModal('EVENTS');
-                            fetchEvents();
-                            if (userProfileData.userId) {
-                              fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                                setTempSelectedEvents(savedEventIds);
-                              });
-                            }
-                          }}
-                        >
-                          Browse Events
-                        </button>
-                      </div>
-                    )}
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Name</span>
+                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase' }}>: {userProfileData?.name || 'N/A'}</span>
                   </div>
 
-                  <div className="profile-actions">
-                    <button className="profile-action-btn logout-btn" onClick={handleLogout}>?? Logout</button>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>DOB</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: 2005-01-18</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>College</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: Vignan University</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>Branch</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: CSE-AIML</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px' }}>PayStatus</span>
+                    <span style={{ color: 'white', fontSize: '1rem' }}>: NOT PAID</span>
                   </div>
                 </div>
+              </div>
+
+              {/* Event Details Section with Button on Right */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
+                <button
+                  onClick={() => setShowProfileModal(false)}
+                  style={{
+                    padding: '0.75rem 2rem',
+                    background: '#3b82f6',
+                    color: 'white',
+                    fontSize: '0.875rem',
+                    fontWeight: 'bold',
+                    borderRadius: '0.375rem',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    textTransform: 'uppercase'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = '#2563eb';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = '#3b82f6';
+                  }}
+                >
+                  EDIT/REGISTER
+                </button>
+              </div>
+              
+              {/* Events Count Box */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.25)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '1.5rem',
+                marginBottom: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.3)'
+              }}>
+                <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
+                  You are enrolled in {userRegisteredEvents.length || myEvents.length} events.
+                </p>
+              </div>
+              
+              {/* Combined Events and Welcome Section */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.25)',
+                backdropFilter: 'blur(12px)',
+                borderRadius: '0.5rem',
+                padding: '2rem',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                minHeight: '400px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                {/* Events List Centered */}
+                <div style={{ width: '100%', maxWidth: '400px' }}>
+                  <button
+                    onClick={() => {
+                      setShowProfileModal(false);
+                      setShowRegistrationModal(true);
+                    }}
+                    style={{
+                      color: '#fef3c7',
+                      fontSize: '1rem',
+                      fontWeight: '700',
+                      marginBottom: '1rem',
+                      marginTop: 0,
+                      textTransform: 'uppercase',
+                      background: 'rgba(255, 255, 255, 0.3)',
+                      padding: '0.75rem',
+                      borderRadius: '0.375rem',
+                      textAlign: 'center',
+                      backdropFilter: 'blur(4px)',
+                      letterSpacing: '0.05em',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'rgba(30, 64, 236, 0.5)';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'rgba(23, 191, 237, 0.3)';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >Register for Events</button>
+                  <button
+                    onClick={() => {
+                      setShowProfileModal(false);
+                      setShowMyEventsModal(true);
+                    }}
+                    style={{
+                      background: '#fef3c7',
+                      color: '#000',
+                      padding: '0.875rem 1rem',
+                      borderRadius: '0.5rem',
+                      fontWeight: '600',
+                      fontSize: '0.9375rem',
+                      textAlign: 'center',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = '#fde68a';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = '#fef3c7';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    MY Events
+                  </button>
+                </div>
+              </div>
+              </div>
               )}
+              </div>
             </div>
           </div>
-        </div>
       )}
 
       {/* Event Registration Modal */}
@@ -5093,24 +5062,25 @@ Do you want to proceed with registration?`;
                   {/* Sports Events Section */}
                   {getFilteredSportsEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>? Sports Events
+                      <h3>Sports Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (?{getPricingForUser().sports} each)</span>
+                          <span className="pricing-info"> ({getPricingForUser().sports} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
                         {getFilteredSportsEvents().map((event) => (
-                          <label key={event._id} className="checklist-item">
+                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
                             <input
                               type="checkbox"
                               checked={selectedEvents.has(event._id)}
                               onChange={() => handleToggleEventSelection(event._id)}
+                              disabled={isEventDisabled(event)}
                             />
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">{event.date}</span>}
+                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -5121,24 +5091,25 @@ Do you want to proceed with registration?`;
                   {/* Cultural Events Section */}
                   {getFilteredCulturalEvents().length > 0 && (
                     <div className="checklist-section">
-                      <h3>?? Cultural Events
+                      <h3>Cultural Events
                         {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> (?{getPricingForUser().culturals} each)</span>
+                          <span className="pricing-info"> ({getPricingForUser().culturals} each)</span>
                         )}
                       </h3>
                       <div className="checklist-items">
                         {getFilteredCulturalEvents().map((event) => (
-                          <label key={event._id} className="checklist-item">
+                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
                             <input
                               type="checkbox"
                               checked={selectedEvents.has(event._id)}
                               onChange={() => handleToggleEventSelection(event._id)}
+                              disabled={isEventDisabled(event)}
                             />
                             <div className="checklist-item-content">
                               <h4>{event.eventName}</h4>
                               <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">?? {event.date}</span>}
-                              {event.venue && <span className="event-meta-small">?? {event.venue}</span>}
+                              {event.date && <span className="event-meta-small">{event.date}</span>}
+                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
                             </div>
                           </label>
                         ))}
@@ -5166,7 +5137,7 @@ Do you want to proceed with registration?`;
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
                 >
-                  ?? Save to My Events
+                  Save to My Events
                 </button>
               </div>
             </div>
@@ -5179,54 +5150,140 @@ Do you want to proceed with registration?`;
         <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>?? My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>�</button>
+              <h2>My Registered Events</h2>
+              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
-                These are your registered events. Click the delete button to remove any event you don't want to participate in.
+                These are your registered events.
               </p>
               
               {myEvents.length > 0 ? (
-                <div className="my-events-list">
-                  {myEvents.map((event) => (
-                    <div key={event._id} className="my-event-card">
-                      <div className="my-event-content">
-                        <div className="my-event-header">
-                          <h4>{event.eventName}</h4>
-                          <span className="event-type-badge">
-                            {event.eventType === 'sports' ? '?' : event.eventType === 'parasports' ? '??' : '??'} {event.eventType}
+                <div className="my-events-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {myEvents.map((event, index) => (
+                    <div key={event._id || index} style={{
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      padding: '1rem',
+                      borderRadius: '0.5rem',
+                      border: '1px solid rgba(255, 255, 255, 0.2)',
+                      position: 'relative'
+                    }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
+                        <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: '600', margin: 0, flex: 1 }}>
+                          {event.eventName}
+                        </h4>
+                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                          <span style={{
+                            background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
+                            color: 'white',
+                            padding: '0.25rem 0.75rem',
+                            borderRadius: '1rem',
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            textTransform: 'uppercase'
+                          }}>
+                            {event.eventType}
                           </span>
-                        </div>
-                        <p>{event.description || 'No description'}</p>
-                        <div className="event-details-grid">
-                          {event.date && <p className="event-meta">?? {event.date}</p>}
-                          {event.venue && <p className="event-meta">?? {event.venue}</p>}
-                          {event.prizePool && <p className="event-meta">?? {event.prizePool}</p>}
-                        </div>
-                        <div className="event-registered-badge">
-                          ? Registered
+                          <button
+                            onClick={async () => {
+                              if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
+                                try {
+                                  const updatedEvents = myEvents.filter((_, i) => i !== index);
+                                  
+                                  // Update in database
+                                  const response = await fetch(`${API_BASE_URL}/save-events`, {
+                                    method: 'POST',
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                      userId: userProfileData.userId,
+                                      events: updatedEvents
+                                    })
+                                  });
+
+                                  const result = await response.json();
+
+                                  if (response.ok && result.success) {
+                                    // Update localStorage
+                                    const storageKey = `myEvents_${userProfileData.userId}`;
+                                    localStorage.setItem(storageKey, JSON.stringify(updatedEvents));
+                                    
+                                    // Update state
+                                    setMyEvents(updatedEvents);
+                                    alert('Event removed successfully!');
+                                  } else {
+                                    throw new Error(result.message || 'Failed to remove event');
+                                  }
+                                } catch (error) {
+                                  console.error('Error removing event:', error);
+                                  alert('Failed to remove event. Please try again.');
+                                }
+                              }
+                            }}
+                            style={{
+                              background: '#ef4444',
+                              color: 'white',
+                              border: 'none',
+                              borderRadius: '0.375rem',
+                              padding: '0.35rem 0.6rem',
+                              fontSize: '0.75rem',
+                              fontWeight: '600',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s'
+                            }}
+                            onMouseOver={(e) => {
+                              e.currentTarget.style.background = '#dc2626';
+                            }}
+                            onMouseOut={(e) => {
+                              e.currentTarget.style.background = '#ef4444';
+                            }}
+                          >
+                            Remove
+                          </button>
                         </div>
                       </div>
+                      {event.category && (
+                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', margin: '0.5rem 0' }}>
+                          {event.category}
+                        </p>
+                      )}
+                      {event.description && (
+                        <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem', margin: '0.5rem 0 0 0' }}>
+                          {event.description}
+                        </p>
+                      )}
+                      {event.fee && (
+                        <p style={{ color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600', margin: '0.5rem 0 0 0' }}>
+                          Fee: ₹{event.fee}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="no-events-saved">
-                  <p>You haven't registered for any events yet.</p>
-                  <button className="browse-events-btn" onClick={() => {
-                    setShowMyEventsModal(false);
-                    setActiveSubModal('EVENTS');
-                    // Fetch data in background
-                    fetchEvents();
-                    if (isLoggedIn && userProfileData.userId) {
-                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                        setTempSelectedEvents(savedEventIds);
-                      });
-                    } else {
-                      setTempSelectedEvents(new Set());
-                    }
-                  }}>
+                <div className="no-events-saved" style={{ textAlign: 'center', padding: '2rem' }}>
+                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1rem' }}>
+                    You haven't registered for any events yet.
+                  </p>
+                  <button 
+                    className="browse-events-btn" 
+                    onClick={() => {
+                      setShowMyEventsModal(false);
+                      setShowRegistrationModal(true);
+                    }}
+                    style={{
+                      padding: '0.75rem 1.5rem',
+                      background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s'
+                    }}
+                  >
                     Browse Events
                   </button>
                 </div>
@@ -5463,7 +5520,7 @@ Do you want to proceed with registration?`;
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            ?
+            ✕
           </button>
 
           {/* Photo Content - reuse AVIF gallery image for modal view */}
@@ -5483,8 +5540,8 @@ Do you want to proceed with registration?`;
             }}
           >
             <img
-              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.index]}`}
-              alt={`Gallery ${selectedPhoto.index + 1}`}
+              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.row * 6 + selectedPhoto.index]}`}
+              alt={`Gallery ${selectedPhoto.row * 6 + selectedPhoto.index + 1}`}
               style={{
                 width: '100%',
                 height: '100%',
@@ -5497,152 +5554,483 @@ Do you want to proceed with registration?`;
         </div>
       )}
 
-      {/* User Details Page Modal */}
-      {showUserDetailsPage && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-[99999]" 
+      {/* Registration Modal with Events from JSON */}
+      {showRegistrationModal && (
+        <div 
+          className="login-modal-overlay" 
+          onClick={() => setShowRegistrationModal(false)}
           style={{
-            backgroundImage: 'url("/Background-redesign.avif")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
-          }}>
-          
-          {/* Floating Flowers */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
-            <FlowerComponent 
-              size="100%"
-              sunSize="50%"
-              moonSize="43%"
-              sunTop="25%"
-              sunLeft="25%"
-              moonTop="28.5%"
-              moonLeft="28.5%"
-              showPetalRotation={true}
-            />
-          </div>
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
-            <FlowerComponent 
-              size="100%"
-              sunSize="50%"
-              moonSize="43%"
-              sunTop="25%"
-              sunLeft="25%"
-              moonTop="28.5%"
-              moonLeft="28.5%"
-              showPetalRotation={true}
-            />
-          </div>
-
-          {/* Content Container */}
-          <div className="relative z-10 min-h-screen">
-            
-            {/* Close Button - Top Right */}
-            <button 
-              onClick={() => setShowUserDetailsPage(false)}
-              className="fixed top-4 right-4 md:top-6 md:right-6 w-12 h-12 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold transition-all hover:scale-110 z-50"
-              aria-label="Close"
-            >
-              ×
-            </button>
-
-            {/* Student Details Header with Logout Button */}
-            <div className="bg-red-500 py-4 px-6 flex justify-between items-center">
-              <h1 className="text-white text-xl md:text-2xl font-bold">Student Details</h1>
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 10000,
+            backdropFilter: 'blur(10px)'
+          }}
+        >
+          <div 
+            className="registration-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'linear-gradient(135deg, rgba(139, 69, 172, 0.95), rgba(88, 28, 135, 0.95))',
+              borderRadius: '1rem',
+              padding: '2rem',
+              width: '90%',
+              maxWidth: '900px',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+              border: '2px solid rgba(255, 255, 255, 0.2)'
+            }}
+          >
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Register for Events</h2>
               <button
-                onClick={() => setShowUserDetailsPage(false)}
-                className="px-6 py-2 bg-white text-red-500 font-bold rounded-md hover:bg-gray-100 transition-all"
+                onClick={() => setShowRegistrationModal(false)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '2rem',
+                  cursor: 'pointer',
+                  padding: 0,
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
               >
-                Logout
+                ×
               </button>
             </div>
 
-            {/* Main Content Area */}
-            <div className="p-6 md:p-12">
-              
-              {/* User Info Box - Structured like image 2 */}
-              <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-8 mb-8 max-w-4xl">
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Reg No</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.userId || userProfileData?.userId || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Unq ID</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.registerId || userProfileData?.registerId || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Name</span>
-                    <span className="text-white text-base md:text-lg uppercase">: {fullUserData?.name || userProfileData?.name || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">DOB</span>
-                    <span className="text-white text-base md:text-lg">: {(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth) ? new Date(fullUserData?.dateOfBirth || userProfileData?.dateOfBirth).toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('/').reverse().join('-') : 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">College</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.college || userProfileData?.college || 'Vignan University'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">Branch</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.branch || userProfileData?.branch || 'N/A'}</span>
-                  </div>
-
-                  <div className="flex items-center">
-                    <span className="text-white text-sm md:text-base min-w-[140px]">PayStatus</span>
-                    <span className="text-white text-base md:text-lg">: {fullUserData?.paymentStatus || userProfileData?.paymentStatus || 'NOT PAID'}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event Details Section with Button on Right */}
-              <div className="flex justify-between items-start mb-6">
-                <h2 className="text-white text-xl md:text-2xl font-bold">Event Details</h2>
-                <button
-                  onClick={() => {
-                    setShowUserDetailsPage(false);
-                    setActiveSubModal('EVENTS');
-                    if (isLoggedIn && userProfileData.userId) {
-                      fetchUserSavedEvents(userProfileData.userId).then(savedEventIds => {
-                        setTempSelectedEvents(savedEventIds);
-                      });
-                    } else {
-                      setTempSelectedEvents(new Set());
+            {/* Sports Events Section */}
+            {registrationEvents.Sports && registrationEvents.Sports.length > 0 && (
+              <div style={{ marginBottom: '2rem' }}>
+                <h3 style={{ 
+                  color: '#fef3c7', 
+                  fontSize: '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '1rem',
+                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
+                  paddingBottom: '0.5rem'
+                }}>
+                  Sports Events
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {registrationEvents.Sports.map((event: any, index: number) => {
+                    if (!event || !event['738500'] || event['738500'] === 'Event') return null;
+                    
+                    const eventId = `sport-${index}`;
+                    const eventName = event['738500'];
+                    const category = event['Prize money for Sports'] || '';
+                    const isHeader = category && !event.D;
+                    
+                    // Gender-based filtering
+                    const userGender = userProfileData.gender?.toLowerCase();
+                    if (userGender && category) {
+                      const categoryLower = category.toLowerCase();
+                      if (userGender === 'male' && categoryLower.includes('women')) {
+                        return null; // Skip women's events for male users
+                      }
+                      if (userGender === 'female' && categoryLower.includes('men') && !categoryLower.includes('women')) {
+                        return null; // Skip men's events for female users
+                      }
                     }
-                    fetchEvents();
-                  }}
-                  className="px-8 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-md shadow-lg transition-all duration-200 hover:scale-105 uppercase"
-                >
-                  EDIT/REGISTER
-                </button>
-              </div>
-              
-              {/* Events Count Box */}
-              <div className="bg-gray-600/50 backdrop-blur-sm rounded-lg p-6 mb-8 max-w-4xl">
-                <p className="text-white text-base md:text-lg text-center">
-                  You are enrolled in {myEvents.length} events.
-                </p>
-              </div>
-              
-              {/* Events List Section */}
-              {myEvents.length > 0 && (
-                <div>
-                  <div className="bg-gray-700/40 rounded-lg p-6 max-w-sm">
-                    <h3 className="text-white text-base font-semibold mb-4 uppercase">EVENTS</h3>
-                    <div className="space-y-3">
-                      {myEvents.map((event, index) => (
-                        <div key={index} className="bg-yellow-400 text-black px-4 py-3 rounded-md font-semibold text-sm">
-                          {typeof event === 'string' ? event : event.eventName || 'Unknown Event'}
+                    
+                    if (isHeader) {
+                      return (
+                        <div key={eventId} style={{ 
+                          color: '#fbbf24', 
+                          fontWeight: 'bold', 
+                          fontSize: '1.1rem', 
+                          marginTop: '1rem',
+                          paddingLeft: '0.5rem'
+                        }}>
+                          {category}
                         </div>
-                      ))}
-                    </div>
+                      );
+                    }
+                    
+                    return (
+                      <label 
+                        key={eventId}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '0.5rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedRegistrationEvents.has(eventId)}
+                          onChange={() => {
+                            setSelectedRegistrationEvents(prev => {
+                              const newSet = new Set(prev);
+                              if (newSet.has(eventId)) {
+                                newSet.delete(eventId);
+                              } else {
+                                newSet.add(eventId);
+                              }
+                              return newSet;
+                            });
+                          }}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginRight: '1rem',
+                            cursor: 'pointer',
+                            accentColor: '#fbbf24'
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
+                            {eventName}
+                          </div>
+                          {category && !isHeader && (
+                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                              {category}
+                            </div>
+                          )}
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Cultural Events Section */}
+            {registrationEvents.Culturals && registrationEvents.Culturals.length > 0 && (
+              <div style={{ marginBottom: '2rem' }}>
+                <h3 style={{ 
+                  color: '#fef3c7', 
+                  fontSize: '1.5rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '1rem',
+                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
+                  paddingBottom: '0.5rem'
+                }}>
+                  Culturals Events
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  {registrationEvents.Culturals.map((event: any, index: number) => {
+                    if (!event || !event['Prize money for Performing arts, Visual arts, Fashion'] || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
+                    
+                    const eventId = `cultural-${index}`;
+                    const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
+                    const category = event['5'] || '';
+                    const isHeader = category && !event.Column1;
+                    
+                    // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
+                    const userGender = userProfileData.gender?.toLowerCase();
+                    if (userGender && (category || eventName)) {
+                      const textToCheck = (category + ' ' + eventName).toLowerCase();
+                      if (userGender === 'male' && textToCheck.includes('ms.')) {
+                        return null; // Skip Ms. Mahotsav for male users
+                      }
+                      if (userGender === 'female' && textToCheck.includes('mr.') && !textToCheck.includes('mrs')) {
+                        return null; // Skip Mr. Mahotsav for female users
+                      }
+                    }
+                    
+                    if (isHeader) {
+                      return (
+                        <div key={eventId} style={{ 
+                          color: '#fbbf24', 
+                          fontWeight: 'bold', 
+                          fontSize: '1.1rem', 
+                          marginTop: '1rem',
+                          paddingLeft: '0.5rem'
+                        }}>
+                          {category}
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <label 
+                        key={eventId}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          padding: '0.75rem 1rem',
+                          borderRadius: '0.5rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s',
+                          border: '1px solid rgba(255, 255, 255, 0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedRegistrationEvents.has(eventId)}
+                          onChange={() => {
+                            setSelectedRegistrationEvents(prev => {
+                              const newSet = new Set(prev);
+                              if (newSet.has(eventId)) {
+                                newSet.delete(eventId);
+                              } else {
+                                newSet.add(eventId);
+                              }
+                              return newSet;
+                            });
+                          }}
+                          style={{
+                            width: '20px',
+                            height: '20px',
+                            marginRight: '1rem',
+                            cursor: 'pointer',
+                            accentColor: '#fbbf24'
+                          }}
+                        />
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
+                            {eventName}
+                          </div>
+                          {category && !isHeader && (
+                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                              {category}
+                            </div>
+                          )}
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Footer with Submit Button */}
+            <div style={{ 
+              borderTop: '2px solid rgba(255, 255, 255, 0.3)', 
+              paddingTop: '1.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem'
+            }}>
+              {/* Summary Section */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '1rem',
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '0.5rem'
+              }}>
+                <div>
+                  <div style={{ color: 'white', fontSize: '1rem', fontWeight: '600' }}>
+                    Selected: {selectedRegistrationEvents.size} event(s)
+                  </div>
+                  <div style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+                    {(() => {
+                      // Calculate event types
+                      const selectedIds = Array.from(selectedRegistrationEvents);
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                      
+                      return `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
+                    })()}
                   </div>
                 </div>
-              )}
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600' }}>
+                    Registration Fee
+                  </div>
+                  <div style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                    {(() => {
+                      const selectedIds = Array.from(selectedRegistrationEvents);
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                      const userGender = userProfileData.gender?.toLowerCase();
+                      
+                      let fee = 0;
+                      if (userGender === 'male') {
+                        if (hasSports || hasCulturals) {
+                          fee = 350; // Same fee regardless of selection
+                        }
+                      } else if (userGender === 'female') {
+                        if (hasSports && hasCulturals) {
+                          fee = 350; // Both
+                        } else if (hasSports) {
+                          fee = 350; // Sports only
+                        } else if (hasCulturals) {
+                          fee = 250; // Culturals only
+                        }
+                      } else {
+                        if (hasSports || hasCulturals) {
+                          fee = 350;
+                        }
+                      }
+                      
+                      return fee > 0 ? `₹${fee}` : '₹0';
+                    })()}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Submit Button */}
+              <button
+                onClick={async () => {
+                  if (selectedRegistrationEvents.size === 0) {
+                    alert('Please select at least one event');
+                    return;
+                  }
+                  
+                  if (!isLoggedIn || !userProfileData.userId) {
+                    alert('Please login to register for events');
+                    return;
+                  }
+                  
+                  // Calculate fee for confirmation message
+                  const selectedIds = Array.from(selectedRegistrationEvents);
+                  const hasSports = selectedIds.some(id => id.startsWith('sport-'));
+                  const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                  const userGender = userProfileData.gender?.toLowerCase();
+                  
+                  let fee = 0;
+                  if (userGender === 'male') {
+                    if (hasSports || hasCulturals) {
+                      fee = 350; // Same fee regardless of selection
+                    }
+                  } else if (userGender === 'female') {
+                    if (hasSports && hasCulturals) {
+                      fee = 350; // Both
+                    } else if (hasSports) {
+                      fee = 350; // Sports only
+                    } else if (hasCulturals) {
+                      fee = 250; // Culturals only
+                    }
+                  } else {
+                    if (hasSports || hasCulturals) {
+                      fee = 350;
+                    }
+                  }
+                  
+                  // Prepare events data to save
+                  const eventsToSave = selectedIds.map(id => {
+                    const [type, index] = id.split('-');
+                    const idx = parseInt(index);
+                    
+                    if (type === 'sport' && registrationEvents.Sports[idx]) {
+                      const event = registrationEvents.Sports[idx];
+                      return {
+                        _id: id,
+                        eventId: id,
+                        eventName: event['738500'],
+                        eventType: 'sports',
+                        category: event['Prize money for Sports'] || '',
+                        description: `${event['Prize money for Sports'] || ''} - ${event['738500']}`.trim(),
+                        fee: userProfileData.gender === 'male' ? 350 : 350
+                      };
+                    } else if (type === 'cultural' && registrationEvents.Culturals[idx]) {
+                      const event = registrationEvents.Culturals[idx];
+                      return {
+                        _id: id,
+                        eventId: id,
+                        eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
+                        eventType: 'culturals',
+                        category: event['5'] || '',
+                        description: `${event['5'] || ''} - ${event['Prize money for Performing arts, Visual arts, Fashion']}`.trim(),
+                        fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
+                      };
+                    }
+                    return null;
+                  }).filter(e => e !== null);
+                  
+                  try {
+                    // Save to database via API
+                    const response = await fetch(`${API_BASE_URL}/save-events`, {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        userId: userProfileData.userId,
+                        events: eventsToSave
+                      })
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                      throw new Error(result.message || 'Failed to save events');
+                    }
+
+                    // Also save to localStorage as backup
+                    const storageKey = `myEvents_${userProfileData.userId}`;
+                    localStorage.setItem(storageKey, JSON.stringify(eventsToSave));
+                    
+                    // Update local state with the registered events
+                    setMyEvents(eventsToSave as any);
+                    
+                    const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
+                    alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);
+                    setShowRegistrationModal(false);
+                    setSelectedRegistrationEvents(new Set());
+                  } catch (error) {
+                    console.error('Error saving events:', error);
+                    alert('An error occurred while saving events to database. Please try again.');
+                  }
+                }}
+                disabled={selectedRegistrationEvents.size === 0}
+                style={{
+                  padding: '0.875rem 2rem',
+                  background: selectedRegistrationEvents.size === 0 ? 'rgba(156, 163, 175, 0.5)' : 'linear-gradient(to right, #fbbf24, #f59e0b)',
+                  color: 'white',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  borderRadius: '0.5rem',
+                  border: 'none',
+                  cursor: selectedRegistrationEvents.size === 0 ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.3s',
+                  textTransform: 'uppercase'
+                }}
+                onMouseOver={(e) => {
+                  if (selectedRegistrationEvents.size > 0) {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(251, 191, 36, 0.5)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Submit Registration
+              </button>
             </div>
           </div>
         </div>

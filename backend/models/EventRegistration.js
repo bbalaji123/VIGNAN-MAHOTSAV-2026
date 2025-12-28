@@ -1,53 +1,30 @@
 import mongoose from 'mongoose';
 
 const eventRegistrationSchema = new mongoose.Schema({
-  registrationId: {
+  userId: {
     type: String,
     required: true,
-    unique: true,
     trim: true
+  },
+  eventName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  eventType: {
+    type: String,
+    enum: ['sports', 'culturals', 'other'],
+    required: true
   },
   registrationType: {
     type: String,
     enum: ['individual', 'team'],
     required: true
   },
-  eventId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Event',
-    required: true
-  },
-  eventName: {
-    type: String,
-    required: true
-  },
-  eventType: {
-    type: String,
-    required: true
-  },
-  // Individual Registration Fields
-  userId: {
+  registrationId: {
     type: String,
     trim: true
   },
-  participantName: {
-    type: String,
-    trim: true
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true
-  },
-  phone: {
-    type: String,
-    trim: true
-  },
-  college: {
-    type: String,
-    trim: true
-  },
-  // Team Registration Fields
   teamId: {
     type: String,
     trim: true
@@ -56,50 +33,31 @@ const eventRegistrationSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  captain: {
-    userId: String,
-    name: String,
-    email: String,
-    phone: String,
-    college: String
-  },
   teamMembers: [{
     userId: String,
     name: String,
     email: String,
-    phone: String,
-    college: String,
-    role: String // captain, member
+    phone: String
   }],
-  teamSize: {
-    type: Number,
-    default: 0
-  },
   paymentStatus: {
     type: String,
-    enum: ['paid', 'unpaid'],
+    enum: ['paid', 'unpaid', 'pending'],
     default: 'unpaid'
   },
-  registrationDate: {
-    type: Date,
-    default: Date.now
-  },
-  status: {
-    type: String,
-    enum: ['pending', 'confirmed', 'cancelled'],
-    default: 'confirmed'
+  participantDetails: {
+    name: String,
+    email: String,
+    phone: String,
+    college: String
   }
 }, {
-  collection: 'eventRegistrations',
-  timestamps: true // Adds createdAt and updatedAt automatically
+  timestamps: true // Automatically adds createdAt and updatedAt fields
 });
 
-// Create compound indexes for better query performance and duplicate prevention
-eventRegistrationSchema.index({ eventId: 1, userId: 1, registrationType: 1 });
-eventRegistrationSchema.index({ eventId: 1, 'captain.userId': 1, registrationType: 1 });
-eventRegistrationSchema.index({ createdAt: -1 }); // For ID generation sorting
-eventRegistrationSchema.index({ registrationId: 1 }, { unique: true }); // Ensure unique registration IDs
-eventRegistrationSchema.index({ teamId: 1 }, { sparse: true }); // For team lookups
+// Index for efficient querying
+eventRegistrationSchema.index({ userId: 1 });
+eventRegistrationSchema.index({ registrationType: 1, createdAt: -1 });
+eventRegistrationSchema.index({ eventName: 1 });
 
 const EventRegistration = mongoose.model('EventRegistration', eventRegistrationSchema);
 

@@ -89,12 +89,13 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
           <div
             className={`scroll-row ${animate ? 'run' : 'paused'} row-${rowIndex}`}
           >
-            {row.map((img, index) => (
+            {/* Duplicate images for continuous scrolling */}
+            {[...row, ...row, ...row].map((img, index) => (
               <div 
-                key={img} 
-                className="throwback-card"
-                onClick={() => onPhotoClick(rowIndex, index)}
-                style={{ cursor: 'pointer' }}
+                key={`${img}-${index}`}
+                className="throwback-card gallery-shimmer"
+                onClick={() => onPhotoClick(rowIndex, index % row.length)}
+                style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
               >
                 <img
                   src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${img}`}
@@ -103,7 +104,12 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
                   decoding="async"
                   width={280}
                   height={180}
+                  onLoad={(e) => {
+                    const card = e.currentTarget.parentElement;
+                    if (card) card.classList.add('loaded');
+                  }}
                 />
+                <div className="shimmer-overlay-gallery"></div>
               </div>
             ))}
           </div>

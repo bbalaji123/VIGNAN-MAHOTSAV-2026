@@ -39,7 +39,7 @@ const AnimatedIcon: React.FC = () => {
       let progress = scrollY / scrollRange;
       progress = Math.min(1, Math.max(0, progress));
 
-      // Opacity fade effect - fade out in middle, fade in from right with reduced opacity
+      // Opacity fade effect - fade out in middle, fade in from right with full opacity
       let newOpacity = 1;
       if (progress < 0.4) {
         // First 40% - fade out
@@ -48,8 +48,8 @@ const AnimatedIcon: React.FC = () => {
         // Middle 20% - completely invisible
         newOpacity = 0;
       } else {
-        // Last 40% - fade in from right with reduced opacity (0.3 instead of 1)
-        newOpacity = ((progress - 0.6) / 0.4) * 0.3;
+        // Last 40% - fade in from right with full opacity
+        newOpacity = ((progress - 0.6) / 0.4) * 1;
       }
       setOpacity(newOpacity);
 
@@ -241,28 +241,6 @@ const AnimatedIcon: React.FC = () => {
           style={{ zIndex: 10 }}
         />
       </svg>
-      
-      <style>{`
-        /* 
-          ANTI-CLOCKWISE ROTATION (Petals)
-          - Negative rotation = anti-clockwise
-          - No translate transforms = no position drift
-        */
-        @keyframes rotateAntiClockwise {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-        
-        /* 
-          CLOCKWISE ROTATION (Sun)
-          - Positive rotation = clockwise
-          - No translate transforms = no position drift
-        */
-        @keyframes rotateClockwise {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 };

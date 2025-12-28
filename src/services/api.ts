@@ -73,6 +73,9 @@ export interface Event {
     contact: string;
   }>;
   isActive?: boolean;
+  fee?: number;
+  eventId?: string;
+  registeredAt?: Date | string;
 }
 
 export interface EventsResponse {
@@ -429,14 +432,14 @@ export const getMyEventRegistrations = async (userId: string): Promise<EventRegi
 };
 
 // Save selected events to user's My Events
-export const saveMyEvents = async (userId: string, eventIds: string[]): Promise<ApiResponse> => {
+export const saveMyEvents = async (userId: string, events: any[]): Promise<ApiResponse> => {
   try {
     const response = await fetch(`${API_BASE_URL}/save-events`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userId, eventIds }),
+      body: JSON.stringify({ userId, events }),
     });
 
     const data = await response.json();

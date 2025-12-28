@@ -123,7 +123,7 @@
   font-family: 'Woodtrap', sans-serif !important;
   font-size: 1.75rem;
   font-weight: bold;
-  color: #ef4444;
+  color: #DB2777;
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
@@ -144,6 +144,7 @@
   font-weight: bold;
   color: #fbbf24;
   margin-top: 1.5rem;
+  margin-left: 550px;
   margin-bottom: 1rem;
 }
 
@@ -155,18 +156,19 @@
 }
 
 .hospitality-table {
-  width: 100%;
+  width: 50%;
   min-width: 400px;
   margin: 2rem 0;
   border-collapse: collapse;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
   overflow: hidden;
+  margin-left: 300px;
   backdrop-filter: blur(10px);
 }
 
 .hospitality-table thead tr {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3));
+  background: rgba(255, 255, 0, 0.842);
   backdrop-filter: blur(10px);
 }
 
@@ -176,7 +178,7 @@
   font-family: 'Woodtrap', sans-serif !important;
   font-size: 0.9375rem;
   font-weight: bold;
-  color: #ffd7a8;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 2px solid rgba(251, 191, 36, 0.3);

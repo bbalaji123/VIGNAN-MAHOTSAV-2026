@@ -11,7 +11,6 @@ const EventsInfo: React.FC = () => {
   
   // Main section states
   const [showSportsDetails, setShowSportsDetails] = useState(false);
-  const [showParaSports, setShowParaSports] = useState(false);
   const [showCulturals, setShowCulturals] = useState(false);
   const [showIndoorSports, setShowIndoorSports] = useState(false);
   const [showWomensIndoorSports, setShowWomensIndoorSports] = useState(false);
@@ -28,15 +27,15 @@ const EventsInfo: React.FC = () => {
   const [showRoboGames, setShowRoboGames] = useState(false);
   const [showSpotLight, setShowSpotLight] = useState(false);
   const [showRoboWarsGaming, setShowRoboWarsGaming] = useState(false);
+  const [showParaCards, setShowParaCards] = useState(false);
 
   // Carousel states
   const [, setCurrentSportsSlide] = useState(2);
   const [, setCurrentCulturalsSlide] = useState(3);
 
   // Events data
-  const [sportsEvents, setSportsEvents] = useState<Event[]>([]);
-  const [culturalEvents, setCulturalEvents] = useState<Event[]>([]);
-  const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
+  const [, setSportsEvents] = useState<Event[]>([]);
+  const [, setCulturalEvents] = useState<Event[]>([]);
 
   const sportsDetailCards = [
     { title: "Men's Athletics", subtitle: "Track & Field" },
@@ -44,7 +43,8 @@ const EventsInfo: React.FC = () => {
     { title: "Men's Individual &", subtitle: "Indoor Sports" },
     { title: "Women's Individual &", subtitle: "Indoor Sports" },
     { title: "Men's Team Field Sports", subtitle: "" },
-    { title: "Women's Team Field", subtitle: "Sports" }
+    { title: "Women's Team Field", subtitle: "Sports" },
+    { title: "Para", subtitle: "" }
   ];
 
   const indoorSportsCards = [
@@ -72,6 +72,11 @@ const EventsInfo: React.FC = () => {
     { title: "Kabaddi", subtitle: "(7+3)*" },
     { title: "Kho-Kho", subtitle: "(9+3)*" },
     { title: "Throw ball", subtitle: "(6+3)*" }
+  ];
+
+  const paraCards = [
+    { title: "Para Sports", subtitle: "" },
+    { title: "Para Cricket", subtitle: "" }
   ];
 
   const culturalsCards = [
@@ -219,6 +224,12 @@ const EventsInfo: React.FC = () => {
       return;
     }
     
+    // Check if it's Para
+    if (eventTitle === "Para") {
+      setShowParaCards(true);
+      return;
+    }
+    
     // Map event titles to their detail page names
     const eventNameMapping: { [key: string]: string } = {
       // Sports events
@@ -349,6 +360,7 @@ const EventsInfo: React.FC = () => {
     else if (showWomensIndoorSports) fromSection = 'womensIndoorSports';
     else if (showMensTeamSports) fromSection = 'mensTeamSports';
     else if (showWomensTeamSports) fromSection = 'womensTeamSports';
+    else if (showParaCards) fromSection = 'paraCards';
     else if (showDance) fromSection = 'dance';
     else if (showMusic) fromSection = 'music';
     else if (showTheatre) fromSection = 'theatre';
@@ -360,17 +372,12 @@ const EventsInfo: React.FC = () => {
     else if (showRoboGames) fromSection = 'roboGames';
     else if (showSpotLight) fromSection = 'spotLight';
     else if (showRoboWarsGaming) fromSection = 'roboWarsGaming';
-    else if (showParaSports) fromSection = 'paraSports';
     navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection } });
   };
 
   // Click handlers
   const handleSportsCardClick = () => {
     setShowSportsDetails(true);
-  };
-
-  const handleParaSportsCardClick = () => {
-    setShowParaSports(true);
   };
 
   const handleCulturalsCardClick = () => {
@@ -399,14 +406,12 @@ const EventsInfo: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const [sportsResponse, culturalsResponse, paraSportsResponse] = await Promise.all([
+        const [sportsResponse, culturalsResponse] = await Promise.all([
           getEventsByType('Sports'),
-          getEventsByType('Cultural'),
-          getEventsByType('Para Sports')
+          getEventsByType('Cultural')
         ]);
         setSportsEvents(sportsResponse.data || []);
         setCulturalEvents(culturalsResponse.data || []);
-        setParaSportsEvents(paraSportsResponse.data || []);
       } catch (error) {
       }
     };
@@ -421,7 +426,7 @@ const EventsInfo: React.FC = () => {
       const section = state.openSection;
       
       // Handle sports sections
-      if (['indoorSports', 'womensIndoorSports', 'mensTeamSports', 'womensTeamSports'].includes(section)) {
+      if (['indoorSports', 'womensIndoorSports', 'mensTeamSports', 'womensTeamSports', 'paraCards'].includes(section)) {
         setShowSportsDetails(true);
         
         switch (section) {
@@ -436,6 +441,9 @@ const EventsInfo: React.FC = () => {
             break;
           case 'womensTeamSports':
             setShowWomensTeamSports(true);
+            break;
+          case 'paraCards':
+            setShowParaCards(true);
             break;
         }
       }
@@ -483,10 +491,6 @@ const EventsInfo: React.FC = () => {
           }
         }
       }
-      // Handle para sports section
-      else if (section === 'paraSports') {
-        setShowParaSports(true);
-      }
       
       // Clear the state to prevent issues on refresh
       window.history.replaceState({}, document.title);
@@ -511,7 +515,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={false}
+          showPetalRotation={true}
         />
       </div>
 
@@ -525,7 +529,7 @@ const EventsInfo: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={false}
+          showPetalRotation={true}
         />
       </div>
 
@@ -537,9 +541,6 @@ const EventsInfo: React.FC = () => {
             right: -13%;
             width: 500px;
             height: 500px;
-            opacity: 0.3            git add .github/workflows/deploy.yml
-            git commit -m "Fix: Add enablement parameter to GitHub Pages deployment"
-            git push;
           }
           
           .flower-bottom-left {
@@ -547,7 +548,6 @@ const EventsInfo: React.FC = () => {
             left: -13%;
             width: 500px;
             height: 500px;
-            opacity: 0.3;
           }
           
           /* Responsive flower positioning */
@@ -556,7 +556,6 @@ const EventsInfo: React.FC = () => {
             .flower-bottom-left {
               width: 350px !important;
               height: 350px !important;
-              opacity: 0.25 !important;
             }
             
             .flower-top-right {
@@ -575,7 +574,6 @@ const EventsInfo: React.FC = () => {
             .flower-bottom-left {
               width: 250px !important;
               height: 250px !important;
-              opacity: 0.2 !important;
             }
             
             .flower-top-right {
@@ -843,6 +841,7 @@ const EventsInfo: React.FC = () => {
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
                 className="events-logo"
+                style={{marginTop: '-60px'}}
               />
               <div className="events-back-button-container">
                 <BackButton 
@@ -864,15 +863,15 @@ const EventsInfo: React.FC = () => {
                   }
                 } else if (showRoboWarsGaming) {
                   setShowRoboWarsGaming(false);
-                } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+                } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
                   setShowIndoorSports(false);
                   setShowWomensIndoorSports(false);
                   setShowMensTeamSports(false);
                   setShowWomensTeamSports(false);
-                } else if (showSportsDetails || showCulturals || showParaSports) {
+                  setShowParaCards(false);
+                } else if (showSportsDetails || showCulturals) {
                   setShowSportsDetails(false);
                   setShowCulturals(false);
-                  setShowParaSports(false);
                 } else {
                   navigate('/');
                 }
@@ -881,12 +880,13 @@ const EventsInfo: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-start" style={showDance ? { marginLeft: '150px' } : {}}>
+            <div className="flex items-start justify-center" style={{ marginTop: '30px' }}>
               <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' : 
                  showWomensIndoorSports ? "Women's Indoor Sports" : 
                  showMensTeamSports ? "Men's Team Field Sports" : 
                  showWomensTeamSports ? "Women's Team Field Sports" :
+                 showParaCards ? 'Para' :
                  showDance ? 'Dance' :
                  showMusic ? 'Music' :
                  showTheatre ? 'Theatre' :
@@ -935,25 +935,26 @@ const EventsInfo: React.FC = () => {
                 }
               } else if (showRoboWarsGaming) {
                 setShowRoboWarsGaming(false);
-              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports) {
+              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
                 setShowIndoorSports(false);
                 setShowWomensIndoorSports(false);
                 setShowMensTeamSports(false);
                 setShowWomensTeamSports(false);
-              } else if (showSportsDetails || showCulturals || showParaSports) {
+                setShowParaCards(false);
+              } else if (showSportsDetails || showCulturals) {
                 setShowSportsDetails(false);
                 setShowCulturals(false);
-                setShowParaSports(false);
               } else {
                 navigate('/');
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem' }}>
+            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem', marginTop: '50px' }}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
                showWomensTeamSports ? "Women's Team Field Sports" :
+               showParaCards ? 'Para' :
                showDance ? 'Dance' :
                showMusic ? 'Music' :
                showTheatre ? 'Theatre' :
@@ -973,10 +974,10 @@ const EventsInfo: React.FC = () => {
 
         {/* Main Cards Section */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
-          {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
+          {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="events-main-cards-container flex flex-col md:flex-row items-center justify-center gap-15 md:gap-18 mb-10">
+              <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div 
                   className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
@@ -1064,7 +1065,7 @@ const EventsInfo: React.FC = () => {
           )}
 
           {/* Keep existing sections for when cards are clicked */}
-          {showSportsDetails && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && (
+          {showSportsDetails && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && (
             <div className="w-full h-full flex flex-col relative z-20">
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
@@ -1076,7 +1077,8 @@ const EventsInfo: React.FC = () => {
                                          card.title === "Men's Individual &" || 
                                          card.title === "Women's Individual &" || 
                                          card.title === "Men's Team Field Sports" || 
-                                         card.title === "Women's Team Field";
+                                         card.title === "Women's Team Field" ||
+                                         card.title === "Para";
                       
                       return (
                         <div 
@@ -1224,31 +1226,34 @@ const EventsInfo: React.FC = () => {
             </div>
           )}
 
-          {/* Para Sports Section */}
-          {showParaSports && (
-            <section className="inline-indoor-sports-section">
-              <div className="inline-indoor-sports-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.avif`}
-                    alt="Vignan Mahotsav" 
-                    className="h-28 md:h-32 object-contain"
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowParaSports(false)}>
-                      ← Back
-                    </button>
-                    <h2>PARA SPORTS CATEGORIES</h2>
+          {/* Para Cards Section */}
+          {showParaCards && (
+            <div className="w-full h-full flex flex-col relative z-20">
+              <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
+                <div className="w-full max-w-6xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {paraCards.map((card, index) => (
+                      <div 
+                        key={index} 
+                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        onClick={() => handleEventDetailClick(card.title)}
+                      >
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <h2 className="subcategory-card-title">
+                            {card.title}
+                          </h2>
+                          {card.subtitle && (
+                            <p className="subcategory-card-subtitle">
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="para-sports-message text-center mt-8">
-                  <p className="text-white text-xl">Para Sports events: {paraSportsEvents.length} events available</p>
-                  <p className="text-white mt-4">Para Sports categories will be displayed here.</p>
-                </div>
               </div>
-            </section>
+            </div>
           )}
 
           {/* Culturals Section */}

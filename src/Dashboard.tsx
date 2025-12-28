@@ -3969,8 +3969,8 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), calc(-50% + clamp(30px, 6vh, 80px)))' 
-                : 'translate(-50%, calc(-50% + clamp(30px, 6vh, 80px)))',
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
+                : 'translate(-50%, calc(-50% + clamp(60px, 10vh, 120px)))',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4001,8 +4001,8 @@ Do you want to proceed with registration?`;
               left: '50%',
               top: '50%',
               transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + 50px))' 
-                : 'translate(-50%, calc(-50% + 50px))',
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
+                : 'translate(-50%, calc(-50% + clamp(80px, 12vh, 150px)))',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
@@ -4084,8 +4084,6 @@ Do you want to proceed with registration?`;
               <div 
                 className="throwback-video-card"
                 style={{
-                  width: 'clamp(280px, 70vw, 485px)',
-                  height: 'clamp(158px, 39.4vw, 273px)',
                   background: '#000',
                   borderRadius: '8px',
                   border: '3px solid rgba(223, 160, 0, 0.822)',
@@ -4165,7 +4163,9 @@ Do you want to proceed with registration?`;
         </div>
 
         {/* Countdown Timer */}
-        <div style={{
+        <div 
+          className="throwback-countdown-timer"
+          style={{
           marginTop: '30px',
           position: 'relative',
           display: 'flex',

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import './Hospitality.css';
-import GarudaBubble from './GarudaBubble';
 import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
 
@@ -11,7 +10,7 @@ const Hospitality: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'instructions' | 'howToReach' | 'accommodation' | 'contacts' | 'faqs'>('instructions');
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/')
   };
 
   return (
@@ -23,7 +22,7 @@ const Hospitality: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -37,7 +36,7 @@ const Hospitality: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-55 z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -79,11 +78,10 @@ const Hospitality: React.FC = () => {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 md:py-16">
         <h1 className="hospitality-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8" style={{
-          background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
+          color: 'rgba(255, 255, 0, 0.842)',
+          marginTop: '1rem',
+          marginBottom: '2rem',
+          // textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
         }}>HOSPITALITY</h1>
         
         {/* Mobile Dropdown Navigation */}
@@ -209,7 +207,7 @@ const Hospitality: React.FC = () => {
             </table>
             </div>
 
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' ,marginLeft: '550px'}}>For Girls:</h3>
             <div className="hospitality-table-container">
             <table className="hospitality-table">
               <thead>
@@ -235,7 +233,7 @@ const Hospitality: React.FC = () => {
             </table>
             </div>
 
-            <h2 className="section-heading-primary mt-8">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="section-heading-primary mt-8 " style={{ marginLeft: '350px' }}>FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
             <div className="hospitality-table-container">
             <table className="hospitality-table">
               <thead>
@@ -286,7 +284,7 @@ const Hospitality: React.FC = () => {
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Boys:</h3>
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' ,paddingLeft: '550px'}}>For Boys:</h3>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -324,7 +322,7 @@ const Hospitality: React.FC = () => {
               </table>
             </div>
 
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>For Girls:</h3>
+            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem', paddingLeft: '550px' }}>For Girls:</h3>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -350,7 +348,7 @@ const Hospitality: React.FC = () => {
               </table>
             </div>
 
-            <h2 className="section-heading-primary">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="section-heading-primary" style={{ marginLeft: '350px' }}>FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -417,9 +415,6 @@ const Hospitality: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* Garuda Floating Bubble */}
-      <GarudaBubble />
     </div>
   );
 };

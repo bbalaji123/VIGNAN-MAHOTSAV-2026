@@ -20,7 +20,7 @@ const Vizag: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -34,7 +34,7 @@ const Vizag: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-750 z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -118,30 +118,30 @@ const Vizag: React.FC = () => {
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="vizag-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-12" style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginBottom: '0' }}>
+            <div className="vizag-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-6 sm:p-8 md:p-10 lg:p-14" style={{ height: '400px', width: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '30px',marginBottom: '90px'  }}>
                 ZONAL EVENTS (MEN)
               </h3>
               <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
                 {/* Sports Column */}
                 <div className="flex flex-col gap-3 sm:gap-4 min-w-[120px] sm:min-w-[150px]">
                   <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Volley ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(6+4)</div>
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px',marginTop: '-60px' }}>Volley ball</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>(6+4)</div>
                   </div>
                   <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Basket ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(5+5)</div>
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>Basket ball</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '50px' }}>(5+5)</div>
                   </div>
                   <div className="flex flex-col py-3 sm:py-4">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>Kabaddi</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>(7+3)</div>
+                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>Kabaddi</div>
+                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px',marginBottom: '30px' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-3 sm:mb-4 font-bold text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-3 sm:mb-4 font-bold text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '-60px' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
@@ -173,7 +173,7 @@ const Vizag: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="vizag-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5" style={{ fontFamily: 'arial, sans-serif !important' }}>
+            <div className="vizag-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5" style={{ fontFamily: 'arial, sans-serif !important',paddingTop: '20px',paddingBottom: '-50px'  }}>
               <div className="text-sm sm:text-base md:text-lg font-semibold">
                 <div>Contact: Mrs.M Navya - +91 86394 00358</div>
               </div>
@@ -181,7 +181,7 @@ const Vizag: React.FC = () => {
           </div>
 
           {/* Hosting Partner */}
-          <div className="vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
+          <div className="vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '500px' }}>
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
@@ -194,7 +194,7 @@ const Vizag: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="vizag-content max-w-[1200px] mx-auto mt-8 sm:mt-12 md:mt-16 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5">
+        <div className="vizag-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5" style={{ fontFamily: 'arial, sans-serif',marginTop: '20px',marginBottom: '20px'  }}>
           <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during</i>
           <i> Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>

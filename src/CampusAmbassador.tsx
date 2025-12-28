@@ -27,7 +27,7 @@ const CampusAmbassador: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 z-1">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -41,7 +41,7 @@ const CampusAmbassador: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-20 z-1">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -523,7 +523,7 @@ const CampusAmbassador: React.FC = () => {
             WebkitOverflowScrolling: 'touch'
           }}>
             <button 
-              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'pointsAllotment' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
               }}
@@ -532,7 +532,7 @@ const CampusAmbassador: React.FC = () => {
               Points Allotment
             </button>
             <button 
-              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'incentives' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
               }}
@@ -541,7 +541,7 @@ const CampusAmbassador: React.FC = () => {
               Incentives
             </button>
             <button 
-              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'codeOfConduct' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
               }}
@@ -550,7 +550,7 @@ const CampusAmbassador: React.FC = () => {
               Code of Conduct
             </button>
             <button 
-              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+              className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'programDuration' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
               }}

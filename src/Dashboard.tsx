@@ -2254,7 +2254,7 @@ Do you want to proceed with registration?`;
         </div>
         
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', justifyContent: 'center', alignItems: 'center', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
           {isLoggedIn ? (
             <button style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: '4px solid transparent', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={() => {
               console.log('Register button clicked');
@@ -3925,7 +3925,7 @@ Do you want to proceed with registration?`;
           alignItems: 'center',
           position: 'relative',
           padding: '140px 20px 40px',
-          overflow: 'visible'
+          overflow: 'hidden'
         }}
       >
         <h2
@@ -4002,7 +4002,7 @@ Do you want to proceed with registration?`;
               top: '50%',
               transform: isThrowbackUnlocked 
                 ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), calc(-50% + clamp(60px, 10vh, 120px)))' 
-                : 'translate(-50%, calc(-50% + clamp(80px, 12vh, 150px)))',
+                : 'translate(-50%, calc(-50% + clamp(60px, 10vh, 120px)))',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',

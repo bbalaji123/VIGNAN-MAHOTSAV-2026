@@ -89,13 +89,13 @@
    ============================================ */
 .close-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 6px;
+  right: 8px;
 
   background: none;
   border: none;
-  color: #ffffff;
-  font-size: 24px;
+  color:whitesmoke;
+  font-size: 36px;
   font-weight: 400;
   cursor: pointer;
   min-width: 44px;
@@ -112,9 +112,10 @@
 
 @media (min-width: 1024px) {
   .close-btn {
-    top: 16px;
-    right: 18px;
-    font-size: 26px;
+    top: 8px;
+    right: -5px;
+    font-size: 38px;
+    color: #ffffff;
   }
 }
 
@@ -293,18 +294,28 @@
 .signup-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #FFD700;
   font-weight: 600;
   cursor: pointer;
   min-height: 44px;
   padding: 8px 12px;
   touch-action: manipulation;
+  text-decoration: underline;
 }
 
 @media (min-width: 1024px) {
   .signup-link {
     margin-top: 18px;
     font-size: 0.9rem;
+  }
+  
+  .signup-btn {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .signup-btn:hover {
+    text-decoration: underline;
   }
 }
 

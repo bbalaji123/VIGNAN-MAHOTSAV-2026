@@ -1,6 +1,7 @@
 import express from 'express';
 import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
+import CampusAmbassador from '../models/CampusAmbassador.js';
 import { generateUserId } from '../utils/idGenerator.js';
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get('/branches', (req, res) => {
 // Create new registration
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, phone, college, branch, dateOfBirth, gender, registerId, userType, participationType } = req.body;
+    const { name, email, password, phone, college, branch, dateOfBirth, gender, registerId, userType, participationType, referralCode } = req.body;
 
     // Validate required fields
     if (!name || !email || !password) {
@@ -22,6 +23,23 @@ router.post('/register', async (req, res) => {
         success: false, 
         message: 'Name, email, and password are required' 
       });
+    }
+
+    // Validate and check referral code if provided
+    let validReferralCode = null;
+    if (referralCode && referralCode.trim()) {
+      const mcaId = referralCode.trim();
+      const campusAmbassador = await CampusAmbassador.findOne({ mcaId });
+      
+      if (!campusAmbassador) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid referral code. Please check and try again.'
+        });
+      }
+      
+      validReferralCode = mcaId;
+      console.log(`✅ Valid referral code: ${mcaId}`);
     }
 
     // Normalize email (trim and lowercase to match schema)
@@ -79,7 +97,8 @@ router.post('/register', async (req, res) => {
           registerId,
           userType: userType || 'visitor',
           participationType: participationType || 'none',
-          paymentStatus: 'unpaid' // Automatically set to unpaid
+          paymentStatus: 'unpaid', // Automatically set to unpaid
+          referredBy: validReferralCode // Store referral code
         });
 
         await registration.save();
@@ -98,11 +117,27 @@ router.post('/register', async (req, res) => {
               gender,
               registerId,
               participantType: participationType || 'general',
+              referredBy: validReferralCode, // Store referral code
+              paymentStatus: 'pending', // Payment status for tracking
               registeredEvents: []
             });
             
             await participant.save();
             console.log(`✅ Participant record created for ${name} (${userId})`);
+
+            // If there's a valid referral code, add the referral to CA
+            if (validReferralCode) {
+              try {
+                const campusAmbassador = await CampusAmbassador.findOne({ mcaId: validReferralCode });
+                if (campusAmbassador) {
+                  await campusAmbassador.addReferral(userId, name, normalizedEmail);
+                  console.log(`✅ Referral added to CA ${validReferralCode}`);
+                }
+              } catch (caError) {
+                console.error('Error adding referral to CA:', caError);
+                // Don't fail the registration if CA update fails
+              }
+            }
           } catch (participantError) {
             console.error('Error creating participant record:', participantError);
             // If participant save fails, we should clean up the registration

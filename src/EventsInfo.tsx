@@ -38,12 +38,9 @@ const EventsInfo: React.FC = () => {
   const [, setCulturalEvents] = useState<Event[]>([]);
 
   const sportsDetailCards = [
-    { title: "Men's Athletics", subtitle: "Track & Field" },
-    { title: "Women's Athletics", subtitle: "Track & Field" },
-    { title: "Men's Individual &", subtitle: "Indoor Sports" },
-    { title: "Women's Individual &", subtitle: "Indoor Sports" },
-    { title: "Men's Team Field Sports", subtitle: "" },
-    { title: "Women's Team Field", subtitle: "Sports" },
+    { title: "Athletics", subtitle: "Track & Field" },
+    { title: "Individual &", subtitle: "Indoor Sports" },
+    { title: "Team Field", subtitle: "Sports" },
     { title: "Para", subtitle: "" }
   ];
 
@@ -180,6 +177,7 @@ const EventsInfo: React.FC = () => {
 
   // Event details data - just the keys to check if event exists
   const eventDetailsData = {
+    "Athletics": true,
     "Men's Athletics": true,
     "Women's Athletics": true,
     "Chess": true,
@@ -200,27 +198,15 @@ const EventsInfo: React.FC = () => {
   // Handle event detail click with gender context
   const handleEventDetailClick = (eventTitle: string, gender?: string) => {
     
-    // Check if it's Men's Individual & Indoor Sports
-    if (eventTitle === "Men's Individual &") {
+    // Check if it's Individual & Indoor Sports (merged)
+    if (eventTitle === "Individual &") {
       setShowIndoorSports(true);
       return;
     }
     
-    // Check if it's Women's Individual & Indoor Sports
-    if (eventTitle === "Women's Individual &") {
-      setShowWomensIndoorSports(true);
-      return;
-    }
-    
-    // Check if it's Men's Team Field Sports
-    if (eventTitle === "Men's Team Field Sports") {
+    // Check if it's Team Field Sports (merged)
+    if (eventTitle === "Team Field") {
       setShowMensTeamSports(true);
-      return;
-    }
-    
-    // Check if it's Women's Team Field Sports
-    if (eventTitle === "Women's Team Field") {
-      setShowWomensTeamSports(true);
       return;
     }
     
@@ -233,6 +219,7 @@ const EventsInfo: React.FC = () => {
     // Map event titles to their detail page names
     const eventNameMapping: { [key: string]: string } = {
       // Sports events
+      "Athletics": "Athletics",
       "Men's Athletics": "Men's Athletics",
       "Women's Athletics": "Men's Athletics",
       "Chess Championship": "Chess",
@@ -343,7 +330,11 @@ const EventsInfo: React.FC = () => {
       "Line follower robot": "Line Follower Robot",
       "Bot Wrestling": "Bot Wrestling",
       "Robo Races": "Robo Races",
-      "Robo races": "Robo Races"
+      "Robo races": "Robo Races",
+      
+      // Para Sports events
+      "Para Sports": "Para Sports",
+      "Para Cricket": "Para Cricket"
     };
     
     let eventName = eventTitle;
@@ -499,7 +490,7 @@ const EventsInfo: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden events-info-page" style={{
-      backgroundImage: 'url("/Background-redesign.avif")',
+      backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -1073,10 +1064,8 @@ const EventsInfo: React.FC = () => {
 
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
-                                         card.title === "Men's Individual &" || 
-                                         card.title === "Women's Individual &" || 
-                                         card.title === "Men's Team Field Sports" || 
-                                         card.title === "Women's Team Field" ||
+                                         card.title === "Individual &" || 
+                                         card.title === "Team Field" ||
                                          card.title === "Para";
                       
                       return (

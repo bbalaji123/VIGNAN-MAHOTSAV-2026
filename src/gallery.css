@@ -69,15 +69,6 @@
   display: block;
 }
 
-/* TEXT */
-.gallery-hint {
-  margin-top: 60px;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-  font-style: italic;
-}
-
 /* ANIMATIONS */
 @keyframes scrollLeft {
   from {

@@ -41,7 +41,7 @@ const EventDetail: React.FC = () => {
 
   // Event data
   const eventDetailsData: { [key: string]: EventDetailData } = {
-    "Men's Athletics": {
+    "Athletics": {
       title: "INDIVIDUAL EVENTS",
       subtitle: "TRACK & FIELD (Men & Women)",
       rules: [
@@ -49,6 +49,34 @@ const EventDetail: React.FC = () => {
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "All participants must come with a proper sports attire.",
         "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "Everyone should report at least 30 mins before scheduled time.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
+        "Prize Money - Men: 1st Rs.3,000 | 2nd Rs.2,000 | 3rd Rs.1,000",
+        "Prize Money - Women: 1st Rs.3,000 | 2nd Rs.2,000 | 3rd Rs.1,000"
+      ],
+      prizes: {
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
+        third: "Rs. 1,000"
+      },
+      contacts: [
+        { name: "Ms. Md.Karishma", phone: "+91 73868 57843" },
+        { name: "Mr. G.Srinu", phone: "+91 93928 34630" },
+        { name: "Ms. Hima", phone: "+91 85208 22204" },
+        { name: "Mr. Hemanth", phone: "+91 74160 65745" },
+        { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
+        { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
+  
+      ]
+    },
+    "Men's Athletics": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "TRACK & FIELD (Men & Women)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "All participants must come with a proper sports attire.",
+        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
         "Everyone should report at least 30 mins before scheduled time.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
@@ -246,6 +274,50 @@ const EventDetail: React.FC = () => {
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+      ]
+    },
+    "Para Sports": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "PARA SPORTS (MEN)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "In Para sports only two events: 100Mts, 400Mts (Men only) under Hand amputee, Leg amputee and visual impairment categories.",
+        "Players must report at least before 30 minutes at respective grounds.",
+        "All participants must come with a proper sports attire.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000",
+        second: "Rs. 1,500"
+      },
+      contacts: [
+        { name: "Mr. S. Badari Ajith", phone: "+91 93461 93840" },
+        { name: "Mr. M. Manikanta", phone: "+91 76720 69471" }
+      ]
+    },
+    "Para Cricket": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "PARA CRICKET (MEN)",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "Each team should consist of 15 members.",
+        "Out of these, 11 members will play in the match.",
+        "The game will be played with a red ball.",
+        "Teams must bring their own kit bags.",
+        "Players should wear proper white attire.",
+        "All other rules will follow the standard BCCI guidelines.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 5,000",
+        second: "Rs. 4,000"
+      },
+      contacts: [
+        { name: "Mr. U. Om Shri", phone: "+91 93477 75310" },
+        { name: "Mr. G. Siva Rama Krishna", phone: "+91 63099 59419" }
       ]
     },
     "Volley ball (Men)": {
@@ -1937,7 +2009,7 @@ const EventDetail: React.FC = () => {
   if (!eventData) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{
-        backgroundImage: 'url("/Background-redesign.avif")',
+        backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
@@ -1982,7 +2054,7 @@ const EventDetail: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={false}
+          showPetalRotation={true}
         />
       </div>
 
@@ -1996,7 +2068,7 @@ const EventDetail: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                style={{height: '18rem', objectFit: 'contain', marginTop: '-7rem'}}
+                style={{height: '18rem', objectFit: 'contain', marginTop: '-2rem'}}
               />
               <BackButton 
                 className="!static !top-20 !left-auto" style={{marginTop: '-5rem',marginBottom: '8rem'}}

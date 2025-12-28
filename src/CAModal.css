@@ -1,0 +1,179 @@
+/* Campus Ambassador Modal Styles */
+.ca-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.ca-modal-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+}
+
+.ca-login-modal {
+  max-width: 450px;
+}
+
+.ca-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #ffd700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.ca-modal-close:hover {
+  color: #ffed4e;
+  transform: rotate(90deg);
+}
+
+.ca-modal-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.ca-error-message {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.ca-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ca-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ca-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.ca-form-group label {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ca-form-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  padding: 12px 15px;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.ca-form-group input:focus {
+  outline: none;
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.ca-form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ca-submit-button {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.ca-submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.ca-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .ca-modal-content {
+    padding: 30px 20px;
+    max-height: 85vh;
+  }
+
+  .ca-modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .ca-form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ca-form {
+    gap: 15px;
+  }
+}
+
+/* Custom Scrollbar */
+.ca-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ca-modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.ca-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+}
+
+.ca-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 0, 0.5);
+}

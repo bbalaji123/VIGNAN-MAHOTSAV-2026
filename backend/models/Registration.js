@@ -68,6 +68,11 @@ const registrationSchema = new mongoose.Schema({
   amount: {
     type: Number,
     default: 0
+  },
+  referredBy: {
+    type: String,
+    trim: true,
+    default: null
   }
 }, {
   collection: 'registrations',

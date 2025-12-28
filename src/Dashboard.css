@@ -172,15 +172,70 @@ img[alt="Moon"],
   height: clamp(158px, 39.4vw, 273px);
 }
 
-/* Mobile - 90% viewport width for consistency across all devices */
+/* Mobile - Clean layout with proper spacing */
 @media (max-width: 640px) {
+  /* Reduce flower size for cleaner look */
+  .throwback-flower-wrapper {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  .throwback-flower-left,
+  .throwback-flower-right {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  /* Adjust flower transitions for mobile */
+  .throwback-flower-left,
+  .throwback-flower-right {
+    transition: transform 2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+  }
+  
+  /* When locked (closed) - flowers overlap at center */
+  .throwback-section:not(.unlocked) .throwback-flower-left {
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  .throwback-section:not(.unlocked) .throwback-flower-right {
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  /* When unlocked (open) - flowers split apart */
+  .throwback-section.unlocked .throwback-flower-left {
+    transform: translate(calc(-50% - 170px), -50%) !important;
+  }
+  
+  .throwback-section.unlocked .throwback-flower-right {
+    transform: translate(calc(-50% + 170px), -50%) !important;
+  }
+  
+  /* Position year buttons at top with proper spacing */
+  .throwback-year-buttons {
+    top: -30px !important;
+  }
+  
+  .throwback-year-buttons button {
+    padding: 6px 20px !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Center video vertically between flowers */
+  .throwback-video-wrapper {
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  /* Larger video for better visibility */
   .throwback-video-card {
-    width: 90vw !important;
-    max-width: 90vw !important;
-    min-width: 90vw !important;
-    height: 270px !important;
-    max-height: 270px !important;
-    min-height: 270px !important;
+    width: 85vw !important;
+    max-width: 320px !important;
+    min-width: 280px !important;
+    height: calc(85vw * 0.5625) !important;
+    max-height: 180px !important;
+    min-height: 158px !important;
+    margin-top: 0 !important;
+    border-width: 4px !important;
   }
   
   .throwback-video-card iframe {
@@ -192,12 +247,12 @@ img[alt="Moon"],
 /* iPhone 12 Pro and similar dimensions (390x844) */
 @media (max-width: 640px) and (min-width: 360px) {
   .throwback-video-card {
-    width: 90vw !important;
-    max-width: 90vw !important;
-    min-width: 90vw !important;
-    height: 220px !important;
-    max-height: 220px !important;
-    min-height: 220px !important;
+    width: 85vw !important;
+    max-width: 320px !important;
+    min-width: 280px !important;
+    height: calc(85vw * 0.5625) !important;
+    max-height: 180px !important;
+    min-height: 158px !important;
   }
 }
 
@@ -212,7 +267,7 @@ img[alt="Moon"],
 /* Mobile - push timer down to create space for video card */
 @media (max-width: 640px) {
   .throwback-countdown-timer {
-    margin-top: 250px !important;
+    margin-top: 80px !important;
   }
 }
 
@@ -649,7 +704,7 @@ body::-webkit-scrollbar {
     width: 100vw;
     overflow-x: hidden;
     position: relative;
-    background-image: url('/Background-redesign.avif');
+    background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2065,8 +2120,25 @@ body::-webkit-scrollbar {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Inductions Section */

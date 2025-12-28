@@ -186,7 +186,7 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-image: url('/Background-redesign.avif');
+  background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -198,7 +198,7 @@ html, body, #root {
 .w-full.min-h-screen,
 .w-screen.min-h-screen,
 .w-screen.h-screen {
-  background-image: url('/Background-redesign.avif');
+  background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

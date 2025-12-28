@@ -376,3 +376,28 @@
   overflow-y: auto;       /* allow vertical scroll */
   overflow-x: hidden;     /* prevent horizontal scroll */
 }
+
+/* Gender dropdown styling in main signup (matches CA inputs) */
+.gender-select {
+  width: 100%;
+  padding: 12px 15px;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+}
+
+.gender-select:focus {
+  border-color: #ffd700;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.gender-select option {
+  background-color: #111827;
+  color: #fff;
+}

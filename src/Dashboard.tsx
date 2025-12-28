@@ -416,7 +416,8 @@ const Dashboard: React.FC = () => {
     participationType: 'none',
     referenceId: '',
     state: '',
-    district: ''
+    district: '',
+    referralCode: ''
   });
   const [signupStep, setSignupStep] = useState(1);
   const totalSteps = 3;
@@ -1071,7 +1072,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const loadRegistrationEvents = async () => {
       try {
-        const response = await fetch('/registration/registartion.json');
+        const response = await fetch('/registration/registration.json');
         const data = await response.json();
         setRegistrationEvents(data);
       } catch (error) {
@@ -1737,6 +1738,8 @@ const Dashboard: React.FC = () => {
       const result = await registerUser(submissionData);
       
       if (result.success && result.data?.userId) {
+        // Close signup modal and show beautiful credential card
+        setShowSignupModal(false);
         setGeneratedUserId(result.data.userId);
         setGeneratedPassword(password);
         setShowUserIdPopup(true);
@@ -2069,6 +2072,9 @@ const Dashboard: React.FC = () => {
         
         // Fetch user's saved events from database
         await fetchUserSavedEvents(userId);
+
+        // After successful login, open the profile page/modal
+        await handleOpenProfile();
       } else {
         setLoginMessage({
           type: 'error',
@@ -2321,7 +2327,7 @@ const Dashboard: React.FC = () => {
       {showPageMenu && (
         <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible" 
           style={{
-            backgroundImage: 'url("/Background-redesign.avif")',
+            backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
@@ -2595,7 +2601,7 @@ const Dashboard: React.FC = () => {
               <div 
                 className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                 onClick={() => { 
-                  navigate('/para-sports');
+                  navigate('/events-info', { state: { openSection: 'paraCards' } });
                   setShowPageMenu(false); 
                 }}
                 style={{ transformStyle: 'preserve-3d' }}
@@ -3944,7 +3950,7 @@ const Dashboard: React.FC = () => {
 
       {/* Throwback Section */}
       <section 
-        className="dashboard-section throwback-section"
+        className={`dashboard-section throwback-section ${isThrowbackUnlocked ? 'unlocked' : ''}`}
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
         style={{
@@ -3975,7 +3981,7 @@ const Dashboard: React.FC = () => {
 </h2>
 
         {/* Flower Container with Lock System */}
-        <div style={{
+        <div className="throwback-flower-container" style={{
           width: '100%',
           flex: 1,
           display: 'flex',
@@ -3986,7 +3992,7 @@ const Dashboard: React.FC = () => {
           padding: '0'
         }}>
           {/* Container for both flower halves */}
-          <div style={{
+          <div className="throwback-flower-wrapper" style={{
             position: 'relative',
             width: 'clamp(200px, 35vw, 450px)',
             height: 'clamp(200px, 35vw, 450px)',
@@ -3995,7 +4001,7 @@ const Dashboard: React.FC = () => {
             alignItems: 'center'
           }}>
             {/* Left Half */}
-            <div style={{
+            <div className="throwback-flower-left" style={{
               position: 'absolute',
               left: '50%',
               top: '50%',
@@ -4027,7 +4033,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Right Half */}
-            <div style={{
+            <div className="throwback-flower-right" style={{
               position: 'absolute',
               left: '50%',
               top: '50%',
@@ -4059,59 +4065,57 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Year buttons and photo card */}
-          <div style={{
+          {/* Year buttons - separate from video */}
+          <div className="throwback-year-buttons" style={{
             position: 'absolute',
-            top: '0',
+            top: '40px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '100%',
-            height: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            paddingTop: '40px',
-            gap: '30px',
+            gap: '20px',
+            pointerEvents: 'auto',
+            zIndex: 15,
+            opacity: isThrowbackUnlocked ? 1 : 0,
+            transition: 'opacity 1.5s ease 0.5s'
+          }}>
+            {(['2023', '2024', '2025'] as const).map(year => (
+              <button 
+                key={year} 
+                onClick={() => setSelectedYear(year)}
+                style={{
+                  padding: '8px 26px',
+                  borderRadius: '20px',
+                  background: selectedYear === year 
+                    ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
+                    : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  boxShadow: selectedYear === year 
+                    ? '0 6px 20px rgba(0, 0, 0, 0.3)'
+                    : '0 4px 15px rgba(0, 0, 0, 0.2)',
+                  transition: 'all 0.3s ease',
+                  transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
+                }}
+              >
+                {year}
+              </button>
+            ))}
+          </div>
+
+          {/* Video card - centered between flowers */}
+          <div className="throwback-video-wrapper" style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s'
           }}>
-              {/* Year buttons */}
-              <div style={{
-                display: 'flex',
-                gap: '20px',
-                pointerEvents: 'auto'
-              }}>
-                {(['2023', '2024', '2025'] as const).map(year => (
-                  <button 
-                    key={year} 
-                    onClick={() => setSelectedYear(year)}
-                    style={{
-                      padding: '8px 26px',
-                      borderRadius: '20px',
-                      marginTop: '-20px',
-                      background: selectedYear === year 
-                        ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
-                        : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
-                      border: 'none',
-                      color: 'white',
-                      fontSize: '1.2rem',
-                      fontWeight: 'bold',
-                      cursor: 'pointer',
-                      boxShadow: selectedYear === year 
-                        ? '0 6px 20px rgba(0, 0, 0, 0.3)'
-                        : '0 4px 15px rgba(0, 0, 0, 0.2)',
-                      transition: 'all 0.3s ease',
-                      transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
-                    }}
-                  >
-                    {year}
-                  </button>
-                ))}
-              </div>
-
               {/* Video card */}
               <div 
                 className="throwback-video-card"
@@ -4125,7 +4129,6 @@ const Dashboard: React.FC = () => {
                   position: 'relative',
                   cursor: 'default',
                   padding: 0,
-                  marginTop: '10px',
                   pointerEvents: 'auto',
                   zIndex: 100
                 }}
@@ -4702,34 +4705,228 @@ const Dashboard: React.FC = () => {
 
       {/* User ID Success Popup */}
       {showUserIdPopup && generatedUserId && (
-        <div className="login-modal-overlay" onClick={handleCloseUserIdPopup}>
-          <div className="userid-popup-content" onClick={(e) => e.stopPropagation()}>
-            <div className="userid-popup-header">
-              <h2>?? Registration Successful!</h2>
+        <div className="login-modal-overlay" onClick={handleCloseUserIdPopup} style={{
+          background: 'rgba(0, 0, 0, 0.9)',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <div className="credential-card" onClick={(e) => e.stopPropagation()} style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            borderRadius: '24px',
+            padding: '3rem',
+            maxWidth: '550px',
+            width: '90%',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.3)',
+            border: '2px solid rgba(255, 215, 0, 0.4)',
+            animation: 'fadeInScale 0.5s ease-out',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            {/* Decorative corner elements */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '120px',
+              height: '120px',
+              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, transparent 70%)',
+              borderRadius: '0 0 100% 0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              width: '120px',
+              height: '120px',
+              background: 'linear-gradient(315deg, rgba(255, 215, 0, 0.15) 0%, transparent 70%)',
+              borderRadius: '100% 0 0 0'
+            }} />
+
+            {/* Success Icon with glow */}
+            <div style={{
+              textAlign: 'center',
+              marginBottom: '1.5rem',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                margin: '0 auto',
+                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 0 30px rgba(255, 215, 0, 0.6)',
+                animation: 'pulse 2s ease-in-out infinite'
+              }}>
+                <span style={{ fontSize: '3rem' }}>🎉</span>
+              </div>
             </div>
-            <div className="userid-popup-body">
-              <div className="userid-display">
-                <div className="success-icon">?</div>
-                <h3>Your Mahotsav ID</h3>
-                <div className="userid-box">
-                  <span className="userid-text">{generatedUserId}</span>
+
+            <h2 style={{
+              color: '#ffd700',
+              textAlign: 'center',
+              fontSize: '2rem',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+              textShadow: '0 2px 10px rgba(255, 215, 0, 0.3)',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              Registration Successful!
+            </h2>
+            
+            <p style={{
+              color: '#e5e7eb',
+              textAlign: 'center',
+              marginBottom: '2rem',
+              fontSize: '1rem',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              Welcome to Vignan Mahotsav 2026
+            </p>
+
+            {/* Credentials Container */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: '16px',
+              padding: '2rem',
+              marginBottom: '1.5rem',
+              border: '1px solid rgba(255, 215, 0, 0.2)',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  color: '#fbbf24',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  Your Mahotsav ID
+                </label>
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  padding: '1rem 1.5rem',
+                  borderRadius: '12px',
+                  border: '2px solid #ffd700',
+                  boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
+                }}>
+                  <span style={{
+                    color: '#ffffff',
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    fontFamily: 'monospace',
+                    letterSpacing: '2px',
+                    display: 'block',
+                    textAlign: 'center'
+                  }}>
+                    {generatedUserId}
+                  </span>
                 </div>
-                <h3>Your Password</h3>
-                <div className="userid-box password-box">
-                  <span className="password-text">{generatedPassword}</span>
+              </div>
+
+              <div>
+                <label style={{
+                  color: '#fbbf24',
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}>
+                  Your Password
+                </label>
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  padding: '1rem 1.5rem',
+                  borderRadius: '12px',
+                  border: '2px solid #ffd700',
+                  boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
+                }}>
+                  <span style={{
+                    color: '#ffffff',
+                    fontSize: '1.5rem',
+                    fontWeight: 'bold',
+                    fontFamily: 'monospace',
+                    letterSpacing: '2px',
+                    display: 'block',
+                    textAlign: 'center'
+                  }}>
+                    {generatedPassword}
+                  </span>
                 </div>
-                <div className="screenshot-note">
-                  <span className="screenshot-icon">??</span>
-                  <p>Please take a screenshot of this page to save your credentials!</p>
-                </div>
-                <p className="userid-instructions">
-                  Use your email/Mahotsav ID and password to login.
+              </div>
+            </div>
+
+            {/* Screenshot Warning */}
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%)',
+              border: '2px solid rgba(239, 68, 68, 0.4)',
+              borderRadius: '12px',
+              padding: '1rem 1.5rem',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              <span style={{ fontSize: '2rem' }}>📸</span>
+              <div>
+                <p style={{
+                  color: '#fef3c7',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  margin: 0,
+                  lineHeight: '1.5'
+                }}>
+                  Important: Take a screenshot of this page!
+                </p>
+                <p style={{
+                  color: '#e5e7eb',
+                  fontSize: '0.875rem',
+                  margin: '0.25rem 0 0 0'
+                }}>
+                  Save these credentials for future login
                 </p>
               </div>
-              <button className="userid-close-btn" onClick={handleCloseUserIdPopup}>
-                Continue to Login
-              </button>
             </div>
+
+            <button 
+              onClick={handleCloseUserIdPopup}
+              style={{
+                width: '100%',
+                padding: '1rem',
+                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                border: 'none',
+                borderRadius: '12px',
+                color: '#1a1a2e',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)',
+                position: 'relative',
+                zIndex: 1
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 215, 0, 0.6)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.4)';
+              }}
+            >
+              Continue to Login →
+            </button>
           </div>
         </div>
       )}
@@ -5563,7 +5760,7 @@ const Dashboard: React.FC = () => {
             }}
           >
             <img
-              src={`${import.meta.env.BASE_URL}gallery/WEBSITES IMAGES AVIF/${galleryImages[selectedPhoto.row * 6 + selectedPhoto.index]}`}
+              src={galleryImages[selectedPhoto.row * 6 + selectedPhoto.index]}
               alt={`Gallery ${selectedPhoto.row * 6 + selectedPhoto.index + 1}`}
               style={{
                 width: '100%',
@@ -5657,12 +5854,12 @@ const Dashboard: React.FC = () => {
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {registrationEvents.Sports.map((event: any, index: number) => {
-                    if (!event || !event['738500'] || event['738500'] === 'Event') return null;
+                    if (!event || !event.Event) return null;
                     
                     const eventId = `sport-${index}`;
-                    const eventName = event['738500'];
-                    const category = event['Prize money for Sports'] || '';
-                    const isHeader = category && !event.D;
+                    const eventName = event.Event;
+                    const category = event.Category || '';
+                    const isHeader = category && category.trim() !== '';
                     
                     // Gender-based filtering
                     const userGender = userProfileData.gender?.toLowerCase();
@@ -5764,12 +5961,17 @@ const Dashboard: React.FC = () => {
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   {registrationEvents.Culturals.map((event: any, index: number) => {
-                    if (!event || !event['Prize money for Performing arts, Visual arts, Fashion'] || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
+                    // Skip null entries and header row
+                    if (!event || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
                     
                     const eventId = `cultural-${index}`;
                     const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
                     const category = event['5'] || '';
-                    const isHeader = category && !event.Column1;
+                    
+                    // Skip if no event name
+                    if (!eventName) return null;
+                    
+                    const isHeader = category && category.trim() !== '' && !event.Column1;
                     
                     // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
                     const userGender = userProfileData.gender?.toLowerCase();

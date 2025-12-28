@@ -10,6 +10,7 @@ import { initializeQueue } from './utils/queue.js';
 
 // Import routes
 import registrationRoutes from './routes/registration.js';
+import campusAmbassadorRoutes from './routes/campusAmbassador.js';
 
 dotenv.config();
 
@@ -65,6 +66,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // API Routes
 app.use('/api', registrationRoutes);
+app.use('/api', campusAmbassadorRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {

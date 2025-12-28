@@ -38,6 +38,7 @@ export interface SignupData {
   referenceId?: string;
   state?: string;
   district?: string;
+  referralCode?: string;
 }
 
 export interface ApiResponse {

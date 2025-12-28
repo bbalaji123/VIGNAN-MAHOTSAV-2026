@@ -1,21 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
+import CASignupModal from './CASignupModal';
+import CALoginModal from './CALoginModal';
 
 const CampusAmbassador: React.FC = () => {
   // Local state to control the incentives modal
   const [showIncentivesModal, setShowIncentivesModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<'signup' | 'login'>('signup');
   const [activeTab, setActiveTab] = useState<'pointsAllotment' | 'incentives' | 'codeOfConduct' | 'programDuration'>('pointsAllotment');
 
   const navigate = useNavigate();
 
-  // Back navigation handled by `BackButton` (navigate(-1))
+  // Check if CA is already logged in
+  useEffect(() => {
+    const caToken = localStorage.getItem('caToken');
+    const caData = localStorage.getItem('caData');
+    if (caToken && caData) {
+      navigate('/ca-dashboard');
+    }
+  }, [navigate]);
 
   const handleRegisterLogin = () => {
     // Instead of navigating to the signup/login, show the Incentives & Rewards modal
     setShowIncentivesModal(true);
+  };
+
+  const handleSignupSuccess = (_caData: any) => {
+    setShowAuthModal(false);
+    navigate('/ca-dashboard');
+  };
+
+  const handleLoginSuccess = (_caData: any) => {
+    setShowAuthModal(false);
+    navigate('/ca-dashboard');
+  };
+
+  const openSignupModal = () => {
+    setShowIncentivesModal(false);
+    setAuthMode('signup');
+    setShowAuthModal(true);
+  };
+
+  const openLoginModal = () => {
+    setShowIncentivesModal(false);
+    setAuthMode('login');
+    setShowAuthModal(true);
   };
 
   return (
@@ -287,8 +320,12 @@ const CampusAmbassador: React.FC = () => {
         className="absolute top-4 left-4 sm:top-0 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-999" style={{marginTop: '-90px'}}
       />
 
-      {/* Back button (uses BackButton component to navigate back) */}
-      <BackButton className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-1000" style={{marginTop: '130px'}} />
+      {/* Back button (explicitly navigate to main dashboard/home) */}
+      <BackButton
+        className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-1000"
+        style={{ marginTop: '130px' }}
+        onClick={() => navigate('/')}
+      />
 
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
@@ -360,15 +397,67 @@ const CampusAmbassador: React.FC = () => {
                </div>
              </div>
 
-
-             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+             {/* CA Action Buttons */}
+             <div style={{ 
+               display: 'flex', 
+               gap: '15px', 
+               justifyContent: 'center', 
+               marginTop: '30px',
+               flexWrap: 'wrap'
+             }}>
                <button
-                 onClick={() => { setShowIncentivesModal(false); navigate('/', { state: { openLogin: true } }); }}
-                 className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+                 onClick={openSignupModal}
+                 style={{
+                   background: 'linear-gradient(135deg, #ffd700, #ffed4e)',
+                   color: '#000',
+                   border: 'none',
+                   padding: '15px 40px',
+                   borderRadius: '8px',
+                   fontSize: '16px',
+                   fontWeight: 'bold',
+                   cursor: 'pointer',
+                   transition: 'all 0.3s ease',
+                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
+                 }}
+                 onMouseEnter={(e) => {
+                   e.currentTarget.style.transform = 'translateY(-2px)';
+                   e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.4)';
+                 }}
+                 onMouseLeave={(e) => {
+                   e.currentTarget.style.transform = 'translateY(0)';
+                   e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.3)';
+                 }}
                >
-                 Register/Login
+                 Sign Up as CA
+               </button>
+               
+               <button
+                 onClick={openLoginModal}
+                 style={{
+                   background: 'rgba(255, 255, 255, 0.1)',
+                   color: '#ffd700',
+                   border: '2px solid #ffd700',
+                   padding: '15px 40px',
+                   borderRadius: '8px',
+                   fontSize: '16px',
+                   fontWeight: 'bold',
+                   cursor: 'pointer',
+                   transition: 'all 0.3s ease'
+                 }}
+                 onMouseEnter={(e) => {
+                   e.currentTarget.style.background = 'rgba(255, 215, 0, 0.1)';
+                   e.currentTarget.style.transform = 'translateY(-2px)';
+                 }}
+                 onMouseLeave={(e) => {
+                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                   e.currentTarget.style.transform = 'translateY(0)';
+                 }}
+               >
+                 Login
                </button>
              </div>
+
+             {/* This section is now replaced with the CA-specific buttons below */}
            </div>
           </div>
         </div>
@@ -958,6 +1047,21 @@ const CampusAmbassador: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Campus Ambassador Auth Modals */}
+      {showAuthModal && authMode === 'signup' && (
+        <CASignupModal
+          onClose={() => setShowAuthModal(false)}
+          onSignupSuccess={handleSignupSuccess}
+        />
+      )}
+      
+      {showAuthModal && authMode === 'login' && (
+        <CALoginModal
+          onClose={() => setShowAuthModal(false)}
+          onLoginSuccess={handleLoginSuccess}
+        />
+      )}
     </div>
   );
 }

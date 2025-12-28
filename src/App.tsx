@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import EventDetail from './EventDetail';
 import EventsInfo from './EventsInfo';
 import CampusAmbassador from './CampusAmbassador';
+import CADashboard from './CADashboard';
 import CampusMap from './CampusMap';
 import Hospitality from './Hospitality';
 import OurTeam from './OurTeam';
@@ -36,6 +37,7 @@ function App() {
           <Route path="/events-info" element={<EventsInfo />} />
           <Route path="/event/:eventName" element={<EventDetail />} />
           <Route path="/campus-ambassador" element={<CampusAmbassador />} />
+          <Route path="/ca-dashboard" element={<CADashboard />} />
           <Route path="/campus-map" element={<CampusMap />} />
           <Route path="/hospitality" element={<Hospitality />} />
           <Route path="/our-team" element={<OurTeam />} />

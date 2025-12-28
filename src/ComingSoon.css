@@ -18,7 +18,7 @@
 .background {
   position: fixed;
   inset: 0;
-  background: url("./img/Background-redesign.avif") center/cover no-repeat;
+  background: url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png") center/cover no-repeat;
   z-index: 1;
 }
 

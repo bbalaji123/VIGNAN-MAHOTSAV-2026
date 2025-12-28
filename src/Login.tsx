@@ -1,5 +1,6 @@
 import React from 'react';
 import './Login.css';
+import './CAModal.css';
 
 interface LoginProps {
   showLoginModal: boolean;
@@ -36,14 +37,12 @@ const Login: React.FC<LoginProps> = ({
 }) => {
   if (!showLoginModal) return null;
 
-  /* ===============================
-     Validation Function
-     =============================== */
+  // Validation for registration number or Mahotsav ID
   const validateIdentifier = (value: string) => {
     const trimmed = value.trim().toUpperCase();
 
     const mahotsavIdRegex = /^MH26\d{6}$/; // MH26XXXXXX
-    const regNoRegex = /^[A-Z0-9]{5,}$/;  // Generic Reg No
+    const regNoRegex = /^[A-Z0-9]{5,}$/; // Generic Reg No
 
     if (mahotsavIdRegex.test(trimmed)) {
       return { type: 'mahotsavId', value: trimmed };
@@ -56,9 +55,6 @@ const Login: React.FC<LoginProps> = ({
     return null;
   };
 
-  /* ===============================
-     Input Change
-     =============================== */
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -68,9 +64,6 @@ const Login: React.FC<LoginProps> = ({
     }));
   };
 
-  /* ===============================
-     Submit Handler
-     =============================== */
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -91,7 +84,7 @@ const Login: React.FC<LoginProps> = ({
 
     try {
       await onSubmitApi(payload);
-    } catch (error) {
+    } catch {
       setLoginMessage({
         type: 'error',
         text: 'Login failed. Please try again.'
@@ -99,9 +92,6 @@ const Login: React.FC<LoginProps> = ({
     }
   };
 
-  /* ===============================
-     Overlay Click
-     =============================== */
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -109,26 +99,24 @@ const Login: React.FC<LoginProps> = ({
   };
 
   return (
-    <div className="login-modal-overlay" onClick={handleOverlayClick}>
+    <div className="ca-modal-overlay" onClick={handleOverlayClick}>
       <div
-        className="login-modal-content"
+        className="ca-modal-content ca-login-modal"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="login-modal-header">
-          <h2>Welcome Back!</h2>
-          <button className="close-btn" onClick={onClose}>×</button>
-        </div>
+        <button className="ca-modal-close" onClick={onClose}>×</button>
+        <h2 className="ca-modal-title">Welcome Back!</h2>
 
         <div className="login-modal-body">
-          <form className="login-form" onSubmit={onSubmit}>
+          <form className="ca-form" onSubmit={onSubmit}>
             {loginMessage && (
-              <div className={`submit-message ${loginMessage.type}`}>
+              <div className="ca-error-message">
                 {loginMessage.text}
               </div>
             )}
 
             {/* Reg No / Mahotsav ID */}
-            <div className="form-group">
+            <div className="ca-form-group">
               <label htmlFor="identifier">
                 Registration No / Mahotsav ID
               </label>
@@ -139,13 +127,12 @@ const Login: React.FC<LoginProps> = ({
                 value={loginFormData.identifier}
                 onChange={onInputChange}
                 placeholder="Reg. No or MH26XXXXXX"
-                className="form-input"
                 required
               />
             </div>
 
             {/* Password */}
-            <div className="form-group">
+            <div className="ca-form-group">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -154,14 +141,13 @@ const Login: React.FC<LoginProps> = ({
                 value={loginFormData.password}
                 onChange={onInputChange}
                 placeholder="Enter your password"
-                className="form-input"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="login-submit-btn"
+              className="ca-submit-button"
               disabled={isLoggingIn}
             >
               {isLoggingIn ? '⏳ Logging in...' : 'Login'}

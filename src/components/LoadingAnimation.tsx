@@ -14,7 +14,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
 }) => {
   return (
     <div className={`flex items-center justify-center flex-col
-      ${fullScreen ? 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[10000]' : ''}`}
+      ${fullScreen ? 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[20000]' : ''}`}
     >
       <div className={`flex flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-lg
         ${fullScreen ? 'bg-white/15 shadow-2xl' : 'bg-transparent'}`}

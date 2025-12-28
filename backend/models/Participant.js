@@ -47,6 +47,16 @@ const participantSchema = new mongoose.Schema({
     default: 'general',
     trim: true
   },
+  referredBy: {
+    type: String,
+    trim: true,
+    default: null
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'paid', 'failed'],
+    default: 'pending'
+  },
   registeredEvents: [{
     eventName: String,
     eventType: String,

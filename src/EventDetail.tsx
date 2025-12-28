@@ -1990,10 +1990,10 @@ const EventDetail: React.FC = () => {
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
-                style={{height: '12rem', objectFit: 'contain', marginTop: '0rem'}}
+                style={{height: '18rem', objectFit: 'contain', marginTop: '-7rem'}}
               />
               <BackButton 
-                className="!static !top-auto !left-auto"
+                className="!static !top-20 !left-auto" style={{marginTop: '-5rem',marginBottom: '8rem'}}
                 onClick={handleBack}
               />
             </div>

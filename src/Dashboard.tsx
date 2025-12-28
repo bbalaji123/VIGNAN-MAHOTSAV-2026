@@ -3737,6 +3737,7 @@ const Dashboard: React.FC = () => {
                 fontWeight: 'bold',
                 color: '#fdee71',
                 marginBottom: '30px',
+                marginLeft: '150px',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 fontFamily: 'coffee+tea demo, sans-serif'
               }}>Mahotsav 2026 - The Eternal Harmony</h3>
@@ -3763,7 +3764,7 @@ const Dashboard: React.FC = () => {
             borderRadius: '30px',
             padding: '40px 15px',
             marginTop: '40px',
-            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
             maxWidth: '1200px',
             margin: '40px auto 0'
           }}>
@@ -3778,28 +3779,28 @@ const Dashboard: React.FC = () => {
             }}>
               {/* Footfall */}
               <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>👥</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-people-group"></i></div>
                 <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{footfall.toLocaleString()}+</div>
                 <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
               <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏫</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-graduation-cap"></i></div>
                 <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{colleges}+</div>
                 <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>COLLEGES</div>
               </div>
               
               {/* Events */}
               <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🏆</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-trophy"></i></div>
                 <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{events}+</div>
                 <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
               <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>🌐</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050'}}><i className="fa-solid fa-earth-africa"></i></div>
                 <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{onlineAudience.toLocaleString()}+</div>
                 <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>ONLINE AUDIANCE</div>
               </div>
@@ -3817,7 +3818,7 @@ const Dashboard: React.FC = () => {
                     width: '60px',
                     height: '60px',
                     borderRadius: '50%',
-                    border: '4px solid #f5e210',
+                    border: '#1e3050 4px solid',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -3833,7 +3834,7 @@ const Dashboard: React.FC = () => {
               
               {/* Cash Prizes */}
               <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px' }}>💰</div>
+                <div style={{ fontSize: '3rem', marginBottom: '10px', color: '#1e3050' }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
                 <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{cashPrizes}+ LACKS</div>
                 <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>CASH PRIZES</div>
               </div>

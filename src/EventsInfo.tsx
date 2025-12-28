@@ -11,7 +11,6 @@ const EventsInfo: React.FC = () => {
   
   // Main section states
   const [showSportsDetails, setShowSportsDetails] = useState(false);
-  const [showParaSports, setShowParaSports] = useState(false);
   const [showCulturals, setShowCulturals] = useState(false);
   const [showIndoorSports, setShowIndoorSports] = useState(false);
   const [showWomensIndoorSports, setShowWomensIndoorSports] = useState(false);
@@ -36,7 +35,6 @@ const EventsInfo: React.FC = () => {
   // Events data
   const [, setSportsEvents] = useState<Event[]>([]);
   const [, setCulturalEvents] = useState<Event[]>([]);
-  const [paraSportsEvents, setParaSportsEvents] = useState<Event[]>([]);
 
   const sportsDetailCards = [
     { title: "Men's Athletics", subtitle: "Track & Field" },
@@ -360,7 +358,6 @@ const EventsInfo: React.FC = () => {
     else if (showRoboGames) fromSection = 'roboGames';
     else if (showSpotLight) fromSection = 'spotLight';
     else if (showRoboWarsGaming) fromSection = 'roboWarsGaming';
-    else if (showParaSports) fromSection = 'paraSports';
     navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection } });
   };
 
@@ -395,14 +392,12 @@ const EventsInfo: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const [sportsResponse, culturalsResponse, paraSportsResponse] = await Promise.all([
+        const [sportsResponse, culturalsResponse] = await Promise.all([
           getEventsByType('Sports'),
-          getEventsByType('Cultural'),
-          getEventsByType('Para Sports')
+          getEventsByType('Cultural')
         ]);
         setSportsEvents(sportsResponse.data || []);
         setCulturalEvents(culturalsResponse.data || []);
-        setParaSportsEvents(paraSportsResponse.data || []);
       } catch (error) {
       }
     };
@@ -478,10 +473,6 @@ const EventsInfo: React.FC = () => {
             setShowRoboGames(true);
           }
         }
-      }
-      // Handle para sports section
-      else if (section === 'paraSports') {
-        setShowParaSports(true);
       }
       
       // Clear the state to prevent issues on refresh
@@ -833,7 +824,7 @@ const EventsInfo: React.FC = () => {
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
                 className="events-logo"
-                
+                style={{marginTop: '-60px'}}
               />
               <div className="events-back-button-container">
                 <BackButton 
@@ -860,10 +851,9 @@ const EventsInfo: React.FC = () => {
                   setShowWomensIndoorSports(false);
                   setShowMensTeamSports(false);
                   setShowWomensTeamSports(false);
-                } else if (showSportsDetails || showCulturals || showParaSports) {
+                } else if (showSportsDetails || showCulturals) {
                   setShowSportsDetails(false);
                   setShowCulturals(false);
-                  setShowParaSports(false);
                 } else {
                   navigate('/');
                 }
@@ -872,7 +862,7 @@ const EventsInfo: React.FC = () => {
             </div>
             
             {/* Center column: Title */}
-            <div className="flex items-start justify-center">
+            <div className="flex items-start justify-center" style={{ marginTop: '30px' }}>
               <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' : 
                  showWomensIndoorSports ? "Women's Indoor Sports" : 
@@ -931,16 +921,15 @@ const EventsInfo: React.FC = () => {
                 setShowWomensIndoorSports(false);
                 setShowMensTeamSports(false);
                 setShowWomensTeamSports(false);
-              } else if (showSportsDetails || showCulturals || showParaSports) {
+              } else if (showSportsDetails || showCulturals) {
                 setShowSportsDetails(false);
                 setShowCulturals(false);
-                setShowParaSports(false);
               } else {
                 navigate('/');
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem'}}>
+            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem', marginTop: '50px' }}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -964,7 +953,7 @@ const EventsInfo: React.FC = () => {
 
         {/* Main Cards Section */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
-          {!showSportsDetails && !showParaSports && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
+          {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
               <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
@@ -1213,34 +1202,6 @@ const EventsInfo: React.FC = () => {
                 </div>
               </div>
             </div>
-          )}
-
-          {/* Para Sports Section */}
-          {showParaSports && (
-            <section className="inline-indoor-sports-section">
-              <div className="inline-indoor-sports-container">
-                <div className="mb-4">
-                  <img 
-                    src={`${import.meta.env.BASE_URL}image.avif`}
-                    alt="Vignan Mahotsav" 
-                    className="h-28 md:h-32 object-contain"
-                    
-                  />
-                </div>
-                <div className="inline-indoor-sports-header">
-                  <div className="indoor-sports-header-left">
-                    <button className="indoor-sports-back-btn" onClick={() => setShowParaSports(false)}>
-                      ← Back
-                    </button>
-                    <h2>PARA SPORTS CATEGORIES</h2>
-                  </div>
-                </div>
-                <div className="para-sports-message text-center mt-8">
-                  <p className="text-white text-xl">Para Sports events: {paraSportsEvents.length} events available</p>
-                  <p className="text-white mt-4">Para Sports categories will be displayed here.</p>
-                </div>
-              </div>
-            </section>
           )}
 
           {/* Culturals Section */}

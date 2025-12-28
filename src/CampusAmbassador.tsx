@@ -284,11 +284,11 @@ const CampusAmbassador: React.FC = () => {
       <img 
         src={`${import.meta.env.BASE_URL}image.avif`}
         alt="Vignan Mahotsav 2026"
-        className="absolute top-4 left-4 sm:top-0 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-999"
+        className="absolute top-4 left-4 sm:top-0 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-999" style={{marginTop: '-90px'}}
       />
 
       {/* Back button (uses BackButton component to navigate back) */}
-      <BackButton className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-1000" />
+      <BackButton className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-1000" style={{marginTop: '130px'}} />
 
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
@@ -297,7 +297,7 @@ const CampusAmbassador: React.FC = () => {
         }}>MAHOTSAV CREW</h1>
         <button
           onClick={handleRegisterLogin}
-          className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 xl:w-64 xl:h-16 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg lg:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]"
+          className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 xl:w-64 xl:h-16 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg lg:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]" style={{marginTop: '50px'}}
         >
           Register/Login
         </button>
@@ -520,7 +520,10 @@ const CampusAmbassador: React.FC = () => {
           {/* Tab Navigation Buttons */}
           <div className="flex justify-center items-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-12 sm:mb-14 md:mb-16 overflow-x-auto" style={{
             scrollbarWidth: 'thin',
-            WebkitOverflowScrolling: 'touch'
+            WebkitOverflowScrolling: 'touch',
+            overflowY: 'visible',
+            paddingTop: '10px',
+            paddingBottom: '10px'
           }}>
             <button 
               className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
@@ -811,9 +814,10 @@ const CampusAmbassador: React.FC = () => {
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Mahotsav 2026" 
               style={{
-                height: '80px',
+                height: '250px',
                 objectFit: 'contain',
-                marginBottom: '25px'
+                marginBottom: '-50px',
+                marginTop: '-70px'
               }}
             />
             {/* Social Media Icons */}
@@ -822,7 +826,8 @@ const CampusAmbassador: React.FC = () => {
               fontSize: '1rem',
               fontWeight: 'bold',
               marginBottom: '20px',
-              letterSpacing: '1px'
+              letterSpacing: '1px',
+              marginLeft: '20px'
             }}>FOLLOW US ON :</h3>
             <div style={{
               display: 'flex',

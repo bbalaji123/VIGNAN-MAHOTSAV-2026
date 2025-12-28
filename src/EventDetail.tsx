@@ -1967,7 +1967,13 @@ const EventDetail: React.FC = () => {
       overflow: 'hidden'
     }}>
       {/* Decorative Flower - Top Right Corner */}
-      <div style={{position: 'fixed', top: '-250px', right: '-250px', width: '600px', height: '600px', zIndex: 1, pointerEvents: 'none', opacity: 0.8}}>
+      <div className="fixed pointer-events-none z-[1] event-detail-flower" style={{
+        top: '-150px',
+        right: '-150px',
+        width: '450px',
+        height: '450px',
+        opacity: 0.3
+      }}>
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -1976,13 +1982,13 @@ const EventDetail: React.FC = () => {
           sunLeft="25%"
           moonTop="28.5%"
           moonLeft="28.5%"
-          showPetalRotation={true}
+          showPetalRotation={false}
         />
       </div>
 
       <div className="min-h-screen" style={{position: 'relative', zIndex: 10, padding: '0px'}}>
         {/* Header: Logo + Back Button + Title */}
-        <div style={{margin: '0px', paddingTop: '8px', paddingLeft: '16px', paddingRight: '16px'}}>
+        <div style={{margin: '0px', paddingTop: '0px', paddingLeft: '16px', paddingRight: '16px'}}>
           {/* Desktop layout */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start mb-4">
             {/* Left column: Logo and Back button stacked */}
@@ -2015,30 +2021,37 @@ const EventDetail: React.FC = () => {
           {/* Mobile layout */}
           <div className="md:hidden flex flex-col items-center gap-3 mb-4 pt-0" style={{position: 'relative'}}>
             {/* Mahotsav Logo - Top Center */}
-            <div style={{
+            <div className="event-detail-mobile-logo" style={{
               position: 'absolute',
               top: '0px',
               left: '50%',
               transform: 'translateX(-50%)',
-              zIndex: 100,
-              width: 'clamp(120px, 25vw, 200px)'
+              zIndex: 1,
+              width: 'clamp(220px, 50vw, 350px) !important',
+              maxWidth: 'clamp(220px, 50vw, 350px) !important',
+              pointerEvents: 'none'
             }}>
               <img 
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav" 
                 style={{
-                  width: '100%',
-                  height: 'auto'
+                  width: '100% !important',
+                  height: 'auto',
+                  display: 'block',
+                  pointerEvents: 'none'
                 }}
               />
             </div>
             
             {/* Back Button and Titles with padding-top for logo space */}
-            <div style={{paddingTop: 'clamp(80px, 18vw, 130px)', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px'}}>
-              <BackButton 
-                className="!static !top-auto !left-auto"
-                onClick={handleBack}
-              />
+            <div style={{paddingTop: 'clamp(170px, 38vw, 240px)', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 10}}>
+              <div style={{width: '100%', display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 10}}>
+                <BackButton 
+                  className="!static !top-auto !left-auto"
+                  onClick={handleBack}
+                  style={{cursor: 'pointer', pointerEvents: 'auto', position: 'relative', zIndex: 10}}
+                />
+              </div>
               <div className="text-center">
                 <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
                   {eventData.title}

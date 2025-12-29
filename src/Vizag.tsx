@@ -57,20 +57,20 @@ const Vizag: React.FC = () => {
           }
 
           /* Font overrides for this page */
-          .vizag-title {
+          .Vizag-title {
             font-family: 'Woodtrap', sans-serif !important;
           }
 
-          .vizag-content,
-          .vizag-content *,
-          .vizag-content h1,
-          .vizag-content h2,
-          .vizag-content h3,
-          .vizag-content h4,
-          .vizag-content h5,
-          .vizag-content h6,
-          .vizag-content div,
-          .vizag-content span {
+          .Vizag-content,
+          .Vizag-content *,
+          .Vizag-content h1,
+          .Vizag-content h2,
+          .Vizag-content h3,
+          .Vizag-content h4,
+          .Vizag-content h5,
+          .Vizag-content h6,
+          .Vizag-content div,
+          .Vizag-content span {
             font-family: 'arial', sans-serif !important;
           }
         `}
@@ -82,23 +82,23 @@ const Vizag: React.FC = () => {
       <div className="relative z-10 min-h-screen px-4 sm:px-6 md:px-8 py-8 sm:py-12 flex flex-col justify-center items-center">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h1 className="vizag-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
+          <h1 className="Vizag-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
               letterSpacing: '0.15em',
-              paddingTop: '20px',
+              paddingTop: '20px'
             }}
           >
-            VIZAG
+            Vizag
           </h1>
-          <p className="vizag-content text-xl sm:text-2xl md:text-3xl text-white italic"
+          <p className="Vizag-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
               letterSpacing: '0.05em',
               paddingBottom: '20px',
               paddingTop: '10px'
             }}
           >
-            (19-20 DEC,2025)
+            (5-6 DEC,2025)
           </p>
         </div>
 
@@ -113,57 +113,57 @@ const Vizag: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="/zonals/VIZAG.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="vizag-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-6 sm:p-8 md:p-10 lg:p-14" style={{ height: '400px', width: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '30px',marginBottom: '90px'  }}>
+            <div className="Vizag-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '400px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginTop: '20px', marginBottom: '40px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+              <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
                 {/* Sports Column */}
-                <div className="flex flex-col gap-3 sm:gap-4 min-w-[120px] sm:min-w-[150px]">
-                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px',marginTop: '-60px' }}>Volley ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>(6+4)</div>
+                <div className="flex flex-col gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] md:min-w-[150px]">
+                  <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Volley ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(6+4)</div>
                   </div>
-                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>Basket ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '50px' }}>(5+5)</div>
+                  <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Basket ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(5+5)</div>
                   </div>
-                  <div className="flex flex-col py-3 sm:py-4">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px' }}>Kabaddi</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important',marginLeft: '30px',marginBottom: '30px' }}>(7+3)</div>
+                  <div className="flex flex-col py-2 sm:py-3">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Kabaddi</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-3 sm:mb-4 font-bold text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '-60px' }}>
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
                   </div>
-                  <div className="flex flex-col gap-2 sm:gap-3">
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">I Prize :</div>
+                  <div className="flex flex-col gap-1 sm:gap-2">
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">II Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">III Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">IV Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
                     </div>
@@ -173,20 +173,20 @@ const Vizag: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="vizag-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5" style={{ fontFamily: 'arial, sans-serif !important',paddingTop: '20px',paddingBottom: '-50px'  }}>
+            <div className="Vizag-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', paddingTop: '20px'  }}>
               <div className="text-sm sm:text-base md:text-lg font-semibold">
-                <div>Contact: Mrs.M Navya - +91 86394 00358</div>
+                <div>Ms. G. Ushaswini - +91 96030 25882</div>
               </div>
             </div>
           </div>
 
           {/* Hosting Partner */}
-          <div className="vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '500px' }}>
+          <div className="Vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:flex-shrink-0" style={{ height: '400px' }}>
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
             <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/Vizag1.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+              <img src="/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>
@@ -194,16 +194,16 @@ const Vizag: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="vizag-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5" style={{ fontFamily: 'arial, sans-serif',marginTop: '20px',marginBottom: '20px'  }}>
-          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during</i>
-          <i> Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
+        <div className="Vizag-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important',marginTop: '20px',marginBottom: '20px' }}>
+          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
+          <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="vizag-content block mx-auto mt-12 sm:mt-16 md:mt-20 min-h-[48px] sm:min-h-[56px] px-12 sm:px-16 md:px-20 lg:px-24 py-4 sm:py-5 md:py-6 rounded-[10px] font-semibold text-xs sm:text-sm md:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95 touch-manipulation"
+          className="Vizag-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
-            background: '#380c0f',
+            background: '#0b112b',
             color: '#fff',
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',

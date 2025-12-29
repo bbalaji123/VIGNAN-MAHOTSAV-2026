@@ -53,7 +53,6 @@ const EventsInfo: React.FC = () => {
   ];
 
   const mensTeamSportsCards = [
-    { title: "Cricket Championship", subtitle: "(13+2)*" },
     { title: "Volley ball", subtitle: "(6+4)*" },
     { title: "Basket ball", subtitle: "(5+5)*" },
     { title: "Kabaddi", subtitle: "(7+3)*" },
@@ -77,9 +76,8 @@ const EventsInfo: React.FC = () => {
 
   const culturalsCards = [
     { title: "Music", subtitle: "Singing & Instruments" },
-    { title: "Dance", subtitle: "Classical & Western" },
     { title: "Theatre", subtitle: "Drama & Cinematography" },
-    { title: "Literature", subtitle: "Poetry & Writing" },
+    { title: "Literature", subtitle: "Writing & Oratory" },
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
     { title: "Spot Light", subtitle: "Special Events" },
@@ -169,8 +167,7 @@ const EventsInfo: React.FC = () => {
   ];
 
   const spotLightCards = [
-    { title: "Mr. Mahotsav", subtitle: "" },
-    { title: "Ms. Mahotsav", subtitle: "" },
+    { title: "Mr. and Ms. Mahotsav", subtitle: "" },
     { title: "Mahotsav Got Talent", subtitle: "" }
   ];
 
@@ -226,7 +223,6 @@ const EventsInfo: React.FC = () => {
       "Table Tennis": "Table Tennis",
       "Traditional Yogasana": "Traditional Yogasana",
       "Taekwondo": "Taekwondo",
-      "Cricket Championship": "Cricket Championship",
       "Tennikoit": "Tennikoit",
       
       // Cultural events - Dance
@@ -705,7 +701,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .category-card-title {
-            font-family: 'BackToSchool, sans-serif';
+            font-family: 'BakeryRoastDemo, sans-serif';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
 
@@ -894,13 +890,8 @@ const EventsInfo: React.FC = () => {
           </div>
 
           {/* Mobile layout - Logo and Back button centered, stacked */}
-          <div className="md:hidden flex flex-col items-center gap-3 pb-4">
-            <img 
-              src={`${import.meta.env.BASE_URL}image.avif`}
-              alt="Vignan Mahotsav" 
-              className="events-logo"
-            />
-            <div className="events-back-button-container">
+          <div className="md:hidden flex flex-col items-center gap-3 pb-4 w-full relative">
+            <div className="absolute left-4 top-0">
               <BackButton 
                 className="!static !top-auto !left-auto"
                 onClick={() => {
@@ -934,7 +925,12 @@ const EventsInfo: React.FC = () => {
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem', marginTop: '50px' }}>
+            <img 
+              src={`${import.meta.env.BASE_URL}image.avif`}
+              alt="Vignan Mahotsav" 
+              className="events-logo mx-auto mt-12"
+            />
+            <h1 className="events-title events-page-heading text-center w-full" style={{ fontSize: '2.5rem', marginTop: '20px', wordBreak: 'break-word', overflowWrap: 'break-word', maxWidth: '100%', padding: '0 10px' }}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 
@@ -1115,6 +1111,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1152,6 +1150,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1172,7 +1172,6 @@ const EventsInfo: React.FC = () => {
                     {mensTeamSportsCards.map((card, index) => {
                       // Map men's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Cricket Championship": "events/web- cricket.avif",
                         "Volley ball": "events/volley ball.avif",
                         "Basket ball": "events/basket ball.avif",
                         "Kabaddi": "events/kabbadi.avif",
@@ -1191,6 +1190,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1228,6 +1229,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1317,7 +1320,7 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
-                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
+                              className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
@@ -1361,6 +1364,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1400,6 +1405,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1437,6 +1444,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1478,6 +1487,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1518,6 +1529,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1554,6 +1567,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1591,6 +1606,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1627,6 +1644,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1673,25 +1692,45 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {spotLightCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {spotLightCards.map((card, index) => {
+                      // Map spotlight card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
+                        "Mahotsav Got Talent": "events/gaming.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )}
+                          {!imageMap[card.title] && (
+                            <div className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300">
+                              <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                                <h2 className="subcategory-card-title">
+                                  {card.title}
+                                </h2>
+                                {card.subtitle && (
+                                  <p className="subcategory-card-subtitle">
+                                    {card.subtitle}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

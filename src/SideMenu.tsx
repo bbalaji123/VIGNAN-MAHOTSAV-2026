@@ -43,68 +43,74 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
   return (
     <>
       {/* Floating Flower - Top Right */}
-      <div className="fixed pointer-events-none z-[1] side-menu-flower-top" style={{
-        top: '-5rem',
-        right: '-5rem',
-        width: '10rem',
-        height: '10rem',
-        opacity: 0.01
-      }}>
-        <FlowerComponent 
-          size="100%"
-          sunSize="50%"
-          moonSize="43%"
-          sunTop="25%"
-          sunLeft="25%"
-          moonTop="28.5%"
-          moonLeft="28.5%"
-          showPetalRotation={true}
-        />
-      </div>
+      {window.innerWidth >= 640 && (
+        <div className="fixed pointer-events-none side-menu-flower-top" style={{
+          top: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          right: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          width: window.innerWidth < 640 ? '12rem' : '16rem',
+          height: window.innerWidth < 640 ? '12rem' : '16rem',
+          zIndex: 0
+        }}>
+          <FlowerComponent 
+            size="100%"
+            sunSize="50%"
+            moonSize="43%"
+            sunTop="25%"
+            sunLeft="25%"
+            moonTop="28.5%"
+            moonLeft="28.5%"
+            showPetalRotation={true}
+            opacity={window.innerWidth < 640 ? 0.01 : window.innerWidth < 1024 ? 0.02 : 0.04}
+          />
+        </div>
+      )}
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed pointer-events-none z-[1] side-menu-flower-bottom" style={{
-        bottom: '-5rem',
-        left: '-5rem',
-        width: '10rem',
-        height: '10rem',
-        opacity: 0.01
-      }}>
-        <FlowerComponent 
-          size="100%"
-          sunSize="50%"
-          moonSize="43%"
-          sunTop="25%"
-          sunLeft="25%"
-          moonTop="28.5%"
-          moonLeft="28.5%"
-          showPetalRotation={true}
-        />
-      </div>
+      {window.innerWidth >= 640 && (
+        <div className="fixed pointer-events-none side-menu-flower-bottom" style={{
+          bottom: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          left: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          width: window.innerWidth < 640 ? '12rem' : '16rem',
+          height: window.innerWidth < 640 ? '12rem' : '16rem',
+          zIndex: 0
+        }}>
+          <FlowerComponent 
+            size="100%"
+            sunSize="50%"
+            moonSize="43%"
+            sunTop="25%"
+            sunLeft="25%"
+            moonTop="28.5%"
+            moonLeft="28.5%"
+            showPetalRotation={true}
+            opacity={window.innerWidth < 640 ? 0.01 : window.innerWidth < 1024 ? 0.02 : 0.04}
+          />
+        </div>
+      )}
 
       {/* Menu toggle button */}
       <div
-        className={`fixed left-3 sm:left-4 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-110 active:scale-95 overflow-visible touch-manipulation ${isOpen ? 'active' : ''}`}
+        className={`fixed left-2 xs:left-3 sm:left-4 top-1/2 -translate-y-1/2 z-50 w-10 h-10 xs:w-11 xs:h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-110 active:scale-95 overflow-visible touch-manipulation ${isOpen ? 'active' : ''}`}
         onClick={toggleMenu}
         role="button"
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
       >
-        <div className="w-5 h-[15px] sm:w-6 sm:h-[18px] relative flex flex-col justify-between cursor-pointer">
+        <div className="w-4 h-[13px] xs:w-5 xs:h-[15px] sm:w-6 sm:h-[18px] relative flex flex-col justify-between cursor-pointer">
           <span 
-            className={`w-full h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
-              isOpen ? 'translate-y-[6px] sm:translate-y-[7.5px] rotate-45' : ''
+            className={`w-full h-[2px] xs:h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
+              isOpen ? 'translate-y-[5.5px] xs:translate-y-[6px] sm:translate-y-[7.5px] rotate-45' : ''
             }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.645, 0.045, 0.355, 1)' }}
           />
           <span 
-            className={`w-full h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
+            className={`w-full h-[2px] xs:h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
               isOpen ? 'opacity-0 scale-x-0' : ''
             }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.645, 0.045, 0.355, 1)' }}
           />
           <span 
-            className={`w-full h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
-              isOpen ? '-translate-y-[6px] sm:-translate-y-[7.5px] -rotate-45' : ''
+            className={`w-full h-[2px] xs:h-[2.5px] sm:h-[3px] bg-yellow-400 rounded-sm transition-all duration-300 origin-center shadow-[0_2px_4px_rgba(0,0,0,0.4)] ${
+              isOpen ? '-translate-y-[5.5px] xs:-translate-y-[6px] sm:-translate-y-[7.5px] -rotate-45' : ''
             }`}
             style={{ transitionTimingFunction: 'cubic-bezier(0.645, 0.045, 0.355, 1)' }}
           />
@@ -122,7 +128,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
       {/* Side Menu Panel */}
       <div className="fixed left-0 top-0 h-full z-50">
         <div 
-          className={`h-full w-56 sm:w-64 md:w-72 lg:w-80 bg-black/80 text-white backdrop-blur-md shadow-2xl transition-all duration-700 ease-out rounded-r-2xl sm:rounded-r-3xl md:rounded-r-[50px] ${
+          className={`h-full w-52 xs:w-56 sm:w-64 md:w-72 lg:w-80 bg-black/80 text-white backdrop-blur-md shadow-2xl transition-all duration-700 ease-out rounded-r-xl xs:rounded-r-2xl sm:rounded-r-3xl md:rounded-r-[50px] relative z-50 ${
             isOpen 
               ? 'translate-x-0 opacity-100 animate-[menuSlideRotate_0.7s_cubic-bezier(0.25,0.46,0.45,0.94)]' 
               : '-translate-x-full opacity-0'
@@ -133,14 +139,14 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
             perspective: '1000px',
           }}
         >
-          <div className="p-4 sm:p-5 md:p-6 lg:p-8">
-            <div className="mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-b border-white/20 pb-3 sm:pb-4 md:pb-5 lg:pb-6">
-              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-amber-400">Menu</h2>
+          <div className="p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8">
+            <div className="mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-b border-white/20 pb-2 xs:pb-3 sm:pb-4 md:pb-5 lg:pb-6">
+              <h2 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-amber-400">Menu</h2>
             </div>
             
             {/* Back Button */}
             {showBackButton && (
-              <div className="mb-4">
+              <div className="mb-3 xs:mb-4">
                 <BackButton 
                   className="!static !top-auto !left-auto"
                   onClick={() => {
@@ -151,11 +157,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
               </div>
             )}
             
-            <div className="space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-4">
+            <div className="space-y-1.5 xs:space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-4">
               {menuCategories.map((category, index) => (
                 <div
                   key={category.name}
-                  className={`flex items-center gap-2.5 sm:gap-3 md:gap-4 p-2 sm:p-2.5 md:p-3 rounded-lg cursor-pointer transition-all duration-300 hover:bg-white/10 hover:translate-x-2 group touch-manipulation active:scale-95 ${
+                  className={`flex items-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 p-1.5 xs:p-2 sm:p-2.5 md:p-3 rounded-lg cursor-pointer transition-all duration-300 hover:bg-white/10 hover:translate-x-2 group touch-manipulation active:scale-95 ${
                     isOpen ? 'animate-[menuItemSlideIn_0.5s_ease-out_forwards]' : 'opacity-0 -translate-x-5'
                   }`}
                   onClick={() => handleCategoryClick(category.name)}
@@ -164,19 +170,19 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
                   <img 
                     src={`${import.meta.env.BASE_URL}${category.icon}`}
                     alt={category.name}
-                    className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 group-hover:scale-110 transition-transform duration-300 object-contain flex-shrink-0"
+                    className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 group-hover:scale-110 transition-transform duration-300 object-contain flex-shrink-0"
                   />
-                  <span className="font-medium text-[0.7rem] sm:text-xs md:text-sm tracking-wide">
+                  <span className="font-medium text-[0.65rem] xs:text-[0.7rem] sm:text-xs md:text-sm tracking-wide">
                     {category.name}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="absolute bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-4 sm:left-5 md:left-6 lg:left-8 right-4 sm:right-5 md:right-6 lg:right-8">
+            <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-3 xs:left-4 sm:left-5 md:left-6 lg:left-8 right-3 xs:right-4 sm:right-5 md:right-6 lg:right-8">
               <img 
                 src={`${import.meta.env.BASE_URL}logo.png`} 
                 alt="Logo" 
-                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto opacity-80 hover:scale-110 transition-transform duration-300" 
+                className="w-8 h-8 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto opacity-80 hover:scale-110 transition-transform duration-300" 
               />
             </div>
           </div>

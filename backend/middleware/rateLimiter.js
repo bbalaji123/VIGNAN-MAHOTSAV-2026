@@ -27,7 +27,7 @@ const authLimiter = createRateLimiter(
 // General API rate limiter
 const generalLimiter = createRateLimiter(
   60 * 1000, // 1 minute
-  100, // max 100 requests per window
+  1000,
   'Too many requests, please slow down'
 );
 

@@ -7,22 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
-
-// Get API base URL from environment
-const getApiBaseUrl = () => {
-  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
-  const DEVELOPMENT_API = 'http://localhost:5000/api';
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      return PRODUCTION_API;
-    }
-  }
-  return DEVELOPMENT_API;
-};
-
-const API_BASE_URL = getApiBaseUrl();
+import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -63,7 +48,7 @@ const Dashboard: React.FC = () => {
   });
 
   const eventInfoCards = [
-    { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
+    { title: "SPORTS", description: "Competitive sports events including Football, Basketball, Badminton, and more." },
     { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
     { title: "PARA SPORTS", description: "Inclusive para sports events designed for participants with special abilities." }
   ];
@@ -533,7 +518,6 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'female' || event.gender === 'mixed'
       );
-      console.log('?? Female user - showing', filtered.length, 'events (female + mixed only)');
       return filtered;
     }
     
@@ -542,7 +526,6 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'male' || event.gender === 'mixed'
       );
-      console.log('?? Male user - showing', filtered.length, 'events (male + mixed only)');
       return filtered;
     }
     
@@ -671,7 +654,6 @@ const Dashboard: React.FC = () => {
   const getTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
     return filteredEvents.filter(event => 
-      event.eventName?.toLowerCase().includes('cricket') ||
       event.eventName?.toLowerCase().includes('football') ||
       event.eventName?.toLowerCase().includes('volleyball') ||
       event.eventName?.toLowerCase().includes('basketball') ||
@@ -1030,37 +1012,25 @@ const Dashboard: React.FC = () => {
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
     setLoadingEvents(true);
     try {
-        // Test API connection first
-        const testResponse = await fetch('/api/events').catch(() => null);
-        if (!testResponse) {
-          console.warn('?? Backend server may not be running. Using production API...');
-        }
-
         // Fetch sports events with gender filter if user is logged in
         const sportsResponse = await getEventsByType('sports', userGender);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-        } else {
-          console.warn('?? No sports events loaded:', sportsResponse.message);
         }
 
         // Fetch culturals events with gender filter if user is logged in
         const culturalsResponse = await getEventsByType('culturals', userGender);
         if (culturalsResponse.success && culturalsResponse.data) {
           setCulturalEvents(culturalsResponse.data);
-        } else {
-          console.warn('?? No cultural events loaded:', culturalsResponse.message);
         }
 
         // Fetch para sports events with gender filter if user is logged in
         const paraSportsResponse = await getEventsByType('parasports', userGender);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-        } else {
-          console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
-        console.error('? Error fetching events:', error);
+        // Silently handle errors
       } finally {
         setLoadingEvents(false);
       }
@@ -1086,7 +1056,7 @@ const Dashboard: React.FC = () => {
         const data = await response.json();
         setRegistrationEvents(data);
       } catch (error) {
-        console.error('Error loading registration events:', error);
+        // Silent error handling
       }
     };
     loadRegistrationEvents();
@@ -1116,7 +1086,6 @@ const Dashboard: React.FC = () => {
             }
           }
         } catch (error) {
-          console.error('Error loading user events from database:', error);
           // Fallback to localStorage on error
           const storageKey = `myEvents_${userProfileData.userId}`;
           const savedEvents = localStorage.getItem(storageKey);
@@ -1125,7 +1094,7 @@ const Dashboard: React.FC = () => {
               const events = JSON.parse(savedEvents);
               setMyEvents(events);
             } catch (parseError) {
-              console.error('Error parsing saved events:', parseError);
+              // Silent error handling
             }
           }
         }
@@ -1463,12 +1432,6 @@ const Dashboard: React.FC = () => {
       'Football Championship': 'Football',
       'Football Tournament': 'Football',
       
-      // Cricket events
-      'Cricket Tournament - Men': 'Football', // Using similar team sport structure
-      'Cricket Tournament - Women': 'Football',
-      'Cricket Tournament': 'Football',
-      'Cricket Championship': 'Football',
-      
       // Kabaddi events
       'Kabaddi Tournament': 'Kabaddi',
       'Kabaddi Championship': 'Kabaddi',
@@ -1603,8 +1566,6 @@ const Dashboard: React.FC = () => {
     if (eventExists || eventName) {
       // Navigate to the new event detail page
       navigate(`/event/${encodeURIComponent(eventName)}`);
-    } else {
-      console.warn('No event details found for:', eventName);
     }
   };
 
@@ -1779,7 +1740,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error: unknown) {
-      console.error('Registration error:', error);
       setSubmitMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1849,7 +1809,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error: unknown) {
-      console.error('Password reset error:', error);
       setResetMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1953,7 +1912,6 @@ const Dashboard: React.FC = () => {
         setUserRegisteredEvents([]);
       }
     } catch (error) {
-      console.error('Error fetching profile data:', error);
       setUserRegisteredEvents([]);
     } finally {
       setIsLoadingProfile(false);
@@ -2017,7 +1975,6 @@ const Dashboard: React.FC = () => {
         alert(result.message || 'Failed to save events. Please try again.');
       }
     } catch (error) {
-      console.error('Error saving events:', error);
       alert('An error occurred while saving events.');
     }
   };
@@ -2044,8 +2001,6 @@ const Dashboard: React.FC = () => {
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
         
-        console.log('Login data received:', { userId, name, email, userType, gender, branch, college, phone, dateOfBirth });
-        
         // Ensure all required fields are present
         if (!userId || !name || !email) {
           setLoginMessage({
@@ -2071,7 +2026,6 @@ const Dashboard: React.FC = () => {
           phone: phone,
           dateOfBirth: dateOfBirth
         };
-        console.log('Setting profile data:', profileData);
         setUserProfileData(profileData);
         
         setShowLoginModal(false);
@@ -2116,7 +2070,6 @@ const Dashboard: React.FC = () => {
             setUserRegisteredEvents([]);
           }
         } catch (error) {
-          console.error('Error fetching profile data:', error);
           setUserRegisteredEvents([]);
         } finally {
           setIsLoadingProfile(false);
@@ -2128,7 +2081,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error) {
-      console.error('Login error:', error);
       setLoginMessage({
         type: 'error',
         text: 'An error occurred during login. Please try again.'
@@ -2165,14 +2117,6 @@ const Dashboard: React.FC = () => {
         phone: storedPhone || undefined,
         dateOfBirth: storedDOB || undefined
       };
-      console.log('Loading profile data from localStorage:', profileData);
-      console.log('Raw localStorage values:', {
-        branch: storedBranch,
-        college: storedCollege,
-        phone: storedPhone,
-        dob: storedDOB,
-        gender: storedUserGender
-      });
       setUserProfileData(profileData);
       
       // Fetch user's saved events from database
@@ -2191,7 +2135,7 @@ const Dashboard: React.FC = () => {
         return savedEventIds; // Return the event IDs for immediate use
       }
     } catch (error) {
-      console.error('Error fetching saved events:', error);
+      // Silent error handling
     }
     return new Set<string>(); // Return empty set if failed
   };
@@ -2279,7 +2223,7 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center'}}>
           {isLoggedIn ? (
             <button 
               className="register-events-btn"
@@ -2333,9 +2277,13 @@ const Dashboard: React.FC = () => {
             }
             
             /* Center Register/Login button on mobile */
+            .hero-action-buttons {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+            }
+            
             .register-login-btn {
-              margin-left: 50% !important;
-              transform: translateX(-50%) !important;
               margin-top: -80px !important;
             }
             
@@ -2397,7 +2345,7 @@ const Dashboard: React.FC = () => {
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2431,7 +2379,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -left-32 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ bottom: '-150px', border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2683,7 +2631,7 @@ const Dashboard: React.FC = () => {
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <img src="/para sports.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766997935/para_sports_tbld5k.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
               </div>
 
@@ -2849,9 +2797,13 @@ const Dashboard: React.FC = () => {
                       className="indoor-sport-card"
                       onClick={() => handleParaSportsClick(card.title)}
                     >
-                      <div className="indoor-sport-card-poster-background">
-                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
-                      </div>
+                      <img 
+                        src="/events/para.avif"
+                        alt={card.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
                       <div className="indoor-sport-card-title-overlay">
                         <h3>{card.title}</h3>
                         {card.subtitle && (
@@ -3399,11 +3351,27 @@ const Dashboard: React.FC = () => {
                 {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
                   const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
                   const card = spotLightCards[cardIndex];
+                  
+                  // Image mapping for spotlight events
+                  const spotlightImageMap: { [key: string]: string } = {
+                    "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
+                    "Mahotsav Got Talent": "events/gaming.avif"
+                  };
+                  
+                  const imagePath = spotlightImageMap[card.title];
+                  
+                  // Only render if image path exists
+                  if (!imagePath) return null;
+                  
+                  const baseUrl = import.meta.env.BASE_URL || '/';
+                  
                   return (
                     <div key={cardIndex} className="indoor-sport-card">
-                      <div className="indoor-sport-card-poster-background">
-                        <span className="indoor-sport-poster-placeholder-text">SPOTLIGHT POSTER</span>
-                      </div>
+                      <img 
+                        src={`${baseUrl}${imagePath}`}
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                      />
                       <div className="indoor-sport-card-title-overlay">
                         <h3>{card.title}</h3>
                         {card.subtitle && <h4>{card.subtitle}</h4>}
@@ -3980,6 +3948,39 @@ const Dashboard: React.FC = () => {
               gap: 10px;
             }
 
+            /* Year buttons - keep in single row on mobile, above video */
+            .throwback-year-buttons {
+              top: calc(50% - 140px) !important;
+              flex-wrap: nowrap !important;
+              gap: 10px !important;
+              padding: 0 10px !important;
+              justify-content: center !important;
+            }
+
+            .throwback-year-buttons button {
+              padding: 6px 14px !important;
+              font-size: 0.85rem !important;
+              flex-shrink: 0 !important;
+            }
+
+            /* Video wrapper - center between flowers */
+            .throwback-video-wrapper {
+              top: 50% !important;
+              width: calc(100% - 40px) !important;
+              max-width: 500px !important;
+            }
+
+            .throwback-video-card {
+              width: 100% !important;
+              aspect-ratio: 16/9 !important;
+              height: auto !important;
+            }
+
+            .throwback-video-card iframe {
+              position: relative !important;
+              height: 100% !important;
+            }
+
             /* Center Register button in mobile */
             .register-events-btn,
             .register-login-btn {
@@ -3994,10 +3995,10 @@ const Dashboard: React.FC = () => {
               padding: 1.5rem !important;
             }
 
-            /* Side menu flowers - barely visible in mobile */
+            /* Side menu flowers - hide completely on mobile */
             .side-menu-flower-top,
             .side-menu-flower-bottom {
-              opacity: 0.01 !important;
+              display: none !important;
             }
 
             /* Hero section improvements */
@@ -4033,16 +4034,191 @@ const Dashboard: React.FC = () => {
             .profile-content-wrapper {
               max-width: 100% !important;
             }
+
+            /* Registration Success Modal - Mobile Responsive */
+            .credential-card {
+              width: 95vw !important;
+              max-width: 95vw !important;
+              padding: 1.5rem !important;
+              margin: 10px !important;
+            }
+
+            .credential-card h2 {
+              font-size: 1.5rem !important;
+              margin-bottom: 0.5rem !important;
+            }
+
+            .credential-card p {
+              font-size: 0.875rem !important;
+              margin-bottom: 1.5rem !important;
+            }
+
+            .credential-card > div:first-of-type {
+              padding: 1.25rem !important;
+            }
+
+            .credential-card label {
+              font-size: 0.75rem !important;
+            }
+
+            .credential-card span[style*="fontSize: '1.5rem'"] {
+              font-size: 1.1rem !important;
+              letter-spacing: 1px !important;
+            }
+
+            .credential-card button {
+              font-size: 1rem !important;
+              padding: 0.875rem !important;
+            }
+
+            /* Success icon smaller on mobile */
+            .credential-card > div[style*="width: '80px'"] {
+              width: 60px !important;
+              height: 60px !important;
+            }
+
+            .credential-card > div[style*="width: '80px'"] span {
+              font-size: 2rem !important;
+            }
+
+            /* Decorative corners smaller */
+            .credential-card > div[style*="width: '120px'"] {
+              width: 60px !important;
+              height: 60px !important;
+            }
+
+            /* Screenshot warning mobile */
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
+              flex-direction: column !important;
+              text-align: center !important;
+              padding: 1rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
+              font-size: 1.5rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p {
+              font-size: 0.875rem !important;
+            }
+          }
+
+          /* iPhone 12 Pro and similar devices (390px width) */
+          @media (max-width: 430px) {
+            /* Registration Success Modal - Extra Small Screens */
+            .credential-card {
+              width: 92vw !important;
+              max-width: 92vw !important;
+              padding: 1.25rem !important;
+              border-radius: 20px !important;
+            }
+
+            .credential-card h2 {
+              font-size: 1.35rem !important;
+              line-height: 1.3 !important;
+            }
+
+            .credential-card p {
+              font-size: 0.8rem !important;
+            }
+
+            /* Credentials container - tighter spacing */
+            .credential-card > div:first-of-type {
+              padding: 1rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card label {
+              font-size: 0.7rem !important;
+              margin-bottom: 0.4rem !important;
+            }
+
+            /* ID and Password display */
+            .credential-card span[style*="fontSize: '1.5rem'"] {
+              font-size: 1rem !important;
+              letter-spacing: 0.5px !important;
+              padding: 0.75rem 1rem !important;
+            }
+
+            /* Success icon */
+            .credential-card > div[style*="width: '80px'"] {
+              width: 50px !important;
+              height: 50px !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card > div[style*="width: '80px'"] span {
+              font-size: 1.75rem !important;
+            }
+
+            /* Corner decorations */
+            .credential-card > div[style*="width: '120px'"] {
+              width: 50px !important;
+              height: 50px !important;
+            }
+
+            /* Screenshot warning */
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
+              padding: 0.875rem 1rem !important;
+              gap: 0.5rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
+              font-size: 1.25rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:first-of-type {
+              font-size: 0.8rem !important;
+              line-height: 1.4 !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:last-of-type {
+              font-size: 0.75rem !important;
+            }
+
+            /* Continue button */
+            .credential-card button {
+              font-size: 0.95rem !important;
+              padding: 0.8rem !important;
+              border-radius: 10px !important;
+            }
+
+            /* General spacing adjustments */
+            .credential-card > div {
+              margin-bottom: 0.75rem !important;
+            }
+          }
+
+          /* Tablet styles for flowers */
+          @media (min-width: 640px) and (max-width: 1023px) {
+            .side-menu-flower-top,
+            .side-menu-flower-bottom {
+              opacity: 0.02 !important;
+              filter: blur(1.5px) !important;
+            }
           }
 
           /* Desktop-only styles for flowers */
+          @media (min-width: 1024px) {
+            .side-menu-flower-top {
+              opacity: 0.04 !important;
+              filter: blur(1px) !important;
+            }
+
+            .side-menu-flower-bottom {
+              opacity: 0.04 !important;
+              filter: blur(1px) !important;
+            }
+          }
+
+          /* Large desktop styles for flowers */
           @media (min-width: 769px) {
             .side-menu-flower-top {
               top: -16rem !important;
               right: -16rem !important;
               width: 37.5rem !important;
               height: 37.5rem !important;
-              opacity: 0.25 !important;
             }
 
             .side-menu-flower-bottom {
@@ -4050,7 +4226,6 @@ const Dashboard: React.FC = () => {
               left: -16rem !important;
               width: 37.5rem !important;
               height: 37.5rem !important;
-              opacity: 0.25 !important;
             }
 
             /* Desktop positioning for Register button */
@@ -4123,8 +4298,10 @@ const Dashboard: React.FC = () => {
     marginBottom: 'clamp(30px, 5vh, 50px)',
     textAlign: 'center',
     fontFamily: 'Bradley Hand, cursive',
-    zIndex: 10,
-    position: 'relative'
+    zIndex: 100,
+    position: 'relative',
+    textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
+    letterSpacing: '2px'
   }}
 >
   Throwback
@@ -4218,16 +4395,17 @@ const Dashboard: React.FC = () => {
           {/* Year buttons - separate from video */}
           <div className="throwback-year-buttons" style={{
             position: 'absolute',
-            top: '40px',
+            top: window.innerWidth >= 768 ? '20px' : '40px',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
-            gap: '20px',
+            flexWrap: 'nowrap',
+            gap: '30px',
             pointerEvents: 'auto',
             zIndex: 15,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s',
-            marginBottom: '50px'
+            justifyContent: 'center'
           }}>
             {(['2023', '2024', '2025'] as const).map(year => (
               <button 
@@ -4266,7 +4444,8 @@ const Dashboard: React.FC = () => {
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s',
-            marginTop: '50px'
+            width: window.innerWidth >= 768 ? 'auto' : 'calc(100% - 40px)',
+            maxWidth: window.innerWidth >= 768 ? 'none' : '500px'
           }}>
               {/* Video card */}
               <div 
@@ -4358,7 +4537,7 @@ const Dashboard: React.FC = () => {
         }}>
           {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
             <div key={unit} style={{
-              width: '85px',
+              width: window.innerWidth < 640 ? '70px' : '85px',
               height: '90px',
               display: 'flex',
               flexDirection: 'column',
@@ -4370,7 +4549,7 @@ const Dashboard: React.FC = () => {
                 style={{
                   width: '100%',
                   height: '60px',
-                  fontSize: '2.6rem',
+                  fontSize: window.innerWidth < 640 ? '2rem' : '2.6rem',
                   fontWeight: '800',
                   fontFamily: 'Poppins, sans-serif',
                   color: '#FBC02D',
@@ -4383,13 +4562,13 @@ const Dashboard: React.FC = () => {
                 {time[unit]}
               </div>
               <div style={{
-                fontSize: '1.5rem',
+                fontSize: window.innerWidth < 640 ? '0.9rem' : '1.5rem',
                 color: '#E0E0E0',
                 marginTop: '6px',
                 letterSpacing: '0.5px',
                 whiteSpace: 'nowrap',
                 textAlign: 'center',
-                fontFamily: 'BackToSchool, sans-serif'
+                fontFamily: 'BakeryRoastDemo, sans-serif'
               }}>
                 {unit.charAt(0).toUpperCase() + unit.slice(1)}
               </div>
@@ -6245,23 +6424,45 @@ const Dashboard: React.FC = () => {
                       const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                       const userGender = userProfileData.gender?.toLowerCase();
+                      const userCollege = userProfileData.college || '';
+                      
+                      // Check if user is from one of the special Vignan colleges
+                      const specialVignanColleges = [
+                        'Vignan Pharmacy College',
+                        "Vignan's Foundation of Science, Technology & Research",
+                        "Vignan's Lara Institute of Technology & Science"
+                      ];
+                      
+                      const isSpecialVignanStudent = specialVignanColleges.some(college => 
+                        userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                        college.toLowerCase().includes(userCollege.toLowerCase())
+                      );
                       
                       let fee = 0;
-                      if (userGender === 'male') {
+                      
+                      // If from special Vignan colleges, fee is always 150
+                      if (isSpecialVignanStudent) {
                         if (hasSports || hasCulturals) {
-                          fee = 350; // Same fee regardless of selection
-                        }
-                      } else if (userGender === 'female') {
-                        if (hasSports && hasCulturals) {
-                          fee = 350; // Both
-                        } else if (hasSports) {
-                          fee = 350; // Sports only
-                        } else if (hasCulturals) {
-                          fee = 250; // Culturals only
+                          fee = 150;
                         }
                       } else {
-                        if (hasSports || hasCulturals) {
-                          fee = 350;
+                        // Regular fee calculation
+                        if (userGender === 'male') {
+                          if (hasSports || hasCulturals) {
+                            fee = 350; // Same fee regardless of selection
+                          }
+                        } else if (userGender === 'female') {
+                          if (hasSports && hasCulturals) {
+                            fee = 350; // Both
+                          } else if (hasSports) {
+                            fee = 350; // Sports only
+                          } else if (hasCulturals) {
+                            fee = 250; // Culturals only
+                          }
+                        } else {
+                          if (hasSports || hasCulturals) {
+                            fee = 350;
+                          }
                         }
                       }
                       
@@ -6289,23 +6490,45 @@ const Dashboard: React.FC = () => {
                   const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                   const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                   const userGender = userProfileData.gender?.toLowerCase();
+                  const userCollege = userProfileData.college || '';
+                  
+                  // Check if user is from one of the special Vignan colleges
+                  const specialVignanColleges = [
+                    'Vignan Pharmacy College',
+                    "Vignan's Foundation of Science, Technology & Research",
+                    "Vignan's Lara Institute of Technology & Science"
+                  ];
+                  
+                  const isSpecialVignanStudent = specialVignanColleges.some(college => 
+                    userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                    college.toLowerCase().includes(userCollege.toLowerCase())
+                  );
                   
                   let fee = 0;
-                  if (userGender === 'male') {
+                  
+                  // If from special Vignan colleges, fee is always 150
+                  if (isSpecialVignanStudent) {
                     if (hasSports || hasCulturals) {
-                      fee = 350; // Same fee regardless of selection
-                    }
-                  } else if (userGender === 'female') {
-                    if (hasSports && hasCulturals) {
-                      fee = 350; // Both
-                    } else if (hasSports) {
-                      fee = 350; // Sports only
-                    } else if (hasCulturals) {
-                      fee = 250; // Culturals only
+                      fee = 150;
                     }
                   } else {
-                    if (hasSports || hasCulturals) {
-                      fee = 350;
+                    // Regular fee calculation
+                    if (userGender === 'male') {
+                      if (hasSports || hasCulturals) {
+                        fee = 350; // Same fee regardless of selection
+                      }
+                    } else if (userGender === 'female') {
+                      if (hasSports && hasCulturals) {
+                        fee = 350; // Both
+                      } else if (hasSports) {
+                        fee = 350; // Sports only
+                      } else if (hasCulturals) {
+                        fee = 250; // Culturals only
+                      }
+                    } else {
+                      if (hasSports || hasCulturals) {
+                        fee = 350;
+                      }
                     }
                   }
                   

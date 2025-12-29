@@ -6,7 +6,7 @@
 .signup-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(20, 10, 30, 0.85);
+  background: #3f2150;
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
@@ -398,6 +398,6 @@
 }
 
 .gender-select option {
-  background-color: #111827;
+  background-color: #3f2150;
   color: #fff;
 }

@@ -24,16 +24,32 @@ img[alt="Moon"],
   }
   
   .footer-content > div {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    align-items: start !important;
+  }
+
+  .footer-content > div > div:first-child {
+    grid-column: 1 / -1 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
   }
   
+  .footer-content > div > div:nth-child(2),
+  .footer-content > div > div:nth-child(3) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  
   .footer-logo {
-    height: 180px !important;
-    margin-bottom: -50px !important;
+    height: 140px !important;
+    margin-bottom: -30px !important;
     margin-left: 0 !important;
-    margin-top: -70px !important;
+    margin-top: -30px !important;
   }
   
   .footer-heading {
@@ -13111,9 +13127,9 @@ html {
   }
 }
 
-/* Stats Card with BackToSchool Font */
-.stats-card-backtoschool div {
-  font-family: 'BackToSchool', sans-serif !important;
+/* Stats Card with BakeryRoastDemo Font */
+.stats-card-BakeryRoastDemo div {
+  font-family: 'BakeryRoastDemo', sans-serif !important;
 }
 
 /* Events Page Main Cards - Mobile Responsiveness */

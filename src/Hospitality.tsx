@@ -296,27 +296,27 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Mr. Ashwin</td>
-                    <td ><a href="tel:+918885284355" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88852 84355</a></td>
+                    <td ><a href="tel:+91 88852 84355" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88852 84355</a></td>
                   </tr>
                   <tr >
-                    <td >Mr. Ajith anna</td>
-                    <td ><a href="tel:+919346193840" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 93461 93840</a></td>
+                    <td >Mr. Ajith</td>
+                    <td ><a href="tel:+91 93461 93840" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 93461 93840</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Hemanth</td>
-                    <td ><a href="tel:+918885476252" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88854 76252</a></td>
+                    <td ><a href="tel:+91 88854 76252" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88854 76252</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Phani</td>
-                    <td ><a href="tel:+919542666866" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 95426 66866</a></td>
+                    <td ><a href="tel:+91 95426 66866" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 95426 66866</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Nawaz Basha</td>
-                    <td ><a href="tel:+919963876989" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99638 76989</a></td>
+                    <td ><a href="tel:+91 99638 76989" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99638 76989</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Yeshwanth</td>
-                    <td ><a href="tel:+918309190435" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83091 90435</a></td>
+                    <td ><a href="tel:+91 83091 90435" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83091 90435</a></td>
                   </tr>
                 </tbody>
               </table>

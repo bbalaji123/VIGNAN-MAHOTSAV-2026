@@ -17,10 +17,10 @@
   font-style: normal;
 }
 
-/* Custom Font - BackToSchool */
+/* Custom Font - BakeryRoastDemo */
 @font-face {
-  font-family: 'BackToSchool';
-  src: url('/BackToSchool.ttf') format('truetype');
+  font-family: 'BakeryRoastDemo';
+  src: url('/backtoschool.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -67,7 +67,7 @@ button {
 /* Override for specific event page elements */
 .events-info-page h2,
 .events-info-page .text-white {
-  font-family: 'BackToSchool', sans-serif !important;
+  font-family: 'BakeryRoastDemo', sans-serif !important;
 }
 
 /* Coffee+Tea Demo font for menu cards */
@@ -110,10 +110,10 @@ button {
   font-family: 'Woodtrap', sans-serif !important;
 }
 
-/* BackToSchool font for event card sub-headings */
+/* BakeryRoastDemo font for event card sub-headings */
 .event-card-title,
 .text-yellow-300 {
-  font-family: 'BackToSchool', sans-serif !important;
+  font-family: 'BakeryRoastDemo', sans-serif !important;
 }
 
 /* Circular Back Navigation Button */

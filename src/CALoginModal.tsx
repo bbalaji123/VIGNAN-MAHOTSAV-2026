@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './CAModal.css';
-
-const API_BASE_URL = 'http://localhost:5000/api';
+import { API_BASE_URL } from './services/api';
 
 interface CALoginModalProps {
   onClose: () => void;

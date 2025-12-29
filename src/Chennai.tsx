@@ -57,20 +57,20 @@ const Chennai: React.FC = () => {
           }
 
           /* Font overrides for this page */
-          .chennai-title {
+          .Chennai-title {
             font-family: 'Woodtrap', sans-serif !important;
           }
 
-          .chennai-content,
-          .chennai-content *,
-          .chennai-content h1,
-          .chennai-content h2,
-          .chennai-content h3,
-          .chennai-content h4,
-          .chennai-content h5,
-          .chennai-content h6,
-          .chennai-content div,
-          .chennai-content span {
+          .Chennai-content,
+          .Chennai-content *,
+          .Chennai-content h1,
+          .Chennai-content h2,
+          .Chennai-content h3,
+          .Chennai-content h4,
+          .Chennai-content h5,
+          .Chennai-content h6,
+          .Chennai-content div,
+          .Chennai-content span {
             font-family: 'arial', sans-serif !important;
           }
         `}
@@ -82,25 +82,23 @@ const Chennai: React.FC = () => {
       <div className="relative z-10 min-h-screen px-4 sm:px-6 md:px-8 py-8 sm:py-12 flex flex-col justify-center items-center">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h1 className="chennai-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
+          <h1 className="Chennai-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
               letterSpacing: '0.15em',
-              paddingTop: '25px',
-            paddingBottom: '25px',
-            paddingLeft: '30px',
-            paddingRight: '30px'
+              paddingTop: '20px'
             }}
           >
-            CHENNAI
+            Chennai
           </h1>
-          <p className="chennai-content text-xl sm:text-2xl md:text-3xl text-white italic"
+          <p className="Chennai-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
               letterSpacing: '0.05em',
               paddingBottom: '20px',
+              paddingTop: '10px'
             }}
           >
-            (19-20 JAN,2026)
+            (5-6 DEC,2025)
           </p>
         </div>
 
@@ -115,61 +113,57 @@ const Chennai: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="/zonals/CHENNAI.avif" alt="Chennai" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929725/CHENNAI_kq6tgd.avif" alt="Chennai" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="chennai-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-6 sm:p-8 md:p-10 lg:p-14" style={{ height: '400px', width: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '30px', marginBottom: '90px' }}>
+            <div className="Chennai-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '400px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginTop: '20px', marginBottom: '40px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:gap-12 text-white" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
+              <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
                 {/* Sports Column */}
-                <div className="flex flex-col gap-3 sm:gap-4 min-w-[120px] sm:min-w-[150px]">
-                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px', marginTop: '-60px' }}>Volley ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px' }}>(6+4)</div>
+                <div className="flex flex-col gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] md:min-w-[150px]">
+                  <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Volley ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(6+4)</div>
                   </div>
-                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px' }}>Basket ball</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '50px' }}>(5+5)</div>
+                  <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Basket ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(5+5)</div>
                   </div>
-                  <div className="flex flex-col py-3 sm:py-4 border-b border-white/30">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px' }}>Kabaddi</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px' }}>(7+3)</div>
-                  </div>
-                  <div className="flex flex-col py-3 sm:py-4">
-                    <div className="font-bold text-base sm:text-lg md:text-xl mb-1" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px' }}>Football</div>
-                    <div className="text-sm sm:text-base md:text-lg" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginLeft: '30px', marginBottom: '30px' }}>(7+3)</div>
+                  <div className="flex flex-col py-2 sm:py-3">
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Kabaddi</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 mb-3 sm:mb-4 font-bold text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important', marginTop: '-60px' }}>
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
                   </div>
-                  <div className="flex flex-col gap-2 sm:gap-3">
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">I Prize :</div>
+                  <div className="flex flex-col gap-1 sm:gap-2">
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">II Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">III Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-8 text-sm sm:text-base md:text-lg text-center" style={{ fontFamily: 'BackToSchool, sans-serif !important' }}>
-                      <div className="font-semibold text-left">IV Prize :</div>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
                     </div>
@@ -179,20 +173,20 @@ const Chennai: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="chennai-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-3 sm:pt-4" style={{ fontFamily: 'BackToSchool, sans-serif !important', paddingTop: '20px', paddingBottom: '10px' }}>
+            <div className="Chennai-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', paddingTop: '20px'  }}>
               <div className="text-sm sm:text-base md:text-lg font-semibold">
-                <div>Contact: Mr. Raghavendra - +91 86863 66111</div>
+                <div>Mr. P. Subbarao - +91 99630 48811</div>
               </div>
             </div>
           </div>
 
           {/* Hosting Partner */}
-          <div className="chennai-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
+          <div className="Chennai-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:flex-shrink-0" style={{ height: '400px' }}>
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
-            <div className="w-[160px] h-[160px] sm:w-[180px] sm:h-[180px] md:w-[200px] md:h-[200px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/chennai1.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+            <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
+              <img src="/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>
@@ -200,19 +194,18 @@ const Chennai: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="chennai-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5" style={{paddingTop: '20px',paddingBottom: '10px'}}>
-          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during</i>
-          <i> Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
+        <div className="Chennai-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important',marginTop: '20px',marginBottom: '20px' }}>
+          <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
+          <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
         <button 
-          className="chennai-content block mx-auto mt-12 sm:mt-16 md:mt-20 min-h-[48px] sm:min-h-[56px] px-12 sm:px-16 md:px-20 lg:px-24 py-4 sm:py-5 md:py-6 rounded-[10px] font-semibold text-xs sm:text-sm md:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95 touch-manipulation"
+          className="Chennai-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
-            border: '1.5px solid #fa68b1ff',
-            background: '#db3a57ff',
+            background: '#0b112b',
             color: '#fff',
-            boxShadow: '0 5px 15px rgba(241, 72, 159, 0.4)',
+            boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
             padding: '8px 10px 8px 10px',
             fontFamily: 'coffee, sans-serif !important'
@@ -225,10 +218,6 @@ const Chennai: React.FC = () => {
             e.currentTarget.style.transform = 'translateY(0)';
             e.currentTarget.style.boxShadow = '0 5px 15px rgba(228, 138, 185, 0.4)';
           }}
-          onMouseDown={(e) => {
-            return e.currentTarget.style.transform = 'scale(0.95)';
-          }}
-          onClick={() => window.open('https://forms.gle/xeQnSdCy2HFRLEuJA', '_blank')}  
         >
           CLICK HERE TO REGISTER
         </button>

@@ -21,7 +21,10 @@ const getApiBaseUrl = () => {
 
 const API_BASE_URL = getApiBaseUrl();
 
-// Log current API configuration (for debugging)
+export const API_BASE_URL = (envApiBase && envApiBase.length > 0
+  ? envApiBase
+  : '/api'
+).replace(/\/+$/, '');
 
 export interface SignupData {
   name: string;
@@ -158,7 +161,6 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
       
       // If it's a conflict error (duplicate userId from concurrent registration), retry
       if (response.status === 409 && data.error?.includes('userId')) {
-        console.log(`⏳ Registration conflict, retrying... (attempt ${attempt}/${maxRetries})`);
         lastError = data;
         // Wait a bit before retrying (exponential backoff)
         await new Promise(resolve => setTimeout(resolve, 300 * attempt));
@@ -176,7 +178,6 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
       
       // Retry on network errors too
       if (attempt < maxRetries) {
-        console.log(`⏳ Network error, retrying... (attempt ${attempt}/${maxRetries})`);
         await new Promise(resolve => setTimeout(resolve, 300 * attempt));
         continue;
       }
@@ -492,7 +493,6 @@ export const addEventToMyEvents = async (userId: string, eventId: string): Promi
     const data = await response.json();
     return data;
   } catch (error: any) {
-    console.error('API Error in addEventToMyEvents:', error);
     return {
       success: false,
       message: error.message.includes('fetch') ? 'Unable to connect to server. Please check your internet connection.' : 'Failed to add event',

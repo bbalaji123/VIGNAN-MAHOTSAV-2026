@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CAModal.css';
-
-const API_BASE_URL = 'http://localhost:5000/api';
+import { API_BASE_URL } from './services/api';
 
 interface CASignupModalProps {
   onClose: () => void;
@@ -16,7 +15,7 @@ interface State {
 interface District {
   no: string;
   name: string;
-  state: string;
+  sno: string; // state number reference
 }
 
 interface College {
@@ -78,14 +77,20 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   // Filter districts when state changes
   useEffect(() => {
     if (formData.state) {
-      const filtered = districts.filter(d => d.state === formData.state);
-      setFilteredDistricts(filtered);
+      // Find the selected state to get its "no" (state number)
+      const selectedState = states.find(s => s.name === formData.state);
+      if (selectedState) {
+        const filtered = districts.filter(d => d.sno === selectedState.no);
+        setFilteredDistricts(filtered);
+      } else {
+        setFilteredDistricts([]);
+      }
       // Reset district and college if state changes
       setFormData(prev => ({ ...prev, district: '', college: '' }));
     } else {
       setFilteredDistricts([]);
     }
-  }, [formData.state, districts]);
+  }, [formData.state, districts, states]);
 
   // Filter colleges when state or district changes
   useEffect(() => {

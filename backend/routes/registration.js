@@ -176,36 +176,56 @@ router.post('/register', async (req, res) => {
    URL: POST /api/login
 ===================================================== */
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({
-      success: false,
-      message: 'Email and password required'
-    });
-  }
-
-  const user = await Registration.findOne({
-    $or: [{ email }, { userId: email }]
-  });
-
-  if (!user || user.password !== password) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid credentials'
-    });
-  }
-
-  res.json({
-    success: true,
-    message: 'Login successful',
-    data: {
-      userId: user.userId,
-      name: user.name,
-      email: user.email,
-      userType: user.userType
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and password required'
+      });
     }
-  });
+
+    // Normalize email to match registration format
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const user = await Registration.findOne({
+      $or: [
+        { email: normalizedEmail },
+        { userId: email.trim() }
+      ]
+    });
+
+    if (!user || user.password !== password) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Login successful',
+      data: {
+        userId: user.userId,
+        name: user.name,
+        email: user.email,
+        userType: user.userType,
+        gender: user.gender,
+        branch: user.branch,
+        college: user.college,
+        phone: user.phone,
+        dateOfBirth: user.dateOfBirth
+      }
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during login',
+      error: error.message
+    });
+  }
 });
 
 /* =====================================================

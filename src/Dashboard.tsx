@@ -3995,6 +3995,16 @@ const Dashboard: React.FC = () => {
               gap: 10px;
             }
 
+            /* Year buttons - add more vertical spacing */
+            .throwback-year-buttons {
+              top: 30px !important;
+            }
+
+            /* Video wrapper - increase separation from buttons */
+            .throwback-video-wrapper {
+              top: calc(50% + 50px) !important;
+            }
+
             /* Center Register button in mobile */
             .register-events-btn,
             .register-login-btn {
@@ -4047,6 +4057,160 @@ const Dashboard: React.FC = () => {
 
             .profile-content-wrapper {
               max-width: 100% !important;
+            }
+
+            /* Registration Success Modal - Mobile Responsive */
+            .credential-card {
+              width: 95vw !important;
+              max-width: 95vw !important;
+              padding: 1.5rem !important;
+              margin: 10px !important;
+            }
+
+            .credential-card h2 {
+              font-size: 1.5rem !important;
+              margin-bottom: 0.5rem !important;
+            }
+
+            .credential-card p {
+              font-size: 0.875rem !important;
+              margin-bottom: 1.5rem !important;
+            }
+
+            .credential-card > div:first-of-type {
+              padding: 1.25rem !important;
+            }
+
+            .credential-card label {
+              font-size: 0.75rem !important;
+            }
+
+            .credential-card span[style*="fontSize: '1.5rem'"] {
+              font-size: 1.1rem !important;
+              letter-spacing: 1px !important;
+            }
+
+            .credential-card button {
+              font-size: 1rem !important;
+              padding: 0.875rem !important;
+            }
+
+            /* Success icon smaller on mobile */
+            .credential-card > div[style*="width: '80px'"] {
+              width: 60px !important;
+              height: 60px !important;
+            }
+
+            .credential-card > div[style*="width: '80px'"] span {
+              font-size: 2rem !important;
+            }
+
+            /* Decorative corners smaller */
+            .credential-card > div[style*="width: '120px'"] {
+              width: 60px !important;
+              height: 60px !important;
+            }
+
+            /* Screenshot warning mobile */
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
+              flex-direction: column !important;
+              text-align: center !important;
+              padding: 1rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
+              font-size: 1.5rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p {
+              font-size: 0.875rem !important;
+            }
+          }
+
+          /* iPhone 12 Pro and similar devices (390px width) */
+          @media (max-width: 430px) {
+            /* Registration Success Modal - Extra Small Screens */
+            .credential-card {
+              width: 92vw !important;
+              max-width: 92vw !important;
+              padding: 1.25rem !important;
+              border-radius: 20px !important;
+            }
+
+            .credential-card h2 {
+              font-size: 1.35rem !important;
+              line-height: 1.3 !important;
+            }
+
+            .credential-card p {
+              font-size: 0.8rem !important;
+            }
+
+            /* Credentials container - tighter spacing */
+            .credential-card > div:first-of-type {
+              padding: 1rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card label {
+              font-size: 0.7rem !important;
+              margin-bottom: 0.4rem !important;
+            }
+
+            /* ID and Password display */
+            .credential-card span[style*="fontSize: '1.5rem'"] {
+              font-size: 1rem !important;
+              letter-spacing: 0.5px !important;
+              padding: 0.75rem 1rem !important;
+            }
+
+            /* Success icon */
+            .credential-card > div[style*="width: '80px'"] {
+              width: 50px !important;
+              height: 50px !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card > div[style*="width: '80px'"] span {
+              font-size: 1.75rem !important;
+            }
+
+            /* Corner decorations */
+            .credential-card > div[style*="width: '120px'"] {
+              width: 50px !important;
+              height: 50px !important;
+            }
+
+            /* Screenshot warning */
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
+              padding: 0.875rem 1rem !important;
+              gap: 0.5rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
+              font-size: 1.25rem !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:first-of-type {
+              font-size: 0.8rem !important;
+              line-height: 1.4 !important;
+            }
+
+            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:last-of-type {
+              font-size: 0.75rem !important;
+            }
+
+            /* Continue button */
+            .credential-card button {
+              font-size: 0.95rem !important;
+              padding: 0.8rem !important;
+              border-radius: 10px !important;
+            }
+
+            /* General spacing adjustments */
+            .credential-card > div {
+              margin-bottom: 0.75rem !important;
             }
           }
 

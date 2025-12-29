@@ -2279,7 +2279,7 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%'}}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center'}}>
           {isLoggedIn ? (
             <button 
               className="register-events-btn"
@@ -2333,9 +2333,13 @@ const Dashboard: React.FC = () => {
             }
             
             /* Center Register/Login button on mobile */
+            .hero-action-buttons {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+            }
+            
             .register-login-btn {
-              margin-left: 50% !important;
-              transform: translateX(-50%) !important;
               margin-top: -80px !important;
             }
             
@@ -3399,17 +3403,28 @@ const Dashboard: React.FC = () => {
                 {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
                   const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
                   const card = spotLightCards[cardIndex];
-                  return (
+                  
+                  // Image mapping for spotlight events
+                  const spotlightImageMap: { [key: string]: string } = {
+                    "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
+                    "Mahotsav Got Talent": "events/gaming.avif"
+                  };
+                  
+                  const imagePath = spotlightImageMap[card.title];
+                  
+                  return imagePath ? (
                     <div key={cardIndex} className="indoor-sport-card">
-                      <div className="indoor-sport-card-poster-background">
-                        <span className="indoor-sport-poster-placeholder-text">SPOTLIGHT POSTER</span>
-                      </div>
+                      <img 
+                        src={`${import.meta.env.BASE_URL}${imagePath}`}
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                      />
                       <div className="indoor-sport-card-title-overlay">
                         <h3>{card.title}</h3>
                         {card.subtitle && <h4>{card.subtitle}</h4>}
                       </div>
                     </div>
-                  );
+                  ) : null;
                 })}
               </div>
               <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>?</button>
@@ -3997,7 +4012,7 @@ const Dashboard: React.FC = () => {
             /* Side menu flowers - barely visible in mobile */
             .side-menu-flower-top,
             .side-menu-flower-bottom {
-              opacity: 0.01 !important;
+              opacity: 0.08 !important;
             }
 
             /* Hero section improvements */
@@ -4035,14 +4050,32 @@ const Dashboard: React.FC = () => {
             }
           }
 
+          /* Tablet styles for flowers */
+          @media (min-width: 640px) and (max-width: 1023px) {
+            .side-menu-flower-top,
+            .side-menu-flower-bottom {
+              opacity: 0.10 !important;
+            }
+          }
+
           /* Desktop-only styles for flowers */
+          @media (min-width: 1024px) {
+            .side-menu-flower-top {
+              opacity: 0.15 !important;
+            }
+
+            .side-menu-flower-bottom {
+              opacity: 0.15 !important;
+            }
+          }
+
+          /* Large desktop styles for flowers */
           @media (min-width: 769px) {
             .side-menu-flower-top {
               top: -16rem !important;
               right: -16rem !important;
               width: 37.5rem !important;
               height: 37.5rem !important;
-              opacity: 0.25 !important;
             }
 
             .side-menu-flower-bottom {
@@ -4050,7 +4083,6 @@ const Dashboard: React.FC = () => {
               left: -16rem !important;
               width: 37.5rem !important;
               height: 37.5rem !important;
-              opacity: 0.25 !important;
             }
 
             /* Desktop positioning for Register button */
@@ -4222,12 +4254,11 @@ const Dashboard: React.FC = () => {
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
-            gap: '20px',
+            gap: '30px',
             pointerEvents: 'auto',
             zIndex: 15,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s',
-            marginBottom: '50px'
+            transition: 'opacity 1.5s ease 0.5s'
           }}>
             {(['2023', '2024', '2025'] as const).map(year => (
               <button 
@@ -4259,14 +4290,13 @@ const Dashboard: React.FC = () => {
           {/* Video card - centered between flowers */}
           <div className="throwback-video-wrapper" style={{
             position: 'absolute',
-            top: '50%',
+            top: window.innerWidth >= 768 ? 'calc(50% + 40px)' : 'calc(50% + 25px)',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s',
-            marginTop: '50px'
+            transition: 'opacity 1.5s ease 0.5s'
           }}>
               {/* Video card */}
               <div 
@@ -4389,7 +4419,7 @@ const Dashboard: React.FC = () => {
                 letterSpacing: '0.5px',
                 whiteSpace: 'nowrap',
                 textAlign: 'center',
-                fontFamily: 'BackToSchool, sans-serif'
+                fontFamily: 'BakeryRoastDemo, sans-serif'
               }}>
                 {unit.charAt(0).toUpperCase() + unit.slice(1)}
               </div>
@@ -6245,23 +6275,45 @@ const Dashboard: React.FC = () => {
                       const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                       const userGender = userProfileData.gender?.toLowerCase();
+                      const userCollege = userProfileData.college || '';
+                      
+                      // Check if user is from one of the special Vignan colleges
+                      const specialVignanColleges = [
+                        'Vignan Pharmacy College',
+                        "Vignan's Foundation of Science, Technology & Research",
+                        "Vignan's Lara Institute of Technology & Science"
+                      ];
+                      
+                      const isSpecialVignanStudent = specialVignanColleges.some(college => 
+                        userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                        college.toLowerCase().includes(userCollege.toLowerCase())
+                      );
                       
                       let fee = 0;
-                      if (userGender === 'male') {
+                      
+                      // If from special Vignan colleges, fee is always 150
+                      if (isSpecialVignanStudent) {
                         if (hasSports || hasCulturals) {
-                          fee = 350; // Same fee regardless of selection
-                        }
-                      } else if (userGender === 'female') {
-                        if (hasSports && hasCulturals) {
-                          fee = 350; // Both
-                        } else if (hasSports) {
-                          fee = 350; // Sports only
-                        } else if (hasCulturals) {
-                          fee = 250; // Culturals only
+                          fee = 150;
                         }
                       } else {
-                        if (hasSports || hasCulturals) {
-                          fee = 350;
+                        // Regular fee calculation
+                        if (userGender === 'male') {
+                          if (hasSports || hasCulturals) {
+                            fee = 350; // Same fee regardless of selection
+                          }
+                        } else if (userGender === 'female') {
+                          if (hasSports && hasCulturals) {
+                            fee = 350; // Both
+                          } else if (hasSports) {
+                            fee = 350; // Sports only
+                          } else if (hasCulturals) {
+                            fee = 250; // Culturals only
+                          }
+                        } else {
+                          if (hasSports || hasCulturals) {
+                            fee = 350;
+                          }
                         }
                       }
                       
@@ -6289,23 +6341,45 @@ const Dashboard: React.FC = () => {
                   const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                   const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                   const userGender = userProfileData.gender?.toLowerCase();
+                  const userCollege = userProfileData.college || '';
+                  
+                  // Check if user is from one of the special Vignan colleges
+                  const specialVignanColleges = [
+                    'Vignan Pharmacy College',
+                    "Vignan's Foundation of Science, Technology & Research",
+                    "Vignan's Lara Institute of Technology & Science"
+                  ];
+                  
+                  const isSpecialVignanStudent = specialVignanColleges.some(college => 
+                    userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                    college.toLowerCase().includes(userCollege.toLowerCase())
+                  );
                   
                   let fee = 0;
-                  if (userGender === 'male') {
+                  
+                  // If from special Vignan colleges, fee is always 150
+                  if (isSpecialVignanStudent) {
                     if (hasSports || hasCulturals) {
-                      fee = 350; // Same fee regardless of selection
-                    }
-                  } else if (userGender === 'female') {
-                    if (hasSports && hasCulturals) {
-                      fee = 350; // Both
-                    } else if (hasSports) {
-                      fee = 350; // Sports only
-                    } else if (hasCulturals) {
-                      fee = 250; // Culturals only
+                      fee = 150;
                     }
                   } else {
-                    if (hasSports || hasCulturals) {
-                      fee = 350;
+                    // Regular fee calculation
+                    if (userGender === 'male') {
+                      if (hasSports || hasCulturals) {
+                        fee = 350; // Same fee regardless of selection
+                      }
+                    } else if (userGender === 'female') {
+                      if (hasSports && hasCulturals) {
+                        fee = 350; // Both
+                      } else if (hasSports) {
+                        fee = 350; // Sports only
+                      } else if (hasCulturals) {
+                        fee = 250; // Culturals only
+                      }
+                    } else {
+                      if (hasSports || hasCulturals) {
+                        fee = 350;
+                      }
                     }
                   }
                   

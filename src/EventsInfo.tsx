@@ -169,8 +169,7 @@ const EventsInfo: React.FC = () => {
   ];
 
   const spotLightCards = [
-    { title: "Mr. Mahotsav", subtitle: "" },
-    { title: "Ms. Mahotsav", subtitle: "" },
+    { title: "Mr. and Ms. Mahotsav", subtitle: "" },
     { title: "Mahotsav Got Talent", subtitle: "" }
   ];
 
@@ -705,7 +704,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .category-card-title {
-            font-family: 'BackToSchool, sans-serif';
+            font-family: 'BakeryRoastDemo, sans-serif';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
 
@@ -1321,6 +1320,22 @@ const EventsInfo: React.FC = () => {
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
+                          {card.title === "Dance" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}events/Dance.avif`}
+                              alt="Dance"
+                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
+                          {card.title === "Literature" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}events/literature.avif`}
+                              alt="Literature"
+                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
                             <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
                               {card.title}
@@ -1673,25 +1688,43 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
-                    {spotLightCards.map((card, index) => (
-                      <div 
-                        key={index} 
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                    {spotLightCards.map((card, index) => {
+                      // Map spotlight card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
+                        "Mahotsav Got Talent": "events/gaming.avif"
+                      };
+                      
+                      return (
+                        <div 
+                          key={index} 
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                            />
+                          )}
+                          {!imageMap[card.title] && (
+                            <div className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300">
+                              <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                                <h2 className="subcategory-card-title">
+                                  {card.title}
+                                </h2>
+                                {card.subtitle && (
+                                  <p className="subcategory-card-subtitle">
+                                    {card.subtitle}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

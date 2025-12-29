@@ -150,7 +150,7 @@ const Collaboration: React.FC = () => {
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'BackToSchool', sans-serif;
+            font-family: 'BakeryRoastDemo', sans-serif;
           }
 
           .year-tab:hover {

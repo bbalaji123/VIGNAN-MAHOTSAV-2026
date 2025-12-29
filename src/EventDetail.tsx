@@ -2243,7 +2243,7 @@ const EventDetail: React.FC = () => {
               {eventData.rules.map((rule, index) => (
                 <li key={index} className="flex items-start gap-2 sm:gap-4">
                   <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BackToSchool, sans-serif', letterSpacing: '0.02em'}}>
+                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BakeryRoastDemo, sans-serif', letterSpacing: '0.02em'}}>
                     {rule}
                   </span>
                 </li>
@@ -2260,23 +2260,23 @@ const EventDetail: React.FC = () => {
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>First</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.first}</span>
+                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>First</span>
+                  <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.first}</span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Second</span>
-                  <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.second}</span>
+                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Second</span>
+                  <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
                   <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Third</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.third}</span>
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Third</span>
+                    <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
                   <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BackToSchool, sans-serif'}}>Fourth</span>
-                    <span className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>- {eventData.prizes.fourth}</span>
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Fourth</span>
+                    <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>
@@ -2298,7 +2298,7 @@ const EventDetail: React.FC = () => {
                   
                   return (
                     <div key={index} className="text-white text-xs sm:text-sm md:text-base">
-                      <div className="font-semibold" style={{fontFamily: 'BackToSchool, sans-serif'}}>
+                      <div className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>
                         {prefix} {cleanName}: <a href={`tel:${formattedPhone.replace(/\s/g, '')}`} style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>{formattedPhone}</a>
                       </div>
                     </div>

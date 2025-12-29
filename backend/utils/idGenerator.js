@@ -1,5 +1,16 @@
+import mongoose from 'mongoose';
 import Registration from '../models/Registration.js';
 import EventRegistration from '../models/EventRegistration.js';
+
+// Counter schema for atomic, sequential ID generation
+const counterSchema = new mongoose.Schema({
+  _id: { type: String, required: true },
+  seq: { type: Number, default: 0 }
+}, {
+  collection: 'counters'
+});
+
+const Counter = mongoose.models.Counter || mongoose.model('Counter', counterSchema);
 
 // In-memory queue to serialize ID generation requests
 class IdGenerationQueue {
@@ -43,27 +54,20 @@ const userIdQueue = new IdGenerationQueue();
 const registrationIdQueue = new IdGenerationQueue();
 const teamIdQueue = new IdGenerationQueue();
 
-// Helper function to generate next user ID (queued)
+// Helper function to generate next user ID (queued + atomic counter in DB)
 async function generateUserId() {
   return userIdQueue.enqueue(async () => {
     try {
-      // Find the last registration sorted by creation time
-      const lastRegistration = await Registration.findOne()
-        .sort({ createdAt: -1 })
-        .select('userId');
-      
-      if (!lastRegistration || !lastRegistration.userId) {
-        // First user
-        return 'MH26000001';
-      }
-      
-      // Extract the number from the last userId (e.g., "MH26000001" -> 1)
-      const lastNumber = parseInt(lastRegistration.userId.substring(4));
-      const nextNumber = lastNumber + 1;
-      
-      // Format with leading zeros (e.g., 2 -> "MH26000002")
+      // Atomically increment a dedicated counter in MongoDB
+      const counter = await Counter.findOneAndUpdate(
+        { _id: 'userId' },
+        { $inc: { seq: 1 } },
+        { new: true, upsert: true }
+      );
+
+      const nextNumber = counter.seq;
       const nextUserId = `MH26${nextNumber.toString().padStart(6, '0')}`;
-      
+
       return nextUserId;
     } catch (error) {
       console.error('Error generating user ID:', error);

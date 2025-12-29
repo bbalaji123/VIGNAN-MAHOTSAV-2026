@@ -462,15 +462,34 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
-    // Replace the entire registeredEvents array with new events
-    participant.registeredEvents = events.map(event => ({
-      eventName: event.eventName,
-      eventType: event.eventType,
-      category: event.category,
-      description: event.description,
-      fee: event.fee,
-      registeredAt: new Date()
-    }));
+    // Deduplicate events by (eventName, eventType, category) to avoid duplicates
+    const uniqueKeySet = new Set();
+    const normalizedEvents = [];
+
+    for (const event of events) {
+      if (!event || !event.eventName) continue;
+
+      const key = [
+        String(event.eventName).trim().toLowerCase(),
+        String(event.eventType || '').trim().toLowerCase(),
+        String(event.category || '').trim().toLowerCase()
+      ].join('|');
+
+      if (uniqueKeySet.has(key)) continue;
+      uniqueKeySet.add(key);
+
+      normalizedEvents.push({
+        eventName: event.eventName,
+        eventType: event.eventType,
+        category: event.category,
+        description: event.description,
+        fee: event.fee,
+        registeredAt: new Date()
+      });
+    }
+
+    // Replace the entire registeredEvents array with de-duplicated events
+    participant.registeredEvents = normalizedEvents;
 
     await participant.save();
 

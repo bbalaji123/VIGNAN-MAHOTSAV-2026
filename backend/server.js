@@ -44,12 +44,13 @@ app.use(requestLogger);
 // CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:3000',
-    'http://localhost:5173', 
-    'http://localhost:5174',
-    'https://akash209581.github.io',
-    'https://mahotsav-1.onrender.com',
-    'https://your-vercel-app.vercel.app',
+     'http://localhost:3000',
+     'http://localhost:5173', 
+     'http://localhost:5174',
+     'https://akash209581.github.io',
+     'https://mahotsav-1.onrender.com',
+     'https://your-vercel-app.vercel.app',
+    'https://vignanmahotsav.in:5000/api',
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,

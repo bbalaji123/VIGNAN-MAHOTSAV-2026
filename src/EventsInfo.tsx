@@ -53,7 +53,6 @@ const EventsInfo: React.FC = () => {
   ];
 
   const mensTeamSportsCards = [
-    { title: "Cricket Championship", subtitle: "(13+2)*" },
     { title: "Volley ball", subtitle: "(6+4)*" },
     { title: "Basket ball", subtitle: "(5+5)*" },
     { title: "Kabaddi", subtitle: "(7+3)*" },
@@ -223,7 +222,6 @@ const EventsInfo: React.FC = () => {
       "Table Tennis": "Table Tennis",
       "Traditional Yogasana": "Traditional Yogasana",
       "Taekwondo": "Taekwondo",
-      "Cricket Championship": "Cricket Championship",
       "Tennikoit": "Tennikoit",
       
       // Cultural events - Dance
@@ -1169,7 +1167,6 @@ const EventsInfo: React.FC = () => {
                     {mensTeamSportsCards.map((card, index) => {
                       // Map men's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Cricket Championship": "events/web- cricket.avif",
                         "Volley ball": "events/volley ball.avif",
                         "Basket ball": "events/basket ball.avif",
                         "Kabaddi": "events/kabbadi.avif",

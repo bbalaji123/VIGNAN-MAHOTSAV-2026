@@ -548,4 +548,24 @@ router.get('/my-registrations/:userId', async (req, res) => {
   }
 });
 
+// Reset counter (for testing/cleanup - remove in production)
+router.post('/reset-counter', async (req, res) => {
+  try {
+    const mongoose = (await import('mongoose')).default;
+    await mongoose.connection.db.collection('counters').deleteOne({ _id: 'userId' });
+    console.log('✅ Counter reset successfully');
+    res.status(200).json({
+      success: true,
+      message: 'Counter reset successfully. Next user will be MH26000001'
+    });
+  } catch (error) {
+    console.error('Reset counter error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error resetting counter',
+      error: error.message
+    });
+  }
+});
+
 export default router;

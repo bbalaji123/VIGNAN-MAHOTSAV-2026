@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
   });
 
   const eventInfoCards = [
-    { title: "SPORTS", description: "Competitive sports events including Cricket, Football, Basketball, Badminton, and more." },
+    { title: "SPORTS", description: "Competitive sports events including Football, Basketball, Badminton, and more." },
     { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
     { title: "PARA SPORTS", description: "Inclusive para sports events designed for participants with special abilities." }
   ];
@@ -533,7 +533,6 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'female' || event.gender === 'mixed'
       );
-      console.log('?? Female user - showing', filtered.length, 'events (female + mixed only)');
       return filtered;
     }
     
@@ -542,7 +541,6 @@ const Dashboard: React.FC = () => {
       const filtered = events.filter(event => 
         event.gender === 'male' || event.gender === 'mixed'
       );
-      console.log('?? Male user - showing', filtered.length, 'events (male + mixed only)');
       return filtered;
     }
     
@@ -671,7 +669,6 @@ const Dashboard: React.FC = () => {
   const getTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
     return filteredEvents.filter(event => 
-      event.eventName?.toLowerCase().includes('cricket') ||
       event.eventName?.toLowerCase().includes('football') ||
       event.eventName?.toLowerCase().includes('volleyball') ||
       event.eventName?.toLowerCase().includes('basketball') ||
@@ -1030,37 +1027,25 @@ const Dashboard: React.FC = () => {
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
     setLoadingEvents(true);
     try {
-        // Test API connection first
-        const testResponse = await fetch('/api/events').catch(() => null);
-        if (!testResponse) {
-          console.warn('?? Backend server may not be running. Using production API...');
-        }
-
         // Fetch sports events with gender filter if user is logged in
         const sportsResponse = await getEventsByType('sports', userGender);
         if (sportsResponse.success && sportsResponse.data) {
           setSportsEvents(sportsResponse.data);
-        } else {
-          console.warn('?? No sports events loaded:', sportsResponse.message);
         }
 
         // Fetch culturals events with gender filter if user is logged in
         const culturalsResponse = await getEventsByType('culturals', userGender);
         if (culturalsResponse.success && culturalsResponse.data) {
           setCulturalEvents(culturalsResponse.data);
-        } else {
-          console.warn('?? No cultural events loaded:', culturalsResponse.message);
         }
 
         // Fetch para sports events with gender filter if user is logged in
         const paraSportsResponse = await getEventsByType('parasports', userGender);
         if (paraSportsResponse.success && paraSportsResponse.data) {
           setParaSportsEvents(paraSportsResponse.data);
-        } else {
-          console.warn('?? No para sports events loaded:', paraSportsResponse.message || paraSportsResponse.error);
         }
       } catch (error) {
-        console.error('? Error fetching events:', error);
+        // Silently handle errors
       } finally {
         setLoadingEvents(false);
       }
@@ -1086,7 +1071,7 @@ const Dashboard: React.FC = () => {
         const data = await response.json();
         setRegistrationEvents(data);
       } catch (error) {
-        console.error('Error loading registration events:', error);
+        // Silent error handling
       }
     };
     loadRegistrationEvents();
@@ -1116,7 +1101,6 @@ const Dashboard: React.FC = () => {
             }
           }
         } catch (error) {
-          console.error('Error loading user events from database:', error);
           // Fallback to localStorage on error
           const storageKey = `myEvents_${userProfileData.userId}`;
           const savedEvents = localStorage.getItem(storageKey);
@@ -1125,7 +1109,7 @@ const Dashboard: React.FC = () => {
               const events = JSON.parse(savedEvents);
               setMyEvents(events);
             } catch (parseError) {
-              console.error('Error parsing saved events:', parseError);
+              // Silent error handling
             }
           }
         }
@@ -1463,12 +1447,6 @@ const Dashboard: React.FC = () => {
       'Football Championship': 'Football',
       'Football Tournament': 'Football',
       
-      // Cricket events
-      'Cricket Tournament - Men': 'Football', // Using similar team sport structure
-      'Cricket Tournament - Women': 'Football',
-      'Cricket Tournament': 'Football',
-      'Cricket Championship': 'Football',
-      
       // Kabaddi events
       'Kabaddi Tournament': 'Kabaddi',
       'Kabaddi Championship': 'Kabaddi',
@@ -1603,8 +1581,6 @@ const Dashboard: React.FC = () => {
     if (eventExists || eventName) {
       // Navigate to the new event detail page
       navigate(`/event/${encodeURIComponent(eventName)}`);
-    } else {
-      console.warn('No event details found for:', eventName);
     }
   };
 
@@ -1779,7 +1755,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error: unknown) {
-      console.error('Registration error:', error);
       setSubmitMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1849,7 +1824,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error: unknown) {
-      console.error('Password reset error:', error);
       setResetMessage({
         type: 'error',
         text: 'An error occurred. Please try again later.'
@@ -1953,7 +1927,6 @@ const Dashboard: React.FC = () => {
         setUserRegisteredEvents([]);
       }
     } catch (error) {
-      console.error('Error fetching profile data:', error);
       setUserRegisteredEvents([]);
     } finally {
       setIsLoadingProfile(false);
@@ -2017,7 +1990,6 @@ const Dashboard: React.FC = () => {
         alert(result.message || 'Failed to save events. Please try again.');
       }
     } catch (error) {
-      console.error('Error saving events:', error);
       alert('An error occurred while saving events.');
     }
   };
@@ -2044,8 +2016,6 @@ const Dashboard: React.FC = () => {
       if (result.success && result.data) {
         const { userId, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
         
-        console.log('Login data received:', { userId, name, email, userType, gender, branch, college, phone, dateOfBirth });
-        
         // Ensure all required fields are present
         if (!userId || !name || !email) {
           setLoginMessage({
@@ -2071,7 +2041,6 @@ const Dashboard: React.FC = () => {
           phone: phone,
           dateOfBirth: dateOfBirth
         };
-        console.log('Setting profile data:', profileData);
         setUserProfileData(profileData);
         
         setShowLoginModal(false);
@@ -2116,7 +2085,6 @@ const Dashboard: React.FC = () => {
             setUserRegisteredEvents([]);
           }
         } catch (error) {
-          console.error('Error fetching profile data:', error);
           setUserRegisteredEvents([]);
         } finally {
           setIsLoadingProfile(false);
@@ -2128,7 +2096,6 @@ const Dashboard: React.FC = () => {
         });
       }
     } catch (error) {
-      console.error('Login error:', error);
       setLoginMessage({
         type: 'error',
         text: 'An error occurred during login. Please try again.'
@@ -2165,14 +2132,6 @@ const Dashboard: React.FC = () => {
         phone: storedPhone || undefined,
         dateOfBirth: storedDOB || undefined
       };
-      console.log('Loading profile data from localStorage:', profileData);
-      console.log('Raw localStorage values:', {
-        branch: storedBranch,
-        college: storedCollege,
-        phone: storedPhone,
-        dob: storedDOB,
-        gender: storedUserGender
-      });
       setUserProfileData(profileData);
       
       // Fetch user's saved events from database
@@ -2191,7 +2150,7 @@ const Dashboard: React.FC = () => {
         return savedEventIds; // Return the event IDs for immediate use
       }
     } catch (error) {
-      console.error('Error fetching saved events:', error);
+      // Silent error handling
     }
     return new Set<string>(); // Return empty set if failed
   };
@@ -2853,9 +2812,11 @@ const Dashboard: React.FC = () => {
                       className="indoor-sport-card"
                       onClick={() => handleParaSportsClick(card.title)}
                     >
-                      <div className="indoor-sport-card-poster-background">
-                        <span className="indoor-sport-poster-placeholder-text">SPORTS POSTER</span>
-                      </div>
+                      <img 
+                        src="events/para.avif"
+                        alt={card.title}
+                        className="w-full h-full object-cover"
+                      />
                       <div className="indoor-sport-card-title-overlay">
                         <h3>{card.title}</h3>
                         {card.subtitle && (
@@ -3412,10 +3373,15 @@ const Dashboard: React.FC = () => {
                   
                   const imagePath = spotlightImageMap[card.title];
                   
-                  return imagePath ? (
+                  // Only render if image path exists
+                  if (!imagePath) return null;
+                  
+                  const baseUrl = import.meta.env.BASE_URL || '/';
+                  
+                  return (
                     <div key={cardIndex} className="indoor-sport-card">
                       <img 
-                        src={`${import.meta.env.BASE_URL}${imagePath}`}
+                        src={`${baseUrl}${imagePath}`}
                         alt={card.title}
                         className="w-full h-full object-cover"
                       />
@@ -3424,7 +3390,7 @@ const Dashboard: React.FC = () => {
                         {card.subtitle && <h4>{card.subtitle}</h4>}
                       </div>
                     </div>
-                  ) : null;
+                  );
                 })}
               </div>
               <button className="indoor-sports-nav-btn next" onClick={nextSpotLightSlide}>?</button>
@@ -3998,11 +3964,20 @@ const Dashboard: React.FC = () => {
             /* Year buttons - add more vertical spacing */
             .throwback-year-buttons {
               top: 30px !important;
+              flex-wrap: wrap !important;
+              gap: 8px !important;
             }
 
             /* Video wrapper - increase separation from buttons */
             .throwback-video-wrapper {
-              top: calc(50% + 50px) !important;
+              top: calc(50% + 120px) !important;
+              width: calc(100% - 40px) !important;
+              max-width: 500px !important;
+            }
+
+            .throwback-video-card {
+              width: 100% !important;
+              aspect-ratio: 16/9 !important;
             }
 
             /* Center Register button in mobile */
@@ -4454,13 +4429,15 @@ const Dashboard: React.FC = () => {
           {/* Video card - centered between flowers */}
           <div className="throwback-video-wrapper" style={{
             position: 'absolute',
-            top: window.innerWidth >= 768 ? 'calc(50% + 40px)' : 'calc(50% + 25px)',
+            top: window.innerWidth >= 768 ? 'calc(50% + 40px)' : 'calc(50% + 120px)',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             zIndex: 5,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s'
+            transition: 'opacity 1.5s ease 0.5s',
+            width: window.innerWidth >= 768 ? 'auto' : 'calc(100% - 40px)',
+            maxWidth: window.innerWidth >= 768 ? 'none' : '500px'
           }}>
               {/* Video card */}
               <div 

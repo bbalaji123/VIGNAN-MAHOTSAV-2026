@@ -19,12 +19,10 @@ const getApiBaseUrl = () => {
   return DEVELOPMENT_API;
 };
 
-const API_BASE_URL = getApiBaseUrl();
+export const API_BASE_URL = getApiBaseUrl();
 
-export const API_BASE_URL = (envApiBase && envApiBase.length > 0
-  ? envApiBase
-  : '/api'
-).replace(/\/+$/, '');
+// Log current API configuration (for debugging)
+console.log('🌐 API Base URL:', API_BASE_URL);
 
 export interface SignupData {
   name: string;

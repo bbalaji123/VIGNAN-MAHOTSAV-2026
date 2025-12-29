@@ -43,44 +43,50 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
   return (
     <>
       {/* Floating Flower - Top Right */}
-      <div className="fixed pointer-events-none side-menu-flower-top" style={{
-        top: window.innerWidth < 640 ? '-6rem' : '-8rem',
-        right: window.innerWidth < 640 ? '-6rem' : '-8rem',
-        width: window.innerWidth < 640 ? '12rem' : '16rem',
-        height: window.innerWidth < 640 ? '12rem' : '16rem',
-        zIndex: 0
-      }}>
-        <FlowerComponent 
-          size="100%"
-          sunSize="50%"
-          moonSize="43%"
-          sunTop="25%"
-          sunLeft="25%"
-          moonTop="28.5%"
-          moonLeft="28.5%"
-          showPetalRotation={true}
-        />
-      </div>
+      {window.innerWidth >= 640 && (
+        <div className="fixed pointer-events-none side-menu-flower-top" style={{
+          top: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          right: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          width: window.innerWidth < 640 ? '12rem' : '16rem',
+          height: window.innerWidth < 640 ? '12rem' : '16rem',
+          zIndex: 0
+        }}>
+          <FlowerComponent 
+            size="100%"
+            sunSize="50%"
+            moonSize="43%"
+            sunTop="25%"
+            sunLeft="25%"
+            moonTop="28.5%"
+            moonLeft="28.5%"
+            showPetalRotation={true}
+            opacity={window.innerWidth < 640 ? 0.01 : window.innerWidth < 1024 ? 0.02 : 0.04}
+          />
+        </div>
+      )}
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed pointer-events-none side-menu-flower-bottom" style={{
-        bottom: window.innerWidth < 640 ? '-6rem' : '-8rem',
-        left: window.innerWidth < 640 ? '-6rem' : '-8rem',
-        width: window.innerWidth < 640 ? '12rem' : '16rem',
-        height: window.innerWidth < 640 ? '12rem' : '16rem',
-        zIndex: 0
-      }}>
-        <FlowerComponent 
-          size="100%"
-          sunSize="50%"
-          moonSize="43%"
-          sunTop="25%"
-          sunLeft="25%"
-          moonTop="28.5%"
-          moonLeft="28.5%"
-          showPetalRotation={true}
-        />
-      </div>
+      {window.innerWidth >= 640 && (
+        <div className="fixed pointer-events-none side-menu-flower-bottom" style={{
+          bottom: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          left: window.innerWidth < 640 ? '-6rem' : '-8rem',
+          width: window.innerWidth < 640 ? '12rem' : '16rem',
+          height: window.innerWidth < 640 ? '12rem' : '16rem',
+          zIndex: 0
+        }}>
+          <FlowerComponent 
+            size="100%"
+            sunSize="50%"
+            moonSize="43%"
+            sunTop="25%"
+            sunLeft="25%"
+            moonTop="28.5%"
+            moonLeft="28.5%"
+            showPetalRotation={true}
+            opacity={window.innerWidth < 640 ? 0.01 : window.innerWidth < 1024 ? 0.02 : 0.04}
+          />
+        </div>
+      )}
 
       {/* Menu toggle button */}
       <div

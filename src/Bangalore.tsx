@@ -181,7 +181,7 @@ const Bangalore: React.FC = () => {
           </div>
 
           {/* Hosting Partner */}
-          <div className="bangalore-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
+          <div className="Bangalore-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:flex-shrink-0" style={{ height: '400px' }}>
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>

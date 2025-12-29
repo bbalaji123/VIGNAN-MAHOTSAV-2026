@@ -424,16 +424,30 @@
   .ca-table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 0 20px;
   }
 
   .ca-referrals-table {
-    min-width: 600px;
+    min-width: 100%;
+    font-size: 12px;
   }
 
   .ca-referrals-table th,
   .ca-referrals-table td {
-    padding: 10px;
-    font-size: 14px;
+    padding: 8px 4px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .ca-referrals-table th:first-child,
+  .ca-referrals-table td:first-child {
+    padding-left: 8px;
+  }
+
+  .ca-status-badge {
+    font-size: 10px;
+    padding: 4px 8px;
   }
 }
 

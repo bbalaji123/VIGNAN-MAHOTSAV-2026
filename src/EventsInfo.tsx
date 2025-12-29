@@ -77,6 +77,7 @@ const EventsInfo: React.FC = () => {
   const culturalsCards = [
     { title: "Music", subtitle: "Singing & Instruments" },
     { title: "Theatre", subtitle: "Drama & Cinematography" },
+    { title: "Literature", subtitle: "Writing & Oratory" },
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
     { title: "Spot Light", subtitle: "Special Events" },
@@ -889,13 +890,8 @@ const EventsInfo: React.FC = () => {
           </div>
 
           {/* Mobile layout - Logo and Back button centered, stacked */}
-          <div className="md:hidden flex flex-col items-center gap-3 pb-4">
-            <img 
-              src={`${import.meta.env.BASE_URL}image.avif`}
-              alt="Vignan Mahotsav" 
-              className="events-logo"
-            />
-            <div className="events-back-button-container">
+          <div className="md:hidden flex flex-col items-center gap-3 pb-4 w-full relative">
+            <div className="absolute left-4 top-0">
               <BackButton 
                 className="!static !top-auto !left-auto"
                 onClick={() => {
@@ -929,7 +925,12 @@ const EventsInfo: React.FC = () => {
               }
             }} />
             </div>
-            <h1 className="events-title events-page-heading text-center" style={{ fontSize: '2.5rem', marginTop: '50px' }}>
+            <img 
+              src={`${import.meta.env.BASE_URL}image.avif`}
+              alt="Vignan Mahotsav" 
+              className="events-logo mx-auto mt-12"
+            />
+            <h1 className="events-title events-page-heading text-center w-full" style={{ fontSize: '2.5rem', marginTop: '20px', wordBreak: 'break-word', overflowWrap: 'break-word', maxWidth: '100%', padding: '0 10px' }}>
               {showIndoorSports ? 'Indoor Sports' : 
                showWomensIndoorSports ? "Women's Indoor Sports" : 
                showMensTeamSports ? "Men's Team Field Sports" : 

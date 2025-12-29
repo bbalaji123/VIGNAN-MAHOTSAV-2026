@@ -23,6 +23,18 @@ export const galleryImages: string[] = [
   'https://res.cloudinary.com/dctuev0mm/image/upload/v1766932886/DSC00450_rqlgbm.avif'
 ];
 
+// Preload and cache images
+const imageCache = new Map<string, HTMLImageElement>();
+const preloadImages = (urls: string[]) => {
+  urls.forEach(url => {
+    if (!imageCache.has(url)) {
+      const img = new Image();
+      img.src = url;
+      imageCache.set(url, img);
+    }
+  });
+};
+
 interface GalleryProps {
   onPhotoClick: (row: number, index: number) => void;
   registerSection: (id: string, element: HTMLElement | null) => void;
@@ -31,7 +43,18 @@ interface GalleryProps {
 const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [animate, setAnimate] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const interactionTimer = useRef<number | null>(null);
+
+  // Preload images once on component mount
+  useEffect(() => {
+    const cachedImages = sessionStorage.getItem('galleryImagesLoaded');
+    if (!cachedImages) {
+      preloadImages(galleryImages);
+      sessionStorage.setItem('galleryImagesLoaded', 'true');
+    }
+    setImagesLoaded(true);
+  }, []);
 
   /* ▶ Start animation only when section is visible */
   useEffect(() => {
@@ -100,10 +123,14 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
                 <img
                   src={img}
                   alt="gallery"
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  loading={index < 6 ? 'eager' : 'lazy'}
                   decoding="async"
                   width={280}
                   height={180}
+                  style={{
+                    objectFit: 'cover',
+                    willChange: 'auto'
+                  }}
                   onLoad={(e) => {
                     const card = e.currentTarget.parentElement;
                     if (card) card.classList.add('loaded');

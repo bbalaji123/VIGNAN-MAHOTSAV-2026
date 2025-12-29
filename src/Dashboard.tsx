@@ -2360,7 +2360,7 @@ const Dashboard: React.FC = () => {
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -2394,7 +2394,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] z-1" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -left-32 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ bottom: '-150px', border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent 
                 size="100%"
@@ -3961,16 +3961,24 @@ const Dashboard: React.FC = () => {
               gap: 10px;
             }
 
-            /* Year buttons - add more vertical spacing */
+            /* Year buttons - keep in single row on mobile, above video */
             .throwback-year-buttons {
-              top: 30px !important;
-              flex-wrap: wrap !important;
-              gap: 8px !important;
+              top: calc(50% - 140px) !important;
+              flex-wrap: nowrap !important;
+              gap: 10px !important;
+              padding: 0 10px !important;
+              justify-content: center !important;
             }
 
-            /* Video wrapper - increase separation from buttons */
+            .throwback-year-buttons button {
+              padding: 6px 14px !important;
+              font-size: 0.85rem !important;
+              flex-shrink: 0 !important;
+            }
+
+            /* Video wrapper - center between flowers */
             .throwback-video-wrapper {
-              top: calc(50% + 120px) !important;
+              top: 50% !important;
               width: calc(100% - 40px) !important;
               max-width: 500px !important;
             }
@@ -3978,6 +3986,12 @@ const Dashboard: React.FC = () => {
             .throwback-video-card {
               width: 100% !important;
               aspect-ratio: 16/9 !important;
+              height: auto !important;
+            }
+
+            .throwback-video-card iframe {
+              position: relative !important;
+              height: 100% !important;
             }
 
             /* Center Register button in mobile */
@@ -3994,10 +4008,10 @@ const Dashboard: React.FC = () => {
               padding: 1.5rem !important;
             }
 
-            /* Side menu flowers - barely visible in mobile */
+            /* Side menu flowers - hide completely on mobile */
             .side-menu-flower-top,
             .side-menu-flower-bottom {
-              opacity: 0.08 !important;
+              display: none !important;
             }
 
             /* Hero section improvements */
@@ -4193,18 +4207,21 @@ const Dashboard: React.FC = () => {
           @media (min-width: 640px) and (max-width: 1023px) {
             .side-menu-flower-top,
             .side-menu-flower-bottom {
-              opacity: 0.10 !important;
+              opacity: 0.02 !important;
+              filter: blur(1.5px) !important;
             }
           }
 
           /* Desktop-only styles for flowers */
           @media (min-width: 1024px) {
             .side-menu-flower-top {
-              opacity: 0.15 !important;
+              opacity: 0.04 !important;
+              filter: blur(1px) !important;
             }
 
             .side-menu-flower-bottom {
-              opacity: 0.15 !important;
+              opacity: 0.04 !important;
+              filter: blur(1px) !important;
             }
           }
 
@@ -4294,8 +4311,10 @@ const Dashboard: React.FC = () => {
     marginBottom: 'clamp(30px, 5vh, 50px)',
     textAlign: 'center',
     fontFamily: 'Bradley Hand, cursive',
-    zIndex: 10,
-    position: 'relative'
+    zIndex: 100,
+    position: 'relative',
+    textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
+    letterSpacing: '2px'
   }}
 >
   Throwback
@@ -4389,15 +4408,17 @@ const Dashboard: React.FC = () => {
           {/* Year buttons - separate from video */}
           <div className="throwback-year-buttons" style={{
             position: 'absolute',
-            top: '40px',
+            top: window.innerWidth >= 768 ? '20px' : '40px',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
+            flexWrap: 'nowrap',
             gap: '30px',
             pointerEvents: 'auto',
             zIndex: 15,
             opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s'
+            transition: 'opacity 1.5s ease 0.5s',
+            justifyContent: 'center'
           }}>
             {(['2023', '2024', '2025'] as const).map(year => (
               <button 
@@ -4429,7 +4450,7 @@ const Dashboard: React.FC = () => {
           {/* Video card - centered between flowers */}
           <div className="throwback-video-wrapper" style={{
             position: 'absolute',
-            top: window.innerWidth >= 768 ? 'calc(50% + 40px)' : 'calc(50% + 120px)',
+            top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
@@ -4529,7 +4550,7 @@ const Dashboard: React.FC = () => {
         }}>
           {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
             <div key={unit} style={{
-              width: '85px',
+              width: window.innerWidth < 640 ? '70px' : '85px',
               height: '90px',
               display: 'flex',
               flexDirection: 'column',
@@ -4541,7 +4562,7 @@ const Dashboard: React.FC = () => {
                 style={{
                   width: '100%',
                   height: '60px',
-                  fontSize: '2.6rem',
+                  fontSize: window.innerWidth < 640 ? '2rem' : '2.6rem',
                   fontWeight: '800',
                   fontFamily: 'Poppins, sans-serif',
                   color: '#FBC02D',
@@ -4554,7 +4575,7 @@ const Dashboard: React.FC = () => {
                 {time[unit]}
               </div>
               <div style={{
-                fontSize: '1.5rem',
+                fontSize: window.innerWidth < 640 ? '0.9rem' : '1.5rem',
                 color: '#E0E0E0',
                 marginTop: '6px',
                 letterSpacing: '0.5px',

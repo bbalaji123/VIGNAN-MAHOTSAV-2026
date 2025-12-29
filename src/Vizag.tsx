@@ -148,22 +148,22 @@ const Vizag: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-1 sm:gap-2">
                     <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
-                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">I Prize :</div>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
                     <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
-                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">II Prize :</div>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
                     <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
-                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">III Prize :</div>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
                     <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
-                      <div className="font-semibold text-left text-xs sm:text-sm md:text-base">IV Prize :</div>
+                      <div className="font-semibold text-left text-[0.7rem] sm:text-sm md:text-base">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
                     </div>
@@ -181,7 +181,7 @@ const Vizag: React.FC = () => {
           </div>
 
           {/* Hosting Partner */}
-          <div className="Vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:mx-0 lg:flex-shrink-0" style={{ height: '400px' }}>
+          <div className="Vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:flex-shrink-0" style={{ height: '400px' }}>
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>

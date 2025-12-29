@@ -50,6 +50,8 @@ app.use(cors({
     'https://akash209581.github.io',
     'https://mahotsav-1.onrender.com',
     'https://your-vercel-app.vercel.app',
+    'https://vignanmahotsav.in',
+    
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,
@@ -68,8 +70,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api', registrationRoutes);
 app.use('/api', campusAmbassadorRoutes);
 
-// Health check route
-app.get('/health', (req, res) => {
+// Health check route - now under /api
+app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'healthy',
     uptime: process.uptime(),

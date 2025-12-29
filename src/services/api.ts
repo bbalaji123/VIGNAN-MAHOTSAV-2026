@@ -1,7 +1,7 @@
 // API Configuration - Automatically detects environment
 const getApiBaseUrl = () => {
-  // Production - Render backend URL
-  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
+  // Production - vignanmahotsav.in backend URL
+  const PRODUCTION_API = 'http://vignanmahotsav.in:5000/api';
   
   // Development
   const DEVELOPMENT_API = 'http://localhost:5000/api';

@@ -7,22 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
-
-// Get API base URL from environment
-const getApiBaseUrl = () => {
-  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
-  const DEVELOPMENT_API = 'http://localhost:5000/api';
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      return PRODUCTION_API;
-    }
-  }
-  return DEVELOPMENT_API;
-};
-
-const API_BASE_URL = getApiBaseUrl();
+import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -2813,8 +2798,10 @@ const Dashboard: React.FC = () => {
                       onClick={() => handleParaSportsClick(card.title)}
                     >
                       <img 
-                        src="events/para.avif"
+                        src="/events/para.avif"
                         alt={card.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       <div className="indoor-sport-card-title-overlay">

@@ -26,12 +26,14 @@ router.get('/', (req, res) => {
 ===================================================== */
 router.get('/health', (req, res) => {
   res.status(200).json({
-    status: 'healthy',
-    service: 'Vignan Mahotsav Backend',
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
-    memory: process.memoryUsage(),
-    nodeVersion: process.version
+    status: 'ok',
+    details: {
+      service: 'Vignan Mahotsav Backend',
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+      memory: process.memoryUsage(),
+      nodeVersion: process.version,
+    },
   });
 });
 

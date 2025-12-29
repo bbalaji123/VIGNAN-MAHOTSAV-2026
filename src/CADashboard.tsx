@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './CADashboard.css';
 import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
+import { API_BASE_URL } from './services/api';
 
 interface Referral {
   userId: string;
@@ -65,7 +66,6 @@ const CADashboard: React.FC = () => {
         console.log('Fetching dashboard for MCA ID:', mcaId);
         console.log('Using token:', token);
 
-        const API_BASE_URL = 'http://localhost:5000/api';
         const response = await fetch(`${API_BASE_URL}/campus-ambassador/dashboard/${mcaId}`, {
           headers: {
             'Authorization': `Bearer ${token}`

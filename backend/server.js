@@ -12,6 +12,7 @@ import { initializeQueue } from './utils/queue.js';
 // Routes
 import registrationRoutes from './routes/registration.js';
 import campusAmbassadorRoutes from './routes/campusAmbassador.js';
+import eventsRoutes from './routes/events.js';
 
 dotenv.config();
 
@@ -79,10 +80,11 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 /* =====================================================
-   API Routes
+  API Routes
 ===================================================== */
 app.use('/api', registrationRoutes);
 app.use('/api', campusAmbassadorRoutes);
+app.use('/api', eventsRoutes);
 
 /* =====================================================
    Root Route

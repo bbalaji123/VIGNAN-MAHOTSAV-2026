@@ -1111,6 +1111,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1148,6 +1150,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1186,6 +1190,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1223,6 +1229,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1356,6 +1364,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1395,6 +1405,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1432,6 +1444,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1473,6 +1487,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1513,6 +1529,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1549,6 +1567,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1586,6 +1606,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1622,6 +1644,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1686,6 +1710,8 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
+                              loading="lazy"
+                              decoding="async"
                             />
                           )}
                           {!imageMap[card.title] && (

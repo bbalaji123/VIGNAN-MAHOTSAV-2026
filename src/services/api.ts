@@ -1,27 +1,10 @@
-// API Configuration - Automatically detects environment
-const getApiBaseUrl = () => {
-  // Production - Render backend URL
-  const PRODUCTION_API = 'https://mahotsav-y08u.onrender.com/api';
-  
-  // Development
-  const DEVELOPMENT_API = 'http://localhost:5000/api';
-  
-  // Auto-detect environment
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    
-    // Check if running in production (GitHub Pages, Vercel, Netlify, Render, etc.)
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      return PRODUCTION_API;
-    }
-  }
-  
-  return DEVELOPMENT_API;
-};
+// API base URL – configured via environment, falls back to same-origin /api
+const envApiBase = import.meta.env.VITE_API_URL?.trim();
 
-const API_BASE_URL = getApiBaseUrl();
-
-// Log current API configuration (for debugging)
+export const API_BASE_URL = (envApiBase && envApiBase.length > 0
+  ? envApiBase
+  : '/api'
+).replace(/\/+$/, '');
 
 export interface SignupData {
   name: string;

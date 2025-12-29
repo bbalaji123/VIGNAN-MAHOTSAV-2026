@@ -184,3 +184,4 @@ For support, contact: support@vignanmahotsav.edu
     return false;
   }
 };
+// Deprecated: this file is intentionally left blank. Email sending has been removed from the backend.

@@ -49,24 +49,23 @@ app.use(
 app.use(compression());
 app.use(requestLogger);
 
-/* =====================================================
-   CORS (FIXED)
-===================================================== */
-app.use(
-  cors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'https://akash209581.github.io',
-      'https://vignanmahotsav.in', // ✅ FIXED
-      process.env.FRONTEND_URL,
-    ].filter(Boolean),
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+// CORS configuration
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173', 
+    'http://localhost:5174',
+    'https://akash209581.github.io',
+    'https://mahotsav-1.onrender.com',
+    'https://your-vercel-app.vercel.app',
+    'https://vignanmahotsav.in',
+    
+    process.env.FRONTEND_URL
+  ].filter(Boolean),
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 /* =====================================================
    Rate Limiting
@@ -86,9 +85,18 @@ app.use('/api', registrationRoutes);
 app.use('/api', campusAmbassadorRoutes);
 app.use('/api', eventsRoutes);
 
-/* =====================================================
-   Root Route
-===================================================== */
+// Health check route - now under /api
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'healthy',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    memory: process.memoryUsage(),
+    version: process.version
+  });
+});
+
+// Root route
 app.get('/', (req, res) => {
   res.json({
     message: 'Vignan Mahotsav 2025 API',

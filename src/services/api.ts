@@ -1,5 +1,25 @@
-// API base URL – configured via environment, falls back to same-origin /api
-const envApiBase = import.meta.env.VITE_API_URL?.trim();
+// API Configuration - Automatically detects environment
+const getApiBaseUrl = () => {
+  // Production - vignanmahotsav.in backend URL
+  const PRODUCTION_API = 'http://vignanmahotsav.in:5000/api';
+  
+  // Development
+  const DEVELOPMENT_API = 'http://localhost:5000/api';
+  
+  // Auto-detect environment
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    
+    // Check if running in production (GitHub Pages, Vercel, Netlify, Render, etc.)
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+      return PRODUCTION_API;
+    }
+  }
+  
+  return DEVELOPMENT_API;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export const API_BASE_URL = (envApiBase && envApiBase.length > 0
   ? envApiBase

@@ -77,9 +77,7 @@ const EventsInfo: React.FC = () => {
 
   const culturalsCards = [
     { title: "Music", subtitle: "Singing & Instruments" },
-    { title: "Dance", subtitle: "Classical & Western" },
     { title: "Theatre", subtitle: "Drama & Cinematography" },
-    { title: "Literature", subtitle: "Poetry & Writing" },
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
     { title: "Spot Light", subtitle: "Special Events" },
@@ -1316,23 +1314,7 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
-                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
-                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
-                            />
-                          )}
-                          {card.title === "Dance" && (
-                            <img 
-                              src={`${import.meta.env.BASE_URL}events/Dance.avif`}
-                              alt="Dance"
-                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
-                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
-                            />
-                          )}
-                          {card.title === "Literature" && (
-                            <img 
-                              src={`${import.meta.env.BASE_URL}events/literature.avif`}
-                              alt="Literature"
-                              className="event-card-image transition-transform duration-300 hover:-translate-y-4"
+                              className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}

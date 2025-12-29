@@ -2687,7 +2687,7 @@ const Dashboard: React.FC = () => {
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}
               >
-                <img src="/para sports.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766997935/para_sports_tbld5k.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                 <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
               </div>
 

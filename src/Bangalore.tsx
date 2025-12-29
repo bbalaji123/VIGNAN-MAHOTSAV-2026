@@ -113,7 +113,7 @@ const Bangalore: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="/zonals/BENGALURU.avif" alt="Bangalore" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929721/BENGALURU_b9ugrx.avif" alt="Bangalore" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Events Table */}

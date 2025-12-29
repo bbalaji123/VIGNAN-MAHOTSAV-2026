@@ -113,7 +113,7 @@ const Vizag: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="/zonals/VIZAG.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Events Table */}

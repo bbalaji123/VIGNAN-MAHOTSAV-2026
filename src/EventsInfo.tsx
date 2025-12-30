@@ -945,32 +945,42 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
+              <div className="events-main-cards-container flex flex-row flex-wrap items-start justify-center gap-10 md:gap-14 mb-10">
                 {/* Card 1 - Performing Arts */}
-                <div 
-                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                  onClick={handleCulturalsCardClick}
-                  style={{ margin: '0 16px' }}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="category-card-title text-white text-xs font-bold tracking-wide leading-tight">
-                      PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
-                    </h2>
+                <div className="flex flex-col items-center gap-3" style={{ transform: 'translateY(3rem)' }}>
+                  <div 
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    onClick={handleCulturalsCardClick}
+                    style={{ 
+                      margin: '0 16px',
+                      backgroundImage: 'url(/events/Cultural.avif)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
                   </div>
+                  <h2 className="category-card-title text-white text-lg font-bold tracking-wide leading-tight text-center px-4" style={{ maxWidth: '280px' }}>
+                    PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
+                  </h2>
                 </div>
 
                 {/* Card 2 - Sports and Games with Button Below (Desktop Only) */}
-                <div className="relative flex flex-col items-center gap-8 events-card-with-button-desktop">
-                  <div 
-                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                    onClick={handleSportsCardClick}
-                    style={{ margin: '0 16px' }}
-                  >
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                      <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
-                        SPORTS AND GAMES
-                      </h2>
+                <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop">
+                  <div className="flex flex-col items-center gap-3">
+                    <div 
+                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                      onClick={handleSportsCardClick}
+                      style={{ 
+                        margin: '0 16px',
+                        backgroundImage: 'url(/events/Sports.avif)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      }}
+                    >
                     </div>
+                    <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center">
+                      SPORTS AND GAMES
+                    </h2>
                   </div>
                   {/* Download Rulebook button - Desktop */}
                   <button 
@@ -988,29 +998,39 @@ const EventsInfo: React.FC = () => {
                 </div>
 
                 {/* Card 2 - Sports and Games (Mobile - No Button) */}
-                <div 
-                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 events-card-mobile-only"
-                  onClick={handleSportsCardClick}
-                  style={{ margin: '0 16px' }}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
-                      SPORTS AND GAMES
-                    </h2>
+                <div className="flex flex-col items-center gap-3 events-card-mobile-only">
+                  <div 
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    onClick={handleSportsCardClick}
+                    style={{ 
+                      margin: '0 16px',
+                      backgroundImage: 'url(/events/Sports.avif)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
                   </div>
+                  <h2 className="category-card-title text-white text-lg font-bold tracking-wide text-center">
+                    SPORTS AND GAMES
+                  </h2>
                 </div>
 
                 {/* Card 3 - Robo Wars & Gaming */}
-                <div 
-                  className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                  onClick={() => setShowRoboWarsGaming(true)}
-                  style={{ margin: '0 16px' }}
-                >
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                    <h2 className="category-card-title text-white text-sm font-bold tracking-wide">
-                      ROBO WARS & GAMING
-                    </h2>
+                <div className="flex flex-col items-center gap-3" style={{ transform: 'translateY(3rem)' }}>
+                  <div 
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    onClick={() => setShowRoboWarsGaming(true)}
+                    style={{ 
+                      margin: '0 16px',
+                      backgroundImage: 'url(/events/Gaming.avif)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
                   </div>
+                  <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center">
+                    ROBO WARS & GAMING
+                  </h2>
                 </div>
               </div>
               

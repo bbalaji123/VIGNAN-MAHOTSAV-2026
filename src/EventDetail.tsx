@@ -1943,6 +1943,10 @@ const EventDetail: React.FC = () => {
 
   // Event image mapping
   const eventImageMap: { [key: string]: string } = {
+    // Category Images
+    "Sports": "events/Sports.avif",
+    "Cultural": "events/Cultural.avif",
+    "Gaming": "events/Gaming.avif",
     // Sports Events
     "Chess": "events/chess.avif",
     "Table Tennis": "events/Tabel Tennis.avif",

@@ -17,6 +17,7 @@ import { initializeQueue } from './utils/queue.js';
 import registrationRoutes from './routes/registration.js';
 import campusAmbassadorRoutes from './routes/campusAmbassador.js';
 import eventsRoutes from './routes/events.js';
+import locationRoutes from './routes/location.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -86,6 +87,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api', registrationRoutes);
 app.use('/api', campusAmbassadorRoutes);
 app.use('/api', eventsRoutes);
+app.use('/api', locationRoutes);
 
 // Health check route - now under /api
 app.get('/api/health', (req, res) => {

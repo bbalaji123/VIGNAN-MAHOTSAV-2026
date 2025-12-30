@@ -9,18 +9,26 @@
   font-style: normal;
 }
 
-/* Custom Font - Woodtrap */
+/* Custom Font - Garden Sans */
 @font-face {
-  font-family: 'Woodtrap';
-  src: url('/Woodtrap.ttf') format('truetype');
+  font-family: 'Garden Sans';
+  src: url('/Garden Sans.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
-/* Custom Font - BakeryRoastDemo */
+/* Custom Font - Borisna */
 @font-face {
-  font-family: 'BakeryRoastDemo';
-  src: url('/backtoschool.ttf') format('truetype');
+  font-family: 'Borisna';
+  src: url('/Borisna.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Custom Font - Quesha */
+@font-face {
+  font-family: 'Quesha';
+  src: url('/Quesha.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,6 +42,7 @@ html, body {
   max-width: 100vw;
   box-sizing: border-box;
   position: relative;
+  font-family: 'Borisna', sans-serif !important;
 }
 
 *, *::before, *::after {
@@ -51,69 +60,69 @@ body * {
   to { transform: rotate(360deg); }
 }
 
-/* Global font for all headings, subheadings, and buttons */
-h1, h2, h3, h4, h5, h6,
+/* Global font for all headings and subheadings */
+h1, h2 {
+  font-family: 'Garden Sans', sans-serif !important;
+}
+
+h3, h4, h5, h6,
 .indoor-sports-card span,
 .highlight-card span,
 .culturals-card span {
-  font-family: 'Baloo 2', cursive, sans-serif !important;
+  font-family: 'Quesha', sans-serif !important;
 }
 
-/* Coffee+Tea Demo font for all buttons */
+/* Garden Sans font for all buttons */
 button {
-  font-family: 'coffee+tea demo', sans-serif !important;
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
 /* Override for specific event page elements */
 .events-info-page h2,
 .events-info-page .text-white {
-  font-family: 'BakeryRoastDemo', sans-serif !important;
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
-/* Coffee+Tea Demo font for menu cards */
-.menu-title-heading,
-.menu-grid-card,
-.menu-grid-card span,
-.menu-grid-card h1,
-.menu-grid-card h2,
-.menu-grid-card h3,
-.menu-grid-card h4,
-.menu-grid-card h5,
-.menu-grid-card h6 {
-  font-family: 'coffee+tea demo', sans-serif !important;
-}
-
-/* Coffee+Tea Demo font specifically for About Theme section */
-.about-theme-section,
+/* Font hierarchy for About Theme section */
 .about-theme-section h1,
-.about-theme-section h2,
+.about-theme-section h2 {
+  font-family: 'Garden Sans', sans-serif !important;
+}
+
 .about-theme-section h3,
 .about-theme-section h4,
 .about-theme-section h5,
-.about-theme-section h6,
-.about-theme-section p,
-.about-theme-section div {
-  font-family: 'coffee+tea demo', sans-serif !important;
+.about-theme-section h6 {
+  font-family: 'Quesha', sans-serif !important;
 }
 
-/* Woodtrap font for event section headings */
+.about-theme-section,
+.about-theme-section p,
+.about-theme-section div {
+  font-family: 'Borisna', sans-serif !important;
+}
+
+/* Garden Sans font for event section headings */
 .events-heading,
 .event-category-heading,
 .events-page-heading {
-  font-family: 'Woodtrap', sans-serif !important;
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
-/* Woodtrap font for event detail page headings */
+/* Font hierarchy for event detail page */
 .event-detail-page h1,
-.event-detail-page h2,
-.event-detail-page h3 {
-  font-family: 'Woodtrap', sans-serif !important;
+.event-detail-page h2 {
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
-/* BakeryRoastDemo font for event card sub-headings */
+.event-detail-page h3 {
+  font-family: 'Quesha', sans-serif !important;
+}
+
+/* Quesha font for event card sub-headings */
 .event-card-title,
 .text-yellow-300 {
-  font-family: 'BakeryRoastDemo', sans-serif !important;
+  font-family: 'Quesha', sans-serif !important;
 }
 
 /* Circular Back Navigation Button */

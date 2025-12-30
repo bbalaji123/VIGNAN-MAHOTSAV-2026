@@ -61,7 +61,7 @@ const CampusMap: React.FC = () => {
           }
 
           .campus-title {
-            font-family: 'Woodtrap', sans-serif !important;
+            font-family: 'Garden Sans', sans-serif !important;
           }
         `}
       </style>

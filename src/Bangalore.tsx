@@ -58,7 +58,7 @@ const Bangalore: React.FC = () => {
 
           /* Font overrides for this page */
           .bangalore-title {
-            font-family: 'Woodtrap', sans-serif !important;
+            font-family: 'Garden Sans', sans-serif !important;
           }
 
           .bangalore-content,
@@ -119,50 +119,50 @@ const Bangalore: React.FC = () => {
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <div className="bangalore-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '400px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginTop: '20px', marginBottom: '40px' }}>
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginTop: '20px', marginBottom: '40px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+              <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                 {/* Sports Column */}
                 <div className="flex flex-col gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] md:min-w-[150px]">
                   <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Volley ball</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(6+4)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Volley ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>(6+4)</div>
                   </div>
                   <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Basket ball</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>(5+5)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Basket ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>(5+5)</div>
                   </div>
                   <div className="flex flex-col py-2 sm:py-3">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px' }}>Kabaddi</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Kabaddi</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                     <div></div>
                     <div>Zone<br/>Winners</div>
                     <div>Mahotsav<br/>Winners</div>
                   </div>
                   <div className="flex flex-col gap-1 sm:gap-2">
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
@@ -173,7 +173,7 @@ const Bangalore: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="bangalore-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'BakeryRoastDemo, sans-serif !important', paddingTop: '20px'  }}>
+            <div className="bangalore-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'Garden Sans, sans-serif !important', paddingTop: '20px'  }}>
               <div className="text-sm sm:text-base md:text-lg font-semibold">
                 <div>Mrs.P. Sai Sowjanya - +91 99123 24909</div>
               </div>

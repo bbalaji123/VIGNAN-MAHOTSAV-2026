@@ -43,42 +43,27 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     };
   }, []);
 
-  // Load colleges from JSON file
+  // Load colleges from backend API
   useEffect(() => {
     const loadColleges = async () => {
       try {
-        console.log('📚 Loading colleges...');
-        const response = await fetch('/college.json');
+        console.log('📚 Loading colleges from API...');
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/colleges`;
+        const response = await fetch(apiUrl);
         console.log('📚 Response status:', response.status);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data: College[] = await response.json();
-        console.log('📚 Loaded colleges count:', data.length);
+        const result = await response.json();
         
-        // Filter out invalid entries
-        const validColleges = data.filter(c => c && c.Name && typeof c.Name === 'string');
+        if (result.success) {
+          console.log('📚 Loaded colleges count:', result.data.length);
+          // Data is already filtered, sorted, and deduplicated by backend
+          setColleges(result.data);
+        }
         
-        // Remove duplicates (case-insensitive) and keep first occurrence
-        const seen = new Set<string>();
-        const uniqueColleges = validColleges.filter(college => {
-          const lowerName = college.Name.toLowerCase().trim();
-          if (seen.has(lowerName)) {
-            return false;
-          }
-          seen.add(lowerName);
-          return true;
-        });
-        
-        // Sort alphabetically by name
-        const sortedColleges = uniqueColleges.sort((a, b) => 
-          a.Name.localeCompare(b.Name)
-        );
-        
-        console.log('📚 Unique colleges count:', sortedColleges.length);
-        setColleges(sortedColleges);
         setIsLoading(false);
       } catch (error) {
         console.error('❌ Error loading colleges:', error);

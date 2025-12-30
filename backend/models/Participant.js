@@ -60,7 +60,7 @@ const participantSchema = new mongoose.Schema({
   registeredEvents: [{
     eventCode: {
       type: String,
-      required: true
+      required: false
     },
     eventId: String,
     eventName: String,

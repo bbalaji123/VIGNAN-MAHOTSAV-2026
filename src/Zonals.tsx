@@ -72,7 +72,7 @@ const Zonals: React.FC = () => {
 
           /* Override global font for this page's h1 */
           h1.zonals-title {
-            font-family: 'Woodtrap', sans-serif !important;
+            font-family: 'Garden Sans', sans-serif !important;
           }
         `}
       </style>
@@ -85,7 +85,7 @@ const Zonals: React.FC = () => {
         <h1 
           className="zonals-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-10 sm:mb-10 md:mb-10 text-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]"
           style={{
-            fontFamily: 'Woodtrap, sans-serif !important',
+            fontFamily: 'Garden Sans, sans-serif !important',
             textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
             letterSpacing: '0.1em',
             paddingBottom: '150px',

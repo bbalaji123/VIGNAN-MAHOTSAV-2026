@@ -428,7 +428,8 @@ const Dashboard: React.FC = () => {
   const [userProfileData, setUserProfileData] = useState<{ 
     name: string; 
     email: string; 
-    userId?: string; 
+    userId?: string;
+    registerId?: string;
     userType?: string; 
     gender?: string;
     branch?: string;
@@ -2011,7 +2012,7 @@ const Dashboard: React.FC = () => {
       const result = await loginUser(identifier, payload.password);
       
       if (result.success && result.data) {
-        const { userId, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
+        const { userId, registerId = undefined, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
         
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -2031,6 +2032,7 @@ const Dashboard: React.FC = () => {
           name: name,
           email: email,
           userId: userId,
+          registerId: registerId,
           userType: userType || 'visitor',
           gender: gender, // No default value
           branch: branch,
@@ -2047,6 +2049,9 @@ const Dashboard: React.FC = () => {
         localStorage.setItem('userName', name);
         localStorage.setItem('userEmail', email);
         localStorage.setItem('userId', userId);
+        if (registerId) {
+          localStorage.setItem('registerId', registerId);
+        }
         localStorage.setItem('userType', userType || 'visitor');
         if (gender) {
           localStorage.setItem('userGender', gender);
@@ -2107,6 +2112,7 @@ const Dashboard: React.FC = () => {
     const storedUserName = localStorage.getItem('userName');
     const storedUserEmail = localStorage.getItem('userEmail'); 
     const storedUserId = localStorage.getItem('userId');
+    const storedRegisterId = localStorage.getItem('registerId');
     const storedUserType = localStorage.getItem('userType');
     const storedUserGender = localStorage.getItem('userGender');
     const storedBranch = localStorage.getItem('userBranch');
@@ -2122,6 +2128,7 @@ const Dashboard: React.FC = () => {
         name: storedUserName,
         email: storedUserEmail || '',
         userId: storedUserId,
+        registerId: storedRegisterId || undefined,
         userType: storedUserType || 'visitor',
         gender: storedUserGender || undefined, // Convert null to undefined
         branch: storedBranch || undefined,
@@ -2217,7 +2224,7 @@ const Dashboard: React.FC = () => {
       )}
      
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 z-10 text-white text-center overflow-hidden" style={{background: "transparent"}} >
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{background: "transparent", zIndex: 1, position: 'relative'}} >
         {/* Left side image - 1.avif */}
         <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
           <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
@@ -2309,12 +2316,16 @@ const Dashboard: React.FC = () => {
               flex-direction: column !important;
             }
             
-            .throwback-section {
+            .about-theme-section {
               order: 1 !important;
             }
             
-            .about-theme-section {
+            .gallery-section {
               order: 2 !important;
+            }
+            
+            .throwback-section {
+              order: 3 !important;
             }
             
             .about-theme-section,
@@ -2456,12 +2467,12 @@ const Dashboard: React.FC = () => {
                 />
               </button>
             </div>
-            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important', flex: 1, textAlign: 'center', marginRight: '96px'}}>MENU</h1>
+            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Garden Sans, sans-serif !important', flex: 1, textAlign: 'center', marginRight: '96px'}}>MENU</h1>
           </div>
 
           {/* Menu Title - Desktop Only */}
           <div className="text-center menu-title-container menu-title-desktop" style={{marginTop: "10px", paddingBottom: "2px"}}>
-            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'coffee+tea demo, sans-serif !important'}}>MENU</h1>
+            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Garden Sans, sans-serif !important'}}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
@@ -2505,7 +2516,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">HOME</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>HOME</span>
               </div>
 
               {/* EVENTS */}
@@ -2529,7 +2540,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'Woodtrap, sans-serif'}}>EVENTS</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>EVENTS</span>
               </div>
 
               {/* PROFILE */}
@@ -2553,7 +2564,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">PROFILE</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>PROFILE</span>
               </div>
 
               {/* SCHEDULE */}
@@ -2580,7 +2591,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">SCHEDULE</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>SCHEDULE</span>
               </div>
 
               {/* COLLABORATION */}
@@ -2607,7 +2618,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">COLLABORATION</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>COLLABORATION</span>
               </div>
 
               {/* ZONALS */}
@@ -2634,7 +2645,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">ZONALS</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>ZONALS</span>
               </div>
 
               {/* PARA SPORTS */}
@@ -2661,7 +2672,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766997935/para_sports_tbld5k.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">PARA SPORTS</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>PARA SPORTS</span>
               </div>
 
               {/* HOSPITALITY */}
@@ -2688,7 +2699,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">HOSPITALITY</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>HOSPITALITY</span>
               </div>
 
               {/* CAMPUS AMBASSADOR */}
@@ -2712,7 +2723,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">CAMPUS AMBASSADOR</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>CAMPUS AMBASSADOR</span>
               </div>
 
               {/* SPONSORS */}
@@ -2739,7 +2750,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">SPONSORS</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>SPONSORS</span>
               </div>
 
               {/* OUR TEAM */}
@@ -2766,7 +2777,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">OUR TEAM</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>OUR TEAM</span>
               </div>
 
               {/* MAP */}
@@ -2793,7 +2804,7 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide">MAP</span>
+                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>MAP</span>
               </div>
             </div>
           </div>
@@ -2809,6 +2820,9 @@ const Dashboard: React.FC = () => {
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>
                   ? Back
+                </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
               </div>
@@ -2867,6 +2881,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>PARA ATHLETICS MEN</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>?</button>
@@ -2919,6 +2936,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>PARA CRICKET MEN</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>?</button>
@@ -2970,6 +2990,9 @@ const Dashboard: React.FC = () => {
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
                   ? Back
+                </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
                 </button>
                 <h2>PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION</h2>
               </div>
@@ -3050,8 +3073,20 @@ const Dashboard: React.FC = () => {
                           cursor: 'pointer'
                         }}
                       >
-                        <div className="cultural-card-poster-background">
-                          <span className="cultural-poster-placeholder-text">CULTURAL POSTER</span>
+                        <div className="cultural-card-poster-background" style={{
+                          backgroundImage: `url(${import.meta.env.BASE_URL}events/${
+                            card.title === 'Music' ? 'singing idol' :
+                            card.title === 'Dance' ? 'Dance' :
+                            card.title === 'Theatre' ? 'skit' :
+                            card.title === 'Literature' ? 'literature' :
+                            card.title === 'Visual Arts' ? 'Rangoli' :
+                            card.title === 'Fashion Design' ? 'Theme Ramp walk' :
+                            card.title === 'Spot Light' ? 'Mr and ms mahotsav' :
+                            card.title
+                          }.avif)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center'
+                        }}>
                         </div>
                         <div className="cultural-card-title-overlay">
                           <h3>{card.title}</h3>
@@ -3182,6 +3217,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>THEATRE & CINEMATOGRAPHY</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>?</button>
@@ -3276,6 +3314,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>VISUAL ARTS & CRAFT</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>?</button>
@@ -3322,6 +3363,9 @@ const Dashboard: React.FC = () => {
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>
                   ? Back
+                </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
                 </button>
                 <h2>FASHION DESIGN & STYLING</h2>
               </div>
@@ -3560,6 +3604,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>?</button>
@@ -3613,6 +3660,9 @@ const Dashboard: React.FC = () => {
               <div className="indoor-sports-header-left">
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>
                   ? Back
+                </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
                 </button>
                 <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
               </div>
@@ -3668,6 +3718,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>TEAM FIELD SPORTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>?</button>
@@ -3722,6 +3775,9 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                  ? Home
+                </button>
                 <h2>WOMEN'S TEAM FIELD SPORTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>?</button>
@@ -3772,7 +3828,7 @@ const Dashboard: React.FC = () => {
         className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
-        style={{ fontFamily: 'coffee+tea demo, sans-serif', position: 'relative' }}
+        style={{ fontFamily: 'Borisna, sans-serif', position: 'relative' }}
       >
         <div className="about-theme-container" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px', position: 'relative' }}>
           <h2 className="about-theme-title" style={{
@@ -3784,7 +3840,7 @@ const Dashboard: React.FC = () => {
             textTransform: 'uppercase',
             letterSpacing: '3px',
             textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
-            fontFamily: 'coffee+tea demo, sans-serif'
+            fontFamily: 'Garden Sans, sans-serif'
           }}>ABOUT THEME</h2>
           
           {/* Garuda Logo - Above title on mobile, left side on desktop */}
@@ -3811,7 +3867,7 @@ const Dashboard: React.FC = () => {
                 color: '#fdee71',
                 marginBottom: '30px',
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-                fontFamily: 'coffee+tea demo, sans-serif'
+                fontFamily: 'Quesha, sans-serif'
               }}>Mahotsav 2026 - The Eternal Harmony</h3>
               
               <p className="theme-description" style={{
@@ -3821,7 +3877,7 @@ const Dashboard: React.FC = () => {
                 textAlign: 'justify',
                 fontWeight: '400',
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
-                fontFamily: 'coffee+tea demo, sans-serif'
+                fontFamily: 'Borisna, sans-serif'
               }}>
                 Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ?17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
               </p>
@@ -3833,82 +3889,256 @@ const Dashboard: React.FC = () => {
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
-            borderRadius: '30px',
-            padding: '40px 15px',
-            marginTop: '40px',
-            boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
-            maxWidth: '1200px',
-            margin: '40px auto 0'
+            borderRadius: '20px',
+            padding: '30px 20px',
+            marginTop: '30px',
+            boxShadow: '0 0 25px rgba(223, 160, 0, 0.822)',
+            maxWidth: '1100px',
+            margin: '30px auto 0',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
             <div className="stats-grid" style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+              display: 'flex',
+              flexWrap: 'wrap',
               justifyContent: 'center',
-              alignItems: 'center',
-              gap: '20px',
-              maxWidth: '1200px',
-              margin: '0 auto'
+              alignItems: 'stretch',
+              gap: '30px',
+              width: '100%'
             }}>
               {/* Footfall */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-people-group"></i></div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{footfall.toLocaleString()}+</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>TOTAL FOOTFALL</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '130px',
+                flex: '1 1 130px',
+                padding: '10px'
+              }}>
+                <div style={{ 
+                  fontSize: '2.2rem', 
+                  marginBottom: '10px', 
+                  color: '#1e3050',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}><i className="fa-solid fa-people-group"></i></div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.5rem', 
+                  marginBottom: '6px', 
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>{footfall.toLocaleString()}+</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '0.85rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>TOTAL FOOTFALL</div>
               </div>
               
               {/* Colleges */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-graduation-cap"></i></div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{colleges}+</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>COLLEGES</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '130px',
+                flex: '1 1 130px',
+                padding: '10px'
+              }}>
+                <div style={{ 
+                  fontSize: '2.2rem', 
+                  marginBottom: '10px', 
+                  color: '#1e3050',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}><i className="fa-solid fa-graduation-cap"></i></div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.5rem', 
+                  marginBottom: '6px', 
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>{colleges}+</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '0.85rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>COLLEGES</div>
               </div>
               
               {/* Events */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050' }}><i className="fa-solid fa-trophy"></i></div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{events}+</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>EVENTS</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '130px',
+                flex: '1 1 130px',
+                padding: '10px'
+              }}>
+                <div style={{ 
+                  fontSize: '2.2rem', 
+                  marginBottom: '10px', 
+                  color: '#1e3050',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}><i className="fa-solid fa-trophy"></i></div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.5rem', 
+                  marginBottom: '6px', 
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>{events}+</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '0.85rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>EVENTS</div>
               </div>
               
               {/* Online Audience */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px',color: '#1e3050'}}><i className="fa-solid fa-earth-africa"></i></div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>ONLINE AUDIANCE</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '130px',
+                flex: '1 1 130px',
+                padding: '10px'
+              }}>
+                <div style={{ 
+                  fontSize: '2.2rem', 
+                  marginBottom: '10px', 
+                  color: '#1e3050',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}><i className="fa-solid fa-earth-africa"></i></div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.5rem', 
+                  marginBottom: '6px', 
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>{onlineAudience.toLocaleString()}+</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '0.85rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>ONLINE AUDIANCE</div>
               </div>
               
               {/* Editions */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '130px',
+                flex: '1 1 130px',
+                padding: '10px'
+              }}>
                 <div style={{ 
-                  fontSize: '3rem', 
                   marginBottom: '10px',
+                  height: '50px',
                   display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  justifyContent: 'center'
                 }}>
                   <div style={{
-                    width: '60px',
-                    height: '60px',
+                    width: '50px',
+                    height: '50px',
                     borderRadius: '50%',
-                    border: '#1e3050 4px solid',
+                    border: '#1e3050 3px solid',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '1.5rem',
+                    fontSize: '1.2rem',
                     fontWeight: 'bold',
                     color: '#ffffff',
                     textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
                   }}>18</div>
                 </div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1rem', marginBottom: '5px', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>18 EDITIONS</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>OF FESTIVITIES</div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1rem', 
+                  marginBottom: '6px', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>18 EDITIONS</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '1rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>OF FESTIVITIES</div>
               </div>
               
               {/* Cash Prizes */}
-              <div style={{ textAlign: 'center', minWidth: '150px' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '10px', color: '#1e3050' }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
-                <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.75rem', marginBottom: '5px', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{cashPrizes}+ LACKS</div>
-                <div style={{ color: '#f5e210', fontWeight: '600', fontSize: '1rem', textShadow: '1px 1px 2px rgba(0,0,0,0.3)' }}>CASH PRIZES</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minWidth: '160px',
+                flex: '1 1 160px',
+                padding: '10px'
+              }}>
+                <div style={{ 
+                  fontSize: '3rem', 
+                  marginBottom: '10px', 
+                  color: '#1e3050',
+                  height: '50px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontWeight: 'bold', 
+                  fontSize: '1.75rem', 
+                  marginBottom: '6px', 
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  lineHeight: '1.2'
+                }}>{cashPrizes}+ LACKS</div>
+                <div style={{ 
+                  color: '#f5e210', 
+                  fontWeight: '600', 
+                  fontSize: '1rem', 
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                  textAlign: 'center',
+                  lineHeight: '1.3'
+                }}>CASH PRIZES</div>
               </div>
             </div>
           </div>
@@ -4597,7 +4827,7 @@ const Dashboard: React.FC = () => {
                 letterSpacing: '0.5px',
                 whiteSpace: 'nowrap',
                 textAlign: 'center',
-                fontFamily: 'BakeryRoastDemo, sans-serif'
+                fontFamily: 'Quesha, sans-serif'
               }}>
                 {unit.charAt(0).toUpperCase() + unit.slice(1)}
               </div>
@@ -5434,42 +5664,56 @@ const Dashboard: React.FC = () => {
               }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Reg No</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Registration Number</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>
+                        : {userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
+                      </span>
+                      {!userProfileData?.registerId && (
+                        <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontStyle: 'italic' }}>
+                          (Your college/university registration ID - You can contact support to add this)
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Mahotsav ID</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Name</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Name</span>
                     <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Email</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Email</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Gender</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Gender</span>
                     <span style={{ color: 'white', fontSize: '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>DOB</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>DOB</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>College</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>College</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Branch</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Branch</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '120px', flexShrink: 0 }}>Phone</span>
+                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Phone</span>
                     <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
                   </div>
                 </div>
@@ -5537,9 +5781,36 @@ const Dashboard: React.FC = () => {
                 <div style={{ width: '100%', maxWidth: '500px' }}>
                   {myEvents.length > 0 ? (
                     <>
-                      <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', marginBottom: '1rem' }}>
-                        My Registered Events
-                      </h3>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', flex: 1 }}>
+                          My Registered Events
+                        </h3>
+                        <button 
+                          onClick={() => window.print()}
+                          style={{
+                            padding: '0.5rem 1rem',
+                            fontSize: '0.85rem',
+                            background: '#10b981',
+                            border: 'none',
+                            borderRadius: '0.5rem',
+                            color: 'white',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.3s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                          }}
+                          onMouseOver={(e) => {
+                            e.currentTarget.style.background = '#059669';
+                          }}
+                          onMouseOut={(e) => {
+                            e.currentTarget.style.background = '#10b981';
+                          }}
+                        >
+                          🖨️ Print
+                        </button>
+                      </div>
                       <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {myEvents.map((event, index) => (
                           <div
@@ -5556,7 +5827,7 @@ const Dashboard: React.FC = () => {
                           >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                               <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
-                                {event.eventName}
+                                {event.eventName || (event as any).Event || (event as any).name || 'Event'}
                               </span>
                               {event.eventType && (
                                 <span
@@ -5727,7 +5998,32 @@ const Dashboard: React.FC = () => {
           <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>My Registered Events</h2>
-              <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                <button 
+                  className="save-events-btn" 
+                  onClick={() => window.print()}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.9rem',
+                    background: '#10b981',
+                    border: 'none',
+                    borderRadius: '0.5rem',
+                    color: 'white',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    transition: 'all 0.3s'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = '#059669';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = '#10b981';
+                  }}
+                >
+                  🖨️ Print
+                </button>
+                <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
+              </div>
             </div>
             <div className="event-checklist-body">
               <p className="checklist-instructions">
@@ -5746,7 +6042,7 @@ const Dashboard: React.FC = () => {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
                         <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: '600', margin: 0, flex: 1 }}>
-                          {event.eventName}
+                          {event.eventName || (event as any).Event || (event as any).name || 'Event'}
                         </h4>
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                           <span style={{
@@ -6812,10 +7108,10 @@ const Dashboard: React.FC = () => {
                       if (type === 'sport' && registrationEvents.Sports[idx]) {
                         const event = registrationEvents.Sports[idx];
                         return {
-                          eventName: event['738500'],
+                          eventName: event.Event || event['738500'],
                           eventType: 'sports',
-                          category: event['Prize money for Sports'] || '',
-                          description: `${event['Prize money for Sports'] || ''} - ${event['738500']}`.trim(),
+                          category: event.Category || event['Prize money for Sports'] || '',
+                          description: `${event.Category || event['Prize money for Sports'] || ''} - ${event.Event || event['738500']}`.trim(),
                           fee: userProfileData.gender === 'male' ? 350 : 350
                         };
                       }
@@ -6922,4 +7218,5 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
 

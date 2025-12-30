@@ -141,7 +141,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
         >
           <div className="p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8">
             <div className="mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-b border-white/20 pb-2 xs:pb-3 sm:pb-4 md:pb-5 lg:pb-6">
-              <h2 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-amber-400">Menu</h2>
+              <h2 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-amber-400" style={{fontFamily: 'Garden Sans, sans-serif'}}>Menu</h2>
             </div>
             
             {/* Back Button */}
@@ -172,7 +172,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
                     alt={category.name}
                     className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 group-hover:scale-110 transition-transform duration-300 object-contain flex-shrink-0"
                   />
-                  <span className="font-medium text-[0.65rem] xs:text-[0.7rem] sm:text-xs md:text-sm tracking-wide">
+                  <span className="font-medium text-[0.65rem] xs:text-[0.7rem] sm:text-xs md:text-sm tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif'}}>
                     {category.name}
                   </span>
                 </div>

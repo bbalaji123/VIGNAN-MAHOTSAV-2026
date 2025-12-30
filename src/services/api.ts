@@ -45,6 +45,7 @@ export interface ApiResponse {
   data?: {
     id?: string;
     userId?: string;
+    registerId?: string;
     name?: string;
     email?: string;
     password?: string;

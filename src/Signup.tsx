@@ -196,16 +196,24 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
   const [filteredDistricts, setFilteredDistricts] = useState<Array<{ no: string; sno: string; name: string }>>([]);
 
   useEffect(() => {
-    // Load states
-    fetch('/state.json')
+    // Load states from backend API
+    fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/states`)
       .then(res => res.json())
-      .then(data => setStates(data))
+      .then(response => {
+        if (response.success) {
+          setStates(response.data);
+        }
+      })
       .catch(err => console.error('Error loading states:', err));
 
-    // Load districts
-    fetch('/district.json')
+    // Load all districts from backend API
+    fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/districts`)
       .then(res => res.json())
-      .then(data => setDistricts(data))
+      .then(response => {
+        if (response.success) {
+          setDistricts(response.data);
+        }
+      })
       .catch(err => console.error('Error loading districts:', err));
   }, []);
 
@@ -227,14 +235,14 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
       <h3>ACADEMIC INFORMATION</h3>
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="registerId">Register ID</label>
+          <label htmlFor="registerId">College Registration Number</label>
           <input
             type="text"
             id="registerId"
             name="registerId"
             value={signupFormData.registerId || ''}
             onChange={onInputChange}
-            placeholder="Enter your register ID"
+            placeholder="Your college/university registration ID"
             className="form-input"
           />
         </div>

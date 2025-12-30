@@ -96,14 +96,12 @@ router.post('/register', async (req, res) => {
     // Cleanup orphan participant
     await Participant.deleteOne({ email: normalizedEmail });
 
-    // Generate ID only once, after validation passes
-    const userId = await generateUserId();
-
     const MAX_RETRIES = 3;
     let lastError = null;
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
+        // Generate ID only once per attempt
         const userId = await generateUserId();
         
         // Convert YYYY-MM-DD to DD/MM/YYYY for password storage
@@ -198,8 +196,16 @@ router.post('/login', async (req, res) => {
       });
     }
 
+    // Make identifier case-insensitive and trim whitespace
+    const normalizedIdentifier = identifier.trim();
+    
+    // Try to find user with case-insensitive matching for userId and registerId
     const user = await Registration.findOne({
-      $or: [{ email: identifier }, { userId: identifier }, { registerId: identifier }]
+      $or: [
+        { email: normalizedIdentifier.toLowerCase() },
+        { userId: { $regex: new RegExp(`^${normalizedIdentifier}$`, 'i') } },
+        { registerId: { $regex: new RegExp(`^${normalizedIdentifier}$`, 'i') } }
+      ]
     });
 
     if (!user) {
@@ -229,6 +235,7 @@ router.post('/login', async (req, res) => {
       message: 'Login successful',
       data: {
         userId: user.userId,
+        registerId: user.registerId,
         name: user.name,
         email: user.email,
         userType: user.userType,

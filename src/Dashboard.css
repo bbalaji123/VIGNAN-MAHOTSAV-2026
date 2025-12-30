@@ -16,6 +16,28 @@ img[alt="Moon"],
    MOBILE RESPONSIVE STYLES - FOOTER & SECTIONS
    ============================================ */
 
+/* Mobile Section Ordering Fix */
+@media (max-width: 640px) {
+  /* Ensure sections display in proper order */
+  /* Hero section = order 0 (first) */
+  /* About Theme = order 1 (second) */
+  /* Gallery = order 2 (third) */
+  /* Throwback = order 3 (fourth) */
+  section {
+    position: relative !important;
+  }
+  
+  .gallery-section {
+    order: 2 !important;
+  }
+  
+  /* Footer should be last */
+  footer {
+    order: 999 !important;
+    margin-top: 0 !important;
+  }
+}
+
 /* Footer responsive styles - Mobile only */
 @media (max-width: 640px) {
   .footer-content {
@@ -157,11 +179,24 @@ img[alt="Moon"],
   }
 }
 
-/* Stats Grid - 2 columns on mobile */
+/* Stats Grid - 3 columns on mobile (2 rows) */
 @media (max-width: 640px) {
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 15px !important;
+    width: 100% !important;
+  }
+  
+  .stats-grid > div {
+    min-width: unset !important;
+    flex: unset !important;
+    padding: 8px !important;
+  }
+  
+  /* Last item (Cash Prizes) is in row 2, column 3 - no special styling needed */
+  .stats-grid > div:last-child {
+    grid-column: auto !important;
   }
 }
 
@@ -394,7 +429,7 @@ body::-webkit-scrollbar {
 .dashboard-container h5,
 .dashboard-container h6 {
   color: #fdee71 !important;
-  font-family: 'Woodtrap', sans-serif !important;
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
 /* Scroll-based section animations */
@@ -13127,9 +13162,9 @@ html {
   }
 }
 
-/* Stats Card with BakeryRoastDemo Font */
-.stats-card-BakeryRoastDemo div {
-  font-family: 'BakeryRoastDemo', sans-serif !important;
+/* Stats Card with Garden Sans Font */
+.stats-card-Garden Sans div {
+  font-family: 'Garden Sans', sans-serif !important;
 }
 
 /* Events Page Main Cards - Mobile Responsiveness */

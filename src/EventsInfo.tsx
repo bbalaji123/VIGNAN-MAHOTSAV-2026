@@ -74,6 +74,7 @@ const EventsInfo: React.FC = () => {
   ];
 
   const culturalsCards = [
+    { title: "Dance", subtitle: "Classical & Western" },
     { title: "Music", subtitle: "Singing & Instruments" },
     { title: "Theatre", subtitle: "Drama & Cinematography" },
     { title: "Literature", subtitle: "Writing & Oratory" },
@@ -653,7 +654,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .events-title {
-            font-family: 'Woodtrap, sans-serif';
+            font-family: 'Garden Sans, sans-serif';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-size: 2.25rem;
             font-weight: bold;
@@ -686,7 +687,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .category-card-title {
-            font-family: 'BakeryRoastDemo, sans-serif';
+            font-family: 'Garden Sans, sans-serif';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
 
@@ -945,9 +946,9 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="events-main-cards-container flex flex-row flex-wrap items-start justify-center gap-10 md:gap-14 mb-10">
+              <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
                 {/* Card 1 - Performing Arts */}
-                <div className="flex flex-col items-center gap-3" style={{ transform: 'translateY(3rem)' }}>
+                <div className="flex flex-col items-center gap-3">
                   <div 
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleCulturalsCardClick}
@@ -959,7 +960,7 @@ const EventsInfo: React.FC = () => {
                     }}
                   >
                   </div>
-                  <h2 className="category-card-title text-white text-lg font-bold tracking-wide leading-tight text-center px-4" style={{ maxWidth: '280px' }}>
+                  <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center" style={{ maxWidth: '320px', lineHeight: '1.3', margin: '0 auto' }}>
                     PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
                   </h2>
                 </div>
@@ -1016,7 +1017,7 @@ const EventsInfo: React.FC = () => {
                 </div>
 
                 {/* Card 3 - Robo Wars & Gaming */}
-                <div className="flex flex-col items-center gap-3" style={{ transform: 'translateY(3rem)' }}>
+                <div className="flex flex-col items-center gap-3">
                   <div 
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={() => setShowRoboWarsGaming(true)}
@@ -1358,6 +1359,14 @@ const EventsInfo: React.FC = () => {
                             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                           }}
                         >
+                          {card.title === "Dance" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}dance.png`}
+                              alt="Dance"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
                           {card.title === "Music" && (
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
@@ -1763,7 +1772,7 @@ const EventsInfo: React.FC = () => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
-                        "Mahotsav Got Talent": "events/gaming.avif"
+                        "Mahotsav Got Talent": "events/Mr and ms mahotsav.avif"
                       };
                       
                       return (

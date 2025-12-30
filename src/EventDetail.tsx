@@ -2188,10 +2188,10 @@ const EventDetail: React.FC = () => {
             
             {/* Center column: Title */}
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '8px'}}>
-              <h1 style={{fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h1 style={{fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
                 {eventData.title}
               </h1>
-              <h2 style={{fontSize: '1.875rem', fontWeight: '600', color: '#e9d5ff', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h2 style={{fontSize: '1.875rem', fontWeight: '600', color: '#e9d5ff', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
                 {eventData.subtitle}
               </h2>
             </div>
@@ -2235,10 +2235,10 @@ const EventDetail: React.FC = () => {
                 />
               </div>
               <div className="text-center">
-                <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
                   {eventData.title}
                 </h1>
-                <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+                <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
                   {eventData.subtitle}
                 </h2>
               </div>
@@ -2268,14 +2268,14 @@ const EventDetail: React.FC = () => {
 
           {/* Rules Section */}
           <div className="p-3 sm:p-4">
-            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
               Rules:
             </h3>
             <ul className="space-y-2 sm:space-y-3">
               {eventData.rules.map((rule, index) => (
                 <li key={index} className="flex items-start gap-2 sm:gap-4">
                   <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'BakeryRoastDemo, sans-serif', letterSpacing: '0.02em'}}>
+                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em'}}>
                     {rule}
                   </span>
                 </li>
@@ -2287,28 +2287,28 @@ const EventDetail: React.FC = () => {
           <div className="space-y-3 sm:space-y-4">
             {/* Cash Prizes */}
             <div className="p-3 sm:p-4">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
                 Cash Prizes:
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>First</span>
-                  <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.first}</span>
+                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>First</span>
+                  <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.first}</span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Second</span>
-                  <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.second}</span>
+                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Second</span>
+                  <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.second}</span>
                 </div>
                 {eventData.prizes.third && (
                   <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Third</span>
-                    <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.third}</span>
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Third</span>
+                    <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.third}</span>
                   </div>
                 )}
                 {eventData.prizes.fourth && (
                   <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>Fourth</span>
-                    <span className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>- {eventData.prizes.fourth}</span>
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Fourth</span>
+                    <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.fourth}</span>
                   </div>
                 )}
               </div>
@@ -2316,7 +2316,7 @@ const EventDetail: React.FC = () => {
 
             {/* Contact Information */}
             <div className="p-4 sm:p-6">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Woodtrap, sans-serif'}}>
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
                 Contact no:
               </h3>
               <div className="space-y-2 sm:space-y-3">
@@ -2330,7 +2330,7 @@ const EventDetail: React.FC = () => {
                   
                   return (
                     <div key={index} className="text-white text-xs sm:text-sm md:text-base">
-                      <div className="font-semibold" style={{fontFamily: 'BakeryRoastDemo, sans-serif'}}>
+                      <div className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>
                         {prefix} {cleanName}: <a href={`tel:${formattedPhone.replace(/\s/g, '')}`} style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>{formattedPhone}</a>
                       </div>
                     </div>

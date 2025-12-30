@@ -7,7 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
-import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -448,6 +448,11 @@ const Dashboard: React.FC = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
   const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
+
+  // Helper to check if an event is already saved/registered for the user
+  const isEventAlreadySaved = (eventName: string) => {
+    return myEvents.some((event) => event.eventName === eventName);
+  };
 
   // Check what gender events are currently selected
   const getSelectedEventsGender = () => {
@@ -1712,7 +1717,8 @@ const Dashboard: React.FC = () => {
         // Close signup modal and show beautiful credential card
         setShowSignupModal(false);
         setGeneratedUserId(result.data.userId);
-        setGeneratedPassword(password);
+        // Use password from backend response (in DD/MM/YYYY format)
+        setGeneratedPassword(result.data.password || password);
         setShowUserIdPopup(true);
         
         // Store the generated userId
@@ -1904,6 +1910,11 @@ const Dashboard: React.FC = () => {
     setIsLoadingProfile(true);
     
     try {
+      // Ensure latest saved events are loaded
+      if (userProfileData.userId) {
+        await fetchUserSavedEvents(userProfileData.userId);
+      }
+
       // Fetch user's registered events
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
       
@@ -2128,10 +2139,12 @@ const Dashboard: React.FC = () => {
   }, []);
   const fetchUserSavedEvents = async (userId: string): Promise<Set<string>> => {
     try {
-      const result = await getMyEvents(userId);
-      if (result.success && result.data) {
-        setMyEvents(result.data);
-        const savedEventIds = new Set<string>(result.data.map((e: Event) => e._id));
+      const result = await getUserRegisteredEvents(userId);
+      if (result.success && result.data && result.data.registeredEvents) {
+        const events = result.data.registeredEvents;
+        setMyEvents(events);
+        // Create Set of event names for comparison
+        const savedEventIds = new Set<string>(events.map((e: any) => e.eventName || e.Event || e.name));
         setSelectedEvents(savedEventIds);
         return savedEventIds; // Return the event IDs for immediate use
       }
@@ -2158,7 +2171,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={`dashboard-container w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-         style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0"}}>
+         style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column"}}>
       
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -2226,6 +2239,7 @@ const Dashboard: React.FC = () => {
         {/* Action Buttons - separate container with mobile-specific positioning */}
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center'}}>
           {isLoggedIn ? (
+            myEvents.length === 0 ? (
             <button 
               className="register-events-btn"
               style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
@@ -2241,6 +2255,7 @@ const Dashboard: React.FC = () => {
                 e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
               }}
             >Register for Events</button>
+            ) : null
           ) : (
             <button 
               className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
@@ -2289,6 +2304,19 @@ const Dashboard: React.FC = () => {
             }
             
             /* Adjust all dashboard sections for mobile */
+            .dashboard-container {
+              display: flex !important;
+              flex-direction: column !important;
+            }
+            
+            .throwback-section {
+              order: 1 !important;
+            }
+            
+            .about-theme-section {
+              order: 2 !important;
+            }
+            
             .about-theme-section,
             .highlights-section,
             .dashboard-section {
@@ -4296,13 +4324,13 @@ const Dashboard: React.FC = () => {
     fontSize: 'clamp(2rem, 6vw, 3.5rem)',
     fontWeight: 'bold',
     color: '#fdee71',
-    marginBottom: 'clamp(30px, 5vh, 50px)',
+    marginBottom: '-27px',
     textAlign: 'center',
     fontFamily: 'Bradley Hand, cursive',
-    zIndex: 100,
     position: 'relative',
     textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
     letterSpacing: '2px'
+
   }}
 >
   Throwback
@@ -4317,7 +4345,6 @@ const Dashboard: React.FC = () => {
           alignItems: 'center',
           position: 'relative',
           maxHeight: 'calc(100vh - 200px)',
-          padding: '0'
         }}>
           {/* Container for both flower halves */}
           <div className="throwback-flower-wrapper" style={{
@@ -4326,7 +4353,8 @@ const Dashboard: React.FC = () => {
             height: 'clamp(200px, 35vw, 450px)',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: '-20px'
           }}>
             {/* Left Half */}
             <div className="throwback-flower-left" style={{
@@ -4355,7 +4383,7 @@ const Dashboard: React.FC = () => {
                 clipPath="inset(0 50% 0 0)"
                 clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
                 style={{
-                  overflow: 'visible'
+                  overflow: 'visible',
                 }}
               />
             </div>
@@ -5451,10 +5479,13 @@ const Dashboard: React.FC = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                 <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
                 <button
-                  onClick={() => setShowProfileModal(false)}
+                  onClick={() => {
+                    setShowProfileModal(false);
+                    setShowMyEventsModal(true);
+                  }}
                   style={{
                     padding: '0.75rem 2rem',
-                    background: '#3b82f6',
+                    background: '#ec09bbe6',
                     color: 'white',
                     fontSize: '0.875rem',
                     fontWeight: 'bold',
@@ -5502,69 +5533,69 @@ const Dashboard: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
-                {/* Events List Centered */}
-                <div style={{ width: '100%', maxWidth: '400px' }}>
-                  <button
-                    onClick={() => {
-                      setShowProfileModal(false);
-                      setShowRegistrationModal(true);
-                    }}
-                    style={{
-                      color: '#fef3c7',
-                      fontSize: '1rem',
-                      fontWeight: '700',
-                      marginBottom: '1rem',
-                      marginTop: 0,
-                      textTransform: 'uppercase',
-                      background: 'rgba(255, 255, 255, 0.3)',
-                      padding: '0.75rem',
-                      borderRadius: '0.375rem',
-                      textAlign: 'center',
-                      backdropFilter: 'blur(4px)',
-                      letterSpacing: '0.05em',
-                      border: 'none',
-                      cursor: 'pointer',
-                      width: '100%',
-                      transition: 'all 0.3s'
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.background = 'rgba(30, 64, 236, 0.5)';
-                      e.currentTarget.style.transform = 'scale(1.02)';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.background = 'rgba(23, 191, 237, 0.3)';
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  >Register for Events</button>
-                  <button
-                    onClick={() => {
-                      setShowProfileModal(false);
-                      setShowMyEventsModal(true);
-                    }}
-                    style={{
-                      background: '#fef3c7',
-                      color: '#000',
-                      padding: '0.875rem 1rem',
-                      borderRadius: '0.5rem',
-                      fontWeight: '600',
-                      fontSize: '0.9375rem',
-                      textAlign: 'center',
-                      border: 'none',
-                      cursor: 'pointer',
-                      width: '100%',
-                      transition: 'all 0.3s'
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.background = '#fde68a';
-                      e.currentTarget.style.transform = 'scale(1.02)';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.background = '#fef3c7';
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  >
-                    MY Events
-                  </button>
+                {/* Inline view of registered events */}
+                <div style={{ width: '100%', maxWidth: '500px' }}>
+                  {myEvents.length > 0 ? (
+                    <>
+                      <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', marginBottom: '1rem' }}>
+                        My Registered Events
+                      </h3>
+                      <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {myEvents.map((event, index) => (
+                          <div
+                            key={event._id || `${event.eventName}-${index}`}
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.18)',
+                              borderRadius: '0.5rem',
+                              padding: '0.75rem 1rem',
+                              border: '1px solid rgba(255, 255, 255, 0.25)',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '0.25rem'
+                            }}
+                          >
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                              <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
+                                {event.eventName}
+                              </span>
+                              {event.eventType && (
+                                <span
+                                  style={{
+                                    background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
+                                    color: 'white',
+                                    padding: '0.2rem 0.6rem',
+                                    borderRadius: '999px',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    textTransform: 'uppercase'
+                                  }}
+                                >
+                                  {event.eventType}
+                                </span>
+                              )}
+                            </div>
+                            {event.category && (
+                              <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
+                                {event.category}
+                              </span>
+                            )}
+                            {event.description && (
+                              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>
+                                {event.description}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
+                        Use the <strong>EDIT/REGISTER</strong> button above to modify your events.
+                      </p>
+                    </>
+                  ) : (
+                    <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
+                      You haven't registered for any events yet. Use the <strong>EDIT/REGISTER</strong> button above to choose your events.
+                    </p>
+                  )}
                 </div>
               </div>
               </div>
@@ -6164,224 +6195,463 @@ const Dashboard: React.FC = () => {
               </button>
             </div>
 
-            {/* Sports Events Section */}
-            {registrationEvents.Sports && registrationEvents.Sports.length > 0 && (
-              <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ 
-                  color: '#fef3c7', 
-                  fontSize: '1.5rem', 
-                  fontWeight: 'bold', 
-                  marginBottom: '1rem',
-                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
-                  paddingBottom: '0.5rem'
-                }}>
-                  Sports Events
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {registrationEvents.Sports.map((event: any, index: number) => {
-                    if (!event || !event.Event) return null;
-                    
-                    const eventId = `sport-${index}`;
-                    const eventName = event.Event;
-                    const category = event.Category || '';
-                    const isHeader = category && category.trim() !== '';
-                    
-                    // Gender-based filtering
-                    const userGender = userProfileData.gender?.toLowerCase();
-                    if (userGender && category) {
-                      const categoryLower = category.toLowerCase();
-                      if (userGender === 'male' && categoryLower.includes('women')) {
-                        return null; // Skip women's events for male users
-                      }
-                      if (userGender === 'female' && categoryLower.includes('men') && !categoryLower.includes('women')) {
-                        return null; // Skip men's events for female users
-                      }
-                    }
-                    
-                    if (isHeader) {
-                      return (
-                        <div key={eventId} style={{ 
-                          color: '#fbbf24', 
-                          fontWeight: 'bold', 
-                          fontSize: '1.1rem', 
-                          marginTop: '1rem',
-                          paddingLeft: '0.5rem'
-                        }}>
-                          {category}
-                        </div>
-                      );
-                    }
-                    
-                    return (
-                      <label 
-                        key={eventId}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          padding: '0.75rem 1rem',
-                          borderRadius: '0.5rem',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s',
-                          border: '1px solid rgba(255, 255, 255, 0.2)'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                        }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedRegistrationEvents.has(eventId)}
-                          onChange={() => {
-                            setSelectedRegistrationEvents(prev => {
-                              const newSet = new Set(prev);
-                              if (newSet.has(eventId)) {
-                                newSet.delete(eventId);
-                              } else {
-                                newSet.add(eventId);
-                              }
-                              return newSet;
-                            });
-                          }}
-                          style={{
-                            width: '20px',
-                            height: '20px',
-                            marginRight: '1rem',
-                            cursor: 'pointer',
-                            accentColor: '#fbbf24'
-                          }}
-                        />
-                        <div style={{ flex: 1 }}>
-                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
-                            {eventName}
-                          </div>
-                          {category && !isHeader && (
-                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                              {category}
-                            </div>
-                          )}
-                        </div>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+            {/* Calculate constraint states */}
+            {(() => {
+              const hasParaSelected = Array.from(selectedRegistrationEvents).some(id => id.startsWith('para-'));
+              const hasNormalSelected = Array.from(selectedRegistrationEvents).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+              (window as any).__hasParaSelected = hasParaSelected;
+              (window as any).__hasNormalSelected = hasNormalSelected;
+              return null;
+            })()}
 
-            {/* Cultural Events Section */}
-            {registrationEvents.Culturals && registrationEvents.Culturals.length > 0 && (
-              <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ 
-                  color: '#fef3c7', 
-                  fontSize: '1.5rem', 
-                  fontWeight: 'bold', 
-                  marginBottom: '1rem',
-                  borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
-                  paddingBottom: '0.5rem'
-                }}>
-                  Culturals Events
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {registrationEvents.Culturals.map((event: any, index: number) => {
-                    // Skip null entries and header row
-                    if (!event || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
-                    
-                    const eventId = `cultural-${index}`;
-                    const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
-                    const category = event['5'] || '';
-                    
-                    // Skip if no event name
-                    if (!eventName) return null;
-                    
-                    const isHeader = category && category.trim() !== '' && !event.Column1;
-                    
-                    // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
-                    const userGender = userProfileData.gender?.toLowerCase();
-                    if (userGender && (category || eventName)) {
-                      const textToCheck = (category + ' ' + eventName).toLowerCase();
-                      if (userGender === 'male' && textToCheck.includes('ms.')) {
-                        return null; // Skip Ms. Mahotsav for male users
+            {/* Category Cards: Sports, Culturals, Para */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '1.5rem',
+                marginBottom: '1.5rem'
+              }}
+            >
+              {/* Sports Events Card */}
+              {registrationEvents.Sports && registrationEvents.Sports.length > 0 && (
+                <div
+                  style={{
+                    background: 'rgba(15, 23, 42, 0.4)',
+                    borderRadius: '0.75rem',
+                    padding: '1.25rem',
+                    border: '1px solid rgba(148, 163, 184, 0.6)'
+                  }}
+                >
+                  <h3
+                    style={{
+                      color: '#fef3c7',
+                      fontSize: '1.25rem',
+                      fontWeight: 'bold',
+                      marginBottom: '0.75rem'
+                    }}
+                  >
+                    Sports Events
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
+                    {registrationEvents.Sports.map((event: any, index: number) => {
+                      if (!event || !event.Event) return null;
+
+                      const eventId = `sport-${index}`;
+                      const eventName = event.Event;
+                      const category = event.Category || '';
+                      const isHeader = category && category.trim() !== '';
+
+                      // Gender-based filtering
+                      const userGender = userProfileData.gender?.toLowerCase();
+                      if (userGender && category) {
+                        const categoryLower = category.toLowerCase();
+                        if (userGender === 'male' && categoryLower.includes('women')) {
+                          return null; // Skip women's events for male users
+                        }
+                        if (userGender === 'female' && categoryLower.includes('men') && !categoryLower.includes('women')) {
+                          return null; // Skip men's events for female users
+                        }
                       }
-                      if (userGender === 'female' && textToCheck.includes('mr.') && !textToCheck.includes('mrs')) {
-                        return null; // Skip Mr. Mahotsav for female users
-                      }
-                    }
-                    
-                    if (isHeader) {
-                      return (
-                        <div key={eventId} style={{ 
-                          color: '#fbbf24', 
-                          fontWeight: 'bold', 
-                          fontSize: '1.1rem', 
-                          marginTop: '1rem',
-                          paddingLeft: '0.5rem'
-                        }}>
-                          {category}
-                        </div>
-                      );
-                    }
-                    
-                    return (
-                      <label 
-                        key={eventId}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          padding: '0.75rem 1rem',
-                          borderRadius: '0.5rem',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s',
-                          border: '1px solid rgba(255, 255, 255, 0.2)'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                        }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedRegistrationEvents.has(eventId)}
-                          onChange={() => {
-                            setSelectedRegistrationEvents(prev => {
-                              const newSet = new Set(prev);
-                              if (newSet.has(eventId)) {
-                                newSet.delete(eventId);
-                              } else {
-                                newSet.add(eventId);
-                              }
-                              return newSet;
-                            });
-                          }}
-                          style={{
-                            width: '20px',
-                            height: '20px',
-                            marginRight: '1rem',
-                            cursor: 'pointer',
-                            accentColor: '#fbbf24'
-                          }}
-                        />
-                        <div style={{ flex: 1 }}>
-                          <div style={{ color: 'white', fontWeight: '600', fontSize: '1rem' }}>
-                            {eventName}
+
+                      if (isHeader) {
+                        return (
+                          <div
+                            key={eventId}
+                            style={{
+                              color: '#fbbf24',
+                              fontWeight: 'bold',
+                              fontSize: '1.05rem',
+                              marginTop: '0.75rem',
+                              paddingLeft: '0.25rem'
+                            }}
+                          >
+                            {category}
                           </div>
-                          {category && !isHeader && (
-                            <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-                              {category}
+                        );
+                      }
+
+                      const disabled = isEventAlreadySaved(eventName);
+                      const constraintDisabled = !disabled && (window as any).__hasParaSelected;
+                      const finalDisabled = disabled || constraintDisabled;
+                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
+
+                      return (
+                        <label
+                          key={eventId}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)',
+                            padding: '0.6rem 0.85rem',
+                            borderRadius: '0.5rem',
+                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                            transition: 'all 0.3s',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            opacity: constraintDisabled ? 0.5 : 1
+                          }}
+                          onMouseOver={(e) => {
+                            if (!finalDisabled) {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                            }
+                          }}
+                          onMouseOut={(e) => {
+                            e.currentTarget.style.background = finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)';
+                          }}
+                          onClick={(e) => {
+                            if (constraintDisabled && !disabled) {
+                              e.preventDefault();
+                              alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                            }
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            disabled={finalDisabled}
+                            onChange={() => {
+                              if (finalDisabled) return;
+                              
+                              setSelectedRegistrationEvents((prev) => {
+                                const newSet = new Set(prev);
+                                if (newSet.has(eventId)) {
+                                  newSet.delete(eventId);
+                                } else {
+                                  newSet.add(eventId);
+                                }
+                                return newSet;
+                              });
+                            }}
+                            style={{
+                              width: '18px',
+                              height: '18px',
+                              marginRight: '0.75rem',
+                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                              accentColor: '#fbbf24'
+                            }}
+                          />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                              {eventName}
                             </div>
-                          )}
-                        </div>
-                      </label>
-                    );
-                  })}
+                            {category && !isHeader && (
+                              <div
+                                style={{
+                                  color: 'rgba(255, 255, 255, 0.7)',
+                                  fontSize: '0.8rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                {category}
+                              </div>
+                            )}
+                            {disabled && (
+                              <div
+                                style={{
+                                  color: 'rgba(248, 250, 252, 0.8)',
+                                  fontSize: '0.75rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                Already registered
+                              </div>
+                            )}
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Culturals Events Card */}
+              {registrationEvents.Culturals && registrationEvents.Culturals.length > 0 && (
+                <div
+                  style={{
+                    background: 'rgba(15, 23, 42, 0.4)',
+                    borderRadius: '0.75rem',
+                    padding: '1.25rem',
+                    border: '1px solid rgba(148, 163, 184, 0.6)'
+                  }}
+                >
+                  <h3
+                    style={{
+                      color: '#fef3c7',
+                      fontSize: '1.25rem',
+                      fontWeight: 'bold',
+                      marginBottom: '0.75rem'
+                    }}
+                  >
+                    Culturals Events
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
+                    {registrationEvents.Culturals.map((event: any, index: number) => {
+                      // Skip null entries and header row
+                      if (!event || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
+
+                      const eventId = `cultural-${index}`;
+                      const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
+                      const category = event['5'] || '';
+
+                      // Skip if no event name
+                      if (!eventName) return null;
+
+                      const isHeader = category && category.trim() !== '' && !event.Column1;
+
+                      // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
+                      const userGender = userProfileData.gender?.toLowerCase();
+                      if (userGender && (category || eventName)) {
+                        const textToCheck = (category + ' ' + eventName).toLowerCase();
+                        if (userGender === 'male' && textToCheck.includes('ms.')) {
+                          return null; // Skip Ms. Mahotsav for male users
+                        }
+                        if (userGender === 'female' && textToCheck.includes('mr.') && !textToCheck.includes('mrs')) {
+                          return null; // Skip Mr. Mahotsav for female users
+                        }
+                      }
+
+                      if (isHeader) {
+                        return (
+                          <div
+                            key={eventId}
+                            style={{
+                              color: '#fbbf24',
+                              fontWeight: 'bold',
+                              fontSize: '1.05rem',
+                              marginTop: '0.75rem',
+                              paddingLeft: '0.25rem'
+                            }}
+                          >
+                            {category}
+                          </div>
+                        );
+                      }
+
+                      const disabled = isEventAlreadySaved(eventName);
+                      const constraintDisabled = !disabled && (window as any).__hasParaSelected;
+                      const finalDisabled = disabled || constraintDisabled;
+                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
+
+                      return (
+                        <label
+                          key={eventId}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)',
+                            padding: '0.6rem 0.85rem',
+                            borderRadius: '0.5rem',
+                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                            transition: 'all 0.3s',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            opacity: constraintDisabled ? 0.5 : 1
+                          }}
+                          onMouseOver={(e) => {
+                            if (!finalDisabled) {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                            }
+                          }}
+                          onMouseOut={(e) => {
+                            e.currentTarget.style.background = finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)';
+                          }}
+                          onClick={(e) => {
+                            if (constraintDisabled && !disabled) {
+                              e.preventDefault();
+                              alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                            }
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            disabled={finalDisabled}
+                            onChange={() => {
+                              if (finalDisabled) return;
+                              
+                              setSelectedRegistrationEvents((prev) => {
+                                const newSet = new Set(prev);
+                                if (newSet.has(eventId)) {
+                                  newSet.delete(eventId);
+                                } else {
+                                  newSet.add(eventId);
+                                }
+                                return newSet;
+                              });
+                            }}
+                            style={{
+                              width: '18px',
+                              height: '18px',
+                              marginRight: '0.75rem',
+                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                              accentColor: '#fbbf24'
+                            }}
+                          />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                              {eventName}
+                            </div>
+                            {category && !isHeader && (
+                              <div
+                                style={{
+                                  color: 'rgba(255, 255, 255, 0.7)',
+                                  fontSize: '0.8rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                {category}
+                              </div>
+                            )}
+                            {disabled && (
+                              <div
+                                style={{
+                                  color: 'rgba(248, 250, 252, 0.8)',
+                                  fontSize: '0.75rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                Already registered
+                              </div>
+                            )}
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Para Sports Events Card */}
+              {getFilteredParaSportsEvents().length > 0 && (
+                <div
+                  style={{
+                    background: 'rgba(15, 23, 42, 0.4)',
+                    borderRadius: '0.75rem',
+                    padding: '1.25rem',
+                    border: '1px solid rgba(148, 163, 184, 0.6)'
+                  }}
+                >
+                  <h3
+                    style={{
+                      color: '#fef3c7',
+                      fontSize: '1.25rem',
+                      fontWeight: 'bold',
+                      marginBottom: '0.75rem'
+                    }}
+                  >
+                    Para Sports
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
+                    {getFilteredParaSportsEvents().map((event, index) => {
+                      const eventId = `para-${index}`;
+                      const eventName = event.eventName;
+                      const category = event.category || '';
+
+                      const disabled = isEventAlreadySaved(eventName);
+                      const hasNormalSelected = (window as any).__hasNormalSelected;
+                      const constraintDisabled = !disabled && hasNormalSelected;
+                      const finalDisabled = disabled || constraintDisabled;
+                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
+
+                      return (
+                        <label
+                          key={eventId}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)',
+                            padding: '0.6rem 0.85rem',
+                            borderRadius: '0.5rem',
+                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                            transition: 'all 0.3s',
+                            border: '1px solid rgba(255, 255, 255, 0.18)',
+                            opacity: constraintDisabled ? 0.5 : 1
+                          }}
+                          onMouseOver={(e) => {
+                            if (!finalDisabled) {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                            }
+                          }}
+                          onMouseOut={(e) => {
+                            e.currentTarget.style.background = finalDisabled
+                              ? 'rgba(75, 85, 99, 0.5)'
+                              : 'rgba(255, 255, 255, 0.08)';
+                          }}
+                          onClick={(e) => {
+                            if (constraintDisabled && !disabled) {
+                              e.preventDefault();
+                              alert('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
+                            }
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            disabled={finalDisabled}
+                            onChange={() => {
+                              if (finalDisabled) return;
+                              
+                              setSelectedRegistrationEvents((prev) => {
+                                const newSet = new Set(prev);
+                                if (newSet.has(eventId)) {
+                                  newSet.delete(eventId);
+                                } else {
+                                  newSet.add(eventId);
+                                }
+                                return newSet;
+                              });
+                            }}
+                            style={{
+                              width: '18px',
+                              height: '18px',
+                              marginRight: '0.75rem',
+                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                              accentColor: '#fbbf24'
+                            }}
+                          />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                              {eventName}
+                            </div>
+                            {category && (
+                              <div
+                                style={{
+                                  color: 'rgba(255, 255, 255, 0.7)',
+                                  fontSize: '0.8rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                {category}
+                              </div>
+                            )}
+                            {disabled && (
+                              <div
+                                style={{
+                                  color: 'rgba(248, 250, 252, 0.8)',
+                                  fontSize: '0.75rem',
+                                  marginTop: '0.1rem'
+                                }}
+                              >
+                                Already registered
+                              </div>
+                            )}
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Footer with Submit Button */}
             <div style={{ 
@@ -6534,35 +6804,50 @@ const Dashboard: React.FC = () => {
                   }
                   
                   // Prepare events data to save
-                  const eventsToSave = selectedIds.map(id => {
-                    const [type, index] = id.split('-');
-                    const idx = parseInt(index);
-                    
-                    if (type === 'sport' && registrationEvents.Sports[idx]) {
-                      const event = registrationEvents.Sports[idx];
-                      return {
-                        eventCode: id,
-                        eventId: id,
-                        eventName: event['738500'],
-                        eventType: 'sports',
-                        category: event['Prize money for Sports'] || '',
-                        description: `${event['Prize money for Sports'] || ''} - ${event['738500']}`.trim(),
-                        fee: userProfileData.gender === 'male' ? 350 : 350
-                      };
-                    } else if (type === 'cultural' && registrationEvents.Culturals[idx]) {
-                      const event = registrationEvents.Culturals[idx];
-                      return {
-                        eventCode: id,
-                        eventId: id,
-                        eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
-                        eventType: 'culturals',
-                        category: event['5'] || '',
-                        description: `${event['5'] || ''} - ${event['Prize money for Performing arts, Visual arts, Fashion']}`.trim(),
-                        fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
-                      };
-                    }
-                    return null;
-                  }).filter(e => e !== null);
+                  const eventsToSave = selectedIds
+                    .map(id => {
+                      const [type, index] = id.split('-');
+                      const idx = parseInt(index);
+
+                      if (type === 'sport' && registrationEvents.Sports[idx]) {
+                        const event = registrationEvents.Sports[idx];
+                        return {
+                          eventName: event['738500'],
+                          eventType: 'sports',
+                          category: event['Prize money for Sports'] || '',
+                          description: `${event['Prize money for Sports'] || ''} - ${event['738500']}`.trim(),
+                          fee: userProfileData.gender === 'male' ? 350 : 350
+                        };
+                      }
+
+                      if (type === 'cultural' && registrationEvents.Culturals[idx]) {
+                        const event = registrationEvents.Culturals[idx];
+                        return {
+                          eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
+                          eventType: 'culturals',
+                          category: event['5'] || '',
+                          description: `${event['5'] || ''} - ${event['Prize money for Performing arts, Visual arts, Fashion']}`.trim(),
+                          fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
+                        };
+                      }
+
+                      if (type === 'para') {
+                        const paraEvents = getFilteredParaSportsEvents();
+                        const event = paraEvents[idx];
+                        if (event) {
+                          return {
+                            eventName: event.eventName,
+                            eventType: 'parasports',
+                            category: event.category || '',
+                            description: event.description || event.eventName,
+                            fee: 0
+                          };
+                        }
+                      }
+
+                      return null;
+                    })
+                    .filter(e => e !== null);
                   
                   try {
                     // Save to database via API
@@ -6589,6 +6874,9 @@ const Dashboard: React.FC = () => {
                     
                     // Update local state with the registered events
                     setMyEvents(eventsToSave as any);
+                    
+                    // Refresh myEvents from database to ensure sync
+                    await fetchUserSavedEvents(userProfileData.userId);
                     
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
                     alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);

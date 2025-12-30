@@ -131,16 +131,15 @@ const Login: React.FC<LoginProps> = ({
               />
             </div>
 
-            {/* Password */}
+            {/* Password as Date (DOB) */}
             <div className="ca-form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password (Date of Birth)</label>
               <input
-                type="password"
+                type="date"
                 id="password"
                 name="password"
                 value={loginFormData.password}
                 onChange={onInputChange}
-                placeholder="Enter your password"
                 required
               />
             </div>

@@ -72,7 +72,7 @@ const Signup: React.FC<SignupProps> = ({
             
             {/* Single-step form: show all fields together like CA signup */}
             <div className="form-section">
-              <h3>👤 Personal Information</h3>
+              <h3>PERSONAL INFORMATION</h3>
               <div className="ca-form-row" style={{ columnGap: '18px', rowGap: '14px' }}>
                 <div className="ca-form-group">
                   <label htmlFor="name">Full Name *</label>
@@ -122,7 +122,7 @@ const Signup: React.FC<SignupProps> = ({
             />
 
             <div className="form-section">
-              <h3>📞 Contact Information</h3>
+              <h3>CONTACT INFORMATION</h3>
               <div className="ca-form-row" style={{ columnGap: '18px', rowGap: '14px' }}>
                 <div className="ca-form-group">
                   <label htmlFor="email">Email Address *</label>
@@ -224,7 +224,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
 
   return (
     <div className="form-section">
-      <h3>🎓 Academic Information</h3>
+      <h3>ACADEMIC INFORMATION</h3>
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="registerId">Register ID</label>

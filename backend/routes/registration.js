@@ -104,11 +104,20 @@ router.post('/register', async (req, res) => {
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
+        const userId = await generateUserId();
+        
+        // Convert YYYY-MM-DD to DD/MM/YYYY for password storage
+        let passwordToStore = dateOfBirth || password;
+        if (passwordToStore && passwordToStore.includes('-')) {
+          const [year, month, day] = passwordToStore.split('-');
+          passwordToStore = `${day}/${month}/${year}`;
+        }
+
         const registration = await Registration.create({
           userId,
           name,
           email: normalizedEmail,
-          password, // ⚠️ hash in production
+          password: passwordToStore, // Store in DD/MM/YYYY format
           phone,
           college,
           branch,
@@ -144,7 +153,8 @@ router.post('/register', async (req, res) => {
           data: {
             userId: registration.userId,
             name: registration.name,
-            email: registration.email
+            email: registration.email,
+            password: registration.password
           }
         });
       } catch (err) {
@@ -178,26 +188,36 @@ router.post('/register', async (req, res) => {
 ===================================================== */
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, mahotsavId, regNo } = req.body;
+    const identifier = email || mahotsavId || regNo;
 
-    if (!email || !password) {
+    if (!identifier || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Email and password required'
+        message: 'Identifier and password required'
       });
     }
 
-    // Normalize email to match registration format
-    const normalizedEmail = email.trim().toLowerCase();
-
     const user = await Registration.findOne({
-      $or: [
-        { email: normalizedEmail },
-        { userId: email.trim() }
-      ]
+      $or: [{ email: identifier }, { userId: identifier }, { registerId: identifier }]
     });
 
-    if (!user || user.password !== password) {
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    // Convert YYYY-MM-DD input from date picker to DD/MM/YYYY
+    let passwordToCheck = password;
+    if (password.includes('-') && password.length === 10) {
+      const [year, month, day] = password.split('-');
+      passwordToCheck = `${day}/${month}/${year}`;
+    }
+
+    // Check if passwords match
+    if (user.password !== passwordToCheck) {
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'
@@ -234,35 +254,109 @@ router.post('/login', async (req, res) => {
    URL: POST /api/save-events
 ===================================================== */
 router.post('/save-events', async (req, res) => {
-  const { userId, events } = req.body;
+  try {
+    const { userId, events } = req.body;
 
-  if (!userId || !Array.isArray(events)) {
-    return res.status(400).json({
+    if (!userId || !Array.isArray(events)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid input'
+      });
+    }
+
+    // Get user details from Registration
+    const user = await Registration.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Find or create participant
+    let participant = await Participant.findOne({ userId });
+    if (!participant) {
+      // Create participant if doesn't exist
+      participant = await Participant.create({
+        userId,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        college: user.college,
+        dateOfBirth: user.dateOfBirth,
+        gender: user.gender,
+        registerId: user.registerId,
+        participantType: 'general',
+        referredBy: user.referredBy,
+        paymentStatus: 'pending',
+        registeredEvents: []
+      });
+    }
+
+    // Update registered events
+    participant.registeredEvents = events.map(e => ({
+      ...e,
+      registeredAt: new Date()
+    }));
+
+    await participant.save();
+
+    res.json({
+      success: true,
+      message: 'Events saved successfully',
+      data: { 
+        userId,
+        registeredEvents: participant.registeredEvents
+      }
+    });
+  } catch (error) {
+    console.error('Error saving events:', error);
+    res.status(500).json({
       success: false,
-      message: 'Invalid input'
+      message: 'Failed to save events',
+      error: error.message
     });
   }
+});
 
-  const participant = await Participant.findOne({ userId });
-  if (!participant) {
-    return res.status(404).json({
+/* =====================================================
+   Get User's Registered Events
+   URL: GET /api/my-registrations/:userId
+===================================================== */
+router.get('/my-registrations/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find participant by userId
+    const participant = await Participant.findOne({ userId });
+    
+    if (!participant) {
+      return res.json({
+        success: true,
+        message: 'No registrations found',
+        data: {
+          userId,
+          registeredEvents: []
+        }
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Registered events retrieved successfully',
+      data: {
+        userId,
+        registeredEvents: participant.registeredEvents || []
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching registered events:', error);
+    res.status(500).json({
       success: false,
-      message: 'Participant not found'
+      message: 'Failed to fetch registered events',
+      error: error.message
     });
   }
-
-  participant.registeredEvents = events.map(e => ({
-    ...e,
-    registeredAt: new Date()
-  }));
-
-  await participant.save();
-
-  res.json({
-    success: true,
-    message: 'Events saved',
-    count: participant.registeredEvents.length
-  });
 });
 
 /* =====================================================

@@ -29,9 +29,7 @@ const EventsInfo: React.FC = () => {
   const [showRoboWarsGaming, setShowRoboWarsGaming] = useState(false);
   const [showParaCards, setShowParaCards] = useState(false);
 
-  // Carousel states
-  const [, setCurrentSportsSlide] = useState(2);
-  const [, setCurrentCulturalsSlide] = useState(3);
+  // Carousel states - removed unused slide state
 
   // Events data
   const [, setSportsEvents] = useState<Event[]>([]);
@@ -368,23 +366,7 @@ const EventsInfo: React.FC = () => {
     setShowCulturals(true);
   };
 
-  // Navigation functions for sports carousel
-  const nextSportsSlide = () => {
-    setCurrentSportsSlide((prev) => (prev + 1) % sportsDetailCards.length);
-  };
-
-  const prevSportsSlide = () => {
-    setCurrentSportsSlide((prev) => (prev - 1 + sportsDetailCards.length) % sportsDetailCards.length);
-  };
-
-  // Navigation functions for culturals carousel
-  const nextCulturalsSlide = () => {
-    setCurrentCulturalsSlide((prev) => (prev + 1) % culturalsCards.length);
-  };
-
-  const prevCulturalsSlide = () => {
-    setCurrentCulturalsSlide((prev) => (prev - 1 + culturalsCards.length) % culturalsCards.length);
-  };
+  // Navigation functions removed - carousel not currently implemented
 
   // Fetch events
   useEffect(() => {

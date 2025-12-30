@@ -23,6 +23,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 /* =====================================================
+   Trust Proxy Configuration (for nginx/reverse proxy)
+===================================================== */
+// Enable trust proxy when behind nginx or other reverse proxy
+app.set('trust proxy', 1);
+
+/* =====================================================
    Init DB & Queue
 ===================================================== */
 connectDB();

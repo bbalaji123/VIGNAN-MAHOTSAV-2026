@@ -1,3 +1,6 @@
 node_modules
 .env
 *.log
+
+# Data files should be committed so they're available in production
+# Do NOT add data/ to gitignore

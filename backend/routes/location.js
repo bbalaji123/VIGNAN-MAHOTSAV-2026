@@ -20,7 +20,8 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
  */
 async function loadLocationData() {
   try {
-    const publicPath = path.join(__dirname, '../../public');
+    // Use backend's own data folder instead of public folder
+    const dataPath = path.join(__dirname, '../data');
     
     // Check if cache is still valid
     if (cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
@@ -29,12 +30,13 @@ async function loadLocationData() {
     }
 
     logger.info('📍 Loading location data from files...');
+    logger.info(`📁 Data path: ${dataPath}`);
     
     // Load all files in parallel for better performance
     const [statesData, districtsData, collegesData] = await Promise.all([
-      fs.readFile(path.join(publicPath, 'state.json'), 'utf-8'),
-      fs.readFile(path.join(publicPath, 'district.json'), 'utf-8'),
-      fs.readFile(path.join(publicPath, 'college.json'), 'utf-8')
+      fs.readFile(path.join(dataPath, 'state.json'), 'utf-8'),
+      fs.readFile(path.join(dataPath, 'district.json'), 'utf-8'),
+      fs.readFile(path.join(dataPath, 'college.json'), 'utf-8')
     ]);
 
     // Parse JSON data

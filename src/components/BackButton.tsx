@@ -28,7 +28,7 @@ const BackButton: React.FC<BackButtonProps> = ({ onClick, className = '', style 
       <img
         src={`${import.meta.env.BASE_URL}BACK.avif`}
         alt="Back"
-        className="w-full h-full object-contain"
+        className="w-full h-full object-contain pointer-events-none"
       />
     </button>
   );

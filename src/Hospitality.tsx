@@ -14,15 +14,9 @@ const Hospitality: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
-      backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
-      backgroundRepeat: 'no-repeat'
-    }}>
+    <div className="hospitality-bg min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -36,7 +30,7 @@ const Hospitality: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-55 z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-55 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -77,59 +71,55 @@ const Hospitality: React.FC = () => {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 md:py-16">
-        <h1 className="hospitality-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8" style={{
-          color: 'rgba(255, 255, 0, 0.842)',
-          marginTop: '1rem',
-          marginBottom: '2rem',
-          // textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
-        }}>HOSPITALITY</h1>
+        <h1 className="hospitality-title hospitality-title-color text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8">HOSPITALITY</h1>
         
+        {/* Desktop Tab Navigation */}
+        <div className="hidden md:flex hospitality-tabs">
+          <button
+            onClick={() => setActiveTab('instructions')}
+            className={`hospitality-tab-btn ${activeTab === 'instructions' ? 'active' : 'inactive'}`}
+          >
+            Instructions
+          </button>
+          <button
+            onClick={() => setActiveTab('howToReach')}
+            className={`hospitality-tab-btn ${activeTab === 'howToReach' ? 'active' : 'inactive'}`}
+          >
+            How to Reach
+          </button>
+          <button
+            onClick={() => setActiveTab('accommodation')}
+            className={`hospitality-tab-btn ${activeTab === 'accommodation' ? 'active' : 'inactive'}`}
+          >
+            Accommodation
+          </button>
+          <button
+            onClick={() => setActiveTab('contacts')}
+            className={`hospitality-tab-btn ${activeTab === 'contacts' ? 'active' : 'inactive'}`}
+          >
+            Contacts
+          </button>
+          <button
+            onClick={() => setActiveTab('faqs')}
+            className={`hospitality-tab-btn ${activeTab === 'faqs' ? 'active' : 'inactive'}`}
+          >
+            FAQ's
+          </button>
+        </div>
+
         {/* Mobile Dropdown Navigation */}
         <select 
           className="block md:hidden hospitality-mobile-select touch-manipulation"
           value={activeTab}
           onChange={(e) => setActiveTab(e.target.value as 'instructions' | 'howToReach' | 'accommodation' | 'contacts' | 'faqs')}
+          aria-label="Select hospitality section"
         >
-          <option value="instructions" style={{ background: '#522566', color: '#ffffff' }}>Instructions</option>
-          <option value="howToReach" style={{ background: '#522566', color: '#ffffff' }}>How to Reach</option>
-          <option value="accommodation" style={{ background: '#522566', color: '#ffffff' }}>Accommodation</option>
-          <option value="contacts" style={{ background: '#522566', color: '#ffffff' }}>Contacts</option>
-          <option value="faqs" style={{ background: '#522566', color: '#ffffff' }}>FAQ's</option>
+          <option value="instructions" className="hospitality-option">Instructions</option>
+          <option value="howToReach" className="hospitality-option">How to Reach</option>
+          <option value="accommodation" className="hospitality-option">Accommodation</option>
+          <option value="contacts" className="hospitality-option">Contacts</option>
+          <option value="faqs" className="hospitality-option">FAQ's</option>
         </select>
-
-        {/* Desktop Tab Navigation */}
-        <div className="hidden md:flex hospitality-tabs">
-          <button 
-            className={`hospitality-tab-btn ${activeTab === 'instructions' ? 'active' : 'inactive'}`}
-            onClick={() => setActiveTab('instructions')}
-          >
-            Instructions
-          </button>
-          <button 
-            className={`hospitality-tab-btn ${activeTab === 'howToReach' ? 'active' : 'inactive'}`}
-            onClick={() => setActiveTab('howToReach')}
-          >
-            How to Reach
-          </button>
-          <button 
-            className={`hospitality-tab-btn ${activeTab === 'accommodation' ? 'active' : 'inactive'}`}
-            onClick={() => setActiveTab('accommodation')}
-          >
-            Accommodation
-          </button>
-          <button 
-            className={`hospitality-tab-btn ${activeTab === 'contacts' ? 'active' : 'inactive'}`}
-            onClick={() => setActiveTab('contacts')}
-          >
-            Contacts
-          </button>
-          <button 
-            className={`hospitality-tab-btn ${activeTab === 'faqs' ? 'active' : 'inactive'}`}
-            onClick={() => setActiveTab('faqs')}
-          >
-            FAQ's
-          </button>
-        </div>
 
         {/* Instructions Tab */}
         {activeTab === 'instructions' && (
@@ -207,7 +197,7 @@ const Hospitality: React.FC = () => {
             </table>
             </div>
 
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' ,marginLeft: '550px'}}>For Girls:</h3>
+            <h3 className="section-subheading">For Girls:</h3>
             <div className="hospitality-table-container">
             <table className="hospitality-table">
               <thead>
@@ -233,7 +223,7 @@ const Hospitality: React.FC = () => {
             </table>
             </div>
 
-            <h2 className="section-heading-primary mt-8 " style={{ marginLeft: '350px' }}>FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="section-heading-primary hospitality-heading-centered mt-8">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
             <div className="hospitality-table-container">
             <table className="hospitality-table">
               <thead>
@@ -284,7 +274,7 @@ const Hospitality: React.FC = () => {
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
           
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' ,paddingLeft: '550px'}}>For Boys:</h3>
+            <h3 className="section-subheading hospitality-subheading-padded">For Boys:</h3>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -296,33 +286,33 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Mr. Ashwin</td>
-                    <td ><a href="tel:+91 88852 84355" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88852 84355</a></td>
+                    <td><a href="tel:+91 88852 84355" className="hospitality-table-link">+91 88852 84355</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Ajith</td>
-                    <td ><a href="tel:+91 93461 93840" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 93461 93840</a></td>
+                    <td><a href="tel:+91 93461 93840" className="hospitality-table-link">+91 93461 93840</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Hemanth</td>
-                    <td ><a href="tel:+91 88854 76252" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 88854 76252</a></td>
+                    <td><a href="tel:+91 88854 76252" className="hospitality-table-link">+91 88854 76252</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Phani</td>
-                    <td ><a href="tel:+91 95426 66866" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 95426 66866</a></td>
+                    <td><a href="tel:+91 95426 66866" className="hospitality-table-link">+91 95426 66866</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Nawaz Basha</td>
-                    <td ><a href="tel:+91 99638 76989" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99638 76989</a></td>
+                    <td><a href="tel:+91 99638 76989" className="hospitality-table-link">+91 99638 76989</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Yeshwanth</td>
-                    <td ><a href="tel:+91 83091 90435" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83091 90435</a></td>
+                    <td><a href="tel:+91 83091 90435" className="hospitality-table-link">+91 83091 90435</a></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h3 style={{ color: '#fbbf24', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem', paddingLeft: '550px' }}>For Girls:</h3>
+            <h3 className="section-subheading hospitality-subheading-padded">For Girls:</h3>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -334,21 +324,21 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Ms. Yamini</td>
-                    <td ><a href="tel:+917093912677" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 70939 12677</a></td>
+                    <td><a href="tel:+917093912677" className="hospitality-table-link">+91 70939 12677</a></td>
                   </tr>
                   <tr >
                     <td >Ms. Sravani</td>
-                    <td ><a href="tel:+919014704929" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 90147 04929</a></td>
+                    <td><a href="tel:+919014704929" className="hospitality-table-link">+91 90147 04929</a></td>
                   </tr>
                   <tr >
                     <td >Ms. Bindhu</td>
-                    <td ><a href="tel:+919959022317" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 99590 22317</a></td>
+                    <td><a href="tel:+919959022317" className="hospitality-table-link">+91 99590 22317</a></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h2 className="section-heading-primary" style={{ marginLeft: '350px' }}>FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <h2 className="section-heading-primary hospitality-heading-centered">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
                 <thead>
@@ -360,11 +350,11 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Mr. Lohith</td>
-                    <td ><a href="tel:+918309751051" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 83097 51051</a></td>
+                    <td><a href="tel:+918309751051" className="hospitality-table-link">+91 83097 51051</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Sri Vatsav</td>
-                    <td ><a href="tel:+919441934549" style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>+91 94419 34549</a></td>
+                    <td><a href="tel:+919441934549" className="hospitality-table-link">+91 94419 34549</a></td>
                   </tr>
                 </tbody>
               </table>

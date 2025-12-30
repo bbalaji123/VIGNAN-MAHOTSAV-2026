@@ -223,6 +223,33 @@ const EventDetail: React.FC = () => {
     
       ]
     },
+    "Yoga & Individual": {
+      title: "INDIVIDUAL EVENTS",
+      subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
+      rules: [
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Everyone should report at least 30 mins before scheduled match time.",
+        "All participants must come with a proper sports attire.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Syllabus, Rules & Regulations for the Yogasana events: Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat",
+        "Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Link to refer syllabus: https://www.yogasanabharat.com/code",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        first: "Rs. 2,000 (Traditional) / Rs. 2,000 (Artistic)",
+        second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
+      },
+      contacts: [
+         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
+        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+    
+      ]
+    },
     "Artistic Yogasana": {
       title: "INDIVIDUAL EVENTS",
       subtitle: "YOGASANA (Men & Women) - Traditional & Artistic",
@@ -1921,6 +1948,7 @@ const EventDetail: React.FC = () => {
     "Table Tennis": "events/Tabel Tennis.avif",
     "Traditional Yogasana": "events/Traditional Yoga.avif",
     "Artistic Yogasana": "events/Traditional Yoga.avif",
+    "Yoga & Individual": "Yoga & individual.png",
     "Taekwondo": "events/Taekwando.avif",
     "Tennikoit": "events/Tennikoit.avif",
     "Volley ball (Men)": "events/volley ball.avif",
@@ -2117,7 +2145,7 @@ const EventDetail: React.FC = () => {
       overflow: 'hidden'
     }}>
       {/* Decorative Flower - Top Right Corner */}
-      <div className="fixed pointer-events-none z-[1] event-detail-flower" style={{
+      <div className="fixed pointer-events-none max-md:z-0 md:z-[1] event-detail-flower" style={{
         top: '-150px',
         right: '-150px',
         width: '450px',

@@ -20,7 +20,7 @@ const ParaSports: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -34,7 +34,7 @@ const ParaSports: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -358,8 +358,8 @@ const ParaSports: React.FC = () => {
         `}
       </style>
 
-      {/* Back to List Button */}
-      <BackButton onClick={handleBackClick} />
+      {/* Navigation Buttons */}
+      <NavigationButtons onBackClick={handleBackClick} />
 
       {/* Main Content */}
       <div className="parasports-content">
@@ -370,7 +370,11 @@ const ParaSports: React.FC = () => {
           <div className="neon-card">
             <div className="shield-icon"></div>
             <div className="card-icon-area">
-              <span className="placeholder-text">Image Space</span>
+              <img 
+                src={`${import.meta.env.BASE_URL}Para_Sports.png`}
+                alt="Para Athletics" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <h3 className="card-title">Para Athletics</h3>
             <p className="card-subtitle">(M&W)</p>
@@ -380,7 +384,11 @@ const ParaSports: React.FC = () => {
           <div className="neon-card">
             <div className="shield-icon"></div>
             <div className="card-icon-area">
-              <span className="placeholder-text">Image Space</span>
+              <img 
+                src={`${import.meta.env.BASE_URL}Para_cricket.png`}
+                alt="Para Cricket" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <h3 className="card-title">Para Cricket</h3>
             <p className="card-subtitle">(M&W)</p>

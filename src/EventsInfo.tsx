@@ -47,7 +47,8 @@ const EventsInfo: React.FC = () => {
     { title: "Table Tennis", subtitle: "" },
     { title: "Traditional Yogasana", subtitle: "" },
     { title: "Taekwondo", subtitle: "under 8 wt. categories" },
-    { title: "Tennikoit", subtitle: "" }
+    { title: "Tennikoit", subtitle: "" },
+    { title: "Yoga & Individual", subtitle: "" }
   ];
 
   const mensTeamSportsCards = [
@@ -185,7 +186,8 @@ const EventsInfo: React.FC = () => {
     "Throw ball": true,
     "Tennikoit": true,
     "Traditional Yogasana": true,
-    "Taekwondo": true
+    "Taekwondo": true,
+    "Yoga & Individual": true
   };
 
   // Handle event detail click with gender context
@@ -378,7 +380,8 @@ const EventsInfo: React.FC = () => {
         ]);
         setSportsEvents(sportsResponse.data || []);
         setCulturalEvents(culturalsResponse.data || []);
-      } catch (error) {
+      } catch {
+        // Error silently ignored
       }
     };
 
@@ -472,7 +475,7 @@ const EventsInfo: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right (clipped naturally) */}
-      <div className="fixed pointer-events-none z-[1] flower-top-right">
+      <div className="fixed pointer-events-none max-md:z-0 md:z-[1] flower-top-right">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -486,7 +489,7 @@ const EventsInfo: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left (clipped naturally) */}
-      <div className="fixed pointer-events-none z-[1] flower-bottom-left">
+      <div className="fixed pointer-events-none max-md:z-0 md:z-[1] flower-bottom-left">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -775,10 +778,6 @@ const EventsInfo: React.FC = () => {
             pointer-events: none;
           }
 
-          .inner-event-card:hover::before {
-            background: rgba(0, 0, 0, 0.6);
-          }
-
           .inner-event-card:hover {
             transform: scale(1.05);
           }
@@ -788,6 +787,12 @@ const EventsInfo: React.FC = () => {
             height: 100%;
             object-fit: cover;
             object-position: center;
+            transition: opacity 0.3s ease;
+          }
+
+          /* When hovering over a specific card, make its siblings transparent */
+          .inner-event-cards-container:has(.inner-event-card:hover) .inner-event-card:not(:hover) img {
+            opacity: 0.4;
           }
         `}
       </style>
@@ -1041,12 +1046,27 @@ const EventsInfo: React.FC = () => {
                                          card.title === "Team Field" ||
                                          card.title === "Para";
                       
+                      // Map sports detail card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Athletics": "athletics.png",
+                        "Team Field": "team events.png"
+                      };
+                      
                       return (
                         <div 
                           key={index} 
                           className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
                         >
+                          {imageMap[card.title] && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                              className="absolute inset-0 w-full h-full object-contain"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )}
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
                             <h2 className="subcategory-card-title">
                               {card.title}
@@ -1080,7 +1100,8 @@ const EventsInfo: React.FC = () => {
                         "Table Tennis": "events/Tabel Tennis.avif",
                         "Traditional Yogasana": "events/Traditional Yoga.avif",
                         "Taekwondo": "events/Taekwando.avif",
-                        "Tennikoit": "events/Tennikoit.avif"
+                        "Tennikoit": "events/Tennikoit.avif",
+                        "Yoga & Individual": "Yoga & individual.png"
                       };
                       
                       return (
@@ -1119,7 +1140,8 @@ const EventsInfo: React.FC = () => {
                         "Table Tennis": "events/Tabel Tennis.avif",
                         "Traditional Yogasana": "events/Traditional Yoga.avif",
                         "Taekwondo": "events/Taekwando.avif",
-                        "Tennikoit": "events/Tennikoit.avif"
+                        "Tennikoit": "events/Tennikoit.avif",
+                        "Yoga & Individual": "Yoga & individual.png"
                       };
                       
                       return (
@@ -1236,6 +1258,24 @@ const EventsInfo: React.FC = () => {
                         className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
+                        {card.title === "Para Sports" && (
+                          <img 
+                            src={`${import.meta.env.BASE_URL}Para_Sports.png`}
+                            alt="Para Sports"
+                            className="absolute inset-0 w-full h-full object-contain"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
+                        {card.title === "Para Cricket" && (
+                          <img 
+                            src={`${import.meta.env.BASE_URL}Para_cricket.png`}
+                            alt="Para Cricket"
+                            className="absolute inset-0 w-full h-full object-contain"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
                           <h2 className="subcategory-card-title">
                             {card.title}
@@ -1302,6 +1342,30 @@ const EventsInfo: React.FC = () => {
                             <img 
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
+                          {card.title === "Literature" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}literary.png`}
+                              alt="Literature"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
+                          {card.title === "Fashion Design" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}fashion.png`}
+                              alt="Fashion Design"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
+                          {card.title === "Spot Light" && (
+                            <img 
+                              src={`${import.meta.env.BASE_URL}spotlight.png`}
+                              alt="Spot Light"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />

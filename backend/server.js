@@ -65,10 +65,10 @@ app.use(cors({
     'http://localhost:5173', 
     'http://localhost:5174',
     'https://akash209581.github.io',
-    // 'https://mahotsav-1.onrender.com',
-    'https://your-vercel-app.vercel.app',
     'https://vignanmahotsav.in',
-    
+    'https://www.vignanmahotsav.in',
+    'http://vignanmahotsav.in',
+    'http://www.vignanmahotsav.in',
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,

@@ -27,7 +27,7 @@ const Guide: React.FC = () => {
   return (
     <div className="guide-container">
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-20 -right-20 sm:-top-32 sm:-right-32 md:-top-64 md:-right-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -top-20 -right-20 sm:-top-32 sm:-right-32 md:-top-64 md:-right-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -41,7 +41,7 @@ const Guide: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-20 -left-20 sm:-bottom-32 sm:-left-32 md:-bottom-64 md:-left-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-[1]">
+      <div className="fixed -bottom-20 -left-20 sm:-bottom-32 sm:-left-32 md:-bottom-64 md:-left-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
         <FlowerComponent 
           size="100%"
           sunSize="50%"

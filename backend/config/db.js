@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const connectDB = async () => {
   try {
@@ -10,8 +7,6 @@ const connectDB = async () => {
     }
 
     console.log('🔄 Connecting to MongoDB...');
-    console.log(`📍 Your current IP: 103.208.230.77`);
-    console.log('💡 Make sure this IP is whitelisted in MongoDB Atlas Network Access');
     
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       dbName: 'test',
@@ -63,11 +58,10 @@ const connectDB = async () => {
   } catch (error) {
     console.error(`❌ MongoDB Connection Error: ${error.message}`);
     console.error('\n⚠️  CONNECTION FAILED - Possible solutions:');
-    console.error('1. 🌐 Whitelist your IP (103.208.230.77) in MongoDB Atlas Network Access');
-    console.error('2. 🔗 Check Network Access settings at: https://cloud.mongodb.com');
-    console.error('3. 🔑 Verify your MongoDB credentials are correct');
-    console.error('4. 🌍 Check if you can access internet/MongoDB Atlas from your network');
-    console.error('5. 🔄 Try restarting your internet connection\n');
+    console.error('1. 🔑 Verify your MongoDB credentials are correct');
+    console.error('2. 🌐 Check if MongoDB server is running and accessible');
+    console.error('3. 🔗 Verify the MONGODB_URI in your .env file');
+    console.error('4. 🌍 Check your network/firewall settings\n');
     process.exit(1);
   }
 };

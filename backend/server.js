@@ -1,8 +1,12 @@
+import dotenv from 'dotenv';
+
+// CRITICAL: Load environment variables FIRST before any other imports
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
-import dotenv from 'dotenv';
 
 import connectDB from './config/db.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
@@ -13,8 +17,6 @@ import { initializeQueue } from './utils/queue.js';
 import registrationRoutes from './routes/registration.js';
 import campusAmbassadorRoutes from './routes/campusAmbassador.js';
 import eventsRoutes from './routes/events.js';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

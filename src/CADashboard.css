@@ -451,6 +451,50 @@
   }
 }
 
+/* Mahotsav Logo Mobile Alignment */
+.ca-mahotsav-logo {
+  position: absolute;
+  z-index: 999;
+}
+
+@media (max-width: 640px) {
+  .ca-mahotsav-logo {
+    top: 0.75rem !important;
+    left: 1rem !important;
+    width: 8rem !important;
+  }
+  
+  /* Position back button below logo on mobile */
+  .ca-page-back-button {
+    top: 7rem !important;
+    left: 1rem !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .ca-mahotsav-logo {
+    top: 0 !important;
+    left: 2rem !important;
+    width: 12rem !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ca-mahotsav-logo {
+    top: 0 !important;
+    left: 2rem !important;
+    width: 16rem !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ca-mahotsav-logo {
+    top: 0 !important;
+    left: 2rem !important;
+    width: 24rem !important;
+  }
+}
+
 @media (max-width: 480px) {
   .ca-dashboard-container {
     padding: 15px;

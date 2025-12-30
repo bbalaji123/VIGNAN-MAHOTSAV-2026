@@ -6,6 +6,163 @@ import BackButton from './components/BackButton';
 import CASignupModal from './CASignupModal';
 import CALoginModal from './CALoginModal';
 
+// Mobile Card Components
+const OutreachPromotionMobile = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const activities = [
+    { activity: 'Resharing/Reposting official posts on social media', points: '5 points/post' },
+    { activity: 'Sharing in WhatsApp groups (50-100 members)', points: '5 points/group' },
+    { activity: 'Sharing in WhatsApp groups (100-200 members)', points: '10 points/group' },
+    { activity: 'Creating original content (reels/blogs/memes)', points: '15 points' },
+    { activity: 'Organizing on-campus promotional events', points: '20 points/event' }
+  ];
+
+  return (
+    <div className="mobile-card-container accordion-section">
+      <div 
+        className={`accordion-header ${isExpanded ? 'active' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <span className="accordion-title">A. Outreach & Promotion</span>
+        <span className={`accordion-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+      </div>
+      <div className={`accordion-content ${isExpanded ? 'expanded' : ''}`}>
+        {activities.map((item, index) => (
+          <div key={index} className="mobile-card">
+            <div className="mobile-card-category">Outreach & Promotion</div>
+            <div className="mobile-card-activity">{item.activity}</div>
+            <span className="mobile-card-points">{item.points}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ReferralsSignupsMobile = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const activities = [
+    { activity: 'Referring a friend/Surrounding Colleges Students to sign up as a CA', points: '20 points/referral' },
+    { activity: 'Registering participants for Mahotsav', points: '5 points/attendee' },
+    { activity: 'Bridging team Mahotsav & Student Council of colleges', points: '10 points/college' }
+  ];
+
+  return (
+    <div className="mobile-card-container accordion-section">
+      <div 
+        className={`accordion-header ${isExpanded ? 'active' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <span className="accordion-title">B. Referrals & Signups</span>
+        <span className={`accordion-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+      </div>
+      <div className={`accordion-content ${isExpanded ? 'expanded' : ''}`}>
+        {activities.map((item, index) => (
+          <div key={index} className="mobile-card">
+            <div className="mobile-card-category">Referrals & Signups</div>
+            <div className="mobile-card-activity">{item.activity}</div>
+            <span className="mobile-card-points">{item.points}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const PerformanceMultipliersMobile = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const multipliers = [
+    { 
+      case: 'For colleges located at long distances', 
+      multiplier: 'Total Points = 4 × (multiplier + 1) × (number of participants)',
+      description: 'Multiplier = (distance between VFSTR and admitted institute in kms / 1000) × number of people'
+    },
+    { case: 'For exceeding 50+ attendee registrations', multiplier: 'Bonus 50 points' }
+  ];
+
+  return (
+    <div className="mobile-card-container accordion-section">
+      <div 
+        className={`accordion-header ${isExpanded ? 'active' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <span className="accordion-title">C. Performance Multipliers</span>
+        <span className={`accordion-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+      </div>
+      <div className={`accordion-content ${isExpanded ? 'expanded' : ''}`}>
+        {multipliers.map((item, index) => (
+          <div key={index} className="mobile-card">
+            <div className="mobile-card-category">Performance Multipliers</div>
+            <div className="mobile-card-activity">{item.case}</div>
+            <span className="mobile-card-points">{item.multiplier}</span>
+            {item.description && (
+              <div className="mobile-card-description">{item.description}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const IncentivesMobile = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const tiers = [
+    { 
+      tier: 'Bronze', 
+      milestone: '100+ Points', 
+      reward: 'Free entry for the Fest + Certificate + Free Accommodation & Food' 
+    },
+    { 
+      tier: 'Silver', 
+      milestone: '150+ Points', 
+      reward: 'Receive the benefits of previous tier + Branded Fest Merchandise (Cap) + Zomato & Blinkit Subscription' 
+    },
+    { 
+      tier: 'Gold', 
+      milestone: '200+ Points', 
+      reward: 'Receive the benefits of previous tiers + Title of CA Lead + Spotify Premium' 
+    },
+    { 
+      tier: 'Platinum', 
+      milestone: '250+ Points', 
+      reward: 'Receive the benefits of previous tiers + Fest Merchandise (Hoodie/T-shirts) + Star Campus Ambassador + Netflix Subscription' 
+    },
+    { 
+      tier: 'Diamond', 
+      milestone: '250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)', 
+      reward: 'Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + ChatGPT Go Subscription' 
+    }
+  ];
+
+  return (
+    <div className="mobile-card-container accordion-section">
+      <div 
+        className={`accordion-header ${isExpanded ? 'active' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <span className="accordion-title">Rewards Based on Milestones</span>
+        <span className={`accordion-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+      </div>
+      <div className={`accordion-content ${isExpanded ? 'expanded' : ''}`}>
+        {tiers.map((item, index) => (
+          <div key={index} className="tier-card">
+            <div className="tier-card-header">
+              <span className="tier-badge">{item.tier}</span>
+              <span className="milestone-badge">{item.milestone}</span>
+            </div>
+            <div className="tier-card-reward">{item.reward}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const CampusAmbassador: React.FC = () => {
   // Local state to control the incentives modal
   const [showIncentivesModal, setShowIncentivesModal] = useState(false);
@@ -60,7 +217,7 @@ const CampusAmbassador: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 z-1">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-1">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -74,7 +231,7 @@ const CampusAmbassador: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-20 z-1">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-20 max-md:z-0 md:z-1">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -115,6 +272,171 @@ const CampusAmbassador: React.FC = () => {
             position: absolute;
             width: 100%;
             height: 100%;
+          }
+
+          /* Mobile Card Layout Styles */
+          .mobile-card-container {
+            display: none;
+          }
+
+          .mobile-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+          }
+
+          .mobile-card:hover {
+            border-color: rgba(251, 191, 36, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+          }
+
+          .mobile-card-activity {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+          }
+
+          .mobile-card-points {
+            display: inline-block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+          }
+
+          .mobile-card-category {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+          }
+
+          .mobile-card-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            margin-top: 8px;
+          }
+
+          .accordion-section {
+            margin-bottom: 20px;
+          }
+
+          .accordion-header {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 10px;
+            padding: 14px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+          }
+
+          .accordion-header:hover {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.25));
+          }
+
+          .accordion-header.active {
+            border-radius: 10px 10px 0 0;
+            border-bottom: none;
+          }
+
+          .accordion-title {
+            color: #fbbf24;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+          }
+
+          .accordion-icon {
+            color: #fbbf24;
+            font-size: 20px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+          }
+
+          .accordion-icon.rotated {
+            transform: rotate(180deg);
+          }
+
+          .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 0 12px;
+          }
+
+          .accordion-content.expanded {
+            max-height: 2000px;
+            padding: 12px;
+          }
+
+          .tier-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+          }
+
+          .tier-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+          }
+
+          .tier-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 700;
+          }
+
+          .milestone-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fbbf24;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+          }
+
+          .tier-card-reward {
+            font-size: 14px;
+            color: #fff;
+            line-height: 1.6;
+          }
+
+          @media (max-width: 768px) {
+            .desktop-table-container {
+              display: none !important;
+            }
+
+            .mobile-card-container {
+              display: block;
+            }
           }
 
           .hero-section {
@@ -317,15 +639,11 @@ const CampusAmbassador: React.FC = () => {
       <img 
         src={`${import.meta.env.BASE_URL}image.avif`}
         alt="Vignan Mahotsav 2026"
-        className="absolute top-4 left-4 sm:top-0 sm:left-8 w-32 sm:w-48 md:w-64 lg:w-96 h-auto z-999" style={{marginTop: '-90px'}}
+        className="ca-mahotsav-logo"
       />
 
       {/* Back button (explicitly navigate to main dashboard/home) */}
-      <BackButton
-        className="absolute top-20 sm:top-28 md:top-7 left-2 sm:left-8 z-1000"
-        style={{ marginTop: '130px' }}
-        onClick={() => navigate('/')}
-      />
+      <BackButton onClick={() => navigate('/')} className="ca-page-back-button" />
 
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
@@ -670,8 +988,9 @@ const CampusAmbassador: React.FC = () => {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-400 mb-6" style={{ scrollMarginTop: '8rem' }}>Points Allotment Rules</h2>
                 <p className="mb-6 text-base sm:text-lg" style={{ lineHeight: '1.8' }}>Campus Ambassadors will earn points based on their engagement and efforts across various categories.</p>
                 
+                {/* Desktop Table - Outreach & Promotion */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Outreach & Promotion</h4>
-                <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
                 <table style={{ 
                   width: '100%',
                   minWidth: '500px',
@@ -708,8 +1027,12 @@ const CampusAmbassador: React.FC = () => {
                 </table>
                 </div>
 
+                {/* Mobile Cards - Outreach & Promotion */}
+                <OutreachPromotionMobile />
+
+                {/* Desktop Table - Referrals & Signups */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Referrals & Signups</h4>
-                <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
                 <table style={{ 
                   width: '100%',
                   minWidth: '500px',
@@ -742,8 +1065,12 @@ const CampusAmbassador: React.FC = () => {
                 </table>
                 </div>
 
+                {/* Mobile Cards - Referrals & Signups */}
+                <ReferralsSignupsMobile />
+
+                {/* Desktop Table - Performance Multipliers */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>C. Performance Multipliers</h4>
-                <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
                 <table style={{ 
                   width: '100%',
                   minWidth: '500px',
@@ -771,6 +1098,10 @@ const CampusAmbassador: React.FC = () => {
                   </tbody>
                 </table>
                 </div>
+
+                {/* Mobile Cards - Performance Multipliers */}
+                <PerformanceMultipliersMobile />
+
                 <p style={{ fontStyle: 'italic', color: '#fbbf24', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>➢ 4 x (multiplier + 1) x (number of participants) points Multiplier = (distance between VFSTR and admitted institute (in kms) /1000) * number of people. Get students to participate in events</p>
               </div>
             )}
@@ -779,7 +1110,9 @@ const CampusAmbassador: React.FC = () => {
               <div className="text-white">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-400 mb-6" style={{ scrollMarginTop: '8rem' }}>Incentives & Rewards (Extending this Based on Targets)</h2>
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Rewards Based on Milestones</h4>
-                <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                
+                {/* Desktop Table */}
+                <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
                 <table style={{ 
                   width: '100%',
                   minWidth: '600px',
@@ -825,6 +1158,9 @@ const CampusAmbassador: React.FC = () => {
                   </tbody>
                 </table>
                 </div>
+
+                {/* Mobile Cards */}
+                <IncentivesMobile />
 
                   <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
                   <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)', marginBottom: '0.5rem' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>

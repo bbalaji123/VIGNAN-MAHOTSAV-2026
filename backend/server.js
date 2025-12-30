@@ -59,7 +59,7 @@ app.use(cors({
     'https://mahotsav-1.onrender.com',
     'https://your-vercel-app.vercel.app',
     'https://vignanmahotsav.in',
-    
+    'http://vignanmahotsav.in',
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,

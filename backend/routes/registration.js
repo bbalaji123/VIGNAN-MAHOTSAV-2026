@@ -184,57 +184,66 @@ router.post('/register', async (req, res) => {
    URL: POST /api/login
 ===================================================== */
 router.post('/login', async (req, res) => {
-  const { email, password, mahotsavId, regNo } = req.body;
-  const identifier = email || mahotsavId || regNo;
+  try {
+    const { email, password, mahotsavId, regNo } = req.body;
+    const identifier = email || mahotsavId || regNo;
 
-  if (!identifier || !password) {
-    return res.status(400).json({
-      success: false,
-      message: 'Identifier and password required'
-    });
-  }
-
-  const user = await Registration.findOne({
-    $or: [{ email: identifier }, { userId: identifier }, { registerId: identifier }]
-  });
-
-  if (!user) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid credentials'
-    });
-  }
-
-  // Convert YYYY-MM-DD input from date picker to DD/MM/YYYY
-  let passwordToCheck = password;
-  if (password.includes('-') && password.length === 10) {
-    const [year, month, day] = password.split('-');
-    passwordToCheck = `${day}/${month}/${year}`;
-  }
-
-  // Check if passwords match
-  if (user.password !== passwordToCheck) {
-    return res.status(401).json({
-      success: false,
-      message: 'Invalid credentials'
-    });
-  }
-
-  res.json({
-    success: true,
-    message: 'Login successful',
-    data: {
-      userId: user.userId,
-      name: user.name,
-      email: user.email,
-      userType: user.userType,
-      gender: user.gender,
-      branch: user.branch,
-      college: user.college,
-      phone: user.phone,
-      dateOfBirth: user.dateOfBirth
+    if (!identifier || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Identifier and password required'
+      });
     }
-  });
+
+    const user = await Registration.findOne({
+      $or: [{ email: identifier }, { userId: identifier }, { registerId: identifier }]
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    // Convert YYYY-MM-DD input from date picker to DD/MM/YYYY
+    let passwordToCheck = password;
+    if (password.includes('-') && password.length === 10) {
+      const [year, month, day] = password.split('-');
+      passwordToCheck = `${day}/${month}/${year}`;
+    }
+
+    // Check if passwords match
+    if (user.password !== passwordToCheck) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Login successful',
+      data: {
+        userId: user.userId,
+        name: user.name,
+        email: user.email,
+        userType: user.userType,
+        gender: user.gender,
+        branch: user.branch,
+        college: user.college,
+        phone: user.phone,
+        dateOfBirth: user.dateOfBirth
+      }
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error during login',
+      error: error.message
+    });
+  }
 });
 
 /* =====================================================

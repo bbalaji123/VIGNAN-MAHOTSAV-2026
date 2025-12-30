@@ -85,7 +85,7 @@ router.post('/register', async (req, res) => {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Email already exists
+    // Email already exists - CHECK BEFORE generating ID
     if (await Registration.findOne({ email: normalizedEmail })) {
       return res.status(409).json({
         success: false,
@@ -96,13 +96,14 @@ router.post('/register', async (req, res) => {
     // Cleanup orphan participant
     await Participant.deleteOne({ email: normalizedEmail });
 
+    // Generate ID only once, after validation passes
+    const userId = await generateUserId();
+
     const MAX_RETRIES = 3;
     let lastError = null;
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
-        const userId = await generateUserId();
-
         const registration = await Registration.create({
           userId,
           name,
@@ -281,9 +282,45 @@ router.get('/user/:userId', async (req, res) => {
 });
 
 router.post('/reset-counter', async (req, res) => {
-  const mongoose = (await import('mongoose')).default;
-  await mongoose.connection.db.collection('counters').deleteOne({ _id: 'userId' });
-  res.json({ success: true, message: 'Counter reset' });
+  try {
+    const mongoose = (await import('mongoose')).default;
+    
+    // Delete the counter to reset it
+    await mongoose.connection.db.collection('counters').deleteOne({ _id: 'userId' });
+    
+    // Optionally set it to 0 explicitly
+    await mongoose.connection.db.collection('counters').insertOne({ _id: 'userId', seq: 0 });
+    
+    res.json({ 
+      success: true, 
+      message: 'Counter reset to 0. Next ID will be MH26000001' 
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to reset counter',
+      error: error.message 
+    });
+  }
+});
+
+router.get('/counter-status', async (req, res) => {
+  try {
+    const mongoose = (await import('mongoose')).default;
+    const counter = await mongoose.connection.db.collection('counters').findOne({ _id: 'userId' });
+    
+    res.json({ 
+      success: true,
+      counter: counter?.seq || 0,
+      nextId: `MH26${((counter?.seq || 0) + 1).toString().padStart(6, '0')}`
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to get counter',
+      error: error.message 
+    });
+  }
 });
 
 export default router;

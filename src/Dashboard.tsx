@@ -398,7 +398,7 @@ const Dashboard: React.FC = () => {
     branch: '',
     dateOfBirth: '',
     userType: 'participant',
-    participationType: 'none',
+    participationType: 'general',
     referenceId: '',
     state: '',
     district: '',
@@ -1727,11 +1727,12 @@ const Dashboard: React.FC = () => {
           college: '',
           branch: '',
           dateOfBirth: '',
-          userType: 'visitor',
-          participationType: 'none',
+          userType: 'participant',
+          participationType: 'general',
           referenceId: '',
           state: '',
-          district: ''
+          district: '',
+          referralCode: ''
         });
       } else {
         setSubmitMessage({
@@ -6540,7 +6541,7 @@ const Dashboard: React.FC = () => {
                     if (type === 'sport' && registrationEvents.Sports[idx]) {
                       const event = registrationEvents.Sports[idx];
                       return {
-                        _id: id,
+                        eventCode: id,
                         eventId: id,
                         eventName: event['738500'],
                         eventType: 'sports',
@@ -6551,7 +6552,7 @@ const Dashboard: React.FC = () => {
                     } else if (type === 'cultural' && registrationEvents.Culturals[idx]) {
                       const event = registrationEvents.Culturals[idx];
                       return {
-                        _id: id,
+                        eventCode: id,
                         eventId: id,
                         eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
                         eventType: 'culturals',

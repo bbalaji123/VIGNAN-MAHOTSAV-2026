@@ -1,7 +1,7 @@
 // API Configuration - Automatically detects environment
 const getApiBaseUrl = () => {
-  // Production - vignanmahotsav.in backend URL
-  const PRODUCTION_API = 'http://vignanmahotsav.in:5000/api';
+  // Production - Main domain with SSL
+  const PRODUCTION_API = 'https://vignanmahotsav.in/api';
   
   // Development
   const DEVELOPMENT_API = 'http://localhost:5000/api';

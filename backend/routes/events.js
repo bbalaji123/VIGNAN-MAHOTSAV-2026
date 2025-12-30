@@ -7,7 +7,35 @@ const router = express.Router();
 const EVENT_GROUPS = {
   sports: [],
   culturals: [],
-  parasports: [],
+  parasports: [
+    // Para Athletics - Men's Events
+    { _id: 'para-athletics-men-100m-leg', eventName: '100 M - Leg Amputee', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-100m-visual', eventName: '100 M - Visual impairment', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-400m-hand', eventName: '400 M - Hand Amputee', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-400m-leg', eventName: '400 M - Leg Amputee', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-shotput', eventName: 'Shot put', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-javelin', eventName: 'Javelin throw', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-athletics-men-discus', eventName: 'Discus throw', category: 'Para Athletics Men', eventType: 'parasports', gender: 'male' },
+    
+    // Para Athletics - Women's Events
+    { _id: 'para-athletics-women-100m-leg', eventName: '100 M - Leg Amputee', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-100m-visual', eventName: '100 M - Visual impairment', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-400m-hand', eventName: '400 M - Hand Amputee', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-400m-leg', eventName: '400 M - Leg Amputee', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-shotput', eventName: 'Shot put', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-javelin', eventName: 'Javelin throw', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-athletics-women-discus', eventName: 'Discus throw', category: 'Para Athletics Women', eventType: 'parasports', gender: 'female' },
+    
+    // Para Cricket - Men's Events
+    { _id: 'para-cricket-men-physical', eventName: 'Cricket - Physical Disability', category: 'Para Cricket Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-cricket-men-visual', eventName: 'Cricket - Visual Impairment', category: 'Para Cricket Men', eventType: 'parasports', gender: 'male' },
+    { _id: 'para-cricket-men-deaf', eventName: 'Cricket - Deaf', category: 'Para Cricket Men', eventType: 'parasports', gender: 'male' },
+    
+    // Para Cricket - Women's Events
+    { _id: 'para-cricket-women-physical', eventName: 'Cricket - Physical Disability', category: 'Para Cricket Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-cricket-women-visual', eventName: 'Cricket - Visual Impairment', category: 'Para Cricket Women', eventType: 'parasports', gender: 'female' },
+    { _id: 'para-cricket-women-deaf', eventName: 'Cricket - Deaf', category: 'Para Cricket Women', eventType: 'parasports', gender: 'female' }
+  ],
 };
 
 // GET /api/events

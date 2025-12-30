@@ -19,12 +19,7 @@ const getApiBaseUrl = () => {
   return DEVELOPMENT_API;
 };
 
-const API_BASE_URL = getApiBaseUrl();
-
-export const API_BASE_URL = (envApiBase && envApiBase.length > 0
-  ? envApiBase
-  : '/api'
-).replace(/\/+$/, '');
+export const API_BASE_URL = getApiBaseUrl();
 
 export interface SignupData {
   name: string;
@@ -52,6 +47,7 @@ export interface ApiResponse {
     userId?: string;
     name?: string;
     email?: string;
+    password?: string;
     userType?: string;
     gender?: string;
     branch?: string;
@@ -194,19 +190,17 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
 
 export const loginUser = async (identifier: string | { mahotsavId?: string; regNo?: string; email?: string }, password: string): Promise<ApiResponse> => {
   try {
-    // Handle different identifier formats
-    let emailField: string;
+    // Prepare request body with proper field names
+    let requestBody: any = { password };
     
     if (typeof identifier === 'string') {
-      emailField = identifier;
+      requestBody.email = identifier;
     } else if (identifier.mahotsavId) {
-      emailField = identifier.mahotsavId;
+      requestBody.mahotsavId = identifier.mahotsavId;
     } else if (identifier.regNo) {
-      emailField = identifier.regNo;
+      requestBody.regNo = identifier.regNo;
     } else if (identifier.email) {
-      emailField = identifier.email;
-    } else {
-      emailField = '';
+      requestBody.email = identifier.email;
     }
     
     const response = await fetch(`${API_BASE_URL}/login`, {
@@ -214,7 +208,7 @@ export const loginUser = async (identifier: string | { mahotsavId?: string; regN
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: emailField, password }),
+      body: JSON.stringify(requestBody),
     });
 
     const data = await response.json();

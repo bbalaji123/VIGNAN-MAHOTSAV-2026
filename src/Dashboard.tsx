@@ -398,7 +398,7 @@ const Dashboard: React.FC = () => {
     branch: '',
     dateOfBirth: '',
     userType: 'participant',
-    participationType: 'none',
+    participationType: 'general',
     referenceId: '',
     state: '',
     district: '',
@@ -1733,11 +1733,12 @@ const Dashboard: React.FC = () => {
           college: '',
           branch: '',
           dateOfBirth: '',
-          userType: 'visitor',
-          participationType: 'none',
+          userType: 'participant',
+          participationType: 'general',
           referenceId: '',
           state: '',
-          district: ''
+          district: '',
+          referralCode: ''
         });
       } else {
         setSubmitMessage({

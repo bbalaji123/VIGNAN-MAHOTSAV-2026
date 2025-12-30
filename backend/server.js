@@ -56,10 +56,10 @@ app.use(cors({
     'http://localhost:5173', 
     'http://localhost:5174',
     'https://akash209581.github.io',
-    'https://mahotsav-1.onrender.com',
+    // 'https://mahotsav-1.onrender.com',
     'https://your-vercel-app.vercel.app',
     'https://vignanmahotsav.in',
-    'http://vignanmahotsav.in',
+    
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,
@@ -113,7 +113,7 @@ app.use(errorLogger);
 /* =====================================================
    Start Server
 ===================================================== */
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '127.0.0.1', () => {
   console.log(`🚀 Server started on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
   console.log(`🏥 Health check at http://localhost:${PORT}/api/health`);

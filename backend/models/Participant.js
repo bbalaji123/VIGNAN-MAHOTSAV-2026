@@ -58,6 +58,11 @@ const participantSchema = new mongoose.Schema({
     default: 'pending'
   },
   registeredEvents: [{
+    eventCode: {
+      type: String,
+      required: true
+    },
+    eventId: String,
     eventName: String,
     eventType: String,
     category: String,

@@ -39,7 +39,7 @@ const EventsInfo: React.FC = () => {
     { title: "Athletics", subtitle: "Track & Field" },
     { title: "Individual &", subtitle: "Indoor Sports" },
     { title: "Team Field", subtitle: "Sports" },
-    { title: "Para", subtitle: "" }
+    { title: "Para Sports", subtitle: "" }
   ];
 
   const indoorSportsCards = [
@@ -47,8 +47,7 @@ const EventsInfo: React.FC = () => {
     { title: "Table Tennis", subtitle: "" },
     { title: "Traditional Yogasana", subtitle: "" },
     { title: "Taekwondo", subtitle: "under 8 wt. categories" },
-    { title: "Tennikoit", subtitle: "" },
-    { title: "Yoga & Individual", subtitle: "" }
+    { title: "Tennikoit", subtitle: "" }
   ];
 
   const mensTeamSportsCards = [
@@ -69,14 +68,14 @@ const EventsInfo: React.FC = () => {
   ];
 
   const paraCards = [
-    { title: "Para Sports", subtitle: "" },
+    { title: "Para Athletics", subtitle: "" },
     { title: "Para Cricket", subtitle: "" }
   ];
 
   const culturalsCards = [
     { title: "Dance", subtitle: "Classical & Western" },
     { title: "Music", subtitle: "Singing & Instruments" },
-    { title: "Theatre", subtitle: "Drama & Cinematography" },
+    { title: "Dramatics", subtitle: "Drama & Cinematography" },
     { title: "Literature", subtitle: "Writing & Oratory" },
     { title: "Visual Arts", subtitle: "Arts & Craft" },
     { title: "Fashion Design", subtitle: "Fashion & Styling" },
@@ -196,19 +195,19 @@ const EventsInfo: React.FC = () => {
 
     // Check if it's Individual & Indoor Sports (merged)
     if (eventTitle === "Individual &") {
-      setShowIndoorSports(true);
+      navigate('/events/indoor-sports');
       return;
     }
 
     // Check if it's Team Field Sports (merged)
     if (eventTitle === "Team Field") {
-      setShowMensTeamSports(true);
+      navigate('/events/mens-team-sports');
       return;
     }
 
-    // Check if it's Para
-    if (eventTitle === "Para") {
-      setShowParaCards(true);
+    // Check if it's Para Sports
+    if (eventTitle === "Para Sports") {
+      navigate('/events/para');
       return;
     }
 
@@ -327,7 +326,7 @@ const EventsInfo: React.FC = () => {
       "Robo races": "Robo Races",
 
       // Para Sports events
-      "Para Sports": "Para Sports",
+      "Para Athletics": "Para Sports",
       "Para Cricket": "Para Cricket"
     };
 
@@ -362,7 +361,7 @@ const EventsInfo: React.FC = () => {
 
   // Click handlers
   const handleSportsCardClick = () => {
-    setShowSportsDetails(true);
+    navigate('/events/sports');
   };
 
   const handleCulturalsCardClick = () => {
@@ -389,9 +388,80 @@ const EventsInfo: React.FC = () => {
     fetchEvents();
   }, []);
 
-  // Restore section state when returning from event detail
+  // Handle URL-based routing and restore section state
   useEffect(() => {
+    const path = location.pathname;
     const state = location.state as { openSection?: string } | null;
+    
+    // Handle URL-based routing
+    if (path.includes('/events/')) {
+      const section = path.split('/events/')[1];
+      
+      switch (section) {
+        case 'dance':
+          setShowCulturals(true);
+          setShowDance(true);
+          break;
+        case 'music':
+          setShowCulturals(true);
+          setShowMusic(true);
+          break;
+        case 'dramatics':
+          setShowCulturals(true);
+          setShowTheatre(true);
+          break;
+        case 'literature':
+          setShowCulturals(true);
+          setShowLiterature(true);
+          break;
+        case 'visual-arts':
+          setShowCulturals(true);
+          setShowVisualArts(true);
+          break;
+        case 'fashion-design':
+          setShowCulturals(true);
+          setShowFashionDesign(true);
+          break;
+        case 'digital-storytelling':
+          setShowCulturals(true);
+          setShowDigitalStorytelling(true);
+          break;
+        case 'spot-light':
+          setShowCulturals(true);
+          setShowSpotLight(true);
+          break;
+        case 'gaming':
+          setShowRoboWarsGaming(true);
+          setShowGaming(true);
+          break;
+        case 'robo-games':
+          setShowRoboWarsGaming(true);
+          setShowRoboGames(true);
+          break;
+        case 'sports':
+          setShowSportsDetails(true);
+          break;
+        case 'indoor-sports':
+          setShowSportsDetails(true);
+          setShowIndoorSports(true);
+          break;
+        case 'mens-team-sports':
+          setShowSportsDetails(true);
+          setShowMensTeamSports(true);
+          break;
+        case 'womens-team-sports':
+          setShowSportsDetails(true);
+          setShowWomensTeamSports(true);
+          break;
+        case 'para':
+          setShowSportsDetails(true);
+          setShowParaCards(true);
+          break;
+      }
+      return;
+    }
+    
+    // Restore section state when returning from event detail
     if (state?.openSection) {
       const section = state.openSection;
 
@@ -1107,13 +1177,14 @@ const EventsInfo: React.FC = () => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
                         card.title === "Individual &" ||
                         card.title === "Team Field" ||
-                        card.title === "Para";
+                        card.title === "Para Sports";
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Athletics": "athletics.png",
                         "Individual &": "events/individual.png",
-                        "Team Field": "team events.png"
+                        "Team Field": "team events.png",
+                        "Para Sports": "Para_Sports.png"
                       };
 
                       return (
@@ -1319,37 +1390,27 @@ const EventsInfo: React.FC = () => {
                     {paraCards.map((card, index) => (
                       <div
                         key={index}
-                        className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="inner-event-card"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
-                        {card.title === "Para Sports" && (
+                        {card.title === "Para Athletics" && (
                           <img
-                            src={`${import.meta.env.BASE_URL}Para_Sports.png`}
-                            alt="Para Sports"
-                            className="absolute inset-0 w-full h-full object-contain"
+                            src={`${import.meta.env.BASE_URL}para athletics (men).png`}
+                            alt="Para Athletics"
+                            className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
                             decoding="async"
                           />
                         )}
                         {card.title === "Para Cricket" && (
                           <img
-                            src={`${import.meta.env.BASE_URL}Para_cricket.png`}
+                            src={`${import.meta.env.BASE_URL}para cricket(men).png`}
                             alt="Para Cricket"
-                            className="absolute inset-0 w-full h-full object-contain"
+                            className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
                             decoding="async"
                           />
                         )}
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
-                          )}
-                        </div>
                       </div>
                     ))}
                   </div>
@@ -1368,25 +1429,25 @@ const EventsInfo: React.FC = () => {
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
-                          setShowDance(true);
+                          navigate('/events/dance');
                         } else if (card.title === "Music") {
-                          setShowMusic(true);
-                        } else if (card.title === "Theatre") {
-                          setShowTheatre(true);
+                          navigate('/events/music');
+                        } else if (card.title === "Dramatics") {
+                          navigate('/events/dramatics');
                         } else if (card.title === "Literature") {
-                          setShowLiterature(true);
+                          navigate('/events/literature');
                         } else if (card.title === "Visual Arts") {
-                          setShowVisualArts(true);
+                          navigate('/events/visual-arts');
                         } else if (card.title === "Fashion Design") {
-                          setShowFashionDesign(true);
+                          navigate('/events/fashion-design');
                         } else if (card.title === "Digital Storytelling & Creative Media") {
-                          setShowDigitalStorytelling(true);
+                          navigate('/events/digital-storytelling');
                         } else if (card.title === "Gaming") {
-                          setShowGaming(true);
+                          navigate('/events/gaming');
                         } else if (card.title === "Robo Games") {
-                          setShowRoboGames(true);
+                          navigate('/events/robo-games');
                         } else if (card.title === "Spot Light") {
-                          setShowSpotLight(true);
+                          navigate('/events/spot-light');
                         }
                       };
                       return (
@@ -1418,10 +1479,10 @@ const EventsInfo: React.FC = () => {
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
-                          {card.title === "Theatre" && (
+                          {card.title === "Dramatics" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}theatre.png`}
-                              alt="Theatre"
+                              src={`${import.meta.env.BASE_URL}events/Dramatics.png`}
+                              alt="Dramatics"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />

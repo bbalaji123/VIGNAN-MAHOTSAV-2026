@@ -35,6 +35,21 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/events-info" element={<EventsInfo />} />
+          <Route path="/events/dance" element={<EventsInfo />} />
+          <Route path="/events/music" element={<EventsInfo />} />
+          <Route path="/events/dramatics" element={<EventsInfo />} />
+          <Route path="/events/literature" element={<EventsInfo />} />
+          <Route path="/events/visual-arts" element={<EventsInfo />} />
+          <Route path="/events/fashion-design" element={<EventsInfo />} />
+          <Route path="/events/digital-storytelling" element={<EventsInfo />} />
+          <Route path="/events/spot-light" element={<EventsInfo />} />
+          <Route path="/events/gaming" element={<EventsInfo />} />
+          <Route path="/events/robo-games" element={<EventsInfo />} />
+          <Route path="/events/sports" element={<EventsInfo />} />
+          <Route path="/events/indoor-sports" element={<EventsInfo />} />
+          <Route path="/events/mens-team-sports" element={<EventsInfo />} />
+          <Route path="/events/womens-team-sports" element={<EventsInfo />} />
+          <Route path="/events/para" element={<EventsInfo />} />
           <Route path="/event/:eventName" element={<EventDetail />} />
           <Route path="/campus-ambassador" element={<CampusAmbassador />} />
           <Route path="/ca-dashboard" element={<CADashboard />} />

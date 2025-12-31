@@ -113,48 +113,53 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
             className={`scroll-row ${animate ? 'run' : 'paused'} row-${rowIndex}`}
           >
             {/* Duplicate images for continuous scrolling */}
-            {[...row, ...row, ...row].map((img, index) => (
-              <div
-                key={`${img}-${index}`}
-                className="throwback-card gallery-shimmer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  // Pause animation temporarily
-                  setAnimate(false);
-                  // Call the photo click handler
-                  onPhotoClick(rowIndex, index % row.length);
-                  // Resume animation after a short delay
-                  setTimeout(() => setAnimate(true), 100);
-                }}
-                style={{
-                  cursor: 'pointer',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  pointerEvents: 'auto',
-                  zIndex: 2
-                }}
-              >
-                <img
-                  src={img}
-                  alt="gallery"
-                  loading={index < 6 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  width={280}
-                  height={180}
+            {[...row, ...row, ...row].map((img, index) => {
+              // Calculate the actual image index in the original row
+              const actualIndex = index % row.length;
+              
+              return (
+                <div
+                  key={`${img}-${index}`}
+                  className="throwback-card gallery-shimmer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Pause animation temporarily
+                    setAnimate(false);
+                    // Call the photo click handler with the actual index
+                    onPhotoClick(rowIndex, actualIndex);
+                    // Resume animation after a short delay
+                    setTimeout(() => setAnimate(true), 100);
+                  }}
                   style={{
-                    objectFit: 'cover',
-                    willChange: 'auto',
-                    pointerEvents: 'none'
+                    cursor: 'pointer',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    pointerEvents: 'auto',
+                    zIndex: 2
                   }}
-                  onLoad={(e) => {
-                    const card = e.currentTarget.parentElement;
-                    if (card) card.classList.add('loaded');
-                  }}
-                />
-                <div className="shimmer-overlay-gallery"></div>
-              </div>
-            ))}
+                >
+                  <img
+                    src={img}
+                    alt="gallery"
+                    loading={index < 6 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    width={280}
+                    height={180}
+                    style={{
+                      objectFit: 'cover',
+                      willChange: 'auto',
+                      pointerEvents: 'none'
+                    }}
+                    onLoad={(e) => {
+                      const card = e.currentTarget.parentElement;
+                      if (card) card.classList.add('loaded');
+                    }}
+                  />
+                  <div className="shimmer-overlay-gallery"></div>
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}

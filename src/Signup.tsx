@@ -95,6 +95,24 @@ const Signup: React.FC<SignupProps> = ({
                     value={signupFormData.dateOfBirth || ''}
                     onChange={onInputChange}
                     placeholder="DD/MM/YYYY"
+                    max={(() => {
+                      const today = new Date();
+                      const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+                      return maxDate.toISOString().split('T')[0];
+                    })()}
+                    onInvalid={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      const selectedDate = new Date(target.value);
+                      const today = new Date();
+                      const age = today.getFullYear() - selectedDate.getFullYear();
+                      if (age < 10) {
+                        target.setCustomValidity('You must be at least 10 years old to register');
+                      }
+                    }}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      target.setCustomValidity('');
+                    }}
                     required
                   />
                 </div>

@@ -978,7 +978,7 @@ const EventsInfo: React.FC = () => {
           </div>
 
           {/* Mobile layout - Logo and Back button centered, stacked */}
-          <div className="md:hidden flex flex-col items-center gap-3 pb-4 w-full relative">
+          <div className="events-mobile-header md:hidden flex flex-col items-center pb-1 w-full relative">
             <div className="absolute left-4 top-0">
               <BackButton
                 className="!static !top-auto !left-auto"
@@ -1016,9 +1016,9 @@ const EventsInfo: React.FC = () => {
             <img
               src={`${import.meta.env.BASE_URL}image.avif`}
               alt="Vignan Mahotsav"
-              className="events-logo mx-auto mt-12"
+              className="events-logo events-mobile-logo mx-auto"
             />
-            <h1 className="events-title events-page-heading text-center w-full" style={{ fontSize: '2.5rem', marginTop: '20px', wordBreak: 'break-word', overflowWrap: 'break-word', maxWidth: '100%', padding: '0 10px' }}>
+            <h1 className="events-title events-page-heading events-mobile-heading text-center w-full">
               {showIndoorSports ? 'Indoor Sports' :
                 showWomensIndoorSports ? "Women's Indoor Sports" :
                   showMensTeamSports ? "Men's Team Field Sports" :
@@ -1042,7 +1042,7 @@ const EventsInfo: React.FC = () => {
         </div>
 
         {/* Main Cards Section */}
-        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8" style={{ position: 'relative', zIndex: 10 }}>
+        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-2 md:py-8" style={{ position: 'relative', zIndex: 10 }}>
           {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
@@ -1073,6 +1073,10 @@ const EventsInfo: React.FC = () => {
                       </h2>
                     </div>
                   </div>
+                  {/* Title below card - visible on mobile via CSS */}
+                  <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center">
+                    PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
+                  </h2>
                 </div>
 
                 {/* Card 2 - Sports and Games with Button Below (Desktop Only) */}
@@ -1425,7 +1429,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12" style={{ overflowY: 'visible' }}>
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0', paddingTop: '60px', overflowY: 'visible' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center events-cards-grid" style={{ columnGap: '0', overflowY: 'visible' }}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {

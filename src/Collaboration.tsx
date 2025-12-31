@@ -20,7 +20,7 @@ const Collaboration: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000">
         <FlowerComponent
           size="100%"
           sunSize="50%"
@@ -34,7 +34,7 @@ const Collaboration: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 ">
         <FlowerComponent
           size="100%"
           sunSize="50%"
@@ -142,7 +142,7 @@ const Collaboration: React.FC = () => {
 
           .year-tab {
             padding: 1rem 2.5rem;
-            border-radius: 50px;
+          
             background: rgba(255, 182, 193, 0.6);
             color: white;
             font-size: 1.5rem;
@@ -169,7 +169,7 @@ const Collaboration: React.FC = () => {
             margin: 0 auto 3rem;
             background: linear-gradient(180deg, rgba(255, 182, 193, 0.3) 0%, rgba(253, 238, 113, 0.3) 100%);
             border: 3px solid rgba(59, 130, 246, 0.5);
-            border-radius: 20px;
+            
             padding: 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
           }
@@ -178,7 +178,6 @@ const Collaboration: React.FC = () => {
             width: 100%;
             aspect-ratio: 16 / 9;
             background: linear-gradient(180deg, #FFB6C1 0%, #FFF 30%, #FFE97F 70%, #90EE90 100%);
-            border-radius: 15px;
             overflow: hidden;
             position: relative;
             display: flex;
@@ -189,7 +188,6 @@ const Collaboration: React.FC = () => {
           .audio-player {
             width: 100%;
             margin-top: 1rem;
-            border-radius: 50px;
             overflow: hidden;
           }
 
@@ -207,7 +205,6 @@ const Collaboration: React.FC = () => {
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -272,7 +269,6 @@ const Collaboration: React.FC = () => {
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #000;
             padding: 0.75rem 1.5rem;
-            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;

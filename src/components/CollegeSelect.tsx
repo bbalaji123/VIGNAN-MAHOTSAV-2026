@@ -165,46 +165,67 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
   return (
     <div className="relative w-full" ref={dropdownRef}>
       {!showOtherInput ? (
-        <div className="relative">
+        <>
           <input
             type="text"
             value={searchTerm}
             onChange={handleSearchChange}
             onFocus={() => setShowDropdown(true)}
-            placeholder={!selectedState ? "Select state first" : filteredColleges.length === 0 ? "No colleges found" : "Search college..."}
             disabled={!selectedState}
+            placeholder={!selectedState ? "Select state first" : "Search your college..."}
             className="w-full p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
-                     cursor-text transition-all duration-300 touch-manipulation
+                     cursor-text transition-all duration-300 touch-manipulation placeholder:text-white/50
                      focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30
-                     disabled:opacity-50 disabled:cursor-not-allowed
-                     placeholder:text-white/50"
+                     disabled:opacity-50 disabled:cursor-not-allowed"
             required={required}
+            autoComplete="off"
           />
           
-          {showDropdown && filteredColleges.length > 0 && selectedState && (
-            <div className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-[#1a1a2e] border-2 border-white/20 rounded-xl shadow-lg">
-              {filteredColleges.map((college, index) => (
+          {showDropdown && selectedState && (
+            <div className="absolute z-50 w-full mt-2 max-h-60 overflow-y-auto bg-gray-900 border-2 border-white/20 rounded-xl shadow-2xl">
+              {filteredColleges.length > 0 ? (
+                <>
+                  {filteredColleges.map((college, index) => (
+                    <div
+                      key={`${college.SNO}-${index}`}
+                      onClick={() => handleSelectCollege(college.Name)}
+                      className="px-4 py-3 text-white hover:bg-white/10 cursor-pointer transition-colors border-b border-white/10 last:border-0"
+                    >
+                      {college.Name}
+                    </div>
+                  ))}
+                  <div
+                    onClick={() => {
+                      setShowOtherInput(true);
+                      setShowDropdown(false);
+                      setSearchTerm('');
+                      onChange('');
+                    }}
+                    className="px-4 py-3 text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors border-t-2 border-orange-500/30"
+                  >
+                    ➕ Other (Not in list)
+                  </div>
+                </>
+              ) : searchTerm ? (
                 <div
-                  key={`${college.SNO}-${index}`}
-                  onClick={() => handleSelectCollege(college.Name)}
-                  className="p-3 hover:bg-white/10 cursor-pointer text-white text-sm transition-colors duration-200 border-b border-white/10 last:border-b-0"
+                  onClick={() => {
+                    setShowOtherInput(true);
+                    setShowDropdown(false);
+                    setOtherCollegeName(searchTerm);
+                    onChange(searchTerm);
+                  }}
+                  className="px-4 py-3 text-center text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors"
                 >
-                  {college.Name}
+                  ➕ College not found? Click here to enter manually
                 </div>
-              ))}
-              <div
-                onClick={() => {
-                  setShowOtherInput(true);
-                  setShowDropdown(false);
-                  setSearchTerm('');
-                }}
-                className="p-3 hover:bg-white/10 cursor-pointer text-orange-400 text-sm transition-colors duration-200 font-semibold sticky bottom-0 bg-[#1a1a2e] border-t-2 border-white/20"
-              >
-                ➕ Other (Not in list)
-              </div>
+              ) : (
+                <div className="px-4 py-3 text-white/50 text-center">
+                  Start typing to search...
+                </div>
+              )}
             </div>
           )}
-        </div>
+        </>
       ) : (
         <div className="flex gap-2 items-center flex-wrap sm:flex-nowrap">
           <input

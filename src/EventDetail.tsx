@@ -1953,8 +1953,9 @@ const EventDetail: React.FC = () => {
     "Athletics": "athletics.png",
     "Men's Athletics": "athletics.png",
     "Women's Athletics": "athletics.png",
-    "Para Sports": "events/Para Sports.avif",
-    "Para Cricket": "events/Para Cricket.avif",
+    "Para Sports": "para athletics (men).png",
+    "Para Athletics": "para athletics (men).png",
+    "Para Cricket": "para cricket(men).png",
     "Chess": "events/chess.avif",
     "Table Tennis": "events/Tabel Tennis.avif",
     "Traditional Yogasana": "events/Traditional Yoga.avif",
@@ -2185,16 +2186,16 @@ const EventDetail: React.FC = () => {
               <img
                 src={`${import.meta.env.BASE_URL}image.avif`}
                 alt="Vignan Mahotsav"
-                style={{ height: '18rem', objectFit: 'contain', marginTop: '-2rem' }}
+                style={{ height: '18rem', objectFit: 'contain', marginTop: '-5rem' }}
               />
               <BackButton
-                className="!static !top-20 !left-auto" style={{ marginTop: '-5rem', marginBottom: '8rem' }}
+                className="!static !top-20 !left-auto" style={{ marginTop: '-7rem', marginBottom: '4rem' }}
                 onClick={handleBack}
               />
             </div>
 
             {/* Center column: Title */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '2rem' }}>
               <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                 {eventData.title}
               </h1>
@@ -2245,7 +2246,7 @@ const EventDetail: React.FC = () => {
                 <h1 className="text-3xl font-bold text-white mb-2" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                   {eventData.title}
                 </h1>
-                <h2 className="text-2xl font-semibold text-purple-100" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
+                <h2 className="text-2xl font-semibold text-purple-100" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive', maxWidth: '280px', margin: '0 auto', lineHeight: '1.3', wordBreak: 'break-word' }}>
                   {eventData.subtitle}
                 </h2>
               </div>
@@ -2258,7 +2259,7 @@ const EventDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-3 sm:gap-4 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
             {/* Poster */}
             <div className="flex justify-center lg:justify-start">
-              <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
+              <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-2 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md" style={{ borderColor: '#FFD700' }}>
                 {eventName && eventImageMap[eventName] ? (
                   <img
                     src={`${import.meta.env.BASE_URL}${eventImageMap[eventName]}`}

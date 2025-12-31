@@ -128,22 +128,8 @@ router.post('/register', async (req, res) => {
           referredBy: validReferralCode
         });
 
-        if (userType === 'participant') {
-          await Participant.create({
-            userId,
-            name,
-            email: normalizedEmail,
-            phone,
-            college,
-            dateOfBirth,
-            gender,
-            registerId,
-            participantType: participationType || 'general',
-            referredBy: validReferralCode,
-            paymentStatus: 'pending',
-            registeredEvents: []
-          });
-        }
+        // Participant will be created only when user registers for events
+        // No automatic participant creation during signup
 
         return res.status(201).json({
           success: true,
@@ -280,10 +266,18 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
-    // Find or create participant
+    // Only create participant if they're registering for events
+    if (!events || events.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No events provided for registration'
+      });
+    }
+
+    // Find or create participant (only when registering for events)
     let participant = await Participant.findOne({ userId });
     if (!participant) {
-      // Create participant if doesn't exist
+      // Create participant only when they register for events
       participant = await Participant.create({
         userId,
         name: user.name,
@@ -296,17 +290,19 @@ router.post('/save-events', async (req, res) => {
         participantType: 'general',
         referredBy: user.referredBy,
         paymentStatus: 'pending',
-        registeredEvents: []
+        registeredEvents: events.map(e => ({
+          ...e,
+          registeredAt: new Date()
+        }))
       });
+    } else {
+      // Update registered events for existing participant
+      participant.registeredEvents = events.map(e => ({
+        ...e,
+        registeredAt: new Date()
+      }));
+      await participant.save();
     }
-
-    // Update registered events
-    participant.registeredEvents = events.map(e => ({
-      ...e,
-      registeredAt: new Date()
-    }));
-
-    await participant.save();
 
     res.json({
       success: true,

@@ -1975,6 +1975,44 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleOpenRegistration = async () => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      alert('Please login first to register for events.');
+      setShowLoginModal(true);
+      return;
+    }
+
+    if (!userProfileData.userId) {
+      alert('Unable to load profile. Please try logging in again.');
+      return;
+    }
+
+    // Directly open the event registration modal with checkboxes
+    setShowRegistrationModal(true);
+    setIsLoadingProfile(true);
+
+    try {
+      // Ensure latest saved events are loaded
+      if (userProfileData.userId) {
+        await fetchUserSavedEvents(userProfileData.userId);
+      }
+
+      // Fetch user's registered events
+      const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
+
+      if (registrationsResult.success && registrationsResult.data) {
+        setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
+      } else {
+        setUserRegisteredEvents([]);
+      }
+    } catch (error) {
+      setUserRegisteredEvents([]);
+    } finally {
+      setIsLoadingProfile(false);
+    }
+  };
+
   const handleCloseEventChecklist = () => {
     setShowEventChecklistModal(false);
   };
@@ -2290,23 +2328,21 @@ const Dashboard: React.FC = () => {
         {/* Action Buttons - separate container with mobile-specific positioning */}
         <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center' }}>
           {isLoggedIn ? (
-            myEvents.length === 0 ? (
-              <button
-                className="register-events-btn"
-                style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
-                onClick={handleOpenProfile}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
-                }}
-              >Register for Events</button>
-            ) : null
+            <button
+              className="register-events-btn"
+              style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
+              onClick={handleOpenRegistration}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+                e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
+              }}
+            >Register for Events</button>
           ) : (
             <button
               className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
@@ -2436,7 +2472,7 @@ const Dashboard: React.FC = () => {
             }
           `}</style>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[280px] h-[280px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent
                 size="100%"
@@ -3952,7 +3988,7 @@ const Dashboard: React.FC = () => {
             WebkitBackdropFilter: 'blur(10px)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
             borderRadius: '20px',
-            padding: '30px 20px',
+            padding: window.innerWidth <= 640 ? '20px 10px' : '30px 20px',
             marginTop: '30px',
             boxShadow: '0 0 25px rgba(223, 160, 0, 0.822)',
             maxWidth: '1010px',
@@ -3960,26 +3996,19 @@ const Dashboard: React.FC = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginLeft: '200px'
+            marginLeft: window.innerWidth <= 640 ? '0' : '200px'
           }}>
-            <div className="stats-grid" style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              alignItems: 'stretch',
-              gap: '30px',
-              width: '100%'
-            }}>
+            <div className="stats-grid">
               {/* Footfall */}
               <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '130px',
-                flex: '1 1 130px',
-                padding: '10px',
-                marginLeft: '-150px'
+                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px',
+                marginLeft: window.innerWidth > 1023 ? '-150px' : '0'
               }}>
                 <div style={{
                   fontSize: '2.2rem',
@@ -4014,9 +4043,9 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '130px',
-                flex: '1 1 130px',
-                padding: '10px'
+                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   fontSize: '2.2rem',
@@ -4051,9 +4080,9 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '130px',
-                flex: '1 1 130px',
-                padding: '10px'
+                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   fontSize: '2.2rem',
@@ -4088,9 +4117,9 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '130px',
-                flex: '1 1 130px',
-                padding: '10px'
+                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   fontSize: '2.2rem',
@@ -4125,9 +4154,9 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '130px',
-                flex: '1 1 130px',
-                padding: '10px'
+                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   marginBottom: '10px',
@@ -4174,9 +4203,9 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '160px',
-                flex: '1 1 160px',
-                padding: '10px'
+                minWidth: window.innerWidth > 1023 ? '160px' : 'unset',
+                flex: window.innerWidth > 1023 ? '1 1 160px' : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   fontSize: '3rem',
@@ -5410,12 +5439,13 @@ const Dashboard: React.FC = () => {
             <h2 style={{
               color: '#ffd700',
               textAlign: 'center',
-              fontSize: '2rem',
+              fontSize: window.innerWidth <= 640 ? '1.5rem' : '2rem',
               fontWeight: 'bold',
               marginBottom: '0.5rem',
               textShadow: '0 2px 10px rgba(255, 215, 0, 0.3)',
               position: 'relative',
-              zIndex: 1
+              zIndex: 1,
+              padding: window.innerWidth <= 640 ? '0 1rem' : '0'
             }}>
               Registration Successful!
             </h2>
@@ -5424,9 +5454,10 @@ const Dashboard: React.FC = () => {
               color: '#e5e7eb',
               textAlign: 'center',
               marginBottom: '2rem',
-              fontSize: '1rem',
+              fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem',
               position: 'relative',
-              zIndex: 1
+              zIndex: 1,
+              padding: window.innerWidth <= 640 ? '0 1rem' : '0'
             }}>
               Welcome to Vignan Mahotsav 2026
             </p>
@@ -5435,7 +5466,7 @@ const Dashboard: React.FC = () => {
             <div style={{
               background: 'rgba(255, 255, 255, 0.05)',
               borderRadius: '16px',
-              padding: '2rem',
+              padding: window.innerWidth <= 640 ? '1rem' : '2rem',
               marginBottom: '1.5rem',
               border: '1px solid rgba(255, 215, 0, 0.2)',
               position: 'relative',
@@ -5444,7 +5475,7 @@ const Dashboard: React.FC = () => {
               <div style={{ marginBottom: '1.5rem' }}>
                 <label style={{
                   color: '#fbbf24',
-                  fontSize: '0.9rem',
+                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.9rem',
                   fontWeight: '600',
                   display: 'block',
                   marginBottom: '0.5rem',
@@ -5455,17 +5486,17 @@ const Dashboard: React.FC = () => {
                 </label>
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.1)',
-                  padding: '1rem 1.5rem',
+                  padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
                   borderRadius: '12px',
                   border: '2px solid #ffd700',
                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
                 }}>
                   <span style={{
                     color: '#ffffff',
-                    fontSize: '1.5rem',
+                    fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.5rem',
                     fontWeight: 'bold',
                     fontFamily: 'monospace',
-                    letterSpacing: '2px',
+                    letterSpacing: window.innerWidth <= 640 ? '1px' : '2px',
                     display: 'block',
                     textAlign: 'center'
                   }}>
@@ -5477,7 +5508,7 @@ const Dashboard: React.FC = () => {
               <div>
                 <label style={{
                   color: '#fbbf24',
-                  fontSize: '0.9rem',
+                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.9rem',
                   fontWeight: '600',
                   display: 'block',
                   marginBottom: '0.5rem',
@@ -5488,17 +5519,17 @@ const Dashboard: React.FC = () => {
                 </label>
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.1)',
-                  padding: '1rem 1.5rem',
+                  padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
                   borderRadius: '12px',
                   border: '2px solid #ffd700',
                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
                 }}>
                   <span style={{
                     color: '#ffffff',
-                    fontSize: '1.5rem',
+                    fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.5rem',
                     fontWeight: 'bold',
                     fontFamily: 'monospace',
-                    letterSpacing: '2px',
+                    letterSpacing: window.innerWidth <= 640 ? '1px' : '2px',
                     display: 'block',
                     textAlign: 'center'
                   }}>
@@ -5513,34 +5544,45 @@ const Dashboard: React.FC = () => {
               background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%)',
               border: '2px solid rgba(239, 68, 68, 0.4)',
               borderRadius: '12px',
-              padding: '1rem 1.5rem',
+              padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
               marginBottom: '1.5rem',
               display: 'flex',
+              flexDirection: window.innerWidth <= 640 ? 'column' : 'row',
               alignItems: 'center',
-              gap: '1rem',
+              gap: window.innerWidth <= 640 ? '0.5rem' : '1rem',
               position: 'relative',
               zIndex: 1
             }}>
-              <span style={{ fontSize: '2rem' }}>📸</span>
-              <div>
+              <span style={{ fontSize: window.innerWidth <= 640 ? '1.5rem' : '2rem' }}>📸</span>
+              <div style={{ textAlign: window.innerWidth <= 640 ? 'center' : 'left' }}>
                 <p style={{
                   color: '#fef3c7',
-                  fontSize: '1rem',
+                  fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem',
                   fontWeight: '600',
                   margin: 0,
-                  lineHeight: '1.5'
+                  lineHeight: '1.5',
+                  animation: 'blink 1.5s ease-in-out infinite'
                 }}>
                   Important: Take a screenshot of this page!
                 </p>
                 <p style={{
                   color: '#e5e7eb',
-                  fontSize: '0.875rem',
+                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
                   margin: '0.25rem 0 0 0'
                 }}>
                   Save these credentials for future login
                 </p>
               </div>
             </div>
+
+            <style>
+              {`
+                @keyframes blink {
+                  0%, 100% { opacity: 1; }
+                  50% { opacity: 0.3; }
+                }
+              `}
+            </style>
 
             <button
               onClick={handleCloseUserIdPopup}
@@ -5656,7 +5698,7 @@ const Dashboard: React.FC = () => {
             <div className="profile-modal-header" style={{
               background: 'rgba(255, 255, 255, 0.3)',
               backdropFilter: 'blur(12px)',
-              padding: '0.5rem 1rem',
+              padding: window.innerWidth <= 640 ? '0.5rem 0.5rem' : '0.5rem 1rem',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -5669,7 +5711,7 @@ const Dashboard: React.FC = () => {
                 onClick={handleCloseProfile}
                 className="profile-back-btn"
                 style={{
-                  padding: '0.5rem 1.5rem',
+                  padding: window.innerWidth <= 640 ? '0.4rem 0.8rem' : '0.5rem 1.5rem',
                   background: 'rgba(255, 255, 255, 0.9)',
                   color: '#1f2937',
                   fontWeight: 'bold',
@@ -5678,20 +5720,20 @@ const Dashboard: React.FC = () => {
                   cursor: 'pointer',
                   transition: 'all 0.3s',
                   position: 'absolute',
-                  left: '1.5rem',
-                  fontSize: '1.2rem'
+                  left: window.innerWidth <= 640 ? '0.5rem' : '1.5rem',
+                  fontSize: window.innerWidth <= 640 ? '0.85rem' : '1.2rem'
                 }}
                 onMouseOver={(e) => e.currentTarget.style.background = 'white'}
                 onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
               >
                 Back
               </button>
-              <h1 className="profile-title" style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
+              <h1 className="profile-title" style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '1.1rem' : '2rem', fontWeight: 'bold', margin: 0 }}>Student Details</h1>
               <button
                 onClick={handleLogout}
                 className="profile-logout-btn"
                 style={{
-                  padding: '0.5rem 1.5rem',
+                  padding: window.innerWidth <= 640 ? '0.4rem 0.8rem' : '0.5rem 1.5rem',
                   background: 'rgba(255, 255, 255, 0.9)',
                   color: '#1f2937',
                   fontWeight: 'bold',
@@ -5700,8 +5742,8 @@ const Dashboard: React.FC = () => {
                   cursor: 'pointer',
                   transition: 'all 0.3s',
                   position: 'absolute',
-                  right: '1.5rem',
-                  fontSize: '1.2rem'
+                  right: window.innerWidth <= 640 ? '0.5rem' : '1.5rem',
+                  fontSize: window.innerWidth <= 640 ? '0.85rem' : '1.2rem'
                 }}
                 onMouseOver={(e) => e.currentTarget.style.background = 'white'}
                 onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
@@ -5711,7 +5753,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Main Content Area - Horizontally Centered */}
-            <div className="profile-content-area" style={{ padding: '3rem', display: 'flex', justifyContent: 'center' }}>
+            <div className="profile-content-area" style={{ padding: window.innerWidth <= 640 ? '1rem' : '3rem', display: 'flex', justifyContent: 'center' }}>
               {isLoadingProfile ? (
                 <div style={{ color: 'white', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '400px' }}>
                   Loading profile data...
@@ -5724,19 +5766,19 @@ const Dashboard: React.FC = () => {
                     background: 'rgba(255, 255, 255, 0.2)',
                     backdropFilter: 'blur(12px)',
                     borderRadius: '0.5rem',
-                    padding: '2rem',
+                    padding: window.innerWidth <= 640 ? '1rem' : '2rem',
                     marginBottom: '1.5rem',
                     marginTop: '0',
                     border: '1px solid rgba(255, 255, 255, 0.3)',
                     wordWrap: 'break-word',
                     overflowWrap: 'break-word'
                   }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Registration Number</span>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: window.innerWidth <= 640 ? '0.6rem' : '0.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Registration Number</span>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                          <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>
-                            : {userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
+                          <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>
+                            {window.innerWidth <= 640 ? '' : ': '}{userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
                           </span>
                           {!userProfileData?.registerId && (
                             <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontStyle: 'italic' }}>
@@ -5746,61 +5788,65 @@ const Dashboard: React.FC = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Mahotsav ID</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Mahotsav ID</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.userId || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Name</span>
-                        <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Name</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.name || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Email</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Email</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-all' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.email || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Gender</span>
-                        <span style={{ color: 'white', fontSize: '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Gender</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.gender || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>DOB</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>DOB</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.dateOfBirth || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>College</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>College</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.college || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Branch</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Branch</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.branch || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Phone</span>
-                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Phone</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.phone || 'N/A'}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Event Details Section with Button on Right */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row', gap: window.innerWidth <= 640 ? '1rem' : 0 }}>
+                    <h2 style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '1.25rem' : '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
                     <button
                       onClick={() => {
                         setShowProfileModal(false);
-                        setShowMyEventsModal(true);
+                        // Navigate to Events section instead of showing modal
+                        const eventsSection = document.getElementById('events-info');
+                        if (eventsSection) {
+                          eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                       }}
                       style={{
-                        padding: '0.75rem 2rem',
+                        padding: window.innerWidth <= 640 ? '0.6rem 1.5rem' : '0.75rem 2rem',
                         background: '#ec09bbe6',
                         color: 'white',
-                        fontSize: '0.875rem',
+                        fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
                         fontWeight: 'bold',
                         borderRadius: '0.375rem',
                         border: 'none',
@@ -5809,10 +5855,10 @@ const Dashboard: React.FC = () => {
                         textTransform: 'uppercase'
                       }}
                       onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#2563eb';
+                        e.currentTarget.style.background = '#ec09bbe6';
                       }}
                       onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#3b82f6';
+                        e.currentTarget.style.background = '#ec09bbe6';
                       }}
                     >
                       EDIT/REGISTER
@@ -5824,11 +5870,11 @@ const Dashboard: React.FC = () => {
                     background: 'rgba(255, 255, 255, 0.25)',
                     backdropFilter: 'blur(12px)',
                     borderRadius: '0.5rem',
-                    padding: '1.5rem',
+                    padding: window.innerWidth <= 640 ? '1rem' : '1.5rem',
                     marginBottom: '1.5rem',
                     border: '1px solid rgba(255, 255, 255, 0.3)'
                   }}>
-                    <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
+                    <p style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.95rem' : '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
                       You are enrolled in {userRegisteredEvents.length || myEvents.length} events.
                     </p>
                   </div>
@@ -5838,9 +5884,9 @@ const Dashboard: React.FC = () => {
                     background: 'rgba(255, 255, 255, 0.25)',
                     backdropFilter: 'blur(12px)',
                     borderRadius: '0.5rem',
-                    padding: '2rem',
+                    padding: window.innerWidth <= 640 ? '1rem' : '2rem',
                     border: '1px solid rgba(255, 255, 255, 0.3)',
-                    minHeight: '400px',
+                    minHeight: window.innerWidth <= 640 ? '200px' : '400px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -5933,7 +5979,7 @@ const Dashboard: React.FC = () => {
                         </>
                       ) : (
                         <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
-                          You haven't registered for any events yet. Use the <strong>EDIT/REGISTER</strong> button above to choose your events.
+                          You haven't registered for any events yet.
                         </p>
                       )}
                     </div>

@@ -6,7 +6,7 @@
 .signup-modal-overlay {
   position: fixed;
   inset: 0;
-  background: #3f2150;
+  background: #462554;
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;

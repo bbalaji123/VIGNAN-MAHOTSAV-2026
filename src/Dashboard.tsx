@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
   const [currentEventSlide, setCurrentEventSlide] = useState(0);
 
   const [currentSportsSlide, setCurrentSportsSlide] = useState(0);
-  
+
   // Counter animation states
   const [footfall, setFootfall] = useState(0);
   const [colleges, setColleges] = useState(0);
@@ -92,7 +92,7 @@ const Dashboard: React.FC = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<{ row: number; index: number } | null>(null);
   const [selectedYear, setSelectedYear] = useState<'2023' | '2024' | '2025'>('2023');
   const [currentDay, setCurrentDay] = useState<1 | 2 | 3>(1);
-  
+
   // Touch swipe state for carousels
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -138,10 +138,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 834124 0966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 834124 0966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
 
       ]
     },
@@ -168,9 +168,9 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Dancing Star - Western Solo": {
@@ -190,10 +190,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
-        {name: "Ms. Asritha", phone: "+91 7386 889772"},
-        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 8341 240966" },
+        { name: "Ms. Asritha", phone: "+91 7386 889772" },
+        { name: "Mr. Vineesha", phone: "+91 9951 695475" }
       ]
     },
     "Group Singing": {
@@ -213,9 +213,9 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 8328009698"},
-        {name: "Ms. Varshitha", phone: "+91 8712347513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 8328009698" },
+        { name: "Ms. Varshitha", phone: "+91 8712347513" }
       ]
     },
     "Skit": {
@@ -235,8 +235,8 @@ const Dashboard: React.FC = () => {
         third: "Rs. 4000"
       },
       contacts: [
-        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 99633 17059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Dancing Jodi - Western Duo": {
@@ -259,10 +259,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 8341 240966"},
-        {name: "Ms. Asritha", phone: "+91 7386 889772"},
-        {name: "Mr. Vineesha", phone: "+91 9951 695475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 8341 240966" },
+        { name: "Ms. Asritha", phone: "+91 7386 889772" },
+        { name: "Mr. Vineesha", phone: "+91 9951 695475" }
       ]
     },
     "Mime": {
@@ -280,8 +280,8 @@ const Dashboard: React.FC = () => {
         third: "Rs. 2000"
       },
       contacts: [
-        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Singing Jodi": {
@@ -301,9 +301,9 @@ const Dashboard: React.FC = () => {
         third: "Rs. 1000"
       },
       contacts: [
-        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Group Dance": {
@@ -325,10 +325,10 @@ const Dashboard: React.FC = () => {
         third: "Rs. 8000"
       },
       contacts: [
-        {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Short Film Making": {
@@ -350,8 +350,8 @@ const Dashboard: React.FC = () => {
         third: "Rs. 12000"
       },
       contacts: [
-        {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Haute Couture": {
@@ -371,20 +371,20 @@ const Dashboard: React.FC = () => {
         third: "Rs. 12000"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     }
   };
-  
+
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [] = useState(0);
-  
+
   // Animation state for sections
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
@@ -425,12 +425,12 @@ const Dashboard: React.FC = () => {
   const [loginMessage, setLoginMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [userProfileData, setUserProfileData] = useState<{ 
-    name: string; 
-    email: string; 
+  const [userProfileData, setUserProfileData] = useState<{
+    name: string;
+    email: string;
     userId?: string;
     registerId?: string;
-    userType?: string; 
+    userType?: string;
     gender?: string;
     branch?: string;
     college?: string;
@@ -459,11 +459,11 @@ const Dashboard: React.FC = () => {
   const getSelectedEventsGender = () => {
     const selectedEventsArray = Array.from(tempSelectedEvents);
     const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
-    
+
     let hasMaleEvents = false;
     let hasFemaleEvents = false;
     let hasMixedEvents = false;
-    
+
     for (const eventId of selectedEventsArray) {
       const event = allEvents.find(e => e._id === eventId);
       if (event) {
@@ -472,7 +472,7 @@ const Dashboard: React.FC = () => {
         else if (event.gender === 'mixed') hasMixedEvents = true;
       }
     }
-    
+
     return { hasMaleEvents, hasFemaleEvents, hasMixedEvents };
   };
 
@@ -482,15 +482,15 @@ const Dashboard: React.FC = () => {
     if (tempSelectedEvents.has(event._id)) {
       return false;
     }
-    
+
     // If already registered for this event, disable
     if (selectedEvents.has(event._id)) {
       return true;
     }
-    
+
     const { hasMaleEvents, hasFemaleEvents } = getSelectedEventsGender();
     const isParaSports = paraSportsEvents.some(pe => pe._id === event._id);
-    
+
     // Para sports logic
     if (isParaSports) {
       // Para sports can't be selected if regular events are selected
@@ -500,17 +500,17 @@ const Dashboard: React.FC = () => {
       if (paraSportsSelected) {
         return true;
       }
-      
+
       // Gender-based restrictions for regular events
       if (event.gender === 'male' && hasFemaleEvents) {
         return true; // Can't select male events if female events are selected
       }
-      
+
       if (event.gender === 'female' && hasMaleEvents) {
         return true; // Can't select female events if male events are selected
       }
     }
-    
+
     // Mixed events are always allowed (unless para sports conflict)
     return false;
   };
@@ -518,23 +518,23 @@ const Dashboard: React.FC = () => {
   // Filter events based on user gender - users only see events appropriate for their gender
   const filterEventsByGender = (events: Event[]) => {
     const userGender = userProfileData.gender;
-    
+
     if (userGender === 'female') {
       // Female users can only see female and mixed gender events
-      const filtered = events.filter(event => 
+      const filtered = events.filter(event =>
         event.gender === 'female' || event.gender === 'mixed'
       );
       return filtered;
     }
-    
+
     if (userGender === 'male') {
       // Male users can only see male and mixed gender events  
-      const filtered = events.filter(event => 
+      const filtered = events.filter(event =>
         event.gender === 'male' || event.gender === 'mixed'
       );
       return filtered;
     }
-    
+
     // For non-logged in users or other genders, show all events
     return events;
   };
@@ -583,8 +583,8 @@ const Dashboard: React.FC = () => {
   // Functions to filter cultural events by category (with gender filtering)
   const getMusicEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
-      event.eventName?.toLowerCase().includes('singing') || 
+    return filteredEvents.filter(event =>
+      event.eventName?.toLowerCase().includes('singing') ||
       event.eventName?.toLowerCase().includes('music') ||
       event.category?.toLowerCase().includes('music')
     );
@@ -592,7 +592,7 @@ const Dashboard: React.FC = () => {
 
   const getDanceEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('dance') ||
       event.category?.toLowerCase().includes('dance')
     );
@@ -600,7 +600,7 @@ const Dashboard: React.FC = () => {
 
   const getTheatreEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('theatre') ||
       event.eventName?.toLowerCase().includes('drama') ||
       event.category?.toLowerCase().includes('theatre')
@@ -609,7 +609,7 @@ const Dashboard: React.FC = () => {
 
   const getLiteratureEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('literature') ||
       event.eventName?.toLowerCase().includes('poetry') ||
       event.eventName?.toLowerCase().includes('writing') ||
@@ -619,7 +619,7 @@ const Dashboard: React.FC = () => {
 
   const getVisualArtsEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('art') ||
       event.eventName?.toLowerCase().includes('painting') ||
       event.eventName?.toLowerCase().includes('photography') ||
@@ -629,7 +629,7 @@ const Dashboard: React.FC = () => {
 
   const getFashionDesignEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('fashion') ||
       event.eventName?.toLowerCase().includes('design') ||
       event.category?.toLowerCase().includes('fashion')
@@ -638,7 +638,7 @@ const Dashboard: React.FC = () => {
 
   const getSpotLightEvents = () => {
     const filteredEvents = getFilteredCulturalEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('spotlight') ||
       event.eventName?.toLowerCase().includes('talent') ||
       event.category?.toLowerCase().includes('spotlight')
@@ -647,7 +647,7 @@ const Dashboard: React.FC = () => {
 
   const getIndoorSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('chess') ||
       event.eventName?.toLowerCase().includes('table tennis') ||
       event.eventName?.toLowerCase().includes('badminton') ||
@@ -659,7 +659,7 @@ const Dashboard: React.FC = () => {
 
   const getTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event => 
+    return filteredEvents.filter(event =>
       event.eventName?.toLowerCase().includes('football') ||
       event.eventName?.toLowerCase().includes('volleyball') ||
       event.eventName?.toLowerCase().includes('basketball') ||
@@ -676,11 +676,11 @@ const Dashboard: React.FC = () => {
   const visualArtsCards = convertEventsToCards(getVisualArtsEvents());
   const fashionDesignCards = convertEventsToCards(getFashionDesignEvents());
   const spotLightCards = convertEventsToCards(getSpotLightEvents());
-  
+
   // Sports event cards (with gender filtering)
   const indoorSportsCards = convertEventsToCards(getIndoorSportsEvents());
   const teamSportsCards = convertEventsToCards(getTeamSportsEvents());
-  
+
   // Para sports cards (with gender filtering)
   const paraSportsCards = convertEventsToCards(getFilteredParaSportsEvents());
 
@@ -712,7 +712,7 @@ const Dashboard: React.FC = () => {
             setEvents(0);
             setOnlineAudience(0);
             setCashPrizes(0);
-            
+
             // Small delay before starting animation
             setTimeout(() => {
               // Animate footfall to 20000
@@ -726,7 +726,7 @@ const Dashboard: React.FC = () => {
                   setFootfall(footfallCount);
                 }
               }, 15);
-              
+
               // Animate colleges to 350
               let collegesCount = 0;
               const collegesInterval = setInterval(() => {
@@ -738,7 +738,7 @@ const Dashboard: React.FC = () => {
                   setColleges(collegesCount);
                 }
               }, 15);
-              
+
               // Animate events to 80
               let eventsCount = 0;
               const eventsInterval = setInterval(() => {
@@ -750,7 +750,7 @@ const Dashboard: React.FC = () => {
                   setEvents(eventsCount);
                 }
               }, 15);
-              
+
               // Animate online audience to 500000
               let audienceCount = 0;
               const audienceInterval = setInterval(() => {
@@ -762,7 +762,7 @@ const Dashboard: React.FC = () => {
                   setOnlineAudience(audienceCount);
                 }
               }, 15);
-              
+
               // Animate cash prizes to 15
               let prizesCount = 0;
               const prizesInterval = setInterval(() => {
@@ -825,11 +825,11 @@ const Dashboard: React.FC = () => {
   // Auto-rotate throwback videos every 15 seconds
   useEffect(() => {
     if (!isThrowbackUnlocked) return;
-    
+
     const interval = setInterval(() => {
       setCurrentDay((prev) => (prev === 3 ? 1 : (prev + 1) as 1 | 2 | 3));
     }, 15000); // 15 seconds
-    
+
     return () => clearInterval(interval);
   }, [isThrowbackUnlocked]);
 
@@ -851,11 +851,10 @@ const Dashboard: React.FC = () => {
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              // Section entering viewport - open flower
+              // Section entering viewport - open flower (only once)
               setIsThrowbackUnlocked(true);
-            } else {
-              // Section leaving viewport - close flower
-              setIsThrowbackUnlocked(false);
+              // Once opened, disconnect the observer so it never closes
+              observer.disconnect();
             }
           });
         },
@@ -1004,6 +1003,51 @@ const Dashboard: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Control video playback based on throwback section visibility
+  useEffect(() => {
+    const throwbackSection = document.querySelector('[data-section-id="throwback"]');
+    if (!throwbackSection || !videoRef.current) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5 // Video plays when 50% of section is visible
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (videoRef.current && videoRef.current.contentWindow) {
+          try {
+            if (entry.isIntersecting) {
+              // Play video when section is visible
+              videoRef.current.contentWindow.postMessage(
+                '{"event":"command","func":"playVideo","args":""}',
+                '*'
+              );
+            } else {
+              // Pause video when section is not visible
+              videoRef.current.contentWindow.postMessage(
+                '{"event":"command","func":"pauseVideo","args":""}',
+                '*'
+              );
+            }
+          } catch (error) {
+            // Silently handle errors
+            console.log('Video control error:', error);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    observer.observe(throwbackSection);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isThrowbackUnlocked, selectedYear, currentDay]); // Re-run when video changes
+
+
   // Helper function to register section refs
   const registerSection = useCallback((id: string, element: HTMLElement | null) => {
     if (element) {
@@ -1018,28 +1062,28 @@ const Dashboard: React.FC = () => {
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
     setLoadingEvents(true);
     try {
-        // Fetch sports events with gender filter if user is logged in
-        const sportsResponse = await getEventsByType('sports', userGender);
-        if (sportsResponse.success && sportsResponse.data) {
-          setSportsEvents(sportsResponse.data);
-        }
-
-        // Fetch culturals events with gender filter if user is logged in
-        const culturalsResponse = await getEventsByType('culturals', userGender);
-        if (culturalsResponse.success && culturalsResponse.data) {
-          setCulturalEvents(culturalsResponse.data);
-        }
-
-        // Fetch para sports events with gender filter if user is logged in
-        const paraSportsResponse = await getEventsByType('parasports', userGender);
-        if (paraSportsResponse.success && paraSportsResponse.data) {
-          setParaSportsEvents(paraSportsResponse.data);
-        }
-      } catch (error) {
-        // Silently handle errors
-      } finally {
-        setLoadingEvents(false);
+      // Fetch sports events with gender filter if user is logged in
+      const sportsResponse = await getEventsByType('sports', userGender);
+      if (sportsResponse.success && sportsResponse.data) {
+        setSportsEvents(sportsResponse.data);
       }
+
+      // Fetch culturals events with gender filter if user is logged in
+      const culturalsResponse = await getEventsByType('culturals', userGender);
+      if (culturalsResponse.success && culturalsResponse.data) {
+        setCulturalEvents(culturalsResponse.data);
+      }
+
+      // Fetch para sports events with gender filter if user is logged in
+      const paraSportsResponse = await getEventsByType('parasports', userGender);
+      if (paraSportsResponse.success && paraSportsResponse.data) {
+        setParaSportsEvents(paraSportsResponse.data);
+      }
+    } catch (error) {
+      // Silently handle errors
+    } finally {
+      setLoadingEvents(false);
+    }
   }, [isLoggedIn, userProfileData.gender]);
 
   // Fetch events on component mount
@@ -1076,7 +1120,7 @@ const Dashboard: React.FC = () => {
           // Try to fetch from database first
           const response = await fetch(`${API_BASE_URL}/my-registrations/${userProfileData.userId}`);
           const result = await response.json();
-          
+
           if (response.ok && result.success && result.data.events) {
             setMyEvents(result.data.events);
             // Also save to localStorage as backup
@@ -1108,7 +1152,7 @@ const Dashboard: React.FC = () => {
         setMyEvents([]);
       }
     };
-    
+
     loadUserEvents();
   }, [isLoggedIn, userProfileData.userId]);
 
@@ -1145,24 +1189,24 @@ const Dashboard: React.FC = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [showSportsDetails, nextSportsSlide, prevSportsSlide]);
-  
+
   // Touch swipe handlers for culturals carousel
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
-  
+
   const onTouchEnd = (carouselType: 'sports' | 'culturals' | 'events') => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    
+
     if (carouselType === 'sports') {
       if (isLeftSwipe) {
         nextSportsSlide();
@@ -1183,7 +1227,7 @@ const Dashboard: React.FC = () => {
       }
     }
   };
-  
+
   const prevEventSlide = () => {
     setCurrentEventSlide((prev) => (prev - 1 + eventInfoCards.length) % eventInfoCards.length);
   };
@@ -1399,79 +1443,79 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEventDetailClick = (eventTitle: string) => {
-    
+
     // Create a comprehensive mapping from database event names to URL-friendly names
     const eventNameMapping: { [key: string]: string } = {
       // Chess events
       'Chess Championship': 'Chess',
       'Chess Tournament': 'Chess',
       'Chess': 'Chess',
-      
+
       // Table Tennis events
       'Table Tennis Tournament': 'Table Tennis',
       'Table Tennis Championship': 'Table Tennis',
       'Table Tennis': 'Table Tennis',
-      
+
       // Badminton events
       'Badminton Championship': 'Table Tennis', // Assuming same structure
       'Badminton Tournament': 'Table Tennis',
-      
+
       // Athletics events
       'Athletics Championship': 'Men\'s Athletics',
       'Track & Field': 'Men\'s Athletics',
-      
+
       // Taekwondo events
       'Taekwondo Championship': 'Taekwondo',
       'Taekwondo Tournament': 'Taekwondo',
-      
+
       // Volleyball events
       'Volleyball Tournament': 'Volley ball',
       'Volleyball Championship': 'Volley ball',
       'Volley Ball Tournament': 'Volley ball',
-      
+
       // Basketball events
       'Basketball Tournament': 'Basket ball',
       'Basketball Championship': 'Basket ball',
       'Basket Ball Tournament': 'Basket ball',
-      
+
       // Football events
       'Football Championship': 'Football',
       'Football Tournament': 'Football',
-      
+
       // Kabaddi events
       'Kabaddi Tournament': 'Kabaddi',
       'Kabaddi Championship': 'Kabaddi',
-      
+
       // Hockey events
       'Hockey Tournament': 'Hockey',
       'Hockey Championship': 'Hockey',
-      
+
       // Kho-Kho events
       'Kho-Kho Tournament': 'Kho-Kho',
       'Kho-Kho Championship': 'Kho-Kho',
-      
+
       // Swimming events
       'Swimming Competition': 'Men\'s Athletics', // Using individual sports structure
       'Swimming Championship': 'Men\'s Athletics',
-      
+
       // Throwball events
       'Throwball Tournament': 'Throw ball',
       'Throwball Championship': 'Throw ball',
-      
+
       // Tennikoit events
       'Tennikoit Tournament': 'Tennikoit',
       'Tennikoit Championship': 'Tennikoit',
-      
+
       // Yoga events
       'Yoga Competition': 'Traditional Yogasana',
       'Traditional Yogasana Competition': 'Traditional Yogasana',
       'Artistic Yogasana Competition': 'Artistic Yogasana',
-      
+
       // Para Sports events
       'Para Athletics': 'Para Sports',
       'Para Cricket Men': 'Para Sports',
       'Para Sports Competition': 'Para Sports',
-      
+
       // Cultural events - Dance
       'Classical Dance Competition': 'Classical Dance Solo',
       'Classical Dance Solo': 'Classical Dance Solo',
@@ -1483,7 +1527,7 @@ const Dashboard: React.FC = () => {
       'Dancing Jodi - Western Duo': 'Dancing Jodi - Western Duo',
       'Group Dance Competition': 'Group Dance',
       'Group Dance': 'Group Dance',
-      
+
       // Cultural events - Music
       'Solo Singing Competition': 'Singing Idol',
       'Singing Idol': 'Singing Idol',
@@ -1491,7 +1535,7 @@ const Dashboard: React.FC = () => {
       'Group Singing Competition': 'Group Singing',
       'Singing Jodi': 'Singing Jodi',
       'Singing Duo': 'Singing Jodi',
-      
+
       // Cultural events - Theatre
       'Drama & Theatre Competition': 'Skit',
       'Skit': 'Skit',
@@ -1500,19 +1544,19 @@ const Dashboard: React.FC = () => {
       'Mime Competition': 'Mime',
       'Short Film Making': 'Short Film Making',
       'Short Film Competition': 'Short Film Making',
-      
+
       // Cultural events - Fashion
       'Fashion Show': 'Haute Couture',
       'Haute Couture': 'Haute Couture',
       'Fashion Competition': 'Haute Couture',
-      
+
       // Other cultural events
       'Stand-up Comedy Competition': 'Singing Idol',
       'Art & Painting Exhibition': 'Singing Idol',
       'Poetry & Literature Competition': 'Singing Idol',
       'DJ & Music Production Battle': 'Singing Idol'
     };
-    
+
     // Try to find the event name using the original title first, then the mapped title
     let eventName = eventTitle;
     if (eventNameMapping[eventTitle]) {
@@ -1564,11 +1608,11 @@ const Dashboard: React.FC = () => {
         eventName = 'Haute Couture';
       }
     }
-    
+
     // Check if event data exists in either sports or cultural events before navigating
-    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] || 
-                        culturalEventsData[eventName as keyof typeof culturalEventsData];
-    
+    const eventExists = eventDetailsData[eventName as keyof typeof eventDetailsData] ||
+      culturalEventsData[eventName as keyof typeof culturalEventsData];
+
     if (eventExists || eventName) {
       // Navigate to the new event detail page
       navigate(`/event/${encodeURIComponent(eventName)}`);
@@ -1713,7 +1757,7 @@ const Dashboard: React.FC = () => {
 
     try {
       const result = await registerUser(submissionData);
-      
+
       if (result.success && result.data?.userId) {
         // Close signup modal and show beautiful credential card
         setShowSignupModal(false);
@@ -1721,10 +1765,10 @@ const Dashboard: React.FC = () => {
         // Use password from backend response (in DD/MM/YYYY format)
         setGeneratedPassword(result.data.password || password);
         setShowUserIdPopup(true);
-        
+
         // Store the generated userId
         localStorage.setItem('generatedUserId', result.data.userId);
-        
+
         // Reset form after showing popup
         setSignupFormData({
           name: '',
@@ -1798,13 +1842,13 @@ const Dashboard: React.FC = () => {
 
     try {
       const result = await forgotPassword(forgotPasswordEmail);
-      
+
       if (result.success) {
         setResetMessage({
           type: 'success',
           text: `Password recovery email sent to ${forgotPasswordEmail}. Please check your inbox!`
         });
-        
+
         // Close modal and show login after 3 seconds
         setTimeout(() => {
           handleCloseForgotPassword();
@@ -1841,15 +1885,15 @@ const Dashboard: React.FC = () => {
         setShowLoginModal(true);
         return;
       }
-      
+
       if (userProfileData.userType === 'visitor') {
         alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
         return;
       }
-      
+
       // Open modal immediately
       setActiveSubModal(cardName);
-      
+
       // Fetch events and user data in background
       fetchEvents();
       if (isLoggedIn && userProfileData.userId) {
@@ -1868,7 +1912,7 @@ const Dashboard: React.FC = () => {
     setActiveSubModal(null);
   };
 
-  
+
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -1884,7 +1928,7 @@ const Dashboard: React.FC = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
     localStorage.removeItem('isLoggedIn');
-    
+
     // Redirect to main page
     window.location.href = '/';
   };
@@ -1901,15 +1945,15 @@ const Dashboard: React.FC = () => {
       setShowLoginModal(true);
       return;
     }
-    
+
     if (!userProfileData.userId) {
       alert('Unable to load profile. Please try logging in again.');
       return;
     }
-    
+
     setShowProfileModal(true);
     setIsLoadingProfile(true);
-    
+
     try {
       // Ensure latest saved events are loaded
       if (userProfileData.userId) {
@@ -1918,7 +1962,7 @@ const Dashboard: React.FC = () => {
 
       // Fetch user's registered events
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
-      
+
       if (registrationsResult.success && registrationsResult.data) {
         setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
       } else {
@@ -1943,12 +1987,12 @@ const Dashboard: React.FC = () => {
       newSelected.add(eventId);
     }
     setSelectedEvents(newSelected);
-    
+
     // Update para/regular selection status
     const selectedEventsArray = Array.from(newSelected);
     const hasPara = selectedEventsArray.some(id => paraSportsEvents.some(pe => pe._id === id));
     const hasRegular = selectedEventsArray.some(id => sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id));
-    
+
     setParaSportsSelected(hasPara);
     setRegularEventsSelected(hasRegular);
   };
@@ -1960,13 +2004,13 @@ const Dashboard: React.FC = () => {
     }
 
     const eventIds = Array.from(selectedEvents);
-    
+
     // Get full event objects from the selected IDs
     const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
     const selectedEventObjects = eventIds.map(id => {
       const event = allEvents.find(e => e._id === id);
       if (!event) return null;
-      
+
       return {
         eventName: event.eventName,
         eventType: event.eventType,
@@ -1975,10 +2019,10 @@ const Dashboard: React.FC = () => {
         fee: event.fee || 0
       };
     }).filter(e => e !== null);
-    
+
     try {
       const result = await saveMyEvents(userProfileData.userId, selectedEventObjects);
-      
+
       if (result.success) {
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
@@ -2010,10 +2054,10 @@ const Dashboard: React.FC = () => {
     try {
       // Call the real login API with the identifier
       const result = await loginUser(identifier, payload.password);
-      
+
       if (result.success && result.data) {
         const { userId, registerId = undefined, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
-        
+
         // Ensure all required fields are present
         if (!userId || !name || !email) {
           setLoginMessage({
@@ -2023,10 +2067,10 @@ const Dashboard: React.FC = () => {
           setIsLoggingIn(false);
           return;
         }
-        
+
         setIsLoggedIn(true);
         setLoggedInUserName(name);
-        
+
         // Store user profile data with all available fields
         const profileData = {
           name: name,
@@ -2041,10 +2085,10 @@ const Dashboard: React.FC = () => {
           dateOfBirth: dateOfBirth
         };
         setUserProfileData(profileData);
-        
+
         setShowLoginModal(false);
         setLoginFormData({ identifier: '', password: '' });
-        
+
         // Store in localStorage
         localStorage.setItem('userName', name);
         localStorage.setItem('userEmail', email);
@@ -2069,18 +2113,18 @@ const Dashboard: React.FC = () => {
           localStorage.setItem('userDOB', dateOfBirth);
         }
         localStorage.setItem('isLoggedIn', 'true');
-        
+
         // Fetch user's saved events from database
         await fetchUserSavedEvents(userId);
 
         // After successful login, open the profile page/modal directly
         setShowProfileModal(true);
         setIsLoadingProfile(true);
-        
+
         try {
           // Fetch user's registered events
           const registrationsResult = await getUserRegisteredEvents(userId);
-          
+
           if (registrationsResult.success && registrationsResult.data) {
             setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
           } else {
@@ -2110,7 +2154,7 @@ const Dashboard: React.FC = () => {
   // Check if user is already logged in on component mount
   useEffect(() => {
     const storedUserName = localStorage.getItem('userName');
-    const storedUserEmail = localStorage.getItem('userEmail'); 
+    const storedUserEmail = localStorage.getItem('userEmail');
     const storedUserId = localStorage.getItem('userId');
     const storedRegisterId = localStorage.getItem('registerId');
     const storedUserType = localStorage.getItem('userType');
@@ -2120,7 +2164,7 @@ const Dashboard: React.FC = () => {
     const storedPhone = localStorage.getItem('userPhone');
     const storedDOB = localStorage.getItem('userDOB');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
-    
+
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
       setIsLoggedIn(true);
       setLoggedInUserName(storedUserName);
@@ -2137,7 +2181,7 @@ const Dashboard: React.FC = () => {
         dateOfBirth: storedDOB || undefined
       };
       setUserProfileData(profileData);
-      
+
       // Fetch user's saved events from database
       if (storedUserId) {
         fetchUserSavedEvents(storedUserId);
@@ -2178,8 +2222,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={`dashboard-container w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-         style={{background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column"}}>
-      
+      style={{ background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column" }}>
+
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
         <div className="sunlight-rays ray-1"></div>
@@ -2195,15 +2239,15 @@ const Dashboard: React.FC = () => {
         <>
           <div className="fixed top-5 left-5 z-60 cursor-pointer" onClick={handlePageMenuToggle}>
             <div className="w-8 h-8 flex flex-col justify-around items-center transition-transform duration-300">
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
-              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{backgroundColor: '#fdee71'}}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
+              <span className="block w-full h-0.5 rounded transition-all duration-300 bg-yellow-400" style={{ backgroundColor: '#fdee71' }}></span>
             </div>
           </div>
-          
+
           {/* Gaurada Image beside hamburger */}
           <div className="absolute top-0 left-16 sm:top-7 z-60">
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}Garuda.avif`}
               alt="Garuda"
               className="h-20 sm:h-24 w-auto object-contain"
@@ -2215,56 +2259,56 @@ const Dashboard: React.FC = () => {
       {/* Top-Right Vignan Logo - Only show on main dashboard (hide when menu, modals, or submodals are open) */}
       {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
-          <img 
+          <img
             src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
             alt="Vignan Logo"
             className="vignan-logo-img"
           />
         </div>
       )}
-     
+
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{background: "transparent", zIndex: 1, position: 'relative'}} >
+      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{ background: "transparent", zIndex: 1, position: 'relative' }} >
         {/* Left side image - 1.avif */}
-        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px',paddingTop: '90px' }}>
+        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
           <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
         </div>
-        
+
         {/* Right side image - 2.avif */}
         <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
           <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
         </div>
-        
+
         {/* National Level Youth Festival Text - Positioned absolutely */}
         <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
         </div>
         {/* Logo */}
-        <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{marginTop: "-80px", display: "flex", justifyContent: "center"}}>
-          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px"}} />
+        <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{ marginTop: "-80px", display: "flex", justifyContent: "center" }}>
+          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
         </div>
-        
+
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center'}}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center' }}>
           {isLoggedIn ? (
             myEvents.length === 0 ? (
-            <button 
-              className="register-events-btn"
-              style={{width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)'}} 
-              onClick={handleOpenProfile}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
-              }}
-            >Register for Events</button>
+              <button
+                className="register-events-btn"
+                style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
+                onClick={handleOpenProfile}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
+                }}
+              >Register for Events</button>
             ) : null
           ) : (
-            <button 
+            <button
               className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 marginTop: '0',
@@ -2376,7 +2420,7 @@ const Dashboard: React.FC = () => {
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
-        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible" 
+        <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
             backgroundSize: 'cover',
@@ -2384,10 +2428,17 @@ const Dashboard: React.FC = () => {
             backgroundAttachment: 'fixed',
             zIndex: 99998
           }}>
+          <style>{`
+            .menu-grid-card span {
+              font-family: 'coffee+tea demo', sans-serif !important;
+              font-weight: normal !important;
+              text-transform: uppercase;
+            }
+          `}</style>
           {/* Floating Flower - Top Right */}
           <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="100%"
                 sunSize="50%"
                 moonSize="43%"
@@ -2401,7 +2452,7 @@ const Dashboard: React.FC = () => {
               />
             </div>
             {/* Static Moon - Not rotating */}
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}moon.avif`}
               alt="Moon"
               style={{
@@ -2419,9 +2470,9 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Floating Flower - Bottom Left */}
-          <div className="fixed -left-32 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ bottom: '-150px', border: 'none', outline: 'none' }}>
+          <div className="menu-bottom-left-flower fixed -left-32 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ bottom: '-290px', border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="100%"
                 sunSize="50%"
                 moonSize="43%"
@@ -2435,7 +2486,7 @@ const Dashboard: React.FC = () => {
               />
             </div>
             {/* Static Moon - Not rotating */}
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}moon.avif`}
               alt="Moon"
               style={{
@@ -2451,7 +2502,19 @@ const Dashboard: React.FC = () => {
               }}
             />
           </div>
-          
+
+          <style>{`
+            /* Mobile responsive styling for bottom left flower */
+            @media (max-width: 767px) {
+              .menu-bottom-left-flower {
+                width: 250px !important;
+                height: 250px !important;
+                bottom: -100px !important;
+                left: -100px !important;
+              }
+            }
+          `}</style>
+
           {/* Back Button and Menu Title - Combined on Mobile */}
           <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginTop: '10px', marginBottom: '10px' }}>
             <div className="menu-back-button-mobile">
@@ -2467,348 +2530,348 @@ const Dashboard: React.FC = () => {
                 />
               </button>
             </div>
-            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Garden Sans, sans-serif !important', flex: 1, textAlign: 'center', marginRight: '96px'}}>MENU</h1>
+            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive !important', flex: 1, textAlign: 'center', marginRight: '96px' }}>MENU</h1>
           </div>
 
           {/* Menu Title - Desktop Only */}
-          <div className="text-center menu-title-container menu-title-desktop" style={{marginTop: "10px", paddingBottom: "2px"}}>
-            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Garden Sans, sans-serif !important'}}>MENU</h1>
+          <div className="text-center menu-title-container menu-title-desktop" style={{ marginTop: "10px", paddingBottom: "2px" }}>
+            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive !important' }}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
-          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-100px)] px-4 md:px-6 menu-grid-container" style={{marginTop: "-90px"}}>
+          <div className="overflow-y-auto overflow-x-hidden h-[calc(100vh-100px)] px-4 md:px-6 menu-grid-container" style={{ marginTop: "-90px" }}>
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-              {/* Back Button - Inside Scroll (Desktop Only) */}
-              <div className="col-span-2 md:col-span-4 flex justify-start mb-2 menu-back-button-desktop" style={{ marginLeft: '-190px' }}>
-                <button
-                  onClick={() => setShowPageMenu(false)}
-                  className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
-                  aria-label="Go back"
+                {/* Back Button - Inside Scroll (Desktop Only) */}
+                <div className="col-span-2 md:col-span-4 flex justify-start mb-2 menu-back-button-desktop" style={{ marginLeft: '-190px' }}>
+                  <button
+                    onClick={() => setShowPageMenu(false)}
+                    className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"
+                    aria-label="Go back"
+                  >
+                    <img
+                      src={`${import.meta.env.BASE_URL}BACK.avif`}
+                      alt="Back"
+                      className="w-full h-full object-contain"
+                    />
+                  </button>
+                </div>
+                {/* HOME */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
+                  style={{
+                    transformStyle: 'preserve-3d'
+                  }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
                 >
-                  <img
-                    src={`${import.meta.env.BASE_URL}BACK.avif`}
-                    alt="Back"
-                    className="w-full h-full object-contain"
-                  />
-                </button>
-              </div>
-              {/* HOME */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { handleCardClick('HOME'); setShowPageMenu(false); }}
-                 style={{ 
-                  transformStyle: 'preserve-3d'
-                }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>HOME</span>
-              </div>
+                  <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">HOME</span>
+                </div>
 
-              {/* EVENTS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={handleEventsInfoClick}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>EVENTS</span>
-              </div>
+                {/* EVENTS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={handleEventsInfoClick}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">EVENTS</span>
+                </div>
 
-              {/* PROFILE */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>PROFILE</span>
-              </div>
+                {/* PROFILE */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">PROFILE</span>
+                </div>
 
-              {/* SCHEDULE */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/schedule');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>SCHEDULE</span>
-              </div>
+                {/* SCHEDULE */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/schedule');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">SCHEDULE</span>
+                </div>
 
-              {/* COLLABORATION */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/collaboration');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>COLLABORATION</span>
-              </div>
+                {/* COLLABORATION */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/collaboration');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">COLLABORATION</span>
+                </div>
 
-              {/* ZONALS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/zonals');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>ZONALS</span>
-              </div>
+                {/* ZONALS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/zonals');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">ZONALS</span>
+                </div>
 
-              {/* PARA SPORTS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/events-info', { state: { openSection: 'paraCards' } });
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766997935/para_sports_tbld5k.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>PARA SPORTS</span>
-              </div>
+                {/* PARA SPORTS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/events-info', { state: { openSection: 'paraCards' } });
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766997935/para_sports_tbld5k.svg" alt="Para Sports" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">PARA SPORTS</span>
+                </div>
 
-              {/* HOSPITALITY */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/hospitality');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>HOSPITALITY</span>
-              </div>
+                {/* HOSPITALITY */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/hospitality');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">HOSPITALITY</span>
+                </div>
 
-              {/* CAMPUS AMBASSADOR */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>CAMPUS AMBASSADOR</span>
-              </div>
+                {/* CAMPUS AMBASSADOR */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">CAMPUS AMBASSADOR</span>
+                </div>
 
-              {/* SPONSORS */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/sponsors');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>SPONSORS</span>
-              </div>
+                {/* SPONSORS */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/sponsors');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">SPONSORS</span>
+                </div>
 
-              {/* OUR TEAM */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/our-team');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>OUR TEAM</span>
-              </div>
+                {/* OUR TEAM */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/our-team');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">OUR TEAM</span>
+                </div>
 
-              {/* MAP */}
-              <div 
-                className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                onClick={() => { 
-                  navigate('/campus-map');
-                  setShowPageMenu(false); 
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-                  const rotateX = (y - centerY) / 10;
-                  const rotateY = (centerX - x) / 10;
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-                }}
-              >
-                <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
-                <span className="text-white text-lg font-semibold tracking-wide" style={{fontFamily: 'coffee+tea demo, sans-serif !important'}}>MAP</span>
+                {/* MAP */}
+                <div
+                  className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
+                  onClick={() => {
+                    navigate('/campus-map');
+                    setShowPageMenu(false);
+                  }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onMouseMove={(e) => {
+                    const card = e.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                  }}
+                >
+                  <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
+                  <span className="text-white text-lg tracking-wide">MAP</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       )}
 
@@ -2821,7 +2884,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaSports(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>PARA SPORTS CATEGORIES</h2>
@@ -2835,12 +2898,12 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentParaSportsSlide + index) % paraSportsCards.length;
                   const card = paraSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleParaSportsClick(card.title)}
                     >
-                      <img 
+                      <img
                         src="/events/para.avif"
                         alt={card.title}
                         loading="lazy"
@@ -2881,7 +2944,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaAthleticsMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>PARA ATHLETICS MEN</h2>
@@ -2895,8 +2958,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentParaAthleticsSlide + index) % paraAthleticsMenCards.length;
                   const card = paraAthleticsMenCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                     >
                       <div className="indoor-sport-card-poster-background">
@@ -2936,7 +2999,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowParaCricketMen(false); setShowParaSports(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>PARA CRICKET MEN</h2>
@@ -2950,8 +3013,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentParaCricketSlide + index) % paraCricketMenCards.length;
                   const card = paraCricketMenCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                     >
                       <div className="indoor-sport-card-poster-background">
@@ -2991,7 +3054,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowCulturals(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION</h2>
@@ -3000,7 +3063,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="culturals-navigation">
               <button className="culturals-nav-btn prev" onClick={prevCulturalsSlide}>?</button>
-              <div 
+              <div
                 className="culturals-carousel-3d-container"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
@@ -3010,12 +3073,12 @@ const Dashboard: React.FC = () => {
                   {culturalsCards.map((card, index) => {
                     const isActive = index === currentCulturalsSlide;
                     const offset = index - currentCulturalsSlide;
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front of semicircle
                       transform = 'translateX(0) translateY(0) translateZ(250px) rotateY(0deg) scale(1.08)';
@@ -3059,10 +3122,10 @@ const Dashboard: React.FC = () => {
                       opacity = 0.15;
                       filter = 'brightness(0.2)';
                     }
-                    
+
                     return (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className={`cultural-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isActive ? () => handleCulturalsClick(card.title) : () => setCurrentCulturalsSlide(index)}
                         style={{
@@ -3074,16 +3137,15 @@ const Dashboard: React.FC = () => {
                         }}
                       >
                         <div className="cultural-card-poster-background" style={{
-                          backgroundImage: `url(${import.meta.env.BASE_URL}events/${
-                            card.title === 'Music' ? 'singing idol' :
+                          backgroundImage: `url(${import.meta.env.BASE_URL}events/${card.title === 'Music' ? 'singing idol' :
                             card.title === 'Dance' ? 'Dance' :
-                            card.title === 'Theatre' ? 'skit' :
-                            card.title === 'Literature' ? 'literature' :
-                            card.title === 'Visual Arts' ? 'Rangoli' :
-                            card.title === 'Fashion Design' ? 'Theme Ramp walk' :
-                            card.title === 'Spot Light' ? 'Mr and ms mahotsav' :
-                            card.title
-                          }.avif)`,
+                              card.title === 'Theatre' ? 'skit' :
+                                card.title === 'Literature' ? 'literature' :
+                                  card.title === 'Visual Arts' ? 'Rangoli' :
+                                    card.title === 'Fashion Design' ? 'Theme Ramp walk' :
+                                      card.title === 'Spot Light' ? 'Mr and ms mahotsav' :
+                                        card.title
+                            }.avif)`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center'
                         }}>
@@ -3217,7 +3279,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>THEATRE & CINEMATOGRAPHY</h2>
@@ -3314,7 +3376,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowVisualArts(false); setShowCulturals(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>VISUAL ARTS & CRAFT</h2>
@@ -3364,7 +3426,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowFashionDesign(false); setShowCulturals(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>FASHION DESIGN & STYLING</h2>
@@ -3424,23 +3486,23 @@ const Dashboard: React.FC = () => {
                 {Array.from({ length: Math.min(3, spotLightCards.length) }).map((_, index) => {
                   const cardIndex = (currentSpotLightSlide + index) % spotLightCards.length;
                   const card = spotLightCards[cardIndex];
-                  
+
                   // Image mapping for spotlight events
                   const spotlightImageMap: { [key: string]: string } = {
                     "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
                     "Mahotsav Got Talent": "events/gaming.avif"
                   };
-                  
+
                   const imagePath = spotlightImageMap[card.title];
-                  
+
                   // Only render if image path exists
                   if (!imagePath) return null;
-                  
+
                   const baseUrl = import.meta.env.BASE_URL || '/';
-                  
+
                   return (
                     <div key={cardIndex} className="indoor-sport-card">
-                      <img 
+                      <img
                         src={`${baseUrl}${imagePath}`}
                         alt={card.title}
                         className="w-full h-full object-cover"
@@ -3481,7 +3543,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="sports-details-navigation">
               <button className="sports-nav-btn prev" onClick={prevSportsSlide}></button>
-              <div 
+              <div
                 className="sports-carousel-3d-container"
                 onTouchStart={handleSportsTouchStart}
                 onTouchMove={handleSportsTouchMove}
@@ -3492,12 +3554,12 @@ const Dashboard: React.FC = () => {
                     const isActive = index === currentSportsSlide;
                     const offset = index - currentSportsSlide;
                     const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front (Glide style)
                       transform = 'translateX(-50%) translateY(-50%) translateZ(0) rotateY(0deg) scale(1)';
@@ -3541,10 +3603,10 @@ const Dashboard: React.FC = () => {
                       opacity = 0.2;
                       filter = 'brightness(0.3)';
                     }
-                    
+
                     return (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isClickable && isActive ? () => {
                           if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
@@ -3604,7 +3666,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
@@ -3618,8 +3680,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentIndoorSlide + index) % indoorSportsCards.length;
                   const card = indoorSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3661,7 +3723,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
@@ -3675,8 +3737,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentWomenIndoorSlide + index) % womenIndoorSportsCards.length;
                   const card = womenIndoorSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3718,7 +3780,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowMenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>TEAM FIELD SPORTS</h2>
@@ -3732,8 +3794,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentMenTeamSlide + index) % menTeamSportsCards.length;
                   const card = menTeamSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3775,7 +3837,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(true); }}>
                   ? Back
                 </button>
-                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{marginLeft: '10px'}}>
+                <button className="indoor-sports-back-btn" onClick={() => { setShowWomenTeamSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
                 <h2>WOMEN'S TEAM FIELD SPORTS</h2>
@@ -3789,8 +3851,8 @@ const Dashboard: React.FC = () => {
                   const cardIndex = (currentWomenTeamSlide + index) % womenTeamSportsCards.length;
                   const card = womenTeamSportsCards[cardIndex];
                   return (
-                    <div 
-                      key={cardIndex} 
+                    <div
+                      key={cardIndex}
                       className="indoor-sport-card"
                       onClick={() => handleEventDetailClick(card.title)}
                       style={{ cursor: 'pointer' }}
@@ -3824,7 +3886,7 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* About Theme Section */}
-      <section 
+      <section
         className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
@@ -3840,17 +3902,17 @@ const Dashboard: React.FC = () => {
             textTransform: 'uppercase',
             letterSpacing: '3px',
             textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
-            fontFamily: 'Garden Sans, sans-serif'
+            fontFamily: 'Aladin, cursive'
           }}>ABOUT THEME</h2>
-          
+
           {/* Garuda Logo - Above title on mobile, left side on desktop */}
           <div className="garuda-about-theme" style={{
             position: 'absolute',
             height: 'auto',
             zIndex: 1
           }}>
-            <img 
-              src="/Garuda.avif" 
+            <img
+              src="/Garuda.avif"
               alt="Garuda Logo"
               style={{
                 width: '100%',
@@ -3862,27 +3924,27 @@ const Dashboard: React.FC = () => {
 
           <div style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
-                fontSize: '2.5rem',
-                fontWeight: 'bold',
-                color: '#fdee71',
-                marginBottom: '30px',
-                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-                fontFamily: 'Quesha, sans-serif'
-              }}>Mahotsav 2026 - The Eternal Harmony</h3>
-              
-              <p className="theme-description" style={{
-                fontSize: '1.25rem',
-                lineHeight: '1.9',
-                color: '#f5e210ff',
-                textAlign: 'justify',
-                fontWeight: '400',
-                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
-                fontFamily: 'Borisna, sans-serif'
-              }}>
-                Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ?17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
-              </p>
+              fontSize: '2.5rem',
+              fontWeight: 'bold',
+              color: '#fdee71',
+              marginBottom: '30px',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+              fontFamily: 'Quesha, sans-serif'
+            }}>Mahotsav 2026 - The Eternal Harmony</h3>
+
+            <p className="theme-description" style={{
+              fontSize: '1.25rem',
+              lineHeight: '1.9',
+              color: '#f5e210ff',
+              textAlign: 'justify',
+              fontWeight: '400',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
+              fontFamily: 'Borisna, sans-serif'
+            }}>
+              Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ?17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
+            </p>
           </div>
-          
+
           {/* Stats Bar */}
           <div ref={statsRef} style={{
             background: 'rgba(255, 255, 255, 0.1)',
@@ -3893,11 +3955,12 @@ const Dashboard: React.FC = () => {
             padding: '30px 20px',
             marginTop: '30px',
             boxShadow: '0 0 25px rgba(223, 160, 0, 0.822)',
-            maxWidth: '1100px',
+            maxWidth: '1010px',
             margin: '30px auto 0',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginLeft: '200px'
           }}>
             <div className="stats-grid" style={{
               display: 'flex',
@@ -3908,164 +3971,165 @@ const Dashboard: React.FC = () => {
               width: '100%'
             }}>
               {/* Footfall */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '130px',
                 flex: '1 1 130px',
-                padding: '10px'
+                padding: '10px',
+                marginLeft: '-150px'
               }}>
-                <div style={{ 
-                  fontSize: '2.2rem', 
-                  marginBottom: '10px', 
+                <div style={{
+                  fontSize: '2.2rem',
+                  marginBottom: '10px',
                   color: '#1e3050',
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}><i className="fa-solid fa-people-group"></i></div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.5rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>{footfall.toLocaleString()}+</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '0.85rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '0.85rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
                 }}>TOTAL FOOTFALL</div>
               </div>
-              
+
               {/* Colleges */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '130px',
                 flex: '1 1 130px',
                 padding: '10px'
               }}>
-                <div style={{ 
-                  fontSize: '2.2rem', 
-                  marginBottom: '10px', 
+                <div style={{
+                  fontSize: '2.2rem',
+                  marginBottom: '10px',
                   color: '#1e3050',
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}><i className="fa-solid fa-graduation-cap"></i></div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.5rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>{colleges}+</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '0.85rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '0.85rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
                 }}>COLLEGES</div>
               </div>
-              
+
               {/* Events */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '130px',
                 flex: '1 1 130px',
                 padding: '10px'
               }}>
-                <div style={{ 
-                  fontSize: '2.2rem', 
-                  marginBottom: '10px', 
+                <div style={{
+                  fontSize: '2.2rem',
+                  marginBottom: '10px',
                   color: '#1e3050',
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}><i className="fa-solid fa-trophy"></i></div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.5rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>{events}+</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '0.85rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '0.85rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
                 }}>EVENTS</div>
               </div>
-              
+
               {/* Online Audience */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '130px',
                 flex: '1 1 130px',
                 padding: '10px'
               }}>
-                <div style={{ 
-                  fontSize: '2.2rem', 
-                  marginBottom: '10px', 
+                <div style={{
+                  fontSize: '2.2rem',
+                  marginBottom: '10px',
                   color: '#1e3050',
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}><i className="fa-solid fa-earth-africa"></i></div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.5rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>{onlineAudience.toLocaleString()}+</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '0.85rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '0.85rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
                 }}>ONLINE AUDIANCE</div>
               </div>
-              
+
               {/* Editions */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '130px',
                 flex: '1 1 130px',
                 padding: '10px'
               }}>
-                <div style={{ 
+                <div style={{
                   marginBottom: '10px',
                   height: '50px',
                   display: 'flex',
@@ -4086,55 +4150,55 @@ const Dashboard: React.FC = () => {
                     textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
                   }}>18</div>
                 </div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                  marginBottom: '6px',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>18 EDITIONS</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '1rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '1rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
                 }}>OF FESTIVITIES</div>
               </div>
-              
+
               {/* Cash Prizes */}
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                alignItems: 'center', 
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
                 justifyContent: 'center',
                 minWidth: '160px',
                 flex: '1 1 160px',
                 padding: '10px'
               }}>
-                <div style={{ 
-                  fontSize: '3rem', 
-                  marginBottom: '10px', 
+                <div style={{
+                  fontSize: '3rem',
+                  marginBottom: '10px',
                   color: '#1e3050',
                   height: '50px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
-                <div style={{ 
-                  color: '#ffffff', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.75rem', 
-                  marginBottom: '6px', 
+                <div style={{
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  fontSize: '1.75rem',
+                  marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
                 }}>{cashPrizes}+ LACKS</div>
-                <div style={{ 
-                  color: '#f5e210', 
-                  fontWeight: '600', 
-                  fontSize: '1rem', 
+                <div style={{
+                  color: '#f5e210',
+                  fontWeight: '600',
+                  fontSize: '1rem',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
@@ -4481,7 +4545,7 @@ const Dashboard: React.FC = () => {
             }
 
             .side-menu-flower-bottom {
-              bottom: -16rem !important;
+              bottom: -8rem !important;
               left: -16rem !important;
               width: 37.5rem !important;
               height: 37.5rem !important;
@@ -4525,46 +4589,47 @@ const Dashboard: React.FC = () => {
           }
         `}
       </style>
-      
+
       {/* Gallery Section */}
-      <Gallery 
+      <Gallery
         onPhotoClick={(row: number, index: number) => setSelectedPhoto({ row, index })}
         registerSection={registerSection}
       />
 
       {/* Throwback Section */}
-      <section 
+      <section
         className={`dashboard-section throwback-section ${isThrowbackUnlocked ? 'unlocked' : ''}`}
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
         style={{
           minHeight: '100vh',
-          height: '100vh',
+          height: 'auto',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
-          padding: '140px 20px 40px',
-          overflow: 'hidden'
+          padding: window.innerWidth < 768 ? '80px 20px 60px' : '100px 20px 80px',
+          overflow: 'visible'
         }}
       >
         <h2
-  style={{
-    fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-    fontWeight: 'bold',
-    color: '#fdee71',
-    marginBottom: '-27px',
-    textAlign: 'center',
-    fontFamily: 'Bradley Hand, cursive',
-    position: 'relative',
-    textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
-    letterSpacing: '2px'
+          style={{
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+            fontWeight: 'bold',
+            color: '#fdee71',
+            marginBottom: window.innerWidth < 768 ? '10px' : '20px',
+            marginTop: window.innerWidth < 768 ? '-30px' : '0px',
+            textAlign: 'center',
+            fontFamily: 'Bradley Hand, cursive',
+            position: 'relative',
+            textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
+            letterSpacing: '2px'
 
-  }}
->
-  Throwback
-</h2>
+          }}
+        >
+          Throwback
+        </h2>
 
         {/* Flower Container with Lock System */}
         <div className="throwback-flower-container" style={{
@@ -4575,6 +4640,7 @@ const Dashboard: React.FC = () => {
           alignItems: 'center',
           position: 'relative',
           maxHeight: 'calc(100vh - 200px)',
+          marginTop: window.innerWidth < 768 ? '20px' : '30px',
         }}>
           {/* Container for both flower halves */}
           <div className="throwback-flower-wrapper" style={{
@@ -4584,23 +4650,25 @@ const Dashboard: React.FC = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '-20px'
+            marginTop: '-20px',
+            pointerEvents: 'none'
           }}>
             {/* Left Half */}
             <div className="throwback-flower-left" style={{
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)' 
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)'
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
               overflow: 'visible',
-              zIndex: 10
+              zIndex: 10,
+              pointerEvents: 'none'
             }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="clamp(200px, 35vw, 450px)"
                 sunSize="45%"
                 moonSize="39.5%"
@@ -4623,16 +4691,17 @@ const Dashboard: React.FC = () => {
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: isThrowbackUnlocked 
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)' 
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)'
                 : 'translate(-50%, -50%)',
               transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
               overflow: 'visible',
-              zIndex: 10
+              zIndex: 10,
+              pointerEvents: 'none'
             }}>
-              <FlowerComponent 
+              <FlowerComponent
                 size="clamp(200px, 35vw, 450px)"
                 sunSize="45%"
                 moonSize="39.5%"
@@ -4654,26 +4723,27 @@ const Dashboard: React.FC = () => {
           {/* Year buttons - separate from video */}
           <div className="throwback-year-buttons" style={{
             position: 'absolute',
-            top: window.innerWidth >= 768 ? '20px' : '40px',
+            top: window.innerWidth >= 768 ? '10px' : '-30px',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
             flexWrap: 'nowrap',
-            gap: '30px',
+            gap: window.innerWidth >= 768 ? '30px' : '15px',
             pointerEvents: 'auto',
             zIndex: 15,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s',
+            paddingBottom: '15px',
             justifyContent: 'center'
           }}>
             {(['2023', '2024', '2025'] as const).map(year => (
-              <button 
-                key={year} 
+              <button
+                key={year}
                 onClick={() => setSelectedYear(year)}
                 style={{
                   padding: '8px 26px',
                   borderRadius: '20px',
-                  background: selectedYear === year 
+                  background: selectedYear === year
                     ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
                     : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
                   border: 'none',
@@ -4681,7 +4751,7 @@ const Dashboard: React.FC = () => {
                   fontSize: '1.2rem',
                   fontWeight: 'bold',
                   cursor: 'pointer',
-                  boxShadow: selectedYear === year 
+                  boxShadow: selectedYear === year
                     ? '0 6px 20px rgba(0, 0, 0, 0.3)'
                     : '0 4px 15px rgba(0, 0, 0, 0.2)',
                   transition: 'all 0.3s ease',
@@ -4699,101 +4769,100 @@ const Dashboard: React.FC = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            pointerEvents: 'none',
-            zIndex: 5,
+            pointerEvents: 'auto',
+            zIndex: 20,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s',
             width: window.innerWidth >= 768 ? 'auto' : 'calc(100% - 40px)',
             maxWidth: window.innerWidth >= 768 ? 'none' : '500px'
           }}>
-              {/* Video card */}
-              <div 
-                className="throwback-video-card"
+            {/* Video card */}
+            <div
+              className="throwback-video-card"
+              style={{
+                background: '#000',
+                borderRadius: '8px',
+                border: '3px solid rgba(223, 160, 0, 0.822)',
+                boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+                overflow: 'hidden',
+                transition: 'all 0.4s ease',
+                position: 'relative',
+                cursor: 'default',
+                padding: 0,
+                pointerEvents: 'auto',
+                zIndex: 100
+              }}
+            >
+              {/* YouTube Video Embed */}
+              <iframe
+                ref={videoRef}
+                key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
+                width="100%"
+                height="100%"
+                src={isThrowbackUnlocked ? `https://www.youtube.com/embed/${selectedYear === '2023'
+                  ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
+                  : selectedYear === '2024'
+                    ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
+                    : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
+                  }?start=20&controls=1&modestbranding=1&rel=0&enablejsapi=1` : ''}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                title="Mahotsav Throwback Video"
+                loading="lazy"
                 style={{
-                  background: '#000',
-                  borderRadius: '8px',
-                  border: '3px solid rgba(223, 160, 0, 0.822)',
-                  boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
-                  overflow: 'hidden',
-                  transition: 'all 0.4s ease',
-                  position: 'relative',
-                  cursor: 'default',
-                  padding: 0,
-                  pointerEvents: 'auto',
-                  zIndex: 100
-                }}
-              >
-                {/* YouTube Video Embed */}
-                <iframe
-                  ref={videoRef}
-                  key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
-                  width="100%"
-                  height="100%"
-                  src={isThrowbackUnlocked ? `https://www.youtube.com/embed/${
-                    selectedYear === '2023' 
-                      ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
-                      : selectedYear === '2024'
-                      ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
-                      : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&enablejsapi=1` : ''}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  title="Mahotsav Throwback Video"
-                  loading="lazy"
-                  style={{
-                    border: 'none',
-                    display: 'block',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    zIndex: 1,
-                    pointerEvents: 'auto'
-                  }}
-                />
-                {/* Day indicator */}
-                <div style={{
+                  border: 'none',
+                  display: 'block',
                   position: 'absolute',
-                  top: '10px',
-                  right: '10px',
-                  background: 'rgba(0, 0, 0, 0.7)',
-                  color: 'white',
-                  padding: '5px 12px',
-                  borderRadius: '15px',
-                  fontSize: '0.9rem',
-                  fontWeight: 'bold',
-                  zIndex: 2,
-                  pointerEvents: 'none'
-                }}>
-                  Day {currentDay}
-                </div>
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  zIndex: 1,
+                  pointerEvents: 'auto'
+                }}
+              />
+              {/* Day indicator */}
+              <div style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                background: 'rgba(0, 0, 0, 0.7)',
+                color: 'white',
+                padding: '5px 12px',
+                borderRadius: '15px',
+                fontSize: '0.9rem',
+                fontWeight: 'bold',
+                zIndex: 2,
+                pointerEvents: 'none'
+              }}>
+                Day {currentDay}
               </div>
             </div>
+          </div>
 
           {/* Lock Icon removed */}
         </div>
 
         {/* Countdown Timer */}
-        <div 
+        <div
           className="throwback-countdown-timer"
           style={{
-          marginTop: '30px',
-          position: 'relative',
-          display: 'flex',
-          gap: '20px',
-          padding: '25px 35px',
-          borderRadius: '16px',
-          background: 'rgba(61, 0, 84, 0.75)',
-          color: '#FFFFFF',
-          boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
-          animation: 'timerGlow 1.5s infinite alternate',
-          zIndex: 10,
-          marginBottom: '200px',
-          justifyContent: 'center'
-        }}>
+            marginTop: '30px',
+            position: 'relative',
+            display: 'flex',
+            gap: '20px',
+            padding: '25px 35px',
+            borderRadius: '16px',
+            background: 'rgba(61, 0, 84, 0.75)',
+            color: '#FFFFFF',
+            boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
+            animation: 'timerGlow 1.5s infinite alternate',
+            zIndex: 10,
+            marginBottom: '40px',
+            justifyContent: 'center'
+          }}>
           {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
             <div key={unit} style={{
               width: window.innerWidth < 640 ? '70px' : '85px',
@@ -4803,7 +4872,7 @@ const Dashboard: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <div 
+              <div
                 className={animate[unit] ? 'timer-digit-change' : ''}
                 style={{
                   width: '100%',
@@ -4902,12 +4971,12 @@ const Dashboard: React.FC = () => {
         <div className="events-info-modal" onClick={() => setShowEventsInfo(false)}>
           <div className="events-info-content" onClick={(e) => e.stopPropagation()}>
             <button className="events-info-close" onClick={() => setShowEventsInfo(false)}>?</button>
-            
+
             {/* Corner Flowers for Events Information */}
             {/* Floating Flower - Top Right */}
             <div className="fixed -top-16 -right-16 md:-top-32 md:-right-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-                <FlowerComponent 
+                <FlowerComponent
                   size="100%"
                   sunSize="50%"
                   moonSize="43%"
@@ -4921,7 +4990,7 @@ const Dashboard: React.FC = () => {
                 />
               </div>
               {/* Static Moon - Not rotating */}
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}moon.avif`}
                 alt="Moon"
                 style={{
@@ -4942,7 +5011,7 @@ const Dashboard: React.FC = () => {
             {/* Floating Flower - Bottom Left */}
             <div className="fixed -bottom-16 -left-16 md:-bottom-32 md:-left-32 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 z-1" style={{ border: 'none', outline: 'none' }}>
               <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
-                <FlowerComponent 
+                <FlowerComponent
                   size="100%"
                   sunSize="50%"
                   moonSize="43%"
@@ -4956,7 +5025,7 @@ const Dashboard: React.FC = () => {
                 />
               </div>
               {/* Static Moon - Not rotating */}
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}moon.avif`}
                 alt="Moon"
                 style={{
@@ -4973,10 +5042,10 @@ const Dashboard: React.FC = () => {
                 }}
               />
             </div>
-            
+
             <div className="events-navigation">
               <button className="events-nav-btn prev" onClick={prevEventSlide}>?</button>
-              <div 
+              <div
                 className="events-carousel-3d-container"
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
@@ -4985,12 +5054,12 @@ const Dashboard: React.FC = () => {
                 <div className="events-carousel-3d-wrapper">
                   {eventInfoCards.map((card, index) => {
                     const offset = index - currentEventSlide;
-                    
+
                     let transform = '';
                     let zIndex = 0;
                     let opacity = 0;
                     let filter = 'grayscale(100%) brightness(0.5)';
-                    
+
                     if (offset === 0) {
                       // Active card - center front
                       transform = 'translateX(0) translateY(0) translateZ(200px) rotateY(0deg) scale(1)';
@@ -5015,7 +5084,7 @@ const Dashboard: React.FC = () => {
                       zIndex = 0;
                       opacity = 0;
                     }
-                    
+
                     return (
                       <div
                         key={index}
@@ -5089,11 +5158,11 @@ const Dashboard: React.FC = () => {
           <div className="sub-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
               <h2>{activeSubModal === 'EVENTS' ? 'REGISTER FOR EVENTS' : activeSubModal}</h2>
-              <button 
-                className="close-btn" 
-                onClick={(e) => { 
+              <button
+                className="close-btn"
+                onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   setActiveSubModal(null);
                 }}
                 type="button"
@@ -5102,7 +5171,7 @@ const Dashboard: React.FC = () => {
               </button>
             </div>
             <div className="sub-modal-body">
-              
+
               {activeSubModal === 'SCHEDULE' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5119,7 +5188,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'COLLABORATION' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5136,7 +5205,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'ZONALS' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5153,7 +5222,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CRICKET' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5170,7 +5239,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'HOSPITALITY' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5187,7 +5256,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CAMPUS AMBASSADOR' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5204,7 +5273,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'SPONSORS' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5221,7 +5290,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'CERTIFICATES' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5238,7 +5307,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'OUR TEAM' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5255,7 +5324,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {activeSubModal === 'MAP' && (
                 <div className="sub-cards-grid">
                   <div className="sub-card">
@@ -5350,7 +5419,7 @@ const Dashboard: React.FC = () => {
             }}>
               Registration Successful!
             </h2>
-            
+
             <p style={{
               color: '#e5e7eb',
               textAlign: 'center',
@@ -5473,7 +5542,7 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <button 
+            <button
               onClick={handleCloseUserIdPopup}
               style={{
                 width: '100%',
@@ -5517,14 +5586,14 @@ const Dashboard: React.FC = () => {
               <p className="forgot-password-instructions">
                 Enter your registered email address and we'll send your login credentials to your inbox.
               </p>
-              
+
               <form className="forgot-password-form" onSubmit={handleForgotPasswordSubmit}>
                 {resetMessage && (
                   <div className={`submit-message ${resetMessage.type}`}>
                     {resetMessage.text}
                   </div>
                 )}
-                
+
                 <div className="form-group">
                   <label htmlFor="forgot-email">Email Address</label>
                   <input
@@ -5538,22 +5607,22 @@ const Dashboard: React.FC = () => {
                     required
                   />
                 </div>
-                
-                <button 
-                  type="submit" 
+
+                <button
+                  type="submit"
                   className="forgot-password-submit-btn"
                   disabled={isSendingReset}
                 >
                   {isSendingReset ? '?? Sending...' : '?? Send Password to Email'}
                 </button>
-                
+
                 <div className="back-to-login">
-                  <button 
-                    type="button" 
-                    onClick={() => { 
-                      setShowForgotPasswordModal(false); 
-                      setShowLoginModal(true); 
-                    }} 
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowForgotPasswordModal(false);
+                      setShowLoginModal(true);
+                    }}
                     className="back-to-login-btn"
                   >
                     ? Back to Login
@@ -5582,7 +5651,7 @@ const Dashboard: React.FC = () => {
 
           {/* Content Container */}
           <div style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
-            
+
             {/* Student Details Header with Logout Button */}
             <div className="profile-modal-header" style={{
               background: 'rgba(255, 255, 255, 0.3)',
@@ -5649,231 +5718,231 @@ const Dashboard: React.FC = () => {
                 </div>
               ) : (
                 <div className="profile-content-wrapper" style={{ maxWidth: '2000px', width: '100%' }}>
-              
-              {/* User Info Box */}
-              <div className="profile-info-box" style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(12px)',
-                borderRadius: '0.5rem',
-                padding: '2rem',
-                marginBottom: '1.5rem',
-                marginTop: '0',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                wordWrap: 'break-word',
-                overflowWrap: 'break-word'
-              }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Registration Number</span>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                      <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>
-                        : {userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
-                      </span>
-                      {!userProfileData?.registerId && (
-                        <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontStyle: 'italic' }}>
-                          (Your college/university registration ID - You can contact support to add this)
-                        </span>
-                      )}
+
+                  {/* User Info Box */}
+                  <div className="profile-info-box" style={{
+                    background: 'rgba(255, 255, 255, 0.2)',
+                    backdropFilter: 'blur(12px)',
+                    borderRadius: '0.5rem',
+                    padding: '2rem',
+                    marginBottom: '1.5rem',
+                    marginTop: '0',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word'
+                  }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Registration Number</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>
+                            : {userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
+                          </span>
+                          {!userProfileData?.registerId && (
+                            <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontStyle: 'italic' }}>
+                              (Your college/university registration ID - You can contact support to add this)
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Mahotsav ID</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Name</span>
+                        <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Email</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Gender</span>
+                        <span style={{ color: 'white', fontSize: '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>DOB</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>College</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Branch</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Phone</span>
+                        <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Mahotsav ID</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
+                  {/* Event Details Section with Button on Right */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                    <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
+                    <button
+                      onClick={() => {
+                        setShowProfileModal(false);
+                        setShowMyEventsModal(true);
+                      }}
+                      style={{
+                        padding: '0.75rem 2rem',
+                        background: '#ec09bbe6',
+                        color: 'white',
+                        fontSize: '0.875rem',
+                        fontWeight: 'bold',
+                        borderRadius: '0.375rem',
+                        border: 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        textTransform: 'uppercase'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#2563eb';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#3b82f6';
+                      }}
+                    >
+                      EDIT/REGISTER
+                    </button>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Name</span>
-                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Email</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Gender</span>
-                    <span style={{ color: 'white', fontSize: '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>DOB</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>College</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Branch</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                    <span style={{ color: 'white', fontSize: '1rem', minWidth: '150px', flexShrink: 0 }}>Phone</span>
-                    <span style={{ color: 'white', fontSize: '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event Details Section with Button on Right */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
-                <button
-                  onClick={() => {
-                    setShowProfileModal(false);
-                    setShowMyEventsModal(true);
-                  }}
-                  style={{
-                    padding: '0.75rem 2rem',
-                    background: '#ec09bbe6',
-                    color: 'white',
-                    fontSize: '0.875rem',
-                    fontWeight: 'bold',
-                    borderRadius: '0.375rem',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    textTransform: 'uppercase'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#2563eb';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#3b82f6';
-                  }}
-                >
-                  EDIT/REGISTER
-                </button>
-              </div>
-              
-              {/* Events Count Box */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.25)',
-                backdropFilter: 'blur(12px)',
-                borderRadius: '0.5rem',
-                padding: '1.5rem',
-                marginBottom: '1.5rem',
-                border: '1px solid rgba(255, 255, 255, 0.3)'
-              }}>
-                <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
-                  You are enrolled in {userRegisteredEvents.length || myEvents.length} events.
-                </p>
-              </div>
-              
-              {/* Combined Events and Welcome Section */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.25)',
-                backdropFilter: 'blur(12px)',
-                borderRadius: '0.5rem',
-                padding: '2rem',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                minHeight: '400px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                {/* Inline view of registered events */}
-                <div style={{ width: '100%', maxWidth: '500px' }}>
-                  {myEvents.length > 0 ? (
-                    <>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', flex: 1 }}>
-                          My Registered Events
-                        </h3>
-                        <button 
-                          onClick={() => window.print()}
-                          style={{
-                            padding: '0.5rem 1rem',
-                            fontSize: '0.85rem',
-                            background: '#10b981',
-                            border: 'none',
-                            borderRadius: '0.5rem',
-                            color: 'white',
-                            cursor: 'pointer',
-                            fontWeight: '600',
-                            transition: 'all 0.3s',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem'
-                          }}
-                          onMouseOver={(e) => {
-                            e.currentTarget.style.background = '#059669';
-                          }}
-                          onMouseOut={(e) => {
-                            e.currentTarget.style.background = '#10b981';
-                          }}
-                        >
-                          🖨️ Print
-                        </button>
-                      </div>
-                      <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                        {myEvents.map((event, index) => (
-                          <div
-                            key={event._id || `${event.eventName}-${index}`}
-                            style={{
-                              background: 'rgba(255, 255, 255, 0.18)',
-                              borderRadius: '0.5rem',
-                              padding: '0.75rem 1rem',
-                              border: '1px solid rgba(255, 255, 255, 0.25)',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              gap: '0.25rem'
-                            }}
-                          >
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                              <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
-                                {event.eventName || (event as any).Event || (event as any).name || 'Event'}
-                              </span>
-                              {event.eventType && (
-                                <span
-                                  style={{
-                                    background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
-                                    color: 'white',
-                                    padding: '0.2rem 0.6rem',
-                                    borderRadius: '999px',
-                                    fontSize: '0.7rem',
-                                    fontWeight: 600,
-                                    textTransform: 'uppercase'
-                                  }}
-                                >
-                                  {event.eventType}
-                                </span>
-                              )}
-                            </div>
-                            {event.category && (
-                              <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
-                                {event.category}
-                              </span>
-                            )}
-                            {event.description && (
-                              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>
-                                {event.description}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
-                        Use the <strong>EDIT/REGISTER</strong> button above to modify your events.
-                      </p>
-                    </>
-                  ) : (
-                    <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
-                      You haven't registered for any events yet. Use the <strong>EDIT/REGISTER</strong> button above to choose your events.
+                  {/* Events Count Box */}
+                  <div style={{
+                    background: 'rgba(255, 255, 255, 0.25)',
+                    backdropFilter: 'blur(12px)',
+                    borderRadius: '0.5rem',
+                    padding: '1.5rem',
+                    marginBottom: '1.5rem',
+                    border: '1px solid rgba(255, 255, 255, 0.3)'
+                  }}>
+                    <p style={{ color: 'white', fontSize: '1.125rem', textAlign: 'center', margin: 0, fontWeight: '500' }}>
+                      You are enrolled in {userRegisteredEvents.length || myEvents.length} events.
                     </p>
-                  )}
+                  </div>
+
+                  {/* Combined Events and Welcome Section */}
+                  <div style={{
+                    background: 'rgba(255, 255, 255, 0.25)',
+                    backdropFilter: 'blur(12px)',
+                    borderRadius: '0.5rem',
+                    padding: '2rem',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    minHeight: '400px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {/* Inline view of registered events */}
+                    <div style={{ width: '100%', maxWidth: '500px' }}>
+                      {myEvents.length > 0 ? (
+                        <>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', flex: 1 }}>
+                              My Registered Events
+                            </h3>
+                            <button
+                              onClick={() => window.print()}
+                              style={{
+                                padding: '0.5rem 1rem',
+                                fontSize: '0.85rem',
+                                background: '#10b981',
+                                border: 'none',
+                                borderRadius: '0.5rem',
+                                color: 'white',
+                                cursor: 'pointer',
+                                fontWeight: '600',
+                                transition: 'all 0.3s',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem'
+                              }}
+                              onMouseOver={(e) => {
+                                e.currentTarget.style.background = '#059669';
+                              }}
+                              onMouseOut={(e) => {
+                                e.currentTarget.style.background = '#10b981';
+                              }}
+                            >
+                              🖨️ Print
+                            </button>
+                          </div>
+                          <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                            {myEvents.map((event, index) => (
+                              <div
+                                key={event._id || `${event.eventName}-${index}`}
+                                style={{
+                                  background: 'rgba(255, 255, 255, 0.18)',
+                                  borderRadius: '0.5rem',
+                                  padding: '0.75rem 1rem',
+                                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: '0.25rem'
+                                }}
+                              >
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                  <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
+                                    {event.eventName || (event as any).Event || (event as any).name || 'Event'}
+                                  </span>
+                                  {event.eventType && (
+                                    <span
+                                      style={{
+                                        background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
+                                        color: 'white',
+                                        padding: '0.2rem 0.6rem',
+                                        borderRadius: '999px',
+                                        fontSize: '0.7rem',
+                                        fontWeight: 600,
+                                        textTransform: 'uppercase'
+                                      }}
+                                    >
+                                      {event.eventType}
+                                    </span>
+                                  )}
+                                </div>
+                                {event.category && (
+                                  <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
+                                    {event.category}
+                                  </span>
+                                )}
+                                {event.description && (
+                                  <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>
+                                    {event.description}
+                                  </span>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
+                            Use the <strong>EDIT/REGISTER</strong> button above to modify your events.
+                          </p>
+                        </>
+                      ) : (
+                        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
+                          You haven't registered for any events yet. Use the <strong>EDIT/REGISTER</strong> button above to choose your events.
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              </div>
               )}
-              </div>
             </div>
           </div>
+        </div>
       )}
 
       {/* Event Registration Modal */}
@@ -5899,7 +5968,7 @@ const Dashboard: React.FC = () => {
               <p className="checklist-instructions">
                 Browse and select events you're interested in, then save them to your My Events collection.
               </p>
-              
+
               {loadingEvents ? (
                 <div className="loading-events">
                   <p>Loading events...</p>
@@ -5966,8 +6035,8 @@ const Dashboard: React.FC = () => {
 
                   {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && (
                     <p className="no-events-message">
-                      {isLoggedIn && userProfileData.gender === 'female' 
-                        ? "No events available for female participants at the moment." 
+                      {isLoggedIn && userProfileData.gender === 'female'
+                        ? "No events available for female participants at the moment."
                         : "No events available at the moment."
                       }
                     </p>
@@ -5979,7 +6048,7 @@ const Dashboard: React.FC = () => {
                 <div className="selected-count">
                   Selected: {selectedEvents.size} event(s)
                 </div>
-                <button 
+                <button
                   className="save-events-btn"
                   onClick={handleSaveSelectedEvents}
                   disabled={selectedEvents.size === 0}
@@ -5999,8 +6068,8 @@ const Dashboard: React.FC = () => {
             <div className="login-modal-header">
               <h2>My Registered Events</h2>
               <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <button 
-                  className="save-events-btn" 
+                <button
+                  className="save-events-btn"
                   onClick={() => window.print()}
                   style={{
                     padding: '0.5rem 1rem',
@@ -6029,7 +6098,7 @@ const Dashboard: React.FC = () => {
               <p className="checklist-instructions">
                 These are your registered events.
               </p>
-              
+
               {myEvents.length > 0 ? (
                 <div className="my-events-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {myEvents.map((event, index) => (
@@ -6061,7 +6130,7 @@ const Dashboard: React.FC = () => {
                               if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
                                 try {
                                   const updatedEvents = myEvents.filter((_, i) => i !== index);
-                                  
+
                                   // Update in database
                                   const response = await fetch(`${API_BASE_URL}/save-events`, {
                                     method: 'POST',
@@ -6080,7 +6149,7 @@ const Dashboard: React.FC = () => {
                                     // Update localStorage
                                     const storageKey = `myEvents_${userProfileData.userId}`;
                                     localStorage.setItem(storageKey, JSON.stringify(updatedEvents));
-                                    
+
                                     // Update state
                                     setMyEvents(updatedEvents);
                                     alert('Event removed successfully!');
@@ -6138,8 +6207,8 @@ const Dashboard: React.FC = () => {
                   <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1rem' }}>
                     You haven't registered for any events yet.
                   </p>
-                  <button 
-                    className="browse-events-btn" 
+                  <button
+                    className="browse-events-btn"
                     onClick={() => {
                       setShowMyEventsModal(false);
                       setShowRegistrationModal(true);
@@ -6188,156 +6257,156 @@ const Dashboard: React.FC = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '30px'
           }}>
-          {/* Logo Section */}
-          <div>
-            <img 
-              src={`${import.meta.env.BASE_URL}image.avif`}
-              alt="Mahotsav 2026" 
-              className="footer-logo"
-              style={{
-                height: '200px',
-                objectFit: 'contain',
-                marginBottom: '-60px',
-                marginLeft: '-7px',
-                marginTop: '-80px'
-              }}
-            />
-            {/* Social Media Icons */}
-            <h3 className="footer-heading" style={{
-              color: '#fff',
-              fontSize: '0.75rem',
-              fontWeight: 'bold',
-              marginBottom: '12px',
-              letterSpacing: '1px'
-            }}>FOLLOW US ON :</h3>
-            <div className="footer-social" style={{
-              display: 'flex',
-              gap: '12px',
-              marginBottom: '25px'
-            }}>
-              <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
+            {/* Logo Section */}
+            <div>
+              <img
+                src={`${import.meta.env.BASE_URL}image.avif`}
+                alt="Mahotsav 2026"
+                className="footer-logo"
+                style={{
+                  height: '200px',
+                  objectFit: 'contain',
+                  marginBottom: '-60px',
+                  marginLeft: '-7px',
+                  marginTop: '-80px'
+                }}
+              />
+              {/* Social Media Icons */}
+              <h3 className="footer-heading" style={{
+                color: '#fff',
+                fontSize: '0.75rem',
+                fontWeight: 'bold',
+                marginBottom: '12px',
+                letterSpacing: '1px'
+              }}>FOLLOW US ON :</h3>
+              <div className="footer-social" style={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
+                gap: '12px',
+                marginBottom: '25px'
               }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
-              <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                background: 'rgba(255, 255, 255, 0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.3s',
-                border: '2px solid transparent'
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
+                <a href="https://www.instagram.com/vignan_mahotsav/profilecard/?igsh=dDE1MHNpcmM4eXhm" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vars0ZXJ3jutqK5hfj3r" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                </a>
+                <a href="https://linkedin.com/company/vignan-mahotsav" target="_blank" rel="noopener noreferrer" className="social-icon" style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s',
+                  border: '2px solid transparent'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* Contact Us Section */}
-          <div>
-            <h3 className="footer-heading" style={{
-              color: '#fff',
-              fontSize: '0.75rem',
-              fontWeight: 'bold',
-              marginBottom: '12px',
-              letterSpacing: '1px'
-            }}>CONTACT US :</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="mailto:mahotsav@vignan.ac.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m2 7 10 6 10-6"/>
-                </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>mahotsav@vignan.ac.in</span>
-              </a>
-              <a href="tel:+919493033592" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 94930 33592</span>
-              </a>
-              <a href="tel:+919030557363" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-                <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 90305 57363</span>
-              </a>
+            {/* Contact Us Section */}
+            <div>
+              <h3 className="footer-heading" style={{
+                color: '#fff',
+                fontSize: '0.75rem',
+                fontWeight: 'bold',
+                marginBottom: '12px',
+                letterSpacing: '1px'
+              }}>CONTACT US :</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <a href="mailto:mahotsav@vignan.ac.in" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m2 7 10 6 10-6" />
+                  </svg>
+                  <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>mahotsav@vignan.ac.in</span>
+                </a>
+                <a href="tel:+919493033592" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 94930 33592</span>
+                </a>
+                <a href="tel:+919030557363" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: 'inherit' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  <span className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', cursor: 'pointer' }}>+91 90305 57363</span>
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* Location Section */}
-          <div>
-            <h3 className="footer-heading" style={{
-              color: '#fff',
-              fontSize: '0.75rem',
-              fontWeight: 'bold',
-              marginBottom: '12px',
-              letterSpacing: '1px'
-            }}>LOCATION :</h3>
-            <div style={{ display: 'flex', alignItems: 'start', gap: '10px', marginBottom: '12px' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginTop: '2px', flexShrink: 0 }}>
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              <p className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', lineHeight: '1.6', margin: 0 }}>
-                VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH (DEEMED TO BE UNIVERSITY), VADLAMUDI, GUNTUR, A.P -522213
-              </p>
+            {/* Location Section */}
+            <div>
+              <h3 className="footer-heading" style={{
+                color: '#fff',
+                fontSize: '0.75rem',
+                fontWeight: 'bold',
+                marginBottom: '12px',
+                letterSpacing: '1px'
+              }}>LOCATION :</h3>
+              <div style={{ display: 'flex', alignItems: 'start', gap: '10px', marginBottom: '12px' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="footer-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginTop: '2px', flexShrink: 0 }}>
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p className="footer-text" style={{ color: '#fff', fontSize: '0.7rem', lineHeight: '1.6', margin: 0 }}>
+                  VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH (DEEMED TO BE UNIVERSITY), VADLAMUDI, GUNTUR, A.P -522213
+                </p>
+              </div>
+              <a
+                href="https://maps.app.goo.gl/5pufqAcYqKrQCyQZ6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+                style={{
+                  color: '#a78bfa',
+                  fontSize: '0.7rem',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  marginTop: '-3px',
+                  paddingLeft: '8px',
+                  transition: 'color 0.3s'
+                }}
+              >
+                VIEW ON GOOGLE MAPS
+                <svg className="footer-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
             </div>
-            <a 
-              href="https://maps.app.goo.gl/5pufqAcYqKrQCyQZ6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="footer-link"
-              style={{
-                color: '#a78bfa',
-                fontSize: '0.7rem',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                marginTop: '-3px',
-                paddingLeft: '8px',
-                transition: 'color 0.3s'
-              }}
-            >
-              VIEW ON GOOGLE MAPS
-              <svg className="footer-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-          </div>
           </div>
         </div>
       </footer>
@@ -6428,8 +6497,8 @@ const Dashboard: React.FC = () => {
 
       {/* Registration Modal with Events from JSON */}
       {showRegistrationModal && (
-        <div 
-          className="login-modal-overlay" 
+        <div
+          className="login-modal-overlay"
           onClick={() => setShowRegistrationModal(false)}
           style={{
             position: 'fixed',
@@ -6445,7 +6514,7 @@ const Dashboard: React.FC = () => {
             backdropFilter: 'blur(10px)'
           }}
         >
-          <div 
+          <div
             className="registration-modal-content"
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -6611,7 +6680,7 @@ const Dashboard: React.FC = () => {
                             disabled={finalDisabled}
                             onChange={() => {
                               if (finalDisabled) return;
-                              
+
                               setSelectedRegistrationEvents((prev) => {
                                 const newSet = new Set(prev);
                                 if (newSet.has(eventId)) {
@@ -6771,7 +6840,7 @@ const Dashboard: React.FC = () => {
                             disabled={finalDisabled}
                             onChange={() => {
                               if (finalDisabled) return;
-                              
+
                               setSelectedRegistrationEvents((prev) => {
                                 const newSet = new Set(prev);
                                 if (newSet.has(eventId)) {
@@ -6895,7 +6964,7 @@ const Dashboard: React.FC = () => {
                             disabled={finalDisabled}
                             onChange={() => {
                               if (finalDisabled) return;
-                              
+
                               setSelectedRegistrationEvents((prev) => {
                                 const newSet = new Set(prev);
                                 if (newSet.has(eventId)) {
@@ -6950,17 +7019,17 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Footer with Submit Button */}
-            <div style={{ 
-              borderTop: '2px solid rgba(255, 255, 255, 0.3)', 
+            <div style={{
+              borderTop: '2px solid rgba(255, 255, 255, 0.3)',
               paddingTop: '1.5rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '1rem'
             }}>
               {/* Summary Section */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '1rem',
                 background: 'rgba(255, 255, 255, 0.1)',
@@ -6976,7 +7045,7 @@ const Dashboard: React.FC = () => {
                       const selectedIds = Array.from(selectedRegistrationEvents);
                       const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
-                      
+
                       return `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
                     })()}
                   </div>
@@ -6992,21 +7061,21 @@ const Dashboard: React.FC = () => {
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                       const userGender = userProfileData.gender?.toLowerCase();
                       const userCollege = userProfileData.college || '';
-                      
+
                       // Check if user is from one of the special Vignan colleges
                       const specialVignanColleges = [
                         'Vignan Pharmacy College',
                         "Vignan's Foundation of Science, Technology & Research",
                         "Vignan's Lara Institute of Technology & Science"
                       ];
-                      
-                      const isSpecialVignanStudent = specialVignanColleges.some(college => 
+
+                      const isSpecialVignanStudent = specialVignanColleges.some(college =>
                         userCollege.toLowerCase().includes(college.toLowerCase()) ||
                         college.toLowerCase().includes(userCollege.toLowerCase())
                       );
-                      
+
                       let fee = 0;
-                      
+
                       // If from special Vignan colleges, fee is always 150
                       if (isSpecialVignanStudent) {
                         if (hasSports || hasCulturals) {
@@ -7032,13 +7101,13 @@ const Dashboard: React.FC = () => {
                           }
                         }
                       }
-                      
+
                       return fee > 0 ? `₹${fee}` : '₹0';
                     })()}
                   </div>
                 </div>
               </div>
-              
+
               {/* Submit Button */}
               <button
                 onClick={async () => {
@@ -7046,33 +7115,33 @@ const Dashboard: React.FC = () => {
                     alert('Please select at least one event');
                     return;
                   }
-                  
+
                   if (!isLoggedIn || !userProfileData.userId) {
                     alert('Please login to register for events');
                     return;
                   }
-                  
+
                   // Calculate fee for confirmation message
                   const selectedIds = Array.from(selectedRegistrationEvents);
                   const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                   const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                   const userGender = userProfileData.gender?.toLowerCase();
                   const userCollege = userProfileData.college || '';
-                  
+
                   // Check if user is from one of the special Vignan colleges
                   const specialVignanColleges = [
                     'Vignan Pharmacy College',
                     "Vignan's Foundation of Science, Technology & Research",
                     "Vignan's Lara Institute of Technology & Science"
                   ];
-                  
-                  const isSpecialVignanStudent = specialVignanColleges.some(college => 
+
+                  const isSpecialVignanStudent = specialVignanColleges.some(college =>
                     userCollege.toLowerCase().includes(college.toLowerCase()) ||
                     college.toLowerCase().includes(userCollege.toLowerCase())
                   );
-                  
+
                   let fee = 0;
-                  
+
                   // If from special Vignan colleges, fee is always 150
                   if (isSpecialVignanStudent) {
                     if (hasSports || hasCulturals) {
@@ -7098,7 +7167,7 @@ const Dashboard: React.FC = () => {
                       }
                     }
                   }
-                  
+
                   // Prepare events data to save
                   const eventsToSave = selectedIds
                     .map(id => {
@@ -7144,7 +7213,7 @@ const Dashboard: React.FC = () => {
                       return null;
                     })
                     .filter(e => e !== null);
-                  
+
                   try {
                     // Save to database via API
                     const response = await fetch(`${API_BASE_URL}/save-events`, {
@@ -7167,13 +7236,13 @@ const Dashboard: React.FC = () => {
                     // Also save to localStorage as backup
                     const storageKey = `myEvents_${userProfileData.userId}`;
                     localStorage.setItem(storageKey, JSON.stringify(eventsToSave));
-                    
+
                     // Update local state with the registered events
                     setMyEvents(eventsToSave as any);
-                    
+
                     // Refresh myEvents from database to ensure sync
                     await fetchUserSavedEvents(userProfileData.userId);
-                    
+
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
                     alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);
                     setShowRegistrationModal(false);

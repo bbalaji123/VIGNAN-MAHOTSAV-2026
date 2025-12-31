@@ -9,10 +9,10 @@
   font-style: normal;
 }
 
-/* Custom Font - Garden Sans */
+/* Custom Font - Aladin */
 @font-face {
-  font-family: 'Garden Sans';
-  src: url('/Garden Sans.ttf') format('truetype');
+  font-family: 'Aladin';
+  src: url('/Aladin.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,7 +34,8 @@
 }
 
 /* Reset browser spacing - Mobile First */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -45,7 +46,9 @@ html, body {
   font-family: 'Borisna', sans-serif !important;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -56,37 +59,46 @@ body * {
 
 /* Sun rotation animation */
 @keyframes sunRotateClockwise {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Global font for all headings and subheadings */
-h1, h2 {
-  font-family: 'Garden Sans', sans-serif !important;
+h1,
+h2 {
+  font-family: 'Aladin', cursive !important;
 }
 
-h3, h4, h5, h6,
+h3,
+h4,
+h5,
+h6,
 .indoor-sports-card span,
 .highlight-card span,
 .culturals-card span {
   font-family: 'Quesha', sans-serif !important;
 }
 
-/* Garden Sans font for all buttons */
+/* Aladin font for all buttons */
 button {
-  font-family: 'Garden Sans', sans-serif !important;
+  font-family: 'Aladin', cursive !important;
 }
 
 /* Override for specific event page elements */
 .events-info-page h2,
 .events-info-page .text-white {
-  font-family: 'Garden Sans', sans-serif !important;
+  font-family: 'Aladin', cursive !important;
 }
 
 /* Font hierarchy for About Theme section */
 .about-theme-section h1,
 .about-theme-section h2 {
-  font-family: 'Garden Sans', sans-serif !important;
+  font-family: 'Aladin', cursive !important;
 }
 
 .about-theme-section h3,
@@ -102,17 +114,17 @@ button {
   font-family: 'Borisna', sans-serif !important;
 }
 
-/* Garden Sans font for event section headings */
+/* Aladin font for event section headings */
 .events-heading,
 .event-category-heading,
 .events-page-heading {
-  font-family: 'Garden Sans', sans-serif !important;
+  font-family: 'Aladin', cursive !important;
 }
 
 /* Font hierarchy for event detail page */
 .event-detail-page h1,
 .event-detail-page h2 {
-  font-family: 'Garden Sans', sans-serif !important;
+  font-family: 'Aladin', cursive !important;
 }
 
 .event-detail-page h3 {
@@ -191,7 +203,9 @@ button {
 }
 
 /* Global Background Image */
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -253,16 +267,37 @@ html, body, #root {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
+
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 @keyframes fadeInDown {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Custom component styles */

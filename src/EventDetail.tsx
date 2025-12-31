@@ -24,7 +24,7 @@ const EventDetail: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDownloading, setIsDownloading] = useState(false);
-  
+
   // Get the section we came from for smart back navigation
   const fromSection = location.state?.fromSection || '';
 
@@ -66,7 +66,7 @@ const EventDetail: React.FC = () => {
         { name: "Mr. Hemanth", phone: "+91 74160 65745" },
         { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
         { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
-  
+
       ]
     },
     "Men's Athletics": {
@@ -92,7 +92,7 @@ const EventDetail: React.FC = () => {
         { name: "Mr. Hemanth", phone: "+91 74160 65745" },
         { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
         { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
-  
+
       ]
     },
     "Women's Athletics": {
@@ -138,12 +138,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 4,000"
       },
       contacts: [
-         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
         { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-      
+
       ]
     },
     "Table Tennis": {
@@ -165,12 +165,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000"
       },
       contacts: [
-         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
         { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-  
+
       ]
     },
     "Tennikoit": {
@@ -189,7 +189,7 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500"
       },
       contacts: [
-         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
         { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
@@ -215,12 +215,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
       contacts: [
-         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
         { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-    
+
       ]
     },
     "Yoga & Individual": {
@@ -242,12 +242,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
       contacts: [
-         { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
+        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
         { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-    
+
       ]
     },
     "Artistic Yogasana": {
@@ -274,7 +274,7 @@ const EventDetail: React.FC = () => {
         { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
         { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
         { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-      
+
       ]
     },
     "Taekwondo": {
@@ -398,7 +398,7 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
         { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
         { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
@@ -426,7 +426,7 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
         { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
         { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
@@ -515,16 +515,16 @@ const EventDetail: React.FC = () => {
         first: "Rs. 15,000",
         second: "Rs. 10,000"
       },
-      contacts: 
-      [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
-      ]
+      contacts:
+        [
+          { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+          { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+          { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+          { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+          { name: "Mr. Anil", phone: "+91 83093 78066" },
+          { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+          { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        ]
     },
     "Kho-Kho (Men)": {
       title: "TEAM EVENTS",
@@ -545,7 +545,7 @@ const EventDetail: React.FC = () => {
         second: "Rs. 20,000"
       },
       contacts: [
-       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
         { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
         { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
@@ -629,7 +629,7 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-       { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
         { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
         { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
@@ -742,10 +742,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-         {name: "Ms. Ch. Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B. Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch. Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B. Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Singing Idol": {
@@ -771,9 +771,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Dancing Star - Western Solo": {
@@ -793,10 +793,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Ms. Ch. Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B. Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch. Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B. Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Group Singing": {
@@ -816,9 +816,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Singing Jodi": {
@@ -838,9 +838,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Classical Light Vocal Solo": {
@@ -860,9 +860,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Western Vocal Solo": {
@@ -882,9 +882,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Anthyakshari Duo": {
@@ -901,9 +901,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Instrumental Solo": {
@@ -931,9 +931,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544"},
-        {name: "Mr. M.Winstone", phone: "+91 83280 09698"},
-        {name: "Ms. Varshitha", phone: "+91 87123 47513"}
+        { name: "Ms. K.lakshmi Revathi", phone: "+91 97035 55544" },
+        { name: "Mr. M.Winstone", phone: "+91 83280 09698" },
+        { name: "Ms. Varshitha", phone: "+91 87123 47513" }
       ]
     },
     "Skit": {
@@ -953,8 +953,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 4,000"
       },
       contacts: [
-        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 99633 17059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Mime": {
@@ -972,8 +972,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 99633 17059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Dancing Jodi - Western Duo": {
@@ -996,10 +996,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Spot Dance - Jodi": {
@@ -1020,10 +1020,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,500"
       },
       contacts: [
-         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Group Dance": {
@@ -1045,10 +1045,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 8,000"
       },
       contacts: [
-         {name: "Ms. Ch.Aparna", phone: "+91 8523 81322"},
-        {name: "Mr. B.Ram Chandu", phone: "+91 83412 40966"},
-        {name: "Ms. Asritha", phone: "+91 73868 89772"},
-        {name: "Mr. Vineesha", phone: "+91 99516 95475"}
+        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
+        { name: "Ms. Asritha", phone: "+91 73868 89772" },
+        { name: "Mr. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Mono Action": {
@@ -1068,8 +1068,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Spot Ad Making": {
@@ -1090,8 +1090,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.Pavankishore", phone: "+91 99633 17059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 99633 17059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Dialogue Dhamaka": {
@@ -1111,8 +1111,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Ms. K.Pavankishore", phone: "+91 9963317059"},
-        {name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757"}
+        { name: "Ms. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Master Orator": {
@@ -1131,10 +1131,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
     "On Spot Creative Content Writing": {
@@ -1152,10 +1152,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
     "Telugu Vyaasa Rachana": {
@@ -1172,10 +1172,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
     "Shayari - Hindi": {
@@ -1195,10 +1195,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
     "JAM": {
@@ -1240,10 +1240,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
     "Dumb Charades": {
@@ -1280,10 +1280,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
 
@@ -1321,10 +1321,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,500"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
 
@@ -1357,10 +1357,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
 
@@ -1386,10 +1386,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Mr. Nihal Kumar", phone: "+91 79797 52014"},
-        {name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055"},
-        {name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146"},
-        {name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228"}
+        { name: "Mr. Nihal Kumar", phone: "+91 79797 52014" },
+        { name: "Ms. N.S.N.B. Nihari", phone: "+91 79957 98055" },
+        { name: "Ms. D. Kavya Sucharitha ", phone: "+91 89194 15146" },
+        { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
 
@@ -1411,9 +1411,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1435,9 +1435,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1460,9 +1460,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1483,9 +1483,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1506,9 +1506,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1527,9 +1527,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1550,9 +1550,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1572,9 +1572,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1595,10 +1595,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 12,000"
       },
       contacts: [
-        {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "Craftvilla": {
@@ -1619,10 +1619,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "Texart": {
@@ -1643,10 +1643,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "T-Shirt Designing": {
@@ -1667,10 +1667,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. ,000"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "Mahotsav Got Talent": {
@@ -1690,10 +1690,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 3,000"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "Mr. and Ms. Mahotsav": {
@@ -1712,10 +1712,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 4,000 (Ms. Mahotsav - Women)"
       },
       contacts: [
-         {name: "Mr. S.Satya Reddy", phone: "+91 93900 41156"},
-        {name: "Ms. Sara", phone: "+91 94904 84233"},
-        {name: "Mr. Manohar ", phone: "+91 81253 97739"},
-        {name: "Ms. Md.Nadira ", phone: "+91 93921 91983"},
+        { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
+        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Mr. Manohar ", phone: "+91 81253 97739" },
+        { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
     },
     "Online Photography": {
@@ -1735,9 +1735,9 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        {name: "Ms. K.Unnathi", phone: "+91 79815 97629"},
-        {name: "Mr. Ch.Dhanush", phone: "+91 63014 20067"},
-        {name: "Ms. P.Lavanya ", phone: "+91 93819 88110"}
+        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
+        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
+        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
       ]
     },
 
@@ -1947,7 +1947,14 @@ const EventDetail: React.FC = () => {
     "Sports": "events/Sports.avif",
     "Cultural": "events/Cultural.avif",
     "Gaming": "events/Gaming.avif",
+    "Visual Arts": "events/visual arts.avif",
+    "Digital Arts": "events/digital arts.avif",
     // Sports Events
+    "Athletics": "athletics.png",
+    "Men's Athletics": "athletics.png",
+    "Women's Athletics": "athletics.png",
+    "Para Sports": "events/Para Sports.avif",
+    "Para Cricket": "events/Para Cricket.avif",
     "Chess": "events/chess.avif",
     "Table Tennis": "events/Tabel Tennis.avif",
     "Traditional Yogasana": "events/Traditional Yoga.avif",
@@ -2026,7 +2033,7 @@ const EventDetail: React.FC = () => {
 
   const handleDownloadPDF = async () => {
     if (!eventData) return;
-    
+
     setIsDownloading(true);
     try {
       const htmlContent = `
@@ -2104,7 +2111,7 @@ const EventDetail: React.FC = () => {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
+
       alert('✅ Event details downloaded successfully!');
     } catch (error) {
       console.error('Download error:', error);
@@ -2127,8 +2134,8 @@ const EventDetail: React.FC = () => {
       }}>
         <div className="text-center text-white">
           <h2 className="text-4xl mb-8">Event Not Found</h2>
-          <button 
-            onClick={handleBack} 
+          <button
+            onClick={handleBack}
             className="text-white font-bold py-3 px-8 rounded-full transition-all duration-300 hover:text-pink-300"
           >
             Go Back
@@ -2156,7 +2163,7 @@ const EventDetail: React.FC = () => {
         height: '450px',
         opacity: 0.7
       }}>
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -2168,40 +2175,40 @@ const EventDetail: React.FC = () => {
         />
       </div>
 
-      <div className="min-h-screen" style={{position: 'relative', zIndex: 10, padding: '0px'}}>
+      <div className="min-h-screen" style={{ position: 'relative', zIndex: 10, padding: '0px' }}>
         {/* Header: Logo + Back Button + Title */}
-        <div style={{margin: '0px', paddingTop: '0px', paddingLeft: '16px', paddingRight: '16px'}}>
+        <div style={{ margin: '0px', paddingTop: '0px', paddingLeft: '16px', paddingRight: '16px' }}>
           {/* Desktop layout */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start mb-4">
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}image.avif`}
-                alt="Vignan Mahotsav" 
-                style={{height: '18rem', objectFit: 'contain', marginTop: '-2rem'}}
+                alt="Vignan Mahotsav"
+                style={{ height: '18rem', objectFit: 'contain', marginTop: '-2rem' }}
               />
-              <BackButton 
-                className="!static !top-20 !left-auto" style={{marginTop: '-5rem',marginBottom: '8rem'}}
+              <BackButton
+                className="!static !top-20 !left-auto" style={{ marginTop: '-5rem', marginBottom: '8rem' }}
                 onClick={handleBack}
               />
             </div>
-            
+
             {/* Center column: Title */}
-            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '8px'}}>
-              <h1 style={{fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: '8px' }}>
+              <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '8px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                 {eventData.title}
               </h1>
-              <h2 style={{fontSize: '1.875rem', fontWeight: '600', color: '#e9d5ff', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
+              <h2 style={{ fontSize: '1.875rem', fontWeight: '600', color: '#e9d5ff', textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                 {eventData.subtitle}
               </h2>
             </div>
-            
+
             {/* Right column: Empty (for balance) */}
             <div></div>
           </div>
 
           {/* Mobile layout */}
-          <div className="md:hidden flex flex-col items-center gap-3 mb-4 pt-0" style={{position: 'relative'}}>
+          <div className="md:hidden flex flex-col items-center gap-3 mb-4 pt-0" style={{ position: 'relative' }}>
             {/* Mahotsav Logo - Top Center */}
             <div className="event-detail-mobile-logo" style={{
               position: 'absolute',
@@ -2213,9 +2220,9 @@ const EventDetail: React.FC = () => {
               maxWidth: 'clamp(220px, 50vw, 350px) !important',
               pointerEvents: 'none'
             }}>
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}image.avif`}
-                alt="Vignan Mahotsav" 
+                alt="Vignan Mahotsav"
                 style={{
                   width: '100% !important',
                   height: 'auto',
@@ -2224,21 +2231,21 @@ const EventDetail: React.FC = () => {
                 }}
               />
             </div>
-            
+
             {/* Back Button and Titles with padding-top for logo space */}
-            <div style={{paddingTop: 'clamp(170px, 38vw, 240px)', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 10}}>
-              <div style={{width: '100%', display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 10}}>
-                <BackButton 
-                  className="!static !top-auto !left-auto"
+            <div style={{ paddingTop: 'clamp(170px, 38vw, 240px)', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 10 }}>
+              <div style={{ width: '100%', position: 'relative' }}>
+                <BackButton
+                  className="!fixed !top-3 !left-1"
                   onClick={handleBack}
-                  style={{cursor: 'pointer', pointerEvents: 'auto', position: 'relative', zIndex: 10}}
+                  style={{ cursor: 'pointer', pointerEvents: 'auto', zIndex: 50 }}
                 />
               </div>
               <div className="text-center">
-                <h1 className="text-3xl font-bold text-white mb-2" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
+                <h1 className="text-3xl font-bold text-white mb-2" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                   {eventData.title}
                 </h1>
-                <h2 className="text-2xl font-semibold text-purple-100" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Garden Sans, sans-serif'}}>
+                <h2 className="text-2xl font-semibold text-purple-100" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
                   {eventData.subtitle}
                 </h2>
               </div>
@@ -2248,111 +2255,111 @@ const EventDetail: React.FC = () => {
 
         {/* Content Grid */}
         <div className="flex justify-center items-start">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-3 sm:gap-4 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
-          {/* Poster */}
-          <div className="flex justify-center lg:justify-start">
-            <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
-              {eventName && eventImageMap[eventName] ? (
-                <img 
-                  src={`${import.meta.env.BASE_URL}${eventImageMap[eventName]}`}
-                  alt={eventName}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center">
-                  <span>POSTER of EVENT</span>
-                </div>
-              )}
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-3 sm:gap-4 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
+            {/* Poster */}
+            <div className="flex justify-center lg:justify-start">
+              <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-4 border-white rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md">
+                {eventName && eventImageMap[eventName] ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}${eventImageMap[eventName]}`}
+                    alt={eventName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-base sm:text-lg font-bold text-purple-900 text-center">
+                    <span>POSTER of EVENT</span>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
 
-          {/* Rules Section */}
-          <div className="p-3 sm:p-4">
-            <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
-              Rules:
-            </h3>
-            <ul className="space-y-2 sm:space-y-3">
-              {eventData.rules.map((rule, index) => (
-                <li key={index} className="flex items-start gap-2 sm:gap-4">
-                  <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                  <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em'}}>
-                    {rule}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Prizes and Contact Section */}
-          <div className="space-y-3 sm:space-y-4">
-            {/* Cash Prizes */}
+            {/* Rules Section */}
             <div className="p-3 sm:p-4">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
-                Cash Prizes:
+              <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
+                Rules:
               </h3>
-              <div className="space-y-2 sm:space-y-3">
-                <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>First</span>
-                  <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.first}</span>
-                </div>
-                <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                  <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Second</span>
-                  <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.second}</span>
-                </div>
-                {eventData.prizes.third && (
-                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Third</span>
-                    <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.third}</span>
-                  </div>
-                )}
-                {eventData.prizes.fourth && (
-                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{fontFamily: 'Borisna, sans-serif'}}>Fourth</span>
-                    <span className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>- {eventData.prizes.fourth}</span>
-                  </div>
-                )}
-              </div>
+              <ul className="space-y-2 sm:space-y-3">
+                {eventData.rules.map((rule, index) => (
+                  <li key={index} className="flex items-start gap-2 sm:gap-4">
+                    <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
+                    <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em' }}>
+                      {rule}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Contact Information */}
-            <div className="p-4 sm:p-6">
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif'}}>
-                Contact no:
-              </h3>
-              <div className="space-y-2 sm:space-y-3">
-                {eventData.contacts.map((contact, index) => {
-                  // Determine prefix (Mr/Ms) based on name
-                  const prefix = contact.name.toLowerCase().includes('ms') || contact.name.toLowerCase().includes('miss') ? 'Ms.' : 'Mr.';
-                  // Clean name (remove existing Mr/Ms if present)
-                  const cleanName = contact.name.replace(/^(Mr\.?|Ms\.?|Miss)\s*/i, '').trim();
-                  // Format phone with +91 and space
-                  const formattedPhone = contact.phone.startsWith('+91') ? contact.phone : `+91 ${contact.phone.replace(/^\+?91\s*/, '')}`;
-                  
-                  return (
-                    <div key={index} className="text-white text-xs sm:text-sm md:text-base">
-                      <div className="font-semibold" style={{fontFamily: 'Borisna, sans-serif'}}>
-                        {prefix} {cleanName}: <a href={`tel:${formattedPhone.replace(/\s/g, '')}`} style={{color: '#FFD700', textDecoration: 'underline', cursor: 'pointer'}}>{formattedPhone}</a>
-                      </div>
+            {/* Prizes and Contact Section */}
+            <div className="space-y-3 sm:space-y-4">
+              {/* Cash Prizes */}
+              <div className="p-3 sm:p-4">
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
+                  Cash Prizes:
+                </h3>
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>First</span>
+                    <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.first}</span>
+                  </div>
+                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Second</span>
+                    <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.second}</span>
+                  </div>
+                  {eventData.prizes.third && (
+                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Third</span>
+                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.third}</span>
                     </div>
-                  );
-                })}
+                  )}
+                  {eventData.prizes.fourth && (
+                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Fourth</span>
+                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.fourth}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className="p-4 sm:p-6">
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
+                  Contact no:
+                </h3>
+                <div className="space-y-2 sm:space-y-3">
+                  {eventData.contacts.map((contact, index) => {
+                    // Determine prefix (Mr/Ms) based on name
+                    const prefix = contact.name.toLowerCase().includes('ms') || contact.name.toLowerCase().includes('miss') ? 'Ms.' : 'Mr.';
+                    // Clean name (remove existing Mr/Ms if present)
+                    const cleanName = contact.name.replace(/^(Mr\.?|Ms\.?|Miss)\s*/i, '').trim();
+                    // Format phone with +91 and space
+                    const formattedPhone = contact.phone.startsWith('+91') ? contact.phone : `+91 ${contact.phone.replace(/^\+?91\s*/, '')}`;
+
+                    return (
+                      <div key={index} className="text-white text-xs sm:text-sm md:text-base">
+                        <div className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>
+                          {prefix} {cleanName}: <a href={`tel:${formattedPhone.replace(/\s/g, '')}`} style={{ color: '#FFD700', textDecoration: 'underline', cursor: 'pointer' }}>{formattedPhone}</a>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 mb-6 sm:mb-8 px-4">
-          <button 
+          <button
             className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             onClick={handleDownloadPDF}
             disabled={isDownloading}
           >
             {isDownloading ? '⏳ Downloading...' : '📄 Download'}
           </button>
-          
-          <button 
+
+          <button
             className="w-full sm:w-auto bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] touch-manipulation"
             onClick={() => {
               // Add to events functionality

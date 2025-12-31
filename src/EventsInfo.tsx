@@ -8,7 +8,7 @@ import BackButton from './components/BackButton';
 const EventsInfo: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Main section states
   const [showSportsDetails, setShowSportsDetails] = useState(false);
   const [showCulturals, setShowCulturals] = useState(false);
@@ -193,25 +193,25 @@ const EventsInfo: React.FC = () => {
 
   // Handle event detail click with gender context
   const handleEventDetailClick = (eventTitle: string, gender?: string) => {
-    
+
     // Check if it's Individual & Indoor Sports (merged)
     if (eventTitle === "Individual &") {
       setShowIndoorSports(true);
       return;
     }
-    
+
     // Check if it's Team Field Sports (merged)
     if (eventTitle === "Team Field") {
       setShowMensTeamSports(true);
       return;
     }
-    
+
     // Check if it's Para
     if (eventTitle === "Para") {
       setShowParaCards(true);
       return;
     }
-    
+
     // Map event titles to their detail page names
     const eventNameMapping: { [key: string]: string } = {
       // Sports events
@@ -225,14 +225,14 @@ const EventsInfo: React.FC = () => {
       "Traditional Yogasana": "Traditional Yogasana",
       "Taekwondo": "Taekwondo",
       "Tennikoit": "Tennikoit",
-      
+
       // Cultural events - Dance
       "Classical Dance Solo": "Classical Dance Solo",
       "Dancing Star – Western Solo": "Dancing Star - Western Solo",
       "Dancing Jodi – Western Duo": "Dancing Jodi - Western Duo",
       "Spot Dance - Jodi": "Spot Dance - Jodi",
       "Group Dance (10 no.)": "Group Dance",
-      
+
       // Cultural events - Music
       "Singing Idol": "Singing Idol",
       "Group Singing (6 no.)": "Group Singing",
@@ -241,7 +241,7 @@ const EventsInfo: React.FC = () => {
       "Western Vocal Solo": "Western Vocal Solo",
       "Instrumental Solo": "Instrumental Solo",
       "Anthyakshari": "Anthyakshari",
-      
+
       // Cultural events - Theatre
       "Skit": "Skit",
       "Skit (8 no.)": "Skit",
@@ -251,7 +251,7 @@ const EventsInfo: React.FC = () => {
       "Spot Ad Making": "Spot Ad Making",
       "On the Spot Ad making": "Spot Ad Making",
       "Dialogue Dhamakha": "Dialogue Dhamaka",
-      
+
       // Cultural events - Literature
       "Shayari (Hindi)": "Shayari - Hindi",
       "Shayari – Hindi": "Shayari - Hindi",
@@ -269,7 +269,7 @@ const EventsInfo: React.FC = () => {
       "Master Orator": "Master Orator",
       "Story telling": "Story telling",
       "Dialogue Dhamaka (HINDI)": "Dialogue Dhamaka",
-      
+
       // Cultural events - Visual Arts
       "Rangoli": "Rangoli",
       "Rangoli (2 no.)": "Rangoli",
@@ -283,7 +283,7 @@ const EventsInfo: React.FC = () => {
       "Theme Painting": "Theme Painting",
       "Texart": "Texart",
       "Mehandi": "Mehandi",
-      
+
       // Cultural events - Fashion Design
       "Haute Couture": "Haute Couture",
       "Haute Couture - Theme Ramp walk (12 no.)": "Haute Couture",
@@ -292,13 +292,13 @@ const EventsInfo: React.FC = () => {
       "Texart (Fashion sketching)": "Texart",
       "Craftvilla": "Craftvilla",
       "Craft villa ( Accessory design)": "Craftvilla",
-      
+
       // Cultural events - Spot Light
       "Mahotsav Got Talent": "Mahotsav Got Talent",
       "Mr. and Ms. Mahotsav": "Mr. and Ms. Mahotsav",
       "Mr. Mahotsav": "Mr. and Ms. Mahotsav",
       "Ms. Mahotsav": "Mr. and Ms. Mahotsav",
-      
+
       // Cultural events - Digital Storytelling
       "Short Film Making": "Short Film Making",
       "Short film": "Short Film Making",
@@ -308,7 +308,7 @@ const EventsInfo: React.FC = () => {
       "Digital Poster making": "Digital Poster Making",
       "Mahotsav Digital Chronicle": "Mahotsav Digital Chronicle",
       "Reel Making": "Reel Making",
-      
+
       // Gaming events
       "Valorant": "Valorant",
       "Valorant (PC)": "Valorant",
@@ -318,19 +318,19 @@ const EventsInfo: React.FC = () => {
       "Counter Strike (PC)": "Counter Strike",
       "Smash Karts": "Smash Karts",
       "Smash Karts (PC)": "Smash Karts",
-      
+
       // Robo Wars events
       "Line Follower Robot": "Line Follower Robot",
       "Line follower robot": "Line Follower Robot",
       "Bot Wrestling": "Bot Wrestling",
       "Robo Races": "Robo Races",
       "Robo races": "Robo Races",
-      
+
       // Para Sports events
       "Para Sports": "Para Sports",
       "Para Cricket": "Para Cricket"
     };
-    
+
     let eventName = eventTitle;
     if (eventNameMapping[eventTitle]) {
       eventName = eventNameMapping[eventTitle];
@@ -338,7 +338,7 @@ const EventsInfo: React.FC = () => {
       // Add gender prefix for team sports
       eventName = `${eventTitle} (${gender})`;
     }
-    
+
     // Determine which section we're currently in for back navigation
     let fromSection = '';
     if (showIndoorSports) fromSection = 'indoorSports';
@@ -394,11 +394,11 @@ const EventsInfo: React.FC = () => {
     const state = location.state as { openSection?: string } | null;
     if (state?.openSection) {
       const section = state.openSection;
-      
+
       // Handle sports sections
       if (['indoorSports', 'womensIndoorSports', 'mensTeamSports', 'womensTeamSports', 'paraCards'].includes(section)) {
         setShowSportsDetails(true);
-        
+
         switch (section) {
           case 'indoorSports':
             setShowIndoorSports(true);
@@ -420,7 +420,7 @@ const EventsInfo: React.FC = () => {
       // Handle cultural sections
       else if (['dance', 'music', 'theatre', 'literature', 'visualArts', 'fashionDesign', 'digitalStorytelling', 'spotLight'].includes(section)) {
         setShowCulturals(true);
-        
+
         switch (section) {
           case 'dance':
             setShowDance(true);
@@ -461,7 +461,7 @@ const EventsInfo: React.FC = () => {
           }
         }
       }
-      
+
       // Clear the state to prevent issues on refresh
       window.history.replaceState({}, document.title);
     }
@@ -477,7 +477,7 @@ const EventsInfo: React.FC = () => {
     }}>
       {/* Floating Flower - Top Right (clipped naturally) */}
       <div className="fixed pointer-events-none max-md:z-0 md:z-[1] flower-top-right">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -491,7 +491,7 @@ const EventsInfo: React.FC = () => {
 
       {/* Floating Flower - Bottom Left (clipped naturally) */}
       <div className="fixed pointer-events-none max-md:z-0 md:z-[1] flower-bottom-left">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -591,16 +591,29 @@ const EventsInfo: React.FC = () => {
             transform-style: preserve-3d;
           }
           
+          .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            z-index: -1;
+          }
+          
           /* Card Hover Effect - Global */
           .event-card:hover {
-            transform: perspective(500px) rotateX(12deg) scale(1);
+            transform: perspective(1000px) rotateX(8deg) translateY(-10px) scale(1.02);
             z-index: 5;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
           }
           
           .event-card-image {
             position: absolute;
             top: 45%;
-            left: 55%;
+            left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
@@ -613,7 +626,7 @@ const EventsInfo: React.FC = () => {
           }
           
           .event-card:hover .event-card-image {
-            transform: translate(-50%, -50%) scale(1.3);
+            transform: translate(-50%, -65%) scale(1.25);
             z-index: 100;
           }
           
@@ -654,7 +667,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .events-title {
-            font-family: 'Garden Sans, sans-serif';
+            font-family: 'Aladin, cursive';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             font-size: 2.25rem;
             font-weight: bold;
@@ -687,7 +700,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .category-card-title {
-            font-family: 'Garden Sans, sans-serif';
+            font-family: 'Aladin, cursive';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
           }
 
@@ -702,6 +715,23 @@ const EventsInfo: React.FC = () => {
             width: 280px;
             max-width: 280px;
             padding-bottom: 5rem;
+            overflow: visible;
+            position: relative;
+            transition: transform 1.5s ease;
+          }
+          
+          .subcategory-card:hover {
+            transform: perspective(1000px) rotateX(8deg) translateY(-10px) scale(1.02);
+            z-index: 5;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          }
+          
+          .subcategory-card img {
+            transition: transform 0.5s ease-in-out;
+          }
+          
+          .subcategory-card:hover img {
+            transform: scale(1.15) translateY(-10%);
           }
 
           /* Cultural Event Cards (with background image) */
@@ -801,78 +831,78 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header: Logo + Title + Back Button */}
-        <div className="w-full px-8 relative z-20" style={{paddingTop: "10px"}}>
+        <div className="w-full px-8 relative z-20" style={{ paddingTop: "10px" }}>
           {/* Desktop layout - Logo left, Title center, Back below logo */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start">
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
-              <img 
+              <img
                 src={`${import.meta.env.BASE_URL}image.avif`}
-                alt="Vignan Mahotsav" 
+                alt="Vignan Mahotsav"
                 className="events-logo"
-                style={{marginTop: '-60px'}}
+                style={{ marginTop: '-60px' }}
               />
               <div className="events-back-button-container">
-                <BackButton 
+                <BackButton
                   className="!static !top-auto !left-auto"
                   onClick={() => {
-                if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
-                  setShowDance(false);
-                  setShowMusic(false);
-                  setShowTheatre(false);
-                  setShowLiterature(false);
-                  setShowVisualArts(false);
-                  setShowFashionDesign(false);
-                  setShowDigitalStorytelling(false);
-                  setShowGaming(false);
-                  setShowRoboGames(false);
-                  setShowSpotLight(false);
-                  if (showGaming || showRoboGames) {
-                    setShowRoboWarsGaming(true);
-                  }
-                } else if (showRoboWarsGaming) {
-                  setShowRoboWarsGaming(false);
-                } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
-                  setShowIndoorSports(false);
-                  setShowWomensIndoorSports(false);
-                  setShowMensTeamSports(false);
-                  setShowWomensTeamSports(false);
-                  setShowParaCards(false);
-                } else if (showSportsDetails || showCulturals) {
-                  setShowSportsDetails(false);
-                  setShowCulturals(false);
-                } else {
-                  navigate('/');
-                }
-              }} />
+                    if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                      setShowDance(false);
+                      setShowMusic(false);
+                      setShowTheatre(false);
+                      setShowLiterature(false);
+                      setShowVisualArts(false);
+                      setShowFashionDesign(false);
+                      setShowDigitalStorytelling(false);
+                      setShowGaming(false);
+                      setShowRoboGames(false);
+                      setShowSpotLight(false);
+                      if (showGaming || showRoboGames) {
+                        setShowRoboWarsGaming(true);
+                      }
+                    } else if (showRoboWarsGaming) {
+                      setShowRoboWarsGaming(false);
+                    } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
+                      setShowIndoorSports(false);
+                      setShowWomensIndoorSports(false);
+                      setShowMensTeamSports(false);
+                      setShowWomensTeamSports(false);
+                      setShowParaCards(false);
+                    } else if (showSportsDetails || showCulturals) {
+                      setShowSportsDetails(false);
+                      setShowCulturals(false);
+                    } else {
+                      navigate('/');
+                    }
+                  }} />
               </div>
             </div>
-            
+
             {/* Center column: Title */}
             <div className="flex items-start justify-center" style={{ marginTop: '30px' }}>
               <h1 className="events-title events-page-heading">
-                {showIndoorSports ? 'Indoor Sports' : 
-                 showWomensIndoorSports ? "Women's Indoor Sports" : 
-                 showMensTeamSports ? "Men's Team Field Sports" : 
-                 showWomensTeamSports ? "Women's Team Field Sports" :
-                 showParaCards ? 'Para' :
-                 showDance ? 'Dance' :
-                 showMusic ? 'Music' :
-                 showTheatre ? 'Theatre' :
-                 showLiterature ? 'Literature' :
-                 showVisualArts ? 'Visual Arts' :
-                 showFashionDesign ? 'Fashion Design' :
-                 showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
-                 showGaming ? 'Gaming' :
-                 showRoboGames ? 'Robo Games' :
-                 showSpotLight ? 'Spot Light' :
-                 showRoboWarsGaming ? 'Robo Wars & Gaming' :
-                 showSportsDetails ? 'sports and games' : 
-                 showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
-                 'EVENTS'}
+                {showIndoorSports ? 'Indoor Sports' :
+                  showWomensIndoorSports ? "Women's Indoor Sports" :
+                    showMensTeamSports ? "Men's Team Field Sports" :
+                      showWomensTeamSports ? "Women's Team Field Sports" :
+                        showParaCards ? 'Para' :
+                          showDance ? 'Dance' :
+                            showMusic ? 'Music' :
+                              showTheatre ? 'Theatre' :
+                                showLiterature ? 'Literature' :
+                                  showVisualArts ? 'Visual Arts' :
+                                    showFashionDesign ? 'Fashion Design' :
+                                      showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+                                        showGaming ? 'Gaming' :
+                                          showRoboGames ? 'Robo Games' :
+                                            showSpotLight ? 'Spot Light' :
+                                              showRoboWarsGaming ? 'Robo Wars & Gaming' :
+                                                showSportsDetails ? 'sports and games' :
+                                                  showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
+                                                    'EVENTS'}
               </h1>
             </div>
-            
+
             {/* Right column: Empty (for balance) */}
             <div></div>
           </div>
@@ -880,63 +910,63 @@ const EventsInfo: React.FC = () => {
           {/* Mobile layout - Logo and Back button centered, stacked */}
           <div className="md:hidden flex flex-col items-center gap-3 pb-4 w-full relative">
             <div className="absolute left-4 top-0">
-              <BackButton 
+              <BackButton
                 className="!static !top-auto !left-auto"
                 onClick={() => {
-              if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
-                setShowDance(false);
-                setShowMusic(false);
-                setShowTheatre(false);
-                setShowLiterature(false);
-                setShowVisualArts(false);
-                setShowFashionDesign(false);
-                setShowDigitalStorytelling(false);
-                setShowGaming(false);
-                setShowRoboGames(false);
-                setShowSpotLight(false);
-                if (showGaming || showRoboGames) {
-                  setShowRoboWarsGaming(true);
-                }
-              } else if (showRoboWarsGaming) {
-                setShowRoboWarsGaming(false);
-              } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
-                setShowIndoorSports(false);
-                setShowWomensIndoorSports(false);
-                setShowMensTeamSports(false);
-                setShowWomensTeamSports(false);
-                setShowParaCards(false);
-              } else if (showSportsDetails || showCulturals) {
-                setShowSportsDetails(false);
-                setShowCulturals(false);
-              } else {
-                navigate('/');
-              }
-            }} />
+                  if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showGaming || showRoboGames || showSpotLight) {
+                    setShowDance(false);
+                    setShowMusic(false);
+                    setShowTheatre(false);
+                    setShowLiterature(false);
+                    setShowVisualArts(false);
+                    setShowFashionDesign(false);
+                    setShowDigitalStorytelling(false);
+                    setShowGaming(false);
+                    setShowRoboGames(false);
+                    setShowSpotLight(false);
+                    if (showGaming || showRoboGames) {
+                      setShowRoboWarsGaming(true);
+                    }
+                  } else if (showRoboWarsGaming) {
+                    setShowRoboWarsGaming(false);
+                  } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
+                    setShowIndoorSports(false);
+                    setShowWomensIndoorSports(false);
+                    setShowMensTeamSports(false);
+                    setShowWomensTeamSports(false);
+                    setShowParaCards(false);
+                  } else if (showSportsDetails || showCulturals) {
+                    setShowSportsDetails(false);
+                    setShowCulturals(false);
+                  } else {
+                    navigate('/');
+                  }
+                }} />
             </div>
-            <img 
+            <img
               src={`${import.meta.env.BASE_URL}image.avif`}
-              alt="Vignan Mahotsav" 
+              alt="Vignan Mahotsav"
               className="events-logo mx-auto mt-12"
             />
             <h1 className="events-title events-page-heading text-center w-full" style={{ fontSize: '2.5rem', marginTop: '20px', wordBreak: 'break-word', overflowWrap: 'break-word', maxWidth: '100%', padding: '0 10px' }}>
-              {showIndoorSports ? 'Indoor Sports' : 
-               showWomensIndoorSports ? "Women's Indoor Sports" : 
-               showMensTeamSports ? "Men's Team Field Sports" : 
-               showWomensTeamSports ? "Women's Team Field Sports" :
-               showParaCards ? 'Para' :
-               showDance ? 'Dance' :
-               showMusic ? 'Music' :
-               showTheatre ? 'Theatre' :
-               showLiterature ? 'Literature' :
-               showVisualArts ? 'Visual Arts' :
-               showFashionDesign ? 'Fashion Design' :
-               showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
-               showGaming ? 'Gaming' :
-               showRoboGames ? 'Robo Games' :
-               showSpotLight ? 'Spot Light' :
-               showSportsDetails ? 'sports and games' : 
-               showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
-               'EVENTS'}
+              {showIndoorSports ? 'Indoor Sports' :
+                showWomensIndoorSports ? "Women's Indoor Sports" :
+                  showMensTeamSports ? "Men's Team Field Sports" :
+                    showWomensTeamSports ? "Women's Team Field Sports" :
+                      showParaCards ? 'Para' :
+                        showDance ? 'Dance' :
+                          showMusic ? 'Music' :
+                            showTheatre ? 'Theatre' :
+                              showLiterature ? 'Literature' :
+                                showVisualArts ? 'Visual Arts' :
+                                  showFashionDesign ? 'Fashion Design' :
+                                    showDigitalStorytelling ? 'Digital Storytelling & Creative Media' :
+                                      showGaming ? 'Gaming' :
+                                        showRoboGames ? 'Robo Games' :
+                                          showSpotLight ? 'Spot Light' :
+                                            showSportsDetails ? 'sports and games' :
+                                              showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
+                                                'EVENTS'}
             </h1>
           </div>
         </div>
@@ -946,45 +976,57 @@ const EventsInfo: React.FC = () => {
           {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
-              <div className="events-main-cards-container flex flex-row flex-wrap items-center justify-center gap-10 md:gap-14 mb-10">
+              <div className="events-main-cards-container flex flex-row flex-wrap items-start justify-center gap-10 md:gap-14 mb-10">
                 {/* Card 1 - Performing Arts */}
                 <div className="flex flex-col items-center gap-3">
-                  <div 
+                  <div
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleCulturalsCardClick}
-                    style={{ 
+                    style={{
                       margin: '0 16px',
                       backgroundImage: 'url(/events/Cultural.avif)',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
                   >
+                    <div style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '90%',
+                      textAlign: 'center',
+                      zIndex: 10
+                    }}>
+                      <h2 className="category-card-title text-white text-xl font-bold tracking-wide" style={{ lineHeight: '1.3', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', marginTop: '460px' }}>
+                        PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
+                      </h2>
+                    </div>
                   </div>
-                  <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center" style={{ maxWidth: '320px', lineHeight: '1.3', margin: '0 auto' }}>
-                    PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
-                  </h2>
                 </div>
 
                 {/* Card 2 - Sports and Games with Button Below (Desktop Only) */}
-                <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop">
-                  <div className="flex flex-col items-center gap-3">
-                    <div 
+                <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop" style={{ marginTop: '-90px' }}>
+                  <div className="flex flex-col items-center gap-3" style={{ marginTop: '-30px' }}>
+                    <div
                       className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                       onClick={handleSportsCardClick}
-                      style={{ 
+                      style={{
                         margin: '0 16px',
                         backgroundImage: 'url(/events/Sports.avif)',
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundPosition: 'center',
+                        position: 'relative',
+                        top: '-60px'
                       }}
                     >
                     </div>
-                    <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center">
+                    <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center" style={{ marginTop: '-50px' }}>
                       SPORTS AND GAMES
                     </h2>
                   </div>
                   {/* Download Rulebook button - Desktop */}
-                  <button 
+                  <button
                     className="download-rulebook-btn download-rulebook-desktop"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -1000,10 +1042,10 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 2 - Sports and Games (Mobile - No Button) */}
                 <div className="flex flex-col items-center gap-3 events-card-mobile-only">
-                  <div 
+                  <div
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={handleSportsCardClick}
-                    style={{ 
+                    style={{
                       margin: '0 16px',
                       backgroundImage: 'url(/events/Sports.avif)',
                       backgroundSize: 'cover',
@@ -1018,10 +1060,10 @@ const EventsInfo: React.FC = () => {
 
                 {/* Card 3 - Robo Wars & Gaming */}
                 <div className="flex flex-col items-center gap-3">
-                  <div 
+                  <div
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={() => setShowRoboWarsGaming(true)}
-                    style={{ 
+                    style={{
                       margin: '0 16px',
                       backgroundImage: 'url(/events/Gaming.avif)',
                       backgroundSize: 'cover',
@@ -1034,10 +1076,10 @@ const EventsInfo: React.FC = () => {
                   </h2>
                 </div>
               </div>
-              
+
               {/* Download Rulebook button - Mobile (After all 3 cards) */}
               <div className="events-button-mobile-container flex justify-center">
-                <button 
+                <button
                   className="download-rulebook-btn download-rulebook-mobile"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -1062,25 +1104,26 @@ const EventsInfo: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-1">
 
                     {sportsDetailCards.map((card, index) => {
-                      const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || 
-                                         card.title === "Individual &" || 
-                                         card.title === "Team Field" ||
-                                         card.title === "Para";
-                      
+                      const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
+                        card.title === "Individual &" ||
+                        card.title === "Team Field" ||
+                        card.title === "Para";
+
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Athletics": "athletics.png",
+                        "Individual &": "events/individual.png",
                         "Team Field": "team events.png"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               className="absolute inset-0 w-full h-full object-contain"
@@ -1113,7 +1156,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1124,15 +1167,15 @@ const EventsInfo: React.FC = () => {
                         "Tennikoit": "events/Tennikoit.avif",
                         "Yoga & Individual": "Yoga & individual.png"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1153,7 +1196,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1164,15 +1207,15 @@ const EventsInfo: React.FC = () => {
                         "Tennikoit": "events/Tennikoit.avif",
                         "Yoga & Individual": "Yoga & individual.png"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1193,7 +1236,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {mensTeamSportsCards.map((card, index) => {
                       // Map men's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1204,15 +1247,15 @@ const EventsInfo: React.FC = () => {
                         "Kho-Kho": "events/kho kho.avif",
                         "Hockey": "events/hockey.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title, 'Men')}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1233,7 +1276,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {womensTeamSportsCards.map((card, index) => {
                       // Map women's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1243,15 +1286,15 @@ const EventsInfo: React.FC = () => {
                         "Kho-Kho": "events/kho kho.avif",
                         "Throw ball": "events/throwball.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title, 'Women')}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1272,15 +1315,15 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {paraCards.map((card, index) => (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
                         {card.title === "Para Sports" && (
-                          <img 
+                          <img
                             src={`${import.meta.env.BASE_URL}Para_Sports.png`}
                             alt="Para Sports"
                             className="absolute inset-0 w-full h-full object-contain"
@@ -1289,7 +1332,7 @@ const EventsInfo: React.FC = () => {
                           />
                         )}
                         {card.title === "Para Cricket" && (
-                          <img 
+                          <img
                             src={`${import.meta.env.BASE_URL}Para_cricket.png`}
                             alt="Para Cricket"
                             className="absolute inset-0 w-full h-full object-contain"
@@ -1319,9 +1362,9 @@ const EventsInfo: React.FC = () => {
           {showCulturals && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full h-full flex flex-col relative z-20">
               {/* Cards Grid - centered */}
-              <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
+              <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12" style={{ overflowY: 'visible' }}>
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0', paddingTop: '60px', overflowY: 'visible' }}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
@@ -1347,8 +1390,8 @@ const EventsInfo: React.FC = () => {
                         }
                       };
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 overflow-hidden"
                           onClick={handleCardClick}
                           style={{
@@ -1360,7 +1403,7 @@ const EventsInfo: React.FC = () => {
                           }}
                         >
                           {card.title === "Dance" && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}dance.png`}
                               alt="Dance"
                               className="event-card-image transition-transform duration-300"
@@ -1368,31 +1411,55 @@ const EventsInfo: React.FC = () => {
                             />
                           )}
                           {card.title === "Music" && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}music.avif`}
                               alt="Music"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
+                          {card.title === "Theatre" && (
+                            <img
+                              src={`${import.meta.env.BASE_URL}theatre.png`}
+                              alt="Theatre"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
                           {card.title === "Literature" && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}literary.png`}
                               alt="Literature"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
+                          {card.title === "Visual Arts" && (
+                            <img
+                              src={`${import.meta.env.BASE_URL}events/visual arts.png`}
+                              alt="Visual Arts"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
                           {card.title === "Fashion Design" && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}fashion.png`}
                               alt="Fashion Design"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
                             />
                           )}
+                          {card.title === "Digital Storytelling & Creative Media" && (
+                            <img
+                              src={`${import.meta.env.BASE_URL}events/Digital Arts.png`}
+                              alt="Digital Storytelling"
+                              className="event-card-image transition-transform duration-300"
+                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                            />
+                          )}
                           {card.title === "Spot Light" && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}spotlight.png`}
                               alt="Spot Light"
                               className="event-card-image transition-transform duration-300"
@@ -1400,7 +1467,7 @@ const EventsInfo: React.FC = () => {
                             />
                           )}
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
-                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)'}}>
+                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{ textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)' }}>
                               {card.title}
                             </h2>
                           </div>
@@ -1418,7 +1485,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {danceCards.map((card, index) => {
                       // Map dance card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1428,15 +1495,15 @@ const EventsInfo: React.FC = () => {
                         "Spot Dance - Jodi": "events/spot dance.avif",
                         "Group Dance (10 no.)": "events/group dance.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1457,7 +1524,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {musicCards.map((card, index) => {
                       // Map music card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1469,15 +1536,15 @@ const EventsInfo: React.FC = () => {
                         "Anthyakshari Duo": "events/anthyakshari.avif",
                         "Instrumental Solo": "events/instrumental solo.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1498,7 +1565,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {theatreCards.map((card, index) => {
                       // Map theatre card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1508,15 +1575,15 @@ const EventsInfo: React.FC = () => {
                         "Mono Action": "events/Mono Action.avif",
                         "On the Spot Ad making": "events/On Spot Ad Making.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1537,7 +1604,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {literatureCards.map((card, index) => {
                       // Map literature card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1551,15 +1618,15 @@ const EventsInfo: React.FC = () => {
                         "Word Master": "events/word master.avif",
                         "Dumb charades (2 no.)": "events/dumb chardes.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1580,7 +1647,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {visualArtsCards.map((card, index) => {
                       // Map visual arts card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1593,15 +1660,15 @@ const EventsInfo: React.FC = () => {
                         "Pencil Sketching": "events/pencil Sketching.avif",
                         "Mandala": "events/Mandala Art.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1622,7 +1689,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {fashionDesignCards.map((card, index) => {
                       // Map fashion design card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1631,15 +1698,15 @@ const EventsInfo: React.FC = () => {
                         "Texart (Fashion sketching)": "events/texart.avif",
                         "T-Shirt designing": "events/T-shirt designing.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1660,7 +1727,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {digitalStorytellingCards.map((card, index) => {
                       // Map digital storytelling card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1670,15 +1737,15 @@ const EventsInfo: React.FC = () => {
                         "Mahotsav Digital Chronicle": "events/MH-26 Digital Chronicle.avif",
                         "Reel Making": "events/reel making.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1699,7 +1766,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {gamingCards.map((card, index) => {
                       // Map gaming card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1708,15 +1775,15 @@ const EventsInfo: React.FC = () => {
                         "Counter Strike (PC)": "events/Counter Strike.avif",
                         "Smash Karts (PC)": "events/smash kart.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1737,10 +1804,10 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {roboGamesCards.map((card, index) => (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => handleEventDetailClick(card.title)}
                       >
@@ -1767,22 +1834,22 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{columnGap: '0'}}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {spotLightCards.map((card, index) => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
                         "Mahotsav Got Talent": "events/Mr and ms mahotsav.avif"
                       };
-                      
+
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="inner-event-card"
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
-                            <img 
+                            <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
                               loading="lazy"
@@ -1827,8 +1894,8 @@ const EventsInfo: React.FC = () => {
                         }
                       };
                       return (
-                        <div 
-                          key={index} 
+                        <div
+                          key={index}
                           className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={handleCardClick}
                         >
@@ -1855,6 +1922,4 @@ const EventsInfo: React.FC = () => {
     </div>
   );
 };
-
 export default EventsInfo;
-

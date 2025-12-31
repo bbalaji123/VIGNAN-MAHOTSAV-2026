@@ -21,7 +21,7 @@ const Chennai: React.FC = () => {
     }}>
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -35,7 +35,7 @@ const Chennai: React.FC = () => {
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-750 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -58,7 +58,7 @@ const Chennai: React.FC = () => {
 
           /* Font overrides for this page */
           .Chennai-title {
-            font-family: 'Garden Sans', sans-serif !important;
+            font-family: 'Aladin', cursive !important;
           }
 
           .Chennai-content,
@@ -103,9 +103,9 @@ const Chennai: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-8 sm:gap-12 max-w-[1400px] mx-auto">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-8 sm:gap-12 max-w-[1400px] mx-auto">
           {/* Left Card */}
-          <div 
+          <div
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden flex items-center justify-center backdrop-blur-[5px] mx-auto lg:mx-0 lg:flex-shrink-0"
             style={{
               minWidth: '180px',
@@ -119,50 +119,50 @@ const Chennai: React.FC = () => {
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
             <div className="Chennai-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '400px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginTop: '20px', marginBottom: '40px' }}>
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Aladin, cursive !important', marginTop: '20px', marginBottom: '40px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
-              <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+              <div className="grid grid-cols-[auto_1fr] gap-4 md:flex md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'Aladin, cursive !important' }}>
                 {/* Sports Column */}
                 <div className="flex flex-col gap-2 sm:gap-3 min-w-[100px] sm:min-w-[120px] md:min-w-[150px]">
                   <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Volley ball</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>(6+4)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px' }}>Volley ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px' }}>(6+4)</div>
                   </div>
                   <div className="flex flex-col py-2 sm:py-3 border-b border-white/30">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Basket ball</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>(5+5)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px' }}>Basket ball</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px' }}>(5+5)</div>
                   </div>
                   <div className="flex flex-col py-2 sm:py-3">
-                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px' }}>Kabaddi</div>
-                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Garden Sans, sans-serif !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
+                    <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl mb-1" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px' }}>Kabaddi</div>
+                    <div className="text-xs sm:text-sm md:text-base lg:text-lg" style={{ fontFamily: 'Aladin, cursive !important', marginLeft: '10px', marginBottom: '10px' }}>(7+3)</div>
                   </div>
                 </div>
 
                 {/* Prizes Section */}
                 <div className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 mb-2 sm:mb-3 font-bold text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Aladin, cursive !important' }}>
                     <div></div>
-                    <div>Zone<br/>Winners</div>
-                    <div>Mahotsav<br/>Winners</div>
+                    <div>Zone<br />Winners</div>
+                    <div>Mahotsav<br />Winners</div>
                   </div>
                   <div className="flex flex-col gap-1 sm:gap-2">
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Aladin, cursive !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">I Prize :</div>
                       <div>10,000</div>
                       <div>30,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Aladin, cursive !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">II Prize :</div>
                       <div>6,000</div>
                       <div>25,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Aladin, cursive !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">III Prize :</div>
                       <div>-</div>
                       <div>7,000</div>
                     </div>
-                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Garden Sans, sans-serif !important' }}>
+                    <div className="grid grid-cols-3 gap-1 sm:gap-2 md:gap-4 lg:gap-8 text-xs sm:text-sm md:text-base lg:text-lg text-center" style={{ fontFamily: 'Aladin, cursive !important' }}>
                       <div className="font-semibold text-left text-xs sm:text-sm md:text-base">IV Prize :</div>
                       <div>-</div>
                       <div>3,000</div>
@@ -173,7 +173,7 @@ const Chennai: React.FC = () => {
             </div>
 
             {/* Contacts */}
-            <div className="Chennai-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'Garden Sans, sans-serif !important', paddingTop: '20px'  }}>
+            <div className="Chennai-content mt-3 sm:mt-4 md:mt-6 text-white text-center pt-4 sm:pt-5 md:pt-6" style={{ fontFamily: 'Aladin, cursive !important', paddingTop: '20px' }}>
               <div className="text-sm sm:text-base md:text-lg font-semibold">
                 <div>Mr. P. Subbarao - +91 99630 48811</div>
               </div>
@@ -194,13 +194,13 @@ const Chennai: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="Chennai-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important',marginTop: '20px',marginBottom: '20px' }}>
+        <div className="Chennai-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important', marginTop: '20px', marginBottom: '20px' }}>
           <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
           <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
 
         {/* Register Button */}
-        <button 
+        <button
           className="Chennai-content block mx-auto mt-16 sm:mt-20 min-h-[56px] px-16 sm:px-20 lg:px-24 py-5 sm:py-6 rounded-[10px] font-semibold text-sm sm:text-base cursor-pointer transition-all duration-300 border-none uppercase active:scale-95"
           style={{
             background: '#0b112b',

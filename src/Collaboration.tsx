@@ -21,7 +21,7 @@ const Collaboration: React.FC = () => {
     }}>
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -35,7 +35,7 @@ const Collaboration: React.FC = () => {
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -130,7 +130,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.1s;
-            font-family: 'Garden Sans', sans-serif !important;
+            font-family: 'Aladin', cursive !important;
           }
 
           .year-tabs {
@@ -150,7 +150,7 @@ const Collaboration: React.FC = () => {
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Garden Sans', sans-serif;
+            font-family: 'Aladin', cursive;
           }
 
           .year-tab:hover {
@@ -250,7 +250,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.3s;
-            font-family: 'Garden Sans', sans-serif !important;
+            font-family: 'Aladin', cursive !important;
           }
 
           .collaboration-text {
@@ -261,7 +261,7 @@ const Collaboration: React.FC = () => {
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.5s;
-            font-family: 'Garden Sans', sans-serif !important;
+            font-family: 'Aladin', cursive !important;
           }
 
           .back-button {
@@ -310,7 +310,7 @@ const Collaboration: React.FC = () => {
       {/* Main Content */}
       <div className="collaboration-content">
         <h1 className="collaboration-title">COLLABORATION</h1>
-        
+
         <div className="collaboration-grid">
           {[
             'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929321/3_dvfsut.avif',
@@ -343,7 +343,7 @@ const Collaboration: React.FC = () => {
             'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929319/32_nmftpg.avif'
           ].map((url, index) => (
             <div key={index} className="collaboration-image-card">
-              <img 
+              <img
                 src={url}
                 alt={`Collaboration ${index + 1}`}
                 loading="lazy"

@@ -30,7 +30,7 @@ function ExternalRedirect({ url }: { url: string }) {
 function App() {
   return (
     <div className="w-full min-h-screen">
-      <Router basename="/cse">
+      <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />

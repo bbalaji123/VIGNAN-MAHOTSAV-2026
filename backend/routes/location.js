@@ -25,12 +25,12 @@ async function loadLocationData() {
     
     // Check if cache is still valid
     if (cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
-      logger.info('📍 Using cached location data');
+      logger.info('Using cached location data');
       return;
     }
 
-    logger.info('📍 Loading location data from files...');
-    logger.info(`📁 Data path: ${dataPath}`);
+    logger.info('Loading location data from files...');
+    logger.info(`Data path: ${dataPath}`);
     
     // Load all files in parallel for better performance
     const [statesData, districtsData, collegesData] = await Promise.all([
@@ -67,11 +67,11 @@ async function loadLocationData() {
     
     cacheTimestamp = Date.now();
     
-    logger.info(`✅ Location data loaded successfully`);
-    logger.info(`📊 States: ${statesCache.length}, Districts: ${districtsCache.length}, Colleges: ${collegesCache.length}`);
+    logger.info(`Location data loaded successfully`);
+    logger.info(`States: ${statesCache.length}, Districts: ${districtsCache.length}, Colleges: ${collegesCache.length}`);
     
   } catch (error) {
-    logger.error('❌ Error loading location data:', error);
+    logger.error('Error loading location data:', error);
     throw error;
   }
 }

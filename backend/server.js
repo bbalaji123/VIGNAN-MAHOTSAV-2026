@@ -124,17 +124,17 @@ app.use(errorLogger);
    Start Server
 ===================================================== */
 app.listen(PORT, '127.0.0.1', () => {
-  console.log(`🚀 Server started on port ${PORT}`);
-  console.log(`📡 API available at http://localhost:${PORT}/api`);
-  console.log(`🏥 Health check at http://localhost:${PORT}/api/health`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server started on port ${PORT}`);
+  console.log(`API available at http://localhost:${PORT}/api`);
+  console.log(`Health check at http://localhost:${PORT}/api/health`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
-  logger.info(`🚀 Server started on port ${PORT}`);
-  logger.info(`📡 API available at http://localhost:${PORT}/api`);
-  logger.info(`🏥 Health check at http://localhost:${PORT}/api/health`);
-  logger.info(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  logger.info(`Server started on port ${PORT}`);
+  logger.info(`API available at http://localhost:${PORT}/api`);
+  logger.info(`Health check at http://localhost:${PORT}/api/health`);
+  logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
 }).on('error', (err) => {
-  console.error('❌ Server startup error:', err);
+  console.error('Server startup error:', err);
   logger.error('Server startup error:', err);
   process.exit(1);
 });

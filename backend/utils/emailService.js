@@ -36,7 +36,7 @@ export const sendWelcomeEmail = async (email, userId, password, name) => {
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: email,
-      subject: '🎉 Welcome to Vignan Mahotsav 2026 - Your Registration Details',
+      subject: 'Welcome to Vignan Mahotsav 2026 - Your Registration Details',
       text: `
 Dear ${name},
 
@@ -52,15 +52,15 @@ Your registration has been successfully completed. Here are your login credentia
 IMPORTANT: Please save these credentials for future reference.
 
 You can now login to the Mahotsav portal using your email and password to:
-✅ Register for events
-✅ View your schedule
-✅ Access event information
-✅ Get updates and notifications
+• Register for events
+• View your schedule
+• Access event information
+• Get updates and notifications
 
 Event Details:
-📅 Dates: February 5-7, 2026
-📍 Venue: Vignan University Campus
-🎯 Expected Participants: 5000+
+Dates: February 5-7, 2026
+Venue: Vignan University Campus
+Expected Participants: 5000+
 
 If you have any questions or need assistance, feel free to contact our support team.
 
@@ -112,9 +112,9 @@ Here are your login credentials:
 You can now login to the Mahotsav portal using your email and password.
 
 SECURITY REMINDER:
-✅ Please change your password after logging in
-✅ Don't share your credentials with anyone
-✅ Keep your Mahotsav ID safe for future reference
+• Please change your password after logging in
+• Don't share your credentials with anyone
+• Keep your Mahotsav ID safe for future reference
 
 If you did not request this password reset, please contact our support team immediately.
 
@@ -149,18 +149,18 @@ export const sendEventRegistrationEmail = async (email, name, eventName, registr
     const mailOptions = {
       from: process.env.GMAIL_USER,
       to: email,
-      subject: `🎯 Event Registration Confirmed - ${eventName}`,
+      subject: `Event Registration Confirmed - ${eventName}`,
       text: `
 Dear ${name},
 
-Your registration for "${eventName}" has been confirmed! 🎉
+Your registration for "${eventName}" has been confirmed!
 
 Registration Details:
 ${registrationDetails}
 
 Event Information:
-📅 Date: February 5-7, 2026
-📍 Venue: Vignan University Campus
+Date: February 5-7, 2026
+Venue: Vignan University Campus
 
 Please arrive 15 minutes before the event starts and bring a valid ID.
 

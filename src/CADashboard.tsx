@@ -111,13 +111,13 @@ const CADashboard: React.FC = () => {
 
   const getTierIcon = (tier: string) => {
     const icons: { [key: string]: string } = {
-      'Bronze': '🥉',
-      'Silver': '🥈',
-      'Gold': '🥇',
-      'Platinum': '💎',
-      'Diamond': '💠'
+      'Bronze': '',
+      'Silver': '',
+      'Gold': '',
+      'Platinum': '',
+      'Diamond': ''
     };
-    return icons[tier] || '⭐';
+    return icons[tier] || '';
   };
 
   if (loading) {
@@ -180,7 +180,7 @@ const CADashboard: React.FC = () => {
         {/* Stats Cards */}
         <div className="ca-stats-grid">
           <div className="ca-stat-card ca-points-card">
-            <div className="ca-stat-icon">⭐</div>
+            <div className="ca-stat-icon"></div>
             <div className="ca-stat-value">{caData.totalPoints}</div>
             <div className="ca-stat-label">Total Points</div>
           </div>
@@ -192,19 +192,19 @@ const CADashboard: React.FC = () => {
           </div>
 
           <div className="ca-stat-card ca-referrals-card">
-            <div className="ca-stat-icon">👥</div>
+            <div className="ca-stat-icon"></div>
             <div className="ca-stat-value">{totalReferrals}</div>
             <div className="ca-stat-label">Total Referrals</div>
           </div>
 
           <div className="ca-stat-card ca-paid-card">
-            <div className="ca-stat-icon">✅</div>
+            <div className="ca-stat-icon"></div>
             <div className="ca-stat-value">{paidReferrals}</div>
             <div className="ca-stat-label">Paid Referrals</div>
           </div>
 
           <div className="ca-stat-card ca-pending-card">
-            <div className="ca-stat-icon">⏳</div>
+            <div className="ca-stat-icon"></div>
             <div className="ca-stat-value">{pendingReferrals}</div>
             <div className="ca-stat-label">Pending Referrals</div>
           </div>
@@ -215,27 +215,27 @@ const CADashboard: React.FC = () => {
           <h3>Tier Progress</h3>
           <div className="ca-tier-milestones">
             <div className={`ca-milestone ${caData.totalPoints >= 50 ? 'achieved' : ''}`}>
-              <span className="milestone-icon">🥉</span>
+              <span className="milestone-icon"></span>
               <span className="milestone-name">Bronze</span>
               <span className="milestone-points">50 pts</span>
             </div>
             <div className={`ca-milestone ${caData.totalPoints >= 100 ? 'achieved' : ''}`}>
-              <span className="milestone-icon">🥈</span>
+              <span className="milestone-icon"></span>
               <span className="milestone-name">Silver</span>
               <span className="milestone-points">100 pts</span>
             </div>
             <div className={`ca-milestone ${caData.totalPoints >= 150 ? 'achieved' : ''}`}>
-              <span className="milestone-icon">🥇</span>
+              <span className="milestone-icon"></span>
               <span className="milestone-name">Gold</span>
               <span className="milestone-points">150 pts</span>
             </div>
             <div className={`ca-milestone ${caData.totalPoints >= 200 ? 'achieved' : ''}`}>
-              <span className="milestone-icon">💎</span>
+              <span className="milestone-icon"></span>
               <span className="milestone-name">Platinum</span>
               <span className="milestone-points">200 pts</span>
             </div>
             <div className={`ca-milestone ${caData.totalPoints >= 250 ? 'achieved' : ''}`}>
-              <span className="milestone-icon">💠</span>
+              <span className="milestone-icon"></span>
               <span className="milestone-name">Diamond</span>
               <span className="milestone-points">250 pts</span>
             </div>
@@ -275,9 +275,6 @@ const CADashboard: React.FC = () => {
                       <td>{new Date(referral.registrationDate).toLocaleDateString('en-IN')}</td>
                       <td>
                         <span className={`ca-status-badge ${referral.paymentStatus}`}>
-                          {referral.paymentStatus === 'paid' && '✅ '}
-                          {referral.paymentStatus === 'pending' && '⏳ '}
-                          {referral.paymentStatus === 'failed' && '❌ '}
                           {referral.paymentStatus.toUpperCase()}
                         </span>
                       </td>

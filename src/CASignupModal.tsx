@@ -54,18 +54,18 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     const loadData = async () => {
       try {
         const [statesRes, districtsRes, collegesRes] = await Promise.all([
-          fetch('/state.json'),
-          fetch('/district.json'),
-          fetch('/college.json')
+          fetch(`${API_BASE_URL}/location/states`),
+          fetch(`${API_BASE_URL}/location/districts`),
+          fetch(`${API_BASE_URL}/location/colleges`)
         ]);
         
-        const statesData = await statesRes.json();
-        const districtsData = await districtsRes.json();
-        const collegesData = await collegesRes.json();
+        const statesResponse = await statesRes.json();
+        const districtsResponse = await districtsRes.json();
+        const collegesResponse = await collegesRes.json();
         
-        setStates(statesData);
-        setDistricts(districtsData);
-        setColleges(collegesData);
+        setStates(statesResponse.data || []);
+        setDistricts(districtsResponse.data || []);
+        setColleges(collegesResponse.data || []);
       } catch (error) {
         console.error('Error loading dropdown data:', error);
       }

@@ -12,13 +12,15 @@ interface CollegeSelectProps {
   required?: boolean;
   selectedState?: string;
   selectedDistrict?: string;
+  onOtherSelected?: (isOther: boolean) => void;
 }
 
 const CollegeSelect: React.FC<CollegeSelectProps> = ({
   onChange,
   required = false,
   selectedState = '',
-  selectedDistrict = ''
+  selectedDistrict = '',
+  onOtherSelected
 }) => {
   const [colleges, setColleges] = useState<College[]>([]);
   const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
@@ -104,8 +106,12 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     const term = e.target.value;
     setSearchTerm(term);
     setShowDropdown(true);
-    if (!term) {
+    // Clear the selected college when user types (forces them to select from dropdown or click Other)
+    if (term !== searchTerm) {
       onChange('');
+      if (onOtherSelected) {
+        onOtherSelected(false);
+      }
     }
   };
 
@@ -113,12 +119,18 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     onChange(collegeName);
     setSearchTerm(collegeName);
     setShowDropdown(false);
+    if (onOtherSelected) {
+      onOtherSelected(false);
+    }
   };
 
   const handleOtherCollegeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     setOtherCollegeName(name);
     onChange(name);
+    if (onOtherSelected) {
+      onOtherSelected(true);
+    }
   };
 
   const handleConfirmOther = () => {
@@ -149,6 +161,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     setShowOtherInput(false);
     setOtherCollegeName('');
     onChange('');
+    if (onOtherSelected) {
+      onOtherSelected(false);
+    }
   };
 
   if (isLoading) {
@@ -200,6 +215,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                       setShowDropdown(false);
                       setSearchTerm('');
                       onChange('');
+                      if (onOtherSelected) {
+                        onOtherSelected(true);
+                      }
                     }}
                     className="px-4 py-3 text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors border-t-2 border-orange-500/30"
                   >

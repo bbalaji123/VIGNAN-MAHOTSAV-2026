@@ -404,6 +404,7 @@ const Dashboard: React.FC = () => {
     district: '',
     referralCode: ''
   });
+  const [isOtherCollege, setIsOtherCollege] = useState(false);
   const [signupStep, setSignupStep] = useState(1);
   const totalSteps = 3;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -447,7 +448,7 @@ const Dashboard: React.FC = () => {
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-  const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [] });
+  const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [], ParaSports: [] });
   const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
 
   // Helper to check if an event is already saved/registered for the user
@@ -1098,17 +1099,23 @@ const Dashboard: React.FC = () => {
     }
   }, [isLoggedIn, userProfileData.gender, fetchEvents]);
 
-  // Fetch registration events from JSON
+  // Load registration events from JSON
   useEffect(() => {
     const loadRegistrationEvents = async () => {
       try {
         const response = await fetch('/registration/registration.json');
         const data = await response.json();
-        setRegistrationEvents(data);
+
+        setRegistrationEvents({
+          Sports: data.Sports || [],
+          Culturals: data.Culturals || [],
+          ParaSports: data.ParaSports || []
+        });
       } catch (error) {
-        // Silent error handling
+        console.error('Error loading registration events:', error);
       }
     };
+
     loadRegistrationEvents();
   }, []);
 
@@ -1731,6 +1738,26 @@ const Dashboard: React.FC = () => {
       return;
     }
 
+    // Validate required state and district
+    if (!signupFormData.state || !signupFormData.district) {
+      setSubmitMessage({
+        type: 'error',
+        text: 'Please select your State and District'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate college field - must have a value and either be from the list or "Other" option
+    if (!signupFormData.college || signupFormData.college.trim() === '') {
+      setSubmitMessage({
+        type: 'error',
+        text: 'Please select your college from the list or choose "Other" option if your college is not listed'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(signupFormData.email)) {
@@ -1785,6 +1812,7 @@ const Dashboard: React.FC = () => {
           district: '',
           referralCode: ''
         });
+        setIsOtherCollege(false);
       } else {
         setSubmitMessage({
           type: 'error',
@@ -1976,45 +2004,125 @@ const Dashboard: React.FC = () => {
   };
 
   const handleOpenRegistration = async () => {
-    // Check if user is logged in
-    if (!isLoggedIn) {
-      alert('Please login first to register for events.');
-      setShowLoginModal(true);
-      return;
-    }
-
-    if (!userProfileData.userId) {
-      alert('Unable to load profile. Please try logging in again.');
-      return;
-    }
-
-    // Directly open the event registration modal with checkboxes
+    // Always open the modal when button is clicked
     setShowRegistrationModal(true);
-    setIsLoadingProfile(true);
+
+    // If user is not logged in, just show empty checkboxes;
+    // the submit button already enforces login.
+    if (!isLoggedIn || !userProfileData.userId) {
+      return;
+    }
 
     try {
-      // Ensure latest saved events are loaded
-      if (userProfileData.userId) {
-        await fetchUserSavedEvents(userProfileData.userId);
+      // Ensure registration events are loaded
+      let sportsEvents = registrationEvents.Sports || [];
+      let culturalEvents = registrationEvents.Culturals || [];
+      let paraEvents = registrationEvents.ParaSports || [];
+      
+      if (!sportsEvents.length && !culturalEvents.length && !paraEvents.length) {
+        const response = await fetch('/registration/registration.json');
+        const data = await response.json();
+        
+        sportsEvents = data.Sports || [];
+        culturalEvents = data.Culturals || [];
+        paraEvents = data.ParaSports || [];
+        
+        setRegistrationEvents({
+          Sports: sportsEvents,
+          Culturals: culturalEvents,
+          ParaSports: paraEvents
+        });
       }
 
-      // Fetch user's registered events
+      // Fetch user's registered events in background
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
 
       if (registrationsResult.success && registrationsResult.data) {
-        setUserRegisteredEvents(registrationsResult.data.registeredEvents || []);
-      } else {
-        setUserRegisteredEvents([]);
+        const registeredEvents = registrationsResult.data.registeredEvents || [];
+        setUserRegisteredEvents(registeredEvents);
+        
+        // Pre-populate selectedRegistrationEvents with currently registered events
+        const preSelectedIds = new Set<string>();
+        
+        registeredEvents.forEach((regEvent: any) => {
+          const eventName = regEvent.eventName || regEvent.Event || regEvent.name;
+          
+          // Find matching event in Sports
+          sportsEvents.forEach((event: any, index: number) => {
+            if (event && event.Event === eventName) {
+              preSelectedIds.add(`sport-${index}`);
+            }
+          });
+          
+          // Find matching event in Culturals
+          culturalEvents.forEach((event: any, index: number) => {
+            if (event) {
+              const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+              if (culturalEventName === eventName) {
+                preSelectedIds.add(`cultural-${index}`);
+              }
+            }
+          });
+          
+          // Find matching event in ParaSports
+          paraEvents.forEach((event: any, index: number) => {
+            if (event && event.Event === eventName) {
+              preSelectedIds.add(`para-${index}`);
+            }
+          });
+        });
+        
+        setSelectedRegistrationEvents(preSelectedIds);
       }
     } catch (error) {
-      setUserRegisteredEvents([]);
-    } finally {
-      setIsLoadingProfile(false);
+      console.error('Error loading registration data:', error);
     }
   };
 
   const handleCloseEventChecklist = () => {
     setShowEventChecklistModal(false);
+  };
+
+  const handleRemoveRegisteredEvent = async (eventToRemove: any) => {
+    if (!userProfileData.userId) {
+      alert('Please login to modify your events.');
+      return;
+    }
+
+    const confirmRemove = window.confirm('Do you want to remove this event from your registration?');
+    if (!confirmRemove) return;
+
+    try {
+      const removeName = eventToRemove.eventName || eventToRemove.Event || eventToRemove.name;
+
+      const remainingEvents = myEvents.filter((e: any) => {
+        const name = e.eventName || e.Event || e.name;
+        return name !== removeName;
+      });
+
+      const response = await fetch(`${API_BASE_URL}/save-events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userProfileData.userId,
+          events: remainingEvents,
+        }),
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to remove event');
+      }
+
+      setMyEvents(remainingEvents as any);
+      setUserRegisteredEvents(remainingEvents as any);
+      alert('Event removed successfully.');
+    } catch (error) {
+      console.error('Error removing event:', error);
+      alert('Failed to remove event. Please try again.');
+    }
   };
 
   const handleToggleEventSelection = (eventId: string) => {
@@ -2451,8 +2559,8 @@ const Dashboard: React.FC = () => {
         `}</style>
       </section>
 
-      {/* The Icon Component - Fixed position flower - Hide in Gallery and Throwback sections */}
-      {!visibleSections.has('throwback') && !visibleSections.has('throwbacks') && <AnimatedIcon />}
+      {/* The Icon Component - Fixed position flower - Hide after about-theme section */}
+      {!visibleSections.has('throwbacks') && !visibleSections.has('throwback') && <AnimatedIcon />}
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
@@ -3705,7 +3813,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
-                <h2>MEN'S INDIVIDUAL & INDOOR SPORTS</h2>
+                <h2>TEAM EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
@@ -3762,7 +3870,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
-                <h2>WOMEN'S INDIVIDUAL & INDOOR SPORTS</h2>
+                <h2>TEAM EVENTS </h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
@@ -5179,6 +5287,7 @@ const Dashboard: React.FC = () => {
         isSubmitting={isSubmitting}
         submitMessage={submitMessage}
         onLoginClick={() => { setShowSignupModal(false); setShowLoginModal(true); }}
+        onOtherSelected={(isOther) => setIsOtherCollege(isOther)}
       />
 
       {/* Sub-Modal for Menu Categories */}
@@ -5774,11 +5883,11 @@ const Dashboard: React.FC = () => {
                     overflowWrap: 'break-word'
                   }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: window.innerWidth <= 640 ? '0.6rem' : '0.75rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Registration Number</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Registration Number</span>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                           <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>
-                            {window.innerWidth <= 640 ? '' : ': '}{userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
+                            : {userProfileData?.registerId || <span style={{ color: '#fbbf24' }}>Not Provided</span>}
                           </span>
                           {!userProfileData?.registerId && (
                             <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontStyle: 'italic' }}>
@@ -5788,81 +5897,51 @@ const Dashboard: React.FC = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Mahotsav ID</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.userId || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Mahotsav ID</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.userId || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Name</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.name || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Name</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'uppercase', wordBreak: 'break-word' }}>: {userProfileData?.name || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Email</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-all' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.email || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Email</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-all' }}>: {userProfileData?.email || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Gender</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.gender || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Gender</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', textTransform: 'capitalize', wordBreak: 'break-word' }}>: {userProfileData?.gender || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>DOB</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.dateOfBirth || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>DOB</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.dateOfBirth || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>College</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.college || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>College</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.college || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Branch</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.branch || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Branch</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.branch || 'N/A'}</span>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row' }}>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? 'auto' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Phone</span>
-                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>{window.innerWidth <= 640 ? '' : ': '}{userProfileData?.phone || 'N/A'}</span>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Phone</span>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Event Details Section with Button on Right */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexDirection: window.innerWidth <= 640 ? 'column' : 'row', gap: window.innerWidth <= 640 ? '1rem' : 0 }}>
+                  {/* Event Details Section (button removed as requested) */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <h2 style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '1.25rem' : '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
-                    <button
-                      onClick={() => {
-                        setShowProfileModal(false);
-                        // Navigate to Events section instead of showing modal
-                        const eventsSection = document.getElementById('events-info');
-                        if (eventsSection) {
-                          eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }}
-                      style={{
-                        padding: window.innerWidth <= 640 ? '0.6rem 1.5rem' : '0.75rem 2rem',
-                        background: '#ec09bbe6',
-                        color: 'white',
-                        fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
-                        fontWeight: 'bold',
-                        borderRadius: '0.375rem',
-                        border: 'none',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                        textTransform: 'uppercase'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = '#ec09bbe6';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#ec09bbe6';
-                      }}
-                    >
-                      EDIT/REGISTER
-                    </button>
                   </div>
 
                   {/* Events Count Box */}
@@ -5917,13 +5996,13 @@ const Dashboard: React.FC = () => {
                                 gap: '0.5rem'
                               }}
                               onMouseOver={(e) => {
-                                e.currentTarget.style.background = '#059669';
+                                e.currentTarget.style.background = '#ef0ebeff';
                               }}
                               onMouseOut={(e) => {
-                                e.currentTarget.style.background = '#10b981';
+                                e.currentTarget.style.background = '#f7ef0fff';
                               }}
                             >
-                              🖨️ Print
+                               Print
                             </button>
                           </div>
                           <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -5940,25 +6019,43 @@ const Dashboard: React.FC = () => {
                                   gap: '0.25rem'
                                 }}
                               >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
                                   <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
                                     {event.eventName || (event as any).Event || (event as any).name || 'Event'}
                                   </span>
-                                  {event.eventType && (
-                                    <span
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    {event.eventType && (
+                                      <span
+                                        style={{
+                                          background: event.eventType === 'sports' ? '#7401a5ff' : '#ec4899',
+                                          color: 'white',
+                                          padding: '0.2rem 0.6rem',
+                                          borderRadius: '999px',
+                                          fontSize: '0.7rem',
+                                          fontWeight: 600,
+                                          textTransform: 'uppercase'
+                                        }}
+                                      >
+                                        {event.eventType}
+                                      </span>
+                                    )}
+                                    <button
+                                      type="button"
+                                      onClick={() => handleRemoveRegisteredEvent(event)}
                                       style={{
-                                        background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
-                                        color: 'white',
                                         padding: '0.2rem 0.6rem',
-                                        borderRadius: '999px',
                                         fontSize: '0.7rem',
-                                        fontWeight: 600,
-                                        textTransform: 'uppercase'
+                                        borderRadius: '999px',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        background: '#dc2626',
+                                        color: 'white',
+                                        fontWeight: 600
                                       }}
                                     >
-                                      {event.eventType}
-                                    </span>
-                                  )}
+                                      Remove
+                                    </button>
+                                  </div>
                                 </div>
                                 {event.category && (
                                   <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
@@ -5973,9 +6070,6 @@ const Dashboard: React.FC = () => {
                               </div>
                             ))}
                           </div>
-                          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', textAlign: 'center', marginTop: '1rem' }}>
-                            Use the <strong>EDIT/REGISTER</strong> button above to modify your events.
-                          </p>
                         </>
                       ) : (
                         <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
@@ -6645,136 +6739,142 @@ const Dashboard: React.FC = () => {
                     Sports Events
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
-                    {registrationEvents.Sports.map((event: any, index: number) => {
-                      if (!event || !event.Event) return null;
-
-                      const eventId = `sport-${index}`;
-                      const eventName = event.Event;
-                      const category = event.Category || '';
-                      const isHeader = category && category.trim() !== '';
-
-                      // Gender-based filtering
-                      const userGender = userProfileData.gender?.toLowerCase();
-                      if (userGender && category) {
-                        const categoryLower = category.toLowerCase();
-                        if (userGender === 'male' && categoryLower.includes('women')) {
-                          return null; // Skip women's events for male users
+                    {(() => {
+                      // Group sports events by category
+                      const groupedByCategory: { [key: string]: any[] } = {};
+                      let currentCategory = 'Other';
+                      
+                      registrationEvents.Sports.forEach((event: any) => {
+                        if (!event || !event.Event) return;
+                        
+                        // Update category if present
+                        if (event.Category) {
+                          currentCategory = event.Category;
                         }
-                        if (userGender === 'female' && categoryLower.includes('men') && !categoryLower.includes('women')) {
-                          return null; // Skip men's events for female users
+                        
+                        // Gender filtering
+                        const userGender = userProfileData.gender?.toLowerCase();
+                        const categoryLower = currentCategory.toLowerCase();
+                        
+                        if (userGender) {
+                          if (userGender === 'male' && (categoryLower.includes('women') || categoryLower.includes('female'))) return;
+                          if (userGender === 'female' && (categoryLower.includes('men') && !categoryLower.includes('women'))) return;
                         }
-                      }
+                        
+                        if (!groupedByCategory[currentCategory]) {
+                          groupedByCategory[currentCategory] = [];
+                        }
+                        groupedByCategory[currentCategory].push({ ...event, category: currentCategory });
+                      });
 
-                      if (isHeader) {
-                        return (
+                      // Render grouped events
+                      return Object.entries(groupedByCategory).map(([category, events]) => (
+                        <div key={category}>
+                          {/* Category Header */}
                           <div
-                            key={eventId}
                             style={{
                               color: '#fbbf24',
                               fontWeight: 'bold',
                               fontSize: '1.05rem',
                               marginTop: '0.75rem',
+                              marginBottom: '0.5rem',
                               paddingLeft: '0.25rem'
                             }}
                           >
                             {category}
                           </div>
-                        );
-                      }
+                          
+                          {/* Events in this category */}
+                          {events.map((event: any, index: number) => {
+                            const eventId = `sport-${index}`;
+                            const eventName = event.Event;
 
-                      const disabled = isEventAlreadySaved(eventName);
-                      const constraintDisabled = !disabled && (window as any).__hasParaSelected;
-                      const finalDisabled = disabled || constraintDisabled;
-                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
+                            const alreadySaved = isEventAlreadySaved(eventName);
+                            const constraintDisabled = (window as any).__hasParaSelected;
+                            const finalDisabled = constraintDisabled;
+                            const isChecked = selectedRegistrationEvents.has(eventId);
 
-                      return (
-                        <label
-                          key={eventId}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            background: finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)',
-                            padding: '0.6rem 0.85rem',
-                            borderRadius: '0.5rem',
-                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                            transition: 'all 0.3s',
-                            border: '1px solid rgba(255, 255, 255, 0.18)',
-                            opacity: constraintDisabled ? 0.5 : 1
-                          }}
-                          onMouseOver={(e) => {
-                            if (!finalDisabled) {
-                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
-                            }
-                          }}
-                          onMouseOut={(e) => {
-                            e.currentTarget.style.background = finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)';
-                          }}
-                          onClick={(e) => {
-                            if (constraintDisabled && !disabled) {
-                              e.preventDefault();
-                              alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
-                            }
-                          }}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            disabled={finalDisabled}
-                            onChange={() => {
-                              if (finalDisabled) return;
-
-                              setSelectedRegistrationEvents((prev) => {
-                                const newSet = new Set(prev);
-                                if (newSet.has(eventId)) {
-                                  newSet.delete(eventId);
-                                } else {
-                                  newSet.add(eventId);
-                                }
-                                return newSet;
-                              });
-                            }}
-                            style={{
-                              width: '18px',
-                              height: '18px',
-                              marginRight: '0.75rem',
-                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                              accentColor: '#fbbf24'
-                            }}
-                          />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                              {eventName}
-                            </div>
-                            {category && !isHeader && (
-                              <div
+                            return (
+                              <label
+                                key={eventId}
                                 style={{
-                                  color: 'rgba(255, 255, 255, 0.7)',
-                                  fontSize: '0.8rem',
-                                  marginTop: '0.1rem'
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  background: finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)',
+                                  padding: '0.6rem 0.85rem',
+                                  borderRadius: '0.5rem',
+                                  cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                  transition: 'all 0.3s',
+                                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                                  opacity: constraintDisabled ? 0.5 : 1,
+                                  marginBottom: '0.5rem'
+                                }}
+                                onMouseOver={(e) => {
+                                  if (!finalDisabled) {
+                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                                  }
+                                }}
+                                onMouseOut={(e) => {
+                                  e.currentTarget.style.background = finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)';
+                                }}
+                                onClick={(e) => {
+                                  if (constraintDisabled) {
+                                    e.preventDefault();
+                                    alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                  }
                                 }}
                               >
-                                {category}
-                              </div>
-                            )}
-                            {disabled && (
-                              <div
-                                style={{
-                                  color: 'rgba(248, 250, 252, 0.8)',
-                                  fontSize: '0.75rem',
-                                  marginTop: '0.1rem'
-                                }}
-                              >
-                                Already registered
-                              </div>
-                            )}
-                          </div>
-                        </label>
-                      );
-                    })}
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  disabled={finalDisabled}
+                                  onChange={() => {
+                                    if (finalDisabled) return;
+
+                                    setSelectedRegistrationEvents((prev) => {
+                                      const newSet = new Set(prev);
+                                      if (newSet.has(eventId)) {
+                                        newSet.delete(eventId);
+                                      } else {
+                                        newSet.add(eventId);
+                                      }
+                                      return newSet;
+                                    });
+                                  }}
+                                  style={{
+                                    width: '18px',
+                                    height: '18px',
+                                    marginRight: '0.75rem',
+                                    cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                    accentColor: '#fbbf24'
+                                  }}
+                                />
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                                    {eventName}
+                                  </div>
+                                  {alreadySaved && (
+                                    <div
+                                      style={{
+                                        color: 'rgba(248, 250, 252, 0.8)',
+                                        fontSize: '0.75rem',
+                                        marginTop: '0.1rem'
+                                      }}
+                                    >
+                                      Already registered
+                                    </div>
+                                  )}
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               )}
@@ -6800,147 +6900,148 @@ const Dashboard: React.FC = () => {
                     Culturals Events
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
-                    {registrationEvents.Culturals.map((event: any, index: number) => {
-                      // Skip null entries and header row
-                      if (!event || event['Prize money for Performing arts, Visual arts, Fashion'] === 'Event') return null;
-
-                      const eventId = `cultural-${index}`;
-                      const eventName = event['Prize money for Performing arts, Visual arts, Fashion'];
-                      const category = event['5'] || '';
-
-                      // Skip if no event name
-                      if (!eventName) return null;
-
-                      const isHeader = category && category.trim() !== '' && !event.Column1;
-
-                      // Gender-based filtering for culturals (most are mixed, but apply if gender-specific)
-                      const userGender = userProfileData.gender?.toLowerCase();
-                      if (userGender && (category || eventName)) {
-                        const textToCheck = (category + ' ' + eventName).toLowerCase();
-                        if (userGender === 'male' && textToCheck.includes('ms.')) {
-                          return null; // Skip Ms. Mahotsav for male users
+                    {(() => {
+                      // Group cultural events by category
+                      const groupedByCategory: { [key: string]: any[] } = {};
+                      let currentCategory = 'Other';
+                      
+                      registrationEvents.Culturals.forEach((event: any) => {
+                        if (!event) return;
+                        
+                        // Skip header rows
+                        if (event.Column1 === 'S.No') return;
+                        
+                        // Get event name from the correct field
+                        const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                        if (!eventName) return;
+                        
+                        // Update category if present
+                        if (event['5']) {
+                          currentCategory = event['5'];
+                        } else if (event.Category) {
+                          currentCategory = event.Category;
                         }
-                        if (userGender === 'female' && textToCheck.includes('mr.') && !textToCheck.includes('mrs')) {
-                          return null; // Skip Mr. Mahotsav for female users
+                        
+                        if (!groupedByCategory[currentCategory]) {
+                          groupedByCategory[currentCategory] = [];
                         }
-                      }
+                        groupedByCategory[currentCategory].push({ Event: eventName, category: currentCategory });
+                      });
 
-                      if (isHeader) {
-                        return (
+                      // Render grouped events
+                      return Object.entries(groupedByCategory).map(([category, events]) => (
+                        <div key={category}>
+                          {/* Category Header */}
                           <div
-                            key={eventId}
                             style={{
                               color: '#fbbf24',
                               fontWeight: 'bold',
                               fontSize: '1.05rem',
                               marginTop: '0.75rem',
+                              marginBottom: '0.5rem',
                               paddingLeft: '0.25rem'
                             }}
                           >
                             {category}
                           </div>
-                        );
-                      }
+                          
+                          {/* Events in this category */}
+                          {events.map((event: any, index: number) => {
+                            const eventId = `cultural-${index}`;
+                            const eventName = event.Event;
 
-                      const disabled = isEventAlreadySaved(eventName);
-                      const constraintDisabled = !disabled && (window as any).__hasParaSelected;
-                      const finalDisabled = disabled || constraintDisabled;
-                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
+                            const alreadySaved = isEventAlreadySaved(eventName);
+                            const constraintDisabled = (window as any).__hasParaSelected;
+                            const finalDisabled = constraintDisabled;
+                            const isChecked = selectedRegistrationEvents.has(eventId);
 
-                      return (
-                        <label
-                          key={eventId}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            background: finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)',
-                            padding: '0.6rem 0.85rem',
-                            borderRadius: '0.5rem',
-                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                            transition: 'all 0.3s',
-                            border: '1px solid rgba(255, 255, 255, 0.18)',
-                            opacity: constraintDisabled ? 0.5 : 1
-                          }}
-                          onMouseOver={(e) => {
-                            if (!finalDisabled) {
-                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
-                            }
-                          }}
-                          onMouseOut={(e) => {
-                            e.currentTarget.style.background = finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)';
-                          }}
-                          onClick={(e) => {
-                            if (constraintDisabled && !disabled) {
-                              e.preventDefault();
-                              alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
-                            }
-                          }}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            disabled={finalDisabled}
-                            onChange={() => {
-                              if (finalDisabled) return;
-
-                              setSelectedRegistrationEvents((prev) => {
-                                const newSet = new Set(prev);
-                                if (newSet.has(eventId)) {
-                                  newSet.delete(eventId);
-                                } else {
-                                  newSet.add(eventId);
-                                }
-                                return newSet;
-                              });
-                            }}
-                            style={{
-                              width: '18px',
-                              height: '18px',
-                              marginRight: '0.75rem',
-                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                              accentColor: '#fbbf24'
-                            }}
-                          />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                              {eventName}
-                            </div>
-                            {category && !isHeader && (
-                              <div
+                            return (
+                              <label
+                                key={eventId}
                                 style={{
-                                  color: 'rgba(255, 255, 255, 0.7)',
-                                  fontSize: '0.8rem',
-                                  marginTop: '0.1rem'
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  background: finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)',
+                                  padding: '0.6rem 0.85rem',
+                                  borderRadius: '0.5rem',
+                                  cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                  transition: 'all 0.3s',
+                                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                                  opacity: constraintDisabled ? 0.5 : 1,
+                                  marginBottom: '0.5rem'
+                                }}
+                                onMouseOver={(e) => {
+                                  if (!finalDisabled) {
+                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                                  }
+                                }}
+                                onMouseOut={(e) => {
+                                  e.currentTarget.style.background = finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)';
+                                }}
+                                onClick={(e) => {
+                                  if (constraintDisabled) {
+                                    e.preventDefault();
+                                    alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                  }
                                 }}
                               >
-                                {category}
-                              </div>
-                            )}
-                            {disabled && (
-                              <div
-                                style={{
-                                  color: 'rgba(248, 250, 252, 0.8)',
-                                  fontSize: '0.75rem',
-                                  marginTop: '0.1rem'
-                                }}
-                              >
-                                Already registered
-                              </div>
-                            )}
-                          </div>
-                        </label>
-                      );
-                    })}
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  disabled={finalDisabled}
+                                  onChange={() => {
+                                    if (finalDisabled) return;
+
+                                    setSelectedRegistrationEvents((prev) => {
+                                      const newSet = new Set(prev);
+                                      if (newSet.has(eventId)) {
+                                        newSet.delete(eventId);
+                                      } else {
+                                        newSet.add(eventId);
+                                      }
+                                      return newSet;
+                                    });
+                                  }}
+                                  style={{
+                                    width: '18px',
+                                    height: '18px',
+                                    marginRight: '0.75rem',
+                                    cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                    accentColor: '#fbbf24'
+                                  }}
+                                />
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                                    {eventName}
+                                  </div>
+                                  {alreadySaved && (
+                                    <div
+                                      style={{
+                                        color: 'rgba(248, 250, 252, 0.8)',
+                                        fontSize: '0.75rem',
+                                        marginTop: '0.1rem'
+                                      }}
+                                    >
+                                      Already registered
+                                    </div>
+                                  )}
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               )}
 
               {/* Para Sports Events Card */}
-              {getFilteredParaSportsEvents().length > 0 && (
+              {registrationEvents.ParaSports && registrationEvents.ParaSports.length > 0 && (
                 <div
                   style={{
                     background: 'rgba(15, 23, 42, 0.4)',
@@ -6960,105 +7061,143 @@ const Dashboard: React.FC = () => {
                     Para Sports
                   </h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
-                    {getFilteredParaSportsEvents().map((event, index) => {
-                      const eventId = `para-${index}`;
-                      const eventName = event.eventName;
-                      const category = event.category || '';
+                    {(() => {
+                      // Group para sports events by category
+                      const groupedByCategory: { [key: string]: any[] } = {};
+                      let currentCategory = 'Other';
+                      
+                      registrationEvents.ParaSports.forEach((event: any) => {
+                        if (!event || !event.Event) return;
+                        
+                        // Update category if present
+                        if (event.Category) {
+                          currentCategory = event.Category;
+                        }
+                        
+                        // Gender filtering
+                        const userGender = userProfileData.gender?.toLowerCase();
+                        const categoryLower = currentCategory.toLowerCase();
+                        
+                        if (userGender) {
+                          if (userGender === 'male' && (categoryLower.includes('women') || categoryLower.includes('female'))) return;
+                          if (userGender === 'female' && (categoryLower.includes('men') && !categoryLower.includes('women'))) return;
+                        }
+                        
+                        if (!groupedByCategory[currentCategory]) {
+                          groupedByCategory[currentCategory] = [];
+                        }
+                        groupedByCategory[currentCategory].push({ ...event, category: currentCategory });
+                      });
 
-                      const disabled = isEventAlreadySaved(eventName);
-                      const hasNormalSelected = (window as any).__hasNormalSelected;
-                      const constraintDisabled = !disabled && hasNormalSelected;
-                      const finalDisabled = disabled || constraintDisabled;
-                      const isChecked = disabled || selectedRegistrationEvents.has(eventId);
-
-                      return (
-                        <label
-                          key={eventId}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            background: finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)',
-                            padding: '0.6rem 0.85rem',
-                            borderRadius: '0.5rem',
-                            cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                            transition: 'all 0.3s',
-                            border: '1px solid rgba(255, 255, 255, 0.18)',
-                            opacity: constraintDisabled ? 0.5 : 1
-                          }}
-                          onMouseOver={(e) => {
-                            if (!finalDisabled) {
-                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
-                            }
-                          }}
-                          onMouseOut={(e) => {
-                            e.currentTarget.style.background = finalDisabled
-                              ? 'rgba(75, 85, 99, 0.5)'
-                              : 'rgba(255, 255, 255, 0.08)';
-                          }}
-                          onClick={(e) => {
-                            if (constraintDisabled && !disabled) {
-                              e.preventDefault();
-                              alert('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
-                            }
-                          }}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            disabled={finalDisabled}
-                            onChange={() => {
-                              if (finalDisabled) return;
-
-                              setSelectedRegistrationEvents((prev) => {
-                                const newSet = new Set(prev);
-                                if (newSet.has(eventId)) {
-                                  newSet.delete(eventId);
-                                } else {
-                                  newSet.add(eventId);
-                                }
-                                return newSet;
-                              });
-                            }}
+                      // Render grouped events
+                      return Object.entries(groupedByCategory).map(([category, events]) => (
+                        <div key={category}>
+                          {/* Category Header */}
+                          <div
                             style={{
-                              width: '18px',
-                              height: '18px',
-                              marginRight: '0.75rem',
-                              cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                              accentColor: '#fbbf24'
+                              color: '#fbbf24',
+                              fontWeight: 'bold',
+                              fontSize: '1.05rem',
+                              marginTop: '0.75rem',
+                              marginBottom: '0.5rem',
+                              paddingLeft: '0.25rem'
                             }}
-                          />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                              {eventName}
-                            </div>
-                            {category && (
-                              <div
-                                style={{
-                                  color: 'rgba(255, 255, 255, 0.7)',
-                                  fontSize: '0.8rem',
-                                  marginTop: '0.1rem'
-                                }}
-                              >
-                                {category}
-                              </div>
-                            )}
-                            {disabled && (
-                              <div
-                                style={{
-                                  color: 'rgba(248, 250, 252, 0.8)',
-                                  fontSize: '0.75rem',
-                                  marginTop: '0.1rem'
-                                }}
-                              >
-                                Already registered
-                              </div>
-                            )}
+                          >
+                            {category}
                           </div>
-                        </label>
-                      );
-                    })}
+                          
+                          {/* Events in this category */}
+                          {events.map((event: any, index: number) => {
+                            const eventId = `para-${index}`;
+                            const eventName = event.Event;
+
+                            const alreadySaved = isEventAlreadySaved(eventName);
+                            const hasNormalSelected = (window as any).__hasNormalSelected;
+                            const constraintDisabled = hasNormalSelected;
+                            const finalDisabled = constraintDisabled;
+                            const isChecked = selectedRegistrationEvents.has(eventId);
+
+                            return (
+                              <label
+                                key={eventId}
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  background: finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)',
+                                  padding: '0.6rem 0.85rem',
+                                  borderRadius: '0.5rem',
+                                  cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                  transition: 'all 0.3s',
+                                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                                  opacity: constraintDisabled ? 0.5 : 1,
+                                  marginBottom: '0.5rem'
+                                }}
+                                onMouseOver={(e) => {
+                                  if (!finalDisabled) {
+                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                                  }
+                                }}
+                                onMouseOut={(e) => {
+                                  e.currentTarget.style.background = finalDisabled
+                                    ? 'rgba(75, 85, 99, 0.5)'
+                                    : 'rgba(255, 255, 255, 0.08)';
+                                }}
+                                onClick={(e) => {
+                                  if (constraintDisabled) {
+                                    e.preventDefault();
+                                    alert('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
+                                  }
+                                }}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  disabled={finalDisabled}
+                                  onChange={() => {
+                                    if (finalDisabled) return;
+
+                                    setSelectedRegistrationEvents((prev) => {
+                                      const newSet = new Set(prev);
+                                      if (newSet.has(eventId)) {
+                                        newSet.delete(eventId);
+                                      } else {
+                                        newSet.add(eventId);
+                                      }
+                                      return newSet;
+                                    });
+                                  }}
+                                  style={{
+                                    width: '18px',
+                                    height: '18px',
+                                    marginRight: '0.75rem',
+                                    cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                    accentColor: '#fbbf24'
+                                  }}
+                                />
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                                    {eventName}
+                                  </div>
+                                  {alreadySaved && (
+                                    <div
+                                      style={{
+                                        color: 'rgba(248, 250, 252, 0.8)',
+                                        fontSize: '0.75rem',
+                                        marginTop: '0.1rem'
+                                      }}
+                                    >
+                                      Already registered
+                                    </div>
+                                  )}
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               )}

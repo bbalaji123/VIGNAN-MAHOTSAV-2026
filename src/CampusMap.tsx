@@ -67,16 +67,18 @@ const CampusMap: React.FC = () => {
       </style>
 
       {/* Back Button */}
-      <BackButton onClick={handleBackClick} />
+      <div className="absolute top-4 left-4 z-50 md:static">
+        <BackButton onClick={handleBackClick} />
+      </div>
 
       {/* Main Content */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-24 pb-10 
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 md:pt-24 pb-10 
                       opacity-0 animate-[fadeInUp_0.8s_ease-out_0.05s_forwards] z-[2]">
 
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-10 mt-16 md:mt-0">
           <h1
-            className="campus-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
+            className="campus-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold pt-4 md:pt-0"
             style={{
               background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
               WebkitBackgroundClip: 'text',
@@ -98,7 +100,8 @@ const CampusMap: React.FC = () => {
           <div
             className="grid grid-cols-1 md:grid-cols-2 gap-6
                        place-items-center
-                       min-h-[460px] md:min-h-[560px]"
+                       min-h-[460px] md:min-h-[560px] style={{marginTop: '20px'}}"
+            style={{marginTop: '40px'}}
           >
             {/* LEFT: Campus Image */}
             <img

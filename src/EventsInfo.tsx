@@ -745,6 +745,21 @@ const EventsInfo: React.FC = () => {
             white-space: nowrap;
           }
 
+          /* Mobile heading responsive - force 2 lines for long text */
+          @media (max-width: 768px) {
+            .events-mobile-heading {
+              white-space: normal !important;
+              word-wrap: break-word !important;
+              overflow-wrap: break-word !important;
+              max-width: 90% !important;
+              font-size: clamp(1.5rem, 5vw, 2rem) !important;
+              line-height: 1.3 !important;
+              padding: 0 1rem !important;
+              text-align: center !important;
+              margin: 1rem auto !important;
+            }
+          }
+
           .events-back-button-container {
             margin-top: -6rem;
           }
@@ -772,6 +787,23 @@ const EventsInfo: React.FC = () => {
           .category-card-title {
             font-family: 'Aladin, cursive';
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+          }
+
+          /* Mobile-specific heading responsiveness */
+          @media (max-width: 768px) {
+            .category-card-title {
+              font-size: clamp(1rem, 4.5vw, 1.25rem) !important;
+              line-height: 1.4 !important;
+              max-width: 100% !important;
+              word-wrap: break-word !important;
+              overflow-wrap: break-word !important;
+              hyphens: auto !important;
+              padding: 0 1rem !important;
+              text-align: center !important;
+              display: block !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+            }
           }
 
           /* Sub-category Cards (with background image) */
@@ -901,7 +933,7 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header: Logo + Title + Back Button */}
-        <div className="w-full px-8 relative z-20" style={{ paddingTop: "10px" }}>
+        <div className="w-full px-8 relative z-20" style={{ paddingTop: window.innerWidth <= 768 ? "0px" : "10px" }}>
           {/* Desktop layout - Logo left, Title center, Back below logo */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start">
             {/* Left column: Logo and Back button stacked */}
@@ -978,7 +1010,7 @@ const EventsInfo: React.FC = () => {
           </div>
 
           {/* Mobile layout - Logo and Back button centered, stacked */}
-          <div className="events-mobile-header md:hidden flex flex-col items-center pb-1 w-full relative">
+          <div className="events-mobile-header md:hidden flex flex-col items-center w-full relative" style={{ paddingBottom: 0 }}>
             <div className="absolute left-4 top-0">
               <BackButton
                 className="!static !top-auto !left-auto"
@@ -1018,7 +1050,7 @@ const EventsInfo: React.FC = () => {
               alt="Vignan Mahotsav"
               className="events-logo events-mobile-logo mx-auto"
             />
-            <h1 className="events-title events-page-heading events-mobile-heading text-center w-full">
+            <h1 className="events-title events-page-heading events-mobile-heading">
               {showIndoorSports ? 'Indoor Sports' :
                 showWomensIndoorSports ? "Women's Indoor Sports" :
                   showMensTeamSports ? "Men's Team Field Sports" :
@@ -1042,7 +1074,7 @@ const EventsInfo: React.FC = () => {
         </div>
 
         {/* Main Cards Section */}
-        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-2 md:py-8" style={{ position: 'relative', zIndex: 10 }}>
+        <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 md:py-8" style={{ position: 'relative', zIndex: 10, paddingTop: window.innerWidth <= 768 ? '0px' : undefined, paddingBottom: window.innerWidth <= 768 ? '0px' : undefined }}>
           {!showSportsDetails && !showCulturals && !showRoboWarsGaming && !showIndoorSports && !showWomensIndoorSports && !showMensTeamSports && !showWomensTeamSports && !showParaCards && !showDance && !showMusic && !showTheatre && !showLiterature && !showVisualArts && !showFashionDesign && !showDigitalStorytelling && !showGaming && !showRoboGames && !showSpotLight && (
             <div className="w-full max-w-7xl mx-auto">
               {/* Three Cards - exact spacing from reference */}
@@ -1106,7 +1138,7 @@ const EventsInfo: React.FC = () => {
                       e.stopPropagation();
                       const link = document.createElement('a');
                       link.href = '/Mahostav Rules Book 2025.pdf';
-                      link.download = 'Mahostav Rules Book 2025.pdf';
+                      link.download = 'Mahostav Rules Book 2026.pdf';
                       link.click();
                     }}
                   >
@@ -1159,7 +1191,7 @@ const EventsInfo: React.FC = () => {
                     e.stopPropagation();
                     const link = document.createElement('a');
                     link.href = '/Mahostav Rules Book 2025.pdf';
-                    link.download = 'Mahostav Rules Book 2025.pdf';
+                    link.download = 'Mahostav Rules Book 2026.pdf';
                     link.click();
                   }}
                 >

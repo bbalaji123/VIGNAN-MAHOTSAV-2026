@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './gallery.css';
 
-/* ✅ Cloudinary Gallery Images */
 export const galleryImages: string[] = [
   'https://res.cloudinary.com/dctuev0mm/image/upload/v1766933328/DSC01155_yultaq.avif',
   'https://res.cloudinary.com/dctuev0mm/image/upload/v1766933328/DSC01072_xil4ty.avif',
@@ -23,18 +22,6 @@ export const galleryImages: string[] = [
   'https://res.cloudinary.com/dctuev0mm/image/upload/v1766932886/DSC00450_rqlgbm.avif'
 ];
 
-// Preload and cache images
-const imageCache = new Map<string, HTMLImageElement>();
-const preloadImages = (urls: string[]) => {
-  urls.forEach(url => {
-    if (!imageCache.has(url)) {
-      const img = new Image();
-      img.src = url;
-      imageCache.set(url, img);
-    }
-  });
-};
-
 interface GalleryProps {
   onPhotoClick: (row: number, index: number) => void;
   registerSection: (id: string, element: HTMLElement | null) => void;
@@ -43,51 +30,14 @@ interface GalleryProps {
 const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [animate, setAnimate] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const interactionTimer = useRef<number | null>(null);
 
-  // Preload images once on component mount
-  useEffect(() => {
-    const cachedImages = sessionStorage.getItem('galleryImagesLoaded');
-    if (!cachedImages) {
-      preloadImages(galleryImages);
-      sessionStorage.setItem('galleryImagesLoaded', 'true');
-    }
-    setImagesLoaded(true);
-  }, []);
-
-  /* ▶ Start animation only when section is visible */
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setAnimate(entry.isIntersecting),
       { threshold: 0.2 }
     );
-
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  /* ⏸ Pause animation on user interaction */
-  useEffect(() => {
-    const pauseAnimation = () => {
-      setAnimate(false);
-      if (interactionTimer.current) {
-        clearTimeout(interactionTimer.current);
-      }
-      interactionTimer.current = window.setTimeout(() => {
-        setAnimate(true);
-      }, 300);
-    };
-
-    window.addEventListener('scroll', pauseAnimation, { passive: true });
-    window.addEventListener('keydown', pauseAnimation);
-    window.addEventListener('pointerdown', pauseAnimation);
-
-    return () => {
-      window.removeEventListener('scroll', pauseAnimation);
-      window.removeEventListener('keydown', pauseAnimation);
-      window.removeEventListener('pointerdown', pauseAnimation);
-    };
   }, []);
 
   const rows = [
@@ -112,54 +62,20 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
           <div
             className={`scroll-row ${animate ? 'run' : 'paused'} row-${rowIndex}`}
           >
-            {/* Duplicate images for continuous scrolling */}
-            {[...row, ...row, ...row].map((img, index) => {
-              // Calculate the actual image index in the original row
-              const actualIndex = index % row.length;
-              
-              return (
-                <div
-                  key={`${img}-${index}`}
-                  className="throwback-card gallery-shimmer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    // Pause animation temporarily
-                    setAnimate(false);
-                    // Call the photo click handler with the actual index
-                    onPhotoClick(rowIndex, actualIndex);
-                    // Resume animation after a short delay
-                    setTimeout(() => setAnimate(true), 100);
-                  }}
-                  style={{
-                    cursor: 'pointer',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    pointerEvents: 'auto',
-                    zIndex: 2
-                  }}
-                >
-                  <img
-                    src={img}
-                    alt="gallery"
-                    loading={index < 6 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    width={280}
-                    height={180}
-                    style={{
-                      objectFit: 'cover',
-                      willChange: 'auto',
-                      pointerEvents: 'none'
-                    }}
-                    onLoad={(e) => {
-                      const card = e.currentTarget.parentElement;
-                      if (card) card.classList.add('loaded');
-                    }}
-                  />
-                  <div className="shimmer-overlay-gallery"></div>
-                </div>
-              );
-            })}
+            {[...row, ...row, ...row].map((img, index) => (
+              <div
+                key={`${img}-${index}`}
+                className="throwback-card"
+                onClick={() => onPhotoClick(rowIndex, index % row.length)}
+              >
+                <img
+                  src={img}
+                  alt="gallery"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
           </div>
         </div>
       ))}

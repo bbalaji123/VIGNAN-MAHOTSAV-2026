@@ -8,6 +8,62 @@ import BackButton from './components/BackButton';
 const Hospitality: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'instructions' | 'howToReach' | 'accommodation' | 'contacts' | 'faqs'>('instructions');
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  const faqs = [
+    {
+      question: "From when can I avail accommodation?",
+      answer: "Accommodation can be availed from 4th February, 2026 - 10 pm onwards."
+    },
+    {
+      question: "What documents and proofs are required while coming to Mahotsav?",
+      answer: "It is mandatory to bring the College ID card and bonafide certificate when you arrive at registration desk at Vignan University."
+    },
+    {
+      question: "Does the accommodation include food?",
+      answer: "No, but you can make use of the canteens/food stalls available during Mahotsav at your own expense. Whereas, for Sports & Games participants, Lunch will be provided"
+    },
+    {
+      question: "When can I come for registration and accommodation?",
+      answer: "Accommodation and registration services can be availed from 4th Feb 2026, starting at 10 PM. The Registration and Hospitality desk will operate 24/7 until 5th Feb 2025. Please note that registrations and check-outs are paused during Inaugural and Valedictory functions, so kindly plan accordingly."
+    },
+    {
+      question: "Can I vacate earlier than the registered date?",
+      answer: "Yes, however you have to inform to the coordinator regarding your check out."
+    },
+    {
+      question: "Whom and How should I approach for accommodation on arrival?",
+      answer: "You have to report at the hospitality desk. You can contact Helpline numbers for any further help.\nHelpline No: 88854 76252"
+    },
+    {
+      question: "Will Mahotsav guarantee security for my luggage and stuff?",
+      answer: "The attendees are responsible for managing their own belongings, Mahotsav does not guarantee security of luggage or any personal belongings."
+    },
+    {
+      question: "Can I check out later than my scheduled time of checkout?",
+      answer: "You have to checkout at your given time only."
+    },
+    {
+      question: "Are Male and Female students provided with the same accommodations?",
+      answer: "No, male and female students would not be provided with the same accommodation."
+    },
+    {
+      question: "Can I expect to private room allotted to me?",
+      answer: "No, common halls will be arranged with decent washroom facilities."
+    },
+    {
+      question: "Is there any curfew for students?",
+      answer: "Yes, there will be a curfew for girl students. It will be informed during the allocation of room."
+    },
+    {
+      question: "What about the food provision inside the college?",
+      answer: "You can make use of the canteens/food stalls available during Mahotsav at your own expense."
+    }
+  ];
 
   const handleBackClick = () => {
     navigate('/')
@@ -16,7 +72,7 @@ const Hospitality: React.FC = () => {
   return (
     <div className="hospitality-bg min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-[1]">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -367,41 +423,84 @@ const Hospitality: React.FC = () => {
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FAQ's</h2>
             
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>1 From when can I avail accommodation?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">Accommodation can be availed from 4th February, 2026 - 10 pm onwards.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>2 What documents and proofs are required while coming to Mahotsav?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">It is mandatory to bring the College ID card and bonafide certificate when you arrive at registration desk at Vignan University.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>3 Does the accommodation include food?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">No, but you can make use of the canteens/food stalls available during Mahotsav at your own expense. Whereas, for Sports & Games participants, Lunch will be provided</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>4 When can I come for registration and accommodation?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">Accommodation and registration services can be availed from 4th Feb 2026, starting at 10 PM. The Registration and Hospitality desk will operate 24/7 until 5th Feb 2025. Please note that registrations and check-outs are paused during Inaugural and Valedictory functions, so kindly plan accordingly.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>5 Can I vacate earlier than the registered date?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">Yes, however you have to inform to the coordinator regarding your check out.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>6 Whom and How should I approach for accommodation on arrival?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">You have to report at the hospitality desk. You can contact Helpline numbers for any further help.<br />Helpline No: 88854 76252</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>7 Will Mahotsav guarantee security for my luggage and stuff?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">The attendees are responsible for managing their own belongings, Mahotsav does not guarantee security of luggage or any personal belongings.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>8 Can I check out later than my scheduled time of checkout?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">You have to checkout at your given time only.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>9 Are Male and Female students provided with the same accommodations?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">No, male and female students would not be provided with the same accommodation.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>10 Can I expect to private room allotted to me?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">No, common halls will be arranged with decent washroom facilities.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>11 Is there any curfew for students?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">Yes, there will be a curfew for girl students. It will be informed during the allocation of room.</p>
-
-            <p className="hospitality-content mb-2 text-sm sm:text-base"><strong>12 What about the food provision inside the college?</strong></p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">You can make use of the canteens/food stalls available during Mahotsav at your own expense.</p>
+            <div className="faq-container" style={{ marginTop: '2rem' }}>
+              {faqs.map((faq, index) => (
+                <div 
+                  key={index}
+                  style={{
+                    marginBottom: '1rem',
+                    border: '2px solid rgba(253, 238, 113, 0.3)',
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(10px)'
+                  }}
+                >
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    style={{
+                      width: '100%',
+                      padding: '1.25rem',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      background: openFAQ === index ? 'rgba(253, 238, 113, 0.15)' : 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      textAlign: 'left'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (openFAQ !== index) {
+                        e.currentTarget.style.background = 'rgba(253, 238, 113, 0.08)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (openFAQ !== index) {
+                        e.currentTarget.style.background = 'transparent';
+                      }
+                    }}
+                  >
+                    <span style={{
+                      color: '#fdee71',
+                      fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+                      fontWeight: '600',
+                      paddingRight: '1rem'
+                    }}>
+                      {index + 1}. {faq.question}
+                    </span>
+                    <span style={{
+                      color: '#fdee71',
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      transform: openFAQ === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease',
+                      flexShrink: 0
+                    }}>
+                      ▼
+                    </span>
+                  </button>
+                  
+                  <div style={{
+                    maxHeight: openFAQ === index ? '500px' : '0',
+                    overflow: 'hidden',
+                    transition: 'max-height 0.4s ease',
+                    background: 'rgba(0, 0, 0, 0.2)'
+                  }}>
+                    <p style={{
+                      padding: '1.25rem',
+                      color: '#f5e210',
+                      fontSize: 'clamp(0.85rem, 1.8vw, 1rem)',
+                      lineHeight: '1.7',
+                      margin: 0,
+                      whiteSpace: 'pre-line'
+                    }}>
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

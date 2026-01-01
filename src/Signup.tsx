@@ -19,6 +19,7 @@ interface SignupProps {
   isSubmitting: boolean;
   submitMessage: { type: 'success' | 'error'; text: string } | null;
   onLoginClick: () => void;
+  onOtherSelected?: (isOther: boolean) => void;
 }
 
 const Signup: React.FC<SignupProps> = ({
@@ -34,7 +35,8 @@ const Signup: React.FC<SignupProps> = ({
   onPrevStep,
   isSubmitting,
   submitMessage,
-  onLoginClick
+  onLoginClick,
+  onOtherSelected
 }) => {
   if (!showSignupModal) return null;
 
@@ -137,6 +139,7 @@ const Signup: React.FC<SignupProps> = ({
               signupFormData={signupFormData}
               onInputChange={onInputChange}
               onCollegeChange={onCollegeChange}
+              onOtherSelected={onOtherSelected}
             />
 
             <div className="form-section">
@@ -202,12 +205,14 @@ interface AcademicInfoStepProps {
   signupFormData: SignupData;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onCollegeChange: (value: string) => void;
+  onOtherSelected?: (isOther: boolean) => void;
 }
 
 const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
   signupFormData,
   onInputChange,
-  onCollegeChange
+  onCollegeChange,
+  onOtherSelected
 }) => {
   const [states, setStates] = useState<Array<{ no: string; name: string }>>([]);
   const [districts, setDistricts] = useState<Array<{ no: string; sno: string; name: string }>>([]);
@@ -322,8 +327,12 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
             onChange={onCollegeChange}
             selectedState={signupFormData.state || ''}
             selectedDistrict={signupFormData.district || ''}
+            onOtherSelected={onOtherSelected}
             required
           />
+          <small style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.85em', marginTop: '5px', display: 'block' }}>
+            Select from the dropdown list or click "Other" if your college is not listed
+          </small>
         </div>
       </div>
 

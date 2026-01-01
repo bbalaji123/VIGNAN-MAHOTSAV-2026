@@ -1,44 +1,53 @@
 .gallery-section {
   padding: 120px 20px 80px;
-  margin: 0 40px;
   overflow: hidden;
-  content-visibility: auto;
-  contain-intrinsic-size: 1200px;
 }
 
 .gallery-title {
   font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: bold;
   color: #fdee71;
   text-align: center;
   margin-bottom: 80px;
 }
 
-/* ROWS */
+/* Each row creates its own stacking context */
 .row-wrapper {
-  padding: 40px 0;
   position: relative;
-  z-index: 1;
-  pointer-events: auto;
+  isolation: isolate;
+  padding: 40px 0;
 }
 
 .scroll-row {
   display: flex;
   gap: 20px;
-  transform: translate3d(0, 0, 0);
   will-change: transform;
-  position: relative;
-  z-index: 1;
-  pointer-events: none;
+  pointer-events: none; /* 👈 IMPORTANT */
 }
 
-/* Keep all rows on same z-level to prevent overlap issues */
-.row-0,
-.row-1,
-.row-2 {
-  z-index: 1;
+/* Allow clicks ONLY on cards */
+.throwback-card {
+  pointer-events: auto;
+  flex-shrink: 0;
+  width: 30vw;
+  max-width: 280px;
+  height: clamp(140px, 20vw, 200px);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
+.throwback-card:hover {
+  transform: scale(1.03);
+}
+
+.throwback-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Animations */
 .scroll-row.run {
   animation: scrollLeft 26s linear infinite;
 }
@@ -56,83 +65,12 @@
   animation: none;
 }
 
-/* CARDS (NO BOX-SHADOW REPAINTS) */
-.throwback-card {
-  flex-shrink: 0;
-  width: 30vw;
-  max-width: 280px;
-  min-width: 140px;
-  height: clamp(140px, 20vw, 200px);
-  border-radius: 16px;
-  overflow: hidden;
-  transform: translateZ(0);
-  will-change: transform;
-  transition: transform 0.25s ease;
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.throwback-card:hover {
-  transform: scale(1.02);
-  z-index: 2;
-}
-
-.throwback-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* ANIMATIONS */
 @keyframes scrollLeft {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-20%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-20%); }
 }
 
 @keyframes scrollRight {
-  from {
-    transform: translateX(-20%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* SHIMMER EFFECT FOR LOADING IMAGES */
-.gallery-shimmer .shimmer-overlay-gallery {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 100%);
-  animation: shimmer 2s infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.gallery-shimmer.loaded .shimmer-overlay-gallery {
-  display: none;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
+  from { transform: translateX(-20%); }
+  to { transform: translateX(0); }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import FlowerComponent from './components/FlowerComponent';
+import { API_BASE_URL } from './services/api';
 
 interface EventDetailData {
   title: string;
@@ -24,6 +25,7 @@ const EventDetail: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isAddingEvent, setIsAddingEvent] = useState(false);
 
   // Get the section we came from for smart back navigation
   const fromSection = location.state?.fromSection || '';
@@ -36,6 +38,100 @@ const EventDetail: React.FC = () => {
     } else {
       // Default behavior - go back in history
       navigate(-1);
+    }
+  };
+
+  // Handle Add to My Events
+  const handleAddToMyEvents = async () => {
+    // Check if user is logged in using the same method as Dashboard
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userId = localStorage.getItem('userId');
+    const userGender = localStorage.getItem('gender')?.toLowerCase();
+    
+    if (!isLoggedIn || !userId) {
+      alert('Please login to continue');
+      return;
+    }
+
+    if (!eventName) {
+      alert('Invalid event');
+      return;
+    }
+
+    try {
+      setIsAddingEvent(true);
+      
+      // First, fetch existing registered events
+      const existingEventsResponse = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
+      const existingEventsResult = await existingEventsResponse.json();
+      
+      let existingEvents: any[] = [];
+      if (existingEventsResult.success && existingEventsResult.data?.registeredEvents) {
+        existingEvents = existingEventsResult.data.registeredEvents;
+      }
+      
+      // Check if event is already registered (normalize for comparison)
+      const normalizeEventName = (name: string) => name?.toLowerCase().trim();
+      const currentEventNormalized = normalizeEventName(eventName || '');
+      
+      const alreadyRegistered = existingEvents.some(
+        (e: any) => {
+          const registeredEventName = e.eventName || e.Event || e.name || '';
+          return normalizeEventName(registeredEventName) === currentEventNormalized;
+        }
+      );
+      
+      if (alreadyRegistered) {
+        alert('You have already registered for this event!');
+        setIsAddingEvent(false);
+        return;
+      }
+      
+      // Determine event type based on the page we came from or event name
+      let eventType = 'sports';
+      const fromSection = location.state?.fromSection || '';
+      if (fromSection.toLowerCase().includes('cultural') || eventName.toLowerCase().includes('dance') || eventName.toLowerCase().includes('music')) {
+        eventType = 'culturals';
+      } else if (fromSection.toLowerCase().includes('para') || eventName.toLowerCase().includes('para')) {
+        eventType = 'parasports';
+      }
+      
+      // Create event object
+      const newEvent = {
+        eventName: eventName,
+        eventType: eventType,
+        category: fromSection || '',
+        description: `${eventName}`,
+        fee: eventType === 'parasports' ? 0 : (userGender === 'female' && eventType === 'culturals' ? 250 : 350)
+      };
+      
+      // Combine existing events with new event
+      const allEvents = [...existingEvents, newEvent];
+      
+      // Save to database via API
+      const response = await fetch(`${API_BASE_URL}/save-events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          events: allEvents
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to add event');
+      }
+
+      alert('You are registered to this event, please check in profile');
+    } catch (error) {
+      console.error('Error adding event:', error);
+      alert('Failed to add event. Please try again.');
+    } finally {
+      setIsAddingEvent(false);
     }
   };
 
@@ -2361,13 +2457,11 @@ const EventDetail: React.FC = () => {
           </button>
 
           <button
-            className="w-full sm:w-auto bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] touch-manipulation"
-            onClick={() => {
-              // Add to events functionality
-              alert('Event added to your list!');
-            }}
+            className="w-full sm:w-auto bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handleAddToMyEvents}
+            disabled={isAddingEvent}
           >
-            ⭐ Add to My Events
+            {isAddingEvent ? '⏳ Adding...' : '⭐ Add to My Events'}
           </button>
         </div>
       </div>

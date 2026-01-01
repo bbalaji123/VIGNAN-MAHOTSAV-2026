@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CAModal.css';
 import { API_BASE_URL } from './services/api';
+import CollegeSelect from './components/CollegeSelect';
 
 interface CASignupModalProps {
   onClose: () => void;
@@ -34,7 +35,8 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     branch: '',
     state: '',
     district: '',
-    dateOfBirth: ''
+    dateOfBirth: '',
+    referralCode: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,27 +47,23 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   // Dropdown data
   const [states, setStates] = useState<State[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
-  const [colleges, setColleges] = useState<College[]>([]);
   const [filteredDistricts, setFilteredDistricts] = useState<District[]>([]);
-  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
+  const [isOtherCollege, setIsOtherCollege] = useState(false);
 
   // Load states, districts, and colleges on mount
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [statesRes, districtsRes, collegesRes] = await Promise.all([
+        const [statesRes, districtsRes] = await Promise.all([
           fetch(`${API_BASE_URL}/location/states`),
-          fetch(`${API_BASE_URL}/location/districts`),
-          fetch(`${API_BASE_URL}/location/colleges`)
+          fetch(`${API_BASE_URL}/location/districts`)
         ]);
         
         const statesResponse = await statesRes.json();
         const districtsResponse = await districtsRes.json();
-        const collegesResponse = await collegesRes.json();
         
         setStates(statesResponse.data || []);
         setDistricts(districtsResponse.data || []);
-        setColleges(collegesResponse.data || []);
       } catch (error) {
         console.error('Error loading dropdown data:', error);
       }
@@ -92,25 +90,6 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     }
   }, [formData.state, districts, states]);
 
-  // Filter colleges when state or district changes
-  useEffect(() => {
-    if (formData.state) {
-      let filtered = colleges.filter(c => c.State.toUpperCase() === formData.state.toUpperCase());
-      
-      if (formData.district) {
-        filtered = filtered.filter(c => c.District.toUpperCase() === formData.district.toUpperCase());
-      }
-      
-      setFilteredColleges(filtered);
-      // Reset college if district changes
-      if (formData.district) {
-        setFormData(prev => ({ ...prev, college: '' }));
-      }
-    } else {
-      setFilteredColleges([]);
-    }
-  }, [formData.state, formData.district, colleges]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
@@ -124,17 +103,17 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
     // Validation
     if (!/^\d{10}$/.test(formData.phone)) {
-      setError('Phone number must be 10 digits');
+      alert('Phone number must be 10 digits');
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Invalid email address');
+      alert('Invalid email address');
       return;
     }
 
     if (!formData.dateOfBirth) {
-      setError('Date of Birth is required');
+      alert('Date of Birth is required');
       return;
     }
 
@@ -162,7 +141,8 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
           branch: formData.branch,
           state: formData.state,
           district: formData.district,
-          dateOfBirth: formData.dateOfBirth
+          dateOfBirth: formData.dateOfBirth,
+          referralCode: formData.referralCode.trim() || undefined
         })
       });
 
@@ -179,11 +159,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
         setShowPasswordCard(true);
       } else {
         console.error('CA Signup Error:', data);
-        setError(data.message || 'Signup failed');
+        alert(data.message || 'Signup failed');
       }
     } catch (err) {
       console.error('CA Signup Network Error:', err);
-      setError('Network error. Please try again.');
+      alert('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -195,18 +175,31 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   };
 
   if (showPasswordCard) {
+    // Format password as date for display
+    const formatPasswordAsDate = (password: string) => {
+      if (password.length === 8) {
+        const day = password.substring(0, 2);
+        const month = password.substring(2, 4);
+        const year = password.substring(4, 8);
+        return `${day}/${month}/${year}`;
+      }
+      return password;
+    };
+
     return (
       <div className="ca-modal-overlay" onClick={handlePasswordCardClose}>
         <div className="ca-modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px', textAlign: 'center' }}>
           <button className="ca-modal-close" onClick={handlePasswordCardClose}>×</button>
-          <h2 className="ca-modal-title" style={{ color: '#FFD700', marginBottom: '30px' }}>Registration Successful! 🎉</h2>
+          <h2 className="ca-modal-title" style={{ color: '#FFD700', marginBottom: '30px' }}>Registration Successful!</h2>
           
-          <div style={{ 
+          <div className="ca-credentials-box" style={{ 
             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
             padding: '30px', 
             borderRadius: '15px',
             marginBottom: '20px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+            boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+            border: '3px solid #FFD700',
+            animation: 'blinkBorder 1.5s infinite'
           }}>
             <h3 style={{ color: '#FFD700', marginBottom: '20px', fontSize: '1.5rem' }}>Your Campus Ambassador Credentials</h3>
             
@@ -215,15 +208,15 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{generatedMCAId}</p>
             </div>
             
-            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px' }}>
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '15px' }}>
               <p style={{ color: '#FFD700', marginBottom: '5px', fontSize: '0.9rem' }}>Password (Your DOB)</p>
-              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{generatedPassword}</p>
+              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{formatPasswordAsDate(generatedPassword)}</p>
             </div>
+            
+            <p style={{ color: '#fff', fontSize: '0.95rem', background: 'rgba(255, 215, 0, 0.15)', padding: '12px', borderRadius: '8px', margin: '0' }}>
+              Please save these credentials securely. You'll need them to login.
+            </p>
           </div>
-          
-          <p style={{ color: '#FFD700', marginBottom: '20px', fontSize: '0.9rem' }}>
-            ⚠️ Please save these credentials securely. You'll need them to login.
-          </p>
           
           <button 
             onClick={handlePasswordCardClose}
@@ -302,9 +295,39 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               value={formData.dateOfBirth}
               onChange={handleChange}
               required
+              max="2010-12-31"
+              onClick={(e) => {
+                const target = e.target as HTMLInputElement;
+                if (!target.value) {
+                  target.defaultValue = '2009-01-01';
+                  try {
+                    target.showPicker();
+                  } catch (err) {
+                    // Fallback for browsers that don't support showPicker
+                  }
+                }
+              }}
+              onInvalid={(e) => {
+                const target = e.target as HTMLInputElement;
+                const selectedDate = new Date(target.value);
+                const maxDate = new Date('2010-12-31');
+                if (selectedDate > maxDate) {
+                  target.setCustomValidity('Date must be before 2011 (Campus Ambassadors must be at least 17 years old)');
+                } else {
+                  target.setCustomValidity('Please select your date of birth');
+                }
+              }}
+              onInput={(e) => {
+                const target = e.target as HTMLInputElement;
+                target.setCustomValidity('');
+              }}
+              style={{
+                colorScheme: 'dark',
+                cursor: 'pointer'
+              }}
             />
             <small style={{ color: '#FFD700', fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>
-              Your password will be auto-generated from your DOB (DDMMYYYY)
+              Your password will be auto-generated from your DOB (DDMMYYYY). Must be born before 2011.
             </small>
           </div>
 
@@ -315,11 +338,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               value={formData.state}
               onChange={handleChange}
               required
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
             >
               <option value="">Select State</option>
               {states.map((state) => (
-                <option key={state.no} value={state.name}>
+                <option key={state.no} value={state.name} style={{ color: '#000' }}>
                   {state.name}
                 </option>
               ))}
@@ -334,11 +357,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               onChange={handleChange}
               required
               disabled={!formData.state}
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
             >
               <option value="">Select District</option>
               {filteredDistricts.map((district) => (
-                <option key={district.no} value={district.name}>
+                <option key={district.no} value={district.name} style={{ color: '#000' }}>
                   {district.name}
                 </option>
               ))}
@@ -347,21 +370,13 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
           <div className="ca-form-group">
             <label>College *</label>
-            <select
-              name="college"
-              value={formData.college}
-              onChange={handleChange}
-              required
-              disabled={!formData.state}
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)' }}
-            >
-              <option value="">Select College</option>
-              {filteredColleges.map((college) => (
-                <option key={college.SNO} value={college.Name}>
-                  {college.Name}
-                </option>
-              ))}
-            </select>
+            <CollegeSelect
+              onChange={(value) => setFormData({ ...formData, college: value })}
+              required={true}
+              selectedState={formData.state}
+              selectedDistrict={formData.district}
+              onOtherSelected={(isOther) => setIsOtherCollege(isOther)}
+            />
           </div>
 
           <div className="ca-form-group">
@@ -374,6 +389,21 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               required
               placeholder="E.g., CSE, ECE, etc."
             />
+          </div>
+
+          <div className="ca-form-group">
+            <label>Referral Code (Optional)</label>
+            <input
+              type="text"
+              name="referralCode"
+              value={formData.referralCode}
+              onChange={handleChange}
+              placeholder="Enter referral MCA ID (if any)"
+              style={{ textTransform: 'uppercase' }}
+            />
+            <small style={{ color: '#888', fontSize: '0.8rem', display: 'block', marginTop: '5px' }}>
+              Enter the MCA ID of the Campus Ambassador who referred you
+            </small>
           </div>
 
           <button type="submit" className="ca-submit-button" disabled={loading}>

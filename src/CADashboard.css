@@ -1,18 +1,463 @@
 /* Campus Ambassador Dashboard Styles */
 .ca-dashboard-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #462554, #2d1640, #1a0f2e);
   padding: 20px;
   position: relative;
   overflow-x: hidden;
 }
 
-.ca-dashboard-content {
-  max-width: 1400px;
+/* Grid Layout */
+.ca-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding-top: 40px;
+  padding: 20px;
   position: relative;
   z-index: 2;
+}
+
+/* Box Base Styles - Glassmorphism */
+.ca-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ca-box:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Box 3 - Top Wide: Welcome Section */
+.ca-box-3 {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.ca-welcome-section {
+  flex: 1;
+}
+
+.ca-welcome-title {
+  font-size: 1.2rem;
+  color: rgba(255, 215, 0, 0.8);
+  margin-bottom: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.ca-name-display {
+  font-size: 2.5rem;
+  color: #FFD700;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.ca-mca-id-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.ca-id-label-inline {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+}
+
+.ca-id-value-inline {
+  color: #FFD700;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.ca-logout-btn {
+  background: rgb(232, 6, 190);
+  color: white;
+  border: 2px solid rgba(70, 37, 84, 0.5);
+  padding: 10px 40px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(84, 83, 37, 0.4);
+}
+
+.ca-logout-btn:hover {
+  background: linear-gradient(135deg, #d6e10a, #ede907);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(70, 37, 84, 0.6);
+}
+
+/* Box 2 - Left Tall: Overview */
+.ca-box-2 {
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.ca-box-title {
+  font-size: 1.8rem;
+  color: #FFD700;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  padding-bottom: 15px;
+}
+
+.ca-points-display {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ca-points-value {
+  font-size: 4rem;
+  color: #FFD700;
+  font-weight: bold;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  margin-bottom: 10px;
+}
+
+.ca-points-label {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ca-tier-display {
+  text-align: center;
+  padding: 20px;
+}
+
+.ca-tier-badge {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border-radius: 50px;
+  border: 3px solid;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ca-tier-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.ca-referrals-stats {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.ca-stats-subtitle {
+  font-size: 1.3rem;
+  color: #9d7fb8;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ca-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ca-stat-row:last-child {
+  border-bottom: none;
+}
+
+.ca-stat-row.ca-stat-total {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  border-bottom: none;
+}
+
+.ca-stat-row .ca-stat-label {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ca-stat-row .ca-stat-value {
+  font-size: 1.5rem;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+/* Box 4 - Right Tall: CA Referrals */
+.ca-box-4 {
+  grid-row: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.ca-ca-referrals-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ca-ca-referral-count {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.ca-ca-count-value {
+  font-size: 3.5rem;
+  color: #FFD700;
+  font-weight: bold;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  margin-bottom: 10px;
+}
+
+.ca-ca-count-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ca-ca-referral-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  padding-right: 10px;
+}
+
+.ca-ca-referral-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ca-ca-referral-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.ca-ca-referral-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.5);
+  border-radius: 10px;
+}
+
+.ca-ca-referral-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ca-ca-referral-item:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+}
+
+.ca-ca-ref-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ca-ca-ref-name {
+  font-size: 1.1rem;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.ca-ca-ref-points {
+  font-size: 1.2rem;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.ca-ca-ref-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ca-ca-ref-id {
+  font-size: 0.9rem;
+  color: rgba(255, 215, 0, 0.8);
+  font-family: 'Courier New', monospace;
+}
+
+.ca-ca-ref-college {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Box 5 - Bottom Wide: Total Referrals */
+.ca-box-5 {
+  grid-column: 1 / -1;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.ca-referrals-table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.ca-modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.ca-modern-table thead {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ca-modern-table th {
+  padding: 15px;
+  text-align: left;
+  font-size: 1rem;
+  color: #FFD700;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.ca-modern-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ca-modern-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ca-modern-table td {
+  padding: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.ca-status-pill {
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.ca-status-pill.ca-status-paid {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+
+.ca-status-pill.ca-status-pending {
+  background: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+  border: 1px solid #FF9800;
+}
+
+.ca-status-pill.ca-status-failed {
+  background: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+  border: 1px solid #F44336;
+}
+
+.ca-points-col {
+  color: #4CAF50 !important;
+  font-weight: bold;
+  font-size: 1.1rem !important;
+}
+
+/* No Data State */
+.ca-no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ca-no-data p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.ca-no-data-hint {
+  font-size: 0.95rem;
+  color: rgba(255, 215, 0, 0.7);
+}
+
+.ca-no-data-hint strong {
+  color: #FFD700;
+  font-weight: bold;
 }
 
 /* Loading & Error States */
@@ -68,118 +513,49 @@
   box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
 }
 
-/* Header Section */
-.ca-dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  border: 2px solid rgba(255, 215, 0, 0.2);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .ca-dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+  
+  .ca-box-3 {
+    grid-column: 1;
+  }
+  
+  .ca-box-2,
+  .ca-box-4 {
+    grid-row: auto;
+  }
+  
+  .ca-box-5 {
+    grid-column: 1;
+  }
 }
 
-.ca-profile-section {
-  flex: 1;
-}
-
-.ca-welcome-text {
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: bold;
-  color: #ffd700;
-  margin-bottom: 15px;
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-.ca-id-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 215, 0, 0.1);
-  padding: 10px 20px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  margin-bottom: 10px;
-}
-
-.ca-id-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-}
-
-.ca-id-value {
-  color: #ffd700;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: 'Courier New', monospace;
-}
-
-.ca-college-name {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
-  margin-top: 5px;
-}
-
-.ca-logout-button {
-  background: rgba(255, 0, 0, 0.2);
-  color: #ff6b6b;
-  border: 1px solid rgba(255, 0, 0, 0.4);
-  padding: 12px 30px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.ca-logout-button:hover {
-  background: rgba(255, 0, 0, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
-}
-
-/* Stats Grid */
-.ca-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.ca-stat-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 215, 0, 0.2);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.ca-stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
-  border-color: rgba(255, 215, 0, 0.4);
-}
-
-.ca-stat-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.ca-stat-value {
-  font-size: 36px;
-  font-weight: bold;
-  color: #ffd700;
-  margin-bottom: 10px;
-}
-
-.ca-stat-label {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+@media (max-width: 768px) {
+  .ca-box-3 {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .ca-name-display {
+    font-size: 2rem;
+  }
+  
+  .ca-logout-btn {
+    width: 100%;
+  }
+  
+  .ca-points-value {
+    font-size: 3rem;
+  }
+  
+  .ca-ca-count-value {
+    font-size: 2.5rem;
+  }
 }
 
 /* Tier Progress Section */

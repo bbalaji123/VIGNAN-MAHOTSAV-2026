@@ -450,6 +450,7 @@ const Dashboard: React.FC = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [registrationEvents, setRegistrationEvents] = useState<any>({ Sports: [], Culturals: [], ParaSports: [] });
   const [selectedRegistrationEvents, setSelectedRegistrationEvents] = useState<Set<string>>(new Set());
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
 
   // Helper to check if an event is already saved/registered for the user
   const isEventAlreadySaved = (eventName: string) => {
@@ -2403,7 +2404,7 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* Top-Right Vignan Logo - Only show on main dashboard (hide when menu, modals, or submodals are open) */}
-      {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && (
+      {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && !showRegistrationModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
           <img
             src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
@@ -5492,69 +5493,25 @@ const Dashboard: React.FC = () => {
         }}>
           <div className="credential-card" onClick={(e) => e.stopPropagation()} style={{
             background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-            borderRadius: '24px',
-            padding: '3rem',
-            maxWidth: '550px',
+            borderRadius: '16px',
+            padding: window.innerWidth <= 640 ? '1.5rem' : '2rem',
+            maxWidth: '500px',
             width: '90%',
+            maxHeight: '85vh',
+            overflowY: 'auto',
             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.3)',
             border: '2px solid rgba(255, 215, 0, 0.4)',
             animation: 'fadeInScale 0.5s ease-out',
-            position: 'relative',
-            overflow: 'hidden'
+            position: 'relative'
           }}>
-            {/* Decorative corner elements */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '120px',
-              height: '120px',
-              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, transparent 70%)',
-              borderRadius: '0 0 100% 0'
-            }} />
-            <div style={{
-              position: 'absolute',
-              bottom: 0,
-              right: 0,
-              width: '120px',
-              height: '120px',
-              background: 'linear-gradient(315deg, rgba(255, 215, 0, 0.15) 0%, transparent 70%)',
-              borderRadius: '100% 0 0 0'
-            }} />
-
-            {/* Success Icon with glow */}
-            <div style={{
-              textAlign: 'center',
-              marginBottom: '1.5rem',
-              position: 'relative',
-              zIndex: 1
-            }}>
-              <div style={{
-                width: '80px',
-                height: '80px',
-                margin: '0 auto',
-                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 30px rgba(255, 215, 0, 0.6)',
-                animation: 'pulse 2s ease-in-out infinite'
-              }}>
-                <span style={{ fontSize: '3rem' }}>🎉</span>
-              </div>
-            </div>
 
             <h2 style={{
               color: '#ffd700',
               textAlign: 'center',
-              fontSize: window.innerWidth <= 640 ? '1.5rem' : '2rem',
+              fontSize: window.innerWidth <= 640 ? '1.3rem' : '1.75rem',
               fontWeight: 'bold',
               marginBottom: '0.5rem',
-              textShadow: '0 2px 10px rgba(255, 215, 0, 0.3)',
-              position: 'relative',
-              zIndex: 1,
-              padding: window.innerWidth <= 640 ? '0 1rem' : '0'
+              textShadow: '0 2px 10px rgba(255, 215, 0, 0.3)'
             }}>
               Registration Successful!
             </h2>
@@ -5562,11 +5519,8 @@ const Dashboard: React.FC = () => {
             <p style={{
               color: '#e5e7eb',
               textAlign: 'center',
-              marginBottom: '2rem',
-              fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem',
-              position: 'relative',
-              zIndex: 1,
-              padding: window.innerWidth <= 640 ? '0 1rem' : '0'
+              marginBottom: '1.5rem',
+              fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem'
             }}>
               Welcome to Vignan Mahotsav 2026
             </p>
@@ -5574,17 +5528,15 @@ const Dashboard: React.FC = () => {
             {/* Credentials Container */}
             <div style={{
               background: 'rgba(255, 255, 255, 0.05)',
-              borderRadius: '16px',
-              padding: window.innerWidth <= 640 ? '1rem' : '2rem',
-              marginBottom: '1.5rem',
-              border: '1px solid rgba(255, 215, 0, 0.2)',
-              position: 'relative',
-              zIndex: 1
+              borderRadius: '12px',
+              padding: window.innerWidth <= 640 ? '1rem' : '1.5rem',
+              marginBottom: '1rem',
+              border: '1px solid rgba(255, 215, 0, 0.2)'
             }}>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ marginBottom: '1rem' }}>
                 <label style={{
                   color: '#fbbf24',
-                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.9rem',
+                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
                   fontWeight: '600',
                   display: 'block',
                   marginBottom: '0.5rem',
@@ -5595,17 +5547,17 @@ const Dashboard: React.FC = () => {
                 </label>
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.1)',
-                  padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
-                  borderRadius: '12px',
+                  padding: window.innerWidth <= 640 ? '0.75rem' : '1rem',
+                  borderRadius: '8px',
                   border: '2px solid #ffd700',
                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
                 }}>
                   <span style={{
                     color: '#ffffff',
-                    fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.5rem',
+                    fontSize: window.innerWidth <= 640 ? '1rem' : '1.25rem',
                     fontWeight: 'bold',
                     fontFamily: 'monospace',
-                    letterSpacing: window.innerWidth <= 640 ? '1px' : '2px',
+                    letterSpacing: '2px',
                     display: 'block',
                     textAlign: 'center'
                   }}>
@@ -5617,7 +5569,7 @@ const Dashboard: React.FC = () => {
               <div>
                 <label style={{
                   color: '#fbbf24',
-                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.9rem',
+                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
                   fontWeight: '600',
                   display: 'block',
                   marginBottom: '0.5rem',
@@ -5628,17 +5580,17 @@ const Dashboard: React.FC = () => {
                 </label>
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.1)',
-                  padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
-                  borderRadius: '12px',
+                  padding: window.innerWidth <= 640 ? '0.75rem' : '1rem',
+                  borderRadius: '8px',
                   border: '2px solid #ffd700',
                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.2)'
                 }}>
                   <span style={{
                     color: '#ffffff',
-                    fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.5rem',
+                    fontSize: window.innerWidth <= 640 ? '1rem' : '1.25rem',
                     fontWeight: 'bold',
                     fontFamily: 'monospace',
-                    letterSpacing: window.innerWidth <= 640 ? '1px' : '2px',
+                    letterSpacing: '2px',
                     display: 'block',
                     textAlign: 'center'
                   }}>
@@ -5651,64 +5603,37 @@ const Dashboard: React.FC = () => {
             {/* Screenshot Warning */}
             <div style={{
               background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%)',
-              border: '2px solid rgba(239, 68, 68, 0.4)',
-              borderRadius: '12px',
-              padding: window.innerWidth <= 640 ? '0.75rem 1rem' : '1rem 1.5rem',
-              marginBottom: '1.5rem',
-              display: 'flex',
-              flexDirection: window.innerWidth <= 640 ? 'column' : 'row',
-              alignItems: 'center',
-              gap: window.innerWidth <= 640 ? '0.5rem' : '1rem',
-              position: 'relative',
-              zIndex: 1
+              border: '1px solid rgba(239, 68, 68, 0.4)',
+              borderRadius: '8px',
+              padding: window.innerWidth <= 640 ? '0.75rem' : '1rem',
+              marginBottom: '1rem',
+              textAlign: 'center'
             }}>
-              <span style={{ fontSize: window.innerWidth <= 640 ? '1.5rem' : '2rem' }}>📸</span>
-              <div style={{ textAlign: window.innerWidth <= 640 ? 'center' : 'left' }}>
-                <p style={{
-                  color: '#fef3c7',
-                  fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem',
-                  fontWeight: '600',
-                  margin: 0,
-                  lineHeight: '1.5',
-                  animation: 'blink 1.5s ease-in-out infinite'
-                }}>
-                  Important: Take a screenshot of this page!
-                </p>
-                <p style={{
-                  color: '#e5e7eb',
-                  fontSize: window.innerWidth <= 640 ? '0.75rem' : '0.875rem',
-                  margin: '0.25rem 0 0 0'
-                }}>
-                  Save these credentials for future login
-                </p>
-              </div>
+              <p style={{
+                color: '#fef3c7',
+                fontSize: window.innerWidth <= 640 ? '0.875rem' : '1rem',
+                fontWeight: '600',
+                margin: 0,
+                lineHeight: '1.5'
+              }}>
+                Important: Save these credentials for future login
+              </p>
             </div>
-
-            <style>
-              {`
-                @keyframes blink {
-                  0%, 100% { opacity: 1; }
-                  50% { opacity: 0.3; }
-                }
-              `}
-            </style>
 
             <button
               onClick={handleCloseUserIdPopup}
               style={{
                 width: '100%',
-                padding: '1rem',
+                padding: window.innerWidth <= 640 ? '0.875rem' : '1rem',
                 background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                 border: 'none',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 color: '#1a1a2e',
-                fontSize: '1.1rem',
+                fontSize: window.innerWidth <= 640 ? '1rem' : '1.1rem',
                 fontWeight: 'bold',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)',
-                position: 'relative',
-                zIndex: 1
+                boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)'
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
@@ -6072,9 +5997,39 @@ const Dashboard: React.FC = () => {
                           </div>
                         </>
                       ) : (
-                        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', textAlign: 'center' }}>
-                          You haven't registered for any events yet.
-                        </p>
+                        <div style={{ textAlign: 'center' }}>
+                          <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1rem', marginBottom: '1.5rem' }}>
+                            You haven't registered for any events yet.
+                          </p>
+                          <button
+                            onClick={() => {
+                              setShowProfileModal(false);
+                              setShowRegistrationModal(true);
+                            }}
+                            style={{
+                              padding: '0.875rem 1.75rem',
+                              background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                              border: 'none',
+                              borderRadius: '8px',
+                              color: '#1a1a2e',
+                              fontSize: '1rem',
+                              fontWeight: 'bold',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease',
+                              boxShadow: '0 4px 15px rgba(255, 215, 0, 0.4)'
+                            }}
+                            onMouseOver={(e) => {
+                              e.currentTarget.style.transform = 'translateY(-2px)';
+                              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 215, 0, 0.6)';
+                            }}
+                            onMouseOut={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)';
+                              e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.4)';
+                            }}
+                          >
+                            Register for Events
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -6729,15 +6684,44 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <h3
+                    onClick={() => {
+                      setExpandedSections(prev => {
+                        const newSet = new Set(prev);
+                        if (newSet.has('sports')) {
+                          newSet.delete('sports');
+                        } else {
+                          newSet.add('sports');
+                        }
+                        return newSet;
+                      });
+                    }}
                     style={{
                       color: '#fef3c7',
                       fontSize: '1.25rem',
                       fontWeight: 'bold',
-                      marginBottom: '0.75rem'
+                      marginBottom: '0.75rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.5rem',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
                     }}
                   >
-                    Sports Events
+                    <span>Sports Events</span>
+                    <span style={{ fontSize: '1.5rem' }}>
+                      {expandedSections.has('sports') ? '▼' : '▶'}
+                    </span>
                   </h3>
+                  {expandedSections.has('sports') && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
                     {(() => {
                       // Group sports events by category
@@ -6769,25 +6753,56 @@ const Dashboard: React.FC = () => {
 
                       // Render grouped events
                       return Object.entries(groupedByCategory).map(([category, events]) => (
-                        <div key={category}>
+                        <div key={category} style={{ marginBottom: '0.5rem' }}>
                           {/* Category Header */}
                           <div
+                            onClick={() => {
+                              setExpandedSections(prev => {
+                                const newSet = new Set(prev);
+                                const categoryKey = `sports-${category}`;
+                                if (newSet.has(categoryKey)) {
+                                  newSet.delete(categoryKey);
+                                } else {
+                                  newSet.add(categoryKey);
+                                }
+                                return newSet;
+                              });
+                            }}
                             style={{
                               color: '#fbbf24',
                               fontWeight: 'bold',
                               fontSize: '1.05rem',
                               marginTop: '0.75rem',
                               marginBottom: '0.5rem',
-                              paddingLeft: '0.25rem'
+                              paddingLeft: '0.5rem',
+                              paddingRight: '0.5rem',
+                              paddingTop: '0.4rem',
+                              paddingBottom: '0.4rem',
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              background: 'rgba(251, 191, 36, 0.1)',
+                              borderRadius: '0.375rem',
+                              transition: 'all 0.3s'
+                            }}
+                            onMouseOver={(e) => {
+                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
                             }}
                           >
-                            {category}
+                            <span>{category}</span>
+                            <span style={{ fontSize: '1rem' }}>
+                              {expandedSections.has(`sports-${category}`) ? '▼' : '▶'}
+                            </span>
                           </div>
                           
                           {/* Events in this category */}
-                          {events.map((event: any, index: number) => {
-                            const eventId = `sport-${index}`;
+                          {expandedSections.has(`sports-${category}`) && events.map((event: any, index: number) => {
                             const eventName = event.Event;
+                            const eventId = `sport-${eventName}`;
 
                             const alreadySaved = isEventAlreadySaved(eventName);
                             const constraintDisabled = (window as any).__hasParaSelected;
@@ -6876,6 +6891,7 @@ const Dashboard: React.FC = () => {
                       ));
                     })()}
                   </div>
+                  )}
                 </div>
               )}
 
@@ -6890,15 +6906,44 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <h3
+                    onClick={() => {
+                      setExpandedSections(prev => {
+                        const newSet = new Set(prev);
+                        if (newSet.has('culturals')) {
+                          newSet.delete('culturals');
+                        } else {
+                          newSet.add('culturals');
+                        }
+                        return newSet;
+                      });
+                    }}
                     style={{
                       color: '#fef3c7',
                       fontSize: '1.25rem',
                       fontWeight: 'bold',
-                      marginBottom: '0.75rem'
+                      marginBottom: '0.75rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.5rem',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(255, 255, 255, 0.05)',
+                      transition: 'all 0.3s'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
                     }}
                   >
-                    Culturals Events
+                    <span>Culturals Events</span>
+                    <span style={{ fontSize: '1.5rem' }}>
+                      {expandedSections.has('culturals') ? '▼' : '▶'}
+                    </span>
                   </h3>
+                  {expandedSections.has('culturals') && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
                     {(() => {
                       // Group cultural events by category
@@ -6930,25 +6975,56 @@ const Dashboard: React.FC = () => {
 
                       // Render grouped events
                       return Object.entries(groupedByCategory).map(([category, events]) => (
-                        <div key={category}>
+                        <div key={category} style={{ marginBottom: '0.5rem' }}>
                           {/* Category Header */}
                           <div
+                            onClick={() => {
+                              setExpandedSections(prev => {
+                                const newSet = new Set(prev);
+                                const categoryKey = `culturals-${category}`;
+                                if (newSet.has(categoryKey)) {
+                                  newSet.delete(categoryKey);
+                                } else {
+                                  newSet.add(categoryKey);
+                                }
+                                return newSet;
+                              });
+                            }}
                             style={{
                               color: '#fbbf24',
                               fontWeight: 'bold',
                               fontSize: '1.05rem',
                               marginTop: '0.75rem',
                               marginBottom: '0.5rem',
-                              paddingLeft: '0.25rem'
+                              paddingLeft: '0.5rem',
+                              paddingRight: '0.5rem',
+                              paddingTop: '0.4rem',
+                              paddingBottom: '0.4rem',
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              background: 'rgba(251, 191, 36, 0.1)',
+                              borderRadius: '0.375rem',
+                              transition: 'all 0.3s'
+                            }}
+                            onMouseOver={(e) => {
+                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
+                            }}
+                            onMouseOut={(e) => {
+                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
                             }}
                           >
-                            {category}
+                            <span>{category}</span>
+                            <span style={{ fontSize: '1rem' }}>
+                              {expandedSections.has(`culturals-${category}`) ? '▼' : '▶'}
+                            </span>
                           </div>
                           
                           {/* Events in this category */}
-                          {events.map((event: any, index: number) => {
-                            const eventId = `cultural-${index}`;
+                          {expandedSections.has(`culturals-${category}`) && events.map((event: any, index: number) => {
                             const eventName = event.Event;
+                            const eventId = `cultural-${eventName}`;
 
                             const alreadySaved = isEventAlreadySaved(eventName);
                             const constraintDisabled = (window as any).__hasParaSelected;
@@ -7037,6 +7113,7 @@ const Dashboard: React.FC = () => {
                       ));
                     })()}
                   </div>
+                  )}
                 </div>
               )}
 
@@ -7356,34 +7433,46 @@ const Dashboard: React.FC = () => {
                   // Prepare events data to save
                   const eventsToSave = selectedIds
                     .map(id => {
-                      const [type, index] = id.split('-');
-                      const idx = parseInt(index);
+                      const [type, ...nameParts] = id.split('-');
+                      const eventName = nameParts.join('-'); // Rejoin in case event name has dashes
 
-                      if (type === 'sport' && registrationEvents.Sports[idx]) {
-                        const event = registrationEvents.Sports[idx];
-                        return {
-                          eventName: event.Event || event['738500'],
-                          eventType: 'sports',
-                          category: event.Category || event['Prize money for Sports'] || '',
-                          description: `${event.Category || event['Prize money for Sports'] || ''} - ${event.Event || event['738500']}`.trim(),
-                          fee: userProfileData.gender === 'male' ? 350 : 350
-                        };
+                      if (type === 'sport') {
+                        // Find the event by name
+                        const event = registrationEvents.Sports.find((e: any) => e.Event === eventName);
+                        if (event) {
+                          return {
+                            eventName: event.Event || event['738500'],
+                            eventType: 'sports',
+                            category: event.Category || event['Prize money for Sports'] || '',
+                            description: `${event.Category || event['Prize money for Sports'] || ''} - ${event.Event || event['738500']}`.trim(),
+                            fee: userProfileData.gender === 'male' ? 350 : 350
+                          };
+                        }
                       }
 
-                      if (type === 'cultural' && registrationEvents.Culturals[idx]) {
-                        const event = registrationEvents.Culturals[idx];
-                        return {
-                          eventName: event['Prize money for Performing arts, Visual arts, Fashion'],
-                          eventType: 'culturals',
-                          category: event['5'] || '',
-                          description: `${event['5'] || ''} - ${event['Prize money for Performing arts, Visual arts, Fashion']}`.trim(),
-                          fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
-                        };
+                      if (type === 'cultural') {
+                        // Find the cultural event by name
+                        const event = registrationEvents.Culturals.find((e: any) => {
+                          if (!e) return false;
+                          const eName = e['Prize money for Performing arts, Visual arts, Fashion'] || e.Event;
+                          return eName === eventName;
+                        });
+                        if (event) {
+                          const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                          return {
+                            eventName: culturalEventName,
+                            eventType: 'culturals',
+                            category: event['5'] || event.Category || '',
+                            description: `${event['5'] || event.Category || ''} - ${culturalEventName}`.trim(),
+                            fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
+                          };
+                        }
                       }
 
                       if (type === 'para') {
                         const paraEvents = getFilteredParaSportsEvents();
-                        const event = paraEvents[idx];
+                        const paraIndex = parseInt(nameParts.join('-'));
+                        const event = paraEvents[paraIndex];
                         if (event) {
                           return {
                             eventName: event.eventName,

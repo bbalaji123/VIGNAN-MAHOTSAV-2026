@@ -73,6 +73,29 @@ const campusAmbassadorSchema = new mongoose.Schema({
       default: false
     }
   }],
+  caReferralList: [{
+    mcaId: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String
+    },
+    email: {
+      type: String
+    },
+    college: {
+      type: String
+    },
+    registeredAt: {
+      type: Date,
+      default: Date.now
+    },
+    pointsAwarded: {
+      type: Number,
+      default: 20
+    }
+  }],
   totalPoints: {
     type: Number,
     default: 0
@@ -91,6 +114,10 @@ const campusAmbassadorSchema = new mongoose.Schema({
     default: 0
   },
   pendingReferrals: {
+    type: Number,
+    default: 0
+  },
+  caReferrals: {
     type: Number,
     default: 0
   },
@@ -116,11 +143,11 @@ campusAmbassadorSchema.methods.updateTier = function() {
     this.tier = 'Diamond';
   } else if (this.totalPoints >= 200) {
     this.tier = 'Platinum';
-  } else if (this.totalPoints >= 150) {
+  } else if (this.totalPoints >= 200) {
     this.tier = 'Gold';
-  } else if (this.totalPoints >= 100) {
+  } else if (this.totalPoints >= 150) {
     this.tier = 'Silver';
-  } else if (this.totalPoints >= 50) {
+  } else if (this.totalPoints >= 100) {
     this.tier = 'Bronze';
   } else {
     this.tier = 'none';
@@ -154,7 +181,7 @@ campusAmbassadorSchema.methods.updatePaymentStatus = async function(userId, paym
   
   // Award points only when payment is marked as paid
   if (paymentStatus === 'paid' && !referral.pointsAwarded) {
-    this.totalPoints += 10; // 10 points per paid referral
+    this.totalPoints += 5; // 5 points per paid referral
     referral.pointsAwarded = true;
     this.paidReferrals += 1;
     if (oldStatus === 'pending') {
@@ -165,7 +192,7 @@ campusAmbassadorSchema.methods.updatePaymentStatus = async function(userId, paym
   
   // Remove points if payment was paid but now changed to pending/failed
   if (oldStatus === 'paid' && paymentStatus !== 'paid' && referral.pointsAwarded) {
-    this.totalPoints -= 10;
+    this.totalPoints -= 5;
     referral.pointsAwarded = false;
     this.paidReferrals -= 1;
     if (paymentStatus === 'pending') {

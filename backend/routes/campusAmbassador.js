@@ -27,7 +27,7 @@ const generateMCAId = async () => {
 // Campus Ambassador Signup
 router.post('/campus-ambassador/signup', async (req, res) => {
   try {
-    const { name, email, password, phone, college, branch, state, district, dateOfBirth } = req.body;
+    const { name, email, password, phone, college, branch, state, district, dateOfBirth, referralCode } = req.body;
 
     // Validate required fields
     if (!name || !email || !password || !phone || !college) {
@@ -44,6 +44,26 @@ router.post('/campus-ambassador/signup', async (req, res) => {
         success: false,
         message: 'Email already registered as Campus Ambassador'
       });
+    }
+
+    // Validate referral code if provided
+    let referringCA = null;
+    if (referralCode) {
+      referringCA = await CampusAmbassador.findOne({ mcaId: referralCode.toUpperCase() });
+      if (!referringCA) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid referral code. Please check the MCA ID and try again.'
+        });
+      }
+      
+      // Check if referring CA is from the same college
+      if (referringCA.college.toLowerCase() === college.toLowerCase()) {
+        return res.status(400).json({
+          success: false,
+          message: 'Cannot use referral code from a Campus Ambassador of your own college. Please use a referral code from a CA at a different college.'
+        });
+      }
     }
 
     // Generate MCA ID
@@ -68,6 +88,27 @@ router.post('/campus-ambassador/signup', async (req, res) => {
 
     await newCA.save();
 
+    // Award 20 points to referring Campus Ambassador if referral code was used
+    if (referringCA) {
+      referringCA.totalPoints += 20;
+      referringCA.caReferrals = (referringCA.caReferrals || 0) + 1;
+      
+      // Add to caReferralList
+      referringCA.caReferralList = referringCA.caReferralList || [];
+      referringCA.caReferralList.push({
+        mcaId: newCA.mcaId,
+        name: newCA.name,
+        email: newCA.email,
+        college: newCA.college,
+        registeredAt: new Date(),
+        pointsAwarded: 20
+      });
+      
+      referringCA.updateTier();
+      await referringCA.save();
+      logger.info(`Awarded 20 points to ${referringCA.mcaId} for CA referral: ${mcaId}`);
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       {
@@ -79,7 +120,7 @@ router.post('/campus-ambassador/signup', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    logger.info(`New Campus Ambassador registered: ${mcaId}`);
+    logger.info(`New Campus Ambassador registered: ${mcaId}${referralCode ? ` (Referred by: ${referralCode})` : ''}`);
 
     res.status(201).json({
       success: true,
@@ -211,12 +252,21 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
       totalReferrals: ca.totalReferrals,
       paidReferrals: ca.paidReferrals,
       pendingReferrals: ca.pendingReferrals,
+      caReferrals: ca.caReferrals || 0,
       referrals: ca.referrals.map(r => ({
           userId: r.userId,
           userName: r.userName,
           userEmail: r.userEmail,
           registeredAt: r.registeredAt,
           paymentStatus: r.paymentStatus,
+          pointsAwarded: r.pointsAwarded ? 5 : 0
+        })),
+      caReferralList: (ca.caReferralList || []).map(r => ({
+          mcaId: r.mcaId,
+          name: r.name,
+          email: r.email,
+          college: r.college,
+          registeredAt: r.registeredAt,
           pointsAwarded: r.pointsAwarded
         }))
     });

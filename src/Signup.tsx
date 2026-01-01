@@ -75,49 +75,73 @@ const Signup: React.FC<SignupProps> = ({
             {/* Single-step form: show all fields together like CA signup */}
             <div className="form-section">
               <h3>PERSONAL INFORMATION</h3>
-              <div className="ca-form-row" style={{ columnGap: '18px', rowGap: '14px' }}>
-                <div className="ca-form-group">
-                  <label htmlFor="name">Full Name *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={signupFormData.name}
-                    onChange={onInputChange}
-                    placeholder="Enter your full name"
-                    required
-                  />
-                </div>
-                <div className="ca-form-group">
-                  <label htmlFor="dateOfBirth">Date of Birth * (Your Password)</label>
-                  <input
-                    type="date"
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    value={signupFormData.dateOfBirth || ''}
-                    onChange={onInputChange}
-                    placeholder="DD/MM/YYYY"
-                    max={(() => {
-                      const today = new Date();
-                      const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
-                      return maxDate.toISOString().split('T')[0];
-                    })()}
-                    onInvalid={(e) => {
-                      const target = e.target as HTMLInputElement;
-                      const selectedDate = new Date(target.value);
-                      const today = new Date();
-                      const age = today.getFullYear() - selectedDate.getFullYear();
-                      if (age < 10) {
-                        target.setCustomValidity('You must be at least 10 years old to register');
-                      }
-                    }}
-                    onInput={(e) => {
-                      const target = e.target as HTMLInputElement;
-                      target.setCustomValidity('');
-                    }}
-                    required
-                  />
-                </div>
+              <div className="ca-form-group">
+                <label htmlFor="name">Full Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={signupFormData.name}
+                  onChange={onInputChange}
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+              <div className="ca-form-group">
+                <label htmlFor="email">Email *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={signupFormData.email}
+                  onChange={onInputChange}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div className="ca-form-group">
+                <label htmlFor="phone">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={signupFormData.phone}
+                  onChange={onInputChange}
+                  placeholder="10-digit phone number"
+                  maxLength={10}
+                  required
+                />
+              </div>
+              <div className="ca-form-group">
+                <label htmlFor="dateOfBirth">Date of Birth *</label>
+                <input
+                  type="date"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  value={signupFormData.dateOfBirth || ''}
+                  onChange={onInputChange}
+                  placeholder="dd-mm-yyyy"
+                  max={(() => {
+                    const today = new Date();
+                    const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+                    return maxDate.toISOString().split('T')[0];
+                  })()}
+                  onInvalid={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    const selectedDate = new Date(target.value);
+                    const today = new Date();
+                    const age = today.getFullYear() - selectedDate.getFullYear();
+                    if (age < 10) {
+                      target.setCustomValidity('You must be at least 10 years old to register');
+                    }
+                  }}
+                  onInput={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    target.setCustomValidity('');
+                  }}
+                  required
+                />
+                <small style={{ color: '#FFD700', fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>Your password will be auto-generated from your DOB (DDMMYYYY)</small>
               </div>
               <div className="ca-form-group">
                 <label htmlFor="gender">Gender</label>
@@ -141,37 +165,6 @@ const Signup: React.FC<SignupProps> = ({
               onCollegeChange={onCollegeChange}
               onOtherSelected={onOtherSelected}
             />
-
-            <div className="form-section">
-              <h3>CONTACT INFORMATION</h3>
-              <div className="ca-form-row" style={{ columnGap: '18px', rowGap: '14px' }}>
-                <div className="ca-form-group">
-                  <label htmlFor="email">Email Address *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={signupFormData.email}
-                    onChange={onInputChange}
-                    placeholder="your.email@example.com"
-                    required
-                  />
-                </div>
-                <div className="ca-form-group">
-                  <label htmlFor="phone">Mobile Number *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={signupFormData.phone}
-                    onChange={onInputChange}
-                    placeholder="10-digit mobile number"
-                    maxLength={10}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
 
             <div className="signup-navigation" style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
               <button 
@@ -256,88 +249,79 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
   return (
     <div className="form-section">
       <h3>ACADEMIC INFORMATION</h3>
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="registerId">College Registration Number</label>
-          <input
-            type="text"
-            id="registerId"
-            name="registerId"
-            value={signupFormData.registerId || ''}
-            onChange={onInputChange}
-            placeholder="Your college/university registration ID"
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="branch">Branch</label>
-          <input
-            type="text"
-            id="branch"
-            name="branch"
-            value={signupFormData.branch || ''}
-            onChange={onInputChange}
-            placeholder="Enter your branch"
-            className="form-input"
-          />
-        </div>
+      <div className="ca-form-group">
+        <label htmlFor="state">State *</label>
+        <select
+          id="state"
+          name="state"
+          value={signupFormData.state || ''}
+          onChange={onInputChange}
+          className="form-input form-select"
+          required
+        >
+          <option value="">Select State</option>
+          {states.map(state => (
+            <option key={state.no} value={state.name}>
+              {state.name}
+            </option>
+          ))}
+        </select>
       </div>
-      
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="state">State *</label>
-          <select
-            id="state"
-            name="state"
-            value={signupFormData.state || ''}
-            onChange={onInputChange}
-            className="form-input form-select"
-            required
-          >
-            <option value="">-- Select your state --</option>
-            {states.map(state => (
-              <option key={state.no} value={state.name}>
-                {state.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="district">District *</label>
-          <select
-            id="district"
-            name="district"
-            value={signupFormData.district || ''}
-            onChange={onInputChange}
-            className="form-input form-select"
-            required
-            disabled={!signupFormData.state}
-          >
-            <option value="">-- Select your district --</option>
-            {filteredDistricts.map(district => (
-              <option key={district.no} value={district.name}>
-                {district.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="college">College Name *</label>
-          <CollegeSelect
-            onChange={onCollegeChange}
-            selectedState={signupFormData.state || ''}
-            selectedDistrict={signupFormData.district || ''}
-            onOtherSelected={onOtherSelected}
-            required
-          />
-          <small style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.85em', marginTop: '5px', display: 'block' }}>
-            Select from the dropdown list or click "Other" if your college is not listed
-          </small>
-        </div>
+      <div className="ca-form-group">
+        <label htmlFor="district">District *</label>
+        <select
+          id="district"
+          name="district"
+          value={signupFormData.district || ''}
+          onChange={onInputChange}
+          className="form-input form-select"
+          required
+          disabled={!signupFormData.state}
+        >
+          <option value="">Select District</option>
+          {filteredDistricts.map(district => (
+            <option key={district.no} value={district.name}>
+              {district.name}
+            </option>
+          ))}
+        </select>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="referralCode">Campus Ambassador Referral Code (Optional)</label>
+      <div className="ca-form-group">
+        <label htmlFor="college">College *</label>
+        <CollegeSelect
+          onChange={onCollegeChange}
+          selectedState={signupFormData.state || ''}
+          selectedDistrict={signupFormData.district || ''}
+          onOtherSelected={onOtherSelected}
+          required
+        />
+      </div>
+      <div className="ca-form-group">
+        <label htmlFor="registerId">College Registration Number</label>
+        <input
+          type="text"
+          id="registerId"
+          name="registerId"
+          value={signupFormData.registerId || ''}
+          onChange={onInputChange}
+          placeholder="Your college/university registration ID"
+          className="form-input"
+        />
+      </div>
+      <div className="ca-form-group">
+        <label htmlFor="branch">Branch</label>
+        <input
+          type="text"
+          id="branch"
+          name="branch"
+          value={signupFormData.branch || ''}
+          onChange={onInputChange}
+          placeholder="Enter your branch"
+          className="form-input"
+        />
+      </div>
+      <div className="ca-form-group">
+        <label htmlFor="referralCode">Referral Code (Optional)</label>
         <input
           type="text"
           id="referralCode"
@@ -348,9 +332,6 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           className="form-input"
           style={{ textTransform: 'uppercase' }}
         />
-        <small style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.85em', marginTop: '5px', display: 'block' }}>
-          If you were referred by a Campus Ambassador, enter their MCA ID here
-        </small>
       </div>
     </div>
   );

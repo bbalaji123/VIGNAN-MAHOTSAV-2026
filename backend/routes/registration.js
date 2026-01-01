@@ -128,6 +128,20 @@ router.post('/register', async (req, res) => {
           referredBy: validReferralCode
         });
 
+        // If a valid referral code was used, update the CA's referral list
+        if (validReferralCode) {
+          try {
+            const ca = await CampusAmbassador.findOne({ mcaId: validReferralCode });
+            if (ca) {
+              await ca.addReferral(userId, name, normalizedEmail);
+              console.log(`Added referral ${userId} to CA ${validReferralCode}`);
+            }
+          } catch (referralError) {
+            console.error('Error adding referral to CA:', referralError);
+            // Don't fail the registration if referral update fails
+          }
+        }
+
         // Participant will be created only when user registers for events
         // No automatic participant creation during signup
 

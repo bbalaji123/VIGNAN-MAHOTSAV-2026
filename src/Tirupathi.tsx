@@ -98,7 +98,7 @@ const Tirupathi: React.FC = () => {
               paddingTop: '10px'
             }}
           >
-            (5-6 DEC,2025)
+            (5 Dec 2025 - 6 Jan, 2026)
           </p>
         </div>
 

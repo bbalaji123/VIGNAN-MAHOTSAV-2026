@@ -445,7 +445,7 @@ const EventDetail: React.FC = () => {
     },
     "Volley ball (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "VOLLEY BALL (Men)",
+      subtitle: "VOLLEY BALL (M&W)",
       rules: [
         "Team strength is 6+4 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
@@ -459,10 +459,16 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 30,000",
-        second: "Rs. 20,000",
-        third: "Rs. 7,000",
-        fourth: "Rs. 3,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -505,7 +511,7 @@ const EventDetail: React.FC = () => {
     },
     "Basket ball (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "BASKET BALL (Men)",
+      subtitle: "BASKET BALL (M&W)",
       rules: [
         "Team strength is 5+5 players.",
         "All matches are conducted on knock out basis.",
@@ -518,8 +524,16 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -561,7 +575,7 @@ const EventDetail: React.FC = () => {
     },
     "Kabaddi (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "KABADDI (Men)",
+      subtitle: "KABADDI (M&W)",
       rules: [
         "Team strength is 7+3 players.",
         "Pro Kabaddi rules & Regulations are applicable.",
@@ -577,8 +591,16 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -624,7 +646,7 @@ const EventDetail: React.FC = () => {
     },
     "Kho-Kho (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "KHO-KHO (Men)",
+      subtitle: "KHO-KHO (M&W)",
       rules: [
         "Team strength is 9+3 players.",
         "All matches are conducted on knock out basis.",
@@ -1815,7 +1837,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Online Photography": {
-      title: "FINE ARTS",
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Online Photography",
       rules: [
         "Photograph should be taken using DSLR camera.",
@@ -1831,9 +1853,10 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Ms. K.Unnathi", phone: "+91 79815 97629" },
-        { name: "Mr. Ch.Dhanush", phone: "+91 63014 20067" },
-        { name: "Ms. P.Lavanya ", phone: "+91 93819 88110" }
+        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
+        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
+        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
+        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
       ]
     },
 
@@ -1854,7 +1877,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
+        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
+        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
+        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+      ]
     },
     "Mahotsav Digital Chronicle": {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
@@ -1891,7 +1919,12 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
+        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
+        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
+        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+      ]
     },
     "Valorant": {
       title: "GAMING",
@@ -1911,7 +1944,9 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+
+      ]
     },
     "E-Football": {
       title: "GAMING",
@@ -1929,7 +1964,7 @@ const EventDetail: React.FC = () => {
       prizes: {
         first: "Rs. 3,000",
         second: "Rs. 2,000",
-        third: "Rs. 1,000"
+        third: "Rs. 1,500"
       },
       contacts: []
     },

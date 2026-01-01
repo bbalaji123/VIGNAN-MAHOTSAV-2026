@@ -584,34 +584,3 @@ export const getUserDetails = async (userId: string): Promise<any> => {
     };
   }
 };
-
-// Update user profile
-export const updateUserProfile = async (userId: string, profileData: {
-  name?: string;
-  email?: string;
-  phone?: string;
-  college?: string;
-  branch?: string;
-  dateOfBirth?: string;
-  gender?: string;
-  registerId?: string;
-}): Promise<ApiResponse> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/user/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(profileData),
-    });
-
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'Failed to update user profile',
-      error: error.message,
-    };
-  }
-};

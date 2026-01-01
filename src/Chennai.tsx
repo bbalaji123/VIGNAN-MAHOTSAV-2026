@@ -98,7 +98,7 @@ const Chennai: React.FC = () => {
               paddingTop: '10px'
             }}
           >
-            (19 Dec 2025 - 20 Jan 2026)
+            (5-6 DEC,2025)
           </p>
         </div>
 
@@ -227,5 +227,3 @@ const Chennai: React.FC = () => {
 };
 
 export default Chennai;
-
-

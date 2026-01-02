@@ -1899,24 +1899,31 @@ const EventsInfo: React.FC = () => {
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
-                    {roboGamesCards.map((card, index) => (
-                      <div
-                        key={index}
-                        className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
-                        onClick={() => handleEventDetailClick(card.title)}
-                      >
-                        <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
-                          <h2 className="subcategory-card-title">
-                            {card.title}
-                          </h2>
-                          {card.subtitle && (
-                            <p className="subcategory-card-subtitle">
-                              {card.subtitle}
-                            </p>
+                    {roboGamesCards.map((card, index) => {
+                      // Map robo games card titles to their image paths
+                      const imageMap: { [key: string]: string } = {
+                        "Line follower robot": "images/Line Flower Robot.png",
+                        "Bot Wrestling": "images/Bot wrestling.png",
+                        "Robo races": "images/Robo Races.png"
+                      };
+
+                      return (
+                        <div
+                          key={index}
+                          className="inner-event-card"
+                          onClick={() => handleEventDetailClick(card.title)}
+                        >
+                          {imageMap[card.title] && (
+                            <img
+                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              alt={card.title}
+                              loading="lazy"
+                              decoding="async"
+                            />
                           )}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

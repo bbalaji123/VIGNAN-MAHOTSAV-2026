@@ -4932,35 +4932,38 @@ const Dashboard: React.FC = () => {
               }}
             >
               {/* YouTube Video Embed */}
-              <iframe
-                ref={videoRef}
-                key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
-                width="100%"
-                height="100%"
-                src={isThrowbackUnlocked ? `https://www.youtube.com/embed/${selectedYear === '2023'
-                  ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
-                  : selectedYear === '2024'
-                    ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
-                    : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                  }?start=20&controls=1&modestbranding=1&rel=0&enablejsapi=1` : ''}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                title="Mahotsav Throwback Video"
-                loading="lazy"
-                style={{
-                  border: 'none',
-                  display: 'block',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  zIndex: 1,
+              {isThrowbackUnlocked && (
+                <iframe
+                  ref={videoRef}
+                  key={`video-${selectedYear}-${currentDay}-${isThrowbackUnlocked}`}
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${selectedYear === '2023'
+                    ? currentDay === 1 ? 'N3dzZ6CVdqg' : currentDay === 2 ? 'lPQ4inwLiFk' : 'o_jkjFvHftM'
+                    : selectedYear === '2024'
+                      ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
+                      : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
+                    }?start=20&controls=1&modestbranding=1&rel=0&enablejsapi=1`}
+                  frameBorder="0"
+                  sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  title="Mahotsav Throwback Video"
+                  loading="lazy"
+                  style={{
+                    border: 'none',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1,
                   pointerEvents: 'auto'
                 }}
               />
+              )}
               {/* Day indicator */}
               <div style={{
                 position: 'absolute',

@@ -56,14 +56,26 @@ router.get('/events', (req, res) => {
 // GET /api/events/:type (sports, culturals, parasports)
 router.get('/events/:type', (req, res) => {
   const { type } = req.params;
-  const normalizedType = String(type).toLowerCase();
+  let normalizedType = String(type).toLowerCase();
   const gender = req.query.gender;
 
-  if (!['sports', 'culturals', 'parasports'].includes(normalizedType)) {
+  // Handle both singular and plural forms
+  const typeMapping = {
+    'sport': 'sports',
+    'sports': 'sports',
+    'cultural': 'culturals',
+    'culturals': 'culturals',
+    'parasport': 'parasports',
+    'parasports': 'parasports'
+  };
+
+  normalizedType = typeMapping[normalizedType];
+
+  if (!normalizedType || !EVENT_GROUPS[normalizedType]) {
     return res.status(400).json({
       success: false,
       message: 'Invalid event type',
-      error: 'Allowed types: sports, culturals, parasports',
+      error: 'Allowed types: sports/sport, culturals/cultural, parasports/parasport (case-insensitive)',
     });
   }
 

@@ -50,7 +50,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
     >
       {/* Petals Layer */}
       <img 
-        src={`${import.meta.env.BASE_URL}petals.avif`}
+        src="/menu-dashboard/petals.avif"
         alt="Flower Petals"
         style={{ 
           width: '100%', 
@@ -67,7 +67,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
       
       {/* Sun Layer */}
       <img 
-        src={`${import.meta.env.BASE_URL}sun.avif`}
+        src="/menu-dashboard/sun.avif"
         alt="Sun"
         style={{ 
           width: sunSize, 
@@ -84,7 +84,7 @@ const FlowerComponent: React.FC<FlowerComponentProps> = ({
       {/* Moon Layer */}
       {!hideMoon && (
         <img 
-          src={`${import.meta.env.BASE_URL}moon.avif`}
+          src="/menu-dashboard/moon.avif"
           alt="Moon"
           className="moon-static"
           style={{ 

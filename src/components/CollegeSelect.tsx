@@ -29,7 +29,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherCollegeName, setOtherCollegeName] = useState('');
+  const [isValidSelection, setIsValidSelection] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Click outside handler
   useEffect(() => {
@@ -79,6 +81,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
   useEffect(() => {
     if (!selectedState) {
       setFilteredColleges([]);
+      setSearchTerm('');
+      setIsValidSelection(false);
+      onChange('');
       return;
     }
 
@@ -106,12 +111,16 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     const term = e.target.value;
     setSearchTerm(term);
     setShowDropdown(true);
-    // Clear the selected college when user types (forces them to select from dropdown or click Other)
-    if (term !== searchTerm) {
-      onChange('');
-      if (onOtherSelected) {
-        onOtherSelected(false);
-      }
+    // Clear validation when user types (forces selection from dropdown)
+    setIsValidSelection(false);
+    onChange(''); // Clear the value until they select from dropdown
+    if (onOtherSelected) {
+      onOtherSelected(false);
+    }
+    
+    // Set custom validity message
+    if (inputRef.current) {
+      inputRef.current.setCustomValidity('Please select a college from the dropdown or click "Other"');
     }
   };
 
@@ -119,8 +128,14 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     onChange(collegeName);
     setSearchTerm(collegeName);
     setShowDropdown(false);
+    setIsValidSelection(true);
     if (onOtherSelected) {
       onOtherSelected(false);
+    }
+    
+    // Clear custom validity message
+    if (inputRef.current) {
+      inputRef.current.setCustomValidity('');
     }
   };
 
@@ -153,16 +168,30 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       }
       
       onChange(otherCollegeName.trim());
+      setSearchTerm(otherCollegeName.trim());
       setShowOtherInput(false);
+      setIsValidSelection(true);
+      
+      // Clear custom validity message
+      if (inputRef.current) {
+        inputRef.current.setCustomValidity('');
+      }
     }
   };
 
   const handleCancelOther = () => {
     setShowOtherInput(false);
     setOtherCollegeName('');
+    setSearchTerm('');
     onChange('');
+    setIsValidSelection(false);
     if (onOtherSelected) {
       onOtherSelected(false);
+    }
+    
+    // Set custom validity message
+    if (inputRef.current) {
+      inputRef.current.setCustomValidity('Please select a college from the dropdown or click "Other"');
     }
   };
 
@@ -182,12 +211,19 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       {!showOtherInput ? (
         <>
           <input
+            ref={inputRef}
             type="text"
             value={searchTerm}
             onChange={handleSearchChange}
             onFocus={() => setShowDropdown(true)}
+            onBlur={(e) => {
+              // Validate on blur
+              if (!isValidSelection && searchTerm && required) {
+                e.target.setCustomValidity('Please select a college from the dropdown or click "Other"');
+              }
+            }}
             disabled={!selectedState}
-            placeholder={!selectedState ? "Select state first" : "Search your college..."}
+            placeholder={!selectedState ? "Select state first" : "Search and select your college..."}
             className="w-full p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
                      cursor-text transition-all duration-300 touch-manipulation placeholder:text-white/50
                      focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30
@@ -195,6 +231,11 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             required={required}
             autoComplete="off"
           />
+          {!isValidSelection && searchTerm && (
+            <div className="text-orange-400 text-xs mt-1 px-1">
+              ⚠️ Please select from dropdown or click "Other" button
+            </div>
+          )}
           
           {showDropdown && selectedState && (
             <div className="absolute z-50 w-full mt-2 max-h-60 overflow-y-auto bg-gray-900 border-2 border-white/20 rounded-xl shadow-2xl">
@@ -215,6 +256,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                       setShowDropdown(false);
                       setSearchTerm('');
                       onChange('');
+                      setIsValidSelection(false);
                       if (onOtherSelected) {
                         onOtherSelected(true);
                       }
@@ -230,7 +272,10 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                     setShowOtherInput(true);
                     setShowDropdown(false);
                     setOtherCollegeName(searchTerm);
-                    onChange(searchTerm);
+                    setIsValidSelection(false);
+                    if (onOtherSelected) {
+                      onOtherSelected(true);
+                    }
                   }}
                   className="px-4 py-3 text-center text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors"
                 >

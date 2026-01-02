@@ -16,15 +16,15 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
   const showBackButton = location.pathname !== '/';
 
   const menuCategories = [
-    { name: 'EVENTS', icon: '/events.svg' },
-    { name: 'ABOUT US', icon: '/team.svg' },
-    { name: 'SCHEDULE', icon: '/Schedule.svg' },
-    { name: 'COLLABORATION', icon: '/collaboration.svg' },
-    { name: 'ZONALS', icon: '/zonals.svg' },
-    { name: 'HOSPITALITY', icon: '/hospitality.svg' },
-    { name: 'CERTIFICATES', icon: '/home.svg' },
-    { name: 'MAP', icon: '/17.svg' },
-    { name: 'CAMPUS AMBASSADOR', icon: '/campus ambassador.svg' }
+    { name: 'EVENTS', icon: '/menu-dashboard/events.svg' },
+    { name: 'ABOUT US', icon: '/menu-dashboard/team.svg' },
+    { name: 'SCHEDULE', icon: '/menu-dashboard/Schedule.svg' },
+    { name: 'COLLABORATION', icon: '/menu-dashboard/collaboration.svg' },
+    { name: 'ZONALS', icon: '/menu-dashboard/zonals.svg' },
+    { name: 'HOSPITALITY', icon: '/menu-dashboard/hospitality.svg' },
+    { name: 'CERTIFICATES', icon: '/menu-dashboard/home.svg' },
+    { name: 'MAP', icon: '/menu-dashboard/17.svg' },
+    { name: 'CAMPUS AMBASSADOR', icon: '/menu-dashboard/campus ambassador.svg' }
   ];
 
   const handleCategoryClick = (category: string) => {
@@ -175,7 +175,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
             </div>
             <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-3 xs:left-4 sm:left-5 md:left-6 lg:left-8 right-3 xs:right-4 sm:right-5 md:right-6 lg:right-8">
               <img
-                src={`${import.meta.env.BASE_URL}logo.png`}
+                src="/images/logo.png"
                 alt="Logo"
                 className="w-8 h-8 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto opacity-80 hover:scale-110 transition-transform duration-300"
               />

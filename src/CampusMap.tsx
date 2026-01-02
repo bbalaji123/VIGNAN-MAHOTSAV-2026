@@ -105,7 +105,7 @@ const CampusMap: React.FC = () => {
           >
             {/* LEFT: Campus Image */}
             <img
-              src={`${import.meta.env.BASE_URL}map.png`}
+              src="/images/map.png"
               alt="Campus Blueprint - Mahotsav 2025 Venue Locations"
               className="w-[85%] max-w-[600px] h-auto object-contain"
             />

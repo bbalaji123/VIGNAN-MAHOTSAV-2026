@@ -1,16 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import BackButton from './components/BackButton';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
 
 const ParaSports: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate('/');
-  };
-
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
       backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
@@ -358,9 +350,6 @@ const ParaSports: React.FC = () => {
         `}
       </style>
 
-      {/* Navigation Buttons */}
-      <NavigationButtons onBackClick={handleBackClick} />
-
       {/* Main Content */}
       <div className="parasports-content">
         <h1 className="parasports-title">PARA SPORTS</h1>
@@ -371,7 +360,7 @@ const ParaSports: React.FC = () => {
             <div className="shield-icon"></div>
             <div className="card-icon-area">
               <img 
-                src={`${import.meta.env.BASE_URL}Para_Sports.png`}
+                src="/images/Para_Sports.png"
                 alt="Para Athletics" 
                 className="w-full h-full object-contain"
               />
@@ -385,7 +374,7 @@ const ParaSports: React.FC = () => {
             <div className="shield-icon"></div>
             <div className="card-icon-area">
               <img 
-                src={`${import.meta.env.BASE_URL}Para_cricket.png`}
+                src="/images/Para_cricket.png"
                 alt="Para Cricket" 
                 className="w-full h-full object-contain"
               />

@@ -13,6 +13,19 @@ interface EventDetailData {
     second: string;
     third?: string;
     fourth?: string;
+  } | {
+    men: {
+      first: string;
+      second: string;
+      third?: string;
+      fourth?: string;
+    };
+    women: {
+      first: string;
+      second: string;
+      third?: string;
+      fourth?: string;
+    };
   };
   contacts: {
     name: string;
@@ -2087,92 +2100,92 @@ const EventDetail: React.FC = () => {
   // Event image mapping
   const eventImageMap: { [key: string]: string } = {
     // Category Images
-    "Sports": "events/Sports.avif",
-    "Cultural": "events/Cultural.avif",
-    "Gaming": "events/Gaming.avif",
-    "Visual Arts": "events/visual arts.avif",
-    "Digital Arts": "events/digital arts.avif",
+    "Sports": "/images/Sports.avif",
+    "Cultural": "/images/Cultural.avif",
+    "Gaming": "/images/Gaming.avif",
+    "Visual Arts": "/images/visual arts.avif",
+    "Digital Arts": "/images/digital arts.avif",
     // Sports Events
-    "Athletics": "athletics.png",
-    "Men's Athletics": "athletics.png",
-    "Women's Athletics": "athletics.png",
-    "Para Sports": "para athletics (men).png",
-    "Para Athletics": "para athletics (men).png",
-    "Para Cricket": "para cricket(men).png",
-    "Chess": "events/chess.avif",
-    "Table Tennis": "events/Tabel Tennis.avif",
-    "Traditional Yogasana": "events/Traditional Yoga.avif",
-    "Artistic Yogasana": "events/Traditional Yoga.avif",
-    "Yoga & Individual": "Yoga & individual.png",
-    "Taekwondo": "events/Taekwando.avif",
-    "Tennikoit": "events/Tennikoit.avif",
-    "Volley ball (Men)": "events/volley ball.avif",
-    "Volley ball (Women)": "events/volley ball.avif",
-    "Basket ball (Men)": "events/basket ball.avif",
-    "Basket ball (Women)": "events/basket ball.avif",
-    "Kabaddi (Men)": "events/kabbadi.avif",
-    "Kabaddi (Women)": "events/kabbadi.avif",
-    "Kho-Kho (Men)": "events/kho kho.avif",
-    "Kho-Kho (Women)": "events/kho kho.avif",
-    "Hockey (Men)": "events/hockey.avif",
-    "Hockey (Women)": "events/hockey.avif",
-    "Throw ball": "events/throwball.avif",
-    "Football (Men)": "events/football men.avif",
-    "Football (Women)": "events/football men.avif",
+    "Athletics": "/images/athletics.png",
+    "Men's Athletics": "/images/athletics.png",
+    "Women's Athletics": "/images/athletics.png",
+    "Para Sports": "/images/para athletics (men).png",
+    "Para Athletics": "/images/para athletics (men).png",
+    "Para Cricket": "/images/para cricket(men).png",
+    "Chess": "/images/chess.avif",
+    "Table Tennis": "/images/Tabel Tennis.avif",
+    "Traditional Yogasana": "/images/Traditional Yoga.avif",
+    "Artistic Yogasana": "/images/Traditional Yoga.avif",
+    "Yoga & Individual": "/images/Yoga & individual.png",
+    "Taekwondo": "/images/Taekwando.avif",
+    "Tennikoit": "/images/Tennikoit.avif",
+    "Volley ball (Men)": "/images/volley ball.avif",
+    "Volley ball (Women)": "/images/volley ball.avif",
+    "Basket ball (Men)": "/images/basket ball.avif",
+    "Basket ball (Women)": "/images/basket ball.avif",
+    "Kabaddi (Men)": "/images/kabbadi.avif",
+    "Kabaddi (Women)": "/images/kabbadi.avif",
+    "Kho-Kho (Men)": "/images/kho kho.avif",
+    "Kho-Kho (Women)": "/images/kho kho.avif",
+    "Hockey (Men)": "/images/hockey.avif",
+    "Hockey (Women)": "/images/hockey.avif",
+    "Throw ball": "/images/throwball.avif",
+    "Football (Men)": "/images/football men.avif",
+    "Football (Women)": "/images/football men.avif",
     // Dance Events
-    "Classical Dance Solo": "events/classical dance.avif",
-    "Dancing Star - Western Solo": "events/dancig star.avif",
-    "Dancing Jodi - Western Duo": "events/dancing jodi.avif",
-    "Spot Dance - Jodi": "events/spot dance.avif",
-    "Group Dance": "events/group dance.avif",
+    "Classical Dance Solo": "/images/classical dance.avif",
+    "Dancing Star - Western Solo": "/images/dancig star.avif",
+    "Dancing Jodi - Western Duo": "/images/dancing jodi.avif",
+    "Spot Dance - Jodi": "/images/spot dance.avif",
+    "Group Dance": "/images/group dance.avif",
     // Music Events
-    "Singing Idol": "events/singing idol.avif",
-    "Group Singing": "events/group singing.avif",
-    "Singing Jodi": "events/singing jodi.avif",
-    "Classical Light Vocal Solo": "events/classical or light vocal solo.avif",
-    "Western Vocal Solo": "events/Western vocal solo.avif",
-    "Anthyakshari Duo": "events/anthyakshari.avif",
-    "Instrumental Solo": "events/instrumental solo.avif",
+    "Singing Idol": "/images/singing idol.avif",
+    "Group Singing": "/images/group singing.avif",
+    "Singing Jodi": "/images/singing jodi.avif",
+    "Classical Light Vocal Solo": "/images/classical or light vocal solo.avif",
+    "Western Vocal Solo": "/images/Western vocal solo.avif",
+    "Anthyakshari Duo": "/images/anthyakshari.avif",
+    "Instrumental Solo": "/images/instrumental solo.avif",
     // Theatre Events
-    "Skit": "events/skit.avif",
-    "Mime": "events/mime.avif",
-    "Mono Action": "events/Mono Action.avif",
-    "Spot Ad Making": "events/On Spot Ad Making.avif",
-    "Dialogue Dhamaka": "events/Dialogue Drama.avif",
+    "Skit": "/images/skit.avif",
+    "Mime": "/images/mime.avif",
+    "Mono Action": "/images/Mono Action.avif",
+    "Spot Ad Making": "/images/On Spot Ad Making.avif",
+    "Dialogue Dhamaka": "/images/Dialogue Drama.avif",
     // Literature Events
-    "Master Orator": "events/Master orator.avif",
-    "On Spot Creative Content Writing": "events/spot creative.avif",
-    "Telugu Vyaasa Rachana": "events/telugu vyasa rachana.avif",
-    "Shayari - Hindi": "events/Shayari hindi.avif",
-    "JAM": "events/impromptu.avif",
-    "Story telling": "events/story telling.avif",
-    "Quiz": "events/Quiz wiz.avif",
-    "Word Master": "events/word master.avif",
-    "Dumb Charades": "events/dumb chardes.avif",
+    "Master Orator": "/images/Master orator.avif",
+    "On Spot Creative Content Writing": "/images/spot creative.avif",
+    "Telugu Vyaasa Rachana": "/images/telugu vyasa rachana.avif",
+    "Shayari - Hindi": "/images/Shayari hindi.avif",
+    "JAM": "/images/impromptu.avif",
+    "Story telling": "/images/story telling.avif",
+    "Quiz": "/images/Quiz wiz.avif",
+    "Word Master": "/images/word master.avif",
+    "Dumb Charades": "/images/dumb chardes.avif",
     // Visual Arts Events
-    "Theme Painting": "events/Theme Painting.avif",
-    "Clay Modelling": "events/clay modeling.avif",
-    "Rangoli": "events/Rangoli.avif",
-    "Mehandi": "events/Mehandi.avif",
-    "Collage": "events/collage.avif",
-    "Face Painting": "events/Face painting.avif",
-    "Pencil Sketching": "events/pencil Sketching.avif",
-    "Mandala Art": "events/Mandala Art.avif",
+    "Theme Painting": "/images/Theme Painting.avif",
+    "Clay Modelling": "/images/clay modeling.avif",
+    "Rangoli": "/images/Rangoli.avif",
+    "Mehandi": "/images/Mehandi.avif",
+    "Collage": "/images/collage.avif",
+    "Face Painting": "/images/Face painting.avif",
+    "Pencil Sketching": "/images/pencil Sketching.avif",
+    "Mandala Art": "/images/Mandala Art.avif",
     // Fashion Design Events
-    "Haute Couture": "events/Theme Ramp walk.avif",
-    "Craftvilla": "events/Craft villa.avif",
-    "Texart": "events/texart.avif",
-    "T-Shirt Designing": "events/T-shirt designing.avif",
+    "Haute Couture": "/images/Theme Ramp walk.avif",
+    "Craftvilla": "/images/Craft villa.avif",
+    "Texart": "/images/texart.avif",
+    "T-Shirt Designing": "/images/T-shirt designing.avif",
     // Digital Storytelling Events
-    "Online Photography": "events/Theme Photography.avif",
-    "Digital Poster Making": "events/Digital Poster Making.avif",
-    "Mahotsav Digital Chronicle": "events/MH-26 Digital Chronicle.avif",
-    "Reel Making": "events/reel making.avif",
+    "Online Photography": "/images/Theme Photography.avif",
+    "Digital Poster Making": "/images/Digital Poster Making.avif",
+    "Mahotsav Digital Chronicle": "/images/MH-26 Digital Chronicle.avif",
+    "Reel Making": "/images/reel making.avif",
     // Gaming Events
-    "Valorant": "events/valorant.avif",
-    "E-Football": "events/E-Football.avif",
-    "Counter Strike": "events/Counter Strike.avif",
-    "Smash Karts": "events/smash kart.avif"
+    "Valorant": "/images/valorant.avif",
+    "E-Football": "/images/E-Football.avif",
+    "Counter Strike": "/images/Counter Strike.avif",
+    "Smash Karts": "/images/smash kart.avif"
   };
 
   const handleDownloadPDF = async () => {
@@ -2234,10 +2247,23 @@ const EventDetail: React.FC = () => {
             </div>
             <div>
                 <h3>Cash Prizes:</h3>
-                <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.first}</div>
-                <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.second}</div>
-                ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.third}</div>` : ''}
-                ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}</div>` : ''}
+                ${'men' in eventData.prizes ? `
+                    <h4>Men:</h4>
+                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.men.first}</div>
+                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.men.second}</div>
+                    ${eventData.prizes.men.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.men.third}</div>` : ''}
+                    ${eventData.prizes.men.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.men.fourth}</div>` : ''}
+                    <h4 style="margin-top: 20px;">Women:</h4>
+                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.women.first}</div>
+                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.women.second}</div>
+                    ${eventData.prizes.women.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.women.third}</div>` : ''}
+                    ${eventData.prizes.women.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.women.fourth}</div>` : ''}
+                ` : `
+                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.first}</div>
+                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.second}</div>
+                    ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.third}</div>` : ''}
+                    ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}</div>` : ''}
+                `}
                 <h3 style="margin-top: 30px;">Contact no:</h3>
                 ${eventData.contacts.map(contact => `<div class="contact-item">${contact.name}: ${contact.phone}</div>`).join('')}
             </div>
@@ -2327,7 +2353,7 @@ const EventDetail: React.FC = () => {
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
               <img
-                src={`${import.meta.env.BASE_URL}image.avif`}
+                src={`/menu-dashboard/image.avif`}
                 alt="Vignan Mahotsav"
                 style={{ height: '18rem', objectFit: 'contain', marginTop: '-5rem' }}
               />
@@ -2365,7 +2391,7 @@ const EventDetail: React.FC = () => {
               pointerEvents: 'none'
             }}>
               <img
-                src={`${import.meta.env.BASE_URL}image.avif`}
+                src={`/menu-dashboard/image.avif`}
                 alt="Vignan Mahotsav"
                 style={{
                   width: '100% !important',
@@ -2405,7 +2431,7 @@ const EventDetail: React.FC = () => {
               <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-2 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md" style={{ borderColor: '#FFD700' }}>
                 {eventName && eventImageMap[eventName] ? (
                   <img
-                    src={`${import.meta.env.BASE_URL}${eventImageMap[eventName]}`}
+                    src={eventImageMap[eventName]}
                     alt={eventName}
                     className="w-full h-full object-cover"
                   />
@@ -2441,28 +2467,83 @@ const EventDetail: React.FC = () => {
                 <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                   Cash Prizes:
                 </h3>
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>First</span>
-                    <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.first}</span>
-                  </div>
-                  <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                    <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Second</span>
-                    <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.second}</span>
-                  </div>
-                  {eventData.prizes.third && (
-                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Third</span>
-                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.third}</span>
+                {'men' in eventData.prizes ? (
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-300 mb-2" style={{ fontFamily: 'Borisna, sans-serif' }}>Men:</h4>
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                          <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>First</span>
+                          <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.men.first}</span>
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                          <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Second</span>
+                          <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.men.second}</span>
+                        </div>
+                        {eventData.prizes.men.third && (
+                          <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                            <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Third</span>
+                            <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.men.third}</span>
+                          </div>
+                        )}
+                        {eventData.prizes.men.fourth && (
+                          <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                            <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Fourth</span>
+                            <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.men.fourth}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                  {eventData.prizes.fourth && (
-                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
-                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Fourth</span>
-                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.fourth}</span>
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-300 mb-2" style={{ fontFamily: 'Borisna, sans-serif' }}>Women:</h4>
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                          <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>First</span>
+                          <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.women.first}</span>
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                          <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Second</span>
+                          <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.women.second}</span>
+                        </div>
+                        {eventData.prizes.women.third && (
+                          <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                            <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Third</span>
+                            <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.women.third}</span>
+                          </div>
+                        )}
+                        {eventData.prizes.women.fourth && (
+                          <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                            <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Fourth</span>
+                            <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.women.fourth}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>First</span>
+                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.first}</span>
+                    </div>
+                    <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                      <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Second</span>
+                      <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.second}</span>
+                    </div>
+                    {eventData.prizes.third && (
+                      <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                        <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Third</span>
+                        <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.third}</span>
+                      </div>
+                    )}
+                    {eventData.prizes.fourth && (
+                      <div className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base">
+                        <span className="font-bold text-yellow-400 min-w-[60px] sm:min-w-[80px]" style={{ fontFamily: 'Borisna, sans-serif' }}>Fourth</span>
+                        <span className="font-semibold" style={{ fontFamily: 'Borisna, sans-serif' }}>- {eventData.prizes.fourth}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Contact Information */}

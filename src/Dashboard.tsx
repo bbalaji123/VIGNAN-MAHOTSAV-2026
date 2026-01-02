@@ -404,7 +404,6 @@ const Dashboard: React.FC = () => {
     district: '',
     referralCode: ''
   });
-  const [isOtherCollege, setIsOtherCollege] = useState(false);
   const [signupStep, setSignupStep] = useState(1);
   const totalSteps = 3;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -1813,7 +1812,6 @@ const Dashboard: React.FC = () => {
           district: '',
           referralCode: ''
         });
-        setIsOtherCollege(false);
       } else {
         setSubmitMessage({
           type: 'error',
@@ -2395,7 +2393,7 @@ const Dashboard: React.FC = () => {
           {/* Gaurada Image beside hamburger */}
           <div className="absolute top-0 left-16 sm:top-7 z-60">
             <img
-              src={`${import.meta.env.BASE_URL}Garuda.avif`}
+              src="/menu-dashboard/Garuda.avif"
               alt="Garuda"
               className="h-20 sm:h-24 w-auto object-contain"
             />
@@ -2407,7 +2405,7 @@ const Dashboard: React.FC = () => {
       {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && !showRegistrationModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
           <img
-            src={`${import.meta.env.BASE_URL}Vignan-logo.avif`}
+            src="/menu-dashboard/Vignan-logo.avif"
             alt="Vignan Logo"
             className="vignan-logo-img"
           />
@@ -2418,12 +2416,12 @@ const Dashboard: React.FC = () => {
       <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{ background: "transparent", zIndex: 1, position: 'relative' }} >
         {/* Left side image - 1.avif */}
         <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
-          <img src="/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
+          <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
         </div>
 
         {/* Right side image - 2.avif */}
         <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
-          <img src="/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
+          <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
         </div>
 
         {/* National Level Youth Festival Text - Positioned absolutely */}
@@ -2431,7 +2429,7 @@ const Dashboard: React.FC = () => {
         </div>
         {/* Logo */}
         <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{ marginTop: "-80px", display: "flex", justifyContent: "center" }}>
-          <img src={`${import.meta.env.BASE_URL}image.avif`} alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
+          <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
         </div>
 
         {/* Action Buttons - separate container with mobile-specific positioning */}
@@ -2598,7 +2596,7 @@ const Dashboard: React.FC = () => {
             </div>
             {/* Static Moon - Not rotating */}
             <img
-              src={`${import.meta.env.BASE_URL}moon.avif`}
+              src={`/menu-dashboard/moon.avif`}
               alt="Moon"
               style={{
                 position: 'absolute',
@@ -2632,7 +2630,7 @@ const Dashboard: React.FC = () => {
             </div>
             {/* Static Moon - Not rotating */}
             <img
-              src={`${import.meta.env.BASE_URL}moon.avif`}
+              src={`/menu-dashboard/moon.avif`}
               alt="Moon"
               style={{
                 position: 'absolute',
@@ -2669,7 +2667,7 @@ const Dashboard: React.FC = () => {
                 aria-label="Go back"
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}BACK.avif`}
+                  src={`/menu-dashboard/BACK.avif`}
                   alt="Back"
                   className="w-full h-full object-contain"
                 />
@@ -2695,7 +2693,7 @@ const Dashboard: React.FC = () => {
                     aria-label="Go back"
                   >
                     <img
-                      src={`${import.meta.env.BASE_URL}BACK.avif`}
+                      src={`/menu-dashboard/BACK.avif`}
                       alt="Back"
                       className="w-full h-full object-contain"
                     />
@@ -2723,7 +2721,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/home.svg" alt="Home" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">HOME</span>
                 </div>
 
@@ -2747,7 +2745,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/events.svg" alt="Events" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">EVENTS</span>
                 </div>
 
@@ -2771,7 +2769,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/profile.svg" alt="Profile" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">PROFILE</span>
                 </div>
 
@@ -2798,7 +2796,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/Schedule.svg" alt="Schedule" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">SCHEDULE</span>
                 </div>
 
@@ -2825,7 +2823,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/collaboration.svg" alt="Collaboration" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">COLLABORATION</span>
                 </div>
 
@@ -2852,7 +2850,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/zonals.svg" alt="Zonals" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">ZONALS</span>
                 </div>
 
@@ -2906,7 +2904,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/hospitality.svg" alt="Hospitality" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">HOSPITALITY</span>
                 </div>
 
@@ -2930,7 +2928,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/campus ambassador.svg" alt="Campus Ambassador" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">CAMPUS AMBASSADOR</span>
                 </div>
 
@@ -2957,7 +2955,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/Sponsership.svg" alt="Sponsors" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">SPONSORS</span>
                 </div>
 
@@ -2984,7 +2982,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/team.svg" alt="Our Team" className="w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">OUR TEAM</span>
                 </div>
 
@@ -3011,7 +3009,7 @@ const Dashboard: React.FC = () => {
                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                   }}
                 >
-                  <img src="/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
+                  <img src="/menu-dashboard/17.svg" alt="Map" className="w-16 h-16 mb-4 object-contain transition-transform duration-300 group-hover:scale-125" />
                   <span className="text-white text-lg tracking-wide">MAP</span>
                 </div>
               </div>
@@ -3049,7 +3047,7 @@ const Dashboard: React.FC = () => {
                       onClick={() => handleParaSportsClick(card.title)}
                     >
                       <img
-                        src="/events/para.avif"
+                        src="/images/para.avif"
                         alt={card.title}
                         loading="lazy"
                         decoding="async"
@@ -3282,7 +3280,7 @@ const Dashboard: React.FC = () => {
                         }}
                       >
                         <div className="cultural-card-poster-background" style={{
-                          backgroundImage: `url(${import.meta.env.BASE_URL}events/${card.title === 'Music' ? 'singing idol' :
+                          backgroundImage: `url(/images/${card.title === 'Music' ? 'singing idol' :
                             card.title === 'Dance' ? 'Dance' :
                               card.title === 'Theatre' ? 'skit' :
                                 card.title === 'Literature' ? 'literature' :
@@ -3634,8 +3632,8 @@ const Dashboard: React.FC = () => {
 
                   // Image mapping for spotlight events
                   const spotlightImageMap: { [key: string]: string } = {
-                    "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
-                    "Mahotsav Got Talent": "events/gaming.avif"
+                    "Mr. and Ms. Mahotsav": "images/Mr and ms mahotsav.avif",
+                    "Mahotsav Got Talent": "images/gaming.avif"
                   };
 
                   const imagePath = spotlightImageMap[card.title];
@@ -4057,7 +4055,7 @@ const Dashboard: React.FC = () => {
             zIndex: 1
           }}>
             <img
-              src="/Garuda.avif"
+              src="/menu-dashboard/Garuda.avif"
               alt="Garuda Logo"
               style={{
                 width: '100%',
@@ -4075,7 +4073,7 @@ const Dashboard: React.FC = () => {
               marginBottom: '30px',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
               fontFamily: 'Quesha, sans-serif'
-            }}>Mahotsav 2026 - The Eternal Harmony</h3>
+            }}>Mahotsav 2026 - For Eternal Harmony</h3>
 
             <p className="theme-description" style={{
               fontSize: '1.25rem',
@@ -4086,7 +4084,7 @@ const Dashboard: React.FC = () => {
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
               fontFamily: 'Borisna, sans-serif'
             }}>
-              Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding ?17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
+              Vignan is all geared up for the 19th edition of Mahotsav 2026, a national-level convergence of talent centered on the sacred theme "Eternal Harmony," running for three dynamic days from February 5th to 7th, 2026. This event is meticulously designed to merge the diverse pursuits of sport, culture, art, and athletics into a single, vibrant platform, offering over 20,000 participants from 300+ colleges a high-stakes opportunity to showcase their excellence. With a magnificent prize pool exceeding 17,00,000, Mahotsav 2026 is an essential crucible for nurturing the nation's most promising young minds, providing a powerful stage for students, a high-visibility engagement platform for sponsors, and a celebrated organizational achievement for Vignan, reinforcing its legacy as a premier host of national youth aspiration.
             </p>
           </div>
 
@@ -4254,7 +4252,7 @@ const Dashboard: React.FC = () => {
                   textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
                   textAlign: 'center',
                   lineHeight: '1.3'
-                }}>ONLINE AUDIANCE</div>
+                }}>ONLINE AUDIENCE</div>
               </div>
 
               {/* Editions */}
@@ -4332,7 +4330,7 @@ const Dashboard: React.FC = () => {
                   marginBottom: '6px',
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   lineHeight: '1.2'
-                }}>{cashPrizes}+ LACKS</div>
+                }}>{cashPrizes}+ LAKHS</div>
                 <div style={{
                   color: '#f5e210',
                   fontWeight: '600',
@@ -5132,7 +5130,7 @@ const Dashboard: React.FC = () => {
               </div>
               {/* Static Moon - Not rotating */}
               <img
-                src={`${import.meta.env.BASE_URL}moon.avif`}
+                src={`/menu-dashboard/moon.avif`}
                 alt="Moon"
                 style={{
                   position: 'absolute',
@@ -5167,7 +5165,7 @@ const Dashboard: React.FC = () => {
               </div>
               {/* Static Moon - Not rotating */}
               <img
-                src={`${import.meta.env.BASE_URL}moon.avif`}
+                src={`/menu-dashboard/moon.avif`}
                 alt="Moon"
                 style={{
                   position: 'absolute',
@@ -5291,7 +5289,6 @@ const Dashboard: React.FC = () => {
         isSubmitting={isSubmitting}
         submitMessage={submitMessage}
         onLoginClick={() => { setShowSignupModal(false); setShowLoginModal(true); }}
-        onOtherSelected={(isOther) => setIsOtherCollege(isOther)}
       />
 
       {/* Sub-Modal for Menu Categories */}
@@ -6358,7 +6355,7 @@ const Dashboard: React.FC = () => {
             {/* Logo Section */}
             <div>
               <img
-                src={`${import.meta.env.BASE_URL}image.avif`}
+                src={`/images/image.avif`}
                 alt="Mahotsav 2026"
                 className="footer-logo"
                 style={{
@@ -6803,7 +6800,7 @@ const Dashboard: React.FC = () => {
                           </div>
                           
                           {/* Events in this category */}
-                          {expandedSections.has(`sports-${category}`) && events.map((event: any, index: number) => {
+                          {expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
                             const eventName = event.Event;
                             const eventId = `sport-${eventName}`;
 
@@ -7025,7 +7022,7 @@ const Dashboard: React.FC = () => {
                           </div>
                           
                           {/* Events in this category */}
-                          {expandedSections.has(`culturals-${category}`) && events.map((event: any, index: number) => {
+                          {expandedSections.has(`culturals-${category}`) && events.map((event: any, _index: number) => {
                             const eventName = event.Event;
                             const eventId = `cultural-${eventName}`;
 

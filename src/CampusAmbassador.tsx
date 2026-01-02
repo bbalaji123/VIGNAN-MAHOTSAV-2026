@@ -637,7 +637,7 @@ const CampusAmbassador: React.FC = () => {
 
       {/* Mahotsav Logo */}
       <img 
-        src={`${import.meta.env.BASE_URL}image.avif`}
+        src={`/images/image.avif`}
         alt="Vignan Mahotsav 2026"
         className="ca-mahotsav-logo"
       />
@@ -1236,7 +1236,7 @@ const CampusAmbassador: React.FC = () => {
             {/* Logo Section */}
             <div>
               <img
-                src={`${import.meta.env.BASE_URL}image.avif`}
+                src={`/images/image.avif`}
                 alt="Mahotsav 2026"
                 className="footer-logo"
                 style={{

@@ -812,7 +812,7 @@ body::-webkit-scrollbar {
 
 /* Full Background Extension */
 .single-page-app.full-bg {
-  background-image: url('/Background-redesign.avif');
+  background-image: url('/images/Background-redesign.avif');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -3444,25 +3444,25 @@ body {
 .footer-lotus-top-left {
   top: 20px;
   left: 50px;
-  background-image: url('/logo.png');
+  background-image: url('/images/logo.png');
 }
 
 .footer-lotus-top-right {
   top: 20px;
   right: 50px;
-  background-image: url('/logo.png');
+  background-image: url('/images/logo.png');
 }
 
 .footer-lotus-bottom-left {
   bottom: 20px;
   left: 30px;
-  background-image: url('/photo.png');
+  background-image: url('/images/photo.png');
 }
 
 .footer-lotus-bottom-right {
   bottom: 20px;
   right: 30px;
-  background-image: url('/photo.png');
+  background-image: url('/images/photo.png');
 }
 
 /* Footer Content */
@@ -5143,7 +5143,7 @@ body {
 }
 
 .sports-card-poster-background {
-  background-image: url('/card-bg.avif');
+  background-image: url('/images/card-bg.avif');
   background-size: cover;
   background-position: center;
   border: 2px dashed #999;

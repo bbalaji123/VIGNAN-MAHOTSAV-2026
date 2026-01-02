@@ -4,7 +4,7 @@
 /* Custom Font - Coffee+Tea Demo */
 @font-face {
   font-family: 'coffee+tea demo';
-  src: url('/coffee+teademo-Regular.ttf') format('truetype');
+  src: url('/images/coffee+teademo-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 /* Custom Font - Aladin */
 @font-face {
   font-family: 'Aladin';
-  src: url('/Aladin.ttf') format('truetype');
+  src: url('/images/Aladin.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +20,7 @@
 /* Custom Font - Borisna */
 @font-face {
   font-family: 'Borisna';
-  src: url('/Borisna.ttf') format('truetype');
+  src: url('/images/Borisna.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,7 +28,7 @@
 /* Custom Font - Quesha */
 @font-face {
   font-family: 'Quesha';
-  src: url('/Quesha.ttf') format('truetype');
+  src: url('/images/Quesha.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

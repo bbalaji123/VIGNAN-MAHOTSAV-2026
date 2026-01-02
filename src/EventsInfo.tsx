@@ -47,7 +47,8 @@ const EventsInfo: React.FC = () => {
     { title: "Table Tennis", subtitle: "" },
     { title: "Traditional Yogasana", subtitle: "" },
     { title: "Taekwondo", subtitle: "under 8 wt. categories" },
-    { title: "Tennikoit", subtitle: "" }
+    { title: "Tennikoit", subtitle: "" },
+    { title: "Throwball", subtitle: "" }
   ];
 
   const mensTeamSportsCards = [
@@ -777,7 +778,7 @@ const EventsInfo: React.FC = () => {
 
           /* Main Category Cards */
           .category-card {
-            background-image: url(/card-bg.avif);
+            background-image: url(/images/card-bg.avif);
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -808,7 +809,7 @@ const EventsInfo: React.FC = () => {
 
           /* Sub-category Cards (with background image) */
           .subcategory-card {
-            background-image: url(/card-bg.avif);
+            background-image: url(/images/card-bg.avif);
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -838,7 +839,7 @@ const EventsInfo: React.FC = () => {
 
           /* Cultural Event Cards (with background image) */
           .cultural-event-card {
-            background-image: url(/card-bg.avif);
+            background-image: url(/images/card-bg.avif);
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -939,7 +940,7 @@ const EventsInfo: React.FC = () => {
             {/* Left column: Logo and Back button stacked */}
             <div className="flex flex-col items-start gap-3">
               <img
-                src={`${import.meta.env.BASE_URL}image.avif`}
+                src={`/menu-dashboard/image.avif`}
                 alt="Vignan Mahotsav"
                 className="events-logo"
                 style={{ marginTop: '-60px' }}
@@ -1046,7 +1047,7 @@ const EventsInfo: React.FC = () => {
                 }} />
             </div>
             <img
-              src={`${import.meta.env.BASE_URL}image.avif`}
+              src={`/menu-dashboard/image.avif`}
               alt="Vignan Mahotsav"
               className="events-logo events-mobile-logo mx-auto"
             />
@@ -1086,7 +1087,7 @@ const EventsInfo: React.FC = () => {
                     onClick={handleCulturalsCardClick}
                     style={{
                       margin: '0 16px',
-                      backgroundImage: 'url(/events/Cultural.avif)',
+                      backgroundImage: 'url(/images/Cultural.avif)',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
@@ -1119,7 +1120,7 @@ const EventsInfo: React.FC = () => {
                       onClick={handleSportsCardClick}
                       style={{
                         margin: '0 16px',
-                        backgroundImage: 'url(/events/Sports.avif)',
+                        backgroundImage: 'url(/images/Sports.avif)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         position: 'relative',
@@ -1134,13 +1135,6 @@ const EventsInfo: React.FC = () => {
                   {/* Download Rulebook button - Desktop */}
                   <button
                     className="download-rulebook-btn download-rulebook-desktop"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const link = document.createElement('a');
-                      link.href = '/Mahostav Rules Book 2025.pdf';
-                      link.download = 'Mahostav Rules Book 2026.pdf';
-                      link.click();
-                    }}
                   >
                     DOWNLOAD RULEBOOK
                   </button>
@@ -1153,7 +1147,7 @@ const EventsInfo: React.FC = () => {
                     onClick={handleSportsCardClick}
                     style={{
                       margin: '0 16px',
-                      backgroundImage: 'url(/events/Sports.avif)',
+                      backgroundImage: 'url(/images/Sports.avif)',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
@@ -1171,7 +1165,7 @@ const EventsInfo: React.FC = () => {
                     onClick={() => setShowRoboWarsGaming(true)}
                     style={{
                       margin: '0 16px',
-                      backgroundImage: 'url(/events/Gaming.avif)',
+                      backgroundImage: 'url(/images/Gaming.avif)',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
@@ -1217,10 +1211,10 @@ const EventsInfo: React.FC = () => {
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Athletics": "athletics.png",
-                        "Individual &": "events/individual.png",
-                        "Team Field": "team events.png",
-                        "Para Sports": "Para_Sports.png"
+                        "Athletics": "/images/athletics.png",
+                        "Individual &": "/images/individual.png",
+                        "Team Field": "/images/team events.png",
+                        "Para Sports": "/images/Para_Sports.png"
                       };
 
                       return (
@@ -1231,7 +1225,7 @@ const EventsInfo: React.FC = () => {
                         >
                           {imageMap[card.title] && (
                             <img
-                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              src={imageMap[card.title]}
                               alt={card.title}
                               className="absolute inset-0 w-full h-full object-contain"
                               loading="lazy"
@@ -1267,12 +1261,13 @@ const EventsInfo: React.FC = () => {
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Chess": "events/chess.avif",
-                        "Table Tennis": "events/Tabel Tennis.avif",
-                        "Traditional Yogasana": "events/Traditional Yoga.avif",
-                        "Taekwondo": "events/Taekwando.avif",
-                        "Tennikoit": "events/Tennikoit.avif",
-                        "Yoga & Individual": "Yoga & individual.png"
+                        "Chess": "images/chess.avif",
+                        "Table Tennis": "images/Tabel Tennis.avif",
+                        "Traditional Yogasana": "images/Traditional Yoga.avif",
+                        "Taekwondo": "images/Taekwando.avif",
+                        "Tennikoit": "images/Tennikoit.avif",
+                        "Throwball": "images/throwball.avif",
+                        "Yoga & Individual": "/images/Yoga & individual.png"
                       };
 
                       return (
@@ -1307,12 +1302,13 @@ const EventsInfo: React.FC = () => {
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Chess": "events/chess.avif",
-                        "Table Tennis": "events/Tabel Tennis.avif",
-                        "Traditional Yogasana": "events/Traditional Yoga.avif",
-                        "Taekwondo": "events/Taekwando.avif",
-                        "Tennikoit": "events/Tennikoit.avif",
-                        "Yoga & Individual": "Yoga & individual.png"
+                        "Chess": "images/chess.avif",
+                        "Table Tennis": "images/Tabel Tennis.avif",
+                        "Traditional Yogasana": "images/Traditional Yoga.avif",
+                        "Taekwondo": "images/Taekwando.avif",
+                        "Tennikoit": "images/Tennikoit.avif",
+                        "Throwball": "images/throwball.avif",
+                        "Yoga & Individual": "/images/Yoga & individual.png"
                       };
 
                       return (
@@ -1347,12 +1343,12 @@ const EventsInfo: React.FC = () => {
                     {mensTeamSportsCards.map((card, index) => {
                       // Map men's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Volley ball": "events/volley ball.avif",
-                        "Basket ball": "events/basket ball.avif",
-                        "Kabaddi": "events/kabbadi.avif",
-                        "Football": "events/football men.avif",
-                        "Kho-Kho": "events/kho kho.avif",
-                        "Hockey": "events/hockey.avif"
+                        "Volley ball": "images/volley ball.avif",
+                        "Basket ball": "images/basket ball.avif",
+                        "Kabaddi": "images/kabbadi.avif",
+                        "Football": "images/football men.avif",
+                        "Kho-Kho": "images/kho kho.avif",
+                        "Hockey": "images/hockey.avif"
                       };
 
                       return (
@@ -1387,11 +1383,11 @@ const EventsInfo: React.FC = () => {
                     {womensTeamSportsCards.map((card, index) => {
                       // Map women's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Volley ball": "events/volley ball.avif",
-                        "Basket ball": "events/basket ball.avif",
-                        "Kabaddi": "events/kabbadi.avif",
-                        "Kho-Kho": "events/kho kho.avif",
-                        "Throw ball": "events/throwball.avif"
+                        "Volley ball": "images/volley ball.avif",
+                        "Basket ball": "images/basket ball.avif",
+                        "Kabaddi": "images/kabbadi.avif",
+                        "Kho-Kho": "images/kho kho.avif",
+                        "Throw ball": "images/throwball.avif"
                       };
 
                       return (
@@ -1431,7 +1427,7 @@ const EventsInfo: React.FC = () => {
                       >
                         {card.title === "Para Athletics" && (
                           <img
-                            src={`${import.meta.env.BASE_URL}para athletics (men).png`}
+                            src={`/images/para athletics (men).png`}
                             alt="Para Athletics"
                             className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
@@ -1440,7 +1436,7 @@ const EventsInfo: React.FC = () => {
                         )}
                         {card.title === "Para Cricket" && (
                           <img
-                            src={`${import.meta.env.BASE_URL}para cricket(men).png`}
+                            src={`/images/para cricket(men).png`}
                             alt="Para Cricket"
                             className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
@@ -1492,7 +1488,7 @@ const EventsInfo: React.FC = () => {
                           className="event-card relative rounded-3xl cursor-pointer transition-all duration-300 overflow-hidden"
                           onClick={handleCardClick}
                           style={{
-                            backgroundImage: 'url(/card-bg.avif)',
+                            backgroundImage: 'url(/images/card-bg.avif)',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             border: '1px solid rgba(255, 255, 255, 0.18)',
@@ -1501,7 +1497,7 @@ const EventsInfo: React.FC = () => {
                         >
                           {card.title === "Dance" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}dance.png`}
+                              src={`/images/dance.png`}
                               alt="Dance"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1509,7 +1505,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Music" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}music.avif`}
+                              src={`/images/music.avif`}
                               alt="Music"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1517,7 +1513,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Dramatics" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}events/Dramatics.png`}
+                              src="/images/Dramatics.png"
                               alt="Dramatics"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1525,7 +1521,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Literature" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}literary.png`}
+                              src={`/images/literary.png`}
                               alt="Literature"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1533,7 +1529,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Visual Arts" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}events/visual arts.png`}
+                              src="/images/visual arts.png"
                               alt="Visual Arts"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1541,7 +1537,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Fashion Design" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}fashion.png`}
+                              src={`/images/fashion.png`}
                               alt="Fashion Design"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1549,7 +1545,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Digital Storytelling & Creative Media" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}events/Digital Arts.png`}
+                              src="/images/Digital Arts.png"
                               alt="Digital Storytelling"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1557,7 +1553,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Spot Light" && (
                             <img
-                              src={`${import.meta.env.BASE_URL}spotlight.png`}
+                              src={`/images/spotlight.png`}
                               alt="Spot Light"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1586,11 +1582,11 @@ const EventsInfo: React.FC = () => {
                     {danceCards.map((card, index) => {
                       // Map dance card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Classical Dance Solo": "events/classical dance.avif",
-                        "Dancing Star – Western Solo": "events/dancig star.avif",
-                        "Dancing Jodi – Western Duo": "events/dancing jodi.avif",
-                        "Spot Dance - Jodi": "events/spot dance.avif",
-                        "Group Dance (10 no.)": "events/group dance.avif"
+                        "Classical Dance Solo": "images/classical dance.avif",
+                        "Dancing Star – Western Solo": "images/dancig star.avif",
+                        "Dancing Jodi – Western Duo": "images/dancing jodi.avif",
+                        "Spot Dance - Jodi": "images/spot dance.avif",
+                        "Group Dance (10 no.)": "images/group dance.avif"
                       };
 
                       return (
@@ -1625,19 +1621,20 @@ const EventsInfo: React.FC = () => {
                     {musicCards.map((card, index) => {
                       // Map music card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Singing Idol": "events/singing idol.avif",
-                        "Group Singing (6 no.)": "events/group singing.avif",
-                        "Singing Jodi": "events/singing jodi.avif",
-                        "Classical/Light Vocal Solo": "events/classical or light vocal solo.avif",
-                        "Western Vocal Solo": "events/Western vocal solo.avif",
-                        "Anthyakshari Duo": "events/anthyakshari.avif",
-                        "Instrumental Solo": "events/instrumental solo.avif"
+                        "Singing Idol": "images/singing idol.avif",
+                        "Group Singing (6 no.)": "images/group singing.avif",
+                        "Singing Jodi": "images/singing jodi.avif",
+                        "Classical/Light Vocal Solo": "images/classical or light vocal solo.avif",
+                        "Western Vocal Solo": "images/Western vocal solo.avif",
+                        "Anthyakshari Duo": "images/anthyakshari.avif",
+                        "Instrumental Solo": "images/instrumental solo.avif"
                       };
 
                       return (
                         <div
                           key={index}
                           className="inner-event-card"
+                          style={index >= 4 ? { marginBottom: '50px' } : {}}
                           onClick={() => handleEventDetailClick(card.title)}
                         >
                           {imageMap[card.title] && (
@@ -1666,11 +1663,11 @@ const EventsInfo: React.FC = () => {
                     {theatreCards.map((card, index) => {
                       // Map theatre card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Skit (8 no.)": "events/skit.avif",
-                        "Mime (6 no.)": "events/mime.avif",
-                        "Dialogue Dhamakha": "events/Dialogue Drama.avif",
-                        "Mono Action": "events/Mono Action.avif",
-                        "On the Spot Ad making": "events/On Spot Ad Making.avif"
+                        "Skit (8 no.)": "images/skit.avif",
+                        "Mime (6 no.)": "images/mime.avif",
+                        "Dialogue Dhamakha": "images/Dialogue Drama.avif",
+                        "Mono Action": "images/Mono Action.avif",
+                        "On the Spot Ad making": "images/On Spot Ad Making.avif"
                       };
 
                       return (
@@ -1705,15 +1702,15 @@ const EventsInfo: React.FC = () => {
                     {literatureCards.map((card, index) => {
                       // Map literature card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Master Orator": "events/Master orator.avif",
-                        "Spot Creative writing": "events/spot creative.avif",
-                        "Telugu Vyaasa rachana": "events/telugu vyasa rachana.avif",
-                        "Shayari – Hindi": "events/Shayari hindi.avif",
-                        "Impromptu (JAM)": "events/impromptu.avif",
-                        "Story telling": "events/story telling.avif",
-                        "Quiz wiz (3 no.)": "events/Quiz wiz.avif",
-                        "Word Master": "events/word master.avif",
-                        "Dumb charades (2 no.)": "events/dumb chardes.avif"
+                        "Master Orator": "images/Master orator.avif",
+                        "Spot Creative writing": "images/spot creative.avif",
+                        "Telugu Vyaasa rachana": "images/telugu vyasa rachana.avif",
+                        "Shayari – Hindi": "images/Shayari hindi.avif",
+                        "Impromptu (JAM)": "images/impromptu.avif",
+                        "Story telling": "images/story telling.avif",
+                        "Quiz wiz (3 no.)": "images/Quiz wiz.avif",
+                        "Word Master": "images/word master.avif",
+                        "Dumb charades (2 no.)": "images/dumb chardes.avif"
                       };
 
                       return (
@@ -1748,14 +1745,14 @@ const EventsInfo: React.FC = () => {
                     {visualArtsCards.map((card, index) => {
                       // Map visual arts card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Theme Painting": "events/Theme Painting.avif",
-                        "Clay modelling": "events/clay modeling.avif",
-                        "Rangoli (2 no.)": "events/Rangoli.avif",
-                        "Mehandi": "events/Mehandi.avif",
-                        "Collage": "events/collage.avif",
-                        "Face Painting": "events/Face painting.avif",
-                        "Pencil Sketching": "events/pencil Sketching.avif",
-                        "Mandala": "events/Mandala Art.avif"
+                        "Theme Painting": "images/Theme Painting.avif",
+                        "Clay modelling": "images/clay modeling.avif",
+                        "Rangoli (2 no.)": "images/Rangoli.avif",
+                        "Mehandi": "images/Mehandi.avif",
+                        "Collage": "images/collage.avif",
+                        "Face Painting": "images/Face painting.avif",
+                        "Pencil Sketching": "images/pencil Sketching.avif",
+                        "Mandala": "images/Mandala Art.avif"
                       };
 
                       return (
@@ -1790,10 +1787,10 @@ const EventsInfo: React.FC = () => {
                     {fashionDesignCards.map((card, index) => {
                       // Map fashion design card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Haute Couture - Theme Ramp walk (12 no.)": "events/Theme Ramp walk.avif",
-                        "Craft villa ( Accessory design)": "events/Craft villa.avif",
-                        "Texart (Fashion sketching)": "events/texart.avif",
-                        "T-Shirt designing": "events/T-shirt designing.avif"
+                        "Haute Couture - Theme Ramp walk (12 no.)": "images/Theme Ramp walk.avif",
+                        "Craft villa ( Accessory design)": "images/Craft villa.avif",
+                        "Texart (Fashion sketching)": "images/texart.avif",
+                        "T-Shirt designing": "images/T-shirt designing.avif"
                       };
 
                       return (
@@ -1828,11 +1825,11 @@ const EventsInfo: React.FC = () => {
                     {digitalStorytellingCards.map((card, index) => {
                       // Map digital storytelling card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Short film": "events/Short Film.avif",
-                        "Theme Photography (Online)": "events/Theme Photography.avif",
-                        "Digital Poster making": "events/Digital Poster Making.avif",
-                        "Mahotsav Digital Chronicle": "events/MH-26 Digital Chronicle.avif",
-                        "Reel Making": "events/reel making.avif"
+                        "Short film": "images/Short Film.avif",
+                        "Theme Photography (Online)": "images/Theme Photography.avif",
+                        "Digital Poster making": "images/Digital Poster Making.avif",
+                        "Mahotsav Digital Chronicle": "images/MH-26 Digital Chronicle.avif",
+                        "Reel Making": "images/reel making.avif"
                       };
 
                       return (
@@ -1867,10 +1864,10 @@ const EventsInfo: React.FC = () => {
                     {gamingCards.map((card, index) => {
                       // Map gaming card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Valorant (PC)": "events/valorant.avif",
-                        "E- Football (PC)": "events/E-Football.avif",
-                        "Counter Strike (PC)": "events/Counter Strike.avif",
-                        "Smash Karts (PC)": "events/smash kart.avif"
+                        "Valorant (PC)": "images/valorant.avif",
+                        "E- Football (PC)": "images/E-Football.avif",
+                        "Counter Strike (PC)": "images/Counter Strike.avif",
+                        "Smash Karts (PC)": "images/smash kart.avif"
                       };
 
                       return (
@@ -1935,8 +1932,8 @@ const EventsInfo: React.FC = () => {
                     {spotLightCards.map((card, index) => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Mr. and Ms. Mahotsav": "events/Mr and ms mahotsav.avif",
-                        "Mahotsav Got Talent": "events/Mr and ms mahotsav.avif"
+                        "Mr. and Ms. Mahotsav": "images/Mr and ms mahotsav.avif",
+                        "Mahotsav Got Talent": "images/Mr and ms mahotsav.avif"
                       };
 
                       return (

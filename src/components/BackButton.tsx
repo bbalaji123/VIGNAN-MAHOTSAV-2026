@@ -26,7 +26,7 @@ const BackButton: React.FC<BackButtonProps> = ({ onClick, className = '', style 
       aria-label="Go back"
     >
       <img
-        src={`${import.meta.env.BASE_URL}BACK.avif`}
+        src="/menu-dashboard/BACK.avif"
         alt="Back"
         className="w-full h-full object-contain pointer-events-none"
       />

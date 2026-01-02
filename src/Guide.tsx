@@ -62,7 +62,7 @@ const Guide: React.FC = () => {
       {/* Garuda Logo */}
       <div className="fixed top-4 left-16 md:top-6 md:left-20 z-50">
         <img 
-          src={`${import.meta.env.BASE_URL}Garuda.avif`}
+          src="/menu-dashboard/Garuda.avif"
           alt="Garuda" 
           className="guide-garuda-logo"
         />
@@ -71,7 +71,7 @@ const Guide: React.FC = () => {
       {/* Mahotsav Logo - Bigger and Centered */}
       <div className="guide-logo-section">
         <img 
-          src={`${import.meta.env.BASE_URL}image.avif`}
+          src="/menu-dashboard/image.avif"
           alt="Mahotsav 2026" 
           className="guide-main-logo"
         />

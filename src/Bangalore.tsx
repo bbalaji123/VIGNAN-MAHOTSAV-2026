@@ -186,7 +186,7 @@ const Bangalore: React.FC = () => {
               HOSTING PARTNER
             </div>
             <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+              <img src="/images/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>

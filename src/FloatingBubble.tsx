@@ -20,7 +20,7 @@ const FloatingBubble: React.FC = () => {
         style={{ transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
       >
         <img 
-          src={`${import.meta.env.BASE_URL}garuda.png`} 
+          src="/images/garuda.png" 
           alt="Garuda" 
           className="w-[35px] h-[35px] md:w-[50px] md:h-[50px] object-contain transition-transform duration-300"
         />

@@ -456,19 +456,15 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
+        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
+        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
       ],
       prizes: {
-        men: {
           first: "Rs. 30,000",
           second: "Rs. 20,000",
           third: "Rs. 7,000",
           fourth: "Rs. 3,000"
-        },
-        women: {
-          first: "Rs. 15,000",
-          second: "Rs. 10,000"
-        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -521,19 +517,15 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
+        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
+        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
       ],
       prizes: {
-        men: {
           first: "Rs. 30,000",
           second: "Rs. 20,000",
           third: "Rs. 7,000",
           fourth: "Rs. 3,000"
-        },
-        women: {
-          first: "Rs. 15,000",
-          second: "Rs. 10,000"
-        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -588,19 +580,15 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
+        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
+        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
       ],
       prizes: {
-        men: {
           first: "Rs. 30,000",
           second: "Rs. 20,000",
           third: "Rs. 7,000",
           fourth: "Rs. 3,000"
-        },
-        women: {
-          first: "Rs. 15,000",
-          second: "Rs. 10,000"
-        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -656,7 +644,9 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
+        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000",
+        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
       ],
       prizes: {
         first: "Rs. 30,000",
@@ -1945,7 +1935,8 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-
+        { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
       ]
     },
     "E-Football": {
@@ -1966,7 +1957,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 2,000",
         third: "Rs. 1,500"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+      ]
     },
     "Counter Strike": {
       title: "GAMING",
@@ -1987,7 +1981,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 3,000",
         third: "Rs. 2,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+      ]
     },
     "Smash Karts": {
       title: "GAMING",
@@ -2005,7 +2002,10 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500",
         third: "Rs. 1,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+      ]
     },
     "Line Follower Robot": {
       title: "ROBO WARS & GAMING",
@@ -2026,7 +2026,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 6,000",
         third: "Rs. 4,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Gautam Kumar", phone: "+91 80927 31451" },
+        { name: "Mr. Pavan Swaroop", phone: "+91 93473 56252" },
+        { name: "Mr. Majeti Duteswar kalyan", phone: "+91 93929 76993" }
+      ]
     },
     "Bot Wrestling": {
       title: "ROBO WARS & GAMING",
@@ -2047,7 +2051,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 6,000",
         third: "Rs. 4,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Gautam Kumar", phone: "+91 80927 31451" },
+        { name: "Mr. Pavan Swaroop", phone: "+91 93473 56252" },
+        { name: "Mr. Majeti Duteswar kalyan", phone: "+91 93929 76993" }
+      ]
     },
     "Robo Races": {
       title: "ROBO WARS & GAMING",
@@ -2068,7 +2076,11 @@ const EventDetail: React.FC = () => {
         second: "Rs. 6,000",
         third: "Rs. 4,000"
       },
-      contacts: []
+      contacts: [
+        { name: "Mr. Gautam Kumar", phone: "+91 80927 31451" },
+        { name: "Mr. Pavan Swaroop", phone: "+91 93473 56252" },
+        { name: "Mr. Majeti Duteswar kalyan", phone: "+91 93929 76993" }
+      ]
     }
   };
 

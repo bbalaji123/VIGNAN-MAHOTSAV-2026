@@ -1,13 +1,7 @@
 # CA Manager System - Complete Documentation
 
 ## Overview
-A complete management system for overseeing Campus Ambassadors with authentication, CRUD operations, and action logging.
-
-## Access Information
-- **URL**: `/CA-Manager`
-- **Login Credentials**:
-  - Email: `bussinesswithruthvik@gmail.com`
-  - Password: `CAmanager@1`
+A complete management system for overseeing Campus Ambassadors with authentication, CRUD operations, and action logging`
 
 ## Features
 

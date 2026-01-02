@@ -460,7 +460,7 @@ const EventDetail: React.FC = () => {
       title: "TEAM EVENTS",
       subtitle: "VOLLEY BALL (M&W)",
       rules: [
-        "Team strength is 6+4 players.",
+        "Team strength is 7+5 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
@@ -526,6 +526,7 @@ const EventDetail: React.FC = () => {
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
         "Every team should come with a proper sports attire.",
+        "The game will follow fiba rules",
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
@@ -968,12 +969,13 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Classical/Light Vocal Solo",
       rules: [
-        "This is a solo singing competition for classical or light vocal music.",
-        "The participant can choose any classical or light music composition.",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "The maximum time for Stage/Instruments setting is 3 minutes.",
-        "The number of accompanists should not exceed two.",
-        "Judgment will be made on the qualities like pitch, rhythm, voice modulation, and overall presentation."
+        "The maximum duration of the performance shall not exceed 6 minutes.",
+        "The item can be presented in either Hindusthani, Carnatic or Light Vocal styles.",
+        "Maximum number of accompanists permitted is two. A Shruthi box must be used(Accompanists must also be registered).",
+        "Movie songs are not allowed under this item.",
+        "For Light Vocal, only non-film songs/ geet/ ghazal/ bhajan/ shabad and abhangas can be presented.",
+        "Sufficient thought and care must be exercised in the choice of Raga and composition.",
+        "Judgement will be based on the qualities like Taal, Selection of Raga, Composition and general impression."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -990,12 +992,11 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Western Vocal Solo",
       rules: [
-        "This is a solo singing competition for western vocal music.",
-        "The participant can choose any western song in any language.",
-        "The maximum duration of the performance shall be 4 minutes.",
-        "The maximum time for Stage/Instruments setting is 3 minutes.",
-        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
-        "Judgment will be made on the qualities like pitch, rhythm, voice quality, stage presence, and overall performance."
+        "The maximum duration for the performance shall be 4 minutes.",
+        "The maximum time for Stage/ Instruments setting is 2 minutes.",
+        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence.",
+        "The songs language can be either in English or any other Foreign language.",
+        "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1082,7 +1083,7 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Mime",
       rules: [
-        "Minimum 3 and Maximum of 8 participants are allowed to participate in a team.",
+        "Minimum 3 and Maximum of 6 participants are allowed to participate in a team",
         "Judgment will most likely be based on the qualities like idea, creativity of presentation, use of make-up, general impression.",
         "Duration of performance shall be for maximum of 5 minutes.",
         "Background music with no vocals is allowed."
@@ -1176,12 +1177,11 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Mono Action",
       rules: [
-        "This is a solo acting performance where one participant portrays multiple characters.",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "Props and background music are allowed but should be minimal.",
-        "The performance should showcase the participant's ability to switch between different characters seamlessly.",
-        "The use of make-up and costume changes is allowed within the time limit.",
-        "Judgment will be based on acting skills, character portrayal, voice modulation, expression, and overall presentation."
+        "This is an individual competition.",
+        "Each participant artist will be given 4 minutes.",
+        "The participant is required to perform an act of any theme. ",
+        "Obscenity and offensive gestures are strictly prohibited. ",
+        "5.	Judgement will be based on acting, dialogue delivery, stage presence and overall impression."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1197,13 +1197,12 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "On the Spot Ad Making",
       rules: [
-        "Teams should consist of a minimum of 3 and a maximum of 6 participants.",
-        "The topic/product for the advertisement will be given on the spot.",
-        "Participants will be given 30 minutes for preparation.",
-        "The maximum duration of the advertisement performance shall be 3 minutes.",
-        "Props are allowed, but teams must arrange them within the preparation time.",
-        "The advertisement should be creative, engaging, and effectively promote the given product/topic.",
-        "Judgment will be based on creativity, presentation, teamwork, message delivery, and entertainment value."
+        "A maximum of 4 participants are allowed to participate in a team.",
+        "The items or item names will be given 1 minute before the presentation.",
+        "The maximum time allotted for preparation for each team is 5 minutes.",
+        "The maximum time allowed to showcase their talent is 2 – 3 minutes.",
+        "Judgment will most likely be based on the qualities like idea, creativity of presentation, general impression. ",
+        "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1219,12 +1218,10 @@ const EventDetail: React.FC = () => {
       title: "THEATRE & CINEMATOGRAPHY",
       subtitle: "Dialogue Dhamaka (Hindi)",
       rules: [
-        "This is a solo dialogue delivery competition in Hindi language.",
-        "Participants can choose dialogues from movies, plays, or their own creations.",
-        "The maximum duration of the performance shall be 3 minutes.",
-        "Props and background music are allowed but should complement the dialogue delivery.",
-        "The performance should showcase powerful delivery, emotion, and expression.",
-        "Judgment will be based on voice modulation, expression, dialogue selection, impact, and overall performance."
+        "It is an individual competition.",
+        "Participants have the flexibility to deliver a dialogue from any movie or they can write their own script for a dialogue in any language.",
+        "Each student is allowed to perform for a minimum of 2 minute and a maximum of 4 minutes.",
+        "Your performance will be evaluated based on key criteria i.e., voice, fluency, facial expressions, gestures, dialogue delivery, stage presence and overall impression."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1785,7 +1782,7 @@ const EventDetail: React.FC = () => {
       prizes: {
         first: "Rs. 2,000",
         second: "Rs. 1,500",
-        third: "Rs. ,000"
+        third: "Rs. 1,000"
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },

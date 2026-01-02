@@ -2342,6 +2342,18 @@ const EventDetail: React.FC = () => {
         />
       </div>
 
+      <style>{`
+        @media (max-width: 768px) {
+          .event-detail-flower {
+            width: 150px !important;
+            height: 150px !important;
+            top: -60px !important;
+            right: -60px !important;
+            opacity: 150 !important;
+          }
+        }
+      `}</style>
+
       <div className="min-h-screen" style={{ position: 'relative', zIndex: 10, padding: '0px' }}>
         {/* Header: Logo + Back Button + Title */}
         <div style={{ margin: '0px', paddingTop: '0px', paddingLeft: '16px', paddingRight: '16px' }}>

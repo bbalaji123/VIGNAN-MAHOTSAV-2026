@@ -1510,3 +1510,720 @@
 
 /* End of Mobile Responsiveness Section */
 
+/* CA Manager Dashboard Styles */
+.ca-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.ca-dashboard-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.ca-logout-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  margin-left: auto;
+}
+
+.ca-logout-button:hover {
+  background: linear-gradient(135deg, #ee5a52, #dc143c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.ca-manager-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: -40px;
+  flex-wrap: wrap;
+}
+
+/* Leaderboard Styles */
+.ca-leaderboard {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ca-no-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ca-no-data h3 {
+  color: #FFD700;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.ca-leaderboard-table {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ca-leaderboard-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.ca-leaderboard-row:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateX(5px);
+}
+
+.ca-leaderboard-row.ca-top-three {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.1));
+  border: 2px solid rgba(255, 215, 0, 0.4);
+}
+
+.ca-rank {
+  min-width: 80px;
+  text-align: center;
+}
+
+.ca-rank-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.ca-leaderboard-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ca-leaderboard-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.ca-leaderboard-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.ca-leaderboard-id {
+  color: #FFD700;
+  font-weight: 500;
+}
+
+.ca-leaderboard-separator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.ca-leaderboard-college {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ca-leaderboard-stats {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.ca-leaderboard-points,
+.ca-leaderboard-referrals {
+  text-align: center;
+}
+
+.ca-points-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.ca-points-label,
+.ca-referrals-label {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ca-referrals-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4da3ff;
+}
+
+/* Mobile Leaderboard Cards */
+.ca-leaderboard-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.ca-leaderboard-card.ca-top-three {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.1));
+  border: 2px solid rgba(255, 215, 0, 0.4);
+}
+
+.ca-leaderboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ca-rank-mobile {
+  font-size: 2rem;
+}
+
+.ca-rank-mobile .ca-rank-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.ca-leaderboard-points-mobile {
+  text-align: right;
+}
+
+.ca-leaderboard-points-mobile .ca-points-value {
+  font-size: 2.5rem;
+}
+
+.ca-leaderboard-points-mobile .ca-points-label {
+  font-size: 0.8rem;
+  display: inline;
+  margin-left: 5px;
+}
+
+.ca-leaderboard-card-body h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  margin: 0 0 8px 0;
+}
+
+.ca-leaderboard-card-body .ca-leaderboard-id {
+  color: #FFD700;
+  font-size: 0.9rem;
+  margin: 0 0 5px 0;
+}
+
+.ca-leaderboard-card-body .ca-leaderboard-college {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0 0 10px 0;
+}
+
+.ca-leaderboard-referrals-mobile {
+  display: inline-block;
+  background: rgba(77, 163, 255, 0.2);
+  border: 1px solid rgba(77, 163, 255, 0.5);
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  color: #4da3ff;
+  font-weight: 500;
+}
+
+.ca-leaderboard-referrals-mobile .ca-referrals-value {
+  display: inline;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.ca-manager-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.ca-tab-button {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.ca-tab-button.active {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  border-color: #FFD700;
+}
+
+.ca-tab-button:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #FFD700;
+}
+
+.ca-ambassadors-list {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ca-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.ca-table th,
+.ca-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.ca-table th {
+  background: rgba(255, 215, 0, 0.1);
+  color: #FFD700;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ca-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ca-points-cell {
+  font-weight: bold;
+  color: #FFD700;
+  font-size: 1.1rem;
+}
+
+.ca-status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ca-status-badge.active {
+  background: rgba(0, 255, 0, 0.2);
+  color: #0f0;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+}
+
+.ca-status-badge.inactive {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.ca-action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ca-btn-increase,
+.ca-btn-decrease,
+.ca-btn-dismiss,
+.ca-btn-activate {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ca-btn-increase {
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  color: #000;
+}
+
+.ca-btn-increase:hover {
+  background: linear-gradient(135deg, #00cc00, #009900);
+  transform: translateY(-2px);
+}
+
+.ca-btn-decrease {
+  background: linear-gradient(135deg, #ff6b6b, #ff4444);
+  color: #fff;
+}
+
+.ca-btn-decrease:hover {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  transform: translateY(-2px);
+}
+
+.ca-btn-dismiss {
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #fff;
+}
+
+.ca-btn-dismiss:hover {
+  background: linear-gradient(135deg, #ff5722, #e64a19);
+  transform: translateY(-2px);
+}
+
+.ca-btn-activate {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: #fff;
+}
+
+.ca-btn-activate:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+}
+
+/* Ambassador Cards for Mobile */
+.ca-ambassador-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  backdrop-filter: blur(20px);
+}
+
+.ca-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.ca-card-header h3 {
+  color: #FFD700;
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.ca-card-id {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.ca-card-body {
+  margin-bottom: 15px;
+}
+
+.ca-card-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.ca-card-row:last-child {
+  border-bottom: none;
+}
+
+.ca-card-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.ca-points-highlight {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.ca-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ca-card-actions button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Activity Logs */
+.ca-activity-logs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.ca-log-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  backdrop-filter: blur(20px);
+}
+
+.ca-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ca-log-action {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ca-log-action.login {
+  background: rgba(0, 123, 255, 0.2);
+  color: #4da3ff;
+  border: 1px solid rgba(0, 123, 255, 0.5);
+}
+
+.ca-log-action.points-increase {
+  background: rgba(0, 255, 0, 0.2);
+  color: #0f0;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+}
+
+.ca-log-action.points-decrease {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.ca-log-action.dismiss {
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.5);
+}
+
+.ca-log-action.activate {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.ca-log-time {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+.ca-log-body {
+  color: #fff;
+  line-height: 1.6;
+}
+
+.ca-log-body strong {
+  color: #FFD700;
+}
+
+.ca-log-details {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Logout Button */
+.ca-modal-content {
+  background: rgba(30, 20, 50, 0.98);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.ca-modal-content h2 {
+  color: #FFD700;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: left;
+}
+
+.ca-modal-content p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 15px;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.ca-modal-content strong {
+  color: #FFD700;
+}
+
+.ca-logout-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ca-logout-button:hover {
+  background: linear-gradient(135deg, #ee5a52, #dc143c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+/* Mobile Responsiveness for Manager Dashboard */
+@media (max-width: 768px) {
+  .ca-manager-tabs {
+    flex-direction: column;
+  }
+
+  .ca-tab-button {
+    width: 100%;
+  }
+
+  .ca-table {
+    font-size: 0.85rem;
+  }
+
+  .ca-table th,
+  .ca-table td {
+    padding: 8px 6px;
+  }
+
+  .ca-action-buttons {
+    flex-direction: column;
+  }
+
+  .ca-action-buttons button {
+    width: 100%;
+  }
+
+  .ca-log-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Leaderboard Mobile */
+  .ca-leaderboard-row {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .ca-rank {
+    min-width: auto;
+  }
+
+  .ca-leaderboard-info {
+    width: 100%;
+  }
+
+  .ca-leaderboard-stats {
+    justify-content: center;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ca-dashboard-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .ca-dashboard-title {
+    position: static;
+    transform: none;
+    font-size: 1.5rem;
+  }
+
+  .ca-logout-button {
+    width: auto;
+    padding: 8px 16px;
+  }
+
+  .ca-ambassador-card {
+    padding: 15px;
+  }
+
+  .ca-card-header h3 {
+    font-size: 1rem;
+  }
+
+  .ca-log-item {
+    padding: 12px;
+  }
+
+  /* Leaderboard Mobile */
+  .ca-leaderboard-card {
+    padding: 15px;
+  }
+
+  .ca-leaderboard-card-body h3 {
+    font-size: 1.1rem;
+  }
+
+  .ca-leaderboard-points-mobile .ca-points-value {
+    font-size: 2rem;
+  }
+
+  .ca-rank-mobile .ca-rank-number {
+    font-size: 1.5rem;
+  }
+
+  .ca-dashboard-title {
+    font-size: 1.8rem;
+  }
+}

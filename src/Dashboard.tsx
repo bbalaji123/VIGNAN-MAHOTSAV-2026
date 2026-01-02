@@ -388,6 +388,8 @@ const Dashboard: React.FC = () => {
   // Animation state for sections
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const lastScrollY = useRef(0);
+  const scrollDirection = useRef<'up' | 'down'>('down');
   const [timeTheme, setTimeTheme] = useState<'day' | 'evening' | 'night'>('day');
   const [signupFormData, setSignupFormData] = useState<SignupData>({
     name: '',
@@ -931,6 +933,15 @@ const Dashboard: React.FC = () => {
 
   // IntersectionObserver for scroll-based animations
   useEffect(() => {
+    // Track scroll direction
+    const trackScrollDirection = () => {
+      const currentScrollY = window.scrollY;
+      scrollDirection.current = currentScrollY > lastScrollY.current ? 'down' : 'up';
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', trackScrollDirection, { passive: true });
+
     const observerOptions = {
       root: null,
       rootMargin: '100px 0px -100px 0px', // Start animation 100px before, remove 100px after
@@ -943,13 +954,20 @@ const Dashboard: React.FC = () => {
         if (sectionId) {
           setVisibleSections(prev => {
             const newSet = new Set(prev);
-            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-              // Section is entering viewport - add it
+            
+            // When scrolling DOWN - no animations, just show immediately
+            if (entry.isIntersecting && scrollDirection.current === 'down') {
               newSet.add(sectionId);
-            } else if (!entry.isIntersecting || entry.intersectionRatio < 0.05) {
-              // Section is leaving viewport - remove it for re-animation
+            } 
+            // When scrolling UP - animate sections
+            else if (entry.isIntersecting && entry.intersectionRatio > 0.1 && scrollDirection.current === 'up') {
+              newSet.add(sectionId);
+            } 
+            // Remove when out of viewport
+            else if (!entry.isIntersecting || entry.intersectionRatio < 0.05) {
               newSet.delete(sectionId);
             }
+            
             return newSet;
           });
         }
@@ -964,6 +982,7 @@ const Dashboard: React.FC = () => {
     });
 
     return () => {
+      window.removeEventListener('scroll', trackScrollDirection);
       observer.disconnect();
     };
   }, []);
@@ -6355,7 +6374,7 @@ const Dashboard: React.FC = () => {
             {/* Logo Section */}
             <div>
               <img
-                src={`/images/image.avif`}
+                src={`/menu-dashboard/image.avif`}
                 alt="Mahotsav 2026"
                 className="footer-logo"
                 style={{

@@ -16,6 +16,7 @@ import { initializeQueue } from './utils/queue.js';
 // Routes
 import registrationRoutes from './routes/registration.js';
 import campusAmbassadorRoutes from './routes/campusAmbassador.js';
+import caManagerRoutes from './routes/caManager.js';
 import eventsRoutes from './routes/events.js';
 import locationRoutes from './routes/location.js';
 
@@ -92,6 +93,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 ===================================================== */
 app.use('/api', registrationRoutes);
 app.use('/api', campusAmbassadorRoutes);
+app.use('/api', caManagerRoutes);
 app.use('/api', eventsRoutes);
 app.use('/api', locationRoutes);
 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Dashboard from './Dashboard';
 import EventDetail from './EventDetail';
@@ -71,6 +71,8 @@ function App() {
           <Route path="/zonals/hyderabad" element={<Hyderabad />} />
           <Route path="/zonals/tirupathi" element={<Tirupathi />} />
           <Route path="/guide" element={<Guide />} />
+          {/* Catch all route - redirect any unknown routes to main page */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </div>

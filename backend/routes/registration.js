@@ -133,7 +133,7 @@ router.post('/register', async (req, res) => {
           try {
             const ca = await CampusAmbassador.findOne({ mcaId: validReferralCode });
             if (ca) {
-              await ca.addReferral(userId, name, normalizedEmail);
+              await ca.addReferral(userId, name, normalizedEmail, college);
               console.log(`Added referral ${userId} to CA ${validReferralCode}`);
             }
           } catch (referralError) {

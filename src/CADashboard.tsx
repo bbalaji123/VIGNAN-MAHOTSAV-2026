@@ -9,6 +9,7 @@ interface Referral {
   userId: string;
   userName: string;
   userEmail: string;
+  userCollege?: string;
   registrationDate: Date;
   paymentStatus: 'pending' | 'paid' | 'failed';
   pointsAwarded: number;
@@ -177,6 +178,9 @@ const CADashboard: React.FC = () => {
               <span className="ca-id-label-inline">MCA ID:</span>
               <span className="ca-id-value-inline">{caData.mcaId}</span>
             </div>
+            <div className="ca-college-display">
+              <span className="ca-college-label">{caData.college}</span>
+            </div>
           </div>
           <button onClick={handleLogout} className="ca-logout-btn">
             Logout
@@ -258,38 +262,99 @@ const CADashboard: React.FC = () => {
               <p className="ca-no-data-hint">Share your referral code: <strong>{caData.mcaId}</strong></p>
             </div>
           ) : (
-            <div className="ca-referrals-table-wrapper">
-              <table className="ca-modern-table">
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Registration Date</th>
-                    <th>Status</th>
-                    <th>Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {caData.referrals.map((referral, index) => (
-                    <tr key={referral.userId}>
-                      <td>{index + 1}</td>
-                      <td>{referral.userName}</td>
-                      <td>{referral.userEmail}</td>
-                      <td>{new Date(referral.registrationDate).toLocaleDateString('en-IN')}</td>
-                      <td>
-                        <span className={`ca-status-pill ca-status-${referral.paymentStatus}`}>
-                          {referral.paymentStatus}
-                        </span>
-                      </td>
-                      <td className="ca-points-col">
-                        {referral.pointsAwarded > 0 ? `+${referral.pointsAwarded}` : '0'}
-                      </td>
+            <>
+              {/* Desktop Table View */}
+              <div className="ca-referrals-table-wrapper ca-desktop-only">
+                <table className="ca-modern-table">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>User ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>College</th>
+                      <th>Registration Date</th>
+                      <th>Status</th>
+                      <th>Points</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {caData.referrals.map((referral, index) => {
+                      const date = new Date(referral.registrationDate);
+                      const isValidDate = !isNaN(date.getTime());
+                      return (
+                        <tr key={referral.userId}>
+                          <td>{index + 1}</td>
+                          <td className="ca-userid-col">{referral.userId}</td>
+                          <td>{referral.userName}</td>
+                          <td>{referral.userEmail}</td>
+                          <td>{referral.userCollege || 'N/A'}</td>
+                          <td>{isValidDate ? date.toLocaleDateString('en-IN') : 'N/A'}</td>
+                          <td>
+                            <span className={`ca-status-pill ca-status-${referral.paymentStatus}`}>
+                              {referral.paymentStatus}
+                            </span>
+                          </td>
+                          <td className="ca-points-col">
+                            {referral.pointsAwarded > 0 ? `+${referral.pointsAwarded}` : '0'}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile Card View */}
+              <div className="ca-referrals-cards-container ca-mobile-only">
+                {caData.referrals.map((referral, index) => {
+                  const date = new Date(referral.registrationDate);
+                  const isValidDate = !isNaN(date.getTime());
+                  return (
+                    <div key={referral.userId} className="ca-referral-card">
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">S.No</span>
+                        <span className="ca-referral-value">: {index + 1}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">User ID</span>
+                        <span className="ca-referral-value ca-userid-style">: {referral.userId}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">Name</span>
+                        <span className="ca-referral-value">: {referral.userName}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">Email</span>
+                        <span className="ca-referral-value">: {referral.userEmail}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">College</span>
+                        <span className="ca-referral-value">: {referral.userCollege || 'N/A'}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">Registration Date</span>
+                        <span className="ca-referral-value">: {isValidDate ? date.toLocaleDateString('en-IN') : 'N/A'}</span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">Status</span>
+                        <span className="ca-referral-value">
+                          : <span className={`ca-status-pill ca-status-${referral.paymentStatus}`}>
+                            {referral.paymentStatus}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="ca-referral-card-row">
+                        <span className="ca-referral-label">Points</span>
+                        <span className="ca-referral-value ca-points-highlight">
+                          : {referral.pointsAwarded > 0 ? `+${referral.pointsAwarded}` : '0'}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </div>

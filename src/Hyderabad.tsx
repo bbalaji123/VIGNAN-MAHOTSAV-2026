@@ -98,7 +98,7 @@ const Hyderabad: React.FC = () => {
               paddingTop: '10px'
             }}
           >
-            (5-6 DEC,2025)
+            (19 DEC 2025 - 20 DEC 2025)
           </p>
         </div>
 

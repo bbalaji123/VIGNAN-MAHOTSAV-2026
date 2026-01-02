@@ -5,6 +5,8 @@
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Grid Layout */
@@ -18,6 +20,7 @@
   padding: 20px;
   position: relative;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 /* Box Base Styles - Glassmorphism */
@@ -31,6 +34,8 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
               inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .ca-box:hover {
@@ -94,6 +99,22 @@
   font-family: 'Courier New', monospace;
 }
 
+.ca-college-display {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid rgba(255, 215, 0, 0.6);
+  border-radius: 5px;
+  max-width: fit-content;
+}
+
+.ca-college-label {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
 .ca-logout-btn {
   background: rgb(232, 6, 190);
   color: white;
@@ -107,11 +128,6 @@
   box-shadow: 0 4px 15px rgba(84, 83, 37, 0.4);
 }
 
-.ca-logout-btn:hover {
-  background: linear-gradient(135deg, #d6e10a, #ede907);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(70, 37, 84, 0.6);
-}
 
 /* Box 2 - Left Tall: Overview */
 .ca-box-2 {
@@ -388,6 +404,83 @@
   border-bottom: 2px solid rgba(255, 215, 0, 0.3);
 }
 
+/* ===== DESKTOP/MOBILE VIEW TOGGLE ===== */
+.ca-desktop-only {
+  display: block !important;
+}
+
+.ca-mobile-only {
+  display: none !important;
+}
+
+/* ===== REFERRAL CARDS LAYOUT (MOBILE ONLY) ===== */
+.ca-referrals-cards-container {
+  display: none; /* Hidden by default on desktop */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.ca-referral-card {
+  background: rgba(120, 81, 169, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.ca-referral-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+.ca-referral-card-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ca-referral-card-row:last-child {
+  border-bottom: none;
+}
+
+.ca-referral-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 140px;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+}
+
+.ca-referral-value {
+  color: rgba(255, 255, 255, 0.85);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.ca-userid-style {
+  color: rgba(255, 215, 0, 0.95);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.ca-points-highlight {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Keep old table styles for backwards compatibility */
 .ca-modern-table tbody tr {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
@@ -430,6 +523,13 @@
   background: rgba(244, 67, 54, 0.2);
   color: #F44336;
   border: 1px solid #F44336;
+}
+
+.ca-userid-col {
+  color: rgba(255, 215, 0, 0.9);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
 }
 
 .ca-points-col {
@@ -889,3 +989,524 @@
     padding: 12px 30px;
   }
 }
+
+/* ============================================
+   MOBILE RESPONSIVENESS - MAX-WIDTH: 768px
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* ===== CONTAINER & GRID FIXES ===== */
+  .ca-dashboard-container {
+    padding: 10px;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+  }
+
+  .ca-dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ===== SHOW CARDS ON MOBILE, HIDE TABLE ===== */
+  .ca-desktop-only {
+    display: none !important;
+  }
+
+  .ca-mobile-only {
+    display: grid !important;
+  }
+
+  /* ===== ALL BOXES - BASE STYLES ===== */
+  .ca-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 15px;
+  }
+
+  .ca-box:hover {
+    transform: none; /* Disable hover transform on mobile */
+  }
+
+  /* ===== WELCOME BOX (BOX-3) ===== */
+  .ca-box-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .ca-welcome-section {
+    width: 100%;
+  }
+
+  .ca-welcome-title {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    word-wrap: break-word;
+  }
+
+  .ca-name-display {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ca-mca-id-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ca-id-label-inline {
+    font-size: 0.8rem;
+  }
+
+  .ca-id-value-inline {
+    font-size: 1rem;
+    word-break: break-all;
+  }
+
+  .ca-college-display {
+    margin-top: 10px;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ca-college-label {
+    font-size: 0.85rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ca-logout-btn {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  /* ===== OVERVIEW BOX (BOX-2) ===== */
+  .ca-box-2 {
+    width: 100%;
+  }
+
+  .ca-box-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .ca-points-display {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .ca-points-value {
+    font-size: 2.5rem;
+  }
+
+  .ca-points-label {
+    font-size: 0.9rem;
+  }
+
+  .ca-tier-display {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .ca-tier-badge {
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    display: inline-block;
+  }
+
+  .ca-tier-label {
+    font-size: 0.85rem;
+  }
+
+  .ca-referrals-stats {
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ca-stats-subtitle {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .ca-stat-row {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .ca-stat-label,
+  .ca-stat-value {
+    font-size: 0.95rem;
+  }
+
+  /* ===== CA REFERRALS BOX (BOX-4) ===== */
+  .ca-box-4 {
+    width: 100%;
+  }
+
+  .ca-ca-referral-count {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .ca-ca-count-value {
+    font-size: 2.2rem;
+  }
+
+  .ca-ca-count-label {
+    font-size: 0.85rem;
+  }
+
+  .ca-ca-referral-list {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .ca-ca-referral-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ca-ca-ref-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ca-ca-ref-name {
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ca-ca-ref-points {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .ca-ca-ref-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ca-ca-ref-id,
+  .ca-ca-ref-college {
+    font-size: 0.75rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* ===== USER REFERRALS TABLE BOX (BOX-5) ===== */
+  .ca-box-5 {
+    width: 100%;
+    padding: 15px 10px;
+  }
+
+  /* Referral Cards Container - Mobile */
+  .ca-referrals-cards-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .ca-referral-card {
+    padding: 15px;
+  }
+
+  .ca-referral-card-row {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 6px 0;
+  }
+
+  .ca-referral-label {
+    font-size: 0.85rem;
+    min-width: 120px;
+  }
+
+  .ca-referral-value {
+    font-size: 0.85rem;
+  }
+
+  /* Table wrapper with horizontal scroll ONLY inside */
+  .ca-referrals-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .ca-modern-table {
+    min-width: 650px; /* Minimum width for table readability */
+    width: auto;
+    font-size: 0.75rem;
+    border-collapse: collapse;
+  }
+
+  .ca-modern-table th,
+  .ca-modern-table td {
+    padding: 8px 6px;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .ca-modern-table th {
+    font-size: 0.7rem;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  .ca-modern-table td {
+    word-break: normal;
+  }
+
+  .ca-userid-col {
+    font-size: 0.75rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .ca-status-pill {
+    font-size: 0.65rem;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  .ca-points-col {
+    font-size: 0.85rem !important;
+  }
+
+  /* ===== NO DATA STATE ===== */
+  .ca-no-data {
+    padding: 30px 15px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ca-no-data p {
+    font-size: 0.9rem;
+    word-wrap: break-word;
+  }
+
+  .ca-no-data-hint {
+    font-size: 0.8rem;
+    word-wrap: break-word;
+  }
+
+  .ca-no-data strong {
+    word-break: break-all;
+  }
+
+  /* ===== LOADING & ERROR STATES ===== */
+  .ca-loading,
+  .ca-error-container {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ca-spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ca-loading p,
+  .ca-error-container p {
+    font-size: 0.9rem;
+    word-wrap: break-word;
+  }
+
+  .ca-error-container h2 {
+    font-size: 1.4rem;
+    word-wrap: break-word;
+  }
+
+  .ca-back-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+  }
+}
+
+/* ============================================
+   EXTRA SMALL MOBILE - MAX-WIDTH: 480px
+   ============================================ */
+
+@media (max-width: 480px) {
+  .ca-dashboard-container {
+    padding: 8px;
+  }
+
+  .ca-dashboard-grid {
+    padding: 8px;
+    gap: 12px;
+  }
+
+  .ca-box {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  /* Welcome Box */
+  .ca-welcome-title {
+    font-size: 0.85rem;
+  }
+
+  .ca-name-display {
+    font-size: 1.4rem;
+  }
+
+  .ca-mca-id-display {
+    padding: 6px 10px;
+  }
+
+  .ca-id-label-inline {
+    font-size: 0.75rem;
+  }
+
+  .ca-id-value-inline {
+    font-size: 0.9rem;
+  }
+
+  .ca-college-label {
+    font-size: 0.8rem;
+  }
+
+  .ca-logout-btn {
+    font-size: 0.95rem;
+    padding: 10px 16px;
+  }
+
+  /* Points & Stats */
+  .ca-box-title {
+    font-size: 1.1rem;
+  }
+
+  .ca-points-value {
+    font-size: 2rem;
+  }
+
+  .ca-points-label {
+    font-size: 0.8rem;
+  }
+
+  .ca-tier-badge {
+    font-size: 1rem;
+    padding: 6px 14px;
+  }
+
+  .ca-tier-label {
+    font-size: 0.75rem;
+  }
+
+  .ca-stat-label,
+  .ca-stat-value {
+    font-size: 0.85rem;
+  }
+
+  /* CA Referrals */
+  .ca-ca-count-value {
+    font-size: 1.8rem;
+  }
+
+  .ca-ca-count-label {
+    font-size: 0.75rem;
+  }
+
+  .ca-ca-ref-name,
+  .ca-ca-ref-points {
+    font-size: 0.85rem;
+  }
+
+  .ca-ca-ref-id,
+  .ca-ca-ref-college {
+    font-size: 0.7rem;
+  }
+
+  /* Referral Cards - Extra Small Mobile */
+  .ca-referral-card {
+    padding: 12px;
+  }
+
+  .ca-referral-label {
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+
+  .ca-referral-value {
+    font-size: 0.8rem;
+  }
+
+  /* Table */
+  .ca-modern-table {
+    font-size: 0.7rem;
+    min-width: 600px;
+  }
+
+  .ca-modern-table th,
+  .ca-modern-table td {
+    padding: 6px 4px;
+  }
+
+  .ca-modern-table th {
+    font-size: 0.65rem;
+  }
+
+  .ca-userid-col {
+    font-size: 0.7rem;
+  }
+
+  .ca-status-pill {
+    font-size: 0.6rem;
+    padding: 3px 6px;
+  }
+
+  .ca-points-col {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* End of Mobile Responsiveness Section */
+

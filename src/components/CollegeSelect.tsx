@@ -79,7 +79,8 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
 
   // Filter colleges based on selected state and district
   useEffect(() => {
-    if (!selectedState) {
+    // Reset if state or district is not selected
+    if (!selectedState || !selectedDistrict) {
       setFilteredColleges([]);
       setSearchTerm('');
       setIsValidSelection(false);
@@ -87,15 +88,11 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       return;
     }
 
+    // Filter by both state and district
     let filtered = colleges.filter(c => 
-      c.State.toLowerCase() === selectedState.toLowerCase()
+      c.State.toLowerCase() === selectedState.toLowerCase() &&
+      c.District.toLowerCase() === selectedDistrict.toLowerCase()
     );
-
-    if (selectedDistrict) {
-      filtered = filtered.filter(c => 
-        c.District.toLowerCase() === selectedDistrict.toLowerCase()
-      );
-    }
 
     // Apply search filter
     if (searchTerm) {
@@ -222,8 +219,14 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                 e.target.setCustomValidity('Please select a college from the dropdown or click "Other"');
               }
             }}
-            disabled={!selectedState}
-            placeholder={!selectedState ? "Select state first" : "Search and select your college..."}
+            disabled={!selectedState || !selectedDistrict}
+            placeholder={
+              !selectedState 
+                ? "Select state first" 
+                : !selectedDistrict 
+                  ? "Select district first" 
+                  : "Search and select your college..."
+            }
             className="w-full p-2.5 sm:p-3 min-h-[44px] rounded-xl border-2 border-white/20 bg-white/10 text-white text-sm sm:text-base 
                      cursor-text transition-all duration-300 touch-manipulation placeholder:text-white/50
                      focus:outline-none focus:border-orange-500 focus:bg-white/15 focus:ring-2 focus:ring-orange-500/30
@@ -237,7 +240,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             </div>
           )}
           
-          {showDropdown && selectedState && (
+          {showDropdown && selectedState && selectedDistrict && (
             <div className="absolute z-50 w-full mt-2 max-h-60 overflow-y-auto bg-gray-900 border-2 border-white/20 rounded-xl shadow-2xl">
               {filteredColleges.length > 0 ? (
                 <>

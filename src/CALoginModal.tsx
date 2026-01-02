@@ -80,14 +80,14 @@ const CALoginModal: React.FC<CALoginModalProps> = ({ onClose, onLoginSuccess }) 
         
         <form onSubmit={handleSubmit} className="ca-form">
           <div className="ca-form-group">
-            <label>MCA ID or Email *</label>
+            <label>MCA ID / Registration Number *</label>
             <input
               type="text"
               name="identifier"
               value={formData.identifier}
               onChange={handleChange}
               required
-              placeholder="Enter your MCA ID or email"
+              placeholder="Enter your MCA ID or Registration Number"
             />
           </div>
 

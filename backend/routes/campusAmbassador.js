@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import CampusAmbassador from '../models/CampusAmbassador.js';
+import Registration from '../models/Registration.js';
 import { logger } from '../utils/logger.js';
 
 const router = express.Router();
@@ -27,7 +28,7 @@ const generateMCAId = async () => {
 // Campus Ambassador Signup
 router.post('/campus-ambassador/signup', async (req, res) => {
   try {
-    const { name, email, password, phone, college, branch, state, district, dateOfBirth, referralCode } = req.body;
+    const { name, email, password, phone, college, branch, registrationNumber, state, district, dateOfBirth, referralCode } = req.body;
 
     // Validate required fields
     if (!name || !email || !password || !phone || !college) {
@@ -81,6 +82,7 @@ router.post('/campus-ambassador/signup', async (req, res) => {
       phone,
       college,
       branch,
+      registrationNumber,
       state,
       district,
       dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined
@@ -157,11 +159,11 @@ router.post('/campus-ambassador/login', async (req, res) => {
       });
     }
 
-    // Find CA by MCA ID or email
+    // Find CA by MCA ID or registration number (case-insensitive)
     const ca = await CampusAmbassador.findOne({
       $or: [
         { mcaId: identifier.toUpperCase() },
-        { email: identifier.toLowerCase() }
+        { registrationNumber: { $regex: new RegExp(`^${identifier}$`, 'i') } }
       ]
     });
 
@@ -242,6 +244,35 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
       });
     }
 
+    // Fetch college information for referrals that don't have it
+    const enrichedReferrals = await Promise.all(
+      ca.referrals.map(async (r) => {
+        let userCollege = r.userCollege;
+        
+        // If college is not stored in referral, fetch it from Registration
+        if (!userCollege) {
+          try {
+            const registration = await Registration.findOne({ userId: r.userId });
+            if (registration && registration.college) {
+              userCollege = registration.college;
+            }
+          } catch (err) {
+            logger.error(`Error fetching college for user ${r.userId}:`, err);
+          }
+        }
+        
+        return {
+          userId: r.userId,
+          userName: r.userName,
+          userEmail: r.userEmail,
+          userCollege: userCollege,
+          registrationDate: r.registeredAt,
+          paymentStatus: r.paymentStatus,
+          pointsAwarded: r.pointsAwarded ? 5 : 0
+        };
+      })
+    );
+
     res.status(200).json({
       mcaId: ca.mcaId,
       name: ca.name,
@@ -253,14 +284,7 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
       paidReferrals: ca.paidReferrals,
       pendingReferrals: ca.pendingReferrals,
       caReferrals: ca.caReferrals || 0,
-      referrals: ca.referrals.map(r => ({
-          userId: r.userId,
-          userName: r.userName,
-          userEmail: r.userEmail,
-          registeredAt: r.registeredAt,
-          paymentStatus: r.paymentStatus,
-          pointsAwarded: r.pointsAwarded ? 5 : 0
-        })),
+      referrals: enrichedReferrals,
       caReferralList: (ca.caReferralList || []).map(r => ({
           mcaId: r.mcaId,
           name: r.name,

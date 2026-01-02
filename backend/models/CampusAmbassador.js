@@ -37,6 +37,10 @@ const campusAmbassadorSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  registrationNumber: {
+    type: String,
+    trim: true
+  },
   state: {
     type: String,
     trim: true
@@ -57,6 +61,9 @@ const campusAmbassadorSchema = new mongoose.Schema({
       type: String
     },
     userEmail: {
+      type: String
+    },
+    userCollege: {
       type: String
     },
     registeredAt: {
@@ -156,11 +163,12 @@ campusAmbassadorSchema.methods.updateTier = function() {
 };
 
 // Method to add referral and update points
-campusAmbassadorSchema.methods.addReferral = function(userId, userName, userEmail) {
+campusAmbassadorSchema.methods.addReferral = function(userId, userName, userEmail, userCollege) {
   this.referrals.push({
     userId,
     userName,
     userEmail,
+    userCollege,
     paymentStatus: 'pending'
   });
   this.totalReferrals += 1;

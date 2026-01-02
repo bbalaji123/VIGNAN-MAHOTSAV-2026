@@ -36,6 +36,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     state: '',
     district: '',
     dateOfBirth: '',
+    registrationNumber: '',
     referralCode: ''
   });
   const [error, setError] = useState('');
@@ -139,6 +140,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
           phone: formData.phone,
           college: formData.college,
           branch: formData.branch,
+          registrationNumber: formData.registrationNumber,
           state: formData.state,
           district: formData.district,
           dateOfBirth: formData.dateOfBirth,
@@ -327,7 +329,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               }}
             />
             <small style={{ color: '#FFD700', fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>
-              Your password will be auto-generated from your DOB (DDMMYYYY). Must be born before 2011.
+              Your password will be your DOB (DD/MM/YYYY).
             </small>
           </div>
 
@@ -338,11 +340,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               value={formData.state}
               onChange={handleChange}
               required
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#000000', backgroundColor: '#ffffff' }}
             >
               <option value="">Select State</option>
               {states.map((state) => (
-                <option key={state.no} value={state.name} style={{ color: '#000' }}>
+                <option key={state.no} value={state.name}>
                   {state.name}
                 </option>
               ))}
@@ -357,11 +359,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               onChange={handleChange}
               required
               disabled={!formData.state}
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '2px solid rgba(255, 215, 0, 0.3)', color: '#000000', backgroundColor: '#ffffff' }}
             >
               <option value="">Select District</option>
               {filteredDistricts.map((district) => (
-                <option key={district.no} value={district.name} style={{ color: '#000' }}>
+                <option key={district.no} value={district.name}>
                   {district.name}
                 </option>
               ))}
@@ -388,6 +390,18 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               onChange={handleChange}
               required
               placeholder="E.g., CSE, ECE, etc."
+            />
+          </div>
+
+          <div className="ca-form-group">
+            <label>College Registration Number *</label>
+            <input
+              type="text"
+              name="registrationNumber"
+              value={formData.registrationNumber}
+              onChange={handleChange}
+              required
+              placeholder="Your college/university registration ID"
             />
           </div>
 

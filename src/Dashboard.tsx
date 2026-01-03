@@ -2036,8 +2036,8 @@ const Dashboard: React.FC = () => {
   };
 
   const handleOpenRegistration = async () => {
-    // Update URL
-    window.history.pushState({}, '', '/register-for-events');
+    // Navigate to register-for-events route
+    navigate('/register-for-events');
     
     // Always open the modal when button is clicked
     setShowRegistrationModal(true);
@@ -6708,7 +6708,7 @@ const Dashboard: React.FC = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            zIndex: 10000,
+            zIndex: 100000,
             backdropFilter: 'blur(10px)'
           }}
         >

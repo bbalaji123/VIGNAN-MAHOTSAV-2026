@@ -36,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/register-for-events" element={<Dashboard />} />
           <Route path="/events-info" element={<EventsInfo />} />
           <Route path="/events/dance" element={<EventsInfo />} />
           <Route path="/events/music" element={<EventsInfo />} />

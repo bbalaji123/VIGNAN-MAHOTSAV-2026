@@ -280,18 +280,24 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
-    // Only create participant if they're registering for events
-    if (!events || events.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'No events provided for registration'
+    // Find or create participant
+    let participant = await Participant.findOne({ userId });
+    
+    if (events.length === 0) {
+      // If no events, remove all registered events from participant
+      if (participant) {
+        participant.registeredEvents = [];
+        await participant.save();
+      }
+      return res.json({
+        success: true,
+        message: 'All events removed successfully',
+        participant: participant || null
       });
     }
 
-    // Find or create participant (only when registering for events)
-    let participant = await Participant.findOne({ userId });
+    // Create participant if they're registering for events and don't exist
     if (!participant) {
-      // Create participant only when they register for events
       participant = await Participant.create({
         userId,
         name: user.name,
@@ -353,7 +359,7 @@ router.get('/my-registrations/:userId', async (req, res) => {
         message: 'No registrations found',
         data: {
           userId,
-          registeredEvents: []
+          events: []
         }
       });
     }
@@ -363,7 +369,7 @@ router.get('/my-registrations/:userId', async (req, res) => {
       message: 'Registered events retrieved successfully',
       data: {
         userId,
-        registeredEvents: participant.registeredEvents || []
+        events: participant.registeredEvents || []
       }
     });
   } catch (error) {

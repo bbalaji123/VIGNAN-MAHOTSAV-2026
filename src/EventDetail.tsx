@@ -458,9 +458,9 @@ const EventDetail: React.FC = () => {
     },
     "Volley ball (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "VOLLEY BALL (M&W)",
+      subtitle: "VOLLEY BALL",
       rules: [
-        "Team strength is 7+5 players.",
+        "Team strength: Men - 7+5 players, Women - 6+4 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
@@ -469,15 +469,19 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
-        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
-        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
+        men: {
           first: "Rs. 30,000",
           second: "Rs. 20,000",
           third: "Rs. 7,000",
           fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -491,9 +495,9 @@ const EventDetail: React.FC = () => {
     },
     "Volley ball (Women)": {
       title: "TEAM EVENTS",
-      subtitle: "VOLLEY BALL (Women)",
+      subtitle: "VOLLEY BALL",
       rules: [
-        "Team strength is 6+4 players.",
+        "Team strength: Men - 7+5 players, Women - 6+4 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
@@ -505,8 +509,16 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -520,26 +532,30 @@ const EventDetail: React.FC = () => {
     },
     "Basket ball (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "BASKET BALL (M&W)",
+      subtitle: "BASKET BALL",
       rules: [
         "Team strength is 5+5 players.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
         "Every team should come with a proper sports attire.",
-        "The game will follow fiba rules",
+        "The game will follow FIBA rules.",
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
-        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
-        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
+        men: {
           first: "Rs. 30,000",
           second: "Rs. 20,000",
           third: "Rs. 7,000",
           fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -553,12 +569,13 @@ const EventDetail: React.FC = () => {
     },
     "Basket ball (Women)": {
       title: "TEAM EVENTS",
-      subtitle: "BASKET BALL (Women)",
+      subtitle: "BASKET BALL",
       rules: [
         "Team strength is 5+5 players.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
         "Every team should come with a proper sports attire.",
+        "The game will follow FIBA rules.",
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
@@ -566,8 +583,16 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -581,42 +606,7 @@ const EventDetail: React.FC = () => {
     },
     "Kabaddi (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "KABADDI (M&W)",
-      rules: [
-        "Team strength is 7+3 players.",
-        "Pro Kabaddi rules & Regulations are applicable.",
-        "All matches will be conducted on the kabaddi mat.",
-        "Player may wear mat shoes or can play with barefoot.",
-        "All matches are conducted on knock out basis.",
-        "Every team should report at least 30 mins before scheduled match time.",
-        "Every team should come with a proper sports attire.",
-        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
-        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
-        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
-        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000 | 3rd Rs.7,000 | 4th Rs.3,000",
-        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
-      ],
-      prizes: {
-          first: "Rs. 30,000",
-          second: "Rs. 20,000",
-          third: "Rs. 7,000",
-          fourth: "Rs. 3,000"
-      },
-      contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
-      ]
-    },
-    "Kabaddi (Women)": {
-      title: "TEAM EVENTS",
-      subtitle: "KABADDI (Women)",
+      subtitle: "KABADDI",
       rules: [
         "Team strength is 7+3 players.",
         "Pro Kabaddi rules & Regulations are applicable.",
@@ -632,8 +622,55 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
+      },
+      contacts: [
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+      ]
+    },
+    "Kabaddi (Women)": {
+      title: "TEAM EVENTS",
+      subtitle: "KABADDI",
+      rules: [
+        "Team strength is 7+3 players.",
+        "Pro Kabaddi rules & Regulations are applicable.",
+        "All matches will be conducted on the kabaddi mat.",
+        "Player may wear mat shoes or can play with barefoot.",
+        "All matches are conducted on knock out basis.",
+        "Every team should report at least 30 mins before scheduled match time.",
+        "Every team should come with a proper sports attire.",
+        "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
+        "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
+        "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
+        "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+      ],
+      prizes: {
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000",
+          third: "Rs. 7,000",
+          fourth: "Rs. 3,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts:
         [
@@ -648,7 +685,7 @@ const EventDetail: React.FC = () => {
     },
     "Kho-Kho (Men)": {
       title: "TEAM EVENTS",
-      subtitle: "KHO-KHO (M&W)",
+      subtitle: "KHO-KHO",
       rules: [
         "Team strength is 9+3 players.",
         "All matches are conducted on knock out basis.",
@@ -658,13 +695,17 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
-        "Prize Money - Men: 1st Rs.30,000 | 2nd Rs.20,000",
-        "Prize Money - Women: 1st Rs.15,000 | 2nd Rs.10,000"
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 30,000",
-        second: "Rs. 20,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -678,7 +719,7 @@ const EventDetail: React.FC = () => {
     },
     "Kho-Kho (Women)": {
       title: "TEAM EVENTS",
-      subtitle: "KHO-KHO (Women)",
+      subtitle: "KHO-KHO",
       rules: [
         "Team strength is 9+3 players.",
         "All matches are conducted on knock out basis.",
@@ -691,8 +732,14 @@ const EventDetail: React.FC = () => {
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
       prizes: {
-        first: "Rs. 15,000",
-        second: "Rs. 10,000"
+        men: {
+          first: "Rs. 30,000",
+          second: "Rs. 20,000"
+        },
+        women: {
+          first: "Rs. 15,000",
+          second: "Rs. 10,000"
+        }
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
@@ -760,7 +807,7 @@ const EventDetail: React.FC = () => {
         { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
       ]
     },
-    "Throw ball": {
+    "Throwball": {
       title: "TEAM EVENTS",
       subtitle: "THROWBALL (Women)",
       rules: [
@@ -780,13 +827,9 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Ms. P. Syam Keerthi", phone: "+91 88861 61616" },
+        { name: "Ms. K. Vaishnavi", phone: "+91 77298 38501" },
+        { name: "Ms. Ch. Bhavana", phone: "+91 93465 57223" }
       ]
     },
     "Football (Men)": {
@@ -1723,13 +1766,18 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "Craft Villa (Accessory Design)",
       rules: [
-        "This is an individual or team event (maximum 2 participants).",
-        "Participants need to create fashion accessories using crafts.",
-        "Duration: 2 hours.",
-        "Participants must bring their own materials.",
-        "Accessories can include jewelry, bags, headbands, belts, or any wearable items.",
-        "The design should be creative, wearable, and aesthetically appealing.",
-        "Judgment will be based on creativity, craftsmanship, design, and overall presentation."
+        "Maximum of 2 people can be in a team.",
+        "The teams should bring their own required materials.",
+        "Items allowed:",
+        "  a) Paper Quilling",
+        "  b) Beaded Accessories Design",
+        "  c) Antique Accessories Design",
+        "  d) Fabric/Threaded Jewellery",
+        "  e) Leather Accessories Design",
+        "  f) Tribal Jewellery",
+        "  g) Wood Accessories Design",
+        "  h) Wealth from Waste",
+        "  i) Greeting Cards"
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1747,13 +1795,11 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "Texart (Fashion Sketching)",
       rules: [
-        "This is an individual fashion sketching competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Drawing sheet will be provided.",
-        "Participants must bring their own sketching and coloring materials.",
-        "The sketch should showcase fashion design concepts based on the theme.",
-        "Judgment will be based on creativity, design concept, sketching skills, and overall presentation."
+        "Theme will be given on the spot",
+        "This is a solo event",
+        "Participants should bring their own materials",
+        "Drawing sheets will be provided to all the participants",
+        "Designing should be done within the stipulated time provided"
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1771,13 +1817,8 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "T-Shirt Designing",
       rules: [
-        "This is an individual T-shirt designing competition.",
-        "Theme will be announced on the spot.",
-        "Duration: 2 hours.",
-        "Plain T-shirt will be provided.",
-        "Participants must bring their own fabric colors, brushes, and designing materials.",
-        "The design should be creative and based on the given theme.",
-        "Judgment will be based on creativity, theme interpretation, color usage, and overall design."
+        "Only T-Shirts will be provided (with additional charge of Rs.150)",
+        "Team of 1 or 2 participants"
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1795,12 +1836,9 @@ const EventDetail: React.FC = () => {
       title: "SPOT LIGHT",
       subtitle: "Mahotsav Got Talent",
       rules: [
-        "This is an open talent show where participants can showcase any unique talent.",
-        "The performance can be solo or group (maximum 5 participants).",
-        "The maximum duration of the performance shall be 5 minutes.",
-        "Participants can perform magic, mimicry, beatboxing, stand-up comedy, unique musical performances, or any other special talent.",
-        "Participants must bring their own props if required.",
-        "Judgment will be based on uniqueness, skill level, entertainment value, and overall performance."
+        "The participant can be solo or group with no team limit.",
+        "Performance can be of any art or skill – Dance, music, special skills etc., that has an 'X' factor unlike the routine performances.",
+        "Judgement will be based on the overall impression created by the participants."
       ],
       prizes: {
         first: "Rs. 7,000",
@@ -1818,16 +1856,16 @@ const EventDetail: React.FC = () => {
       title: "SPOT LIGHT",
       subtitle: "Mr. and Ms. Mahotsav",
       rules: [
-        "This is an individual personality competition for male and female categories.",
-        "Participants will go through multiple rounds including introduction, talent round, question-answer, and ramp walk.",
-        "Participants should come in formal/ethnic attire for introduction round.",
-        "Talent round: Showcase any talent (singing, dancing, mimicry, etc.) - 2 minutes max.",
-        "Participants should be confident, well-spoken, and presentable.",
-        "Judgment will be based on personality, confidence, talent, communication skills, and overall presence."
+        "It is a multiple round event where the participant will be tested on various capabilities like talent, presentation skills etc.",
+        "Winners will be awarded with the title of Mr. / Ms. Mahotsav along with a crowning ceremony.",
+        "Details of Rounds:",
+        "  • Round 1: It is a written round on personality assessment based questions.",
+        "  • Round 2: It is a Talent Round. Any talent that you posses can be exhibited within the time limit of 2 to 3 minutes.",
+        "  • Round 3: Participants should present their perspective on the given real time or general situation given by the jury."
       ],
       prizes: {
-        first: "Rs. 4,000 (Mr. Mahotsav - Men)",
-        second: "Rs. 4,000 (Ms. Mahotsav - Women)"
+        first: "Rs. 4,000",
+        second: "Rs. 2,000"
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
@@ -1858,6 +1896,42 @@ const EventDetail: React.FC = () => {
         { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
         { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
       ]
+    },
+
+    "Short Film Making": {
+      title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
+      subtitle: "Short Film Making",
+      rules: [
+        "Submission Requirements and Deadline:",
+        "  • Submission Method: Participants must submit their short film using the Google Drive or YouTube link provided in the registration form.",
+        "  • Deadline: The last date for submitting the short film is January 25th, 2026 by 9:00 AM.",
+        "  • Modification: Once submitted, no further modifications to the film are allowed.",
+        "  • Eligibility: Only short films released between March 2025 to January 2026 are eligible for the competition.",
+        "  • Duration: The short film duration should not exceed 15 minutes, including titles and end credits.",
+        "Registration and Identification:",
+        "  • Registration Process: Participants must register on the official Mahotsav webpage, generate their Mahotsav ID, complete the online registration process, and submit the required details.",
+        "  • Mandatory Details: The film submission must include the participant's name, designation, college, and a suitable caption. Submissions missing these details will not be considered valid.",
+        "Content and Format:",
+        "  • Theme: The short film may address any theme, including social issues, fiction, love, drama, or thriller.",
+        "  • Format: The submission must be a visually engaging video, such as a vlog, documentary, or short story that incorporates camera work.",
+        "  • Prohibited Formats: PowerPoint presentations and photo story submissions will not be accepted.",
+        "  • Subtitles: If the short film is not in Telugu, subtitles must be included.",
+        "  • Content Restrictions: Vulgarity or offensive insinuations are prohibited. Only innocent satire or humour is allowed.",
+        "Team and Competition Rounds:",
+        "  • Team Representation: A maximum of five students can represent the short film in the competition.",
+        "  • Team Roles: One of the team members must play a role in the film, and one must be the director.",
+        "  • Competition Structure: The competition will consist of two rounds.",
+        "  • Final Round Notification: The organizing committee will shortlist the top 20 short films. Participants whose films are selected for the final round will be notified via phone. These participants must present their short film in front of the judges at the Mahotsav 2025 competition.",
+        "Judging and Prizes:",
+        "  • Judging Criteria: The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation.",
+        "  • Prize Collection: Winners must collect their prizes in person. Prizes will not be sent via any online or postal method."
+      ],
+      prizes: {
+        first: "Rs. 20,000",
+        second: "Rs. 15,000",
+        third: "Rs. 12,000"
+      },
+      contacts: []
     },
 
     "Digital Poster Making": {
@@ -2126,7 +2200,7 @@ const EventDetail: React.FC = () => {
     "Kho-Kho (Women)": "/images/kho kho.avif",
     "Hockey (Men)": "/images/hockey.avif",
     "Hockey (Women)": "/images/hockey.avif",
-    "Throw ball": "/images/throwball.avif",
+    "Throwball": "/images/throwball.avif",
     "Football (Men)": "/images/football men.avif",
     "Football (Women)": "/images/football men.avif",
     // Dance Events
@@ -2175,6 +2249,7 @@ const EventDetail: React.FC = () => {
     "T-Shirt Designing": "/images/T-shirt designing.avif",
     // Digital Storytelling Events
     "Online Photography": "/images/Theme Photography.avif",
+    "Short Film Making": "/images/Short Film.avif",
     "Digital Poster Making": "/images/Digital Poster Making.avif",
     "Mahotsav Digital Chronicle": "/images/MH-26 Digital Chronicle.avif",
     "Reel Making": "/images/reel making.avif",
@@ -2182,7 +2257,11 @@ const EventDetail: React.FC = () => {
     "Valorant": "/images/valorant.avif",
     "E-Football": "/images/E-Football.avif",
     "Counter Strike": "/images/Counter Strike.avif",
-    "Smash Karts": "/images/smash kart.avif"
+    "Smash Karts": "/images/smash kart.avif",
+    // Robo Games Events
+    "Line Follower Robot": "/images/Line Flower Robot.png",
+    "Bot Wrestling": "/images/Bot wrestling.png",
+    "Robo Races": "/images/Robo Races.png"
   };
 
   const handleDownloadPDF = async () => {
@@ -2190,6 +2269,11 @@ const EventDetail: React.FC = () => {
 
     setIsDownloading(true);
     try {
+      // Get the event image URL if available
+      const eventImageUrl = eventName && eventImageMap[eventName] ? eventImageMap[eventName] : '';
+      const fullImageUrl = eventImageUrl ? `${window.location.origin}${eventImageUrl}` : '';
+      const logoUrl = `${window.location.origin}/images/10.avif`;
+
       const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -2201,41 +2285,243 @@ const EventDetail: React.FC = () => {
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6B46C1 0%, #8B5CF6 50%, #C084FC 100%);
+            background: linear-gradient(135deg, #6B46C1 0%, #7C3AED 25%, #8B5CF6 50%, #A78BFA 75%, #C4B5FD 100%);
             color: white;
-            padding: 40px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-size: 36px; margin-bottom: 10px; }
-        .header h2 { font-size: 28px; color: #E9D5FF; }
-        .content { display: grid; grid-template-columns: 300px 1fr 350px; gap: 40px; }
+        
+        /* Logo at top */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            z-index: 10;
+        }
+        .logo-container img {
+            height: 80px;
+            width: auto;
+        }
+        
+        /* Back arrow */
+        .back-arrow {
+            position: absolute;
+            top: 120px;
+            left: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-arrow::before {
+            content: '←';
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        /* Lotus decoration on right */
+        .lotus-decoration-right {
+            position: fixed;
+            right: -50px;
+            top: 0;
+            width: 400px;
+            height: 400px;
+            opacity: 0.3;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, rgba(219, 39, 119, 0.4) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* Sun decoration */
+        .sun-decoration {
+            position: fixed;
+            right: 80px;
+            top: 80px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #FCD34D 0%, #F59E0B 40%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 140px 50px 50px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .header { 
+            text-align: center; 
+            margin-bottom: 50px; 
+        }
+        .header h1 { 
+            font-size: 48px; 
+            margin-bottom: 15px; 
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); 
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        .header h2 { 
+            font-size: 36px; 
+            color: #FDE68A; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+            font-weight: 700;
+        }
+        
+        .content { 
+            display: grid; 
+            grid-template-columns: 320px 1fr 380px; 
+            gap: 50px; 
+            align-items: start;
+        }
+        
+        /* Poster with lotus frame */
+        .poster-wrapper {
+            position: relative;
+            width: 300px;
+        }
         .poster {
-            width: 250px; height: 350px; background: rgba(255,255,255,0.9);
-            border: 4px solid white; border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            color: #581C87; font-weight: bold; font-size: 18px;
+            width: 300px; 
+            height: 400px; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            border: 5px solid #FFD700;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 215, 0, 0.3);
+            position: relative;
         }
-        h3 { color: #FFD700; font-size: 24px; margin-bottom: 20px; }
-        .rules-list { list-style: none; padding: 0; }
-        .rules-list li { margin-bottom: 15px; display: flex; }
-        .rules-list li:before { content: "•"; color: #FFD700; font-weight: bold; margin-right: 12px; }
-        .prize-item { margin-bottom: 12px; font-size: 16px; }
-        .prize-label { color: #FFD700; font-weight: bold; }
-        .contact-item { margin-bottom: 12px; font-size: 14px; }
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .lotus-icon {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+        }
+        
+        .poster-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #581C87;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h3 { 
+            color: #FCD34D; 
+            font-size: 32px; 
+            margin-bottom: 25px; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
+            font-weight: 700;
+        }
+        
+        .rules-list { 
+            list-style: none; 
+            padding: 0; 
+        }
+        .rules-list li { 
+            margin-bottom: 18px; 
+            display: flex; 
+            line-height: 1.7;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .rules-list li:before { 
+            content: "•"; 
+            color: #FCD34D; 
+            font-weight: bold; 
+            margin-right: 15px; 
+            font-size: 24px; 
+        }
+        
+        .prize-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .prize-item { 
+            margin-bottom: 14px; 
+            font-size: 18px; 
+            font-weight: 600;
+        }
+        .prize-label { 
+            color: #FCD34D; 
+            font-weight: 800; 
+            display: inline-block;
+            min-width: 90px;
+        }
+        
+        .contact-item { 
+            margin-bottom: 14px; 
+            font-size: 15px; 
+            font-weight: 500;
+            color: #FDE68A;
+        }
+        .contact-item strong {
+            color: white;
+            font-weight: 700;
+        }
+        
+        h4 { 
+            color: #FDE68A; 
+            font-size: 22px; 
+            margin-top: 20px; 
+            margin-bottom: 12px; 
+            font-weight: 700;
+        }
+        
         @media print {
-            body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            body { 
+                print-color-adjust: exact; 
+                -webkit-print-color-adjust: exact; 
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="${logoUrl}" alt="Mahotsav Logo">
+    </div>
+    
+    <!-- Back arrow -->
+    <div class="back-arrow">BACK</div>
+    
+    <!-- Lotus decoration on right -->
+    <div class="lotus-decoration-right"></div>
+    <div class="sun-decoration"></div>
+    
     <div class="container">
         <div class="header">
             <h1>${eventData.title}</h1>
             <h2>${eventData.subtitle}</h2>
         </div>
         <div class="content">
-            <div class="poster">POSTER of EVENT</div>
+            <div class="poster-wrapper">
+                <div class="poster">
+                    ${fullImageUrl ? `<img src="${fullImageUrl}" alt="${eventData.subtitle}" />` : '<div class="poster-placeholder">POSTER of EVENT</div>'}
+                </div>
+                <div class="lotus-icon">🪷</div>
+            </div>
             <div>
                 <h3>Rules:</h3>
                 <ul class="rules-list">
@@ -2243,26 +2529,28 @@ const EventDetail: React.FC = () => {
                 </ul>
             </div>
             <div>
-                <h3>Cash Prizes:</h3>
-                ${'men' in eventData.prizes ? `
-                    <h4>Men:</h4>
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.men.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.men.second}</div>
-                    ${eventData.prizes.men.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.men.third}</div>` : ''}
-                    ${eventData.prizes.men.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.men.fourth}</div>` : ''}
-                    <h4 style="margin-top: 20px;">Women:</h4>
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.women.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.women.second}</div>
-                    ${eventData.prizes.women.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.women.third}</div>` : ''}
-                    ${eventData.prizes.women.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.women.fourth}</div>` : ''}
-                ` : `
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.second}</div>
-                    ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.third}</div>` : ''}
-                    ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}</div>` : ''}
-                `}
-                <h3 style="margin-top: 30px;">Contact no:</h3>
-                ${eventData.contacts.map(contact => `<div class="contact-item">${contact.name}: ${contact.phone}</div>`).join('')}
+                <div class="prize-section">
+                    <h3>Cash Prizes:</h3>
+                    ${'men' in eventData.prizes ? `
+                        <h4>Men:</h4>
+                        <div class="prize-item"><span class="prize-label">First</span> - ${eventData.prizes.men.first}</div>
+                        <div class="prize-item"><span class="prize-label">Second</span> - ${eventData.prizes.men.second}</div>
+                        ${eventData.prizes.men.third ? `<div class="prize-item"><span class="prize-label">Third</span> - ${eventData.prizes.men.third}</div>` : ''}
+                        ${eventData.prizes.men.fourth ? `<div class="prize-item"><span class="prize-label">Fourth</span> - ${eventData.prizes.men.fourth}</div>` : ''}
+                        <h4>Women:</h4>
+                        <div class="prize-item"><span class="prize-label">First</span> - ${eventData.prizes.women.first}</div>
+                        <div class="prize-item"><span class="prize-label">Second</span> - ${eventData.prizes.women.second}</div>
+                        ${eventData.prizes.women.third ? `<div class="prize-item"><span class="prize-label">Third</span> - ${eventData.prizes.women.third}</div>` : ''}
+                        ${eventData.prizes.women.fourth ? `<div class="prize-item"><span class="prize-label">Fourth</span> - ${eventData.prizes.women.fourth}</div>` : ''}
+                    ` : `
+                        <div class="prize-item"><span class="prize-label">First</span> - ${eventData.prizes.first}</div>
+                        <div class="prize-item"><span class="prize-label">Second</span> - ${eventData.prizes.second}</div>
+                        ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third</span> - ${eventData.prizes.third}</div>` : ''}
+                        ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth</span> - ${eventData.prizes.fourth}</div>` : ''}
+                    `}
+                </div>
+                <h3 style="margin-top: 35px;">Contact no:</h3>
+                ${eventData.contacts.map(contact => `<div class="contact-item"><strong>${contact.name}:</strong> ${contact.phone}</div>`).join('')}
             </div>
         </div>
     </div>
@@ -2458,14 +2746,19 @@ const EventDetail: React.FC = () => {
                 Rules:
               </h3>
               <ul className="space-y-2 sm:space-y-3">
-                {eventData.rules.map((rule, index) => (
-                  <li key={index} className="flex items-start gap-2 sm:gap-4">
-                    <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                    <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em' }}>
-                      {rule}
-                    </span>
-                  </li>
-                ))}
+                {eventData.rules.map((rule, index) => {
+                  const startsWithLetter = /^\s*[a-i]\)/.test(rule);
+                  return (
+                    <li key={index} className="flex items-start gap-2 sm:gap-4">
+                      {!startsWithLetter && (
+                        <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
+                      )}
+                      <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em' }}>
+                        {rule}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

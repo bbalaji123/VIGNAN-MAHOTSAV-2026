@@ -56,10 +56,10 @@ const Dashboard: React.FC = () => {
   const sportsDetailCards = [
     { title: "Men's Athletics", subtitle: "Track & Field" },
     { title: "Women's Athletics", subtitle: "Track & Field" },
-    { title: "Men's Individual &", subtitle: "Indoor Sports" },
-    { title: "Women's Individual &", subtitle: "Indoor Sports" },
-    { title: "Men's Team Field Sports", subtitle: "" },
-    { title: "Women's Team Field", subtitle: "Sports" }
+    { title: "Men's Team Events", subtitle: "Indoor Sports" },
+    { title: "Women's Team Events", subtitle: "Indoor Sports" },
+    { title: "Team Field Sports", subtitle: "" },
+    { title: "Women's Team Field Sports", subtitle: "" }
   ];
 
   const culturalsCards = [
@@ -702,6 +702,20 @@ const Dashboard: React.FC = () => {
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate]);
+
+  // Check for register-for-events route
+  useEffect(() => {
+    if (window.location.pathname === '/register-for-events') {
+      handleOpenRegistration();
+    }
+  }, []);
+
+  // Check for register-for-events route
+  useEffect(() => {
+    if (location.pathname === '/register-for-events') {
+      handleOpenRegistration();
+    }
+  }, [location.pathname]);
 
   // Counter animation effect
   useEffect(() => {
@@ -1453,10 +1467,10 @@ const Dashboard: React.FC = () => {
   };
 
   const handleIndoorSportsClick = (eventTitle: string) => {
-    if (eventTitle === "Men's Individual &") {
+    if (eventTitle === "Men's Team Events") {
       setShowIndoorSports(true);
       setShowSportsDetails(false);
-    } else if (eventTitle === "Women's Individual &") {
+    } else if (eventTitle === "Women's Team Events") {
       setShowWomenIndoorSports(true);
       setShowSportsDetails(false);
     } else if (eventTitle === "Men's Team Field Sports") {
@@ -2022,6 +2036,9 @@ const Dashboard: React.FC = () => {
   };
 
   const handleOpenRegistration = async () => {
+    // Update URL
+    window.history.pushState({}, '', '/register-for-events');
+    
     // Always open the modal when button is clicked
     setShowRegistrationModal(true);
 
@@ -2066,26 +2083,26 @@ const Dashboard: React.FC = () => {
           const eventName = regEvent.eventName || regEvent.Event || regEvent.name;
           
           // Find matching event in Sports
-          sportsEvents.forEach((event: any, index: number) => {
+          sportsEvents.forEach((event: any) => {
             if (event && event.Event === eventName) {
-              preSelectedIds.add(`sport-${index}`);
+              preSelectedIds.add(`sport-${eventName}`);
             }
           });
           
           // Find matching event in Culturals
-          culturalEvents.forEach((event: any, index: number) => {
+          culturalEvents.forEach((event: any) => {
             if (event) {
               const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
               if (culturalEventName === eventName) {
-                preSelectedIds.add(`cultural-${index}`);
+                preSelectedIds.add(`cultural-${culturalEventName}`);
               }
             }
           });
           
           // Find matching event in ParaSports
-          paraEvents.forEach((event: any, index: number) => {
+          paraEvents.forEach((event: any) => {
             if (event && event.Event === eventName) {
-              preSelectedIds.add(`para-${index}`);
+              preSelectedIds.add(`para-${eventName}`);
             }
           });
         });
@@ -2107,17 +2124,23 @@ const Dashboard: React.FC = () => {
       return;
     }
 
+    const removeName = eventToRemove.eventName || eventToRemove.Event || eventToRemove.name;
+
+    const remainingEvents = myEvents.filter((e: any) => {
+      const name = e.eventName || e.Event || e.name;
+      return name !== removeName;
+    });
+
+    // Check if this is the last event
+    if (remainingEvents.length === 0) {
+      alert('You have to register for at least one event');
+      return;
+    }
+
     const confirmRemove = window.confirm('Do you want to remove this event from your registration?');
     if (!confirmRemove) return;
 
     try {
-      const removeName = eventToRemove.eventName || eventToRemove.Event || eventToRemove.name;
-
-      const remainingEvents = myEvents.filter((e: any) => {
-        const name = e.eventName || e.Event || e.name;
-        return name !== removeName;
-      });
-
       const response = await fetch(`${API_BASE_URL}/save-events`, {
         method: 'POST',
         headers: {
@@ -3715,7 +3738,7 @@ const Dashboard: React.FC = () => {
                   {sportsDetailCards.map((card, index) => {
                     const isActive = index === currentSportsSlide;
                     const offset = index - currentSportsSlide;
-                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
+                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Team Events" || card.title === "Women's Team Events" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
 
                     let transform = '';
                     let zIndex = 0;
@@ -3771,7 +3794,7 @@ const Dashboard: React.FC = () => {
                         key={index}
                         className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isClickable && isActive ? () => {
-                          if (card.title === "Men's Individual &" || card.title === "Women's Individual &" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
+                          if (card.title === "Men's Team Events" || card.title === "Women's Team Events" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
                             handleIndoorSportsClick(card.title);
                           } else {
                             handleEventDetailClick(card.title);
@@ -3819,7 +3842,7 @@ const Dashboard: React.FC = () => {
         </section>
       )}
 
-      {/* Indoor Sports Section - appears when clicking Men's Individual & Indoor Sports */}
+      {/* Indoor Sports Section - appears when clicking Men's Team Events Indoor Sports */}
       {showIndoorSports && (
         <section className="inline-indoor-sports-section">
           <div className="inline-indoor-sports-container">
@@ -3876,7 +3899,7 @@ const Dashboard: React.FC = () => {
         </section>
       )}
 
-      {/* Women's Indoor Sports Section - appears when clicking Women's Individual & Indoor Sports */}
+      {/* Women's Indoor Sports Section - appears when clicking Women's Team Events Indoor Sports */}
       {showWomenIndoorSports && (
         <section className="inline-indoor-sports-section">
           <div className="inline-indoor-sports-container">
@@ -5883,9 +5906,35 @@ const Dashboard: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Event Details Section (button removed as requested) */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '1.5rem' }}>
+                  {/* Event Details Section with Edit/Register Button */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <h2 style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '1.25rem' : '1.75rem', fontWeight: 'bold', margin: 0 }}>Event Details</h2>
+                    <button
+                      onClick={handleOpenRegistration}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        backdropFilter: 'blur(10px)',
+                        color: 'white',
+                        padding: window.innerWidth <= 640 ? '0.5rem 1rem' : '0.75rem 1.5rem',
+                        borderRadius: '0.5rem',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        cursor: 'pointer',
+                        fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      Edit/Register
+                    </button>
                   </div>
 
                   {/* Events Count Box */}
@@ -6184,6 +6233,32 @@ const Dashboard: React.FC = () => {
               <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                 <button
                   className="save-events-btn"
+                  onClick={() => {
+                    setShowMyEventsModal(false);
+                    setShowEventChecklistModal(true);
+                  }}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.9rem',
+                    background: '#3b82f6',
+                    border: 'none',
+                    borderRadius: '0.5rem',
+                    color: 'white',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    transition: 'all 0.3s'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.background = '#2563eb';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.background = '#3b82f6';
+                  }}
+                >
+                  ✏️ Edit/Register
+                </button>
+                <button
+                  className="save-events-btn"
                   onClick={() => window.print()}
                   style={{
                     padding: '0.5rem 1rem',
@@ -6241,10 +6316,16 @@ const Dashboard: React.FC = () => {
                           </span>
                           <button
                             onClick={async () => {
+                              const updatedEvents = myEvents.filter((_, i) => i !== index);
+                              
+                              // Check if this is the last event
+                              if (updatedEvents.length === 0) {
+                                alert('You have to register for at least one event');
+                                return;
+                              }
+
                               if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
                                 try {
-                                  const updatedEvents = myEvents.filter((_, i) => i !== index);
-
                                   // Update in database
                                   const response = await fetch(`${API_BASE_URL}/save-events`, {
                                     method: 'POST',
@@ -6613,7 +6694,10 @@ const Dashboard: React.FC = () => {
       {showRegistrationModal && (
         <div
           className="login-modal-overlay"
-          onClick={() => setShowRegistrationModal(false)}
+          onClick={() => {
+            window.history.pushState({}, '', '/');
+            setShowRegistrationModal(false);
+          }}
           style={{
             position: 'fixed',
             top: 0,
@@ -6647,7 +6731,10 @@ const Dashboard: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Register for Events</h2>
               <button
-                onClick={() => setShowRegistrationModal(false)}
+                onClick={() => {
+                  window.history.pushState({}, '', '/');
+                  setShowRegistrationModal(false);
+                }}
                 style={{
                   background: 'transparent',
                   border: 'none',
@@ -6676,8 +6763,14 @@ const Dashboard: React.FC = () => {
 
             {/* Calculate constraint states */}
             {(() => {
-              const hasParaSelected = Array.from(selectedRegistrationEvents).some(id => id.startsWith('para-'));
-              const hasNormalSelected = Array.from(selectedRegistrationEvents).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+              // Only count newly selected events, not already registered ones
+              const newlySelectedIds = Array.from(selectedRegistrationEvents).filter(id => {
+                const [_type, ...nameParts] = id.split('-');
+                const eventName = nameParts.join('-');
+                return !isEventAlreadySaved(eventName);
+              });
+              const hasParaSelected = newlySelectedIds.some(id => id.startsWith('para-'));
+              const hasNormalSelected = newlySelectedIds.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
               (window as any).__hasParaSelected = hasParaSelected;
               (window as any).__hasNormalSelected = hasNormalSelected;
               return null;
@@ -6825,8 +6918,8 @@ const Dashboard: React.FC = () => {
 
                             const alreadySaved = isEventAlreadySaved(eventName);
                             const constraintDisabled = (window as any).__hasParaSelected;
-                            const finalDisabled = constraintDisabled;
-                            const isChecked = selectedRegistrationEvents.has(eventId);
+                            const finalDisabled = constraintDisabled || alreadySaved;
+                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
 
                             return (
                               <label
@@ -6899,7 +6992,7 @@ const Dashboard: React.FC = () => {
                                         marginTop: '0.1rem'
                                       }}
                                     >
-                                      Already registered
+                                      Already registered • Fee: ₹{event.Fee || 350}
                                     </div>
                                   )}
                                 </div>
@@ -7042,13 +7135,13 @@ const Dashboard: React.FC = () => {
                           
                           {/* Events in this category */}
                           {expandedSections.has(`culturals-${category}`) && events.map((event: any, _index: number) => {
-                            const eventName = event.Event;
-                            const eventId = `cultural-${eventName}`;
+                            const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                            const eventId = `cultural-${culturalEventName}`;
 
-                            const alreadySaved = isEventAlreadySaved(eventName);
+                            const alreadySaved = isEventAlreadySaved(culturalEventName);
                             const constraintDisabled = (window as any).__hasParaSelected;
-                            const finalDisabled = constraintDisabled;
-                            const isChecked = selectedRegistrationEvents.has(eventId);
+                            const finalDisabled = constraintDisabled || alreadySaved;
+                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
 
                             return (
                               <label
@@ -7111,7 +7204,7 @@ const Dashboard: React.FC = () => {
                                 />
                                 <div style={{ flex: 1 }}>
                                   <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                                    {eventName}
+                                    {culturalEventName}
                                   </div>
                                   {alreadySaved && (
                                     <div
@@ -7121,7 +7214,7 @@ const Dashboard: React.FC = () => {
                                         marginTop: '0.1rem'
                                       }}
                                     >
-                                      Already registered
+                                      Already registered • Fee: ₹{event.Fee || (userProfileData.gender === 'female' ? 250 : 350)}
                                     </div>
                                   )}
                                 </div>
@@ -7203,15 +7296,15 @@ const Dashboard: React.FC = () => {
                           </div>
                           
                           {/* Events in this category */}
-                          {events.map((event: any, index: number) => {
-                            const eventId = `para-${index}`;
+                          {events.map((event: any) => {
                             const eventName = event.Event;
+                            const eventId = `para-${eventName}`;
 
                             const alreadySaved = isEventAlreadySaved(eventName);
                             const hasNormalSelected = (window as any).__hasNormalSelected;
                             const constraintDisabled = hasNormalSelected;
-                            const finalDisabled = constraintDisabled;
-                            const isChecked = selectedRegistrationEvents.has(eventId);
+                            const finalDisabled = constraintDisabled || alreadySaved;
+                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
 
                             return (
                               <label
@@ -7284,7 +7377,7 @@ const Dashboard: React.FC = () => {
                                         marginTop: '0.1rem'
                                       }}
                                     >
-                                      Already registered
+                                      Already registered • Fee: ₹0 (Free)
                                     </div>
                                   )}
                                 </div>
@@ -7456,48 +7549,87 @@ const Dashboard: React.FC = () => {
                       const eventName = nameParts.join('-'); // Rejoin in case event name has dashes
 
                       if (type === 'sport') {
-                        // Find the event by name
-                        const event = registrationEvents.Sports.find((e: any) => e.Event === eventName);
-                        if (event) {
+                        // Find the event by name and track its category
+                        let foundEvent: any = null;
+                        let foundCategory = '';
+                        let currentCat = 'Other';
+                        
+                        registrationEvents.Sports.forEach((e: any) => {
+                          if (!e) return;
+                          if (e.Category) {
+                            currentCat = e.Category;
+                          }
+                          if (e.Event === eventName) {
+                            foundEvent = e;
+                            foundCategory = currentCat;
+                          }
+                        });
+                        
+                        if (foundEvent) {
                           return {
-                            eventName: event.Event || event['738500'],
+                            eventName: foundEvent.Event || foundEvent['738500'],
                             eventType: 'sports',
-                            category: event.Category || event['Prize money for Sports'] || '',
-                            description: `${event.Category || event['Prize money for Sports'] || ''} - ${event.Event || event['738500']}`.trim(),
+                            category: foundCategory,
+                            description: `${foundCategory} - ${foundEvent.Event || foundEvent['738500']}`.trim(),
                             fee: userProfileData.gender === 'male' ? 350 : 350
                           };
                         }
                       }
 
                       if (type === 'cultural') {
-                        // Find the cultural event by name
-                        const event = registrationEvents.Culturals.find((e: any) => {
-                          if (!e) return false;
+                        // Find the cultural event by name and track its category
+                        let foundEvent: any = null;
+                        let foundCategory = '';
+                        let currentCat = 'Other';
+                        
+                        registrationEvents.Culturals.forEach((e: any) => {
+                          if (!e) return;
+                          if (e['5'] || e.Category) {
+                            currentCat = e['5'] || e.Category;
+                          }
                           const eName = e['Prize money for Performing arts, Visual arts, Fashion'] || e.Event;
-                          return eName === eventName;
+                          if (eName === eventName) {
+                            foundEvent = e;
+                            foundCategory = currentCat;
+                          }
                         });
-                        if (event) {
-                          const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                        
+                        if (foundEvent) {
+                          const culturalEventName = foundEvent['Prize money for Performing arts, Visual arts, Fashion'] || foundEvent.Event;
                           return {
                             eventName: culturalEventName,
                             eventType: 'culturals',
-                            category: event['5'] || event.Category || '',
-                            description: `${event['5'] || event.Category || ''} - ${culturalEventName}`.trim(),
+                            category: foundCategory,
+                            description: `${foundCategory} - ${culturalEventName}`.trim(),
                             fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
                           };
                         }
                       }
 
                       if (type === 'para') {
-                        const paraEvents = getFilteredParaSportsEvents();
-                        const paraIndex = parseInt(nameParts.join('-'));
-                        const event = paraEvents[paraIndex];
-                        if (event) {
+                        const paraEventName = nameParts.join('-');
+                        // Find the event in registrationEvents.ParaSports and track its category
+                        let foundEvent: any = null;
+                        let foundCategory = '';
+                        let currentCat = 'Other';
+                        
+                        registrationEvents.ParaSports?.forEach((e: any) => {
+                          if (!e) return;
+                          if (e.Category) {
+                            currentCat = e.Category;
+                          }
+                          if (e.Event === paraEventName) {
+                            foundEvent = e;
+                            foundCategory = currentCat;
+                          }
+                        });
+                        
+                        if (foundEvent) {
                           return {
-                            eventName: event.eventName,
+                            eventName: foundEvent.Event,
                             eventType: 'parasports',
-                            category: event.category || '',
-                            description: event.description || event.eventName,
+                            category: foundCategory,
+                            description: `${foundCategory} - ${foundEvent.Event}`.trim(),
                             fee: 0
                           };
                         }
@@ -7538,6 +7670,7 @@ const Dashboard: React.FC = () => {
 
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
                     alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);
+                    window.history.pushState({}, '', '/');
                     setShowRegistrationModal(false);
                     setSelectedRegistrationEvents(new Set());
                   } catch (error) {

@@ -37,7 +37,7 @@ const EventsInfo: React.FC = () => {
 
   const sportsDetailCards = [
     { title: "Athletics", subtitle: "Track & Field" },
-    { title: "Individual &", subtitle: "Indoor Sports" },
+    { title: "Team Events", subtitle: "Indoor Sports" },
     { title: "Team Field", subtitle: "Sports" },
     { title: "Para Sports", subtitle: "" }
   ];
@@ -47,8 +47,7 @@ const EventsInfo: React.FC = () => {
     { title: "Table Tennis", subtitle: "" },
     { title: "Traditional Yogasana", subtitle: "" },
     { title: "Taekwondo", subtitle: "under 8 wt. categories" },
-    { title: "Tennikoit", subtitle: "" },
-    { title: "Throwball", subtitle: "" }
+    { title: "Tennikoit", subtitle: "" }
   ];
 
   const mensTeamSportsCards = [
@@ -57,15 +56,15 @@ const EventsInfo: React.FC = () => {
     { title: "Kabaddi", subtitle: "(7+3)*" },
     { title: "Football", subtitle: "(7+3)*" },
     { title: "Kho-Kho", subtitle: "(9+3)*" },
-    { title: "Hockey", subtitle: "(7+3)*" }
+    { title: "Hockey", subtitle: "(7+3)*" },
+    { title: "Throwball", subtitle: "(6+3)*" }
   ];
 
   const womensTeamSportsCards = [
     { title: "Volley ball", subtitle: "(6+4)*" },
     { title: "Basket ball", subtitle: "(5+5)*" },
     { title: "Kabaddi", subtitle: "(7+3)*" },
-    { title: "Kho-Kho", subtitle: "(9+3)*" },
-    { title: "Throw ball", subtitle: "(6+3)*" }
+    { title: "Kho-Kho", subtitle: "(9+3)*" }
   ];
 
   const paraCards = [
@@ -194,8 +193,8 @@ const EventsInfo: React.FC = () => {
   // Handle event detail click with gender context
   const handleEventDetailClick = (eventTitle: string, gender?: string) => {
 
-    // Check if it's Individual & Indoor Sports (merged)
-    if (eventTitle === "Individual &") {
+    // Check if it's Team Events Indoor Sports (merged)
+    if (eventTitle === "Team Events") {
       navigate('/events/indoor-sports');
       return;
     }
@@ -225,6 +224,7 @@ const EventsInfo: React.FC = () => {
       "Traditional Yogasana": "Traditional Yogasana",
       "Taekwondo": "Taekwondo",
       "Tennikoit": "Tennikoit",
+      "Throwball": "Throwball",
 
       // Cultural events - Dance
       "Classical Dance Solo": "Classical Dance Solo",
@@ -879,6 +879,7 @@ const EventsInfo: React.FC = () => {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             white-space: nowrap;
+            margin-bottom: 2rem;
           }
 
           .download-rulebook-btn:hover {
@@ -927,6 +928,12 @@ const EventsInfo: React.FC = () => {
           /* When hovering over a specific card, make its siblings transparent */
           .inner-event-cards-container:has(.inner-event-card:hover) .inner-event-card:not(:hover) img {
             opacity: 0.4;
+          }
+
+          /* Add margin-bottom to all grid containers to prevent cards from sticking to bottom */
+          .grid.grid-cols-1,
+          .inner-event-cards-container {
+            margin-bottom: 2rem;
           }
         `}
       </style>
@@ -986,7 +993,7 @@ const EventsInfo: React.FC = () => {
               <h1 className="events-title events-page-heading">
                 {showIndoorSports ? 'Indoor Sports' :
                   showWomensIndoorSports ? "Women's Indoor Sports" :
-                    showMensTeamSports ? "Men's Team Field Sports" :
+                    showMensTeamSports ? "Team Field Sports" :
                       showWomensTeamSports ? "Women's Team Field Sports" :
                         showParaCards ? 'Para' :
                           showDance ? 'Dance' :
@@ -1054,7 +1061,7 @@ const EventsInfo: React.FC = () => {
             <h1 className="events-title events-page-heading events-mobile-heading">
               {showIndoorSports ? 'Indoor Sports' :
                 showWomensIndoorSports ? "Women's Indoor Sports" :
-                  showMensTeamSports ? "Men's Team Field Sports" :
+                  showMensTeamSports ? "Team Field Sports" :
                     showWomensTeamSports ? "Women's Team Field Sports" :
                       showParaCards ? 'Para' :
                         showDance ? 'Dance' :
@@ -1201,18 +1208,18 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-1" style={{ marginBottom: '2rem' }}>
 
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
-                        card.title === "Individual &" ||
+                        card.title === "Team Events" ||
                         card.title === "Team Field" ||
                         card.title === "Para Sports";
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Athletics": "/images/athletics.png",
-                        "Individual &": "/images/individual.png",
+                        "Team Events": "/images/individual.png",
                         "Team Field": "/images/team events.png",
                         "Para Sports": "/images/Para_Sports.png"
                       };
@@ -1232,7 +1239,7 @@ const EventsInfo: React.FC = () => {
                               decoding="async"
                             />
                           )}
-                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
                             <h2 className="subcategory-card-title">
                               {card.title}
                             </h2>
@@ -1348,7 +1355,8 @@ const EventsInfo: React.FC = () => {
                         "Kabaddi": "images/kabbadi.avif",
                         "Football": "images/football men.avif",
                         "Kho-Kho": "images/kho kho.avif",
-                        "Hockey": "images/hockey.avif"
+                        "Hockey": "images/hockey.avif",
+                        "Throwball": "images/throwball.avif"
                       };
 
                       return (
@@ -1457,7 +1465,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12" style={{ overflowY: 'visible' }}>
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center events-cards-grid" style={{ columnGap: '0', overflowY: 'visible' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center events-cards-grid" style={{ columnGap: '0', overflowY: 'visible', marginBottom: '2rem' }}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
@@ -1959,7 +1967,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {!imageMap[card.title] && (
                             <div className="cultural-event-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300">
-                              <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                              <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
                                 <h2 className="subcategory-card-title">
                                   {card.title}
                                 </h2>
@@ -2000,7 +2008,7 @@ const EventsInfo: React.FC = () => {
                           className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                           onClick={handleCardClick}
                         >
-                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent">
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
                             <h2 className="subcategory-card-title">
                               {card.title}
                             </h2>

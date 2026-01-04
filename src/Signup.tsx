@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Signup.css';
-import './CAModal.css';
 import LoadingAnimation from './components/LoadingAnimation';
 import CollegeSelect from './components/CollegeSelect';
 import type { SignupData } from './services/api';
+import { API_BASE_URL } from './services/api';
 
 interface SignupProps {
   showSignupModal: boolean;
@@ -38,6 +38,27 @@ const Signup: React.FC<SignupProps> = ({
   onLoginClick,
   onOtherSelected
 }) => {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showSignupModal) {
+      document.body.classList.add('modal-open');
+      const scrollY = window.scrollY;
+      document.body.style.top = `-${scrollY}px`;
+    } else {
+      document.body.classList.remove('modal-open');
+      const scrollY = document.body.style.top;
+      document.body.style.top = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+
+    return () => {
+      document.body.classList.remove('modal-open');
+      document.body.style.top = '';
+    };
+  }, [showSignupModal]);
+
   if (!showSignupModal) return null;
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -57,25 +78,25 @@ const Signup: React.FC<SignupProps> = ({
         />
       )}
 
-      <div className="ca-modal-overlay" onClick={handleOverlayClick}>
-        <div className="ca-modal-content" onClick={(e) => e.stopPropagation()}>
-          <div className="login-modal-header">
-            <h2 className="ca-modal-title">Join Mahotsav 2026</h2>
+      <div className="signup-modal-overlay signup-overlay-fix" onClick={handleOverlayClick}>
+        <div className="signup-modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="signup-header">
+            <h2 className="signup-modal-title">Registration</h2>
             <button className="signup-close-btn" onClick={onClose}>×</button>
           </div>
 
           <div className="signup-modal-body">
-            <form className="ca-form" onSubmit={onSubmit}>
+            <form className="signup-form" onSubmit={onSubmit}>
               {submitMessage && (
-                <div className={`submit-message ${submitMessage.type}`}>
+                <div className={`signup-submit-message ${submitMessage.type}`}>
                   {submitMessage.text}
                 </div>
               )}
 
-              {/* Single-step form: show all fields together like CA signup */}
+              {/* Single-step form: show all fields together */}
               <div className="form-section">
                 <h3>PERSONAL INFORMATION</h3>
-                <div className="ca-form-group">
+                <div className="signup-form-group">
                   <label htmlFor="name">Full Name *</label>
                   <input
                     type="text"
@@ -87,7 +108,7 @@ const Signup: React.FC<SignupProps> = ({
                     required
                   />
                 </div>
-                <div className="ca-form-group">
+                <div className="signup-form-group">
                   <label htmlFor="email">Email *</label>
                   <input
                     type="email"
@@ -99,7 +120,7 @@ const Signup: React.FC<SignupProps> = ({
                     required
                   />
                 </div>
-                <div className="ca-form-group">
+                <div className="signup-form-group">
                   <label htmlFor="phone">Phone Number *</label>
                   <input
                     type="tel"
@@ -112,7 +133,7 @@ const Signup: React.FC<SignupProps> = ({
                     required
                   />
                 </div>
-                <div className="ca-form-group">
+                <div className="signup-form-group">
                   <label htmlFor="dateOfBirth">Date of Birth *</label>
                   <input
                     type="date"
@@ -141,7 +162,9 @@ const Signup: React.FC<SignupProps> = ({
                     }}
                     required
                   />
-                  <small style={{ color: '#FFD700', fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>Your password is your DOB</small>
+                  <div className="dob-helper-text">
+                    Your password will be your DOB (DD/MM/YYYY).
+                  </div>
                 </div>
                 <div className="ca-form-group">
                   <label htmlFor="gender">Gender</label>
@@ -150,7 +173,7 @@ const Signup: React.FC<SignupProps> = ({
                     name="gender"
                     value={signupFormData.gender || ''}
                     onChange={onInputChange}
-                    className="gender-select"
+                    className="signup-gender-select"
                   >
                     <option value="">Select gender</option>
                     <option value="Male">Male</option>
@@ -166,14 +189,13 @@ const Signup: React.FC<SignupProps> = ({
                 onOtherSelected={onOtherSelected}
               />
 
-              <div className="signup-navigation" style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+              <div className="signup-navigation">
                 <button
                   type="submit"
-                  className="ca-submit-button"
+                  className="signup-submit-button"
                   disabled={isSubmitting}
-                  style={{ maxWidth: '320px', width: '100%' }}
                 >
-                  {isSubmitting ? 'Signing you up...' : 'Create Account & Get Mahotsav ID'}
+                  {isSubmitting ? 'Signing you up...' : 'Get Mahotsav ID'}
                 </button>
               </div>
 
@@ -213,7 +235,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
 
   useEffect(() => {
     // Load states from backend API
-    fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/states`)
+    fetch(`${API_BASE_URL}/location/states`)
       .then(res => res.json())
       .then(response => {
         if (response.success) {
@@ -223,7 +245,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
       .catch(err => console.error('Error loading states:', err));
 
     // Load all districts from backend API
-    fetch(`${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/districts`)
+    fetch(`${API_BASE_URL}/location/districts`)
       .then(res => res.json())
       .then(response => {
         if (response.success) {
@@ -248,8 +270,8 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
 
   return (
     <div className="form-section">
-      <h3>ACADEMIC INFORMATION</h3>
-      <div className="ca-form-group">
+      <h3>COLLEGE INFORMATION</h3>
+      <div className="signup-form-group">
         <label htmlFor="state">State *</label>
         <select
           id="state"
@@ -267,7 +289,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           ))}
         </select>
       </div>
-      <div className="ca-form-group">
+      <div className="signup-form-group">
         <label htmlFor="district">District *</label>
         <select
           id="district"
@@ -286,7 +308,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           ))}
         </select>
       </div>
-      <div className="ca-form-group">
+      <div className="signup-form-group">
         <label htmlFor="college">College *</label>
         <CollegeSelect
           onChange={onCollegeChange}
@@ -296,7 +318,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           required
         />
       </div>
-      <div className="ca-form-group">
+      <div className="signup-form-group">
         <label htmlFor="registerId">College Registration Number</label>
         <input
           type="text"
@@ -308,7 +330,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           className="form-input"
         />
       </div>
-      <div className="ca-form-group">
+      <div className="signup-form-group">
         <label htmlFor="branch">Branch</label>
         <input
           type="text"
@@ -320,7 +342,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           className="form-input"
         />
       </div>
-      <div className="ca-form-group">
+      <div className="signup-form-group">
         <label htmlFor="referralCode">Referral Code (Optional)</label>
         <input
           type="text"
@@ -329,8 +351,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           value={signupFormData.referralCode || ''}
           onChange={onInputChange}
           placeholder="Enter CA referral code (e.g., MCA260001)"
-          className="form-input"
-          style={{ textTransform: 'uppercase' }}
+          className="form-input signup-referral-input"
         />
       </div>
     </div>

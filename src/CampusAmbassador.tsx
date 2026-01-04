@@ -20,7 +20,7 @@ const OutreachPromotionMobile = () => {
 
   return (
     <div className="mobile-card-container accordion-section">
-      <div 
+      <div
         className={`accordion-header ${isExpanded ? 'active' : ''}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >
@@ -51,7 +51,7 @@ const ReferralsSignupsMobile = () => {
 
   return (
     <div className="mobile-card-container accordion-section">
-      <div 
+      <div
         className={`accordion-header ${isExpanded ? 'active' : ''}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >
@@ -75,8 +75,8 @@ const PerformanceMultipliersMobile = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const multipliers = [
-    { 
-      case: 'For colleges located at long distances', 
+    {
+      case: 'For colleges located at long distances',
       multiplier: 'Total Points = 4 × (multiplier + 1) × (number of participants)',
       description: 'Multiplier = (distance between VFSTR and admitted institute in kms / 1000) × number of people'
     },
@@ -85,7 +85,7 @@ const PerformanceMultipliersMobile = () => {
 
   return (
     <div className="mobile-card-container accordion-section">
-      <div 
+      <div
         className={`accordion-header ${isExpanded ? 'active' : ''}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >
@@ -112,36 +112,36 @@ const IncentivesMobile = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const tiers = [
-    { 
-      tier: 'Bronze', 
-      milestone: '100+ Points', 
-      reward: 'Free entry for the Fest + Certificate + Free Accommodation & Food' 
+    {
+      tier: 'Bronze',
+      milestone: '100+ Points',
+      reward: 'Free entry for the Fest + Certificate + Free Accommodation & Food'
     },
-    { 
-      tier: 'Silver', 
-      milestone: '150+ Points', 
-      reward: 'Receive the benefits of previous tier + Branded Fest Merchandise (Cap) + Zomato & Blinkit Subscription' 
+    {
+      tier: 'Silver',
+      milestone: '150+ Points',
+      reward: 'Receive the benefits of previous tier + Branded Fest Merchandise (Cap) + Zomato & Blinkit Subscription'
     },
-    { 
-      tier: 'Gold', 
-      milestone: '200+ Points', 
-      reward: 'Receive the benefits of previous tiers + Title of CA Lead + Spotify Premium' 
+    {
+      tier: 'Gold',
+      milestone: '200+ Points',
+      reward: 'Receive the benefits of previous tiers + Title of CA Lead + Spotify Premium'
     },
-    { 
-      tier: 'Platinum', 
-      milestone: '250+ Points', 
-      reward: 'Receive the benefits of previous tiers + Fest Merchandise (Hoodie/T-shirts) + Star Campus Ambassador + Netflix Subscription' 
+    {
+      tier: 'Platinum',
+      milestone: '250+ Points',
+      reward: 'Receive the benefits of previous tiers + Fest Merchandise (Hoodie/T-shirts) + Star Campus Ambassador + Netflix Subscription'
     },
-    { 
-      tier: 'Diamond', 
-      milestone: '250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)', 
-      reward: 'Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + ChatGPT Go Subscription' 
+    {
+      tier: 'Diamond',
+      milestone: '250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)',
+      reward: 'Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + ChatGPT Go Subscription'
     }
   ];
 
   return (
     <div className="mobile-card-container accordion-section">
-      <div 
+      <div
         className={`accordion-header ${isExpanded ? 'active' : ''}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >
@@ -218,7 +218,7 @@ const CampusAmbassador: React.FC = () => {
     }}>
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000 max-md:z-0 md:z-1">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -232,7 +232,7 @@ const CampusAmbassador: React.FC = () => {
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-20 max-md:z-0 md:z-1">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -664,14 +664,14 @@ const CampusAmbassador: React.FC = () => {
       </style>
 
       {/* Mahotsav Logo */}
-      <img 
+      <img
         src="/images/image15.avif"
         alt="Vignan Mahotsav 2026"
         className="ca-mahotsav-logo"
       />
 
       {/* Back button (explicitly navigate to main dashboard/home) */}
-      <BackButton onClick={() => navigate('/')} className="ca-page-back-button" />
+      <BackButton onClick={() => navigate('/?menu=true')} className="ca-page-back-button" />
 
       {/* Hero Section */}
       <div className="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-8 text-center">
@@ -680,7 +680,7 @@ const CampusAmbassador: React.FC = () => {
         }}>MAHOTSAV CREW</h1>
         <button
           onClick={handleRegisterLogin}
-          className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 xl:w-64 xl:h-16 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg lg:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]" style={{marginTop: '50px'}}
+          className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 xl:w-64 xl:h-16 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg lg:text-xl font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]" style={{ marginTop: '50px' }}
         >
           Register/Login
         </button>
@@ -702,19 +702,19 @@ const CampusAmbassador: React.FC = () => {
             onClick={() => setShowIncentivesModal(false)}
           />
           <div className="relative w-full max-w-4xl max-h-[85vh] overflow-auto rounded-xl p-5 scrollbar-hide animate-[dropdownFade_0.4s_ease-out_forwards]" style={{
-              margin: '0 auto',
-              boxSizing: 'border-box',
-              width: 'min(95vw, 900px)',
-              minWidth: '320px',
-              maxWidth: '900px',
-              maxHeight: '85vh',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              background: 'rgba(199, 205, 28, 0.06)',
-              backdropFilter: 'blur(8px) saturate(120%)',
-              WebkitBackdropFilter: 'blur(8px) saturate(120%)',
-              border: '1px solid rgba(255,255,255,0.12)'
-            }}>
+            margin: '0 auto',
+            boxSizing: 'border-box',
+            width: 'min(95vw, 900px)',
+            minWidth: '320px',
+            maxWidth: '900px',
+            maxHeight: '85vh',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            background: 'rgba(199, 205, 28, 0.06)',
+            backdropFilter: 'blur(8px) saturate(120%)',
+            WebkitBackdropFilter: 'blur(8px) saturate(120%)',
+            border: '1px solid rgba(255,255,255,0.12)'
+          }}>
             <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
             <button
               onClick={() => setShowIncentivesModal(false)}
@@ -725,94 +725,94 @@ const CampusAmbassador: React.FC = () => {
               ✕
             </button>
 
-           <div style={{ background: '#5b2d82', borderRadius: 14, padding: '32px 28px', color: '#fff' }}>
-             <h2 style={{ textAlign: 'center', fontSize: '1.75rem', fontWeight: 600, color: '#fbbf24', marginBottom: '1.5rem', fontStyle: 'italic' }}>Here's what being a Campus Ambassador (CA) gets you:</h2>
+            <div style={{ background: '#5b2d82', borderRadius: 14, padding: '32px 28px', color: '#fff' }}>
+              <h2 style={{ textAlign: 'center', fontSize: '1.75rem', fontWeight: 600, color: '#fbbf24', marginBottom: '1.5rem', fontStyle: 'italic' }}>Here's what being a Campus Ambassador (CA) gets you:</h2>
 
-             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
-                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Bronze (100+ Points):</span>{' '}
-                 <span style={{ color: '#fff' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</span>
-               </div>
-               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
-                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Silver (150+ Points):</span>{' '}
-                 <span style={{ color: '#fff' }}>Receive the benefits of previous tier + Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</span>
-               </div>
-               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
-                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Gold (200+ Points):</span>{' '}
-                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</span>
-               </div>
-               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
-                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Platinum (250+ Points):</span>{' '}
-                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</span>
-               </div>
-               <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
-                 <span style={{ color: '#fbbf24', fontWeight: 700 }}>Diamond (250+ Points / Scope of Zonal at your respective Venue - Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore):</span>{' '}
-                 <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</span>
-               </div>
-             </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 700 }}>Bronze (100+ Points):</span>{' '}
+                  <span style={{ color: '#fff' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</span>
+                </div>
+                <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 700 }}>Silver (150+ Points):</span>{' '}
+                  <span style={{ color: '#fff' }}>Receive the benefits of previous tier + Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</span>
+                </div>
+                <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 700 }}>Gold (200+ Points):</span>{' '}
+                  <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</span>
+                </div>
+                <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 700 }}>Platinum (250+ Points):</span>{' '}
+                  <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</span>
+                </div>
+                <div style={{ background: 'rgba(255, 255, 255, 0.1)', borderRadius: 10, padding: '18px 24px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', fontSize: '1.05rem', lineHeight: 1.5, border: '1px solid rgba(251, 191, 36, 0.2)' }}>
+                  <span style={{ color: '#fbbf24', fontWeight: 700 }}>Diamond (250+ Points / Scope of Zonal at your respective Venue - Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore):</span>{' '}
+                  <span style={{ color: '#fff' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</span>
+                </div>
+              </div>
 
-             {/* CA Action Buttons */}
-             <div style={{ 
-               display: 'flex', 
-               gap: '15px', 
-               justifyContent: 'center', 
-               marginTop: '30px',
-               flexWrap: 'wrap'
-             }}>
-               <button
-                 onClick={openSignupModal}
-                 style={{
-                   background: 'linear-gradient(135deg, #ffd700, #ffed4e)',
-                   color: '#000',
-                   border: 'none',
-                   padding: '15px 40px',
-                   borderRadius: '8px',
-                   fontSize: '16px',
-                   fontWeight: 'bold',
-                   cursor: 'pointer',
-                   transition: 'all 0.3s ease',
-                   boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
-                 }}
-                 onMouseEnter={(e) => {
-                   e.currentTarget.style.transform = 'translateY(-2px)';
-                   e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.4)';
-                 }}
-                 onMouseLeave={(e) => {
-                   e.currentTarget.style.transform = 'translateY(0)';
-                   e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.3)';
-                 }}
-               >
-                 Sign Up as CA
-               </button>
-               
-               <button
-                 onClick={openLoginModal}
-                 style={{
-                   background: 'rgba(255, 255, 255, 0.1)',
-                   color: '#ffd700',
-                   border: '2px solid #ffd700',
-                   padding: '15px 40px',
-                   borderRadius: '8px',
-                   fontSize: '16px',
-                   fontWeight: 'bold',
-                   cursor: 'pointer',
-                   transition: 'all 0.3s ease'
-                 }}
-                 onMouseEnter={(e) => {
-                   e.currentTarget.style.background = 'rgba(255, 215, 0, 0.1)';
-                   e.currentTarget.style.transform = 'translateY(-2px)';
-                 }}
-                 onMouseLeave={(e) => {
-                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                   e.currentTarget.style.transform = 'translateY(0)';
-                 }}
-               >
-                 Login
-               </button>
-             </div>
+              {/* CA Action Buttons */}
+              <div style={{
+                display: 'flex',
+                gap: '15px',
+                justifyContent: 'center',
+                marginTop: '30px',
+                flexWrap: 'wrap'
+              }}>
+                <button
+                  onClick={openSignupModal}
+                  style={{
+                    background: 'linear-gradient(135deg, #ffd700, #ffed4e)',
+                    color: '#000',
+                    border: 'none',
+                    padding: '15px 40px',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    boxShadow: '0 4px 15px rgba(255, 215, 0, 0.3)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.3)';
+                  }}
+                >
+                  Sign Up as CA
+                </button>
 
-             {/* This section is now replaced with the CA-specific buttons below */}
-           </div>
+                <button
+                  onClick={openLoginModal}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    color: '#ffd700',
+                    border: '2px solid #ffd700',
+                    padding: '15px 40px',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 215, 0, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+
+              {/* This section is now replaced with the CA-specific buttons below */}
+            </div>
           </div>
         </div>
       )}
@@ -969,7 +969,7 @@ const CampusAmbassador: React.FC = () => {
             paddingTop: '10px',
             paddingBottom: '10px'
           }}>
-            <button 
+            <button
               className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'pointsAllotment' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
@@ -978,7 +978,7 @@ const CampusAmbassador: React.FC = () => {
             >
               Points Allotment
             </button>
-            <button 
+            <button
               className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'incentives' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
@@ -987,7 +987,7 @@ const CampusAmbassador: React.FC = () => {
             >
               Incentives
             </button>
-            <button 
+            <button
               className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'codeOfConduct' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
@@ -996,7 +996,7 @@ const CampusAmbassador: React.FC = () => {
             >
               Code of Conduct
             </button>
-            <button 
+            <button
               className="w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 lg:w-56 lg:h-16 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-2 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
               style={{
                 background: activeTab === 'programDuration' ? 'linear-gradient(to right, #ec4899, #db2777)' : 'linear-gradient(to right, rgba(236, 72, 153, 0.5), rgba(219, 39, 119, 0.5))'
@@ -1024,44 +1024,44 @@ const CampusAmbassador: React.FC = () => {
               <div className="text-white">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-400 mb-6" style={{ scrollMarginTop: '8rem' }}>Points Allotment Rules</h2>
                 <p className="mb-6 text-base sm:text-lg" style={{ lineHeight: '1.8' }}>Campus Ambassadors will earn points based on their engagement and efforts across various categories.</p>
-                
+
                 {/* Desktop Table - Outreach & Promotion */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Outreach & Promotion</h4>
                 <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-                <table style={{ 
-                  width: '100%',
-                  minWidth: '500px',
-                  borderCollapse: 'collapse', 
-                  marginBottom: '2rem',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <thead>
-                    <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Resharing /Reposting official posts on social media</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/post</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Sharing in WhatsApp groups (50-100 mem) to (100-200 mem)</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/group to 10 points/group</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Creating original content (reels/blogs/memes)</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>15 points</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Organizing on-campus promotional events</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/event</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <table style={{
+                    width: '100%',
+                    minWidth: '500px',
+                    borderCollapse: 'collapse',
+                    marginBottom: '2rem',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    borderRadius: '10px',
+                    overflow: 'hidden'
+                  }}>
+                    <thead>
+                      <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Resharing /Reposting official posts on social media</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/post</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Sharing in WhatsApp groups (50-100 mem) to (100-200 mem)</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/group to 10 points/group</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Creating original content (reels/blogs/memes)</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>15 points</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Organizing on-campus promotional events</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/event</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 {/* Mobile Cards - Outreach & Promotion */}
@@ -1070,36 +1070,36 @@ const CampusAmbassador: React.FC = () => {
                 {/* Desktop Table - Referrals & Signups */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Referrals & Signups</h4>
                 <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-                <table style={{ 
-                  width: '100%',
-                  minWidth: '500px',
-                  borderCollapse: 'collapse', 
-                  marginBottom: '2rem',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <thead>
-                    <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Referring a friend/Surrounding Colleges Students to sign up as a CA</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/referral</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Registering participants for Mahotsav</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/attendee</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bridging team Mahotsav & Student Council of colleges</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>10 points/college</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <table style={{
+                    width: '100%',
+                    minWidth: '500px',
+                    borderCollapse: 'collapse',
+                    marginBottom: '2rem',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    borderRadius: '10px',
+                    overflow: 'hidden'
+                  }}>
+                    <thead>
+                      <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Activity</th>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Points</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Referring a friend/Surrounding Colleges Students to sign up as a CA</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>20 points/referral</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Registering participants for Mahotsav</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>5 points/attendee</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bridging team Mahotsav & Student Council of colleges</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>10 points/college</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 {/* Mobile Cards - Referrals & Signups */}
@@ -1108,32 +1108,32 @@ const CampusAmbassador: React.FC = () => {
                 {/* Desktop Table - Performance Multipliers */}
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>C. Performance Multipliers</h4>
                 <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-                <table style={{ 
-                  width: '100%',
-                  minWidth: '500px',
-                  borderCollapse: 'collapse', 
-                  marginBottom: '2rem',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <thead>
-                    <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Special Cases</th>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Multiplier</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For colleges located at long distances</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Total Points= 4 x (multiplier + 1) x (number of participants)</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For exceeding 50+ attendee registrations</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bonus 50 points</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <table style={{
+                    width: '100%',
+                    minWidth: '500px',
+                    borderCollapse: 'collapse',
+                    marginBottom: '2rem',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    borderRadius: '10px',
+                    overflow: 'hidden'
+                  }}>
+                    <thead>
+                      <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Special Cases</th>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Multiplier</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For colleges located at long distances</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Total Points= 4 x (multiplier + 1) x (number of participants)</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>For exceeding 50+ attendee registrations</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bonus 50 points</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 {/* Mobile Cards - Performance Multipliers */}
@@ -1147,62 +1147,62 @@ const CampusAmbassador: React.FC = () => {
               <div className="text-white">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-400 mb-6" style={{ scrollMarginTop: '8rem' }}>Incentives & Rewards (Extending this Based on Targets)</h2>
                 <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>A. Rewards Based on Milestones</h4>
-                
+
                 {/* Desktop Table */}
                 <div className="desktop-table-container overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-                <table style={{ 
-                  width: '100%',
-                  minWidth: '600px',
-                  borderCollapse: 'collapse', 
-                  marginBottom: '2rem',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  borderRadius: '10px',
-                  overflow: 'hidden'
-                }}>
-                  <thead>
-                    <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Tier</th>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Milestone</th>
-                      <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Reward</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bronze</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>100+ Points</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Silver</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>150+ Points</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tier+ Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Gold</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>200+ Points</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Platinum</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ points</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Diamond</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)</td>
-                      <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <table style={{
+                    width: '100%',
+                    minWidth: '600px',
+                    borderCollapse: 'collapse',
+                    marginBottom: '2rem',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                    borderRadius: '10px',
+                    overflow: 'hidden'
+                  }}>
+                    <thead>
+                      <tr style={{ background: 'linear-gradient(135deg, #fbbf24, #f59e0b)' }}>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Tier</th>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Milestone</th>
+                        <th style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', textAlign: 'left', color: '#000', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Reward</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Bronze</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>100+ Points</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Free entry for the Fest + Certificate + Free Accommodation & Food</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Silver</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>150+ Points</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tier+ Branded Fest Merchandise(Cap) + "Zomato & Blink it Subscription"</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Gold</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>200+ Points</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Title of CA Lead + "Spotify Premium"</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Platinum</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ points</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + Fest Merchandise (Hoodie/ T-shirts) + Star Campus Ambassador + "Netflix Subscription"</td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Diamond</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>250+ Points / Scope of Zonal at your respective Venue (Cities Excluding Vizag, Hyderabad, Tirupati, Chennai, Bangalore)</td>
+                        <td style={{ padding: 'clamp(0.5rem, 2vw, 1rem)', color: '#fff', border: '1px solid rgba(251, 191, 36, 0.3)', fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Receive the benefits of previous tiers + On stage recognition + "Legend Campus Ambassador" + Certificate of Excellence + "ChatGPT Go Subscription"</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 {/* Mobile Cards */}
                 <IncentivesMobile />
 
-                  <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
-                  <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)', marginBottom: '0.5rem' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
-                  <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)', marginBottom: '0.5rem' }}>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
-                  <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
+                <h4 style={{ color: '#fbbf24', fontSize: 'clamp(1rem, 3vw, 1.2rem)', fontWeight: 'bold', marginTop: '1.5rem', marginBottom: '1rem' }}>B. Long-Term Benefits</h4>
+                <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)', marginBottom: '0.5rem' }}>Letter of Recommendation (LOR) from Vignan Mahotsav 2026.</p>
+                <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)', marginBottom: '0.5rem' }}>Exclusive access to workshops & guest lectures organized as part of Mahotsav 2026</p>
+                <p style={{ fontSize: 'clamp(0.75rem, 2vw, 1rem)' }}>Recognition on Mahotsav 2026 Official Website (Gold Tier onwards)</p>
               </div>
             )}
 
@@ -1247,7 +1247,7 @@ const CampusAmbassador: React.FC = () => {
         </div>
       </div>
 
-       {/* Footer Section */}
+      {/* Footer Section */}
       <footer className="footer-section" style={{
         background: '#000',
         width: '100vw',
@@ -1431,7 +1431,7 @@ const CampusAmbassador: React.FC = () => {
           onSignupSuccess={handleSignupSuccess}
         />
       )}
-      
+
       {showAuthModal && authMode === 'login' && (
         <CALoginModal
           onClose={() => setShowAuthModal(false)}

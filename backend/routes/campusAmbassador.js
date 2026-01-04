@@ -11,11 +11,11 @@ const router = express.Router();
 const generateMCAId = async () => {
   try {
     const lastCA = await CampusAmbassador.findOne({}, { mcaId: 1 }).sort({ mcaId: -1 }).limit(1);
-    
+
     if (!lastCA) {
       return 'MCA260001';
     }
-    
+
     const lastNumber = parseInt(lastCA.mcaId.substring(3));
     const nextNumber = lastNumber + 1;
     return `MCA${nextNumber.toString().padStart(6, '0')}`;
@@ -47,6 +47,35 @@ router.post('/campus-ambassador/signup', async (req, res) => {
       });
     }
 
+    // Check for duplicate Registration Number if provided
+    if (registrationNumber) {
+      const trimmedRegNo = registrationNumber.trim();
+
+      // Check in CampusAmbassador collection
+      const existingCARegNo = await CampusAmbassador.findOne({
+        registrationNumber: { $regex: new RegExp(`^${trimmedRegNo}$`, 'i') }
+      });
+
+      if (existingCARegNo) {
+        return res.status(409).json({
+          success: false,
+          message: `Registration Number '${trimmedRegNo}' is already registered by another Campus Ambassador.`
+        });
+      }
+
+      // Also check in main Registration collection
+      const existingRegNo = await Registration.findOne({
+        registerId: { $regex: new RegExp(`^${trimmedRegNo}$`, 'i') }
+      });
+
+      if (existingRegNo) {
+        return res.status(409).json({
+          success: false,
+          message: `Registration Number '${trimmedRegNo}' is already registered by another user.`
+        });
+      }
+    }
+
     // Validate referral code if provided
     let referringCA = null;
     if (referralCode) {
@@ -57,7 +86,7 @@ router.post('/campus-ambassador/signup', async (req, res) => {
           message: 'Invalid referral code. Please check the MCA ID and try again.'
         });
       }
-      
+
       // Check if referring CA is from the same college
       if (referringCA.college.toLowerCase() === college.toLowerCase()) {
         return res.status(400).json({
@@ -94,7 +123,7 @@ router.post('/campus-ambassador/signup', async (req, res) => {
     if (referringCA) {
       referringCA.totalPoints += 20;
       referringCA.caReferrals = (referringCA.caReferrals || 0) + 1;
-      
+
       // Add to caReferralList
       referringCA.caReferralList = referringCA.caReferralList || [];
       referringCA.caReferralList.push({
@@ -105,7 +134,7 @@ router.post('/campus-ambassador/signup', async (req, res) => {
         registeredAt: new Date(),
         pointsAwarded: 20
       });
-      
+
       referringCA.updateTier();
       await referringCA.save();
       logger.info(`Awarded 20 points to ${referringCA.mcaId} for CA referral: ${mcaId}`);
@@ -248,7 +277,7 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
     const enrichedReferrals = await Promise.all(
       ca.referrals.map(async (r) => {
         let userCollege = r.userCollege;
-        
+
         // If college is not stored in referral, fetch it from Registration
         if (!userCollege) {
           try {
@@ -260,7 +289,7 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
             logger.error(`Error fetching college for user ${r.userId}:`, err);
           }
         }
-        
+
         return {
           userId: r.userId,
           userName: r.userName,
@@ -286,13 +315,13 @@ router.get('/campus-ambassador/dashboard/:mcaId', async (req, res) => {
       caReferrals: ca.caReferrals || 0,
       referrals: enrichedReferrals,
       caReferralList: (ca.caReferralList || []).map(r => ({
-          mcaId: r.mcaId,
-          name: r.name,
-          email: r.email,
-          college: r.college,
-          registeredAt: r.registeredAt,
-          pointsAwarded: r.pointsAwarded
-        }))
+        mcaId: r.mcaId,
+        name: r.name,
+        email: r.email,
+        college: r.college,
+        registeredAt: r.registeredAt,
+        pointsAwarded: r.pointsAwarded
+      }))
     });
   } catch (error) {
     logger.error('Get CA dashboard error:', error);

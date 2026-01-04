@@ -83,8 +83,7 @@
   "Event": "Tennikoit"
  },
  {
-  "Category": "Men's Team Field Sports",
-  "Event": "Cricket Championship (13+2)*"
+  "Category": "Men's Team Field Sports"
  },
  {
   "Event": "Volley ball (6+4)*"
@@ -121,7 +120,7 @@
   "Event": "Throw ball (6+3)*"
  },
  {
-  "Category": "Para Athletics\nMen",
+  "Category": "Para Athletics Men",
   "Event": "100 M - Hand Amputee"
  },
  {
@@ -232,7 +231,7 @@
  },
  {
   "Column1": 9,
-  "Prize money for Performing arts, Visual arts, Fashion": "Classical\/Light Vocal Solo",
+  "Prize money for Performing arts, Visual arts, Fashion": "Classical /Light Vocal Solo",
   "Column4": 1,
   "488500": 2000,
   "Column6": 1500,
@@ -507,7 +506,7 @@
  {
   "Column1": 39,
   "5": "Digital Storytelling & Creative Media",
-  "Prize money for Performing arts, Visual arts, Fashion": "Short film",
+  "Prize mo": "Short film",
   "Column4": 5,
   "488500": 20000,
   "Column6": 15000,

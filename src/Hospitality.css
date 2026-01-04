@@ -10,12 +10,13 @@
   font-family: 'Aladin', cursive !important;
 }
 
-/* Content Text - Coffee & Tea Style */
+/* Content Text - Borisna Style */
 .hospitality-content {
-  font-family: 'Aladin', cursive !important;
+  font-family: 'Borisna', sans-serif !important;
   color: #f5e6d3;
-  line-height: 1.3;
-  letter-spacing: 0.3px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  font-size: 1rem;
 }
 
 .hospitality-content strong {
@@ -214,8 +215,8 @@
 
 .hospitality-table tbody td {
   padding: 1rem;
-  font-family: 'Georgia', 'Crimson Text', serif;
-  font-size: 0.9375rem;
+  font-family: 'Borisna', sans-serif !important;
+  font-size: 1rem;
   color: #f5e6d3;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

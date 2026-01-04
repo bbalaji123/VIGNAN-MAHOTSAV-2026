@@ -44,7 +44,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   const [showPasswordCard, setShowPasswordCard] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState('');
   const [generatedMCAId, setGeneratedMCAId] = useState('');
-  
+
   // Dropdown data
   const [states, setStates] = useState<State[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
@@ -59,17 +59,17 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
           fetch(`${API_BASE_URL}/location/states`),
           fetch(`${API_BASE_URL}/location/districts`)
         ]);
-        
+
         const statesResponse = await statesRes.json();
         const districtsResponse = await districtsRes.json();
-        
+
         setStates(statesResponse.data || []);
         setDistricts(districtsResponse.data || []);
       } catch (error) {
         console.error('Error loading dropdown data:', error);
       }
     };
-    
+
     loadData();
   }, []);
 
@@ -152,11 +152,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
       if (response.ok) {
         console.log('CA Signup Success:', data);
-        
+
         // Store the generated password and MCA ID
         setGeneratedPassword(password);
         setGeneratedMCAId(data.campusAmbassador.mcaId || data.mcaId);
-        
+
         // Show password card instead of proceeding to login
         setShowPasswordCard(true);
       } else {
@@ -190,13 +190,13 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
     return (
       <div className="ca-modal-overlay" onClick={handlePasswordCardClose}>
-        <div className="ca-modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px', textAlign: 'center' }}>
+        <div className="ca-modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '500px', width: '95%', textAlign: 'center' }}>
           <button className="ca-modal-close" onClick={handlePasswordCardClose}>×</button>
           <h2 className="ca-modal-title" style={{ color: '#FFD700', marginBottom: '30px' }}>Registration Successful!</h2>
-          
-          <div className="ca-credentials-box" style={{ 
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
-            padding: '30px', 
+
+          <div className="ca-credentials-box" style={{
+            background: '#1a1033',
+            padding: '30px',
             borderRadius: '15px',
             marginBottom: '20px',
             boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
@@ -204,23 +204,23 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
             animation: 'blinkBorder 1.5s infinite'
           }}>
             <h3 style={{ color: '#FFD700', marginBottom: '20px', fontSize: '1.5rem' }}>Your Campus Ambassador Credentials</h3>
-            
-            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '15px' }}>
-              <p style={{ color: '#FFD700', marginBottom: '5px', fontSize: '0.9rem' }}>MCA ID</p>
-              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{generatedMCAId}</p>
+
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '10px 15px', borderRadius: '10px', marginBottom: '12px', width: '100%' }}>
+              <p style={{ color: '#FFD700', marginBottom: '3px', fontSize: '0.85rem' }}>MCA ID</p>
+              <p style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'monospace', margin: 0 }}>{generatedMCAId}</p>
             </div>
-            
-            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '15px' }}>
-              <p style={{ color: '#FFD700', marginBottom: '5px', fontSize: '0.9rem' }}>Password (Your DOB)</p>
-              <p style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 'bold', fontFamily: 'monospace' }}>{formatPasswordAsDate(generatedPassword)}</p>
+
+            <div style={{ background: 'rgba(255,255,255,0.1)', padding: '10px 15px', borderRadius: '10px', marginBottom: '12px', width: '100%' }}>
+              <p style={{ color: '#FFD700', marginBottom: '3px', fontSize: '0.85rem' }}>Password (Your DOB)</p>
+              <p style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'monospace', margin: 0 }}>{formatPasswordAsDate(generatedPassword)}</p>
             </div>
-            
-            <p style={{ color: '#fff', fontSize: '0.95rem', background: 'rgba(255, 215, 0, 0.15)', padding: '12px', borderRadius: '8px', margin: '0' }}>
+
+            <p style={{ color: '#fff', fontSize: '0.9rem', background: 'rgba(255, 215, 0, 0.15)', padding: '10px', borderRadius: '8px', margin: '0', lineHeight: '1.4' }}>
               Please save these credentials securely. You'll need them to login.
             </p>
           </div>
-          
-          <button 
+
+          <button
             onClick={handlePasswordCardClose}
             style={{
               background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
@@ -248,9 +248,9 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
       <div className="ca-modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="ca-modal-close" onClick={onClose}>×</button>
         <h2 className="ca-modal-title">Campus Ambassador Signup</h2>
-        
+
         {error && <div className="ca-error-message">{error}</div>}
-        
+
         <form onSubmit={handleSubmit} className="ca-form">
           <div className="ca-form-group">
             <label>Full Name *</label>

@@ -393,11 +393,11 @@ const EventsInfo: React.FC = () => {
   useEffect(() => {
     const path = location.pathname;
     const state = location.state as { openSection?: string } | null;
-    
+
     // Handle URL-based routing
     if (path.includes('/events/')) {
       const section = path.split('/events/')[1];
-      
+
       switch (section) {
         case 'dance':
           setShowCulturals(true);
@@ -461,7 +461,7 @@ const EventsInfo: React.FC = () => {
       }
       return;
     }
-    
+
     // Restore section state when returning from event detail
     if (state?.openSection) {
       const section = state.openSection;
@@ -982,7 +982,7 @@ const EventsInfo: React.FC = () => {
                       setShowSportsDetails(false);
                       setShowCulturals(false);
                     } else {
-                      navigate('/');
+                      navigate('/?menu=true');
                     }
                   }} />
               </div>
@@ -1049,7 +1049,7 @@ const EventsInfo: React.FC = () => {
                     setShowSportsDetails(false);
                     setShowCulturals(false);
                   } else {
-                    navigate('/');
+                    navigate('/?menu=true');
                   }
                 }} />
             </div>

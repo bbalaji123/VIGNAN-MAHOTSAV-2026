@@ -28,7 +28,7 @@ const Guide: React.FC = () => {
     <div className="guide-container">
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-20 -right-20 sm:-top-32 sm:-right-32 md:-top-64 md:-right-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -42,7 +42,7 @@ const Guide: React.FC = () => {
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-20 -left-20 sm:-bottom-32 sm:-left-32 md:-bottom-64 md:-left-64 pointer-events-none w-40 h-40 sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -56,23 +56,23 @@ const Guide: React.FC = () => {
 
       {/* Back Button */}
       <div className="fixed top-4 left-4 md:top-6 md:left-6 z-50">
-        <BackButton onClick={() => navigate('/')} />
+        <BackButton onClick={() => navigate('/?menu=true')} />
       </div>
 
       {/* Garuda Logo */}
       <div className="fixed top-4 left-16 md:top-6 md:left-20 z-50">
-        <img 
+        <img
           src="/menu-dashboard/Garuda.avif"
-          alt="Garuda" 
+          alt="Garuda"
           className="guide-garuda-logo"
         />
       </div>
 
       {/* Mahotsav Logo - Bigger and Centered */}
       <div className="guide-logo-section">
-        <img 
+        <img
           src="/menu-dashboard/image.avif"
-          alt="Mahotsav 2026" 
+          alt="Mahotsav 2026"
           className="guide-main-logo"
         />
       </div>

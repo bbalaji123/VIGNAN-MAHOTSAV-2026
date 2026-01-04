@@ -717,6 +717,16 @@ const Dashboard: React.FC = () => {
     }
   }, [location.pathname]);
 
+  // Check for menu query parameter to auto-open menu
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('menu') === 'true') {
+      setShowPageMenu(true);
+      // Clean up the URL
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location.search, navigate, location.pathname]);
+
   // Counter animation effect
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -2794,7 +2804,7 @@ const Dashboard: React.FC = () => {
                 {/* PROFILE */}
                 <div
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                  onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
+                  onClick={(e) => { e.preventDefault(); handleOpenProfile(); }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
                     const card = e.currentTarget;
@@ -2820,7 +2830,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/schedule');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -2847,7 +2856,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/collaboration');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -2874,7 +2882,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/zonals');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -2901,7 +2908,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/events-info', { state: { openSection: 'paraCards' } });
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -2928,7 +2934,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/hospitality');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -2953,7 +2958,7 @@ const Dashboard: React.FC = () => {
                 {/* CAMPUS AMBASSADOR */}
                 <div
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                  onClick={() => { navigate('/campus-ambassador'); setShowPageMenu(false); }}
+                  onClick={() => { navigate('/campus-ambassador'); }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
                     const card = e.currentTarget;
@@ -2979,7 +2984,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/sponsors');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -3006,7 +3010,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/our-team');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -3033,7 +3036,6 @@ const Dashboard: React.FC = () => {
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
                     navigate('/campus-map');
-                    setShowPageMenu(false);
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -4120,7 +4122,7 @@ const Dashboard: React.FC = () => {
             <p className="theme-description" style={{
               fontSize: '1.25rem',
               lineHeight: '1.9',
-              color: '#f5e210ff',
+              color: 'white',
               textAlign: 'justify',
               fontWeight: '400',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
@@ -4133,9 +4135,10 @@ const Dashboard: React.FC = () => {
           {/* Stats Bar */}
           <div ref={statsRef} style={{
             background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            appearance: 'none',
+            border: '2px solid rgba(251,191,36,0.5)',
             borderRadius: '20px',
             padding: window.innerWidth <= 640 ? '20px 10px' : '30px 20px',
             marginTop: '30px',
@@ -6724,8 +6727,8 @@ const Dashboard: React.FC = () => {
             style={{
               background: 'linear-gradient(135deg, rgba(139, 69, 172, 0.95), rgba(88, 28, 135, 0.95))',
               borderRadius: '1rem',
-              padding: '2rem',
-              width: '90%',
+              padding: window.innerWidth <= 640 ? '1.25rem' : '2rem',
+              width: '95%',
               maxWidth: '900px',
               maxHeight: '90vh',
               overflow: 'auto',
@@ -6734,8 +6737,21 @@ const Dashboard: React.FC = () => {
             }}
           >
             {/* Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ color: 'white', fontSize: '1.75rem', fontWeight: 'bold', margin: 0 }}>Register for Events</h2>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '1rem',
+              position: 'relative'
+            }}>
+              <h2 style={{
+                color: 'white',
+                fontSize: window.innerWidth <= 640 ? '1.35rem' : '1.75rem',
+                fontWeight: 'bold',
+                margin: 0,
+                textAlign: 'center',
+                width: '100%'
+              }}>Register for Events</h2>
               <button
                 onClick={() => {
                   window.history.pushState({}, '', '/');
@@ -6745,16 +6761,18 @@ const Dashboard: React.FC = () => {
                   background: 'transparent',
                   border: 'none',
                   color: 'white',
-                  fontSize: '2rem',
+                  fontSize: '1.75rem',
                   cursor: 'pointer',
                   padding: 0,
-                  width: '40px',
-                  height: '40px',
+                  width: '32px',
+                  height: '32px',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'all 0.3s'
+                  transition: 'all 0.3s',
+                  position: 'absolute',
+                  right: 0
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
@@ -6815,14 +6833,15 @@ const Dashboard: React.FC = () => {
                     }}
                     style={{
                       color: '#fef3c7',
-                      fontSize: '1.25rem',
+                      fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.25rem',
                       fontWeight: 'bold',
-                      marginBottom: '0.75rem',
+                      marginBottom: '0.5rem',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.5rem',
+                      justifyContent: 'center',
+                      gap: '1rem',
+                      padding: '0.75rem',
                       borderRadius: '0.5rem',
                       background: 'rgba(255, 255, 255, 0.05)',
                       transition: 'all 0.3s'
@@ -6835,7 +6854,7 @@ const Dashboard: React.FC = () => {
                     }}
                   >
                     <span>Sports Events</span>
-                    <span style={{ fontSize: '1.5rem' }}>
+                    <span style={{ fontSize: '1.2rem' }}>
                       {expandedSections.has('sports') ? '▼' : '▶'}
                     </span>
                   </h3>
@@ -7037,14 +7056,15 @@ const Dashboard: React.FC = () => {
                     }}
                     style={{
                       color: '#fef3c7',
-                      fontSize: '1.25rem',
+                      fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.25rem',
                       fontWeight: 'bold',
-                      marginBottom: '0.75rem',
+                      marginBottom: '0.5rem',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.5rem',
+                      justifyContent: 'center',
+                      gap: '1rem',
+                      padding: '0.75rem',
                       borderRadius: '0.5rem',
                       background: 'rgba(255, 255, 255, 0.05)',
                       transition: 'all 0.3s'
@@ -7057,7 +7077,7 @@ const Dashboard: React.FC = () => {
                     }}
                   >
                     <span>Culturals Events</span>
-                    <span style={{ fontSize: '1.5rem' }}>
+                    <span style={{ fontSize: '1.2rem' }}>
                       {expandedSections.has('culturals') ? '▼' : '▶'}
                     </span>
                   </h3>
@@ -7248,9 +7268,16 @@ const Dashboard: React.FC = () => {
                   <h3
                     style={{
                       color: '#fef3c7',
-                      fontSize: '1.25rem',
+                      fontSize: window.innerWidth <= 640 ? '1.1rem' : '1.25rem',
                       fontWeight: 'bold',
-                      marginBottom: '0.75rem'
+                      marginBottom: '0.5rem',
+                      textAlign: 'center',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: '0.75rem',
+                      borderRadius: '0.5rem',
+                      background: 'rgba(255, 255, 255, 0.05)'
                     }}
                   >
                     Para Sports

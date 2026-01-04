@@ -8,7 +8,7 @@ const Collaboration: React.FC = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/?menu=true');
   };
 
   return (

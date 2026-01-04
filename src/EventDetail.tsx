@@ -2369,7 +2369,7 @@ const EventDetail: React.FC = () => {
       min-height: 100vh;
       margin: 0 auto;
       background-color: #1a1034;
-      background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png');
+      background-image: url('images/Background.png');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -2553,8 +2553,8 @@ const EventDetail: React.FC = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="flex justify-center items-start">
-          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-3 sm:gap-4 max-w-7xl items-start px-4 sm:px-6 lg:px-0">
+        <div className="flex justify-center items-start" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-6 sm:gap-8 max-w-7xl items-start">
             {/* Poster */}
             <div className="flex justify-center lg:justify-start">
               <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-2 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md" style={{ borderColor: '#FFD700' }}>
@@ -2573,7 +2573,7 @@ const EventDetail: React.FC = () => {
             </div>
 
             {/* Rules Section */}
-            <div className="p-3 sm:p-4">
+            <div className="p-5 sm:p-8 lg:p-4">
               <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                 Rules:
               </h3>
@@ -2592,7 +2592,7 @@ const EventDetail: React.FC = () => {
             {/* Prizes and Contact Section */}
             <div className="space-y-3 sm:space-y-4">
               {/* Cash Prizes */}
-              <div className="p-3 sm:p-4">
+              <div className="p-5 sm:p-8 lg:p-4">
                 <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                   Cash Prizes:
                 </h3>
@@ -2676,7 +2676,7 @@ const EventDetail: React.FC = () => {
               </div>
 
               {/* Contact Information */}
-              <div className="p-4 sm:p-6">
+              <div className="p-5 sm:p-8 lg:p-6">
                 <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-yellow-400 text-center" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                   Contact no:
                 </h3>
@@ -2704,21 +2704,27 @@ const EventDetail: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 mb-6 sm:mb-8 px-4">
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-16 mb-20 px-6">
           <button
-            className="w-full sm:w-auto bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+            className="hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2 border-2 border-purple-400/30"
+            style={{
+              width: '85%',
+              maxWidth: '320px',
+              backgroundColor: '#462554'
+            }}
             onClick={handleDownloadHTML}
             disabled={isDownloading}
           >
-            {isDownloading ? '⏳ Downloading...' : '📄 Download'}
+            {isDownloading ? '⏳ Downloading...' : '📄 Download Details'}
           </button>
 
           <button
-            className="w-full sm:w-auto bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-pink-500 to-rose-500 hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2"
+            style={{ width: '85%', maxWidth: '320px' }}
             onClick={handleAddToMyEvents}
             disabled={isAddingEvent}
           >
-            {isAddingEvent ? '⏳ Adding...' : '⭐ Add to My Events'}
+            {isAddingEvent ? '⏳ Adding...' : '⭐ Add My Events'}
           </button>
         </div>
       </div>

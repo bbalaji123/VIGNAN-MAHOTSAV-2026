@@ -66,14 +66,14 @@ const Hospitality: React.FC = () => {
   ];
 
   const handleBackClick = () => {
-    navigate('/')
+    navigate('/?menu=true')
   };
 
   return (
     <div className="hospitality-bg min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Floating Flower - Top Right */}
       <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-50 ">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -87,7 +87,7 @@ const Hospitality: React.FC = () => {
 
       {/* Floating Flower - Bottom Left */}
       <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-55 max-md:z-0 md:z-[1]">
-        <FlowerComponent 
+        <FlowerComponent
           size="100%"
           sunSize="50%"
           moonSize="43%"
@@ -127,8 +127,8 @@ const Hospitality: React.FC = () => {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 md:py-16">
-        <h1 className="hospitality-title hospitality-title-color text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8 relative z-10" style={{ marginTop: '80px' }}>HOSPITALITY</h1>
-        
+        <h1 className="hospitality-title hospitality-title-color text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8 relative z-10" style={{ marginTop: '80px', color: '#fdee71' }}>HOSPITALITY</h1>
+
         {/* Desktop Tab Navigation */}
         <div className="hidden md:flex hospitality-tabs">
           <button
@@ -164,7 +164,7 @@ const Hospitality: React.FC = () => {
         </div>
 
         {/* Mobile Dropdown Navigation */}
-        <select 
+        <select
           className="block md:hidden hospitality-mobile-select touch-manipulation"
           value={activeTab}
           onChange={(e) => setActiveTab(e.target.value as 'instructions' | 'howToReach' | 'accommodation' | 'contacts' | 'faqs')}
@@ -185,22 +185,22 @@ const Hospitality: React.FC = () => {
             <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Performing Arts:</strong> Students of any UG / PG program of any discipline are permitted to participate, from institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc., in Performing arts / Literature / Visual Arts and Crafts / Fashion events.</p>
 
             <h2 className="section-heading-primary">Registrations:</h2>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• All external participants have to report at the Registration desk arranged near the main gate before 12 noon on 5th Feb 2026.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Registration fee:</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Sports & Games: Rs.350/- for Men and Rs. 250/- for women</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Performing arts / Literature / Visual Arts and Crafts / Fashion: Rs. 250/-</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Entry is free for PARA sports participants.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• All participants must produce their college ID card and Bonafide certificate.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• On completion of individual registration, a Mahotsav ID will be generated for your account.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• After individual registration, Team captain/leads must report at counters setup for concerned game/ event for registering their team by producing Mahotsav ID cards of all the team members.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for sports and games events are permitted to participate in any one Team event of sports and games and any number of Track & Field/ Individual sport event Performing Arts / Literature / Visual Arts and Crafts / Fashion.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for Performing Arts alone will not be permitted to participate in Sports & Games.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Participants who require accommodation must register at the adjacent hospitality desk by producing a Mahotsav ID card issued upon first come first serve basis.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Any number of individuals / teams are allowed to participate from an institute in an event.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Lunch will be provided on the three days of the fest for Sports & Games participants only.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• All the visitors should also register at the desk with a nominal entry fee.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Winners and Runners will be awarded with cash prizes, memento/medal and appreciation certificate during the valedictory function only i.e., held on 8th Feb 2025 from 6 – 8 p.m.</p>
-          <p className="hospitality-content mb-2 text-sm sm:text-base">• Participation certificates will be issued to all the participants at the event venue only upon completion of the event.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• All external participants have to report at the Registration desk arranged near the main gate before 12 noon on 5th Feb 2026.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Registration fee:</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Sports & Games: Rs.350/- for Men and Rs. 250/- for women</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Performing arts / Literature / Visual Arts and Crafts / Fashion: Rs. 250/-</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Entry is free for PARA sports participants.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• All participants must produce their college ID card and Bonafide certificate.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• On completion of individual registration, a Mahotsav ID will be generated for your account.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• After individual registration, Team captain/leads must report at counters setup for concerned game/ event for registering their team by producing Mahotsav ID cards of all the team members.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for sports and games events are permitted to participate in any one Team event of sports and games and any number of Track & Field/ Individual sport event Performing Arts / Literature / Visual Arts and Crafts / Fashion.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for Performing Arts alone will not be permitted to participate in Sports & Games.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Participants who require accommodation must register at the adjacent hospitality desk by producing a Mahotsav ID card issued upon first come first serve basis.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Any number of individuals / teams are allowed to participate from an institute in an event.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Lunch will be provided on the three days of the fest for Sports & Games participants only.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• All the visitors should also register at the desk with a nominal entry fee.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Winners and Runners will be awarded with cash prizes, memento/medal and appreciation certificate during the valedictory function only i.e., held on 8th Feb 2025 from 6 – 8 p.m.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Participation certificates will be issued to all the participants at the event venue only upon completion of the event.</p>
           </div>
         )}
 
@@ -214,91 +214,91 @@ const Hospitality: React.FC = () => {
             <p className="hospitality-content mb-6 sm:mb-8 text-sm sm:text-base">• There are plenty of auto-rickshaws and buses available from Tenali to reach Vignan University.</p>
 
             <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
-          
+
             <h3 className="section-subheading">For Boys:</h3>
             <div className="hospitality-table-container">
-            <table className="hospitality-table">
-              <thead>
-                <tr >
-                  <th >Name</th>
-                  <th >Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr >
-                  <td >Ashwin</td>
-                  <td >88852 84355</td>
-                </tr>
-                <tr >
-                  <td >Ajith anna</td>
-                  <td >93461 93840</td>
-                </tr>
-                <tr >
-                  <td >Hemanth</td>
-                  <td >88854 76252</td>
-                </tr>
-                <tr >
-                  <td >Phani</td>
-                  <td >95426 66866</td>
-                </tr>
-                <tr >
-                  <td >Nawaz Basha</td>
-                  <td >99638 76989</td>
-                </tr>
-                <tr >
-                  <td >Yeshwanth</td>
-                  <td >83091 90435</td>
-                </tr>
-              </tbody>
-            </table>
+              <table className="hospitality-table">
+                <thead>
+                  <tr >
+                    <th >Name</th>
+                    <th >Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td >Ashwin</td>
+                    <td >88852 84355</td>
+                  </tr>
+                  <tr >
+                    <td >Ajith anna</td>
+                    <td >93461 93840</td>
+                  </tr>
+                  <tr >
+                    <td >Hemanth</td>
+                    <td >88854 76252</td>
+                  </tr>
+                  <tr >
+                    <td >Phani</td>
+                    <td >95426 66866</td>
+                  </tr>
+                  <tr >
+                    <td >Nawaz Basha</td>
+                    <td >99638 76989</td>
+                  </tr>
+                  <tr >
+                    <td >Yeshwanth</td>
+                    <td >83091 90435</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <h3 className="section-subheading">For Girls:</h3>
             <div className="hospitality-table-container">
-            <table className="hospitality-table">
-              <thead>
-                <tr >
-                  <th >Name</th>
-                  <th >Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr >
-                  <td >Yamini</td>
-                  <td >70939 12677</td>
-                </tr>
-                <tr >
-                  <td >Sravani</td>
-                  <td >90147 04929</td>
-                </tr>
-                <tr >
-                  <td >Bindhu</td>
-                  <td >99590 22317</td>
-                </tr>
-              </tbody>
-            </table>
+              <table className="hospitality-table">
+                <thead>
+                  <tr >
+                    <th >Name</th>
+                    <th >Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td >Yamini</td>
+                    <td >70939 12677</td>
+                  </tr>
+                  <tr >
+                    <td >Sravani</td>
+                    <td >90147 04929</td>
+                  </tr>
+                  <tr >
+                    <td >Bindhu</td>
+                    <td >99590 22317</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <h2 className="section-heading-primary hospitality-heading-centered mt-8">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
             <div className="hospitality-table-container">
-            <table className="hospitality-table">
-              <thead>
-                <tr >
-                  <th >Name</th>
-                  <th >Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr >
-                  <td >Lohith</td>
-                  <td >8309751051</td>
-                </tr>
-                <tr >
-                  <td >Sri Vatsav</td>
-                  <td >94419 34549</td>
-                </tr>
-              </tbody>
-            </table>
+              <table className="hospitality-table">
+                <thead>
+                  <tr >
+                    <th >Name</th>
+                    <th >Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td >Lohith</td>
+                    <td >8309751051</td>
+                  </tr>
+                  <tr >
+                    <td >Sri Vatsav</td>
+                    <td >94419 34549</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         )}
@@ -329,7 +329,7 @@ const Hospitality: React.FC = () => {
         {activeTab === 'contacts' && (
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
-          
+
             <h3 className="section-subheading hospitality-subheading-padded">For Boys:</h3>
             <div className="hospitality-table-container">
               <table className="hospitality-table">
@@ -422,10 +422,10 @@ const Hospitality: React.FC = () => {
         {activeTab === 'faqs' && (
           <div className="hospitality-tab-content">
             <h2 className="section-heading-primary">FAQ's</h2>
-            
+
             <div className="faq-container" style={{ marginTop: '2rem' }}>
               {faqs.map((faq, index) => (
-                <div 
+                <div
                   key={index}
                   style={{
                     marginBottom: '1rem',
@@ -480,7 +480,7 @@ const Hospitality: React.FC = () => {
                       ▼
                     </span>
                   </button>
-                  
+
                   <div style={{
                     maxHeight: openFAQ === index ? '500px' : '0',
                     overflow: 'hidden',
@@ -489,11 +489,12 @@ const Hospitality: React.FC = () => {
                   }}>
                     <p style={{
                       padding: '1.25rem',
-                      color: '#f5e210',
+                      color: '#fdee71',
                       fontSize: 'clamp(0.85rem, 1.8vw, 1rem)',
                       lineHeight: '1.7',
                       margin: 0,
-                      whiteSpace: 'pre-line'
+                      whiteSpace: 'pre-line',
+                      fontFamily: "'Borisna', sans-serif"
                     }}>
                       {faq.answer}
                     </p>

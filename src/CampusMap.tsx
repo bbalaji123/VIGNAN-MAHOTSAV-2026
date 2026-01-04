@@ -8,7 +8,7 @@ const CampusMap: React.FC = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/?menu=true');
   };
 
   return (
@@ -63,6 +63,15 @@ const CampusMap: React.FC = () => {
           .campus-title {
             font-family: 'Aladin', cursive !important;
           }
+
+          @media (max-width: 768px) {
+            .mobile-content-spacer {
+              padding-bottom: 20px !important;
+            }
+            .mobile-map-spacer {
+              margin-bottom: 20px !important;
+            }
+          }
         `}
       </style>
 
@@ -72,15 +81,15 @@ const CampusMap: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 md:pt-24 pb-10 
-                      opacity-0 animate-[fadeInUp_0.8s_ease-out_0.05s_forwards] z-2">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 md:pt-24 pb-32 md:pb-16 
+                      opacity-0 animate-[fadeInUp_0.8s_ease-out_0.05s_forwards] z-2 mobile-content-spacer">
 
         {/* Header */}
         <div className="text-center mb-10 mt-16 md:mt-0">
           <h1
             className="campus-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold pt-4 md:pt-0"
             style={{
-              background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
+              background: '#fdee71',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -98,8 +107,8 @@ const CampusMap: React.FC = () => {
           <div
             className="grid grid-cols-1 md:grid-cols-2 gap-6
                        place-items-center
-                       min-h-[460px] md:min-h-[560px] style={{marginTop: '20px'}}"
-            style={{marginTop: '40px'}}
+                       min-h-[460px] md:min-h-[560px]"
+            style={{ marginTop: '40px' }}
           >
             {/* LEFT: Campus Image */}
             <img
@@ -111,7 +120,7 @@ const CampusMap: React.FC = () => {
             {/* RIGHT: Live Google Map */}
             <div
               className="w-[85%] max-w-[600px] h-[380px] md:h-[430px]
-                         rounded-2xl overflow-hidden shadow-2xl"
+                         rounded-2xl overflow-hidden shadow-2xl mb-16 md:mb-10 mobile-map-spacer"
             >
               <iframe
                 src="https://www.google.com/maps/d/embed?mid=1uZxIpP4jFqgAqCDThH4ZWryPqkiR9Vc"
@@ -119,6 +128,7 @@ const CampusMap: React.FC = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Mahotsav 2025 Campus Map"
+
               />
             </div>
           </div>

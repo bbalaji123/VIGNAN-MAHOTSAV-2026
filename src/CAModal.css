@@ -36,8 +36,9 @@
   .ca-modal-content,
   .ca-modal-content.ca-login-modal,
   .ca-login-modal {
-    max-width: 520px;
-    padding: 24px;
+    max-width: 480px;
+    padding: 20px;
+    width: 95%;
   }
 
   .ca-modal-close {
@@ -276,22 +277,40 @@
 /* Mobile Responsive */
 @media (max-width: 640px) {
   .ca-modal-content {
-    padding: 30px 20px;
+    padding: 20px 15px;
     max-height: 85vh;
+    width: 95%;
   }
 
   .ca-modal-title {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .ca-form-row {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 12px;
   }
 
   .ca-form {
-    gap: 15px;
+    gap: 12px;
+  }
+
+  .ca-form-group {
+    gap: 6px;
+  }
+
+  .ca-form-group input {
+    padding: 12px 14px;
+    min-height: 48px;
+    font-size: 15px;
+  }
+
+  .ca-submit-button {
+    height: 50px;
+    padding: 10px 20px;
+    font-size: 15px;
+    margin-top: 5px;
   }
 }
 

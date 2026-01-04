@@ -84,13 +84,27 @@ router.post('/register', async (req, res) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const trimmedRegisterId = registerId?.trim();
 
-    // Email already exists - CHECK BEFORE generating ID
+    // Email already exists
     if (await Registration.findOne({ email: normalizedEmail })) {
       return res.status(409).json({
         success: false,
         message: 'Email already registered'
       });
+    }
+
+    // Check for duplicate Registration Number if provided
+    if (trimmedRegisterId) {
+      const existingRegId = await Registration.findOne({
+        registerId: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
+      });
+      if (existingRegId) {
+        return res.status(409).json({
+          success: false,
+          message: `Registration Number '${trimmedRegisterId}' is already registered by another user.`
+        });
+      }
     }
 
     // Cleanup orphan participant
@@ -103,7 +117,7 @@ router.post('/register', async (req, res) => {
       try {
         // Generate ID only once per attempt
         const userId = await generateUserId();
-        
+
         // Convert YYYY-MM-DD to DD/MM/YYYY for password storage
         let passwordToStore = dateOfBirth || password;
         if (passwordToStore && passwordToStore.includes('-')) {
@@ -198,7 +212,7 @@ router.post('/login', async (req, res) => {
 
     // Make identifier case-insensitive and trim whitespace
     const normalizedIdentifier = identifier.trim();
-    
+
     // Try to find user with case-insensitive matching for userId and registerId
     const user = await Registration.findOne({
       $or: [
@@ -282,7 +296,7 @@ router.post('/save-events', async (req, res) => {
 
     // Find or create participant
     let participant = await Participant.findOne({ userId });
-    
+
     if (events.length === 0) {
       // If no events, remove all registered events from participant
       if (participant) {
@@ -327,7 +341,7 @@ router.post('/save-events', async (req, res) => {
     res.json({
       success: true,
       message: 'Events saved successfully',
-      data: { 
+      data: {
         userId,
         registeredEvents: participant.registeredEvents
       }
@@ -352,7 +366,7 @@ router.get('/my-registrations/:userId', async (req, res) => {
 
     // Find participant by userId
     const participant = await Participant.findOne({ userId });
-    
+
     if (!participant) {
       return res.json({
         success: true,
@@ -401,22 +415,22 @@ router.get('/user/:userId', async (req, res) => {
 router.post('/reset-counter', async (req, res) => {
   try {
     const mongoose = (await import('mongoose')).default;
-    
+
     // Delete the counter to reset it
     await mongoose.connection.db.collection('counters').deleteOne({ _id: 'userId' });
-    
+
     // Optionally set it to 0 explicitly
     await mongoose.connection.db.collection('counters').insertOne({ _id: 'userId', seq: 0 });
-    
-    res.json({ 
-      success: true, 
-      message: 'Counter reset to 0. Next ID will be MH26000001' 
+
+    res.json({
+      success: true,
+      message: 'Counter reset to 0. Next ID will be MH26000001'
     });
   } catch (error) {
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       message: 'Failed to reset counter',
-      error: error.message 
+      error: error.message
     });
   }
 });
@@ -425,17 +439,17 @@ router.get('/counter-status', async (req, res) => {
   try {
     const mongoose = (await import('mongoose')).default;
     const counter = await mongoose.connection.db.collection('counters').findOne({ _id: 'userId' });
-    
-    res.json({ 
+
+    res.json({
       success: true,
       counter: counter?.seq || 0,
       nextId: `MH26${((counter?.seq || 0) + 1).toString().padStart(6, '0')}`
     });
   } catch (error) {
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       message: 'Failed to get counter',
-      error: error.message 
+      error: error.message
     });
   }
 });

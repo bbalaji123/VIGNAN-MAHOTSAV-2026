@@ -118,8 +118,23 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
       return;
     }
 
-    // Generate password from DOB (DDMMYYYY format)
+    // Validate age - must be at least 18 years old
     const dob = new Date(formData.dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+
+    // Adjust age if birthday hasn't occurred this year
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+
+    if (age < 18) {
+      alert(`You must be at least 18 years old to become a Campus Ambassador.\n\nYour current age: ${age} years\nRequired age: 18 years or older\n\nPlease check your date of birth and try again.`);
+      return;
+    }
+
+    // Generate password from DOB (DDMMYYYY format)
     const day = String(dob.getDate()).padStart(2, '0');
     const month = String(dob.getMonth() + 1).padStart(2, '0');
     const year = dob.getFullYear();

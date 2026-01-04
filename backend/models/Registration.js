@@ -82,6 +82,7 @@ const registrationSchema = new mongoose.Schema({
 // Create indexes for better performance and duplicate prevention
 registrationSchema.index({ email: 1 }, { unique: true }); // Prevent duplicate emails
 registrationSchema.index({ userId: 1 }, { unique: true }); // Ensure unique user IDs
+registrationSchema.index({ registerId: 1 }, { unique: true, sparse: true }); // Prevent duplicate registration numbers (sparse allows nulls)
 registrationSchema.index({ createdAt: -1 }); // For ID generation sorting
 
 const Registration = mongoose.model('Registration', registrationSchema);

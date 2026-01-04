@@ -1773,30 +1773,21 @@ const Dashboard: React.FC = () => {
 
     // Validate required fields
     if (!signupFormData.name || !signupFormData.email || !signupFormData.dateOfBirth) {
-      setSubmitMessage({
-        type: 'error',
-        text: 'Please fill in all required fields (Name, Email, Date of Birth)'
-      });
+      alert('Please fill in all required fields (Name, Email, Date of Birth)');
       setIsSubmitting(false);
       return;
     }
 
     // Validate required state and district
     if (!signupFormData.state || !signupFormData.district) {
-      setSubmitMessage({
-        type: 'error',
-        text: 'Please select your State and District'
-      });
+      alert('Please select your State and District');
       setIsSubmitting(false);
       return;
     }
 
     // Validate college field - must have a value and either be from the list or "Other" option
     if (!signupFormData.college || signupFormData.college.trim() === '') {
-      setSubmitMessage({
-        type: 'error',
-        text: 'Please select your college from the list or choose "Other" option if your college is not listed'
-      });
+      alert('Please select your college from the list or choose "Other" option if your college is not listed');
       setIsSubmitting(false);
       return;
     }
@@ -1804,16 +1795,29 @@ const Dashboard: React.FC = () => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(signupFormData.email)) {
-      setSubmitMessage({
-        type: 'error',
-        text: 'Please enter a valid email address'
-      });
+      alert('Please enter a valid email address');
       setIsSubmitting(false);
       return;
     }
 
-    // Set password as date of birth in DDMMYYYY format
+    // Validate age - must be at least 10 years old
     const dob = new Date(signupFormData.dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+
+    // Adjust age if birthday hasn't occurred this year
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+
+    if (age < 10) {
+      alert(`You must be at least 10 years old to register.\n\nYour current age: ${age} years\nRequired age: 10 years or older\n\nPlease check your date of birth and try again.`);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Set password as date of birth in DDMMYYYY format (reuse dob from age validation)
     const day = String(dob.getDate()).padStart(2, '0');
     const month = String(dob.getMonth() + 1).padStart(2, '0');
     const year = dob.getFullYear();
@@ -1856,16 +1860,12 @@ const Dashboard: React.FC = () => {
           referralCode: ''
         });
       } else {
-        setSubmitMessage({
-          type: 'error',
-          text: result.message || 'Registration failed. Please try again.'
-        });
+        // Show error as popup alert
+        alert(result.message || 'Registration failed. Please try again.');
       }
     } catch (error: unknown) {
-      setSubmitMessage({
-        type: 'error',
-        text: 'An error occurred. Please try again later.'
-      });
+      // Show error as popup alert
+      alert('An error occurred. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }

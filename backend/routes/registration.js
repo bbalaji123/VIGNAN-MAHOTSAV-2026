@@ -96,13 +96,27 @@ router.post('/register', async (req, res) => {
 
     // Check for duplicate Registration Number if provided
     if (trimmedRegisterId) {
+      // Check in Registration collection
       const existingRegId = await Registration.findOne({
         registerId: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
       });
+
       if (existingRegId) {
         return res.status(409).json({
           success: false,
           message: `Registration Number '${trimmedRegisterId}' is already registered by another user.`
+        });
+      }
+
+      // Also check in CampusAmbassador collection
+      const existingCARegNo = await CampusAmbassador.findOne({
+        registrationNumber: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
+      });
+
+      if (existingCARegNo) {
+        return res.status(409).json({
+          success: false,
+          message: `Registration Number '${trimmedRegisterId}' is already registered by a Campus Ambassador.`
         });
       }
     }

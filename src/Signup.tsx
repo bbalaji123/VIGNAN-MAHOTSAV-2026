@@ -86,7 +86,7 @@ const Signup: React.FC<SignupProps> = ({
           </div>
 
           <div className="signup-modal-body">
-            <form className="signup-form" onSubmit={onSubmit}>
+            <form className="signup-form" onSubmit={onSubmit} noValidate>
               {submitMessage && (
                 <div className={`signup-submit-message ${submitMessage.type}`}>
                   {submitMessage.text}

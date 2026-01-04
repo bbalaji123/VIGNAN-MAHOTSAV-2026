@@ -2475,7 +2475,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center' }}>
+        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
           {isLoggedIn ? (
             <button
               className="register-events-btn"
@@ -4733,9 +4733,17 @@ const Dashboard: React.FC = () => {
             .register-events-btn,
             .register-login-btn {
               position: relative !important;
-              margin-top: -100px !important;
-              margin-left: 0 !important;
-              left: auto !important;
+              margin-top: -20px !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
+              left: 0 !important;
+              right: 0 !important;
+            }
+            
+            .hero-action-buttons {
+              display: flex !important;
+              justify-content: center !important;
+              align-items: center !important;
             }
 
             /* Desktop padding for profile */

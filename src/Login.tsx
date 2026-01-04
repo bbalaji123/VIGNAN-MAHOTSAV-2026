@@ -126,7 +126,7 @@ const Login: React.FC<LoginProps> = ({
                 name="identifier"
                 value={loginFormData.identifier}
                 onChange={onInputChange}
-                placeholder="Reg. No or MH26XXXXXX"
+                placeholder="Reg. No or MH26XX"
                 required
               />
             </div>

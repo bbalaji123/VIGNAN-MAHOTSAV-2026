@@ -13,7 +13,7 @@ const Vizag: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
-      backgroundImage: 'url("/images/Background-redesign.png")',
+      backgroundImage: 'url("/images/Background.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -113,7 +113,7 @@ const Vizag: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
           </div>
 
           {/* Events Table */}

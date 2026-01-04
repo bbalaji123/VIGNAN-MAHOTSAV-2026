@@ -18,7 +18,7 @@
 .background {
   position: fixed;
   inset: 0;
-  background: url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png") center/cover no-repeat;
+  background: url("https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png") center/cover no-repeat;
   z-index: 1;
 }
 
@@ -76,8 +76,13 @@
 }
 
 @keyframes timerGlow {
-  from { box-shadow: 0 0 20px rgba(255, 191, 29, 0.542); }
-  to { box-shadow: 0 0 35px rgba(251,192,45,0.8); }
+  from {
+    box-shadow: 0 0 20px rgba(255, 191, 29, 0.542);
+  }
+
+  to {
+    box-shadow: 0 0 35px rgba(251, 192, 45, 0.8);
+  }
 }
 
 /* ================= TIME UNIT ================= */
@@ -99,7 +104,7 @@
   font-family: 'Poppins', sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--gold-yellow);
-  text-shadow: 0 0 12px rgba(251,192,45,0.7);
+  text-shadow: 0 0 12px rgba(251, 192, 45, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,9 +115,17 @@
 }
 
 @keyframes rotateOnce {
-  0% { transform: scale(1) rotateX(0deg); }
-  50% { transform: scale(1.2) rotateX(180deg); }
-  100% { transform: scale(1) rotateX(360deg); }
+  0% {
+    transform: scale(1) rotateX(0deg);
+  }
+
+  50% {
+    transform: scale(1.2) rotateX(180deg);
+  }
+
+  100% {
+    transform: scale(1) rotateX(360deg);
+  }
 }
 
 /* ================= LABEL ================= */
@@ -130,7 +143,8 @@
 
   /* MAIN CONTAINER */
   .main-container {
-    height: 100dvh; /* better mobile viewport handling */
+    height: 100dvh;
+    /* better mobile viewport handling */
   }
 
   /* BACKGROUND stays same */

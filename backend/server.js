@@ -63,7 +63,7 @@ app.use(requestLogger);
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'http://localhost:5173', 
+    'http://localhost:5173',
     'http://localhost:5174',
     'https://akash209581.github.io',
     'https://vignanmahotsav.in',
@@ -83,6 +83,22 @@ app.use(cors({
 app.use('/api', generalLimiter);
 
 /* =====================================================
+   Static File Serving with Caching
+===================================================== */
+// Serve static files with aggressive caching for images
+// This enables browser caching for 1 year (immutable)
+app.use(express.static('public', {
+  maxAge: '1y', // 1 year cache
+  immutable: true,
+  setHeaders: (res, path) => {
+    // Apply aggressive caching to image files
+    if (path.match(/\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+  }
+}));
+
+/* =====================================================
    Body Parsing
 ===================================================== */
 app.use(express.json({ limit: '10mb' }));
@@ -99,7 +115,7 @@ app.use('/api', locationRoutes);
 
 // Health check route - now under /api
 app.get('/api/health', (req, res) => {
-  res.json({ 
+  res.json({
     status: 'healthy',
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),

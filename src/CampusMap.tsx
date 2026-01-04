@@ -73,7 +73,7 @@ const CampusMap: React.FC = () => {
 
       {/* Main Content */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-4 md:pt-24 pb-10 
-                      opacity-0 animate-[fadeInUp_0.8s_ease-out_0.05s_forwards] z-[2]">
+                      opacity-0 animate-[fadeInUp_0.8s_ease-out_0.05s_forwards] z-2">
 
         {/* Header */}
         <div className="text-center mb-10 mt-16 md:mt-0">
@@ -84,15 +84,13 @@ const CampusMap: React.FC = () => {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              textShadow: '0 0 30px rgba(251, 191, 36, 0.3)'
+              textShadow: '0 0 30px rgba(251, 191, 36, 0.3)',
+              marginTop: '50px'
             }}
           >
             CAMPUS BLUE PRINT
           </h1>
 
-          <p className="mt-2 text-sm sm:text-base text-white/70 italic">
-            Interactive campus blueprint — zoom, pan, and explore venue locations
-          </p>
         </div>
 
         {/* 50 / 50 Image + Map — PERFECT CENTERING */}

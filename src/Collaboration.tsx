@@ -309,40 +309,41 @@ const Collaboration: React.FC = () => {
 
         <div className="collaboration-grid">
           {[
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929321/3_dvfsut.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929248/4_w9ppck.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929250/5_sinxan.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929254/6_cuyhzg.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929255/7_fhojic.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929256/8_onyr5b.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929259/9_uev3pg.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929261/10_wni4f6.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929264/11_q25rha.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929266/12_vslte5.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929269/13_qkox2a.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929271/14_q6kzto.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929273/15_voez03.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929277/16_wnub7p.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929286/17_atxyzf.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929290/18_qg24n9.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929290/19_meotku.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929293/20_o9gjwx.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929297/21_z7jcol.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929302/22_fhnvbe.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929302/23_mviqwn.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929304/25_bif5nv.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929305/24_pziuis.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929310/26_mr4ydh.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929311/28_yulk3k.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929313/29_o6tbis.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929316/30_mwqfbc.avif',
-            'https://res.cloudinary.com/dctuev0mm/image/upload/v1766929319/32_nmftpg.avif'
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929321/3_dvfsut.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929248/4_w9ppck.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929250/5_sinxan.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929254/6_cuyhzg.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929255/7_fhojic.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929256/8_onyr5b.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929259/9_uev3pg.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929261/10_wni4f6.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929264/11_q25rha.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929266/12_vslte5.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929269/13_qkox2a.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929271/14_q6kzto.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929273/15_voez03.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929277/16_wnub7p.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929286/17_atxyzf.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929290/18_qg24n9.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929290/19_meotku.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929293/20_o9gjwx.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929297/21_z7jcol.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929302/22_fhnvbe.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929302/23_mviqwn.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929304/25_bif5nv.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929305/24_pziuis.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929310/26_mr4ydh.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929311/28_yulk3k.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929313/29_o6tbis.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929316/30_mwqfbc.avif',
+            'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929319/32_nmftpg.avif'
           ].map((url, index) => (
             <div key={index} className="collaboration-image-card">
               <img
                 src={url}
                 alt={`Collaboration ${index + 1}`}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           ))}

@@ -72,7 +72,7 @@ const Hospitality: React.FC = () => {
   return (
     <div className="hospitality-bg min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-1000">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-50 ">
         <FlowerComponent 
           size="100%"
           sunSize="50%"
@@ -127,7 +127,7 @@ const Hospitality: React.FC = () => {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-12 md:py-16">
-        <h1 className="hospitality-title hospitality-title-color text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8">HOSPITALITY</h1>
+        <h1 className="hospitality-title hospitality-title-color text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 sm:mb-6 md:mb-8 relative z-10" style={{ marginTop: '80px' }}>HOSPITALITY</h1>
         
         {/* Desktop Tab Navigation */}
         <div className="hidden md:flex hospitality-tabs">

@@ -17,7 +17,7 @@ const Zonals: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
-      backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
+      backgroundImage: 'url("/images/Background.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -102,28 +102,28 @@ const Zonals: React.FC = () => {
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929721/BENGALURU_b9ugrx.avif" alt="Bangalore" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929721/BENGALURU_b9ugrx.avif" alt="Bangalore" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('vizag')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929718/VIZAG_pcabnp.avif" alt="Vizag" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('hyderabad')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929711/HYDERABAD_yg7ryn.avif" alt="Hyderabad" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929711/HYDERABAD_yg7ryn.avif" alt="Hyderabad" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('tirupathi')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929714/TIRUPATHI_y1iypg.avif" alt="Tirupati" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929714/TIRUPATHI_y1iypg.avif" alt="Tirupati" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </div>
 
           {/* Chennai Card */}
@@ -132,7 +132,7 @@ const Zonals: React.FC = () => {
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/v1766929725/CHENNAI_kq6tgd.avif" alt="Chennai" className="w-full h-full object-cover" />
+            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929725/CHENNAI_kq6tgd.avif" alt="Chennai" className="w-full h-full object-cover" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>

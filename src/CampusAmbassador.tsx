@@ -450,35 +450,63 @@ const CampusAmbassador: React.FC = () => {
             text-align: center;
           }
 
-          .back-button {
+          .ca-page-back-button {
             position: absolute;
-            top: 8rem;
-            left: 2rem;
+            top: 0.1rem;
+            left: 0.51rem;
             z-index: 1000;
-            background: linear-gradient(135deg, #e48ab9, #c96ba1);
+            background: transparent;
             color: #fff;
             padding: 0.75rem 2rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 5px 15px rgba(228, 138, 185, 0.4);
+            box-shadow: none;
             text-transform: uppercase;
+            margin-left: -30px;
           }
 
-          .back-button:hover {
+          @media (max-width: 768px) {
+            .ca-page-back-button {
+              top: 0.5rem !important;
+              left: 1rem !important;
+              padding: 0.2rem 1.5rem !important;
+              font-size: 0.5rem !important;
+            }
+          }
+
+          .ca-page-back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(228, 138, 185, 0.6);
+            box-shadow: none;
           }
 
-          .mahotsav-logo {
+          .ca-mahotsav-logo {
             position: absolute;
             top: 1.5rem;
-            left: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 999;
-            width: 400px;
+            width: 350px;
             height: auto;
+            margin-left: 0;
+          }
+
+          @media (min-width: 769px) {
+            .ca-mahotsav-logo {
+              margin-left: 150px;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .ca-mahotsav-logo {
+              top: 2.5rem !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              width: 220px !important;
+              margin-left: 0 !important;
+            }
           }
 
           .hero-title {
@@ -656,6 +684,14 @@ const CampusAmbassador: React.FC = () => {
         >
           Register/Login
         </button>
+        <p className="text-base sm:text-lg md:text-xl text-white mt-6 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]" style={{
+          fontFamily: 'Quesha, cursive',
+          letterSpacing: '0.05em',
+          marginTop: '100px',
+          fontSize: '2rem'
+        }}>
+          Scroll down for the rules
+        </p>
       </div>
 
       {/* Incentives & Rewards Modal (glass morphism) */}
@@ -799,20 +835,20 @@ const CampusAmbassador: React.FC = () => {
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
             borderRadius: '14px',
-            padding: '70px 50px',
+            padding: window.innerWidth < 640 ? '30px 20px' : '70px 50px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             border: '1px solid rgba(255, 255, 255, 0.1)'
           }}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-yellow-400 text-center" style={{
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
               letterSpacing: '0.02em',
-              marginBottom: '32px'
+              marginBottom: '20px'
             }}>
               What is Mahotsav Crew?
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-white leading-relaxed" style={{
-              textAlign: 'justify',
-              lineHeight: '1.9',
+              textAlign: 'center',
+              lineHeight: window.innerWidth < 640 ? '1.6' : '1.9',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
               marginLeft: 'auto',
@@ -828,7 +864,8 @@ const CampusAmbassador: React.FC = () => {
       {/* Eligibility Criteria Section */}
       <div className="w-full py-16 sm:py-20 md:py-24 flex justify-center items-center px-4" style={{
         background: 'transparent',
-        position: 'relative'
+        position: 'relative',
+        textAlign: 'left'
       }}>
         <div style={{
           width: 'min(95vw, 75%)',
@@ -842,35 +879,35 @@ const CampusAmbassador: React.FC = () => {
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
             borderRadius: '14px',
-            padding: '70px 50px',
+            padding: window.innerWidth < 640 ? '30px 20px' : '70px 50px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             border: '1px solid rgba(255, 255, 255, 0.1)'
           }}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-yellow-400 text-center" style={{
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
               letterSpacing: '0.02em',
-              marginBottom: '32px'
+              marginBottom: '20px'
             }}>
               Eligibility Criteria
             </h2>
-            <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-4" style={{
-              textAlign: 'justify',
-              lineHeight: '1.8',
+            <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
+              textAlign: 'left',
+              lineHeight: window.innerWidth < 640 ? '1.6' : '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
             }}>
               To become a Mahotsav Crew Campus Ambassador for Vignan Mahotsav 2026, the applicant must:
             </p>
-            <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
-              textAlign: 'justify',
-              lineHeight: '1.8',
+            <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-2" style={{
+              textAlign: 'left',
+              lineHeight: window.innerWidth < 640 ? '1.6' : '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
             }}>
               <strong> Current Enrollment:</strong> Must be a student in a recognized college/university (UG/PG).
             </p>
             <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               lineHeight: '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
@@ -878,7 +915,7 @@ const CampusAmbassador: React.FC = () => {
               <strong> Communication Skills:</strong> Able to connect and interact confidently with peers.
             </p>
             <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               lineHeight: '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
@@ -886,7 +923,7 @@ const CampusAmbassador: React.FC = () => {
               <strong> Proactive & Enthusiastic:</strong> Self-motivated, energetic, and ready to take initiative.
             </p>
             <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               lineHeight: '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
@@ -894,7 +931,7 @@ const CampusAmbassador: React.FC = () => {
               <strong> Creative & Innovative:</strong> Bring fresh ideas for online/offline fest promotions.
             </p>
             <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose mb-3" style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               lineHeight: '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
@@ -902,7 +939,7 @@ const CampusAmbassador: React.FC = () => {
               <strong> Time Management:</strong> Balance academics with ambassador tasks efficiently.
             </p>
             <p className="text-base sm:text-lg text-white leading-relaxed sm:leading-loose" style={{
-              textAlign: 'justify',
+              textAlign: 'left',
               lineHeight: '1.8',
               letterSpacing: '0.02em',
               textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)'
@@ -1194,7 +1231,7 @@ const CampusAmbassador: React.FC = () => {
 
       {/* Contact Information */}
       <div className="w-full py-12 flex justify-center items-center px-4">
-        <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg" style={{
+        <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg text-center sm:text-left" style={{
           maxWidth: '900px',
           width: '100%'
         }}>
@@ -1236,7 +1273,7 @@ const CampusAmbassador: React.FC = () => {
             {/* Logo Section */}
             <div>
               <img
-                src={`/images/image.avif`}
+                src={`/menu-dashboard/image.avif`}
                 alt="Mahotsav 2026"
                 className="footer-logo"
                 style={{

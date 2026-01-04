@@ -224,7 +224,7 @@ const EventsInfo: React.FC = () => {
       "Traditional Yogasana": "Traditional Yogasana",
       "Taekwondo": "Taekwondo",
       "Tennikoit": "Tennikoit",
-      "Throwball": "Throwball",
+      "Throwball": "Throw ball",
 
       // Cultural events - Dance
       "Classical Dance Solo": "Classical Dance Solo",
@@ -540,7 +540,7 @@ const EventsInfo: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden events-info-page" style={{
-      backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
+      backgroundImage: 'url("/images/Background.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',

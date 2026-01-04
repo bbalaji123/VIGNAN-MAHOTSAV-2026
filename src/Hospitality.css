@@ -126,7 +126,7 @@
   font-weight: bold;
   color: #DB2777;
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: 0.1rem;
 }
 
 .section-heading-center {
@@ -222,7 +222,7 @@
 
 /* Additional utility classes */
 .hospitality-bg {
-  background-image: url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png");
+  background-image: url("/images/Background.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

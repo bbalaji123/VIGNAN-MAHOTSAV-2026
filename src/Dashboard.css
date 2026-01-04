@@ -198,18 +198,18 @@ img[alt="Moon"],
   }
 
   /* Reduce font sizes on mobile */
-  .stats-grid>div > div:first-child {
+  .stats-grid>div>div:first-child {
     font-size: 1.8rem !important;
     height: 40px !important;
     margin-bottom: 5px !important;
   }
 
-  .stats-grid>div > div:nth-child(2) {
+  .stats-grid>div>div:nth-child(2) {
     font-size: 1.2rem !important;
     margin-bottom: 4px !important;
   }
 
-  .stats-grid>div > div:nth-child(3) {
+  .stats-grid>div>div:nth-child(3) {
     font-size: 0.7rem !important;
   }
 
@@ -219,7 +219,7 @@ img[alt="Moon"],
   }
 
   /* Editions circle - smaller on mobile */
-  .stats-grid>div:nth-child(5) > div:first-child > div {
+  .stats-grid>div:nth-child(5)>div:first-child>div {
     width: 40px !important;
     height: 40px !important;
     font-size: 1rem !important;
@@ -803,7 +803,7 @@ body::-webkit-scrollbar {
   width: 100vw;
   overflow-x: hidden;
   position: relative;
-  background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png');
+  background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -2698,7 +2698,7 @@ body::-webkit-scrollbar {
 @media (max-width: 768px) {
   .vignan-logo-top {
     top: -10px;
-    right: -05px !important;
+    right: 10px !important;
   }
 
   .vignan-logo-img {
@@ -2709,7 +2709,7 @@ body::-webkit-scrollbar {
 @media (max-width: 480px) {
   .vignan-logo-top {
     top: -10px;
-    right: -05px !important;
+    right: 10px !important;
   }
 
   .vignan-logo-img {
@@ -7579,6 +7579,8 @@ body {
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.92rem;
   letter-spacing: 0.3px;
+  display: flex;
+  justify-content: center;
 }
 
 .signup-btn,
@@ -13372,7 +13374,7 @@ html {
   }
 
   /* Card wrapper - stack image and title */
-  .events-main-cards-container > div {
+  .events-main-cards-container>div {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -13388,7 +13390,7 @@ html {
   }
 
   /* HIDE the absolute positioned text inside the first card on mobile */
-  .events-main-cards-container .event-card > div[style*="position: absolute"] {
+  .events-main-cards-container .event-card>div[style*="position: absolute"] {
     display: none !important;
   }
 
@@ -13436,7 +13438,7 @@ html {
 @media (min-width: 769px) {
 
   /* Hide the title below first card on desktop (show the absolute positioned one) */
-  .events-main-cards-container > div:first-child > .category-card-title {
+  .events-main-cards-container>div:first-child>.category-card-title {
     display: none !important;
   }
 
@@ -13744,7 +13746,8 @@ html {
 
 /* Mobile header layout - tight spacing */
 .events-mobile-header {
-  gap: 0 !important; /* No gap between elements */
+  gap: 0 !important;
+  /* No gap between elements */
 }
 
 /* Mobile logo - compact size */

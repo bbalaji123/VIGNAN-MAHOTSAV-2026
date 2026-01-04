@@ -219,7 +219,7 @@ const Dashboard: React.FC = () => {
       ]
     },
     "Skit": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Skit",
       rules: [
         "A minimum of 4 and a maximum of 8 participants are allowed to participate in one item.",
@@ -266,7 +266,7 @@ const Dashboard: React.FC = () => {
       ]
     },
     "Mime": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Mime",
       rules: [
         "Minimum 3 and Maximum of 8 participants are allowed to participate in a team.",
@@ -332,7 +332,7 @@ const Dashboard: React.FC = () => {
       ]
     },
     "Short Film Making": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Short Film Making",
       rules: [
         "Submission Method: Participants must submit their short film using the Google Drive or YouTube link provided in the registration form.",
@@ -968,20 +968,20 @@ const Dashboard: React.FC = () => {
         if (sectionId) {
           setVisibleSections(prev => {
             const newSet = new Set(prev);
-            
+
             // When scrolling DOWN - no animations, just show immediately
             if (entry.isIntersecting && scrollDirection.current === 'down') {
               newSet.add(sectionId);
-            } 
+            }
             // When scrolling UP - animate sections
             else if (entry.isIntersecting && entry.intersectionRatio > 0.1 && scrollDirection.current === 'up') {
               newSet.add(sectionId);
-            } 
+            }
             // Remove when out of viewport
             else if (!entry.isIntersecting || entry.intersectionRatio < 0.05) {
               newSet.delete(sectionId);
             }
-            
+
             return newSet;
           });
         }
@@ -2038,7 +2038,7 @@ const Dashboard: React.FC = () => {
   const handleOpenRegistration = async () => {
     // Navigate to register-for-events route
     navigate('/register-for-events');
-    
+
     // Always open the modal when button is clicked
     setShowRegistrationModal(true);
 
@@ -2053,15 +2053,15 @@ const Dashboard: React.FC = () => {
       let sportsEvents = registrationEvents.Sports || [];
       let culturalEvents = registrationEvents.Culturals || [];
       let paraEvents = registrationEvents.ParaSports || [];
-      
+
       if (!sportsEvents.length && !culturalEvents.length && !paraEvents.length) {
         const response = await fetch('/registration/registration.json');
         const data = await response.json();
-        
+
         sportsEvents = data.Sports || [];
         culturalEvents = data.Culturals || [];
         paraEvents = data.ParaSports || [];
-        
+
         setRegistrationEvents({
           Sports: sportsEvents,
           Culturals: culturalEvents,
@@ -2075,20 +2075,20 @@ const Dashboard: React.FC = () => {
       if (registrationsResult.success && registrationsResult.data) {
         const registeredEvents = registrationsResult.data.registeredEvents || [];
         setUserRegisteredEvents(registeredEvents);
-        
+
         // Pre-populate selectedRegistrationEvents with currently registered events
         const preSelectedIds = new Set<string>();
-        
+
         registeredEvents.forEach((regEvent: any) => {
           const eventName = regEvent.eventName || regEvent.Event || regEvent.name;
-          
+
           // Find matching event in Sports
           sportsEvents.forEach((event: any) => {
             if (event && event.Event === eventName) {
               preSelectedIds.add(`sport-${eventName}`);
             }
           });
-          
+
           // Find matching event in Culturals
           culturalEvents.forEach((event: any) => {
             if (event) {
@@ -2098,7 +2098,7 @@ const Dashboard: React.FC = () => {
               }
             }
           });
-          
+
           // Find matching event in ParaSports
           paraEvents.forEach((event: any) => {
             if (event && event.Event === eventName) {
@@ -2106,7 +2106,7 @@ const Dashboard: React.FC = () => {
             }
           });
         });
-        
+
         setSelectedRegistrationEvents(preSelectedIds);
       }
     } catch (error) {
@@ -3467,7 +3467,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowTheatre(false); setShowCulturals(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
-                <h2>THEATRE & CINEMATOGRAPHY</h2>
+                <h2>THEATRE</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowTheatre(false); setShowCulturals(true); }}>?</button>
             </div>
@@ -4733,11 +4733,9 @@ const Dashboard: React.FC = () => {
             .register-events-btn,
             .register-login-btn {
               position: relative !important;
-              margin-top: -20px !important;
-              margin-left: auto !important;
+              margin-top: -100px !important;
+              margin-left: 690px !important;
               margin-right: auto !important;
-              left: 0 !important;
-              right: 0 !important;
             }
             
             .hero-action-buttons {
@@ -5008,9 +5006,9 @@ const Dashboard: React.FC = () => {
                     height: '100%',
                     objectFit: 'cover',
                     zIndex: 1,
-                  pointerEvents: 'auto'
-                }}
-              />
+                    pointerEvents: 'auto'
+                  }}
+                />
               )}
               {/* Day indicator */}
               <div style={{
@@ -6003,7 +6001,7 @@ const Dashboard: React.FC = () => {
                                 e.currentTarget.style.background = '#f7ef0fff';
                               }}
                             >
-                               Print
+                              Print
                             </button>
                           </div>
                           <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -6325,7 +6323,7 @@ const Dashboard: React.FC = () => {
                           <button
                             onClick={async () => {
                               const updatedEvents = myEvents.filter((_, i) => i !== index);
-                              
+
                               // Check if this is the last event
                               if (updatedEvents.length === 0) {
                                 alert('You have to register for at least one event');
@@ -6842,175 +6840,175 @@ const Dashboard: React.FC = () => {
                     </span>
                   </h3>
                   {expandedSections.has('sports') && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
-                    {(() => {
-                      // Group sports events by category
-                      const groupedByCategory: { [key: string]: any[] } = {};
-                      let currentCategory = 'Other';
-                      
-                      registrationEvents.Sports.forEach((event: any) => {
-                        if (!event || !event.Event) return;
-                        
-                        // Update category if present
-                        if (event.Category) {
-                          currentCategory = event.Category;
-                        }
-                        
-                        // Gender filtering
-                        const userGender = userProfileData.gender?.toLowerCase();
-                        const categoryLower = currentCategory.toLowerCase();
-                        
-                        if (userGender) {
-                          if (userGender === 'male' && (categoryLower.includes('women') || categoryLower.includes('female'))) return;
-                          if (userGender === 'female' && (categoryLower.includes('men') && !categoryLower.includes('women'))) return;
-                        }
-                        
-                        if (!groupedByCategory[currentCategory]) {
-                          groupedByCategory[currentCategory] = [];
-                        }
-                        groupedByCategory[currentCategory].push({ ...event, category: currentCategory });
-                      });
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
+                      {(() => {
+                        // Group sports events by category
+                        const groupedByCategory: { [key: string]: any[] } = {};
+                        let currentCategory = 'Other';
 
-                      // Render grouped events
-                      return Object.entries(groupedByCategory).map(([category, events]) => (
-                        <div key={category} style={{ marginBottom: '0.5rem' }}>
-                          {/* Category Header */}
-                          <div
-                            onClick={() => {
-                              setExpandedSections(prev => {
-                                const newSet = new Set(prev);
-                                const categoryKey = `sports-${category}`;
-                                if (newSet.has(categoryKey)) {
-                                  newSet.delete(categoryKey);
-                                } else {
-                                  newSet.add(categoryKey);
-                                }
-                                return newSet;
-                              });
-                            }}
-                            style={{
-                              color: '#fbbf24',
-                              fontWeight: 'bold',
-                              fontSize: '1.05rem',
-                              marginTop: '0.75rem',
-                              marginBottom: '0.5rem',
-                              paddingLeft: '0.5rem',
-                              paddingRight: '0.5rem',
-                              paddingTop: '0.4rem',
-                              paddingBottom: '0.4rem',
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              background: 'rgba(251, 191, 36, 0.1)',
-                              borderRadius: '0.375rem',
-                              transition: 'all 0.3s'
-                            }}
-                            onMouseOver={(e) => {
-                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
-                            }}
-                            onMouseOut={(e) => {
-                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
-                            }}
-                          >
-                            <span>{category}</span>
-                            <span style={{ fontSize: '1rem' }}>
-                              {expandedSections.has(`sports-${category}`) ? '▼' : '▶'}
-                            </span>
-                          </div>
-                          
-                          {/* Events in this category */}
-                          {expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
-                            const eventName = event.Event;
-                            const eventId = `sport-${eventName}`;
+                        registrationEvents.Sports.forEach((event: any) => {
+                          if (!event || !event.Event) return;
 
-                            const alreadySaved = isEventAlreadySaved(eventName);
-                            const constraintDisabled = (window as any).__hasParaSelected;
-                            const finalDisabled = constraintDisabled || alreadySaved;
-                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+                          // Update category if present
+                          if (event.Category) {
+                            currentCategory = event.Category;
+                          }
 
-                            return (
-                              <label
-                                key={eventId}
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  background: finalDisabled
-                                    ? 'rgba(75, 85, 99, 0.5)'
-                                    : 'rgba(255, 255, 255, 0.08)',
-                                  padding: '0.6rem 0.85rem',
-                                  borderRadius: '0.5rem',
-                                  cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                                  transition: 'all 0.3s',
-                                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                                  opacity: constraintDisabled ? 0.5 : 1,
-                                  marginBottom: '0.5rem'
-                                }}
-                                onMouseOver={(e) => {
-                                  if (!finalDisabled) {
-                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                          // Gender filtering
+                          const userGender = userProfileData.gender?.toLowerCase();
+                          const categoryLower = currentCategory.toLowerCase();
+
+                          if (userGender) {
+                            if (userGender === 'male' && (categoryLower.includes('women') || categoryLower.includes('female'))) return;
+                            if (userGender === 'female' && (categoryLower.includes('men') && !categoryLower.includes('women'))) return;
+                          }
+
+                          if (!groupedByCategory[currentCategory]) {
+                            groupedByCategory[currentCategory] = [];
+                          }
+                          groupedByCategory[currentCategory].push({ ...event, category: currentCategory });
+                        });
+
+                        // Render grouped events
+                        return Object.entries(groupedByCategory).map(([category, events]) => (
+                          <div key={category} style={{ marginBottom: '0.5rem' }}>
+                            {/* Category Header */}
+                            <div
+                              onClick={() => {
+                                setExpandedSections(prev => {
+                                  const newSet = new Set(prev);
+                                  const categoryKey = `sports-${category}`;
+                                  if (newSet.has(categoryKey)) {
+                                    newSet.delete(categoryKey);
+                                  } else {
+                                    newSet.add(categoryKey);
                                   }
-                                }}
-                                onMouseOut={(e) => {
-                                  e.currentTarget.style.background = finalDisabled
-                                    ? 'rgba(75, 85, 99, 0.5)'
-                                    : 'rgba(255, 255, 255, 0.08)';
-                                }}
-                                onClick={(e) => {
-                                  if (constraintDisabled) {
-                                    e.preventDefault();
-                                    alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
-                                  }
-                                }}
-                              >
-                                <input
-                                  type="checkbox"
-                                  checked={isChecked}
-                                  disabled={finalDisabled}
-                                  onChange={() => {
-                                    if (finalDisabled) return;
+                                  return newSet;
+                                });
+                              }}
+                              style={{
+                                color: '#fbbf24',
+                                fontWeight: 'bold',
+                                fontSize: '1.05rem',
+                                marginTop: '0.75rem',
+                                marginBottom: '0.5rem',
+                                paddingLeft: '0.5rem',
+                                paddingRight: '0.5rem',
+                                paddingTop: '0.4rem',
+                                paddingBottom: '0.4rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: 'rgba(251, 191, 36, 0.1)',
+                                borderRadius: '0.375rem',
+                                transition: 'all 0.3s'
+                              }}
+                              onMouseOver={(e) => {
+                                e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
+                              }}
+                              onMouseOut={(e) => {
+                                e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
+                              }}
+                            >
+                              <span>{category}</span>
+                              <span style={{ fontSize: '1rem' }}>
+                                {expandedSections.has(`sports-${category}`) ? '▼' : '▶'}
+                              </span>
+                            </div>
 
-                                    setSelectedRegistrationEvents((prev) => {
-                                      const newSet = new Set(prev);
-                                      if (newSet.has(eventId)) {
-                                        newSet.delete(eventId);
-                                      } else {
-                                        newSet.add(eventId);
-                                      }
-                                      return newSet;
-                                    });
-                                  }}
+                            {/* Events in this category */}
+                            {expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
+                              const eventName = event.Event;
+                              const eventId = `sport-${eventName}`;
+
+                              const alreadySaved = isEventAlreadySaved(eventName);
+                              const constraintDisabled = (window as any).__hasParaSelected;
+                              const finalDisabled = constraintDisabled || alreadySaved;
+                              const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+
+                              return (
+                                <label
+                                  key={eventId}
                                   style={{
-                                    width: '18px',
-                                    height: '18px',
-                                    marginRight: '0.75rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    background: finalDisabled
+                                      ? 'rgba(75, 85, 99, 0.5)'
+                                      : 'rgba(255, 255, 255, 0.08)',
+                                    padding: '0.6rem 0.85rem',
+                                    borderRadius: '0.5rem',
                                     cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                                    accentColor: '#fbbf24'
+                                    transition: 'all 0.3s',
+                                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                                    opacity: constraintDisabled ? 0.5 : 1,
+                                    marginBottom: '0.5rem'
                                   }}
-                                />
-                                <div style={{ flex: 1 }}>
-                                  <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                                    {eventName}
-                                  </div>
-                                  {alreadySaved && (
-                                    <div
-                                      style={{
-                                        color: 'rgba(248, 250, 252, 0.8)',
-                                        fontSize: '0.75rem',
-                                        marginTop: '0.1rem'
-                                      }}
-                                    >
-                                      Already registered • Fee: ₹{event.Fee || 350}
+                                  onMouseOver={(e) => {
+                                    if (!finalDisabled) {
+                                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                                    }
+                                  }}
+                                  onMouseOut={(e) => {
+                                    e.currentTarget.style.background = finalDisabled
+                                      ? 'rgba(75, 85, 99, 0.5)'
+                                      : 'rgba(255, 255, 255, 0.08)';
+                                  }}
+                                  onClick={(e) => {
+                                    if (constraintDisabled) {
+                                      e.preventDefault();
+                                      alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                    }
+                                  }}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    disabled={finalDisabled}
+                                    onChange={() => {
+                                      if (finalDisabled) return;
+
+                                      setSelectedRegistrationEvents((prev) => {
+                                        const newSet = new Set(prev);
+                                        if (newSet.has(eventId)) {
+                                          newSet.delete(eventId);
+                                        } else {
+                                          newSet.add(eventId);
+                                        }
+                                        return newSet;
+                                      });
+                                    }}
+                                    style={{
+                                      width: '18px',
+                                      height: '18px',
+                                      marginRight: '0.75rem',
+                                      cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                      accentColor: '#fbbf24'
+                                    }}
+                                  />
+                                  <div style={{ flex: 1 }}>
+                                    <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                                      {eventName}
                                     </div>
-                                  )}
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      ));
-                    })()}
-                  </div>
+                                    {alreadySaved && (
+                                      <div
+                                        style={{
+                                          color: 'rgba(248, 250, 252, 0.8)',
+                                          fontSize: '0.75rem',
+                                          marginTop: '0.1rem'
+                                        }}
+                                      >
+                                        Already registered • Fee: ₹{event.Fee || 350}
+                                      </div>
+                                    )}
+                                  </div>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        ));
+                      })()}
+                    </div>
                   )}
                 </div>
               )}
@@ -7064,175 +7062,175 @@ const Dashboard: React.FC = () => {
                     </span>
                   </h3>
                   {expandedSections.has('culturals') && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
-                    {(() => {
-                      // Group cultural events by category
-                      const groupedByCategory: { [key: string]: any[] } = {};
-                      let currentCategory = 'Other';
-                      
-                      registrationEvents.Culturals.forEach((event: any) => {
-                        if (!event) return;
-                        
-                        // Skip header rows
-                        if (event.Column1 === 'S.No') return;
-                        
-                        // Get event name from the correct field
-                        const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
-                        if (!eventName) return;
-                        
-                        // Update category if present
-                        if (event['5']) {
-                          currentCategory = event['5'];
-                        } else if (event.Category) {
-                          currentCategory = event.Category;
-                        }
-                        
-                        if (!groupedByCategory[currentCategory]) {
-                          groupedByCategory[currentCategory] = [];
-                        }
-                        groupedByCategory[currentCategory].push({ Event: eventName, category: currentCategory });
-                      });
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '260px', overflowY: 'auto' }}>
+                      {(() => {
+                        // Group cultural events by category
+                        const groupedByCategory: { [key: string]: any[] } = {};
+                        let currentCategory = 'Other';
 
-                      // Render grouped events
-                      return Object.entries(groupedByCategory).map(([category, events]) => (
-                        <div key={category} style={{ marginBottom: '0.5rem' }}>
-                          {/* Category Header */}
-                          <div
-                            onClick={() => {
-                              setExpandedSections(prev => {
-                                const newSet = new Set(prev);
-                                const categoryKey = `culturals-${category}`;
-                                if (newSet.has(categoryKey)) {
-                                  newSet.delete(categoryKey);
-                                } else {
-                                  newSet.add(categoryKey);
-                                }
-                                return newSet;
-                              });
-                            }}
-                            style={{
-                              color: '#fbbf24',
-                              fontWeight: 'bold',
-                              fontSize: '1.05rem',
-                              marginTop: '0.75rem',
-                              marginBottom: '0.5rem',
-                              paddingLeft: '0.5rem',
-                              paddingRight: '0.5rem',
-                              paddingTop: '0.4rem',
-                              paddingBottom: '0.4rem',
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              background: 'rgba(251, 191, 36, 0.1)',
-                              borderRadius: '0.375rem',
-                              transition: 'all 0.3s'
-                            }}
-                            onMouseOver={(e) => {
-                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
-                            }}
-                            onMouseOut={(e) => {
-                              e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
-                            }}
-                          >
-                            <span>{category}</span>
-                            <span style={{ fontSize: '1rem' }}>
-                              {expandedSections.has(`culturals-${category}`) ? '▼' : '▶'}
-                            </span>
-                          </div>
-                          
-                          {/* Events in this category */}
-                          {expandedSections.has(`culturals-${category}`) && events.map((event: any, _index: number) => {
-                            const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
-                            const eventId = `cultural-${culturalEventName}`;
+                        registrationEvents.Culturals.forEach((event: any) => {
+                          if (!event) return;
 
-                            const alreadySaved = isEventAlreadySaved(culturalEventName);
-                            const constraintDisabled = (window as any).__hasParaSelected;
-                            const finalDisabled = constraintDisabled || alreadySaved;
-                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+                          // Skip header rows
+                          if (event.Column1 === 'S.No') return;
 
-                            return (
-                              <label
-                                key={eventId}
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  background: finalDisabled
-                                    ? 'rgba(75, 85, 99, 0.5)'
-                                    : 'rgba(255, 255, 255, 0.08)',
-                                  padding: '0.6rem 0.85rem',
-                                  borderRadius: '0.5rem',
-                                  cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                                  transition: 'all 0.3s',
-                                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                                  opacity: constraintDisabled ? 0.5 : 1,
-                                  marginBottom: '0.5rem'
-                                }}
-                                onMouseOver={(e) => {
-                                  if (!finalDisabled) {
-                                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                          // Get event name from the correct field
+                          const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                          if (!eventName) return;
+
+                          // Update category if present
+                          if (event['5']) {
+                            currentCategory = event['5'];
+                          } else if (event.Category) {
+                            currentCategory = event.Category;
+                          }
+
+                          if (!groupedByCategory[currentCategory]) {
+                            groupedByCategory[currentCategory] = [];
+                          }
+                          groupedByCategory[currentCategory].push({ Event: eventName, category: currentCategory });
+                        });
+
+                        // Render grouped events
+                        return Object.entries(groupedByCategory).map(([category, events]) => (
+                          <div key={category} style={{ marginBottom: '0.5rem' }}>
+                            {/* Category Header */}
+                            <div
+                              onClick={() => {
+                                setExpandedSections(prev => {
+                                  const newSet = new Set(prev);
+                                  const categoryKey = `culturals-${category}`;
+                                  if (newSet.has(categoryKey)) {
+                                    newSet.delete(categoryKey);
+                                  } else {
+                                    newSet.add(categoryKey);
                                   }
-                                }}
-                                onMouseOut={(e) => {
-                                  e.currentTarget.style.background = finalDisabled
-                                    ? 'rgba(75, 85, 99, 0.5)'
-                                    : 'rgba(255, 255, 255, 0.08)';
-                                }}
-                                onClick={(e) => {
-                                  if (constraintDisabled) {
-                                    e.preventDefault();
-                                    alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
-                                  }
-                                }}
-                              >
-                                <input
-                                  type="checkbox"
-                                  checked={isChecked}
-                                  disabled={finalDisabled}
-                                  onChange={() => {
-                                    if (finalDisabled) return;
+                                  return newSet;
+                                });
+                              }}
+                              style={{
+                                color: '#fbbf24',
+                                fontWeight: 'bold',
+                                fontSize: '1.05rem',
+                                marginTop: '0.75rem',
+                                marginBottom: '0.5rem',
+                                paddingLeft: '0.5rem',
+                                paddingRight: '0.5rem',
+                                paddingTop: '0.4rem',
+                                paddingBottom: '0.4rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                background: 'rgba(251, 191, 36, 0.1)',
+                                borderRadius: '0.375rem',
+                                transition: 'all 0.3s'
+                              }}
+                              onMouseOver={(e) => {
+                                e.currentTarget.style.background = 'rgba(251, 191, 36, 0.2)';
+                              }}
+                              onMouseOut={(e) => {
+                                e.currentTarget.style.background = 'rgba(251, 191, 36, 0.1)';
+                              }}
+                            >
+                              <span>{category}</span>
+                              <span style={{ fontSize: '1rem' }}>
+                                {expandedSections.has(`culturals-${category}`) ? '▼' : '▶'}
+                              </span>
+                            </div>
 
-                                    setSelectedRegistrationEvents((prev) => {
-                                      const newSet = new Set(prev);
-                                      if (newSet.has(eventId)) {
-                                        newSet.delete(eventId);
-                                      } else {
-                                        newSet.add(eventId);
-                                      }
-                                      return newSet;
-                                    });
-                                  }}
+                            {/* Events in this category */}
+                            {expandedSections.has(`culturals-${category}`) && events.map((event: any, _index: number) => {
+                              const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                              const eventId = `cultural-${culturalEventName}`;
+
+                              const alreadySaved = isEventAlreadySaved(culturalEventName);
+                              const constraintDisabled = (window as any).__hasParaSelected;
+                              const finalDisabled = constraintDisabled || alreadySaved;
+                              const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+
+                              return (
+                                <label
+                                  key={eventId}
                                   style={{
-                                    width: '18px',
-                                    height: '18px',
-                                    marginRight: '0.75rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    background: finalDisabled
+                                      ? 'rgba(75, 85, 99, 0.5)'
+                                      : 'rgba(255, 255, 255, 0.08)',
+                                    padding: '0.6rem 0.85rem',
+                                    borderRadius: '0.5rem',
                                     cursor: finalDisabled ? 'not-allowed' : 'pointer',
-                                    accentColor: '#fbbf24'
+                                    transition: 'all 0.3s',
+                                    border: '1px solid rgba(255, 255, 255, 0.18)',
+                                    opacity: constraintDisabled ? 0.5 : 1,
+                                    marginBottom: '0.5rem'
                                   }}
-                                />
-                                <div style={{ flex: 1 }}>
-                                  <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
-                                    {culturalEventName}
-                                  </div>
-                                  {alreadySaved && (
-                                    <div
-                                      style={{
-                                        color: 'rgba(248, 250, 252, 0.8)',
-                                        fontSize: '0.75rem',
-                                        marginTop: '0.1rem'
-                                      }}
-                                    >
-                                      Already registered • Fee: ₹{event.Fee || (userProfileData.gender === 'female' ? 250 : 350)}
+                                  onMouseOver={(e) => {
+                                    if (!finalDisabled) {
+                                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)';
+                                    }
+                                  }}
+                                  onMouseOut={(e) => {
+                                    e.currentTarget.style.background = finalDisabled
+                                      ? 'rgba(75, 85, 99, 0.5)'
+                                      : 'rgba(255, 255, 255, 0.08)';
+                                  }}
+                                  onClick={(e) => {
+                                    if (constraintDisabled) {
+                                      e.preventDefault();
+                                      alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                    }
+                                  }}
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    disabled={finalDisabled}
+                                    onChange={() => {
+                                      if (finalDisabled) return;
+
+                                      setSelectedRegistrationEvents((prev) => {
+                                        const newSet = new Set(prev);
+                                        if (newSet.has(eventId)) {
+                                          newSet.delete(eventId);
+                                        } else {
+                                          newSet.add(eventId);
+                                        }
+                                        return newSet;
+                                      });
+                                    }}
+                                    style={{
+                                      width: '18px',
+                                      height: '18px',
+                                      marginRight: '0.75rem',
+                                      cursor: finalDisabled ? 'not-allowed' : 'pointer',
+                                      accentColor: '#fbbf24'
+                                    }}
+                                  />
+                                  <div style={{ flex: 1 }}>
+                                    <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
+                                      {culturalEventName}
                                     </div>
-                                  )}
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      ));
-                    })()}
-                  </div>
+                                    {alreadySaved && (
+                                      <div
+                                        style={{
+                                          color: 'rgba(248, 250, 252, 0.8)',
+                                          fontSize: '0.75rem',
+                                          marginTop: '0.1rem'
+                                        }}
+                                      >
+                                        Already registered • Fee: ₹{event.Fee || (userProfileData.gender === 'female' ? 250 : 350)}
+                                      </div>
+                                    )}
+                                  </div>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        ));
+                      })()}
+                    </div>
                   )}
                 </div>
               )}
@@ -7262,24 +7260,24 @@ const Dashboard: React.FC = () => {
                       // Group para sports events by category
                       const groupedByCategory: { [key: string]: any[] } = {};
                       let currentCategory = 'Other';
-                      
+
                       registrationEvents.ParaSports.forEach((event: any) => {
                         if (!event || !event.Event) return;
-                        
+
                         // Update category if present
                         if (event.Category) {
                           currentCategory = event.Category;
                         }
-                        
+
                         // Gender filtering
                         const userGender = userProfileData.gender?.toLowerCase();
                         const categoryLower = currentCategory.toLowerCase();
-                        
+
                         if (userGender) {
                           if (userGender === 'male' && (categoryLower.includes('women') || categoryLower.includes('female'))) return;
                           if (userGender === 'female' && (categoryLower.includes('men') && !categoryLower.includes('women'))) return;
                         }
-                        
+
                         if (!groupedByCategory[currentCategory]) {
                           groupedByCategory[currentCategory] = [];
                         }
@@ -7302,7 +7300,7 @@ const Dashboard: React.FC = () => {
                           >
                             {category}
                           </div>
-                          
+
                           {/* Events in this category */}
                           {events.map((event: any) => {
                             const eventName = event.Event;
@@ -7561,7 +7559,7 @@ const Dashboard: React.FC = () => {
                         let foundEvent: any = null;
                         let foundCategory = '';
                         let currentCat = 'Other';
-                        
+
                         registrationEvents.Sports.forEach((e: any) => {
                           if (!e) return;
                           if (e.Category) {
@@ -7572,7 +7570,7 @@ const Dashboard: React.FC = () => {
                             foundCategory = currentCat;
                           }
                         });
-                        
+
                         if (foundEvent) {
                           return {
                             eventName: foundEvent.Event || foundEvent['738500'],
@@ -7589,7 +7587,7 @@ const Dashboard: React.FC = () => {
                         let foundEvent: any = null;
                         let foundCategory = '';
                         let currentCat = 'Other';
-                        
+
                         registrationEvents.Culturals.forEach((e: any) => {
                           if (!e) return;
                           if (e['5'] || e.Category) {
@@ -7601,7 +7599,7 @@ const Dashboard: React.FC = () => {
                             foundCategory = currentCat;
                           }
                         });
-                        
+
                         if (foundEvent) {
                           const culturalEventName = foundEvent['Prize money for Performing arts, Visual arts, Fashion'] || foundEvent.Event;
                           return {
@@ -7620,7 +7618,7 @@ const Dashboard: React.FC = () => {
                         let foundEvent: any = null;
                         let foundCategory = '';
                         let currentCat = 'Other';
-                        
+
                         registrationEvents.ParaSports?.forEach((e: any) => {
                           if (!e) return;
                           if (e.Category) {
@@ -7631,7 +7629,7 @@ const Dashboard: React.FC = () => {
                             foundCategory = currentCat;
                           }
                         });
-                        
+
                         if (foundEvent) {
                           return {
                             eventName: foundEvent.Event,

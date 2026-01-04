@@ -60,7 +60,7 @@ const EventDetail: React.FC = () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userId = localStorage.getItem('userId');
     const userGender = localStorage.getItem('gender')?.toLowerCase();
-    
+
     if (!isLoggedIn || !userId) {
       alert('Please login to continue');
       return;
@@ -73,33 +73,33 @@ const EventDetail: React.FC = () => {
 
     try {
       setIsAddingEvent(true);
-      
+
       // First, fetch existing registered events
       const existingEventsResponse = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
       const existingEventsResult = await existingEventsResponse.json();
-      
+
       let existingEvents: any[] = [];
       if (existingEventsResult.success && existingEventsResult.data?.registeredEvents) {
         existingEvents = existingEventsResult.data.registeredEvents;
       }
-      
+
       // Check if event is already registered (normalize for comparison)
       const normalizeEventName = (name: string) => name?.toLowerCase().trim();
       const currentEventNormalized = normalizeEventName(eventName || '');
-      
+
       const alreadyRegistered = existingEvents.some(
         (e: any) => {
           const registeredEventName = e.eventName || e.Event || e.name || '';
           return normalizeEventName(registeredEventName) === currentEventNormalized;
         }
       );
-      
+
       if (alreadyRegistered) {
         alert('You have already registered for this event!');
         setIsAddingEvent(false);
         return;
       }
-      
+
       // Determine event type based on the page we came from or event name
       let eventType = 'sports';
       const fromSection = location.state?.fromSection || '';
@@ -108,7 +108,7 @@ const EventDetail: React.FC = () => {
       } else if (fromSection.toLowerCase().includes('para') || eventName.toLowerCase().includes('para')) {
         eventType = 'parasports';
       }
-      
+
       // Create event object
       const newEvent = {
         eventName: eventName,
@@ -117,10 +117,10 @@ const EventDetail: React.FC = () => {
         description: `${eventName}`,
         fee: eventType === 'parasports' ? 0 : (userGender === 'female' && eventType === 'culturals' ? 250 : 350)
       };
-      
+
       // Combine existing events with new event
       const allEvents = [...existingEvents, newEvent];
-      
+
       // Save to database via API
       const response = await fetch(`${API_BASE_URL}/save-events`, {
         method: 'POST',
@@ -481,7 +481,8 @@ const EventDetail: React.FC = () => {
         women: {
           first: "Rs. 15,000",
           second: "Rs. 10,000"
-        }},
+        }
+      },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
@@ -546,7 +547,8 @@ const EventDetail: React.FC = () => {
         women: {
           first: "Rs. 15,000",
           second: "Rs. 10,000"
-        }},
+        }
+      },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
@@ -1073,7 +1075,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Skit": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Skit",
       rules: [
         "A minimum of 4 and a maximum of 8 participants are allowed to participate in one item.",
@@ -1094,7 +1096,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Mime": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Mime",
       rules: [
         "Minimum 3 and Maximum of 6 participants are allowed to participate in a team",
@@ -1188,14 +1190,14 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Mono Action": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "Mono Action",
       rules: [
         "This is an individual competition.",
         "Each participant artist will be given 4 minutes.",
         "The participant is required to perform an act of any theme. ",
         "Obscenity and offensive gestures are strictly prohibited. ",
-        "5.	Judgement will be based on acting, dialogue delivery, stage presence and overall impression."
+        "Judgement will be based on acting, dialogue delivery, stage presence and overall impression."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1208,7 +1210,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Spot Ad Making": {
-      title: "THEATRE & CINEMATOGRAPHY",
+      title: "THEATRE",
       subtitle: "On the Spot Ad Making",
       rules: [
         "A maximum of 4 participants are allowed to participate in a team.",
@@ -1229,8 +1231,8 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Dialogue Dhamaka": {
-      title: "THEATRE & CINEMATOGRAPHY",
-      subtitle: "Dialogue Dhamaka (Hindi)",
+      title: "THEATRE",
+      subtitle: "Dialogue Dhamaka",
       rules: [
         "It is an individual competition.",
         "Participants have the flexibility to deliver a dialogue from any movie or they can write their own script for a dialogue in any language.",
@@ -1876,7 +1878,7 @@ const EventDetail: React.FC = () => {
         "",
         "Final Round Selection Process:",
         "From both categories — online submissions and on-spot submissions — the top-performed short films will be selected separately, and then combined for the final round on 7th February 2026."
-    
+
       ],
       prizes: {
         first: "Rs. 20,000",
@@ -1971,21 +1973,21 @@ const EventDetail: React.FC = () => {
         "Capture real-time moments from Day 1 & Day 2 of Mahotsav.",
         "Write engaging content covering performances, stalls, competitions, ambiance, and crowd highlights.",
         "Design a structured and visually appealing digital magazine using collected photographs and written content.",
-      
+
         "3. Allowed Platforms",
         "Canva, Adobe Express, Figma, InDesign, MS Publisher, or any digital design tool.",
-      
+
         "4. Output Format",
         "Final submission must be in PDF format.",
         "Magazine must contain a minimum of 6 pages and a maximum of 15 pages.",
-      
+
         "5. Judging Criteria",
         "Creativity and presentation.",
         "Quality of photographs.",
         "Content clarity and storytelling.",
         "Magazine flow and layout.",
         "Overall impact.",
-    
+
         "6. Disqualification Criteria",
         "Use of internet photos instead of original photographs.",
         "Plagiarised or AI-generated content.",
@@ -2120,7 +2122,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Line Follower Robot": {
-      title: "ROBO WARS & GAMING",
+      title: "ROBO WARS",
       subtitle: "Line Follower Robot",
       rules: [
         "This is a team event (maximum 4 members per team).",
@@ -2145,7 +2147,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Bot Wrestling": {
-      title: "ROBO WARS & GAMING",
+      title: "ROBO WARS",
       subtitle: "Bot Wrestling",
       rules: [
         "This is a team event (maximum 4 members per team).",
@@ -2170,7 +2172,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Robo Races": {
-      title: "ROBO WARS & GAMING",
+      title: "ROBO WARS",
       subtitle: "Robo Races",
       rules: [
         "This is a team event (maximum 4 members per team).",
@@ -2280,102 +2282,118 @@ const EventDetail: React.FC = () => {
     "Digital Poster Making": "/images/Digital Poster Making.avif",
     "Mahotsav Digital Chronicle": "/images/MH-26 Digital Chronicle.avif",
     "Reel Making": "/images/reel making.avif",
+    "Short Film Making": "/images/Short Film.avif",
     // Gaming Events
     "Valorant": "/images/valorant.avif",
     "E-Football": "/images/E-Football.avif",
     "Counter Strike": "/images/Counter Strike.avif",
-    "Smash Karts": "/images/smash kart.avif"
+    "Smash Karts": "/images/smash kart.avif",
+    "Line Follower Robot": "/images/Line Flower Robot.png",
+    "Bot Wrestling": "/images/Bot wrestling.png",
+    "Robo Races": "/images/Robo Races.png"
   };
 
-  const handleDownloadPDF = async () => {
+  const handleDownloadHTML = async () => {
     if (!eventData) return;
 
     setIsDownloading(true);
     try {
-      const htmlContent = `
+      const element = document.getElementById('download-section');
+      if (!element) {
+        throw new Error('Download section not found');
+      }
+
+      // 1. Convert Images to Base64 for offline support
+      const images = Array.from(element.getElementsByTagName('img'));
+      const originalSrcs = new Map<HTMLImageElement, string>();
+      const imagesToConvert = images.filter(img => img.src && !img.src.includes('data:'));
+
+      for (const img of imagesToConvert) {
+        try {
+          const response = await fetch(img.src);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          const base64data = await new Promise<string>((resolve) => {
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.readAsDataURL(blob);
+          });
+          originalSrcs.set(img, img.src);
+          img.src = base64data;
+        } catch (e) {
+          console.warn(`Failed to convert image to base64: ${img.src}`, e);
+        }
+      }
+
+      // 2. Get the content
+      const content = element.outerHTML;
+
+      // Restore original srcs in the live UI
+      originalSrcs.forEach((src, img) => {
+        img.src = src;
+      });
+
+      // 3. Get all styles
+      let styles = '';
+      const styleSheets = document.styleSheets;
+      for (let i = 0; i < styleSheets.length; i++) {
+        try {
+          const sheet = styleSheets[i];
+          const rules = sheet.cssRules || sheet.rules;
+          for (let j = 0; j < rules.length; j++) {
+            styles += rules[j].cssText + '\n';
+          }
+        } catch (e) {
+          if (styleSheets[i].href) {
+            styles += `@import url("${styleSheets[i].href}");\n`;
+          }
+        }
+      }
+
+      // 4. Construct the full HTML
+      const fullHtml = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${eventData.subtitle} - Vignan Mahotsav</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6B46C1 0%, #8B5CF6 50%, #C084FC 100%);
-            color: white;
-            padding: 40px;
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-size: 36px; margin-bottom: 10px; }
-        .header h2 { font-size: 28px; color: #E9D5FF; }
-        .content { display: grid; grid-template-columns: 300px 1fr 350px; gap: 40px; }
-        .poster {
-            width: 250px; height: 350px; background: rgba(255,255,255,0.9);
-            border: 4px solid white; border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            color: #581C87; font-weight: bold; font-size: 18px;
-        }
-        h3 { color: #FFD700; font-size: 24px; margin-bottom: 20px; }
-        .rules-list { list-style: none; padding: 0; }
-        .rules-list li { margin-bottom: 15px; display: flex; }
-        .rules-list li:before { content: "•"; color: #FFD700; font-weight: bold; margin-right: 12px; }
-        .prize-item { margin-bottom: 12px; font-size: 16px; }
-        .prize-label { color: #FFD700; font-weight: bold; }
-        .contact-item { margin-bottom: 12px; font-size: 14px; }
-        @media print {
-            body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${eventData.subtitle} - Event Details</title>
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0; 
+      background-color: #1a1034; 
+      font-family: sans-serif;
+    }
+    #download-section {
+      width: 100%;
+      min-height: 100vh;
+      margin: 0 auto;
+      background-color: #1a1034;
+      background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    /* Hide the download, add buttons, and back button in the exported file */
+    .flex.flex-col.md\\:flex-row.gap-3.sm\\:gap-4.justify-center,
+    button[aria-label="Go back"] {
+      display: none !important;
+    }
+    ${styles}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>${eventData.title}</h1>
-            <h2>${eventData.subtitle}</h2>
-        </div>
-        <div class="content">
-            <div class="poster">POSTER of EVENT</div>
-            <div>
-                <h3>Rules:</h3>
-                <ul class="rules-list">
-                    ${eventData.rules.map(rule => `<li>${rule}</li>`).join('')}
-                </ul>
-            </div>
-            <div>
-                <h3>Cash Prizes:</h3>
-                ${'men' in eventData.prizes ? `
-                    <h4>Men:</h4>
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.men.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.men.second}</div>
-                    ${eventData.prizes.men.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.men.third}</div>` : ''}
-                    ${eventData.prizes.men.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.men.fourth}</div>` : ''}
-                    <h4 style="margin-top: 20px;">Women:</h4>
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.women.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.women.second}</div>
-                    ${eventData.prizes.women.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.women.third}</div>` : ''}
-                    ${eventData.prizes.women.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.women.fourth}</div>` : ''}
-                ` : `
-                    <div class="prize-item"><span class="prize-label">First:</span> ${eventData.prizes.first}</div>
-                    <div class="prize-item"><span class="prize-label">Second:</span> ${eventData.prizes.second}</div>
-                    ${eventData.prizes.third ? `<div class="prize-item"><span class="prize-label">Third:</span> ${eventData.prizes.third}</div>` : ''}
-                    ${eventData.prizes.fourth ? `<div class="prize-item"><span class="prize-label">Fourth:</span> ${eventData.prizes.fourth}</div>` : ''}
-                `}
-                <h3 style="margin-top: 30px;">Contact no:</h3>
-                ${eventData.contacts.map(contact => `<div class="contact-item">${contact.name}: ${contact.phone}</div>`).join('')}
-            </div>
-        </div>
-    </div>
+  ${content}
 </body>
 </html>`;
 
-      const blob = new Blob([htmlContent], { type: 'text/html' });
+      // 5. Trigger Download
+      const blob = new Blob([fullHtml], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `${eventData.subtitle.replace(/[^a-zA-Z0-9\s]/g, '')}_Details.html`;
+      link.download = `${eventData.subtitle.replace(/[^a-zA-Z0-9\s]/g, '_')}_Details.html`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -2384,7 +2402,7 @@ const EventDetail: React.FC = () => {
       alert('✅ Event details downloaded successfully!');
     } catch (error) {
       console.error('Download error:', error);
-      alert('❌ Download failed. Please try again.');
+      alert(`❌ Download failed: ${error instanceof Error ? error.message : 'Please try again.'}`);
     } finally {
       setIsDownloading(false);
     }
@@ -2415,7 +2433,7 @@ const EventDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen event-detail-page" style={{
+    <div id="download-section" className="min-h-screen event-detail-page" style={{
       backgroundImage: 'url("/Background-redesign.avif")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -2523,7 +2541,7 @@ const EventDetail: React.FC = () => {
                 />
               </div>
               <div className="text-center">
-                <h1 className="text-3xl font-bold text-white mb-2" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive' }}>
+                <h1 className="text-3xl font-bold text-white mb-2" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive', whiteSpace: 'nowrap' }}>
                   {eventData.title}
                 </h1>
                 <h2 className="text-2xl font-semibold text-purple-100" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Aladin, cursive', maxWidth: '280px', margin: '0 auto', lineHeight: '1.3', wordBreak: 'break-word' }}>
@@ -2688,8 +2706,8 @@ const EventDetail: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex flex-col md:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 mb-6 sm:mb-8 px-4">
           <button
-            className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
-            onClick={handleDownloadPDF}
+            className="w-full sm:w-auto bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 sm:py-4 px-8 sm:px-10 rounded-xl transition-all duration-300 shadow-lg text-base sm:text-lg sm:min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+            onClick={handleDownloadHTML}
             disabled={isDownloading}
           >
             {isDownloading ? '⏳ Downloading...' : '📄 Download'}

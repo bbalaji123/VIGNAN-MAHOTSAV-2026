@@ -2698,7 +2698,7 @@ body::-webkit-scrollbar {
 @media (max-width: 768px) {
   .vignan-logo-top {
     top: -10px;
-    right: 10px !important;
+    right: -05px !important;
   }
 
   .vignan-logo-img {
@@ -2709,7 +2709,7 @@ body::-webkit-scrollbar {
 @media (max-width: 480px) {
   .vignan-logo-top {
     top: -10px;
-    right: 10px !important;
+    right: -05px !important;
   }
 
   .vignan-logo-img {

@@ -740,6 +740,7 @@ const EventsInfo: React.FC = () => {
             height: 16rem;
             object-fit: contain;
             margin-top: -2rem;
+            margin-right: -100px;
           }
 
           .events-title {
@@ -946,7 +947,7 @@ const EventsInfo: React.FC = () => {
       {/* Main content - centered both vertically and horizontally */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Header: Logo + Title + Back Button */}
-        <div className="w-full px-8 relative z-20" style={{ paddingTop: window.innerWidth <= 768 ? "0px" : "10px" }}>
+        <div className="w-full px-0 relative z-20" style={{ paddingTop: window.innerWidth <= 768 ? "0px" : "10px" }}>
           {/* Desktop layout - Logo left, Title center, Back below logo */}
           <div className="hidden md:grid md:grid-cols-3 md:items-start">
             {/* Left column: Logo and Back button stacked */}
@@ -987,15 +988,20 @@ const EventsInfo: React.FC = () => {
                       setShowSportsDetails(false);
                       setShowCulturals(false);
                     } else {
-                      navigate('/?menu=true');
+                      window.history.pushState({}, '', '/');
+                      window.dispatchEvent(new PopStateEvent('popstate'));
+                      setTimeout(() => {
+                        const menuBtn = document.querySelector('[onClick*="handlePageMenuToggle"]') as HTMLElement;
+                        if (menuBtn) menuBtn.click();
+                      }, 100);
                     }
                   }} />
               </div>
             </div>
 
             {/* Center column: Title */}
-            <div className="flex items-start justify-center" style={{ marginTop: '30px' }}>
-              <h1 className="events-title events-page-heading">
+            <div className="flex items-center justify-center" style={{ marginTop: showCulturals ? '20px' : '-10px' }}>
+              <h1 className="events-title events-page-heading" style={{ marginTop: '30px', textAlign: 'center' }}>
                 {showIndoorSports ? 'Indoor Sports' :
                   showWomensIndoorSports ? "Women's Indoor Sports" :
                     showMensTeamSports ? "Team Field Sports" :
@@ -1013,7 +1019,7 @@ const EventsInfo: React.FC = () => {
                                             showSpotLight ? 'Spot Light' :
                                               showRoboWarsGaming ? 'Robo Wars & Gaming' :
                                                 showSportsDetails ? 'sports and games' :
-                                                  showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
+                                                  showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION' :
                                                     'EVENTS'}
               </h1>
             </div>
@@ -1080,7 +1086,7 @@ const EventsInfo: React.FC = () => {
                                         showRoboGames ? 'Robo Games' :
                                           showSpotLight ? 'Spot Light' :
                                             showSportsDetails ? 'sports and games' :
-                                              showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION' :
+                                              showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION' :
                                                 'EVENTS'}
             </h1>
           </div>
@@ -1114,13 +1120,13 @@ const EventsInfo: React.FC = () => {
                       zIndex: 10
                     }}>
                       <h2 className="category-card-title text-white text-xl font-bold tracking-wide" style={{ lineHeight: '1.3', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', marginTop: '460px' }}>
-                        PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
+                        PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION
                       </h2>
                     </div>
                   </div>
                   {/* Title below card - visible on mobile via CSS */}
                   <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center">
-                    PERFORMING ARTS,VISUAL ARTS,LITERARY,FASHION
+                    PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION
                   </h2>
                 </div>
 
@@ -1952,8 +1958,8 @@ const EventsInfo: React.FC = () => {
                     {spotLightCards.map((card, index) => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Mr. and Ms. Mahotsav": "images/Mr and ms mahotsav.avif",
-                        "Mahotsav Got Talent": "images/Mr and ms mahotsav.avif"
+                        "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.png",
+                        "Mahotsav Got Talent": "/images/Mahotsav Got Talent.png"
                       };
 
                       return (
@@ -1964,7 +1970,7 @@ const EventsInfo: React.FC = () => {
                         >
                           {imageMap[card.title] && (
                             <img
-                              src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
+                              src={imageMap[card.title]}
                               alt={card.title}
                               loading="lazy"
                               decoding="async"

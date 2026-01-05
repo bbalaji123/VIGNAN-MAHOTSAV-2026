@@ -97,7 +97,7 @@ const Signup: React.FC<SignupProps> = ({
 
               {/* Single-step form: show all fields together */}
               <div className="form-section">
-                <h3>PERSONAL INFORMATION</h3>
+                <h3 style={{ color: 'white' }}>PERSONAL INFORMATION</h3>
                 <div className="signup-form-group">
                   <label htmlFor="name">Full Name *</label>
                   <input
@@ -275,7 +275,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
 
   return (
     <div className="form-section">
-      <h3>COLLEGE INFORMATION</h3>
+      <h3 style={{ color: 'white' }}>COLLEGE INFORMATION</h3>
       <div className="signup-form-group">
         <label htmlFor="state">State *</label>
         <select

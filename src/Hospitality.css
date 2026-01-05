@@ -120,6 +120,29 @@
   padding: 1.5rem;
 }
 
+/* Glassmorphism for mobile view only */
+@media (max-width: 768px) {
+  .hospitality-tab-content.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-left: 0rem;
+    margin-right: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Decrease flower opacity on mobile */
+  .hospitality-bg .fixed.opacity-25 {
+    opacity: 0.1 !important;
+  }
+}
+
 /* Section Heading Styles */
 .section-heading-primary {
   font-family: 'Aladin', cursive !important;

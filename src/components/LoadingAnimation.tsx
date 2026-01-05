@@ -17,16 +17,16 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
       ${fullScreen ? 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[20000]' : ''}`}
     >
       <div className={`flex flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-lg
-        ${fullScreen ? 'bg-white/15 shadow-2xl' : 'bg-transparent'}`}
+        ${fullScreen ? 'bg-white/15 shadow-2xl max-w-md' : 'bg-transparent'}`}
       >
         <DotLottieReact
-          src="/loading.lottie"
+          src="/images/loading.lottie"
           loop
           autoplay
           style={{ width: `${size}px`, height: `${size}px` }}
         />
         {message && (
-          <p className={`mt-4 text-lg text-center font-medium animate-pulse
+          <p className={`mt-4 text-lg text-center font-medium animate-pulse px-4 break-words
             ${fullScreen ? 'text-white' : 'text-orange-500'}`}
           >
             {message}

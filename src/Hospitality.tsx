@@ -72,7 +72,7 @@ const Hospitality: React.FC = () => {
   return (
     <div className="hospitality-bg min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Floating Flower - Top Right */}
-      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-50 ">
+      <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 ">
         <FlowerComponent
           size="100%"
           sunSize="50%"
@@ -86,7 +86,7 @@ const Hospitality: React.FC = () => {
       </div>
 
       {/* Floating Flower - Bottom Left */}
-      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-55 max-md:z-0 md:z-[1]">
+      <div className="fixed -bottom-32 -left-32 md:-bottom-64 md:-left-64 pointer-events-none w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-25 max-md:z-0 md:z-[1]">
         <FlowerComponent
           size="100%"
           sunSize="50%"
@@ -179,7 +179,7 @@ const Hospitality: React.FC = () => {
 
         {/* Instructions Tab */}
         {activeTab === 'instructions' && (
-          <div className="hospitality-tab-content">
+          <div className="hospitality-tab-content glassmorphism">
             <h2 className="section-heading-primary">Eligibility:</h2>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Sports & Games:</strong> Students of any UG / PG program from Technical Deemed Universities, Engineering and Pharmacy institutes are only allowed to participate in sports events.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Performing Arts:</strong> Students of any UG / PG program of any discipline are permitted to participate, from institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc., in Performing arts / Literature / Visual Arts and Crafts / Fashion events.</p>

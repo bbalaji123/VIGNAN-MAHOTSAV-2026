@@ -73,6 +73,14 @@ const registrationSchema = new mongoose.Schema({
     type: String,
     trim: true,
     default: null
+  },
+  state: {
+    type: String,
+    trim: true
+  },
+  district: {
+    type: String,
+    trim: true
   }
 }, {
   collection: 'registrations',

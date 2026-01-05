@@ -86,7 +86,8 @@ const Tirupathi: React.FC = () => {
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
               letterSpacing: '0.15em',
-              paddingTop: '20px'
+              paddingTop: '20px',
+              marginTop: '40px'
             }}
           >
             Tirupathi
@@ -118,8 +119,8 @@ const Tirupathi: React.FC = () => {
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="Tirupathi-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '400px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Aladin, cursive !important', marginTop: '20px', marginBottom: '20px' }}>
+            <div className="Tirupathi-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '300px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Aladin, cursive !important', marginTop: '40px', marginBottom: '20px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
               <div className="grid grid-cols-[auto_1fr] gap-4 md:flex md:flex-row md:gap-8 lg:gap-12 text-white" style={{ fontFamily: 'Aladin, cursive !important' }}>
@@ -186,7 +187,7 @@ const Tirupathi: React.FC = () => {
               HOSTING PARTNER
             </div>
             <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/images/RCB.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+              <img src="/images/Tirupati.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>
@@ -194,7 +195,7 @@ const Tirupathi: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="Tirupathi-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important', marginTop: '20px', marginBottom: '20px' }}>
+        <div className="Tirupathi-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-6 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important', marginTop: '20px', marginBottom: '20px' }}>
           <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
           <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
@@ -208,7 +209,8 @@ const Tirupathi: React.FC = () => {
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
             padding: '8px 10px 8px 10px',
-            fontFamily: 'coffee, sans-serif !important'
+            fontFamily: 'coffee, sans-serif !important',
+            marginBottom: '40px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

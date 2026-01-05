@@ -2862,7 +2862,7 @@ const Dashboard: React.FC = () => {
                 {/* PROFILE */}
                 <div
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
-                  onClick={(e) => { e.preventDefault(); handleOpenProfile(); }}
+                  onClick={(e) => { e.preventDefault(); handleOpenProfile(); setShowPageMenu(false); }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
                     const card = e.currentTarget;
@@ -5970,6 +5970,11 @@ const Dashboard: React.FC = () => {
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
                         <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Phone</span>
                         <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', wordBreak: 'break-word' }}>: {userProfileData?.phone || 'N/A'}</span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Payment Status</span>
+                        <span style={{ color: userProfileData?.paymentStatus === 'paid' ? '#22c55e' : '#ef4444', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: {userProfileData?.paymentStatus === 'paid' ? 'Paid' : 'Not Paid'}</span>
                       </div>
                     </div>
                   </div>

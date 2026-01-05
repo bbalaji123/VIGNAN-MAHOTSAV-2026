@@ -2412,7 +2412,10 @@ const EventDetail: React.FC = () => {
     "Smash Karts": "/images/smash kart.avif",
     "Line Follower Robot": "/images/Line Flower Robot.png",
     "Bot Wrestling": "/images/Bot wrestling.png",
-    "Robo Races": "/images/Robo Races.png"
+    "Robo Races": "/images/Robo Races.png",
+    // Spotlight Events
+    "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.png",
+    "Mahotsav Got Talent": "/images/Mahotsav%20Got%20Talent.png"
   };
 
   const handleDownloadHTML = async () => {
@@ -2696,6 +2699,7 @@ const EventDetail: React.FC = () => {
 
             {/* Rules Section */}
             <div className="p-5 sm:p-8 lg:p-4">
+
               <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                 Rules:
               </h3>

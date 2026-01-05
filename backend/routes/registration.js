@@ -60,7 +60,8 @@ router.post('/register', async (req, res) => {
       name, email, password, phone,
       college, branch, dateOfBirth,
       gender, registerId, userType,
-      participationType, referralCode
+      participationType, referralCode,
+      state, district
     } = req.body;
 
     if (!name || !email || !password) {
@@ -153,7 +154,9 @@ router.post('/register', async (req, res) => {
           userType: userType || 'visitor',
           participationType: participationType || 'none',
           paymentStatus: 'unpaid',
-          referredBy: validReferralCode
+          referredBy: validReferralCode,
+          state,
+          district
         });
 
         // If a valid referral code was used, update the CA's referral list

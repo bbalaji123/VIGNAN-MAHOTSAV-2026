@@ -13804,6 +13804,9 @@ html {
     margin-bottom: -105px !important;
     max-width: 200px !important;
     width: 60% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
   }
 }
 

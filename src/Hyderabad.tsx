@@ -79,14 +79,15 @@ const Hyderabad: React.FC = () => {
       {/* Back Button */}
       <BackButton onClick={handleBackClick} />
 
-      <div className="relative z-10 min-h-screen px-4 sm:px-6 md:px-8 py-8 sm:py-12 flex flex-col justify-center items-center">
+      <div className="relative z-10 min-h-screen px-4 sm:px-6 md:px-8 py-12 sm:py-12 md:py-8 flex flex-col justify-center items-center">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h1 className="Hyderabad-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4"
             style={{
               textShadow: '0 0 30px rgba(255, 255, 255, 0.3)',
               letterSpacing: '0.15em',
-              paddingTop: '20px'
+              paddingTop: '20px',
+              marginTop: '40px'
             }}
           >
             Hyderabad
@@ -194,7 +195,7 @@ const Hyderabad: React.FC = () => {
         </div>
 
         {/* Note */}
-        <div className="Hyderabad-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-4 sm:px-8 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important', marginTop: '20px', marginBottom: '20px' }}>
+        <div className="Hyderabad-content max-w-[1200px] mx-auto mt-0 text-center text-white/90 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-6 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6" style={{ fontFamily: 'arial, sans-serif !important', marginTop: '20px', marginBottom: '20px' }}>
           <strong><i>*Note : </i></strong><i>The semi finalists of each zone will be promoted to higher level rounds during </i>
           <i>Vignan Mahotsav 2026 organised from 5 - 7 Feb, 2026 at Guntur, Andhra Pradesh.</i>
         </div>
@@ -208,7 +209,8 @@ const Hyderabad: React.FC = () => {
             boxShadow: '0 5px 15px rgba(228, 138, 185, 0.4)',
             touchAction: 'manipulation',
             padding: '8px 10px 8px 10px',
-            fontFamily: 'coffee, sans-serif !important'
+            fontFamily: 'coffee, sans-serif !important',
+            marginBottom: '40px'
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'translateY(-2px)';

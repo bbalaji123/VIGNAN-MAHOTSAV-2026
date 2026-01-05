@@ -20,6 +20,7 @@ interface SignupProps {
   submitMessage: { type: 'success' | 'error'; text: string } | null;
   onLoginClick: () => void;
   onOtherSelected?: (isOther: boolean) => void;
+  onCollegesLoaded?: () => void;
 }
 
 const Signup: React.FC<SignupProps> = ({
@@ -36,7 +37,8 @@ const Signup: React.FC<SignupProps> = ({
   isSubmitting,
   submitMessage,
   onLoginClick,
-  onOtherSelected
+  onOtherSelected,
+  onCollegesLoaded
 }) => {
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -187,6 +189,7 @@ const Signup: React.FC<SignupProps> = ({
                 onInputChange={onInputChange}
                 onCollegeChange={onCollegeChange}
                 onOtherSelected={onOtherSelected}
+                onCollegesLoaded={onCollegesLoaded}
               />
 
               <div className="signup-navigation">
@@ -221,13 +224,15 @@ interface AcademicInfoStepProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onCollegeChange: (value: string) => void;
   onOtherSelected?: (isOther: boolean) => void;
+  onCollegesLoaded?: () => void;
 }
 
 const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
   signupFormData,
   onInputChange,
   onCollegeChange,
-  onOtherSelected
+  onOtherSelected,
+  onCollegesLoaded
 }) => {
   const [states, setStates] = useState<Array<{ no: string; name: string }>>([]);
   const [districts, setDistricts] = useState<Array<{ no: string; sno: string; name: string }>>([]);
@@ -315,6 +320,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           selectedState={signupFormData.state || ''}
           selectedDistrict={signupFormData.district || ''}
           onOtherSelected={onOtherSelected}
+          onCollegesLoaded={onCollegesLoaded}
           required
         />
       </div>

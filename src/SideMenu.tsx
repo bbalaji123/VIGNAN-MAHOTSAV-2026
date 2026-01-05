@@ -43,7 +43,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
   return (
     <>
       {/* Floating Flower - Top Right */}
-      {window.innerWidth >= 640 && (
+      {window.innerWidth >= 768 && (
         <div className="fixed pointer-events-none side-menu-flower-top" style={{
           top: window.innerWidth < 640 ? '-6rem' : '-8rem',
           right: window.innerWidth < 640 ? '-6rem' : '-8rem',

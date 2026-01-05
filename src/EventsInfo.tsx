@@ -37,7 +37,7 @@ const EventsInfo: React.FC = () => {
 
   const sportsDetailCards = [
     { title: "Athletics", subtitle: "Track & Field" },
-    { title: "Team Events", subtitle: "Indoor Sports" },
+    { title: "Individual Events", subtitle: "Indoor Sports" },
     { title: "Team Field", subtitle: "Sports" },
     { title: "Para Sports", subtitle: "" }
   ];
@@ -198,8 +198,8 @@ const EventsInfo: React.FC = () => {
   // Handle event detail click with gender context
   const handleEventDetailClick = (eventTitle: string, gender?: string) => {
 
-    // Check if it's Team Events Indoor Sports (merged)
-    if (eventTitle === "Team Events") {
+    // Check if it's Individual Events Indoor Sports (merged)
+    if (eventTitle === "Individual Events") {
       navigate('/events/indoor-sports');
       return;
     }
@@ -1217,14 +1217,14 @@ const EventsInfo: React.FC = () => {
 
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
-                        card.title === "Team Events" ||
+                        card.title === "Individual Events" ||
                         card.title === "Team Field" ||
                         card.title === "Para Sports";
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Athletics": "/images/athletics.png",
-                        "Team Events": "/images/individual.png",
+                        "Individual Events": "/images/individual.png",
                         "Team Field": "/images/team events.png",
                         "Para Sports": "/images/Para_Sports.png"
                       };

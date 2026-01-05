@@ -39,6 +39,8 @@ const EventDetail: React.FC = () => {
   const location = useLocation();
   const [isDownloading, setIsDownloading] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
+  const [showAthleticsSelection, setShowAthleticsSelection] = useState(false);
+  const [selectedAthleticsEvents, setSelectedAthleticsEvents] = useState<string[]>([]);
 
   // Get the section we came from for smart back navigation
   const fromSection = location.state?.fromSection || '';
@@ -59,7 +61,6 @@ const EventDetail: React.FC = () => {
     // Check if user is logged in using the same method as Dashboard
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const userId = localStorage.getItem('userId');
-    const userGender = localStorage.getItem('gender')?.toLowerCase();
 
     if (!isLoggedIn || !userId) {
       alert('Please login to continue');
@@ -69,6 +70,50 @@ const EventDetail: React.FC = () => {
     if (!eventName) {
       alert('Invalid event');
       return;
+    }
+
+    const normalizedName = eventName.toLowerCase().trim();
+    if (normalizedName.includes('athletics') || normalizedName.includes('track')) {
+      setShowAthleticsSelection(true);
+      return;
+    }
+
+    // Call the actual registration logic for non-athletics events
+    await processEventRegistration(eventName);
+  };
+
+  const processEventRegistration = async (nameToRegister: string, isAthleticsSubEvent: boolean = false) => {
+    const userId = localStorage.getItem('userId');
+    const userGender = localStorage.getItem('gender')?.toLowerCase();
+
+    // Define women-only events
+    const womenOnlyEvents = [
+      'throwball', 'throw ball', 'tennikoit'
+    ];
+
+    // Define men-only events (if any)
+    const menOnlyEvents: string[] = ['hockey', '3k', '3 k'];
+
+    // Define para sports events
+    const paraEvents = [
+      'para athletics', 'para cricket'
+    ];
+
+    // Check gender restrictions
+    const normalizedEventName = nameToRegister.toLowerCase().trim();
+
+    if (womenOnlyEvents.some(e => normalizedEventName.includes(e))) {
+      if (userGender !== 'female') {
+        alert('This is a Women-only event. You are not allowed to register.');
+        return;
+      }
+    }
+
+    if (menOnlyEvents.some(e => normalizedEventName.includes(e))) {
+      if (userGender !== 'male') {
+        alert('This is a Men-only event. You are not allowed to register.');
+        return;
+      }
     }
 
     try {
@@ -96,7 +141,7 @@ const EventDetail: React.FC = () => {
 
       // Check if event is already registered (normalize for comparison)
       const normalizeEventName = (name: string) => name?.toLowerCase().trim();
-      const currentEventNormalized = normalizeEventName(eventName || '');
+      const currentEventNormalized = normalizeEventName(nameToRegister || '');
 
       const alreadyRegistered = existingEvents.some(
         (e: any) => {
@@ -106,26 +151,57 @@ const EventDetail: React.FC = () => {
       );
 
       if (alreadyRegistered) {
-        alert('You have already registered for this event!');
-        setIsAddingEvent(false);
+        // If it's a sub-event, we just skip it silently or alert once
+        if (!isAthleticsSubEvent) alert('You have already registered for this event!');
+        return;
+      }
+
+      // Check para sports vs normal sports mutual exclusion
+      const isCurrentEventPara = paraEvents.some(e => normalizedEventName.includes(e));
+      const hasParaEvents = existingEvents.some((e: any) => {
+        const eName = (e.eventName || e.Event || e.name || '').toLowerCase();
+        return paraEvents.some(pe => eName.includes(pe));
+      });
+      const hasNormalEvents = existingEvents.some((e: any) => {
+        const eName = (e.eventName || e.Event || e.name || '').toLowerCase();
+        return !paraEvents.some(pe => eName.includes(pe));
+      });
+
+      if (isCurrentEventPara && hasNormalEvents) {
+        alert('You have already registered for normal events. You cannot register for Para Sports events.');
+        return;
+      }
+
+      if (!isCurrentEventPara && hasParaEvents) {
+        alert('You have already registered for Para Sports events. You cannot register for normal events.');
         return;
       }
 
       // Determine event type based on the page we came from or event name
       let eventType = 'sports';
       const fromSection = location.state?.fromSection || '';
-      if (fromSection.toLowerCase().includes('cultural') || eventName.toLowerCase().includes('dance') || eventName.toLowerCase().includes('music')) {
+      if (fromSection.toLowerCase().includes('cultural') || nameToRegister.toLowerCase().includes('dance') || nameToRegister.toLowerCase().includes('music')) {
         eventType = 'culturals';
-      } else if (fromSection.toLowerCase().includes('para') || eventName.toLowerCase().includes('para')) {
+      } else if (fromSection.toLowerCase().includes('para') || nameToRegister.toLowerCase().includes('para')) {
         eventType = 'parasports';
       }
 
+      // Clean up category to remove gender-specific prefixes and fix naming
+      let cleanCategory = fromSection || '';
+      cleanCategory = cleanCategory
+        .replace(/Women's\s+/gi, '')
+        .replace(/Men's\s+/gi, '')
+        .replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports')
+        .replace(/Team\s+Events/gi, 'Team Sports')
+        .replace(/Athletics/gi, 'Athletics')
+        .trim();
+
       // Create event object
       const newEvent = {
-        eventName: eventName,
+        eventName: nameToRegister,
         eventType: eventType,
-        category: fromSection || '',
-        description: `${eventName}`,
+        category: cleanCategory,
+        description: `${nameToRegister}`,
         fee: eventType === 'parasports' ? 0 : (userGender === 'female' && eventType === 'culturals' ? 250 : 350)
       };
 
@@ -150,14 +226,49 @@ const EventDetail: React.FC = () => {
         throw new Error(result.message || 'Failed to add event');
       }
 
-      alert('You are registered to this event, please check in profile');
+      if (!isAthleticsSubEvent) alert('You are registered to this event, please check in profile');
     } catch (error) {
       console.error('Error adding event:', error);
-      alert('Failed to add event. Please try again.');
+      if (!isAthleticsSubEvent) alert('Failed to add event. Please try again.');
     } finally {
       setIsAddingEvent(false);
     }
   };
+
+  const handleAthleticsSelectionConfirm = async () => {
+    if (selectedAthleticsEvents.length === 0) {
+      alert('Please select at least one athletics event');
+      return;
+    }
+
+    setShowAthleticsSelection(false);
+    setIsAddingEvent(true);
+
+    try {
+      // Register each selected sub-event
+      for (const subEvent of selectedAthleticsEvents) {
+        await processEventRegistration(`Athletics - ${subEvent}`, true);
+      }
+      alert('Successfully registered for selected Athletics events!');
+    } catch (error) {
+      console.error('Error in athletics multi-registration:', error);
+      alert('Some events could not be registered. Please check your profile.');
+    } finally {
+      setIsAddingEvent(false);
+      setSelectedAthleticsEvents([]);
+    }
+  };
+
+  const athleticsEvents = [
+    { id: '100m', name: '100 M' },
+    { id: '400m', name: '400 M' },
+    { id: '800m', name: '800 M' },
+    { id: '4x100m', name: '4 X 100 M Relay' },
+    { id: '4x400m', name: '4 X 400 M Relay' },
+    { id: 'shotput', name: 'Shot Put' },
+    { id: 'longjump', name: 'Long Jump' },
+    { id: '3k', name: '3 K (Men Only)', menOnly: true }
+  ];
 
   // Event data
   const eventDetailsData: { [key: string]: EventDetailData } = {
@@ -2738,6 +2849,66 @@ const EventDetail: React.FC = () => {
             {isAddingEvent ? '⏳ Adding...' : '⭐ Add My Events'}
           </button>
         </div>
+
+        {/* Athletics Selection Modal */}
+        {showAthleticsSelection && (
+          <div className="athletics-selection-overlay">
+            <div className="athletics-selection-modal">
+              <h2 className="athletics-selection-title">
+                Select Athletics Events
+              </h2>
+              <div className="athletics-selection-list custom-scrollbar">
+                {athleticsEvents.map((event) => {
+                  const userGender = localStorage.getItem('gender')?.toLowerCase();
+                  if (event.menOnly && userGender !== 'male') return null;
+
+                  const isSelected = selectedAthleticsEvents.includes(event.name);
+
+                  return (
+                    <div
+                      key={event.id}
+                      className={`athletics-selection-item ${isSelected ? 'selected' : ''}`}
+                      onClick={() => {
+                        setSelectedAthleticsEvents(prev =>
+                          prev.includes(event.name)
+                            ? prev.filter(e => e !== event.name)
+                            : [...prev, event.name]
+                        );
+                      }}
+                    >
+                      <div className={`athletics-selection-checkbox ${isSelected ? 'selected' : ''}`}>
+                        {isSelected && (
+                          <span className="athletics-selection-checkmark">✓</span>
+                        )}
+                      </div>
+                      <span className="athletics-selection-text">
+                        {event.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="athletics-selection-footer">
+                <button
+                  className="athletics-selection-btn-cancel"
+                  onClick={() => {
+                    setShowAthleticsSelection(false);
+                    setSelectedAthleticsEvents([]);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="athletics-selection-btn-confirm"
+                  disabled={selectedAthleticsEvents.length === 0}
+                  onClick={handleAthleticsSelectionConfirm}
+                >
+                  Confirm Selection ({selectedAthleticsEvents.length})
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

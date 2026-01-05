@@ -7,6 +7,7 @@
   src: url('/images/coffee+teademo-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Custom Font - Aladin */
@@ -15,6 +16,7 @@
   src: url('/images/Aladin.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Custom Font - Borisna */
@@ -23,6 +25,7 @@
   src: url('/images/Borisna.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Custom Font - Quesha */
@@ -31,6 +34,7 @@
   src: url('/images/Quesha.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Reset browser spacing - Mobile First */

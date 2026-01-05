@@ -48,7 +48,7 @@
   "Event": "Shot put"
  },
  {
-  "Category": "Men's Team Events Indoor Sports",
+  "Category": "Men's Indoor Sports",
   "Event": "Chess"
  },
  {
@@ -64,7 +64,7 @@
   "Event": "Takewondo - under 8 wt. categories"
  },
  {
-  "Category": "Women's Team Events Indoor Sports",
+  "Category": "Women's Indoor Sports",
   "Event": "Chess"
  },
  {
@@ -83,9 +83,7 @@
   "Event": "Tennikoit"
  },
  {
-  "Category": "Men's Team Field Sports"
- },
- {
+  "Category": "Men's Team Field Sports",
   "Event": "Volley ball (6+4)*"
  },
  {

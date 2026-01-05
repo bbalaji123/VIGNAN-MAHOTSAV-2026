@@ -56,8 +56,8 @@ const Dashboard: React.FC = () => {
   const sportsDetailCards = [
     { title: "Men's Athletics", subtitle: "Track & Field" },
     { title: "Women's Athletics", subtitle: "Track & Field" },
-    { title: "Men's Team Events", subtitle: "Indoor Sports" },
-    { title: "Women's Team Events", subtitle: "Indoor Sports" },
+    { title: "Men's Indoor Sports", subtitle: "Individual Events" },
+    { title: "Women's Indoor Sports", subtitle: "Individual Events" },
     { title: "Team Field Sports", subtitle: "" },
     { title: "Women's Team Field Sports", subtitle: "" }
   ];
@@ -406,6 +406,7 @@ const Dashboard: React.FC = () => {
     district: '',
     referralCode: ''
   });
+  const [collegesLoaded, setCollegesLoaded] = useState(false);
   const [signupStep, setSignupStep] = useState(1);
   const totalSteps = 3;
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -552,6 +553,10 @@ const Dashboard: React.FC = () => {
   };
 
   const getFilteredParaSportsEvents = () => {
+    // Para sports are only for male participants
+    if (isLoggedIn && userProfileData.gender?.toLowerCase() === 'female') {
+      return [];
+    }
     return isLoggedIn ? filterEventsByGender(paraSportsEvents) : paraSportsEvents;
   };
 
@@ -660,6 +665,32 @@ const Dashboard: React.FC = () => {
     );
   };
 
+  const getWomenIndoorSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event =>
+      (event.gender === 'female' || event.gender === 'mixed') &&
+      (event.eventName?.toLowerCase().includes('chess') ||
+        event.eventName?.toLowerCase().includes('table tennis') ||
+        event.eventName?.toLowerCase().includes('badminton') ||
+        event.eventName?.toLowerCase().includes('yoga') ||
+        event.eventName?.toLowerCase().includes('taekwondo') ||
+        event.category?.toLowerCase().includes('indoor'))
+    );
+  };
+
+  const getMenIndoorSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event =>
+      (event.gender === 'male' || event.gender === 'mixed') &&
+      (event.eventName?.toLowerCase().includes('chess') ||
+        event.eventName?.toLowerCase().includes('table tennis') ||
+        event.eventName?.toLowerCase().includes('badminton') ||
+        event.eventName?.toLowerCase().includes('yoga') ||
+        event.eventName?.toLowerCase().includes('taekwondo') ||
+        event.category?.toLowerCase().includes('indoor'))
+    );
+  };
+
   const getTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
     return filteredEvents.filter(event =>
@@ -668,6 +699,30 @@ const Dashboard: React.FC = () => {
       event.eventName?.toLowerCase().includes('basketball') ||
       event.eventName?.toLowerCase().includes('kabaddi') ||
       event.category?.toLowerCase().includes('team')
+    );
+  };
+
+  const getWomenTeamSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event =>
+      (event.gender === 'female' || event.gender === 'mixed') &&
+      (event.eventName?.toLowerCase().includes('football') ||
+        event.eventName?.toLowerCase().includes('volleyball') ||
+        event.eventName?.toLowerCase().includes('basketball') ||
+        event.eventName?.toLowerCase().includes('kabaddi') ||
+        event.category?.toLowerCase().includes('team'))
+    );
+  };
+
+  const getMenTeamSportsEvents = () => {
+    const filteredEvents = getFilteredSportsEvents();
+    return filteredEvents.filter(event =>
+      (event.gender === 'male' || event.gender === 'mixed') &&
+      (event.eventName?.toLowerCase().includes('football') ||
+        event.eventName?.toLowerCase().includes('volleyball') ||
+        event.eventName?.toLowerCase().includes('basketball') ||
+        event.eventName?.toLowerCase().includes('kabaddi') ||
+        event.category?.toLowerCase().includes('team'))
     );
   };
 
@@ -684,13 +739,14 @@ const Dashboard: React.FC = () => {
   const indoorSportsCards = convertEventsToCards(getIndoorSportsEvents());
   const teamSportsCards = convertEventsToCards(getTeamSportsEvents());
 
+  // Gender-specific indoor and team sports cards
+  const womenIndoorSportsCards = convertEventsToCards(getWomenIndoorSportsEvents());
+  const menIndoorSportsCards = convertEventsToCards(getMenIndoorSportsEvents());
+  const womenTeamSportsCards = convertEventsToCards(getWomenTeamSportsEvents());
+  const menTeamSportsCards = convertEventsToCards(getMenTeamSportsEvents());
+
   // Para sports cards (with gender filtering)
   const paraSportsCards = convertEventsToCards(getFilteredParaSportsEvents());
-
-  // Additional card assignments for compatibility
-  const womenIndoorSportsCards = indoorSportsCards;
-  const menTeamSportsCards = teamSportsCards;
-  const womenTeamSportsCards = teamSportsCards;
   const paraAthleticsMenCards = paraSportsCards;
   const paraCricketMenCards = paraSportsCards;
 
@@ -1477,10 +1533,10 @@ const Dashboard: React.FC = () => {
   };
 
   const handleIndoorSportsClick = (eventTitle: string) => {
-    if (eventTitle === "Men's Team Events") {
+    if (eventTitle === "Men's Indoor Sports") {
       setShowIndoorSports(true);
       setShowSportsDetails(false);
-    } else if (eventTitle === "Women's Team Events") {
+    } else if (eventTitle === "Women's Indoor Sports") {
       setShowWomenIndoorSports(true);
       setShowSportsDetails(false);
     } else if (eventTitle === "Men's Team Field Sports") {
@@ -1781,6 +1837,13 @@ const Dashboard: React.FC = () => {
     // Validate required state and district
     if (!signupFormData.state || !signupFormData.district) {
       alert('Please select your State and District');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate that colleges are loaded
+    if (!collegesLoaded) {
+      alert('Please wait for colleges to load before submitting the form');
       setIsSubmitting(false);
       return;
     }
@@ -2557,6 +2620,8 @@ const Dashboard: React.FC = () => {
             
             .about-theme-section {
               order: 1 !important;
+              margin-top: 180px !important;
+              padding-top: 120px !important;
             }
             
             .gallery-section {
@@ -2623,13 +2688,6 @@ const Dashboard: React.FC = () => {
             backgroundAttachment: 'fixed',
             zIndex: 99998
           }}>
-          <style>{`
-            .menu-grid-card span {
-              font-family: 'coffee+tea demo', sans-serif !important;
-              font-weight: normal !important;
-              text-transform: uppercase;
-            }
-          `}</style>
           {/* Floating Flower - Top Right */}
           <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[280px] h-[280px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
@@ -2725,12 +2783,12 @@ const Dashboard: React.FC = () => {
                 />
               </button>
             </div>
-            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive !important', flex: 1, textAlign: 'center', marginRight: '96px' }}>MENU</h1>
+            <h1 className="menu-title-heading text-3xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive', flex: 1, textAlign: 'center', marginRight: '96px' }}>MENU</h1>
           </div>
 
           {/* Menu Title - Desktop Only */}
           <div className="text-center menu-title-container menu-title-desktop" style={{ marginTop: "10px", paddingBottom: "2px" }}>
-            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive !important' }}>MENU</h1>
+            <h1 className="menu-title-heading text-4xl md:text-6xl font-bold text-white tracking-widest" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)', fontFamily: 'Aladin, cursive' }}>MENU</h1>
           </div>
 
           {/* Grid Menu Items - Scrollable Container */}
@@ -3740,7 +3798,7 @@ const Dashboard: React.FC = () => {
                   {sportsDetailCards.map((card, index) => {
                     const isActive = index === currentSportsSlide;
                     const offset = index - currentSportsSlide;
-                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Team Events" || card.title === "Women's Team Events" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
+                    const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] || card.title === "Men's Indoor Sports" || card.title === "Women's Indoor Sports" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field";
 
                     let transform = '';
                     let zIndex = 0;
@@ -3796,7 +3854,7 @@ const Dashboard: React.FC = () => {
                         key={index}
                         className={`sports-detail-card-3d ${isActive ? 'active' : ''}`}
                         onClick={isClickable && isActive ? () => {
-                          if (card.title === "Men's Team Events" || card.title === "Women's Team Events" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
+                          if (card.title === "Men's Indoor Sports" || card.title === "Women's Indoor Sports" || card.title === "Men's Team Field Sports" || card.title === "Women's Team Field") {
                             handleIndoorSportsClick(card.title);
                           } else {
                             handleEventDetailClick(card.title);
@@ -3819,7 +3877,7 @@ const Dashboard: React.FC = () => {
                           <span className="sports-poster-placeholder-text">SPORTS POSTER</span>
                         </div>
                         <div className="sports-card-title-overlay">
-                          <h3>{card.title}</h3>
+                          <h3>{card.title.replace(/Team Events/gi, 'Indoor Sports').replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '')}</h3>
                           {card.subtitle && (
                             <h4>{card.subtitle}</h4>
                           )}
@@ -3844,7 +3902,7 @@ const Dashboard: React.FC = () => {
         </section>
       )}
 
-      {/* Indoor Sports Section - appears when clicking Men's Team Events Indoor Sports */}
+      {/* Indoor Sports Section - appears when clicking Men's Indoor Sports (Individual Events) */}
       {showIndoorSports && (
         <section className="inline-indoor-sports-section">
           <div className="inline-indoor-sports-container">
@@ -3856,7 +3914,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
-                <h2>TEAM EVENTS</h2>
+                <h2>INDIVIDUAL EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
@@ -3901,7 +3959,7 @@ const Dashboard: React.FC = () => {
         </section>
       )}
 
-      {/* Women's Indoor Sports Section - appears when clicking Women's Team Events Indoor Sports */}
+      {/* Women's Indoor Sports Section - appears when clicking Women's Indoor Sports (Individual Events) */}
       {showWomenIndoorSports && (
         <section className="inline-indoor-sports-section">
           <div className="inline-indoor-sports-container">
@@ -3913,7 +3971,7 @@ const Dashboard: React.FC = () => {
                 <button className="indoor-sports-back-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(false); setShowPageMenu(false); }} style={{ marginLeft: '10px' }}>
                   ? Home
                 </button>
-                <h2>TEAM EVENTS </h2>
+                <h2>INDIVIDUAL EVENTS</h2>
               </div>
               <button className="inline-indoor-sports-close-btn" onClick={() => { setShowWomenIndoorSports(false); setShowSportsDetails(true); }}>?</button>
             </div>
@@ -4074,7 +4132,7 @@ const Dashboard: React.FC = () => {
 
       {/* About Theme Section */}
       <section
-        className={`dashboard-section about-theme-section section-animate section-animate-right ${visibleSections.has('about-theme') ? 'visible' : ''}`}
+        className="dashboard-section about-theme-section"
         data-section-id="about-theme"
         ref={(el) => registerSection('about-theme', el)}
         style={{ fontFamily: 'Borisna, sans-serif', position: 'relative' }}
@@ -5340,6 +5398,7 @@ const Dashboard: React.FC = () => {
         isSubmitting={isSubmitting}
         submitMessage={submitMessage}
         onLoginClick={() => { setShowSignupModal(false); setShowLoginModal(true); }}
+        onCollegesLoaded={() => setCollegesLoaded(true)}
       />
 
       {/* Sub-Modal for Menu Categories */}
@@ -6023,7 +6082,7 @@ const Dashboard: React.FC = () => {
                               >
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
                                   <span style={{ color: 'white', fontWeight: 600, fontSize: '1rem' }}>
-                                    {event.eventName || (event as any).Event || (event as any).name || 'Event'}
+                                    {(event.eventName || (event as any).Event || (event as any).name || 'Event').replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                                   </span>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                     {event.eventType && (
@@ -6061,12 +6120,12 @@ const Dashboard: React.FC = () => {
                                 </div>
                                 {event.category && (
                                   <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>
-                                    {event.category}
+                                    {event.category.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                                   </span>
                                 )}
                                 {event.description && (
                                   <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>
-                                    {event.description}
+                                    {event.description.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                                   </span>
                                 )}
                               </div>
@@ -6205,7 +6264,34 @@ const Dashboard: React.FC = () => {
                     </div>
                   )}
 
-                  {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && (
+                  {/* Para Sports Events Section */}
+                  {getFilteredParaSportsEvents().length > 0 && (
+                    <div className="checklist-section">
+                      <h3>Para Sports Events
+                        <span className="pricing-info"> (Free)</span>
+                      </h3>
+                      <div className="checklist-items">
+                        {getFilteredParaSportsEvents().map((event) => (
+                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
+                            <input
+                              type="checkbox"
+                              checked={selectedEvents.has(event._id)}
+                              onChange={() => handleToggleEventSelection(event._id)}
+                              disabled={isEventDisabled(event)}
+                            />
+                            <div className="checklist-item-content">
+                              <h4>{event.eventName}</h4>
+                              <p>{event.description || event.category || 'No description'}</p>
+                              {event.date && <span className="event-meta-small">{event.date}</span>}
+                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
+                            </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && getFilteredParaSportsEvents().length === 0 && (
                     <p className="no-events-message">
                       {isLoggedIn && userProfileData.gender === 'female'
                         ? "No events available for female participants at the moment."
@@ -6309,11 +6395,11 @@ const Dashboard: React.FC = () => {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
                         <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: '600', margin: 0, flex: 1 }}>
-                          {event.eventName || (event as any).Event || (event as any).name || 'Event'}
+                          {(event.eventName || (event as any).Event || (event as any).name || 'Event').replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                         </h4>
                         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                           <span style={{
-                            background: event.eventType === 'sports' ? '#3b82f6' : '#ec4899',
+                            background: event.eventType === 'sports' ? '#3b82f6' : (event.eventType === 'parasports' ? '#10b981' : '#ec4899'),
                             color: 'white',
                             padding: '0.25rem 0.75rem',
                             borderRadius: '1rem',
@@ -6390,12 +6476,12 @@ const Dashboard: React.FC = () => {
                       </div>
                       {event.category && (
                         <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', margin: '0.5rem 0' }}>
-                          {event.category}
+                          {event.category.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                         </p>
                       )}
                       {event.description && (
                         <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem', margin: '0.5rem 0 0 0' }}>
-                          {event.description}
+                          {event.description.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
                         </p>
                       )}
                       {event.fee && (
@@ -6943,7 +7029,26 @@ const Dashboard: React.FC = () => {
 
                               const alreadySaved = isEventAlreadySaved(eventName);
                               const constraintDisabled = (window as any).__hasParaSelected;
-                              const finalDisabled = constraintDisabled || alreadySaved;
+
+                              // Gender validation
+                              const womenOnlyEvents = ['throwball', 'throw ball', 'tennikoit'];
+                              const menOnlyEvents: string[] = ['hockey', '3k', '3 k'];
+                              const normalizedEventName = eventName.toLowerCase().trim();
+                              const userGender = userProfileData.gender?.toLowerCase();
+
+                              let genderDisabled = false;
+                              let genderMessage = '';
+
+                              if (womenOnlyEvents.some(e => normalizedEventName.includes(e)) && userGender !== 'female') {
+                                genderDisabled = true;
+                                genderMessage = 'Women-only event';
+                              }
+                              if (menOnlyEvents.some(e => normalizedEventName.includes(e)) && userGender !== 'male') {
+                                genderDisabled = true;
+                                genderMessage = 'Men-only event';
+                              }
+
+                              const finalDisabled = constraintDisabled || alreadySaved || genderDisabled;
                               const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
 
                               return (
@@ -7008,6 +7113,11 @@ const Dashboard: React.FC = () => {
                                   <div style={{ flex: 1 }}>
                                     <div style={{ color: 'white', fontWeight: 600, fontSize: '0.95rem' }}>
                                       {eventName}
+                                      {genderDisabled && (
+                                        <span style={{ color: '#fbbf24', fontSize: '0.75rem', marginLeft: '0.5rem' }}>
+                                          ({genderMessage})
+                                        </span>
+                                      )}
                                     </div>
                                     {alreadySaved && (
                                       <div
@@ -7576,10 +7686,53 @@ const Dashboard: React.FC = () => {
                   }
 
                   // Prepare events data to save
-                  const eventsToSave = selectedIds
+                  const newEventsToAdd = selectedIds
                     .map(id => {
                       const [type, ...nameParts] = id.split('-');
                       const eventName = nameParts.join('-'); // Rejoin in case event name has dashes
+
+                      // Calculate fee based on college and event type
+                      const calculateEventFee = (eventType: 'sport' | 'cultural' | 'para') => {
+                        // Para sports are always free
+                        if (eventType === 'para') {
+                          return 0;
+                        }
+
+                        // Check if user is from one of the special Vignan colleges
+                        const specialVignanColleges = [
+                          'Vignan Pharmacy College',
+                          "Vignan's Foundation of Science, Technology & Research",
+                          "Vignan's Lara Institute of Technology & Science"
+                        ];
+
+                        const isSpecialVignanStudent = specialVignanColleges.some(college =>
+                          userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                          college.toLowerCase().includes(userCollege.toLowerCase())
+                        );
+
+                        // If from special Vignan colleges, fee is always 150
+                        if (isSpecialVignanStudent) {
+                          return 150;
+                        }
+
+                        // Regular fee calculation
+                        if (eventType === 'sport') {
+                          return 350; // Sports is always 350 for non-Vignan students
+                        }
+
+                        if (eventType === 'cultural') {
+                          // For cultural events, check gender
+                          if (userGender === 'male') {
+                            return 350;
+                          } else if (userGender === 'female') {
+                            return hasSports ? 350 : 250;
+                          } else {
+                            return 350;
+                          }
+                        }
+
+                        return 350; // Default
+                      };
 
                       if (type === 'sport') {
                         // Find the event by name and track its category
@@ -7604,7 +7757,7 @@ const Dashboard: React.FC = () => {
                             eventType: 'sports',
                             category: foundCategory,
                             description: `${foundCategory} - ${foundEvent.Event || foundEvent['738500']}`.trim(),
-                            fee: userProfileData.gender === 'male' ? 350 : 350
+                            fee: calculateEventFee('sport')
                           };
                         }
                       }
@@ -7634,7 +7787,7 @@ const Dashboard: React.FC = () => {
                             eventType: 'culturals',
                             category: foundCategory,
                             description: `${foundCategory} - ${culturalEventName}`.trim(),
-                            fee: userProfileData.gender === 'male' ? 350 : (hasSports ? 350 : 250)
+                            fee: calculateEventFee('cultural')
                           };
                         }
                       }
@@ -7663,7 +7816,7 @@ const Dashboard: React.FC = () => {
                             eventType: 'parasports',
                             category: foundCategory,
                             description: `${foundCategory} - ${foundEvent.Event}`.trim(),
-                            fee: 0
+                            fee: calculateEventFee('para')
                           };
                         }
                       }
@@ -7671,6 +7824,9 @@ const Dashboard: React.FC = () => {
                       return null;
                     })
                     .filter(e => e !== null);
+
+                  // Merge with existing events to avoid overwriting
+                  const eventsToSave = [...myEvents, ...newEventsToAdd];
 
                   try {
                     // Save to database via API

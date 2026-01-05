@@ -88,6 +88,11 @@ const EventsInfo: React.FC = () => {
     { title: "Robo Games", subtitle: "" }
   ];
 
+  const roboWarsGamingImageMap: { [key: string]: string } = {
+    "Gaming": "images/Robo gaming.jpg",
+    "Robo Games": "images/Robo wars.jpg"
+  };
+
   const danceCards = [
     { title: "Classical Dance Solo", subtitle: "" },
     { title: "Dancing Star – Western Solo", subtitle: "" },
@@ -1993,7 +1998,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {roboWarsGamingCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Gaming") {
@@ -2005,10 +2010,19 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div
                           key={index}
-                          className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          className="inner-event-card"
                           onClick={handleCardClick}
                         >
-                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl">
+                          {roboWarsGamingImageMap[card.title] && (
+                            <img
+                              src={`${import.meta.env.BASE_URL}${roboWarsGamingImageMap[card.title]}`}
+                              alt={card.title}
+                              loading="lazy"
+                              decoding="async"
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                          <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl z-10">
                             <h2 className="subcategory-card-title">
                               {card.title}
                             </h2>

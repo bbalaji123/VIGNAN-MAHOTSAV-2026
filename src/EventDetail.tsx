@@ -78,9 +78,20 @@ const EventDetail: React.FC = () => {
       const existingEventsResponse = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
       const existingEventsResult = await existingEventsResponse.json();
 
+      // Normalize existing events from API response to always be an array
       let existingEvents: any[] = [];
-      if (existingEventsResult.success && existingEventsResult.data?.registeredEvents) {
-        existingEvents = existingEventsResult.data.registeredEvents;
+      if (existingEventsResult?.success && existingEventsResult.data) {
+        const data = existingEventsResult.data;
+
+        if (Array.isArray(data)) {
+          existingEvents = data;
+        } else if (Array.isArray(data.registeredEvents)) {
+          // Backward compatibility with older API shape
+          existingEvents = data.registeredEvents;
+        } else if (Array.isArray(data.events)) {
+          // Current API shape
+          existingEvents = data.events;
+        }
       }
 
       // Check if event is already registered (normalize for comparison)

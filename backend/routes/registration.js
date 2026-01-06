@@ -342,6 +342,8 @@ router.post('/save-events', async (req, res) => {
         email: user.email,
         phone: user.phone,
         college: user.college,
+        state: user.state,
+        district: user.district,
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         registerId: user.registerId,

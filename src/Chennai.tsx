@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import './Dashboard.css';
@@ -7,8 +7,12 @@ import FlowerComponent from './components/FlowerComponent';
 const Chennai: React.FC = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleBackClick = () => {
-    navigate('/zonals');
+    navigate('/?menu=true');
   };
 
   return (

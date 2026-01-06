@@ -27,6 +27,14 @@ const participantSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  state: {
+    type: String,
+    trim: true
+  },
+  district: {
+    type: String,
+    trim: true
+  },
   dateOfBirth: {
     type: Date
   },

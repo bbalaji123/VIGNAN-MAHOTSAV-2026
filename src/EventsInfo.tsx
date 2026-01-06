@@ -9,6 +9,11 @@ const EventsInfo: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Main section states
   const [showSportsDetails, setShowSportsDetails] = useState(false);
   const [showCulturals, setShowCulturals] = useState(false);

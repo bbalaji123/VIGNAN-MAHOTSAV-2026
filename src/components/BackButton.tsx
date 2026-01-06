@@ -10,7 +10,9 @@ interface BackButtonProps {
 const BackButton: React.FC<BackButtonProps> = ({ onClick, className = '', style = {} }) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (onClick) {
       onClick();
     } else {

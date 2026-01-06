@@ -81,7 +81,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       }
     };
     loadColleges();
-  }, [onCollegesLoaded]);
+  }, []); // Empty dependency array - only run once on mount
 
   // Filter colleges based on selected state and district
   useEffect(() => {

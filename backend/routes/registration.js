@@ -74,21 +74,27 @@ router.post('/register', async (req, res) => {
     // Validate referral code
     let validReferralCode = null;
     if (referralCode?.trim()) {
-      const ca = await CampusAmbassador.findOne({ mcaId: referralCode.trim() });
-      if (!ca) {
-        return res.status(400).json({
-          success: false,
-          message: 'Invalid referral code'
-        });
+      try {
+        const ca = await CampusAmbassador.findOne({ mcaId: referralCode.trim() }).lean();
+        if (!ca) {
+          return res.status(400).json({
+            success: false,
+            message: 'Invalid referral code'
+          });
+        }
+        validReferralCode = referralCode.trim();
+      } catch (referralError) {
+        console.error('Error validating referral code:', referralError);
+        // Continue without referral if there's an error
       }
-      validReferralCode = referralCode.trim();
     }
 
     const normalizedEmail = email.trim().toLowerCase();
     const trimmedRegisterId = registerId?.trim();
 
     // Email already exists
-    if (await Registration.findOne({ email: normalizedEmail })) {
+    const existingEmail = await Registration.findOne({ email: normalizedEmail }).lean();
+    if (existingEmail) {
       return res.status(409).json({
         success: false,
         message: 'Email already registered'
@@ -97,10 +103,15 @@ router.post('/register', async (req, res) => {
 
     // Check for duplicate Registration Number if provided
     if (trimmedRegisterId) {
-      // Check in Registration collection
-      const existingRegId = await Registration.findOne({
-        registerId: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
-      });
+      // Use Promise.all to check both collections in parallel
+      const [existingRegId, existingCARegNo] = await Promise.all([
+        Registration.findOne({
+          registerId: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
+        }).lean(),
+        CampusAmbassador.findOne({
+          registrationNumber: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
+        }).lean()
+      ]);
 
       if (existingRegId) {
         return res.status(409).json({
@@ -108,11 +119,6 @@ router.post('/register', async (req, res) => {
           message: `Registration Number '${trimmedRegisterId}' is already registered by another user.`
         });
       }
-
-      // Also check in CampusAmbassador collection
-      const existingCARegNo = await CampusAmbassador.findOne({
-        registrationNumber: { $regex: new RegExp(`^${trimmedRegisterId}$`, 'i') }
-      });
 
       if (existingCARegNo) {
         return res.status(409).json({
@@ -231,13 +237,14 @@ router.post('/login', async (req, res) => {
     const normalizedIdentifier = identifier.trim();
 
     // Try to find user with case-insensitive matching for userId and registerId
+    // Use .lean() for faster query without full Mongoose document overhead
     const user = await Registration.findOne({
       $or: [
         { email: normalizedIdentifier.toLowerCase() },
         { userId: { $regex: new RegExp(`^${normalizedIdentifier}$`, 'i') } },
         { registerId: { $regex: new RegExp(`^${normalizedIdentifier}$`, 'i') } }
       ]
-    });
+    }).select('userId name email password college branch dateOfBirth gender registerId userType participationType paymentStatus state district phone').lean();
 
     if (!user) {
       return res.status(401).json({

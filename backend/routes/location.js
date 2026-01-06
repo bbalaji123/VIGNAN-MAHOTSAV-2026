@@ -87,9 +87,23 @@ loadLocationData().catch(err => {
  */
 router.get('/location/states', async (req, res) => {
   try {
-    // Ensure data is loaded
+    // Ensure data is loaded with retry
     if (!statesCache) {
-      await loadLocationData();
+      try {
+        await loadLocationData();
+      } catch (loadError) {
+        logger.error('Failed to load location data, retrying...', loadError);
+        // Retry once
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await loadLocationData();
+      }
+    }
+
+    if (!statesCache || statesCache.length === 0) {
+      return res.status(503).json({
+        success: false,
+        message: 'Location data not available, please try again'
+      });
     }
 
     res.json({
@@ -113,9 +127,23 @@ router.get('/location/states', async (req, res) => {
  */
 router.get('/location/districts', async (req, res) => {
   try {
-    // Ensure data is loaded
+    // Ensure data is loaded with retry
     if (!districtsCache) {
-      await loadLocationData();
+      try {
+        await loadLocationData();
+      } catch (loadError) {
+        logger.error('Failed to load location data, retrying...', loadError);
+        // Retry once
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await loadLocationData();
+      }
+    }
+
+    if (!districtsCache || districtsCache.length === 0) {
+      return res.status(503).json({
+        success: false,
+        message: 'Location data not available, please try again'
+      });
     }
 
     const { stateNo } = req.query;
@@ -148,9 +176,23 @@ router.get('/location/districts', async (req, res) => {
  */
 router.get('/location/colleges', async (req, res) => {
   try {
-    // Ensure data is loaded
+    // Ensure data is loaded with retry
     if (!collegesCache) {
-      await loadLocationData();
+      try {
+        await loadLocationData();
+      } catch (loadError) {
+        logger.error('Failed to load location data, retrying...', loadError);
+        // Retry once
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await loadLocationData();
+      }
+    }
+
+    if (!collegesCache || collegesCache.length === 0) {
+      return res.status(503).json({
+        success: false,
+        message: 'Location data not available, please try again'
+      });
     }
 
     const { state, district } = req.query;

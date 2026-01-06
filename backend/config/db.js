@@ -10,13 +10,15 @@ const connectDB = async () => {
 
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       dbName: 'test',
-      serverSelectionTimeoutMS: 60000, // Increase timeout to 60 seconds
-      socketTimeoutMS: 75000, // Socket timeout
-      connectTimeoutMS: 60000, // Connection timeout
-      maxPoolSize: 10, // Maintain up to 10 socket connections
-      minPoolSize: 5, // Maintain a minimum of 5 socket connections
-      maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity
+      serverSelectionTimeoutMS: 120000, // Increase timeout to 120 seconds
+      socketTimeoutMS: 120000, // Socket timeout
+      connectTimeoutMS: 120000, // Connection timeout
+      maxPoolSize: 20, // Maintain up to 20 socket connections
+      minPoolSize: 2, // Maintain a minimum of 2 socket connections
+      maxIdleTimeMS: 60000, // Close connections after 60 seconds of inactivity
       bufferCommands: false, // Disable mongoose buffering
+      retryWrites: true, // Enable automatic retry of write operations
+      retryReads: true, // Enable automatic retry of read operations
     });
     
     console.log(`MongoDB Connected Successfully!`);

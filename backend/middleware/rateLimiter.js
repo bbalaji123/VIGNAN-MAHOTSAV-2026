@@ -20,7 +20,7 @@ const createRateLimiter = (windowMs = 60000, max = 100, message = 'Too many requ
 // Strict rate limiter for registration/login
 const authLimiter = createRateLimiter(
   15 * 60 * 1000, // 15 minutes
-  5, // max 5 attempts per window
+  20, // max 20 attempts per window
   'Too many authentication attempts, please try again later'
 );
 

@@ -59,6 +59,19 @@ app.use(
 app.use(compression());
 app.use(requestLogger);
 
+// Request timeout middleware - prevent hanging requests
+app.use((req, res, next) => {
+  // Set timeout to 30 seconds
+  req.setTimeout(30000, () => {
+    res.status(408).json({
+      success: false,
+      message: 'Request timeout'
+    });
+  });
+  res.setTimeout(30000);
+  next();
+});
+
 // CORS configuration
 app.use(cors({
   origin: [
@@ -141,7 +154,7 @@ app.use(errorLogger);
 /* =====================================================
    Start Server
 ===================================================== */
-app.listen(PORT, '127.0.0.1', () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server started on port ${PORT}`);
   console.log(`API available at http://localhost:${PORT}/api`);
   console.log(`Health check at http://localhost:${PORT}/api/health`);

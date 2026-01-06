@@ -292,6 +292,19 @@ img[alt="Moon"],
   height: clamp(158px, 39.4vw, 273px);
 }
 
+.throwback-video-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
 /* Mobile - Clean layout with proper spacing */
 @media (max-width: 640px) {
 
@@ -339,12 +352,6 @@ img[alt="Moon"],
   .throwback-year-buttons button {
     padding: 6px 20px !important;
     font-size: 1rem !important;
-  }
-
-  /* Center video vertically between flowers */
-  .throwback-video-wrapper {
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
   }
 
   /* Larger video for better visibility */

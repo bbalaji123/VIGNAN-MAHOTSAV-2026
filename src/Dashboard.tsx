@@ -452,6 +452,7 @@ const Dashboard: React.FC = () => {
     college?: string;
     phone?: string;
     dateOfBirth?: string;
+    paymentStatus?: string;
   }>({ name: '', email: '' });
   const [showEventChecklistModal, setShowEventChecklistModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
@@ -4888,136 +4889,137 @@ const Dashboard: React.FC = () => {
           Throwback
         </h2>
 
-        {/* Flower Container with Lock System */}
-        <div className="throwback-flower-container" style={{
-          width: '100%',
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          maxHeight: 'calc(100vh - 200px)',
-          marginTop: window.innerWidth < 768 ? '20px' : '30px',
-        }}>
-          {/* Container for both flower halves */}
-          <div className="throwback-flower-wrapper" style={{
-            position: 'relative',
-            width: 'clamp(200px, 35vw, 450px)',
-            height: 'clamp(200px, 35vw, 450px)',
+          {/* Flower Container with Lock System */}
+          <div className="throwback-flower-container" style={{
+            width: '100%',
+            flex: 1,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '-20px',
-            pointerEvents: 'none'
+            position: 'relative',
+            maxHeight: 'calc(100vh - 200px)',
+            marginTop: window.innerWidth < 768 ? '20px' : '30px',
           }}>
-            {/* Left Half */}
-            <div className="throwback-flower-left" style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: isThrowbackUnlocked
-                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)'
-                : 'translate(-50%, -50%)',
-              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
+            {/* Container for both flower halves */}
+            <div className="throwback-flower-wrapper" style={{
+              position: 'relative',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
-              overflow: 'visible',
-              zIndex: 10,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '-20px',
               pointerEvents: 'none'
             }}>
-              <FlowerComponent
-                size="clamp(200px, 35vw, 450px)"
-                sunSize="45%"
-                moonSize="39.5%"
-                sunTop="28%"
-                sunLeft="28%"
-                moonTop="30.8%"
-                moonLeft="30.8%"
-                showPetalRotation={false}
-                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
-                clipPath="inset(0 50% 0 0)"
-                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-                style={{
-                  overflow: 'visible',
-                }}
-              />
+              {/* Left Half */}
+              <div className="throwback-flower-left" style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: isThrowbackUnlocked
+                  ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)'
+                  : 'translate(-50%, -50%)',
+                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
+                width: 'clamp(200px, 35vw, 450px)',
+                height: 'clamp(200px, 35vw, 450px)',
+                overflow: 'visible',
+                zIndex: 10,
+                pointerEvents: 'none'
+              }}>
+                <FlowerComponent
+                  size="clamp(200px, 35vw, 450px)"
+                  sunSize="45%"
+                  moonSize="39.5%"
+                  sunTop="28%"
+                  sunLeft="28%"
+                  moonTop="30.8%"
+                  moonLeft="30.8%"
+                  showPetalRotation={false}
+                  petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                  clipPath="inset(0 50% 0 0)"
+                  clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                  style={{
+                    overflow: 'visible',
+                  }}
+                />
+              </div>
+
+              {/* Right Half */}
+              <div className="throwback-flower-right" style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: isThrowbackUnlocked
+                  ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)'
+                  : 'translate(-50%, -50%)',
+                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
+                width: 'clamp(200px, 35vw, 450px)',
+                height: 'clamp(200px, 35vw, 450px)',
+                overflow: 'visible',
+                zIndex: 10,
+                pointerEvents: 'none'
+              }}>
+                <FlowerComponent
+                  size="clamp(200px, 35vw, 450px)"
+                  sunSize="45%"
+                  moonSize="39.5%"
+                  sunTop="28%"
+                  sunLeft="28%"
+                  moonTop="30.8%"
+                  moonLeft="30.8%"
+                  showPetalRotation={false}
+                  petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                  clipPath="inset(0 0 0 50%)"
+                  clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                  style={{
+                    overflow: 'visible'
+                  }}
+                />
+              </div>
             </div>
 
-            {/* Right Half */}
-            <div className="throwback-flower-right" style={{
+            {/* Year buttons - separate from video */}
+            <div className="throwback-year-buttons" style={{
               position: 'absolute',
+              top: window.innerWidth >= 768 ? '10px' : '-30px',
               left: '50%',
-              top: '50%',
-              transform: isThrowbackUnlocked
-                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)'
-                : 'translate(-50%, -50%)',
-              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-              width: 'clamp(200px, 35vw, 450px)',
-              height: 'clamp(200px, 35vw, 450px)',
-              overflow: 'visible',
-              zIndex: 10,
-              pointerEvents: 'none'
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              flexWrap: 'nowrap',
+              gap: window.innerWidth >= 768 ? '30px' : '15px',
+              pointerEvents: 'auto',
+              zIndex: 15,
+              opacity: isThrowbackUnlocked ? 1 : 0,
+              transition: 'opacity 1.5s ease 0.5s',
+              paddingBottom: '15px',
+              justifyContent: 'center'
             }}>
-              <FlowerComponent
-                size="clamp(200px, 35vw, 450px)"
-                sunSize="45%"
-                moonSize="39.5%"
-                sunTop="28%"
-                sunLeft="28%"
-                moonTop="30.8%"
-                moonLeft="30.8%"
-                showPetalRotation={false}
-                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
-                clipPath="inset(0 0 0 50%)"
-                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-                style={{
-                  overflow: 'visible'
-                }}
-              />
+              {(['2023', '2024', '2025'] as const).map(year => (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  style={{
+                    padding: '8px 26px',
+                    borderRadius: '20px',
+                    background: selectedYear === year
+                      ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
+                      : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
+                    border: 'none',
+                    color: 'white',
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    cursor: 'pointer',
+                    boxShadow: selectedYear === year
+                      ? '0 6px 20px rgba(0, 0, 0, 0.3)'
+                      : '0 4px 15px rgba(0, 0, 0, 0.2)',
+                    transition: 'all 0.3s ease',
+                    transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
+                  }}
+                >
+                  {year}
+                </button>
+              ))}
             </div>
-          </div>
-
-          {/* Year buttons - separate from video */}
-          <div className="throwback-year-buttons" style={{
-            position: 'absolute',
-            top: window.innerWidth >= 768 ? '10px' : '-30px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexWrap: 'nowrap',
-            gap: window.innerWidth >= 768 ? '30px' : '15px',
-            pointerEvents: 'auto',
-            zIndex: 15,
-            opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s',
-            paddingBottom: '15px',
-            justifyContent: 'center'
-          }}>
-            {(['2023', '2024', '2025'] as const).map(year => (
-              <button
-                key={year}
-                onClick={() => setSelectedYear(year)}
-                style={{
-                  padding: '8px 26px',
-                  borderRadius: '20px',
-                  background: selectedYear === year
-                    ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
-                    : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
-                  border: 'none',
-                  color: 'white',
-                  fontSize: '1.2rem',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  boxShadow: selectedYear === year
-                    ? '0 6px 20px rgba(0, 0, 0, 0.3)'
-                    : '0 4px 15px rgba(0, 0, 0, 0.2)',
-                  transition: 'all 0.3s ease',
-                  transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
-                }}
-              >
-                {year}
-              </button>
-            ))}
           </div>
 
           {/* Video card - centered between flowers */}
@@ -5030,8 +5032,11 @@ const Dashboard: React.FC = () => {
             zIndex: 20,
             opacity: isThrowbackUnlocked ? 1 : 0,
             transition: 'opacity 1.5s ease 0.5s',
-            width: window.innerWidth >= 768 ? 'auto' : 'calc(100% - 40px)',
-            maxWidth: window.innerWidth >= 768 ? 'none' : '500px'
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%'
           }}>
             {/* Video card */}
             <div
@@ -5103,7 +5108,6 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Lock Icon removed */}
-        </div>
 
         {/* Countdown Timer */}
         <div

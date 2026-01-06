@@ -47,7 +47,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: -100px;
+  margin-bottom: -80px;
   animation: fadeInScale 1s ease-out;
 }
 

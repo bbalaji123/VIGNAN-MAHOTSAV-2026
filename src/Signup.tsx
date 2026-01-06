@@ -169,13 +169,14 @@ const Signup: React.FC<SignupProps> = ({
                   </div>
                 </div>
                 <div className="ca-form-group">
-                  <label htmlFor="gender">Gender</label>
+                  <label htmlFor="gender">Gender *</label>
                   <select
                     id="gender"
                     name="gender"
                     value={signupFormData.gender || ''}
                     onChange={onInputChange}
                     className="signup-gender-select"
+                    required
                   >
                     <option value="">Select gender</option>
                     <option value="Male">Male</option>
@@ -325,7 +326,7 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
         />
       </div>
       <div className="signup-form-group">
-        <label htmlFor="registerId">College Registration Number</label>
+        <label htmlFor="registerId">College Registration Number *</label>
         <input
           type="text"
           id="registerId"
@@ -334,18 +335,20 @@ const AcademicInfoStep: React.FC<AcademicInfoStepProps> = ({
           onChange={onInputChange}
           placeholder="Your college/university registration ID"
           className="form-input"
+          required
         />
       </div>
       <div className="signup-form-group">
-        <label htmlFor="branch">Branch</label>
+        <label htmlFor="branch">Branch *</label>
         <input
           type="text"
           id="branch"
           name="branch"
           value={signupFormData.branch || ''}
           onChange={onInputChange}
-          placeholder="Enter your branch"
+          placeholder="Enter your branch (e.g., CSE, ECE, Mechanical)"
           className="form-input"
+          required
         />
       </div>
       <div className="signup-form-group">

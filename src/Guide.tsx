@@ -8,7 +8,7 @@ const Guide: React.FC = () => {
   const navigate = useNavigate();
 
   const handleMapClick = () => {
-    navigate('/campus-map');
+    window.open('https://www.google.com/maps/d/edit?mid=1uZxIpP4jFqgAqCDThH4ZWryPqkiR9Vc&usp=sharing', '_blank');
   };
 
   const handleScheduleClick = () => {
@@ -60,7 +60,7 @@ const Guide: React.FC = () => {
       </div>
 
       {/* Garuda Logo */}
-      <div className="fixed top-4 left-16 md:top-6 md:left-20 z-50">
+      <div className="fixed top-4 left-32 md:top-6 md:left-40 z-50 transition-all duration-300">
         <img
           src="/menu-dashboard/Garuda.avif"
           alt="Garuda"

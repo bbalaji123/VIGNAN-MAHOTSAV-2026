@@ -12,7 +12,20 @@ import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType,
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [showPageMenu, setShowPageMenu] = useState(false);
+  const [showPageMenu, setShowPageMenu] = useState(() => {
+    // Check URL first (highest priority for navigation)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('menu') === 'true') return true;
+
+    // Then check localStorage (persistence)
+    const stored = localStorage.getItem('isMenuOpen');
+    return stored === 'true';
+  });
+
+  // Persist menu state
+  useEffect(() => {
+    localStorage.setItem('isMenuOpen', String(showPageMenu));
+  }, [showPageMenu]);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
   const [currentEventSlide, setCurrentEventSlide] = useState(0);
@@ -777,7 +790,6 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('menu') === 'true') {
-      setShowPageMenu(true);
       // Clean up the URL
       navigate(location.pathname, { replace: true });
     }

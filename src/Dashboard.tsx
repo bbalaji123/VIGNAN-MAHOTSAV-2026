@@ -5020,24 +5020,20 @@ const Dashboard: React.FC = () => {
                 </button>
               ))}
             </div>
-          </div>
-
-          {/* Video card - centered between flowers */}
-          <div className="throwback-video-wrapper" style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            pointerEvents: 'auto',
-            zIndex: 20,
-            opacity: isThrowbackUnlocked ? 1 : 0,
-            transition: 'opacity 1.5s ease 0.5s',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%'
-          }}>
+            {/* Video card - centered between flowers */}
+            <div className="throwback-video-wrapper" style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              pointerEvents: 'auto',
+              zIndex: 20,
+              opacity: isThrowbackUnlocked ? 1 : 0,
+              transition: 'opacity 1.5s ease 0.5s',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
             {/* Video card */}
             <div
               className="throwback-video-card"
@@ -5104,6 +5100,7 @@ const Dashboard: React.FC = () => {
               }}>
                 Day {currentDay}
               </div>
+            </div>
             </div>
           </div>
 

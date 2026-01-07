@@ -2172,7 +2172,8 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
     "E-Football": {
@@ -2195,7 +2196,8 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
     "Counter Strike": {
@@ -2219,7 +2221,8 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
     "Smash Karts": {
@@ -2240,7 +2243,8 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" }
+        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
     "Line Follower Robot": {
@@ -2682,7 +2686,7 @@ const EventDetail: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_320px] gap-6 sm:gap-8 max-w-7xl items-start">
             {/* Poster */}
             <div className="flex justify-center lg:justify-start">
-              <div className="w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-white/90 border-2 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md" style={{ borderColor: '#FFD700' }}>
+              <div className="w-48 sm:w-56 md:w-64 aspect-[3/4] bg-white/90 border-2 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md" style={{ borderColor: '#FFD700' }}>
                 {eventName && eventImageMap[eventName] ? (
                   <img
                     src={eventImageMap[eventName]}

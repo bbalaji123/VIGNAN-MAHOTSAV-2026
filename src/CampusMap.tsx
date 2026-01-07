@@ -6,9 +6,18 @@ import './Dashboard.css';
 
 const CampusMap: React.FC = () => {
   const navigate = useNavigate();
+  const [showImageModal, setShowImageModal] = React.useState(false);
 
   const handleBackClick = () => {
     navigate('/?menu=true');
+  };
+
+  const handleImageClick = () => {
+    setShowImageModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowImageModal(false);
   };
 
   return (
@@ -114,7 +123,9 @@ const CampusMap: React.FC = () => {
             <img
               src="/images/map.png"
               alt="Campus Blueprint - Mahotsav 2025 Venue Locations"
-              className="w-[85%] max-w-[600px] h-auto object-contain"
+              className="w-[85%] max-w-[600px] h-auto object-contain cursor-pointer transition-transform hover:scale-105"
+              onClick={handleImageClick}
+              style={{ cursor: 'pointer' }}
             />
 
             {/* RIGHT: Live Google Map */}
@@ -135,6 +146,80 @@ const CampusMap: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Image Modal */}
+      {showImageModal && (
+        <div
+          className="image-modal-overlay"
+          onClick={handleCloseModal}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '1rem',
+            cursor: 'pointer'
+          }}
+        >
+          <button
+            onClick={handleCloseModal}
+            style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '2px solid rgba(255, 255, 255, 0.5)',
+              color: 'white',
+              fontSize: '1.5rem',
+              width: '45px',
+              height: '45px',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s ease',
+              zIndex: 10000,
+              fontWeight: 'bold',
+              textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.5)';
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            ×
+          </button>
+          <img
+            src="/images/map.png"
+            alt="Campus Blueprint - Full View"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: window.innerWidth <= 768 ? '95%' : '90%',
+              maxHeight: window.innerWidth <= 768 ? '98%' : '90%',
+              objectFit: 'contain',
+              borderRadius: '12px',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+              cursor: 'default',
+              border: '2px solid rgba(255, 255, 255, 0.2)'
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

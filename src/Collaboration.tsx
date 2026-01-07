@@ -6,9 +6,18 @@ import FlowerComponent from './components/FlowerComponent';
 
 const Collaboration: React.FC = () => {
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
   const handleBackClick = () => {
     navigate('/?menu=true');
+  };
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
   };
 
   return (
@@ -338,7 +347,7 @@ const Collaboration: React.FC = () => {
             'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929316/30_mwqfbc.avif',
             'https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929319/32_nmftpg.avif'
           ].map((url, index) => (
-            <div key={index} className="collaboration-image-card">
+            <div key={index} className="collaboration-image-card" onClick={() => handleImageClick(url)} style={{ cursor: 'pointer' }}>
               <img
                 src={url}
                 alt={`Collaboration ${index + 1}`}
@@ -349,6 +358,80 @@ const Collaboration: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="image-modal-overlay"
+          onClick={handleCloseModal}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9999,
+            padding: '1rem',
+            cursor: 'pointer'
+          }}
+        >
+          <button
+            onClick={handleCloseModal}
+            style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              border: '2px solid rgba(255, 255, 255, 0.5)',
+              color: 'white',
+              fontSize: '1.5rem',
+              width: '45px',
+              height: '45px',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s ease',
+              zIndex: 10000,
+              fontWeight: 'bold',
+              textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.5)';
+              e.currentTarget.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            ×
+          </button>
+          <img
+            src={selectedImage}
+            alt="Full size"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: window.innerWidth <= 768 ? '95%' : '85%',
+              maxHeight: window.innerWidth <= 768 ? '98%' : '85%',
+              objectFit: 'contain',
+              borderRadius: '12px',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+              cursor: 'default',
+              border: '2px solid rgba(255, 255, 255, 0.2)'
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

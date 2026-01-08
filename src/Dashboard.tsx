@@ -582,7 +582,7 @@ const Dashboard: React.FC = () => {
       return {
         sports: 250,
         culturals: 250,
-        both: 350
+        both: 250
       };
     }
 
@@ -2074,6 +2074,13 @@ const Dashboard: React.FC = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('userType');
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('registerId');
+    localStorage.removeItem('userGender');
+    localStorage.removeItem('userBranch');
+    localStorage.removeItem('userCollege');
+    localStorage.removeItem('userPhone');
+    localStorage.removeItem('userDOB');
+    localStorage.removeItem('paymentStatus');
 
     // Redirect to main page
     window.location.href = '/';
@@ -2329,7 +2336,7 @@ const Dashboard: React.FC = () => {
       const result = await loginUser(identifier, payload.password);
 
       if (result.success && result.data) {
-        const { userId, registerId = undefined, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth } = result.data;
+        const { userId, registerId = undefined, name, email, userType = 'visitor', gender, branch, college, phone, dateOfBirth, paymentStatus } = result.data;
 
         // Ensure all required fields are present
         if (!userId || !name || !email) {
@@ -2355,7 +2362,8 @@ const Dashboard: React.FC = () => {
           branch: branch,
           college: college,
           phone: phone,
-          dateOfBirth: dateOfBirth
+          dateOfBirth: dateOfBirth,
+          paymentStatus: paymentStatus || 'unpaid'
         };
         setUserProfileData(profileData);
 
@@ -2384,6 +2392,9 @@ const Dashboard: React.FC = () => {
         }
         if (dateOfBirth) {
           localStorage.setItem('userDOB', dateOfBirth);
+        }
+        if (result.data.paymentStatus) {
+          localStorage.setItem('paymentStatus', result.data.paymentStatus);
         }
         localStorage.setItem('isLoggedIn', 'true');
 
@@ -2436,6 +2447,7 @@ const Dashboard: React.FC = () => {
     const storedCollege = localStorage.getItem('userCollege');
     const storedPhone = localStorage.getItem('userPhone');
     const storedDOB = localStorage.getItem('userDOB');
+    const storedPaymentStatus = localStorage.getItem('paymentStatus');
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
 
     if (storedLoginStatus === 'true' && storedUserName && storedUserId) {
@@ -2451,7 +2463,8 @@ const Dashboard: React.FC = () => {
         branch: storedBranch || undefined,
         college: storedCollege || undefined,
         phone: storedPhone || undefined,
-        dateOfBirth: storedDOB || undefined
+        dateOfBirth: storedDOB || undefined,
+        paymentStatus: storedPaymentStatus || 'unpaid'
       };
       setUserProfileData(profileData);
 
@@ -7623,12 +7636,8 @@ const Dashboard: React.FC = () => {
                             fee = 350; // Same fee regardless of selection
                           }
                         } else if (userGender === 'female') {
-                          if (hasSports && hasCulturals) {
-                            fee = 350; // Both
-                          } else if (hasSports) {
-                            fee = 350; // Sports only
-                          } else if (hasCulturals) {
-                            fee = 250; // Culturals only
+                          if (hasSports || hasCulturals) {
+                            fee = 250; // Female fee is always 250
                           }
                         } else {
                           if (hasSports || hasCulturals) {
@@ -7689,12 +7698,8 @@ const Dashboard: React.FC = () => {
                         fee = 350; // Same fee regardless of selection
                       }
                     } else if (userGender === 'female') {
-                      if (hasSports && hasCulturals) {
-                        fee = 350; // Both
-                      } else if (hasSports) {
-                        fee = 350; // Sports only
-                      } else if (hasCulturals) {
-                        fee = 250; // Culturals only
+                      if (hasSports || hasCulturals) {
+                        fee = 250; // Female fee is always 250
                       }
                     } else {
                       if (hasSports || hasCulturals) {
@@ -7735,7 +7740,7 @@ const Dashboard: React.FC = () => {
 
                         // Regular fee calculation
                         if (eventType === 'sport') {
-                          return 350; // Sports is always 350 for non-Vignan students
+                          return userGender === 'female' ? 250 : 350; // Female sports is 250
                         }
 
                         if (eventType === 'cultural') {
@@ -7743,7 +7748,7 @@ const Dashboard: React.FC = () => {
                           if (userGender === 'male') {
                             return 350;
                           } else if (userGender === 'female') {
-                            return hasSports ? 350 : 250;
+                            return 250; // Female cultural is always 250
                           } else {
                             return 350;
                           }

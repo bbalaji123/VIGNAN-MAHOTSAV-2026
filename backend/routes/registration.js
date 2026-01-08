@@ -281,7 +281,8 @@ router.post('/login', async (req, res) => {
         branch: user.branch,
         college: user.college,
         phone: user.phone,
-        dateOfBirth: user.dateOfBirth
+        dateOfBirth: user.dateOfBirth,
+        paymentStatus: user.paymentStatus
       }
     });
   } catch (error) {

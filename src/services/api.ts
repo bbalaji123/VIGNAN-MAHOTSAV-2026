@@ -55,6 +55,7 @@ export interface ApiResponse {
     college?: string;
     phone?: string;
     dateOfBirth?: string;
+    paymentStatus?: string;
   };
   error?: string;
 }

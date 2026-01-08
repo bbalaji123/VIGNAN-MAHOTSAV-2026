@@ -94,8 +94,8 @@ const EventsInfo: React.FC = () => {
   ];
 
   const roboWarsGamingImageMap: { [key: string]: string } = {
-    "Gaming": "images/Robo gaming.jpg",
-    "Robo Games": "images/Robo wars.jpg"
+    "Gaming": "images/Esports.png",
+    "Robo Games": "images/Techno_races.png"
   };
 
   const danceCards = [
@@ -934,6 +934,23 @@ const EventsInfo: React.FC = () => {
             object-fit: cover;
             object-position: center;
             transition: opacity 0.3s ease;
+          }
+
+          /* Specific styling for Robo Wars & Gaming cards */
+          .robo-wars-gaming-card {
+            overflow: visible;
+          }
+
+          .robo-wars-gaming-card img {
+            transition: transform 0.5s ease-in-out, opacity 0.3s ease;
+            border-radius: 1.5rem;
+            position: relative;
+            z-index: 1;
+          }
+
+          .robo-wars-gaming-card:hover img {
+            transform: translateY(-10%) scale(1.15);
+            z-index: 10;
           }
 
           /* When hovering over a specific card, make its siblings transparent */
@@ -2021,7 +2038,7 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div
                           key={index}
-                          className="inner-event-card"
+                          className="inner-event-card robo-wars-gaming-card"
                           onClick={handleCardClick}
                         >
                           {roboWarsGamingImageMap[card.title] && (

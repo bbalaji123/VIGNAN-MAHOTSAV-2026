@@ -33,7 +33,7 @@ function ExternalRedirect({ url }: { url: string }) {
 function App() {
   return (
     <div className="w-full min-h-screen">
-      <Toaster />
+      <Toaster toastOptions={{ style: { zIndex: 99999 } }} containerStyle={{ zIndex: 99999 }} />
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />

@@ -38,6 +38,41 @@ router.post('/campus-ambassador/signup', async (req, res) => {
       });
     }
 
+    if (!branch) {
+      return res.status(400).json({
+        success: false,
+        message: 'Branch is required'
+      });
+    }
+
+    if (!registrationNumber) {
+      return res.status(400).json({
+        success: false,
+        message: 'College registration number is required'
+      });
+    }
+
+    if (!state) {
+      return res.status(400).json({
+        success: false,
+        message: 'State is required'
+      });
+    }
+
+    if (!district) {
+      return res.status(400).json({
+        success: false,
+        message: 'District is required'
+      });
+    }
+
+    if (!dateOfBirth) {
+      return res.status(400).json({
+        success: false,
+        message: 'Date of birth is required'
+      });
+    }
+
     // Check if email already exists
     const existingCA = await CampusAmbassador.findOne({ email: email.toLowerCase() });
     if (existingCA) {

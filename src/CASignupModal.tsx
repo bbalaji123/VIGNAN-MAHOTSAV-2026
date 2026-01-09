@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './CAModal.css';
 import { API_BASE_URL } from './services/api';
 import CollegeSelect from './components/CollegeSelect';
+import { showToast } from './utils/toast';
 
 interface CASignupModalProps {
   onClose: () => void;
@@ -104,17 +105,17 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
 
     // Validation
     if (!/^\d{10}$/.test(formData.phone)) {
-      alert('Phone number must be 10 digits');
+      showToast.error('Phone number must be 10 digits');
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      alert('Invalid email address');
+      showToast.error('Invalid email address');
       return;
     }
 
     if (!formData.dateOfBirth) {
-      alert('Date of Birth is required');
+      showToast.warning('Date of Birth is required');
       return;
     }
 
@@ -130,7 +131,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
     }
 
     if (age < 18) {
-      alert(`You must be at least 18 years old to become a Campus Ambassador.\n\nYour current age: ${age} years\nRequired age: 18 years or older\n\nPlease check your date of birth and try again.`);
+      showToast.error(`You must be at least 18 years old to become a Campus Ambassador. Your current age: ${age} years. Required age: 18 years or older. Please check your date of birth and try again.`);
       return;
     }
 
@@ -176,11 +177,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
         setShowPasswordCard(true);
       } else {
         console.error('CA Signup Error:', data);
-        alert(data.message || 'Signup failed');
+        showToast.error(data.message || 'Signup failed');
       }
     } catch (err) {
       console.error('CA Signup Network Error:', err);
-      alert('Network error. Please try again.');
+      showToast.error('Network error. Please try again.');
     } finally {
       setLoading(false);
     }

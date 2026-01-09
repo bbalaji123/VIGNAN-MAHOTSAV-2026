@@ -862,7 +862,7 @@ const EventsInfo: React.FC = () => {
           }
 
           .subcategory-card-title {
-            color: #fde047;
+            color: #feee71;
             font-size: 0.875rem;
             font-weight: bold;
             text-transform: uppercase;
@@ -1549,7 +1549,7 @@ const EventsInfo: React.FC = () => {
                               src={`/images/music.avif`}
                               alt="Music"
                               className="event-card-image transition-transform duration-300"
-                              style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
+                              style={{ display: 'block', width: '100%', height: '410px', zIndex: 1,marginTop:'15px',marginLeft:'10px' }}
                             />
                           )}
                           {card.title === "Dramatics" && (

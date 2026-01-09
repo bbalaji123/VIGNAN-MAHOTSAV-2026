@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CADashboard.css';
 import { API_BASE_URL } from './services/api';
+import { showToast } from './utils/toast';
 
 interface CampusAmbassador {
   _id: string;
@@ -124,10 +125,10 @@ const CAManagerDashboard: React.FC = () => {
         fetchActivityLogs();
       } else {
         const data = await response.json();
-        alert(data.message || 'Failed to update points');
+        showToast.error(data.message || 'Failed to update points');
       }
     } catch (err) {
-      alert('Network error');
+      showToast.error('Network error');
     }
   };
 
@@ -153,10 +154,10 @@ const CAManagerDashboard: React.FC = () => {
         fetchActivityLogs();
       } else {
         const data = await response.json();
-        alert(data.message || 'Failed to update status');
+        showToast.error(data.message || 'Failed to update status');
       }
     } catch (err) {
-      alert('Network error');
+      showToast.error('Network error');
     }
   };
 

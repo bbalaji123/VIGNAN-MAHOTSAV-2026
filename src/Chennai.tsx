@@ -12,7 +12,7 @@ const Chennai: React.FC = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate('/?menu=true');
+    navigate('/zonals');
   };
 
   return (

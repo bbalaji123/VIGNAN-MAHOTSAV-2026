@@ -1,9 +1,8 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import FlowerComponent from './components/FlowerComponent';
 import { API_BASE_URL } from './services/api';
-import { showToast } from './utils/toast';
 
 interface EventDetailData {
   title: string;
@@ -64,12 +63,12 @@ const EventDetail: React.FC = () => {
     const userId = localStorage.getItem('userId');
 
     if (!isLoggedIn || !userId) {
-      showToast.warning('Please login to continue');
+      alert('Please login to continue');
       return;
     }
 
     if (!eventName) {
-      showToast.error('Invalid event');
+      alert('Invalid event');
       return;
     }
 
@@ -105,14 +104,14 @@ const EventDetail: React.FC = () => {
 
     if (womenOnlyEvents.some(e => normalizedEventName.includes(e))) {
       if (userGender !== 'female') {
-        showToast.error('This is a Women-only event. You are not allowed to register.');
+        alert('This is a Women-only event. You are not allowed to register.');
         return;
       }
     }
 
     if (menOnlyEvents.some(e => normalizedEventName.includes(e))) {
       if (userGender !== 'male') {
-        showToast.error('This is a Men-only event. You are not allowed to register.');
+        alert('This is a Men-only event. You are not allowed to register.');
         return;
       }
     }
@@ -153,7 +152,7 @@ const EventDetail: React.FC = () => {
 
       if (alreadyRegistered) {
         // If it's a sub-event, we just skip it silently or alert once
-        if (!isAthleticsSubEvent) showToast.info('You have already registered for this event!');
+        if (!isAthleticsSubEvent) alert('You have already registered for this event!');
         return;
       }
 
@@ -169,12 +168,12 @@ const EventDetail: React.FC = () => {
       });
 
       if (isCurrentEventPara && hasNormalEvents) {
-        showToast.warning('You have already registered for normal events. You cannot register for Para Sports events.');
+        alert('You have already registered for normal events. You cannot register for Para Sports events.');
         return;
       }
 
       if (!isCurrentEventPara && hasParaEvents) {
-        showToast.warning('You have already registered for Para Sports events. You cannot register for normal events.');
+        alert('You have already registered for Para Sports events. You cannot register for normal events.');
         return;
       }
 
@@ -227,10 +226,10 @@ const EventDetail: React.FC = () => {
         throw new Error(result.message || 'Failed to add event');
       }
 
-      if (!isAthleticsSubEvent) showToast.success('You are registered to this event, please check in profile');
+      if (!isAthleticsSubEvent) alert('You are registered to this event, please check in profile');
     } catch (error) {
       console.error('Error adding event:', error);
-      if (!isAthleticsSubEvent) showToast.error('Failed to add event. Please try again.');
+      if (!isAthleticsSubEvent) alert('Failed to add event. Please try again.');
     } finally {
       setIsAddingEvent(false);
     }
@@ -238,7 +237,7 @@ const EventDetail: React.FC = () => {
 
   const handleAthleticsSelectionConfirm = async () => {
     if (selectedAthleticsEvents.length === 0) {
-      showToast.warning('Please select at least one athletics event');
+      alert('Please select at least one athletics event');
       return;
     }
 
@@ -250,10 +249,10 @@ const EventDetail: React.FC = () => {
       for (const subEvent of selectedAthleticsEvents) {
         await processEventRegistration(`Athletics - ${subEvent}`, true);
       }
-      showToast.success('Successfully registered for selected Athletics events!');
+      alert('Successfully registered for selected Athletics events!');
     } catch (error) {
       console.error('Error in athletics multi-registration:', error);
-      showToast.warning('Some events could not be registered. Please check your profile.');
+      alert('Some events could not be registered. Please check your profile.');
     } finally {
       setIsAddingEvent(false);
       setSelectedAthleticsEvents([]);
@@ -1546,29 +1545,21 @@ const EventDetail: React.FC = () => {
         { name: "Mr. Gouse Baji Shaik", phone: "+91 81433 83228" }
       ]
     },
+
     "Quiz": {
       title: "LITERATURE",
       subtitle: "Quiz Wiz",
       rules: [
-        "This competition is designed to test participants' knowledge across a wide spectrum of subjects.",
-        "I. Registration and Team Composition",
-        "Team Size: Participation is strictly limited to teams of three (3) members.",
-        "Team Formation: Teams are permitted regardless of college affiliation. However, all participants must be registered students.",
-        "Conduct: Any attempt by a team to disrupt or 'mess the atmosphere' of the contest through unfair means or unsportsmanlike conduct will result in immediate disqualification.",
-        "II. Event Structure and Rounds",
-        "The competition will consist of a maximum of three rounds. The Quizmaster reserves the right to modify the number or type of rounds based on the number of participating teams.",
-        "Round 1: This will be a written round containing the questions covering various topics.",
-        "Round 2: Knowledge Dropping (Mechanism to be Defined by Quizmaster): This will be a multi-answer or visual round where points may be awarded for each correct piece of information provided, testing deep knowledge in a specific area.",
-        "Round 3: Speeding Test (Buzzer Round): This is a rapid-fire round where the fastest correct answer wins' points.",
-        "III. General Rules of Conduct",
-        "Electronic Devices: The use of any electronic gadgets, including but not limited to mobile phones, laptops, smartwatches, or any external material (printed or digital) is strictly prohibited. Violation will result in immediate disqualification of the entire team.",
-        "Stationery: All necessary stationery (pens, paper) will be provided by the organizers. Participants are not allowed to bring any loose paper, personal pens, or external writing material into the competition area.",
-        "Subject Areas: Questions will cover History, Mythology, Literature, Social Sciences, General World Affairs, and current events.",
-        "Discipline: Arguments or aggressive disputes with the contestants, the Quizmaster, or the coordinators over questions or answers are strictly prohibited and will lead to the immediate elimination of the offending team.",
-        "Quizmaster's Decision: The decision of the Quizmaster on all matters, including questions, answers, and scoring, is final and binding.",
-        "IV. Scoring and Tie-Breaker (Essential additions)",
-        "Scoring System: (To be announced before the start of Round 1). Points will be allocated for correct answers, and negative marking may be applied for incorrect answers in the buzzer rounds.",
-        "Tie-Breaker: In the event of a tie for the top position, a sudden death question or a separate tie-breaker round will be conducted to determine the winner."
+        "A team of minimum 2 and maximum 3 members will be allowed.",
+        "There will be a written preliminary round, and teams will be selected for the final. ",
+        "The finals will be oral and include audio-visual questions. ",
+        "Specific rules regarding the evaluation procedure, time allowed to answer each question, and the types of rounds will be provided before the start of the competition. ",
+        "The Quiz Master’s decisions in all respects including question types, rounds, marking scheme, tie-breaking mechanisms, and any other related matters shall be final and binding.",
+        "Prelims will be a two phase written round, first having 40 questions on general knowledge and second having 15 questions displayed on ppt or smart board.",
+        "The total time of prelims will be 1 hour.(Including phase A and B)",
+        "6-8 teams will be selected for finals on the basis of prelims phase A score, the phase B marks will be opening scores in finals of the finalist teams.",
+        "The finals will be a 60-75 minutes long marathon quiz conducted in picture-Audio-video format, having questions from diverse fields.",
+        "The participants will be tested upon the general themes like current affairs, history, geography, geopolitics, pop culture, literature etc."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -2537,10 +2528,10 @@ const EventDetail: React.FC = () => {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      showToast.success('Event details downloaded successfully!');
+      alert('✅ Event details downloaded successfully!');
     } catch (error) {
       console.error('Download error:', error);
-      showToast.error(`Download failed: ${error instanceof Error ? error.message : 'Please try again.'}`);
+      alert(`❌ Download failed: ${error instanceof Error ? error.message : 'Please try again.'}`);
     } finally {
       setIsDownloading(false);
     }
@@ -2717,20 +2708,14 @@ const EventDetail: React.FC = () => {
                 Rules:
               </h3>
               <ul className="space-y-2 sm:space-y-3">
-                {eventData.rules.map((rule, index) => {
-                  // Check if rule is a section header (starts with I., II., III., IV. followed by space)
-                  const isSectionHeader = /^(I{1,4})\.\s/.test(rule);
-                  return (
-                    <li key={index} className="flex items-start gap-2 sm:gap-4">
-                      {!isSectionHeader && (
-                        <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                      )}
-                      <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em', fontWeight: isSectionHeader ? 'bold' : 'normal' }}>
-                        {rule}
-                      </span>
-                    </li>
-                  );
-                })}
+                {eventData.rules.map((rule, index) => (
+                  <li key={index} className="flex items-start gap-2 sm:gap-4">
+                    <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
+                    <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em' }}>
+                      {rule}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
 

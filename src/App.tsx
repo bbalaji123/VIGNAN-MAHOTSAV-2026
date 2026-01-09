@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import Dashboard from './Dashboard';
 import EventDetail from './EventDetail';
 import EventsInfo from './EventsInfo';
@@ -32,6 +33,7 @@ function ExternalRedirect({ url }: { url: string }) {
 function App() {
   return (
     <div className="w-full min-h-screen">
+      <Toaster />
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />

@@ -12,7 +12,7 @@ const Tirupathi: React.FC = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate('/?menu=true');
+    navigate('/zonals');
   };
 
   return (
@@ -99,7 +99,7 @@ const Tirupathi: React.FC = () => {
           <p className="Tirupathi-content text-xl sm:text-2xl md:text-3xl text-white italic"
             style={{
               letterSpacing: '0.05em',
-              paddingBottom: '20px',
+              paddingBottom: '50px',
               paddingTop: '10px'
             }}
           >
@@ -123,7 +123,7 @@ const Tirupathi: React.FC = () => {
 
           {/* Events Table */}
           <div className="flex-1 w-full max-w-[600px] mx-auto lg:mx-0">
-            <div className="Tirupathi-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '300px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="Tirupathi-content bg-[rgba(82,37,102,0.3)] border-2 border-dashed border-white/50 rounded-lg backdrop-blur-[10px] p-4 sm:p-6 md:p-8 lg:p-10" style={{ minHeight: '300px', width: '100%', maxWidth: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',marginTop:'20px' }}>
               <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white text-center uppercase tracking-wider" style={{ fontFamily: 'Aladin, cursive !important', marginTop: '40px', marginBottom: '20px' }}>
                 ZONAL EVENTS (MEN)
               </h3>
@@ -190,8 +190,8 @@ const Tirupathi: React.FC = () => {
             <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
               HOSTING PARTNER
             </div>
-            <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/images/Tirupati.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+            <div className="w-[180px] h-[140px] sm:w-[190px] sm:h-[150px] md:w-[200px] md:h-[160px] flex items-center justify-center">
+              <img src="/images/tirupati-logo.png" alt="Hosting Partner" className="w-full h-full object-cover" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>

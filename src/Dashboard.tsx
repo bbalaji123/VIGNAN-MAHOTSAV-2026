@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import AnimatedIcon from './Animatedicon';
@@ -8,6 +8,7 @@ import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
 import Gallery, { galleryImages } from './Gallery';
 import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+import { showToast } from './utils/toast';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -17,15 +18,18 @@ const Dashboard: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('menu') === 'true') return true;
 
-    // Then check localStorage (persistence)
-    const stored = localStorage.getItem('isMenuOpen');
-    return stored === 'true';
+    // Default to false - don't open menu automatically
+    return false;
   });
 
-  // Persist menu state
+  // Don't persist menu state to avoid auto-opening on reload
   useEffect(() => {
-    localStorage.setItem('isMenuOpen', String(showPageMenu));
-  }, [showPageMenu]);
+    // Only open menu if URL parameter is explicitly set
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('menu') === 'true') {
+      setShowPageMenu(true);
+    }
+  }, [location]);
   const [showEventsInfo, setShowEventsInfo] = useState(false);
   const [showSportsDetails, setShowSportsDetails] = useState(false);
   const [currentEventSlide, setCurrentEventSlide] = useState(0);
@@ -1218,9 +1222,33 @@ const Dashboard: React.FC = () => {
         const response = await fetch('/registration/registration.json');
         const data = await response.json();
 
+        // Process culturals to reorganize events into new categories
+        const processedCulturals = data.Culturals?.map((event: any) => {
+          if (!event) return event;
+          
+          const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event || '';
+          const eventNameLower = eventName.toLowerCase();
+          
+          // Check if this event should be in Digital Storytelling & Creative Media
+          if (eventNameLower.includes('photography') ||
+              eventNameLower.includes('poster') ||
+              eventNameLower.includes('digital') ||
+              eventNameLower.includes('chronicle') ||
+              eventNameLower.includes('reel')) {
+            // Move to Digital Storytelling & Creative Media category
+            return {
+              ...event,
+              Category: 'Digital Storytelling & Creative Media',
+              '5': 'Digital Storytelling & Creative Media'
+            };
+          }
+          
+          return event;
+        }) || [];
+
         setRegistrationEvents({
           Sports: data.Sports || [],
-          Culturals: data.Culturals || [],
+          Culturals: processedCulturals,
           ParaSports: data.ParaSports || []
         });
       } catch (error) {
@@ -1842,28 +1870,35 @@ const Dashboard: React.FC = () => {
 
     // Validate required fields
     if (!signupFormData.name || !signupFormData.email || !signupFormData.dateOfBirth) {
-      alert('Please fill in all required fields (Name, Email, Date of Birth)');
+      showToast.error('Please fill in all required fields (Name, Email, Date of Birth)');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate gender
+    if (!signupFormData.gender) {
+      showToast.warning('Please select your gender');
       setIsSubmitting(false);
       return;
     }
 
     // Validate required state and district
     if (!signupFormData.state || !signupFormData.district) {
-      alert('Please select your State and District');
+      showToast.warning('Please select your State and District');
       setIsSubmitting(false);
       return;
     }
 
     // Validate that colleges are loaded
     if (!collegesLoaded) {
-      alert('Please wait for colleges to load before submitting the form');
+      showToast.info('Please wait for colleges to load before submitting the form');
       setIsSubmitting(false);
       return;
     }
 
     // Validate college field - must have a value and either be from the list or "Other" option
     if (!signupFormData.college || signupFormData.college.trim() === '') {
-      alert('Please select your college from the list or choose "Other" option if your college is not listed');
+      showToast.warning('Please select your college from the list or choose Other option if your college is not listed');
       setIsSubmitting(false);
       return;
     }
@@ -1871,7 +1906,7 @@ const Dashboard: React.FC = () => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(signupFormData.email)) {
-      alert('Please enter a valid email address');
+      showToast.error('Please enter a valid email address');
       setIsSubmitting(false);
       return;
     }
@@ -1888,7 +1923,7 @@ const Dashboard: React.FC = () => {
     }
 
     if (age < 10) {
-      alert(`You must be at least 10 years old to register.\n\nYour current age: ${age} years\nRequired age: 10 years or older\n\nPlease check your date of birth and try again.`);
+      showToast.error(`You must be at least 10 years old to register. Your current age: ${age} years. Required age: 10 years or older. Please check your date of birth and try again.`);
       setIsSubmitting(false);
       return;
     }
@@ -1937,11 +1972,11 @@ const Dashboard: React.FC = () => {
         });
       } else {
         // Show error as popup alert
-        alert(result.message || 'Registration failed. Please try again.');
+        showToast.error(result.message || 'Registration failed. Please try again.');
       }
     } catch (error: unknown) {
       // Show error as popup alert
-      alert('An error occurred. Please try again later.');
+      showToast.error('An error occurred. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
@@ -2027,13 +2062,13 @@ const Dashboard: React.FC = () => {
     } else if (cardName === 'EVENTS') {
       // Check if user is logged in and is a participant
       if (!isLoggedIn) {
-        alert('Please login to view events!');
+        showToast.warning('Please login to view events!');
         setShowLoginModal(true);
         return;
       }
 
       if (userProfileData.userType === 'visitor') {
-        alert('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
+        showToast.warning('You are registered as a Visitor. Only Participants can register for events. Please contact admin to upgrade your account.');
         return;
       }
 
@@ -2094,13 +2129,13 @@ const Dashboard: React.FC = () => {
   const handleOpenProfile = async () => {
     // Check if user is logged in
     if (!isLoggedIn) {
-      alert('Please login first to view your profile.');
+      showToast.warning('Please login first to view your profile.');
       setShowLoginModal(true);
       return;
     }
 
     if (!userProfileData.userId) {
-      alert('Unable to load profile. Please try logging in again.');
+      showToast.error('Unable to load profile. Please try logging in again.');
       return;
     }
 
@@ -2213,7 +2248,7 @@ const Dashboard: React.FC = () => {
 
   const handleRemoveRegisteredEvent = async (eventToRemove: any) => {
     if (!userProfileData.userId) {
-      alert('Please login to modify your events.');
+      showToast.warning('Please login to modify your events.');
       return;
     }
 
@@ -2226,7 +2261,7 @@ const Dashboard: React.FC = () => {
 
     // Check if this is the last event
     if (remainingEvents.length === 0) {
-      alert('You have to register for at least one event');
+      showToast.warning('You have to register for at least one event');
       return;
     }
 
@@ -2252,10 +2287,10 @@ const Dashboard: React.FC = () => {
 
       setMyEvents(remainingEvents as any);
       setUserRegisteredEvents(remainingEvents as any);
-      alert('Event removed successfully.');
+      showToast.success('Event removed successfully.');
     } catch (error) {
       console.error('Error removing event:', error);
-      alert('Failed to remove event. Please try again.');
+      showToast.error('Failed to remove event. Please try again.');
     }
   };
 
@@ -2279,7 +2314,7 @@ const Dashboard: React.FC = () => {
 
   const handleSaveSelectedEvents = async () => {
     if (!userProfileData.userId) {
-      alert('Please login to save events!');
+      showToast.warning('Please login to save events!');
       return;
     }
 
@@ -2307,12 +2342,12 @@ const Dashboard: React.FC = () => {
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
         setShowEventChecklistModal(false);
-        alert(`? Successfully saved and registered for ${eventIds.length} event(s)!`);
+        showToast.success(`Successfully saved and registered for ${eventIds.length} event(s)!`);
       } else {
-        alert(result.message || 'Failed to save events. Please try again.');
+        showToast.error(result.message || 'Failed to save events. Please try again.');
       }
     } catch (error) {
-      alert('An error occurred while saving events.');
+      showToast.error('An error occurred while saving events.');
     }
   };
 
@@ -6446,7 +6481,7 @@ const Dashboard: React.FC = () => {
 
                               // Check if this is the last event
                               if (updatedEvents.length === 0) {
-                                alert('You have to register for at least one event');
+                                showToast.warning('You have to register for at least one event');
                                 return;
                               }
 
@@ -6473,13 +6508,13 @@ const Dashboard: React.FC = () => {
 
                                     // Update state
                                     setMyEvents(updatedEvents);
-                                    alert('Event removed successfully!');
+                                    showToast.success('Event removed successfully!');
                                   } else {
                                     throw new Error(result.message || 'Failed to remove event');
                                   }
                                 } catch (error) {
                                   console.error('Error removing event:', error);
-                                  alert('Failed to remove event. Please try again.');
+                                  showToast.error('Failed to remove event. Please try again.');
                                 }
                               }
                             }}
@@ -7112,7 +7147,7 @@ const Dashboard: React.FC = () => {
                                   onClick={(e) => {
                                     if (constraintDisabled) {
                                       e.preventDefault();
-                                      alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                      showToast.warning('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
                                     }
                                   }}
                                 >
@@ -7158,7 +7193,20 @@ const Dashboard: React.FC = () => {
                                           marginTop: '0.1rem'
                                         }}
                                       >
-                                        Already registered • Fee: ₹{event.Fee || 350}
+                                        Already registered • Fee: ₹{(() => {
+                                          const userCollege = userProfileData.college || '';
+                                          const specialVignanColleges = [
+                                            'Vignan Pharmacy College',
+                                            "Vignan's Foundation of Science, Technology & Research",
+                                            "Vignan's Lara Institute of Technology & Science"
+                                          ];
+                                          const isSpecialVignan = specialVignanColleges.some(college =>
+                                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                                            college.toLowerCase().includes(userCollege.toLowerCase())
+                                          );
+                                          if (isSpecialVignan) return 150;
+                                          return userProfileData.gender?.toLowerCase() === 'female' ? 250 : 350;
+                                        })()}
                                       </div>
                                     )}
                                   </div>
@@ -7340,7 +7388,7 @@ const Dashboard: React.FC = () => {
                                   onClick={(e) => {
                                     if (constraintDisabled) {
                                       e.preventDefault();
-                                      alert('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                      showToast.warning('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
                                     }
                                   }}
                                 >
@@ -7381,7 +7429,20 @@ const Dashboard: React.FC = () => {
                                           marginTop: '0.1rem'
                                         }}
                                       >
-                                        Already registered • Fee: ₹{event.Fee || (userProfileData.gender === 'female' ? 250 : 350)}
+                                        Already registered • Fee: ₹{(() => {
+                                          const userCollege = userProfileData.college || '';
+                                          const specialVignanColleges = [
+                                            'Vignan Pharmacy College',
+                                            "Vignan's Foundation of Science, Technology & Research",
+                                            "Vignan's Lara Institute of Technology & Science"
+                                          ];
+                                          const isSpecialVignan = specialVignanColleges.some(college =>
+                                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                                            college.toLowerCase().includes(userCollege.toLowerCase())
+                                          );
+                                          if (isSpecialVignan) return 150;
+                                          return userProfileData.gender?.toLowerCase() === 'female' ? 250 : 350;
+                                        })()}
                                       </div>
                                     )}
                                   </div>
@@ -7510,7 +7571,7 @@ const Dashboard: React.FC = () => {
                                 onClick={(e) => {
                                   if (constraintDisabled) {
                                     e.preventDefault();
-                                    alert('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
+                                    showToast.warning('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
                                   }
                                 }}
                               >
@@ -7637,7 +7698,7 @@ const Dashboard: React.FC = () => {
                           }
                         } else if (userGender === 'female') {
                           if (hasSports || hasCulturals) {
-                            fee = 250; // Female fee is always 250
+                            fee = 250; // Female fee is always 250 total
                           }
                         } else {
                           if (hasSports || hasCulturals) {
@@ -7656,12 +7717,12 @@ const Dashboard: React.FC = () => {
               <button
                 onClick={async () => {
                   if (selectedRegistrationEvents.size === 0) {
-                    alert('Please select at least one event');
+                    showToast.warning('Please select at least one event');
                     return;
                   }
 
                   if (!isLoggedIn || !userProfileData.userId) {
-                    alert('Please login to register for events');
+                    showToast.warning('Please login to register for events');
                     return;
                   }
 
@@ -7699,7 +7760,7 @@ const Dashboard: React.FC = () => {
                       }
                     } else if (userGender === 'female') {
                       if (hasSports || hasCulturals) {
-                        fee = 250; // Female fee is always 250
+                        fee = 250; // Female fee is always 250 total
                       }
                     } else {
                       if (hasSports || hasCulturals) {
@@ -7740,7 +7801,7 @@ const Dashboard: React.FC = () => {
 
                         // Regular fee calculation
                         if (eventType === 'sport') {
-                          return userGender === 'female' ? 250 : 350; // Female sports is 250
+                          return userGender === 'female' ? 0 : 350; // Female pays 0 per event (total is 250)
                         }
 
                         if (eventType === 'cultural') {
@@ -7748,7 +7809,7 @@ const Dashboard: React.FC = () => {
                           if (userGender === 'male') {
                             return 350;
                           } else if (userGender === 'female') {
-                            return 250; // Female cultural is always 250
+                            return 0; // Female pays 0 per event (total is 250)
                           } else {
                             return 350;
                           }
@@ -7881,13 +7942,13 @@ const Dashboard: React.FC = () => {
                     await fetchUserSavedEvents(userProfileData.userId);
 
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
-                    alert(`Successfully registered for ${selectedRegistrationEvents.size} event(s)!\n\nEvent Type: ${eventTypes}\nTotal Registration Fee: ₹${fee}\n\nThank you!`);
+                    showToast.success(`Successfully registered for ${selectedRegistrationEvents.size} event(s)! Event Type: ${eventTypes}. Total Registration Fee: ₹${fee}. Thank you!`);
                     window.history.pushState({}, '', '/');
                     setShowRegistrationModal(false);
                     setSelectedRegistrationEvents(new Set());
                   } catch (error) {
                     console.error('Error saving events:', error);
-                    alert('An error occurred while saving events to database. Please try again.');
+                    showToast.error('An error occurred while saving events to database. Please try again.');
                   }
                 }}
                 disabled={selectedRegistrationEvents.size === 0}

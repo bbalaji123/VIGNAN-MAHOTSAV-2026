@@ -71,6 +71,62 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    if (!gender) {
+      return res.status(400).json({
+        success: false,
+        message: 'Gender is required'
+      });
+    }
+
+    if (!phone) {
+      return res.status(400).json({
+        success: false,
+        message: 'Phone number is required'
+      });
+    }
+
+    if (!dateOfBirth) {
+      return res.status(400).json({
+        success: false,
+        message: 'Date of birth is required'
+      });
+    }
+
+    if (!college) {
+      return res.status(400).json({
+        success: false,
+        message: 'College is required'
+      });
+    }
+
+    if (!branch) {
+      return res.status(400).json({
+        success: false,
+        message: 'Branch is required'
+      });
+    }
+
+    if (!registerId) {
+      return res.status(400).json({
+        success: false,
+        message: 'College registration number is required'
+      });
+    }
+
+    if (!state) {
+      return res.status(400).json({
+        success: false,
+        message: 'State is required'
+      });
+    }
+
+    if (!district) {
+      return res.status(400).json({
+        success: false,
+        message: 'District is required'
+      });
+    }
+
     // Validate referral code
     let validReferralCode = null;
     if (referralCode?.trim()) {
@@ -319,6 +375,37 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
+    // Validate events against user's gender
+    const userGender = user.gender?.toLowerCase();
+    if (userGender && events.length > 0) {
+      for (const event of events) {
+        const category = (event.category || '').toLowerCase();
+        const eventName = (event.eventName || '').toLowerCase();
+        
+        // Check if male is trying to register for women's events
+        if (userGender === 'male') {
+          if (category.includes('women') || category.includes('female') ||
+              eventName.includes('women') || eventName.includes('female')) {
+            return res.status(400).json({
+              success: false,
+              message: `Cannot register for women's event: ${event.eventName}`
+            });
+          }
+        }
+        
+        // Check if female is trying to register for men's only events
+        if (userGender === 'female') {
+          if ((category.includes('men') && !category.includes('women')) ||
+              (eventName.includes('men') && !eventName.includes('women'))) {
+            return res.status(400).json({
+              success: false,
+              message: `Cannot register for men's event: ${event.eventName}`
+            });
+          }
+        }
+      }
+    }
+
     // Find or create participant
     let participant = await Participant.findOne({ userId });
 
@@ -353,6 +440,7 @@ router.post('/save-events', async (req, res) => {
         paymentStatus: 'pending',
         registeredEvents: events.map(e => ({
           ...e,
+          category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
           registeredAt: new Date()
         }))
       });
@@ -360,6 +448,7 @@ router.post('/save-events', async (req, res) => {
       // Update registered events for existing participant
       participant.registeredEvents = events.map(e => ({
         ...e,
+        category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
         registeredAt: new Date()
       }));
       await participant.save();

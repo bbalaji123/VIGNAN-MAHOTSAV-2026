@@ -12,7 +12,7 @@ const Vizag: React.FC = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate('/?menu=true');
+    navigate('/zonals');
   };
 
   return (
@@ -187,11 +187,11 @@ const Vizag: React.FC = () => {
 
           {/* Hosting Partner */}
           <div className="Vizag-content flex flex-col items-center justify-center gap-3 sm:gap-4 mx-auto lg:flex-shrink-0" style={{ height: '400px' }}>
-            <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest">
+            <div className="text-xs sm:text-sm md:text-base font-semibold text-white uppercase tracking-widest" style={{marginBottom: '-50px'}}>
               HOSTING PARTNER
             </div>
-            <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] rounded-full bg-white/90 flex items-center justify-center p-3 sm:p-4 shadow-[0_5px_20px_rgba(0,0,0,0.3)]">
-              <img src="/images/Vizag1.avif" alt="Hosting Partner" className="w-full h-full object-contain" />
+            <div className="w-[220px] h-[220px] sm:w-[250px] sm:h-[250px] md:w-[280px] md:h-[280px] flex items-center justify-center">
+              <img src="/images/VIZAG.png" alt="Hosting Partner" className="w-full h-full object-contain" />
             </div>
             <div className="text-base sm:text-lg lg:text-xl font-bold text-white text-center max-w-[200px] leading-tight">
             </div>

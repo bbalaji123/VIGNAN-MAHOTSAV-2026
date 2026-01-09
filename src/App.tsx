@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './Dashboard';
 import EventDetail from './EventDetail';
@@ -23,23 +23,20 @@ import Hyderabad from './Hyderabad';
 import Tirupathi from './Tirupathi';
 import Guide from './Guide';
 
-function ExternalRedirect({ url }: { url: string }) {
-  useEffect(() => {
-    window.location.replace(url);
-  }, [url]);
-  return null;
-}
+
 
 function App() {
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen desktop-bound">
       <Toaster toastOptions={{ style: { zIndex: 99999 } }} containerStyle={{ zIndex: 99999 }} />
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/register-for-events" element={<Dashboard />} />
-          <Route path="/events-info" element={<EventsInfo />} />
+          <Route path="/events" element={<EventsInfo />} />
+          <Route path="/events/robos" element={<EventsInfo />} />
+          <Route path="/events/arts" element={<EventsInfo />} />
           <Route path="/events/dance" element={<EventsInfo />} />
           <Route path="/events/music" element={<EventsInfo />} />
           <Route path="/events/dramatics" element={<EventsInfo />} />

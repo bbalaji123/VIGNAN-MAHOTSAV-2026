@@ -376,7 +376,7 @@ const EventsInfo: React.FC = () => {
   };
 
   const handleCulturalsCardClick = () => {
-    setShowCulturals(true);
+    navigate('/events/arts');
   };
 
   // Navigation functions removed - carousel not currently implemented
@@ -409,6 +409,12 @@ const EventsInfo: React.FC = () => {
       const section = path.split('/events/')[1];
 
       switch (section) {
+        case 'robos':
+          setShowRoboWarsGaming(true);
+          break;
+        case 'arts':
+          setShowCulturals(true);
+          break;
         case 'dance':
           setShowCulturals(true);
           setShowDance(true);
@@ -996,26 +1002,30 @@ const EventsInfo: React.FC = () => {
                       setShowRoboGames(false);
                       setShowSpotLight(false);
                       if (showGaming || showRoboGames) {
-                        setShowRoboWarsGaming(true);
+                        navigate('/events/robos');
+                      } else if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showSpotLight) {
+                        navigate('/events/arts');
                       }
                     } else if (showRoboWarsGaming) {
                       setShowRoboWarsGaming(false);
+                      navigate('/events');
                     } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
-                      setShowIndoorSports(false);
-                      setShowWomensIndoorSports(false);
-                      setShowMensTeamSports(false);
-                      setShowWomensTeamSports(false);
-                      setShowParaCards(false);
+                      // Check if para cards was accessed from menu
+                      if (showParaCards && location.state?.fromMenu) {
+                        navigate('/?menu=true');
+                      } else {
+                        setShowIndoorSports(false);
+                        setShowWomensIndoorSports(false);
+                        setShowMensTeamSports(false);
+                        setShowWomensTeamSports(false);
+                        setShowParaCards(false);
+                      }
                     } else if (showSportsDetails || showCulturals) {
                       setShowSportsDetails(false);
                       setShowCulturals(false);
+                      navigate('/events');
                     } else {
-                      window.history.pushState({}, '', '/');
-                      window.dispatchEvent(new PopStateEvent('popstate'));
-                      setTimeout(() => {
-                        const menuBtn = document.querySelector('[onClick*="handlePageMenuToggle"]') as HTMLElement;
-                        if (menuBtn) menuBtn.click();
-                      }, 100);
+                      navigate('/?menu=true');
                     }
                   }} />
               </div>
@@ -1068,19 +1078,28 @@ const EventsInfo: React.FC = () => {
                     setShowRoboGames(false);
                     setShowSpotLight(false);
                     if (showGaming || showRoboGames) {
-                      setShowRoboWarsGaming(true);
+                      navigate('/events/robos');
+                    } else if (showDance || showMusic || showTheatre || showLiterature || showVisualArts || showFashionDesign || showDigitalStorytelling || showSpotLight) {
+                      navigate('/events/arts');
                     }
                   } else if (showRoboWarsGaming) {
                     setShowRoboWarsGaming(false);
+                    navigate('/events');
                   } else if (showIndoorSports || showWomensIndoorSports || showMensTeamSports || showWomensTeamSports || showParaCards) {
-                    setShowIndoorSports(false);
-                    setShowWomensIndoorSports(false);
-                    setShowMensTeamSports(false);
-                    setShowWomensTeamSports(false);
-                    setShowParaCards(false);
+                    // Check if para cards was accessed from menu
+                    if (showParaCards && location.state?.fromMenu) {
+                      navigate('/?menu=true');
+                    } else {
+                      setShowIndoorSports(false);
+                      setShowWomensIndoorSports(false);
+                      setShowMensTeamSports(false);
+                      setShowWomensTeamSports(false);
+                      setShowParaCards(false);
+                    }
                   } else if (showSportsDetails || showCulturals) {
                     setShowSportsDetails(false);
                     setShowCulturals(false);
+                    navigate('/events');
                   } else {
                     navigate('/?menu=true');
                   }
@@ -1202,7 +1221,7 @@ const EventsInfo: React.FC = () => {
                 <div className="flex flex-col items-center gap-3">
                   <div
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                    onClick={() => setShowRoboWarsGaming(true)}
+                    onClick={() => navigate('/events/robos')}
                     style={{
                       margin: '0 16px',
                       backgroundImage: 'url(/images/Gaming.avif)',
@@ -1601,7 +1620,7 @@ const EventsInfo: React.FC = () => {
                             />
                           )}
                           <div className="absolute bottom-0 left-0 right-0 p-5 text-center bg-gradient-to-t from-black/60 to-transparent rounded-b-3xl" style={{ zIndex: 10 }}>
-                            <h2 className="text-white text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{ textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)' }}>
+                            <h2 className="text-2xl font-bold tracking-wide uppercase transition-all duration-300" style={{ color: '#fdee71', textShadow: '1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 #000, 4px 4px 0 #000, 5px 5px 0 #000, 6px 6px 8px rgba(0, 0, 0, 0.8)' }}>
                               {card.title}
                             </h2>
                           </div>

@@ -1225,16 +1225,16 @@ const Dashboard: React.FC = () => {
         // Process culturals to reorganize events into new categories
         const processedCulturals = data.Culturals?.map((event: any) => {
           if (!event) return event;
-          
+
           const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event || '';
           const eventNameLower = eventName.toLowerCase();
-          
+
           // Check if this event should be in Digital Storytelling & Creative Media
           if (eventNameLower.includes('photography') ||
-              eventNameLower.includes('poster') ||
-              eventNameLower.includes('digital') ||
-              eventNameLower.includes('chronicle') ||
-              eventNameLower.includes('reel')) {
+            eventNameLower.includes('poster') ||
+            eventNameLower.includes('digital') ||
+            eventNameLower.includes('chronicle') ||
+            eventNameLower.includes('reel')) {
             // Move to Digital Storytelling & Creative Media category
             return {
               ...event,
@@ -1242,7 +1242,7 @@ const Dashboard: React.FC = () => {
               '5': 'Digital Storytelling & Creative Media'
             };
           }
-          
+
           return event;
         }) || [];
 
@@ -1308,7 +1308,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEventsInfoClick = () => {
-    navigate('/events-info');
+    navigate('/events');
   };
 
 
@@ -2542,8 +2542,8 @@ const Dashboard: React.FC = () => {
   }, [showProfileDropdown]);
 
   return (
-    <div className={`dashboard-container w-screen overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-      style={{ background: "transparent", maxWidth: "100vw", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column" }}>
+    <div className={`dashboard-container w-full overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
+      style={{ background: "transparent", width: "100%", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column" }}>
 
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -3026,7 +3026,7 @@ const Dashboard: React.FC = () => {
                 <div
                   className="menu-grid-card bg-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:shadow-2xl min-h-[130px] border border-white/20 group"
                   onClick={() => {
-                    navigate('/events-info', { state: { openSection: 'paraCards' } });
+                    navigate('/events/para', { state: { fromMenu: true } });
                   }}
                   style={{ transformStyle: 'preserve-3d' }}
                   onMouseMove={(e) => {
@@ -4937,151 +4937,151 @@ const Dashboard: React.FC = () => {
           Throwback
         </h2>
 
-          {/* Flower Container with Lock System */}
-          <div className="throwback-flower-container" style={{
-            width: '100%',
-            flex: 1,
+        {/* Flower Container with Lock System */}
+        <div className="throwback-flower-container" style={{
+          width: '100%',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+          maxHeight: 'calc(100vh - 200px)',
+          marginTop: window.innerWidth < 768 ? '20px' : '30px',
+        }}>
+          {/* Container for both flower halves */}
+          <div className="throwback-flower-wrapper" style={{
+            position: 'relative',
+            width: 'clamp(200px, 35vw, 450px)',
+            height: 'clamp(200px, 35vw, 450px)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            position: 'relative',
-            maxHeight: 'calc(100vh - 200px)',
-            marginTop: window.innerWidth < 768 ? '20px' : '30px',
+            marginTop: '-20px',
+            pointerEvents: 'none'
           }}>
-            {/* Container for both flower halves */}
-            <div className="throwback-flower-wrapper" style={{
-              position: 'relative',
+            {/* Left Half */}
+            <div className="throwback-flower-left" style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)'
+                : 'translate(-50%, -50%)',
+              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
               width: 'clamp(200px, 35vw, 450px)',
               height: 'clamp(200px, 35vw, 450px)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '-20px',
+              overflow: 'visible',
+              zIndex: 10,
               pointerEvents: 'none'
             }}>
-              {/* Left Half */}
-              <div className="throwback-flower-left" style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: isThrowbackUnlocked
-                  ? 'translate(calc(-50% - clamp(180px, 25vw, 400px)), -50%)'
-                  : 'translate(-50%, -50%)',
-                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-                width: 'clamp(200px, 35vw, 450px)',
-                height: 'clamp(200px, 35vw, 450px)',
-                overflow: 'visible',
-                zIndex: 10,
-                pointerEvents: 'none'
-              }}>
-                <FlowerComponent
-                  size="clamp(200px, 35vw, 450px)"
-                  sunSize="45%"
-                  moonSize="39.5%"
-                  sunTop="28%"
-                  sunLeft="28%"
-                  moonTop="30.8%"
-                  moonLeft="30.8%"
-                  showPetalRotation={false}
-                  petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
-                  clipPath="inset(0 50% 0 0)"
-                  clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-                  style={{
-                    overflow: 'visible',
-                  }}
-                />
-              </div>
-
-              {/* Right Half */}
-              <div className="throwback-flower-right" style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: isThrowbackUnlocked
-                  ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)'
-                  : 'translate(-50%, -50%)',
-                transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
-                width: 'clamp(200px, 35vw, 450px)',
-                height: 'clamp(200px, 35vw, 450px)',
-                overflow: 'visible',
-                zIndex: 10,
-                pointerEvents: 'none'
-              }}>
-                <FlowerComponent
-                  size="clamp(200px, 35vw, 450px)"
-                  sunSize="45%"
-                  moonSize="39.5%"
-                  sunTop="28%"
-                  sunLeft="28%"
-                  moonTop="30.8%"
-                  moonLeft="30.8%"
-                  showPetalRotation={false}
-                  petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
-                  clipPath="inset(0 0 0 50%)"
-                  clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
-                  style={{
-                    overflow: 'visible'
-                  }}
-                />
-              </div>
+              <FlowerComponent
+                size="clamp(200px, 35vw, 450px)"
+                sunSize="45%"
+                moonSize="39.5%"
+                sunTop="28%"
+                sunLeft="28%"
+                moonTop="30.8%"
+                moonLeft="30.8%"
+                showPetalRotation={false}
+                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                clipPath="inset(0 50% 0 0)"
+                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                style={{
+                  overflow: 'visible',
+                }}
+              />
             </div>
 
-            {/* Year buttons - separate from video */}
-            <div className="throwback-year-buttons" style={{
+            {/* Right Half */}
+            <div className="throwback-flower-right" style={{
               position: 'absolute',
-              top: window.innerWidth >= 768 ? '10px' : '-30px',
               left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              flexWrap: 'nowrap',
-              gap: window.innerWidth >= 768 ? '30px' : '15px',
-              pointerEvents: 'auto',
-              zIndex: 15,
-              opacity: isThrowbackUnlocked ? 1 : 0,
-              transition: 'opacity 1.5s ease 0.5s',
-              paddingBottom: '15px',
-              justifyContent: 'center'
-            }}>
-              {(['2023', '2024', '2025'] as const).map(year => (
-                <button
-                  key={year}
-                  onClick={() => setSelectedYear(year)}
-                  style={{
-                    padding: '8px 26px',
-                    borderRadius: '20px',
-                    background: selectedYear === year
-                      ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
-                      : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
-                    border: 'none',
-                    color: 'white',
-                    fontSize: '1.2rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    boxShadow: selectedYear === year
-                      ? '0 6px 20px rgba(0, 0, 0, 0.3)'
-                      : '0 4px 15px rgba(0, 0, 0, 0.2)',
-                    transition: 'all 0.3s ease',
-                    transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
-                  }}
-                >
-                  {year}
-                </button>
-              ))}
-            </div>
-            {/* Video card - centered between flowers */}
-            <div className="throwback-video-wrapper" style={{
-              position: 'absolute',
               top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              pointerEvents: 'auto',
-              zIndex: 20,
-              opacity: isThrowbackUnlocked ? 1 : 0,
-              transition: 'opacity 1.5s ease 0.5s',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
+              transform: isThrowbackUnlocked
+                ? 'translate(calc(-50% + clamp(180px, 25vw, 400px)), -50%)'
+                : 'translate(-50%, -50%)',
+              transition: 'transform 2s cubic-bezier(0.4, 0.0, 0.2, 1)',
+              width: 'clamp(200px, 35vw, 450px)',
+              height: 'clamp(200px, 35vw, 450px)',
+              overflow: 'visible',
+              zIndex: 10,
+              pointerEvents: 'none'
             }}>
+              <FlowerComponent
+                size="clamp(200px, 35vw, 450px)"
+                sunSize="45%"
+                moonSize="39.5%"
+                sunTop="28%"
+                sunLeft="28%"
+                moonTop="30.8%"
+                moonLeft="30.8%"
+                showPetalRotation={false}
+                petalAnimation={isThrowbackUnlocked ? 'none' : 'petalsRotateAnticlockwise 40s linear infinite'}
+                clipPath="inset(0 0 0 50%)"
+                clipPathTransition="clip-path 2s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                style={{
+                  overflow: 'visible'
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Year buttons - separate from video */}
+          <div className="throwback-year-buttons" style={{
+            position: 'absolute',
+            top: window.innerWidth >= 768 ? '10px' : '-30px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            flexWrap: 'nowrap',
+            gap: window.innerWidth >= 768 ? '30px' : '15px',
+            pointerEvents: 'auto',
+            zIndex: 15,
+            opacity: isThrowbackUnlocked ? 1 : 0,
+            transition: 'opacity 1.5s ease 0.5s',
+            paddingBottom: '15px',
+            justifyContent: 'center'
+          }}>
+            {(['2023', '2024', '2025'] as const).map(year => (
+              <button
+                key={year}
+                onClick={() => setSelectedYear(year)}
+                style={{
+                  padding: '8px 26px',
+                  borderRadius: '20px',
+                  background: selectedYear === year
+                    ? 'linear-gradient(135deg, #e88bb7 0%, #d67ba4 100%)'
+                    : 'linear-gradient(135deg, #f5a3c7 0%, #e88bb7 100%)',
+                  border: 'none',
+                  color: 'white',
+                  fontSize: '1.2rem',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  boxShadow: selectedYear === year
+                    ? '0 6px 20px rgba(0, 0, 0, 0.3)'
+                    : '0 4px 15px rgba(0, 0, 0, 0.2)',
+                  transition: 'all 0.3s ease',
+                  transform: selectedYear === year ? 'scale(1.05)' : 'scale(1)'
+                }}
+              >
+                {year}
+              </button>
+            ))}
+          </div>
+          {/* Video card - centered between flowers */}
+          <div className="throwback-video-wrapper" style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'auto',
+            zIndex: 20,
+            opacity: isThrowbackUnlocked ? 1 : 0,
+            transition: 'opacity 1.5s ease 0.5s',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
             {/* Video card */}
             <div
               className="throwback-video-card"
@@ -5149,10 +5149,10 @@ const Dashboard: React.FC = () => {
                 Day {currentDay}
               </div>
             </div>
-            </div>
           </div>
+        </div>
 
-          {/* Lock Icon removed */}
+        {/* Lock Icon removed */}
 
         {/* Countdown Timer */}
         <div
@@ -6035,7 +6035,7 @@ const Dashboard: React.FC = () => {
 
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
                         <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Payment Status</span>
-                        <span style={{ color: userProfileData?.paymentStatus === 'paid' ? '#22c55e' : '#ef4444', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: {userProfileData?.paymentStatus === 'paid' ? 'Paid' : 'Not Paid'}</span>
+                        <span style={{ color: userProfileData?.paymentStatus === 'paid' ? '#22c55e' : '#b84b4b', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: {userProfileData?.paymentStatus === 'paid' ? 'Paid' : 'Not Paid'}</span>
                       </div>
                     </div>
                   </div>

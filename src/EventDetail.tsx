@@ -49,8 +49,8 @@ const EventDetail: React.FC = () => {
   // Smart back navigation handler
   const handleBack = () => {
     if (fromSection) {
-      // Navigate to /events-info with the specific section to open
-      navigate('/events-info', { state: { openSection: fromSection } });
+      // Navigate to /events with the specific section to open
+      navigate('/events', { state: { openSection: fromSection } });
     } else {
       // Default behavior - go back in history
       navigate(-1);

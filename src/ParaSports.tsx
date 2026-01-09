@@ -1,8 +1,13 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 import FlowerComponent from './components/FlowerComponent';
+import BackButton from './components/BackButton';
 
 const ParaSports: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const fromMenu = location.state?.fromMenu;
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
       backgroundImage: 'url("/images/Background.png")',
@@ -349,6 +354,14 @@ const ParaSports: React.FC = () => {
           }
         `}
       </style>
+
+      {/* Back Button */}
+      {fromMenu && (
+        <BackButton
+          onClick={() => navigate('/?menu=true')}
+          className="fixed top-4 left-4 z-[1000]"
+        />
+      )}
 
       {/* Main Content */}
       <div className="parasports-content">

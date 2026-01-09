@@ -588,3 +588,42 @@ body,
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #ca8a04;
 }
+
+/* ==========================================================================
+   DESKTOP RESPONSIVENESS FIX (LOCKED LAYOUT)
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+
+  /* 
+     Create a centered container for desktop screens 
+     that locks the layout to a maximum width (e.g., 1920px).
+     This effectively treats the browser window as if it were only that wide.
+  */
+  .desktop-bound {
+    max-width: 1920px !important;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  /* Helper for fixed elements that need to stay within bounds */
+  .fixed-bound {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100% !important;
+    max-width: 1920px !important;
+  }
+
+  /* Helper for absolute elements that need to stay within bounds */
+  .absolute-bound {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100% !important;
+    max-width: 1920px !important;
+  }
+}

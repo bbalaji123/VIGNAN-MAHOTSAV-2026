@@ -135,7 +135,6 @@ body.modal-open {
 
 .signup-close-btn:hover {
   color: #ffed4e !important;
-  transform: rotate(90deg) !important;
 }
 
 /* Remove old arrow logic */

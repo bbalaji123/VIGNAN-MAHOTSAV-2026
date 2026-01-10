@@ -41,9 +41,9 @@ const EventsInfo: React.FC = () => {
   const [, setCulturalEvents] = useState<Event[]>([]);
 
   const sportsDetailCards = [
-    { title: "Athletics", subtitle: "Track & Field" },
-    { title: "Individual Events", subtitle: "Indoor Sports" },
-    { title: "Team Field", subtitle: "Sports" },
+    { title: "Athletics", subtitle: "" },
+    { title: "Individual Events", subtitle: "" },
+    { title: "Team Events", subtitle: "" },
     { title: "Para Sports", subtitle: "" }
   ];
 
@@ -210,7 +210,7 @@ const EventsInfo: React.FC = () => {
     }
 
     // Check if it's Team Field Sports (merged)
-    if (eventTitle === "Team Field") {
+    if (eventTitle === "Team Events") {
       navigate('/events/mens-team-sports');
       return;
     }
@@ -1036,8 +1036,8 @@ const EventsInfo: React.FC = () => {
               <h1 className="events-title events-page-heading" style={{ marginTop: '30px', textAlign: 'center' }}>
                 {showIndoorSports ? 'Indoor Sports' :
                   showWomensIndoorSports ? "Women's Indoor Sports" :
-                    showMensTeamSports ? "Team Field Sports" :
-                      showWomensTeamSports ? "Women's Team Field Sports" :
+                    showMensTeamSports ? "Team Events" :
+                      showWomensTeamSports ? "Women's Team Events" :
                         showParaCards ? 'Para' :
                           showDance ? 'Dance' :
                             showMusic ? 'Music' :
@@ -1113,8 +1113,8 @@ const EventsInfo: React.FC = () => {
             <h1 className="events-title events-page-heading events-mobile-heading">
               {showIndoorSports ? 'Indoor Sports' :
                 showWomensIndoorSports ? "Women's Indoor Sports" :
-                  showMensTeamSports ? "Team Field Sports" :
-                    showWomensTeamSports ? "Women's Team Field Sports" :
+                  showMensTeamSports ? "Team Events" :
+                    showWomensTeamSports ? "Women's Team Events" :
                       showParaCards ? 'Para' :
                         showDance ? 'Dance' :
                           showMusic ? 'Music' :
@@ -1265,14 +1265,14 @@ const EventsInfo: React.FC = () => {
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
                         card.title === "Individual Events" ||
-                        card.title === "Team Field" ||
+                        card.title === "Team Events" ||
                         card.title === "Para Sports";
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
                         "Athletics": "/images/athletics.png",
                         "Individual Events": "/images/individual.png",
-                        "Team Field": "/images/team events.png",
+                        "Team Events": "/images/team events.png",
                         "Para Sports": "/images/Para_Sports.png"
                       };
 

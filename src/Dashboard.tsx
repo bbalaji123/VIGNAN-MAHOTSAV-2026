@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
+// import './hero-fullwidth.css';
 import AnimatedIcon from './Animatedicon';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
@@ -2589,68 +2590,74 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* 1. Hero Section (First Fold) - Moved to Top */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{ background: "transparent", zIndex: 1, position: 'relative' }} >
-        {/* Left side image - 1.avif */}
-        <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
-          <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
-        </div>
+      <section className="hero-section-fullwidth relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{ background: "transparent", zIndex: 1, position: 'relative' }} >
+        <div className="hero-content-wrapper">
+          {/* Left side image - 1.avif */}
+          <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
+            <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
+          </div>
 
-        {/* Right side image - 2.avif */}
-        <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
-          <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
-        </div>
+          {/* Right side image - 2.avif */}
+          <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
+            <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
+          </div>
 
-        {/* National Level Youth Festival Text - Positioned absolutely */}
-        <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
-        </div>
-        {/* Logo */}
-        <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{ marginTop: "-80px", display: "flex", justifyContent: "center" }}>
-          <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
-        </div>
+          {/* National Level Youth Festival Text - Positioned absolutely */}
+          <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
+          </div>
+          {/* Logo */}
+          <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{ marginTop: "-80px", display: "flex", justifyContent: "center" }}>
+            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
+          </div>
 
-        {/* Action Buttons - separate container with mobile-specific positioning */}
-        <div className="flex justify-center items-center mt-8 lg:-mt-72 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-          {isLoggedIn ? (
-            <button
-              className="register-events-btn"
-              style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
-              onClick={handleOpenRegistration}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
-              }}
-            >Register for Events</button>
-          ) : (
-            <button
-              className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
-              style={{
-                marginTop: '0',
-                marginLeft: '0',
-              }}
-              onClick={handleLoginClick}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(236, 72, 153, 0.6)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #db2777, #be185d)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
-                e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
-              }}
-            >Register/Login</button>
-          )}
-        </div>
-        <style>{`
+          {/* Action Buttons - separate container with mobile-specific positioning */}
+          <div className="flex justify-center items-center mt-8 lg:mt-12 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            {isLoggedIn ? (
+              <button
+                className="register-events-btn"
+                style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
+                onClick={handleOpenRegistration}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
+                }}
+              >Register for Events</button>
+            ) : (
+              <button
+                className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
+                style={{
+                  marginTop: '0',
+                  marginLeft: '0',
+                }}
+                onClick={handleLoginClick}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(236, 72, 153, 0.6)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #db2777, #be185d)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
+                  e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
+                }}
+              >Register/Login</button>
+            )}
+          </div>
+          <style>{`
           @media (min-width: 768px) {
             .animate-fadeInDown {
               margin-left: 5% !important;
+            }
+            
+            /* Desktop - ensure button is visible */
+            .hero-action-buttons {
+              margin-top: 3rem !important;
             }
           }
           
@@ -2667,10 +2674,14 @@ const Dashboard: React.FC = () => {
               display: flex !important;
               align-items: center !important;
               justify-content: center !important;
+              margin-top: 1rem !important;
             }
             
-            .register-login-btn {
-              margin-top: -80px !important;
+            .register-login-btn,
+            .register-events-btn {
+              margin-top: 0 !important;
+              margin-left: auto !important;
+              margin-right: auto !important;
             }
             
             /* Adjust all dashboard sections for mobile */
@@ -2681,7 +2692,7 @@ const Dashboard: React.FC = () => {
             
             .about-theme-section {
               order: 1 !important;
-              margin-top: 180px !important;
+              margin-top: 580px !important;
               padding-top: 120px !important;
             }
             
@@ -2734,6 +2745,7 @@ const Dashboard: React.FC = () => {
             }
           }
         `}</style>
+        </div>
       </section>
 
       {/* The Icon Component - Fixed position flower - Hide after about-theme section */}
@@ -7265,7 +7277,7 @@ const Dashboard: React.FC = () => {
                       e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
                     }}
                   >
-                    <span>Culturals Events</span>
+                    <span>Arts/Gaming</span>
                     <span style={{ fontSize: '1.2rem' }}>
                       {expandedSections.has('culturals') ? '▼' : '▶'}
                     </span>

@@ -106,6 +106,12 @@ router.get('/location/states', async (req, res) => {
       });
     }
 
+    // Set cache headers (cache for 1 hour)
+    res.set({
+      'Cache-Control': 'public, max-age=3600',
+      'ETag': `states-${cacheTimestamp}`
+    });
+
     res.json({
       success: true,
       count: statesCache.length,
@@ -154,6 +160,12 @@ router.get('/location/districts', async (req, res) => {
     if (stateNo) {
       districts = districtsCache.filter(d => d.sno === stateNo);
     }
+
+    // Set cache headers (cache for 1 hour)
+    res.set({
+      'Cache-Control': 'public, max-age=3600',
+      'ETag': `districts-${stateNo || 'all'}-${cacheTimestamp}`
+    });
 
     res.json({
       success: true,
@@ -212,6 +224,12 @@ router.get('/location/colleges', async (req, res) => {
         c.District.toLowerCase() === district.toLowerCase()
       );
     }
+
+    // Set cache headers (cache for 1 hour)
+    res.set({
+      'Cache-Control': 'public, max-age=3600',
+      'ETag': `colleges-${state || 'all'}-${district || 'all'}-${cacheTimestamp}`
+    });
 
     res.json({
       success: true,

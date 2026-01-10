@@ -49,12 +49,21 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
     };
   }, []);
 
-  // Load colleges from backend API
+  // Load colleges from backend API when state and district are selected
   useEffect(() => {
     const loadColleges = async () => {
+      // Don't load if state or district is not selected
+      if (!selectedState || !selectedDistrict) {
+        setColleges([]);
+        setFilteredColleges([]);
+        setIsLoading(false);
+        return;
+      }
+
       try {
-        console.log('📚 Loading colleges from API...');
-        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/colleges`;
+        setIsLoading(true);
+        console.log('📚 Loading colleges for:', selectedState, selectedDistrict);
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/colleges?state=${encodeURIComponent(selectedState)}&district=${encodeURIComponent(selectedDistrict)}`;
         const response = await fetch(apiUrl);
         console.log('📚 Response status:', response.status);
 
@@ -68,6 +77,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
           console.log('📚 Loaded colleges count:', result.data.length);
           // Data is already filtered, sorted, and deduplicated by backend
           setColleges(result.data);
+          setFilteredColleges(result.data); // Set filtered colleges immediately
           // Notify parent that colleges are loaded
           if (onCollegesLoaded) {
             onCollegesLoaded();
@@ -81,9 +91,9 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       }
     };
     loadColleges();
-  }, []); // Empty dependency array - only run once on mount
+  }, [selectedState, selectedDistrict]); // Load when state or district changes
 
-  // Filter colleges based on selected state and district
+  // Filter colleges based on search term (state and district filtering already done by backend)
   useEffect(() => {
     // Reset if state or district is not selected
     if (!selectedState || !selectedDistrict) {
@@ -94,21 +104,16 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       return;
     }
 
-    // Filter by both state and district
-    let filtered = colleges.filter(c =>
-      c.State.toLowerCase() === selectedState.toLowerCase() &&
-      c.District.toLowerCase() === selectedDistrict.toLowerCase()
-    );
-
-    // Apply search filter
+    // Apply search filter only (colleges are already filtered by state/district from backend)
+    let filtered = colleges;
     if (searchTerm) {
-      filtered = filtered.filter(c =>
+      filtered = colleges.filter(c =>
         c.Name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     setFilteredColleges(filtered);
-  }, [selectedState, selectedDistrict, colleges, searchTerm]);
+  }, [colleges, searchTerm, selectedState, selectedDistrict]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;

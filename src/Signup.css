@@ -2,6 +2,18 @@
    SIGNUP PAGE – DARK THEME (MATCHING CA MODAL PATTERN)
    ======================================================= */
 
+/* Anti-bot honeypot fields - hidden from real users */
+.honeypot-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  tab-index: -1 !important;
+}
+
 /* Force body and html not to scroll when main signup is active */
 body:has(.signup-overlay-fix),
 html:has(.signup-overlay-fix) {
@@ -163,7 +175,7 @@ body.modal-open {
 .form-section h3 {
   display: block !important;
   /* Show section headers */
-  color: #c96ba1 !important;
+  color: #fff !important;
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;

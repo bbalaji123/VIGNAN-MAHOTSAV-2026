@@ -26,7 +26,7 @@ export const showToast = {
   error: (message: string) => {
     toast.error(message, {
       duration: 5000,
-      position: 'top-right',
+      position: 'top-center',
       style: {
         background: '#ef4444',
         color: '#fff',
@@ -47,8 +47,7 @@ export const showToast = {
   warning: (message: string) => {
     toast(message, {
       duration: 4500,
-      position: 'top-right',
-      icon: '⚠️',
+      position: 'top-center',
       style: {
         background: '#f59e0b',
         color: '#fff',
@@ -65,7 +64,7 @@ export const showToast = {
   info: (message: string) => {
     toast(message, {
       duration: 4000,
-      position: 'top-right',
+      position: 'top-center',
       icon: 'ℹ️',
       style: {
         background: '#3b82f6',

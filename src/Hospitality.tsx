@@ -207,17 +207,17 @@ const Hospitality: React.FC = () => {
         {/* How to Reach Tab */}
         {activeTab === 'howToReach' && (
           <div className="hospitality-tab-content">
-            <h2 className="section-heading-primary">How to Reach</h2>
+            <h2 className="section-heading-primary how-to-reach-heading">How to Reach</h2>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• Vignan University is well-connected to neighboring cities and towns, making it easily accessible for visitors. The nearest major city is Guntur, which is approximately 20 kilometers away. Guntur has a railway station and is connected to major cities like Hyderabad, Vijayawada, and Chennai. From Guntur, one can hire a taxi or take a bus that goes to Tenali to reach Vignan.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• The nearest major railway station is in Tenali which is approximately 12 kM from Vignan University and is connected to major cities like Vishakhapatnam, Chennai, Coimbatore, Cochin.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• One can get down at Vijayawada junction that has great connectivity to all parts of India and reach Tenali by bus which would take around 45 minutes.</p>
             <p className="hospitality-content mb-6 sm:mb-8 text-sm sm:text-base">• There are plenty of auto-rickshaws and buses available from Tenali to reach Vignan University.</p>
 
-            <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
+            <h2 className="section-heading-primary how-to-reach-contact-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
 
-            <h3 className="section-subheading">For Boys:</h3>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h3 className="section-subheading how-to-reach-subheading">For Boys:</h3>
+            <div className="hospitality-table-container how-to-reach-table-container">
+              <table className="hospitality-table how-to-reach-table">
                 <thead>
                   <tr >
                     <th >Name</th>
@@ -226,36 +226,36 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Ashwin</td>
+                    <td >Mr. Ashwin</td>
                     <td >88852 84355</td>
                   </tr>
                   <tr >
-                    <td >Ajith anna</td>
+                    <td >Mr. Ajith</td>
                     <td >93461 93840</td>
                   </tr>
                   <tr >
-                    <td >Hemanth</td>
+                    <td >Mr. Hemanth</td>
                     <td >88854 76252</td>
                   </tr>
                   <tr >
-                    <td >Phani</td>
+                    <td >Mr. Phani</td>
                     <td >95426 66866</td>
                   </tr>
                   <tr >
-                    <td >Nawaz Basha</td>
+                    <td >Mr. Nawaz Basha</td>
                     <td >99638 76989</td>
                   </tr>
                   <tr >
-                    <td >Yeshwanth</td>
+                    <td >Mr. Yeshwanth</td>
                     <td >83091 90435</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h3 className="section-subheading">For Girls:</h3>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h3 className="section-subheading how-to-reach-subheading">For Girls:</h3>
+            <div className="hospitality-table-container how-to-reach-table-container">
+              <table className="hospitality-table how-to-reach-table">
                 <thead>
                   <tr >
                     <th >Name</th>
@@ -264,24 +264,24 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Yamini</td>
+                    <td >Ms. Yamini</td>
                     <td >70939 12677</td>
                   </tr>
                   <tr >
-                    <td >Sravani</td>
+                    <td >Ms. Sravani</td>
                     <td >90147 04929</td>
                   </tr>
                   <tr >
-                    <td >Bindhu</td>
+                    <td >Ms. Bindhu</td>
                     <td >99590 22317</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <h2 className="section-heading-primary hospitality-heading-centered mt-8">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h2 className="section-heading-primary how-to-reach-further-heading mt-8">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <div className="hospitality-table-container how-to-reach-table-container">
+              <table className="hospitality-table how-to-reach-table">
                 <thead>
                   <tr >
                     <th >Name</th>
@@ -290,11 +290,11 @@ const Hospitality: React.FC = () => {
                 </thead>
                 <tbody>
                   <tr >
-                    <td >Lohith</td>
+                    <td >Mr. Lohith</td>
                     <td >8309751051</td>
                   </tr>
                   <tr >
-                    <td >Sri Vatsav</td>
+                    <td >Mr. Sri Vatsav</td>
                     <td >94419 34549</td>
                   </tr>
                 </tbody>
@@ -328,11 +328,11 @@ const Hospitality: React.FC = () => {
         {/* Contacts Tab */}
         {activeTab === 'contacts' && (
           <div className="hospitality-tab-content">
-            <h2 className="section-heading-primary">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
+            <h2 className="section-heading-primary contacts-heading">FOR QUERIES AND DETAILS ON ACCOMMODATION CONTACT:</h2>
 
-            <h3 className="section-subheading hospitality-subheading-padded">For Boys:</h3>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h3 className="section-subheading contacts-subheading">For Boys:</h3>
+            <div className="hospitality-table-container contacts-table-container">
+              <table className="hospitality-table contacts-table">
                 <thead>
                   <tr >
                     <th >Name</th>
@@ -368,9 +368,9 @@ const Hospitality: React.FC = () => {
               </table>
             </div>
 
-            <h3 className="section-subheading hospitality-subheading-padded">For Girls:</h3>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h3 className="section-subheading contacts-subheading">For Girls:</h3>
+            <div className="hospitality-table-container contacts-table-container">
+              <table className="hospitality-table contacts-table">
                 <thead>
                   <tr >
                     <th >Name</th>
@@ -394,9 +394,9 @@ const Hospitality: React.FC = () => {
               </table>
             </div>
 
-            <h2 className="section-heading-primary hospitality-heading-centered">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
-            <div className="hospitality-table-container">
-              <table className="hospitality-table">
+            <h2 className="section-heading-primary contacts-further-heading">FOR FURTHER QUERIES AND DETAILS CONTACT:</h2>
+            <div className="hospitality-table-container contacts-table-container">
+              <table className="hospitality-table contacts-table">
                 <thead>
                   <tr >
                     <th >Name</th>

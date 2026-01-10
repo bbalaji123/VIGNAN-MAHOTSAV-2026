@@ -59,7 +59,7 @@
 }
 
 .hospitality-tab-btn.active {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background: #fdee71;
   color: #000;
   box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
 }
@@ -105,7 +105,7 @@
 
 .hospitality-mobile-select:focus {
   outline: none;
-  border-color: #fbbf24;
+  border-color: #fdee71;
   box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
 }
 
@@ -148,9 +148,10 @@
   font-family: 'Aladin', cursive !important;
   font-size: 1.75rem;
   font-weight: bold;
-  color: #DB2777;
+  color: #fdee71;
   margin-bottom: 1rem;
   margin-top: 0.1rem;
+  margin-right: 300px;
 }
 
 .section-heading-center {
@@ -167,9 +168,9 @@
   font-family: 'Aladin', cursive !important;
   font-size: 1.375rem;
   font-weight: bold;
-  color: #fbbf24;
+  color: #fdee71;
   margin-top: 1.5rem;
-  margin-left: 20px;
+  margin-left: 550px;
   margin-bottom: 1rem;
 }
 
@@ -285,7 +286,7 @@
 }
 
 .hospitality-heading-centered {
-  margin-left: 350px;
+  margin-left: 320px;
 }
 
 @media (max-width: 768px) {
@@ -366,5 +367,89 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* ===================================================
+   HOW TO REACH SECTION - Independent Styling
+   =================================================== */
+
+.how-to-reach-subheading {
+  margin-left: 550px !important;
+}
+
+.how-to-reach-table {
+  margin-left: 300px !important;
+}
+
+.how-to-reach-contact-heading {
+  margin-left: 0 !important;
+  margin-right: 300px !important;
+}
+
+.how-to-reach-further-heading {
+  margin-left: 320px !important;
+}
+
+@media (max-width: 768px) {
+  .how-to-reach-subheading {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+
+  .how-to-reach-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .how-to-reach-contact-heading,
+  .how-to-reach-further-heading {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center;
+  }
+}
+
+/* ===================================================
+   CONTACTS SECTION - Independent Styling (Centered)
+   =================================================== */
+
+.contacts-heading {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.contacts-subheading {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.contacts-table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.contacts-table {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.contacts-further-heading {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (max-width: 768px) {
+  .contacts-heading,
+  .contacts-subheading,
+  .contacts-further-heading {
+    text-align: center !important;
+  }
+
+  .contacts-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }

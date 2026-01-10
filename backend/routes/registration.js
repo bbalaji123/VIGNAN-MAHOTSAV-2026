@@ -56,6 +56,16 @@ router.get('/branches', (req, res) => {
 ===================================================== */
 router.post('/register', async (req, res) => {
   try {
+    // Anti-bot honeypot validation - check if bot filled honeypot fields
+    const { company_name, address2 } = req.body;
+    if (company_name || address2) {
+      console.log('Bot detected - honeypot triggered:', { company_name, address2, ip: req.ip });
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid request'
+      });
+    }
+
     const {
       name, email, password, phone,
       college, branch, dateOfBirth,

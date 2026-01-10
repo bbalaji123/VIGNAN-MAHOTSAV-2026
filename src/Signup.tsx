@@ -183,6 +183,28 @@ const Signup: React.FC<SignupProps> = ({
                     <option value="Female">Female</option>
                   </select>
                 </div>
+                
+                {/* Honeypot fields - hidden from real users, catch bots */}
+                <div className="honeypot-field" aria-hidden="true">
+                  <label htmlFor="company_name">Company Name</label>
+                  <input
+                    type="text"
+                    id="company_name"
+                    name="company_name"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="honeypot-field" aria-hidden="true">
+                  <label htmlFor="address2">Address 2</label>
+                  <input
+                    type="text"
+                    id="address2"
+                    name="address2"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
               </div>
 
               <AcademicInfoStep

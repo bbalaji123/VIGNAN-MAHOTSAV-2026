@@ -280,7 +280,7 @@ const EventDetail: React.FC = () => {
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "All participants must come with a proper sports attire.",
-        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "All rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, short put, long Jump and 3 K for men only.",
         "Everyone should report at least 30 mins before scheduled time.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team.",
         "Prize Money - Men: 1st Rs.3,000 | 2nd Rs.2,000 | 3rd Rs.1,000",
@@ -293,11 +293,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. Md.Karishma", phone: "+91 73868 57843" },
-        { name: "Mr. G.Srinu", phone: "+91 93928 34630" },
-        { name: "Ms. Hima", phone: "+91 85208 22204" },
-        { name: "Mr. Hemanth", phone: "+91 74160 65745" },
+        { name: "Mr. G.Srinivas", phone: "+91 93928 34630" },
+        { name: "Ms. Himasri", phone: "+91 85208 22204" },
+        { name: "Mr. Hema Naga Venkata Krishna", phone: "+91 74160 65745" },
         { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
-        { name: "Ms. M. Venkata swamy", phone: "+91 83176 56282" }
+        { name: "Mr. M. Venkata swamy", phone: "+91 83176 56282" }
 
       ]
     },
@@ -308,7 +308,7 @@ const EventDetail: React.FC = () => {
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "All participants must come with a proper sports attire.",
-        "Sport Authority of India (SAI) rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, Short put, long Jump and 3 K for men only.",
+        "All rules are applicable for all Track & Field events under Men & Women categories i.e., 100 M, 400 M, 800 M, 4 X 100 M relay, 4 x 400 M relay, short put, long Jump and 3 K for men only.",
         "Everyone should report at least 30 mins before scheduled time.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
@@ -363,19 +363,15 @@ const EventDetail: React.FC = () => {
         "All India Chess Federation Rules & Regulations are adopted for the competition.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Tie breaks is as following: A. Buchholz B. Buchholz but 1 C. Sonneburn burger D. Direct encounter E. Great number of victories",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "7.	If a player wishes to raise any issue or concern, he/she must approach the Protest Team within 15 minutes.",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         first: "Rs. 6,000",
         second: "Rs. 4,000"
       },
       contacts: [
-        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
-        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
-        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
-        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
-        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026" }
       ]
     },
     "Table Tennis": {
@@ -390,19 +386,15 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "There will be only three sets for each match.",
         "Five sets will be conducted for semifinals and finals.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000."
       ],
       prizes: {
         first: "Rs. 3,000",
         second: "Rs. 2,000"
       },
       contacts: [
-        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
-        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
-        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
-        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
-        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-
+        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" }
       ]
     },
     "Tennikoit": {
@@ -414,18 +406,15 @@ const EventDetail: React.FC = () => {
         "All participants must come with a proper sports attire.",
         "Participants should report at least 30 mins before scheduled time.",
         "The match is played as the best of 3 sets, 21+21+15 points.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         first: "Rs. 2,000",
         second: "Rs. 1,500"
       },
       contacts: [
-        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
-        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
-        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
-        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
-        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" }
       ]
     },
     "Traditional Yogasana": {
@@ -437,8 +426,19 @@ const EventDetail: React.FC = () => {
         "Everyone should report at least 30 mins before scheduled match time.",
         "All participants must come with a proper sports attire.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
-        "Syllabus, Rules & Regulations for the Yogasana events: Traditional Yogasana (singles) Event - Syllabus of Seniors A for Men & Women as per new code of points of Yogasana Bharat",
-        "Artistic Yogasana (singles) Event - Artistic Yogasana Single Event syllabus as per new code of points of Yogasana Bharat",
+        "Rules & Regulations for the Yogasana events:",
+        "A.	Traditional Yogasana (singles) Event", 
+        "Total Marks: 70",
+        "Competition Format: One final round only.",
+        "Holding Time:",
+        "Compulsory Asanas: 30 seconds.",
+        "Optional Asanas: 15 seconds.",
+        "B.	Artistic Yogasana (singles) Event",
+        "Total Marks: 150",
+        "Number of Asanas: 10",
+        "Performance Time: 150–180 seconds",
+        "Holding Time per Asana: Minimum 5 seconds",
+        "Requirement: Athletes must cover at least 3 major categories in their routine",
         "Link to refer syllabus: https://www.yogasanabharat.com/code",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
       ],
@@ -447,12 +447,8 @@ const EventDetail: React.FC = () => {
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
       contacts: [
-        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
-        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
-        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
-        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
-        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
-
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026" }
       ]
     },
     "Yoga & Individual": {
@@ -521,18 +517,17 @@ const EventDetail: React.FC = () => {
         "World Taekwondo (WT) new competition rules are applicable.",
         "Senior men and women kyorugi competitions only.",
         "All participants must come with a proper sports attire.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "Participants must wear chin guards, forearm guards, and groin guards, which must arrange by your own.",
+        "Chest guards and helmets will be provided.",
+        "Jury Decision is final, if a player wishes to raise any issue or concern, he/she must approach the Protest Team within 15 minutes.",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         first: "Rs. 1,500",
         second: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. H. Harshith", phone: "+91 80191 71205" },
-        { name: "Mr. S. Siva Subrahmanyam", phone: "+91 93479 10733" },
-        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
-        { name: "Ms. G. Gayathri", phone: "+91 93929 60026" },
-        { name: "Ms. S. Sowmya", phone: "+91 70136 39789" }
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" }
       ]
     },
     "Para Sports": {
@@ -580,10 +575,10 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Volley ball (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "VOLLEY BALL (M&W)",
       rules: [
-        "Team strength is 7+5 players.",
+        "Team strength is 6+4 players.",
         "Match will be organized for a total of 3 sets and each set contains 25+25+15 points. It may vary depending upon the situation after prior information to both participating teams.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
@@ -592,7 +587,8 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         men: {
@@ -607,17 +603,11 @@ const EventDetail: React.FC = () => {
         }
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" }
       ]
     },
     "Volley ball (Women)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "VOLLEY BALL (Women)",
       rules: [
         "Team strength is 7+5 players.",
@@ -646,7 +636,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Basket ball (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "BASKET BALL (M&W)",
       rules: [
         "Team strength is 5+5 players.",
@@ -658,7 +648,8 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         men: {
@@ -673,13 +664,8 @@ const EventDetail: React.FC = () => {
         }
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
         { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" }
       ]
     },
     "Basket ball (Women)": {
@@ -711,7 +697,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Kabaddi (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "KABADDI (M&W)",
       rules: [
         "Team strength is 7+3 players.",
@@ -725,7 +711,8 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000"
       ],
       prizes: {
         men: {
@@ -741,16 +728,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. S. Rathna Prabhooth", phone: "+91 63030 13174" }
       ]
     },
     "Kabaddi (Women)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "KABADDI (Women)",
       rules: [
         "Team strength is 7+3 players.",
@@ -773,16 +755,11 @@ const EventDetail: React.FC = () => {
       contacts:
         [
           { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-          { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-          { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-          { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-          { name: "Mr. Anil", phone: "+91 83093 78066" },
-          { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-          { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+          { name: "Mr. S. Rathna Prabhooth", phone: "+91 63030 13174" }
         ]
     },
     "Kho-Kho (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "KHO-KHO (M&W)",
       rules: [
         "Team strength is 9+3 players.",
@@ -793,7 +770,9 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000",
+        "No player is allowed to participate in multiple teams. If found, the team will be disqualified."
       ],
       prizes: {
         men: {
@@ -806,17 +785,12 @@ const EventDetail: React.FC = () => {
         }
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. N. Anil Kumar", phone: "+91 83093 78066" },
+        { name: "Mr. S. Rathna Prabhooth", phone: "+91 63030 13174" }
       ]
     },
     "Kho-Kho (Women)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "KHO-KHO (Women)",
       rules: [
         "Team strength is 9+3 players.",
@@ -844,7 +818,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Hockey (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "HOCKEY (Men)",
       rules: [
         "Team strength is 7+3 players.",
@@ -855,20 +829,15 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000."
       ],
       prizes: {
         first: "Rs. 15,000",
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. Bellamkonda Harsha sai", phone: "+91 88852 19568" }
       ]
     },
     "Hockey (Women)": {
@@ -900,7 +869,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Football (Men)": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "FOOTBALL (Men)",
       rules: [
         "Team strength is 7+3 players.",
@@ -912,7 +881,8 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000."
       ],
       prizes: {
         first: "Rs. 30,000",
@@ -921,13 +891,7 @@ const EventDetail: React.FC = () => {
         fourth: "Rs. 3,000"
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Mr. Y. RaghuRam", phone: "+91 99898 84558" }
       ]
     },
     "Football (Women)": {
@@ -960,10 +924,10 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Throw ball": {
-      title: "Team Fields",
+      title: "Team Events",
       subtitle: "THROWBALL (Women)",
       rules: [
-        "Team limit is 9+1 players.",
+        "Team limit is 9+3 players.",
         "The match is played as the best of 3 sets, 25+25+15 points.",
         "All matches are conducted on knock out basis.",
         "Every team should report at least 30 mins before scheduled match time.",
@@ -972,20 +936,17 @@ const EventDetail: React.FC = () => {
         "All teams must register the required number of players, including substitutes and submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
-        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team."
+        "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
+        "Protest Fee: ₹2000."
+
       ],
       prizes: {
         first: "Rs. 15,000",
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
-        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
-        { name: "Mr. N. Shivaji", phone: "+91 83090 65560" },
-        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
-        { name: "Mr. Anil", phone: "+91 83093 78066" },
-        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
-        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" }
+        { name: "Ms. Mounika Uppala", phone: "+91 96181 09821"},
+        {name: "Ms. Nirmitha Jyosthna", phone: "+91 75697 1780"}
       ]
     },
     "Classical Dance Solo": {
@@ -995,6 +956,7 @@ const EventDetail: React.FC = () => {
         "The classical dance performed can be from any of the approved schools of dance, such as Kathak, Kathakali, Bharat Natyam, Manipuri, Kuchipudi, Mohiniyattam, or Odissi.",
         "Participants will be allowed up to 10 minutes, which includes preparation time. Maximum three accompanists are permissible. Audio tracks are also permitted.",
         "The selected song(s) must not appear in movies or shows. However, if an original song is present in a movie, the original composition should be used.",
+        "Elements like fire, water or harmful substances must not be used.",
         "Judgment will be based on the qualities like Tal, Technique, Rhythm, Abhinaya or Expression, Costumes, Footwork and general impression."
       ],
       prizes: {
@@ -1003,7 +965,7 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Ms. Ch. Aparna", phone: "+91 8523 81322" },
+        { name: "Ms. Ch. Aparna", phone: "+91 85238 13227" },
         { name: "Mr. B. Ram Chandu", phone: "+91 83412 40966" },
         { name: "Ms. Asritha", phone: "+91 73868 89772" },
         { name: "Ms. Vineesha", phone: "+91 99516 95475" }
@@ -1022,9 +984,8 @@ const EventDetail: React.FC = () => {
         "1st round: 2 minutes (one pallavi and one charanam without karaoke)",
         "2nd round: 3 minutes (Fast beat song with karaoke)",
         "3rd round: 3 minutes (Melody with karaoke)",
-        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman / K V Mahadevan/ MM Keeravani / Mani Sharma. Karaoke is must)",
-        "Promotion to the final round: Average scores from the 2nd and 3rd rounds will be utilized for promotion to the final round.",
-        "Declaration of the IDOL: The final score will be calculated as a composite of 40% of the average scores from the 2nd and 3rd rounds, and 60% of the score from the 4th round performance."
+        "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman /  K  V Mahadevan/ Anirudh Ravichandran / MM Keeravani / Mani Sharma. Karaoke is must)",
+        "Evaluation – Average scores of 2nd and 3rd round will be taken to get promoted to 4th round. For finals 40% of scores in the average of 2 & 3 rounds and 60% of scores for the performance in the 4th round will be added to declare the IDOL"
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -1046,6 +1007,7 @@ const EventDetail: React.FC = () => {
         "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
         "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
         "Any audio or track that are offensive, criticising or hurt others feelings must be avoided. This includes for ex. AI generated spoofs.",
+        "Elements like fire, water or harmful substances must not be used.",
         "Judgement will be based on choreography, selection of songs, expression and overall performance."
       ],
       prizes: {
@@ -1054,7 +1016,7 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Ms. Ch. Aparna", phone: "+91 8523 81322" },
+        { name: "Ms. Ch. Aparna", phone: "+91 85238 13227" },
         { name: "Mr. B. Ram Chandu", phone: "+91 83412 40966" },
         { name: "Ms. Asritha", phone: "+91 73868 89772" },
         { name: "Ms. Vineesha", phone: "+91 99516 95475" }
@@ -1064,10 +1026,9 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Group Singing",
       rules: [
-        "A performing group must consist of a minimum of 4 singers and a maximum of 6 singers.",
-        "The performance may be accompanied by either a live band (maximum of 3 accompanists) or a karaoke track.",
-        "A participant (singer) is limited to performing with only one team. However, accompanists are permitted to perform with multiple teams.",
-        "Folk song / Film song of any language can be chosen for performance, any songs of that may be lead to controversies are not allowed.",
+        "Group can consist of a minimum of 3 singers and a maximum of 6 singers, and the performance can be accompanied by either a band with instruments (Maximum Number of accompanies are 3) or a karaoke.",
+        "A participant must be limited to a single team; however, the accompanists can perform with multiple teams.",
+        "Folk song / Film song of any language can be chosen for performance, any songs of (professionally rival Telugu actor families) that may be lead to controversies are not allowed.",
         "Maximum time allowed for the group song is 5 minutes which does not include setting time. The setting time for a group shall not exceed 3 minutes.",
         "Judgement will be strictly on the basis of quality of singing only. Things like make-up, costumes and actions of the team are not considered for judgement."
       ],
@@ -1087,11 +1048,11 @@ const EventDetail: React.FC = () => {
       subtitle: "Singing Jodi",
       rules: [
         "This is a Jodi singing competition (Each performance must feature exactly two singers).",
-        "The number of accompanists should not exceed two. Karaoke is permitted only in the absence of accompanists.",
-        "The maximum duration of the performance shall be 4 minutes.",
-        "The maximum time for Stage/ Instruments setting is 3 minutes",
-        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
-        "Judgment will be made on the qualities like, pitch, rhythm, coordination and general impression."
+        "Time for Stage/ Instruments setting is maximum 4 minutes.",
+        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence. ",
+        "Duration of the performance shall be 4 minutes. ",
+        "Film song of any language can be chosen for performance, any songs of (professionally rival Telugu actor families) that may lead to controversies are not allowed.",
+        "Judgment will be made on the qualities like, composition rhythm, coordination and general impression."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -1108,12 +1069,12 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Classical/Light Vocal Solo",
       rules: [
-        "The maximum duration of the performance shall not exceed 6 minutes.",
-        "The item can be presented in either Hindusthani, Carnatic or Light Vocal styles.",
-        "Maximum number of accompanists permitted is two. A Shruthi box must be used(Accompanists must also be registered).",
+        "The maximum duration of the performance shall not be more than 6 minutes.",
+        "Maximum number of accompanists is two. Shruthi box should be used (Accompanists should also get registered).",
+        "Item can be presented in either Hindustani or Carnatic style.",
         "Movie songs are not allowed under this item.",
-        "For Light Vocal, only non-film songs/ geet/ ghazal/ bhajan/ shabad and abhangas can be presented.",
-        "Sufficient thought and care must be exercised in the choice of Raga and composition.",
+        "Only non-film songs/ geet/ ghazal/ bhajan/ shabad and abhangas can be presented for Light vocal.",
+        "Sufficient thought and care must be exercised in the choice of Raga and composition",
         "Judgement will be based on the qualities like Taal, Selection of Raga, Composition and general impression."
       ],
       prizes: {
@@ -1131,10 +1092,10 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Western Vocal Solo",
       rules: [
-        "The maximum duration for the performance shall be 4 minutes.",
-        "The maximum time for Stage/ Instruments setting is 2 minutes.",
+        "Time for Stage/ Instruments setting is maximum 2 minutes.",
         "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence.",
-        "The songs language can be either in English or any other Foreign language.",
+        "Duration of the performance shall be 4 minutes.",
+        "Language of the song can be any Foreign language.", 
         "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
       ],
       prizes: {
@@ -1171,7 +1132,7 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Instrumental Solo",
       rules: [
-        "This category is open to all types of instruments, including Western or Classical, and Percussion or Non-Percussion.",
+        "•	The Instrumental Solo Performance category is open to all types of instruments, whether Western or Classical, Percussion or Non-Percussion.",
         "No pre-processed or programmed sounds/loops are allowed in the performance.",
         "Item can be presented in any style or genre.",
         "Participants must bring their own instruments.",
@@ -1198,7 +1159,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Skit": {
-      title: "THEATRE",
+      title: "DRAMATICS",
       subtitle: "Skit",
       rules: [
         "A minimum of 4 and a maximum of 8 participants are allowed to participate in one item.",
@@ -1219,10 +1180,10 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Mime": {
-      title: "THEATRE",
+      title: "DRAMATICS",
       subtitle: "Mime",
       rules: [
-        "Minimum 3 and Maximum of 6 participants are allowed to participate in a team",
+        "Minimum 3 and Maximum of 8 participants are allowed to participate in a team",
         "Judgment will most likely be based on the qualities like idea, creativity of presentation, use of make-up, general impression.",
         "Duration of performance shall be for maximum of 5 minutes.",
         "Background music with no vocals is allowed."
@@ -1241,15 +1202,14 @@ const EventDetail: React.FC = () => {
       title: "DANCE",
       subtitle: "Dancing Star - Western Dance Duo",
       rules: [
-        "This is a dual dance competition and must feature exactly two dancers.",
-        "The choice of the genre is left to the team.",
-        "The duo can be a Boy/Boy (BB), Boy/Girl (BG), or Girl/Girl (GG) pairing.",
+        "This is a dual dance competition and choice of genre is left to the team.",
         "The maximum duration of the performance should not exceed 4 minutes.",
-        "The audio track must be submitted in pen drive to the coordinator before the event starts.",
-        "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
-        "Film song of any language can be chosen for performance, any songs that may lead to controversies are not allowed.",
-        "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
-        "Judgement will be based on choreography, song selection, synchronization and overall performance."
+        "The duo can either be a BB/BG/GG.",
+        "The audio track is to be submitted in pen drive to the coordinator before the event starts.",
+        "Film song of any language can be chosen for performance, any songs of (professionally rival Telugu actor families) that may lead to controversies are not allowed.",
+        "Use of fire (including diyas , candles or lighters) and water is not allowed.",
+        "Judgement will be based on choreography, song selection, synchronization and overall performance.",
+        "Any audio or track that are offensive, criticising or hurt others feelings must be avoided. For ex. AI generated spoofs."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -1257,7 +1217,7 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Ms. Ch.Aparna", phone: "+91 85238 13227" },
         { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
         { name: "Ms. Asritha", phone: "+91 73868 89772" },
         { name: "Ms. Vineesha", phone: "+91 99516 95475" }
@@ -1281,7 +1241,7 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,500"
       },
       contacts: [
-        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Ms. Ch.Aparna", phone: "+91 85238 13227" },
         { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
         { name: "Ms. Asritha", phone: "+91 73868 89772" },
         { name: "Ms. Vineesha", phone: "+91 99516 95475" }
@@ -1297,8 +1257,7 @@ const EventDetail: React.FC = () => {
         "In case of using movie songs or movie references in the audio tracks, any sort of controversial elements is to be avoided.",
         "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
         "Any audio or track that is offensive, criticizing, or hurts others' feelings must be avoided. For example, AI-generated spoofs are not permitted.",
-        "Judgment will be based on the following: choreography, creativity in presentation, track selection, formations, costume, synchronization, and overall performance.",
-        "Note: If the performance portrays any specific theme, it is strongly advised to avoid repetitive and routine themes, such as Kanchana etc. Themes are encouraged to be youth-centric, thought-provoking or crowd pulling."
+        "Judgment will be based on the following: choreography, creativity in presentation, track selection, formations, costume, synchronization, and overall performance."
       ],
       prizes: {
         first: "Rs. 15,000",
@@ -1306,17 +1265,16 @@ const EventDetail: React.FC = () => {
         third: "Rs. 8,000"
       },
       contacts: [
-        { name: "Ms. Ch.Aparna", phone: "+91 8523 81322" },
+        { name: "Ms. Ch.Aparna", phone: "+91 85238 13227" },
         { name: "Mr. B.Ram Chandu", phone: "+91 83412 40966" },
         { name: "Ms. Asritha", phone: "+91 73868 89772" },
         { name: "Ms. Vineesha", phone: "+91 99516 95475" }
       ]
     },
     "Mono Action": {
-      title: "THEATRE",
+      title: "DRAMATICS",
       subtitle: "Mono Action",
       rules: [
-        "This is an individual competition.",
         "Each participant artist will be given 4 minutes.",
         "The participant is required to perform an act of any theme. ",
         "Obscenity and offensive gestures are strictly prohibited. ",
@@ -1328,12 +1286,12 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. K.Pavankishore", phone: "+91 99633 17059" },
         { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
     "Spot Ad Making": {
-      title: "THEATRE",
+      title: "DRAMATICS",
       subtitle: "On the Spot Ad Making",
       rules: [
         "A maximum of 4 participants are allowed to participate in a team.",
@@ -1354,7 +1312,7 @@ const EventDetail: React.FC = () => {
       ]
     },
     "Dialogue Dhamaka": {
-      title: "THEATRE",
+      title: "DRAMATICS",
       subtitle: "Dialogue Dhamaka",
       rules: [
         "It is an individual competition.",
@@ -1368,7 +1326,7 @@ const EventDetail: React.FC = () => {
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. K.Pavankishore", phone: "+91 9963317059" },
+        { name: "Mr. K.Pavankishore", phone: "+91 99633 17059" },
         { name: "Mr. P.Samba Siva Rao", phone: "+91 63011 24757" }
       ]
     },
@@ -1401,7 +1359,7 @@ const EventDetail: React.FC = () => {
         "Creative writing is defined as any writing of the participant's own composition.",
         "Participants are required to write an essay on a particular topic that will be given on the spot.",
         "The written submissions are to be submitted within the specified duration.",
-        "The word limit for the competition is 500-600 words.",
+        "The word limit for the competition is 800 words.",
         "Judgement is based on creativity and originality, relevance to the given topic, clarity and coherence of ideas, effective language use, and correctness of grammar"
       ],
       prizes: {
@@ -1510,29 +1468,10 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Dumb Charades",
       rules: [
-        "Team Composition and Time Limits",
-        "Participation is strictly limited to teams of two (2) members.",
-        "The maximum time allotted for a team to successfully enact and guess one word/phrase is 90 seconds (1 minute 30 seconds).",
-        "The competition will consist of multiple rounds. Each team will attempt to guess a predetermined number of clues (e.g., 5 clues) per turn.",
-        "Gameplay",
-        "Word/Phrase Cards: Teams will be provided with clue cards containing a word, phrase, or movie title (in any language).",
-        "Roles: One member of the team will act out the clue (The Enactor), and the other member will guess the clue (The Guesser).",
-        "Non-Verbal Rule: The Enactor must perform the charade using only gestures, body movements, and facial expressions. No lip movements, pointing to written words, or sounds are allowed. Any violation of this rule will result in the immediate cancellation of the current clue and a penalty.",
-        "Passing: Teams are permitted to pass on a clue if they are unable to guess it within a reasonable time. The team may only return to a passed clue if they complete all others within the 90-second limit.",
-        "Scoring and Judging",
-        "Scoring: Points will be awarded for each successfully guessed clue.",
-        "3 Points for each correctly guessed movie/phrase.",
-        "Penalty: -2 Points will be deducted for any infringement of the non-verbal rule (lip movement, sound).",
-        "Winning: The team with the highest total score after all rounds will be declared the winner. In case of a tie, a sudden death round will be conducted.",
-        "Conduct",
-        "Electronic Devices: The use of any electronic device, including mobile phones, to search for clues or assist in guessing is strictly prohibited and will result in disqualification.",
-        "Audience Assistance: Audience members are not allowed to prompt, shout, or assist the guessing team. Any deliberate attempt to assist will be penalized at the judge's discretion.",
-        "Judge's Decision: The decision of the Judge/Coordinator on the validity of the guess and any rule violations is final.",
-        "Cash Prizes:",
-        "First - Rs. 2000",
-        "Second - Rs. 1500",
-        "Third - Rs. 1000",
-        "Contact no:"
+        "Enacting the word without your voice does need patience. Here you find the test of your own least bothered patience.",
+        "The team of two will be permitted for the competition.",
+        "The team will be provided with the sort of words that might be either the movie names or some sort of word.",
+        "One among the team has to enact the word and the other has to say the word."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1550,25 +1489,12 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Quiz Wiz",
       rules: [
-        "This competition is designed to test participants' knowledge across a wide spectrum of subjects.",
-        "I. Registration and Team Composition",
-        "Team Size: Participation is strictly limited to teams of three (3) members.",
-        "Team Formation: Teams are permitted regardless of college affiliation. However, all participants must be registered students.",
-        "Conduct: Any attempt by a team to disrupt or 'mess the atmosphere' of the contest through unfair means or unsportsmanlike conduct will result in immediate disqualification.",
-        "II. Event Structure and Rounds",
-        "The competition will consist of a maximum of three rounds. The Quizmaster reserves the right to modify the number or type of rounds based on the number of participating teams.",
-        "Round 1: This will be a written round containing the questions covering various topics.",
-        "Round 2: Knowledge Dropping (Mechanism to be Defined by Quizmaster): This will be a multi-answer or visual round where points may be awarded for each correct piece of information provided, testing deep knowledge in a specific area.",
-        "Round 3: Speeding Test (Buzzer Round): This is a rapid-fire round where the fastest correct answer wins' points.",
-        "III. General Rules of Conduct",
-        "Electronic Devices: The use of any electronic gadgets, including but not limited to mobile phones, laptops, smartwatches, or any external material (printed or digital) is strictly prohibited. Violation will result in immediate disqualification of the entire team.",
-        "Stationery: All necessary stationery (pens, paper) will be provided by the organizers. Participants are not allowed to bring any loose paper, personal pens, or external writing material into the competition area.",
-        "Subject Areas: Questions will cover History, Mythology, Literature, Social Sciences, General World Affairs, and current events.",
-        "Discipline: Arguments or aggressive disputes with the contestants, the Quizmaster, or the coordinators over questions or answers are strictly prohibited and will lead to the immediate elimination of the offending team.",
-        "Quizmaster's Decision: The decision of the Quizmaster on all matters, including questions, answers, and scoring, is final and binding.",
-        "IV. Scoring and Tie-Breaker (Essential additions)",
-        "Scoring System: (To be announced before the start of Round 1). Points will be allocated for correct answers, and negative marking may be applied for incorrect answers in the buzzer rounds.",
-        "Tie-Breaker: In the event of a tie for the top position, a sudden death question or a separate tie-breaker round will be conducted to determine the winner."
+        "The knowledge to know is never ending. Learning to exhibit maybe one’s passion and the platform to be chosen is what is called Quiz. Here the participants will be made into teams where each team consists of three people and they will be tested in the areas of history, mythology, literature, social sciences, general world affairs etc.; A maximum of three rounds will be conducted which include fill the abbreviations, knowledge dropping and speeding test to decide the winner among the participants.",
+        "The team of three will be permitted for the competition.",
+        "The teams are not based on the college name or any sort of group messing the atmosphere of the contest.",
+        "The people are being provided with the stationary. Thus no loose paper, pen or any sort of material is entertained.",
+        "Use of electronic gadgets like cell phones, laptops or any material will violate the rules of the contest.",
+        "Arguments over issues with either the contestant or the coordinator will lead to elimination from the contest."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -1599,12 +1525,7 @@ const EventDetail: React.FC = () => {
         "Timing: The specific time limits for Solving Anagrams and Solving Crosswords will be announced on the spot by the coordinator.",
         "Progression: Contestants will be filtered based on performance in each preceding round to advance to the next stage.",
         "Device Usage: The use of any electronic device, mobile phone, or external reference material is strictly prohibited and will result in immediate disqualification.",
-        "Scoring criteria: Scoring will be based on accuracy and time taken to complete the task",
-        "Cash Prizes:",
-        "First - Rs. 2000",
-        "Second - Rs. 1500",
-        "Third - Rs. 1000",
-        "Contact no:"
+        "Scoring criteria: Scoring will be based on accuracy and time taken to complete the task."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1851,7 +1772,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -1861,7 +1782,8 @@ const EventDetail: React.FC = () => {
       subtitle: "Craft Villa (Accessory Design)",
       rules: [
         "Maximum of 2 people can be in a team.",
-        "The teams should bring their own required materials.Items allowed:",
+        "The teams should bring their own required materials.",
+        "Items allowed:",
         "a) Paper Quilling",
         "b) Beaded Accessories Design.",
         "c) Antique Accessories Design.",
@@ -1879,7 +1801,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -1903,7 +1825,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -1928,7 +1850,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -1948,7 +1870,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -1960,6 +1882,8 @@ const EventDetail: React.FC = () => {
         "This is an individual personality competition for male and female categories.",
         "It is a multiple round event where the participant will be tested on various capabilities like talent, presentation skills etc.",
         "Details of Rounds:",
+        "Winners will be awarded with the title of Mr. / Ms. Mahotsav along with a crowning ceremony.",
+        "Details of Rounds:",
         "Round 1 : It is a written round on personality assessment based questions.",
         "Round 2 : It is a Talent Round. Any talent that you posses can be exhibited within the time limit of 2 to 3 minutes.",
         "Round 3 : Participants should present their perspective on the given real time or general situation given by the jury."
@@ -1970,7 +1894,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. S.Satya Reddy", phone: "+91 93900 41156" },
-        { name: "Ms. Sara", phone: "+91 94904 84233" },
+        { name: "Ms. Sara", phone: "+91 79815 69853" },
         { name: "Mr. Manohar ", phone: "+91 81253 97739" },
         { name: "Ms. Md.Nadira ", phone: "+91 93921 91983" },
       ]
@@ -2165,14 +2089,14 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "Valorant (PC)",
       rules: [
-        "This is a team-based tactical shooter game competition.",
-        "Team size: 5 players per team.",
-        "Tournament format will be announced by coordinators (knockout/league).",
-        "All matches will be played on the provided PCs.",
-        "Players must report 30 minutes before their scheduled match.",
-        "Standard Valorant competitive rules apply.",
-        "Use of any cheats, hacks, or exploits will lead to immediate disqualification.",
-        "Coordinator's decision will be final."
+        "All participating players are required to bring their own laptops for use during the tournament.",
+        "Ethernet connection is provided, players are advised to bring laptops that support WLAN connection.",
+        "Mahotsav ID cards must be presented by every player",
+        "Maximum of 5 players per team.",
+        "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
+        "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
+        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
+        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2181,7 +2105,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. Charan gopi", phone: "+91 87909 65843" },
         { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
@@ -2189,14 +2113,14 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "E-Football (PC)",
       rules: [
-        "This is an individual e-football gaming competition.",
-        "Game: EA Sports FC or eFootball (will be specified).",
-        "Tournament format: Knockout basis.",
-        "All matches will be played on the provided PCs.",
-        "Match duration: Standard game time settings.",
-        "Players must report 30 minutes before their scheduled match.",
-        "No external controllers allowed unless specified by coordinators.",
-        "Coordinator's decision will be final."
+        "All participating players are required to bring their own laptops for use during the tournament.",
+        "Ethernet connection is provided, players are advised to bring laptops that support WLAN connection.",  
+        "Mahotsav ID cards must be presented by every player.",
+        "Maximum of 3 players per team.",
+        "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
+        "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
+        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
+        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -2205,7 +2129,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. Charan gopi", phone: "+91 87909 65843" },
         { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
@@ -2213,15 +2137,15 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "Counter Strike (PC)",
       rules: [
-        "This is a team-based first-person shooter game competition.",
-        "Team size: 5 players per team.",
-        "Game: Counter-Strike 2 or CS:GO (will be specified).",
-        "Tournament format will be announced by coordinators.",
-        "All matches will be played on the provided PCs.",
-        "Players must report 30 minutes before their scheduled match.",
-        "Standard CS competitive rules apply.",
-        "Use of any cheats, hacks, or exploits will lead to immediate disqualification.",
-        "Coordinator's decision will be final."
+        "All participating players are required to bring their own laptops for use during the tournament.",
+        "Ethernet connection is provided, players are advised to bring laptops that support WLAN connection.",
+        "Mahotsav ID cards must be presented by every player.",
+        "Maximum of 5 players per team.",
+        "According to the game guidelines players are supposed to play modes to unlock private matchmaking so players are supposed to unlock the private matchmaking before coming to event.",
+        "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
+        "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
+        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
+        "Any form of in-game toxicity—including chat abuse, intentional targeting,  or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2230,7 +2154,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. Charan gopi", phone: "+91 87909 65843" },
         { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },
@@ -2238,12 +2162,13 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "Smash Karts (PC)",
       rules: [
-        "This is an individual kart racing game competition.",
-        "Tournament format: Multiple rounds with point system.",
-        "All matches will be played on the provided PCs.",
-        "Players must report 30 minutes before their scheduled match.",
-        "Standard game rules apply.",
-        "Coordinator's decision will be final."
+        "Pc’s  are provided.", 
+        "Mahotsav ID cards must be presented by every player.",
+        "All matches will be played in Solo mode (individual).",
+        "The competition will utilize a single-elimination knockout structure. Winning player will advance to the next round.",
+        "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
+        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
+        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -2252,7 +2177,7 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. Harsha vardhan", phone: "+91 87122 77646" },
-        { name: "Mr. Charan gopi", phone: "+91 72078 72334" },
+        { name: "Mr. Charan gopi", phone: "+91 87909 65843" },
         { name: "Mr. N Praneeth Virat", phone: "+91 86887 45247" }
       ]
     },

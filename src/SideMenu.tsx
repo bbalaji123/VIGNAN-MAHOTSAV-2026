@@ -136,20 +136,22 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
           }}
         >
           <div className="p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8">
-            <div className="mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-b border-white/20 pb-2 xs:pb-3 sm:pb-4 md:pb-5 lg:pb-6 relative z-50 menu-header-container">
-              {/* Back Button */}
-              {showBackButton && (
+            <div className="mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 border-b border-white/20 pb-2 xs:pb-3 sm:pb-4 md:pb-5 lg:pb-6 relative z-50">
+              <h2 className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-amber-400" style={{ fontFamily: 'Aladin, cursive' }}>MENU</h2>
+            </div>
+
+            {/* Back Button */}
+            {showBackButton && (
+              <div className="mb-3 xs:mb-4">
                 <BackButton
-                  style={{ position: 'static', top: 'auto', left: 'auto', transform: 'none' }}
-                  className="menu-back-btn"
+                  className="!static !top-auto !left-auto"
                   onClick={() => {
                     setIsOpen(false);
                     navigate(-1);
                   }}
                 />
-              )}
-              <h2 className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-amber-400" style={{ fontFamily: 'Aladin, cursive' }}>MENU</h2>
-            </div>
+              </div>
+            )}
 
             <div className="space-y-1.5 xs:space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-4">
               {menuCategories.map((category, index) => (

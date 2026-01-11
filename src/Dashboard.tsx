@@ -2674,34 +2674,48 @@ const Dashboard: React.FC = () => {
             }
           }
           
-          /* Specific positioning for 1024x768 - move to middle of viewport */
-          @media (min-width: 1024px) and (max-width: 1024px) and (min-height: 768px) and (max-height: 768px) {
+          /* Specific positioning for 1366x768 desktop */
+          @media (min-width: 1024px) and (max-width: 1440px) {
+            .hero-action-buttons {
+              margin-left: calc(50% - 105px) !important;
+            }
+          }
+          
+          /* OVERRIDE for 1024-1100px (1028x768) - Must come AFTER 1024-1440px */
+          @media (min-width: 1024px) and (max-width: 1100px) and (min-height: 700px) and (max-height: 800px) {
             .hero-action-buttons {
               margin-top: -15rem !important;
               margin-left: 0 !important;
-              left: -320px !important;
+              right: 15% !important;
+              left: auto !important;
               transform: none !important;
               position: relative !important;
               z-index: 100 !important;
             }
             
-            /* Move MAHOTSAV logo down */
             .animate-fadeInDown {
               margin-top: 3rem !important;
             }
             
-            /* Hide Vignan logo on 1024x768 to prevent overlap */
             .vignan-logo-top {
               margin-top: 1px !important;
             }
             
-            /* Add left margin to Garuda logo in About Theme section */
             .garuda-about-theme {
               left: -220px !important;
               margin-top: 30px !important;
             }
             
-            /* Throwback section adjustments */
+            .about-theme-content {
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              text-align: center !important;
+            }
+            
+            .theme-name {
+              text-align: center !important;
+            }
+            
             .throwback-video-wrapper {
               max-width: 600px !important;
             }
@@ -2715,57 +2729,13 @@ const Dashboard: React.FC = () => {
               padding: 8px 16px !important;
               font-size: 0.95rem !important;
             }
-              
             
-
-            /* Move flowers further outward */
             .throwback-flower-left {
               transform: translate(calc(-50% - 280px), -50%) !important;
             }
             
             .throwback-flower-right {
               transform: translate(calc(-50% + 280px), -50%) !important;
-            }
-            
-            /* Menu Header Layout for 1024x768 */
-            .menu-header-container {
-              display: flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              gap: 12px !important;
-            }
-            
-            .menu-back-btn {
-              width: 96px !important;
-              height: 48px !important;
-              padding: 0 !important;
-              position: static !important;
-              transform: none !important;
-              margin: 0 !important;
-            }
-          }
-          
-          /* General SideMenu styles that replicate Tailwind flex behavior */
-          .menu-header-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-          }
-          
-          .menu-back-btn {
-             width: 6rem;
-             height: 3rem;
-             padding: 0;
-             position: static !important;
-             transform: none !important;
-             margin: 0;
-          }
-          
-          /* Specific positioning for 1366x768 desktop */
-          @media (min-width: 1024px) and (max-width: 1440px) {
-            .hero-action-buttons {
-              margin-left: calc(50% - 105px) !important;
             }
           }
           
@@ -4349,7 +4319,7 @@ const Dashboard: React.FC = () => {
             />
           </div>
 
-          <div style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
+          <div className="about-theme-content" style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
               fontSize: '2.5rem',
               fontWeight: 'bold',

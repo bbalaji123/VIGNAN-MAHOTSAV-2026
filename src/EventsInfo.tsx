@@ -1034,7 +1034,7 @@ const EventsInfo: React.FC = () => {
             {/* Center column: Title */}
             <div className="flex items-center justify-center" style={{ marginTop: showCulturals ? '20px' : '-10px' }}>
               <h1 className="events-title events-page-heading" style={{ marginTop: '30px', textAlign: 'center' }}>
-                {showIndoorSports ? 'Indoor Sports' :
+                {showIndoorSports ? 'Individual Events' :
                   showWomensIndoorSports ? "Women's Indoor Sports" :
                     showMensTeamSports ? "Team Events" :
                       showWomensTeamSports ? "Women's Team Events" :
@@ -1111,7 +1111,7 @@ const EventsInfo: React.FC = () => {
               className="events-logo events-mobile-logo mx-auto"
             />
             <h1 className="events-title events-page-heading events-mobile-heading">
-              {showIndoorSports ? 'Indoor Sports' :
+              {showIndoorSports ? 'Individual Events' :
                 showWomensIndoorSports ? "Women's Indoor Sports" :
                   showMensTeamSports ? "Team Events" :
                     showWomensTeamSports ? "Women's Team Events" :
@@ -1568,7 +1568,7 @@ const EventsInfo: React.FC = () => {
                               src={`/images/music.avif`}
                               alt="Music"
                               className="event-card-image transition-transform duration-300"
-                              style={{ display: 'block', width: '100%', height: '410px', zIndex: 1,marginTop:'15px',marginLeft:'10px' }}
+                              style={{ display: 'block', width: '100%', height: '410px', zIndex: 1, marginTop: '15px', marginLeft: '10px' }}
                             />
                           )}
                           {card.title === "Dramatics" && (

@@ -1870,8 +1870,15 @@ const Dashboard: React.FC = () => {
     setSubmitMessage(null);
 
     // Validate required fields
-    if (!signupFormData.name || !signupFormData.email || !signupFormData.dateOfBirth) {
-      showToast.error('Please fill in all required fields (Name, Email, Date of Birth)');
+    if (!signupFormData.name || !signupFormData.email || !signupFormData.phone || !signupFormData.dateOfBirth) {
+      showToast.error('Please fill in all required fields (Name, Email, Phone Number, Date of Birth)');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validate phone number - must be exactly 10 digits
+    if (signupFormData.phone.length !== 10 || !/^\d{10}$/.test(signupFormData.phone)) {
+      showToast.error('Phone number must be exactly 10 digits');
       setIsSubmitting(false);
       return;
     }
@@ -1971,6 +1978,18 @@ const Dashboard: React.FC = () => {
           district: '',
           referralCode: ''
         });
+
+        // Automatically login the user
+        try {
+          const loginPayload = {
+            mahotsavId: result.data.userId,
+            password: result.data.password || password
+          };
+          await handleLoginSubmit(loginPayload);
+        } catch (loginError) {
+          console.error('Auto-login failed:', loginError);
+          // Don't show error to user, they can login manually
+        }
       } else {
         // Show error as popup alert
         showToast.error(result.message || 'Registration failed. Please try again.');
@@ -2553,9 +2572,6 @@ const Dashboard: React.FC = () => {
         <div className="sunlight-rays ray-3"></div>
       </div>
 
-      {/* Shimmer Overlay */}
-      <div className={`shimmer-overlay ${isScrolled ? 'active' : ''}`}></div>
-
       {/* Top-Left Menu Icon - Only show when menu is closed */}
       {!showPageMenu && (
         <>
@@ -2606,16 +2622,15 @@ const Dashboard: React.FC = () => {
           <div className="absolute top-8 left-0 right-0 z-20 w-full px-4 pt-4 pointer-events-none">
           </div>
           {/* Logo */}
-          <div className="flex justify-center items-center z-20 relative w-full px-0 mahotsav-logo-container" style={{ marginTop: "-80px", display: "flex", justifyContent: "center" }}>
-            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="w-[90%] sm:w-[85%] md:w-[80%] lg:w-[50%] max-w-none object-contain bg-transparent border-none shadow-none animate-fadeInDown mahotsav-logo-img" style={{ height: "60%", maxWidth: "none", marginLeft: "50px", marginRight: "50px", marginTop: "-80px" }} />
+          <div className="mahotsav-logo-container">
+            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="mahotsav-logo-img animate-fadeInDown" />
           </div>
 
           {/* Action Buttons - separate container with mobile-specific positioning */}
-          <div className="flex justify-center items-center mt-8 lg:mt-12 hero-action-buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem', zIndex: 20, position: 'relative', paddingLeft: '1rem', paddingRight: '1rem', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="hero-action-buttons">
             {isLoggedIn ? (
               <button
                 className="register-events-btn"
-                style={{ width: '11rem', height: '3rem', background: 'linear-gradient(to right, #FF69B4, #FF1493)', color: 'white', borderRadius: '1rem', fontSize: '1rem', fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(255, 105, 180, 0.4)' }}
                 onClick={handleOpenRegistration}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
@@ -2630,11 +2645,7 @@ const Dashboard: React.FC = () => {
               >Register for Events</button>
             ) : (
               <button
-                className="register-login-btn w-44 h-12 sm:w-48 sm:h-13 md:w-52 md:h-14 bg-linear-to-r from-pink-500 to-pink-600 text-white rounded-2xl text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-300 hover:from-pink-600 hover:to-pink-700 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center touch-manipulation active:scale-95"
-                style={{
-                  marginTop: '0',
-                  marginLeft: '0',
-                }}
+                className="register-login-btn"
                 onClick={handleLoginClick}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
@@ -2652,14 +2663,24 @@ const Dashboard: React.FC = () => {
           <style>{`
           @media (min-width: 768px) {
             .animate-fadeInDown {
-              margin-left: 5% !important;
+              margin-left: 0 !important;
             }
             
-            /* Desktop - ensure button is visible */
+            /* Desktop - position button below the "O" in MAHOTSAV */
             .hero-action-buttons {
               margin-top: 3rem !important;
+              margin-left: calc(50% - 40px) !important;
+              transform: translateX(-50%) !important;
             }
           }
+          
+          /* Specific positioning for 1366x768 desktop */
+          @media (min-width: 1024px) and (max-width: 1440px) {
+            .hero-action-buttons {
+              margin-left: calc(50% - 105px) !important;
+            }
+          }
+          
           
           /* Mobile view adjustments for flower overlap */
           @media (max-width: 767px) {
@@ -4271,27 +4292,25 @@ const Dashboard: React.FC = () => {
             appearance: 'none',
             border: '2px solid rgba(251,191,36,0.5)',
             borderRadius: '20px',
-            padding: window.innerWidth <= 640 ? '20px 10px' : '30px 20px',
+            padding: window.innerWidth <= 640 ? '20px 10px' : (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '30px 15px' : '30px 20px'),
             marginTop: '30px',
             boxShadow: '0 0 25px rgba(223, 160, 0, 0.822)',
-            maxWidth: '1010px',
+            maxWidth: (window.innerWidth >= 1024 && window.innerWidth <= 1400) ? '900px' : '950px',
             margin: '30px auto 0',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center',
-            marginLeft: window.innerWidth <= 640 ? '0' : '200px'
+            alignItems: 'center'
           }}>
-            <div className="stats-grid">
+            <div className="stats-grid" style={{ marginLeft: window.innerWidth > 1400 ? '-60px' : '0' }}>
               {/* Footfall */}
               <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
-                padding: window.innerWidth <= 640 ? '8px' : '10px',
-                marginLeft: window.innerWidth > 1023 ? '-150px' : '0'
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '110px' : '120px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 110px' : '1 1 120px') : 'unset',
+                padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
                   fontSize: '2.2rem',
@@ -4326,8 +4345,8 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '110px' : '120px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 110px' : '1 1 120px') : 'unset',
                 padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
@@ -4363,8 +4382,8 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '110px' : '120px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 110px' : '1 1 120px') : 'unset',
                 padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
@@ -4400,8 +4419,8 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '110px' : '120px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 110px' : '1 1 120px') : 'unset',
                 padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
@@ -4437,8 +4456,8 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '130px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 130px' : 'unset',
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '110px' : '120px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 110px' : '1 1 120px') : 'unset',
                 padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
@@ -4486,8 +4505,8 @@ const Dashboard: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: window.innerWidth > 1023 ? '160px' : 'unset',
-                flex: window.innerWidth > 1023 ? '1 1 160px' : 'unset',
+                minWidth: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '130px' : '145px') : 'unset',
+                flex: window.innerWidth > 1023 ? (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '1 1 130px' : '1 1 145px') : 'unset',
                 padding: window.innerWidth <= 640 ? '8px' : '10px'
               }}>
                 <div style={{
@@ -4916,61 +4935,18 @@ const Dashboard: React.FC = () => {
 
       {/* Throwback Section */}
       <section
-        className={`dashboard-section throwback-section ${isThrowbackUnlocked ? 'unlocked' : ''}`}
+        className={`throwback-section ${isThrowbackUnlocked ? 'unlocked' : ''}`}
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
-        style={{
-          minHeight: '100vh',
-          height: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          padding: window.innerWidth < 768 ? '80px 20px 60px' : '100px 20px 80px',
-          overflow: 'visible'
-        }}
       >
-        <h2
-          style={{
-            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-            fontWeight: 'bold',
-            color: '#fdee71',
-            marginBottom: window.innerWidth < 768 ? '10px' : '20px',
-            marginTop: window.innerWidth < 768 ? '-30px' : '0px',
-            textAlign: 'center',
-            fontFamily: 'Bradley Hand, cursive',
-            position: 'relative',
-            textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(253, 238, 113, 0.5)',
-            letterSpacing: '2px'
-
-          }}
-        >
+        <h2 className="throwback-heading">
           Throwback
         </h2>
 
         {/* Flower Container with Lock System */}
-        <div className="throwback-flower-container" style={{
-          width: '100%',
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          maxHeight: 'calc(100vh - 200px)',
-          marginTop: window.innerWidth < 768 ? '20px' : '30px',
-        }}>
+        <div className="throwback-flower-container">
           {/* Container for both flower halves */}
-          <div className="throwback-flower-wrapper" style={{
-            position: 'relative',
-            width: 'clamp(200px, 35vw, 450px)',
-            height: 'clamp(200px, 35vw, 450px)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '-20px',
-            pointerEvents: 'none'
-          }}>
+          <div className="throwback-flower-wrapper">
             {/* Left Half */}
             <div className="throwback-flower-left" style={{
               position: 'absolute',

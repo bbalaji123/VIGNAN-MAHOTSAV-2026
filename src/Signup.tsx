@@ -131,8 +131,24 @@ const Signup: React.FC<SignupProps> = ({
                     value={signupFormData.phone}
                     onChange={onInputChange}
                     placeholder="10-digit phone number"
+                    pattern="[0-9]{10}"
+                    minLength={10}
                     maxLength={10}
                     required
+                    onInvalid={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      if (target.validity.patternMismatch || target.validity.tooShort) {
+                        target.setCustomValidity('Phone number must be exactly 10 digits');
+                      } else if (target.validity.valueMissing) {
+                        target.setCustomValidity('Phone number is required');
+                      }
+                    }}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      target.setCustomValidity('');
+                      // Only allow numbers
+                      target.value = target.value.replace(/[^0-9]/g, '');
+                    }}
                   />
                 </div>
                 <div className="signup-form-group">

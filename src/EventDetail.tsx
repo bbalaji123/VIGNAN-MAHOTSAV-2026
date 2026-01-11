@@ -427,7 +427,7 @@ const EventDetail: React.FC = () => {
         "All participants must come with a proper sports attire.",
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Rules & Regulations for the Yogasana events:",
-        "A.	Traditional Yogasana (singles) Event", 
+        "A.	Traditional Yogasana (singles) Event",
         "Total Marks: 70",
         "Competition Format: One final round only.",
         "Holding Time:",
@@ -945,8 +945,8 @@ const EventDetail: React.FC = () => {
         second: "Rs. 10,000"
       },
       contacts: [
-        { name: "Ms. Mounika Uppala", phone: "+91 96181 09821"},
-        {name: "Ms. Nirmitha Jyosthna", phone: "+91 75697 1780"}
+        { name: "Ms. Mounika Uppala", phone: "+91 96181 09821" },
+        { name: "Ms. Nirmitha Jyosthna", phone: "+91 75697 1780" }
       ]
     },
     "Classical Dance Solo": {
@@ -1095,7 +1095,7 @@ const EventDetail: React.FC = () => {
         "Time for Stage/ Instruments setting is maximum 2 minutes.",
         "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence.",
         "Duration of the performance shall be 4 minutes.",
-        "Language of the song can be any Foreign language.", 
+        "Language of the song can be any Foreign language.",
         "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
       ],
       prizes: {
@@ -2114,7 +2114,7 @@ const EventDetail: React.FC = () => {
       subtitle: "E-Football (PC)",
       rules: [
         "All participating players are required to bring their own laptops for use during the tournament.",
-        "Ethernet connection is provided, players are advised to bring laptops that support WLAN connection.",  
+        "Ethernet connection is provided, players are advised to bring laptops that support WLAN connection.",
         "Mahotsav ID cards must be presented by every player.",
         "Maximum of 3 players per team.",
         "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
@@ -2162,7 +2162,7 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "Smash Karts (PC)",
       rules: [
-        "Pc’s  are provided.", 
+        "Pc’s  are provided.",
         "Mahotsav ID cards must be presented by every player.",
         "All matches will be played in Solo mode (individual).",
         "The competition will utilize a single-elimination knockout structure. Winning player will advance to the next round.",
@@ -2267,12 +2267,12 @@ const EventDetail: React.FC = () => {
     "Visual Arts": "/images/visual arts.avif",
     "Digital Arts": "/images/digital arts.avif",
     // Sports Events
-    "Athletics": "/images/athletics.png",
+    "Athletics": "/images/athletics.avif",
     "Men's Athletics": "/images/athletics.png",
     "Women's Athletics": "/images/athletics.png",
-    "Para Sports": "/images/para athletics (men).png",
-    "Para Athletics": "/images/para athletics (men).png",
-    "Para Cricket": "/images/para cricket(men).png",
+    "Para Sports": "/images/para athletics (men).avif",
+    "Para Athletics": "/images/para athletics (men).avif",
+    "Para Cricket": "/images/para cricket(men).avif",
     "Chess": "/images/chess.avif",
     "Table Tennis": "/images/Tabel Tennis.avif",
     "Traditional Yogasana": "/images/Traditional Yoga.avif",
@@ -2348,12 +2348,12 @@ const EventDetail: React.FC = () => {
     "E-Football": "/images/E-Football.avif",
     "Counter Strike": "/images/Counter Strike.avif",
     "Smash Karts": "/images/smash kart.avif",
-    "Line Follower Robot": "/images/Line Flower Robot.png",
-    "Bot Wrestling": "/images/Bot wrestling.png",
-    "Robo Races": "/images/Robo Races.png",
+    "Line Follower Robot": "/images/Line Flower Robot.avif",
+    "Bot Wrestling": "/images/Bot wrestling.avif",
+    "Robo Races": "/images/Robo Races.avif",
     // Spotlight Events
-    "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.png",
-    "Mahotsav Got Talent": "/images/Mahotsav%20Got%20Talent.png"
+    "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.avif",
+    "Mahotsav Got Talent": "/images/Mahotsav%20Got%20Talent.avif"
   };
 
   const handleDownloadHTML = async () => {

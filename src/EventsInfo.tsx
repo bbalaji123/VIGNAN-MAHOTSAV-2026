@@ -94,8 +94,8 @@ const EventsInfo: React.FC = () => {
   ];
 
   const roboWarsGamingImageMap: { [key: string]: string } = {
-    "Gaming": "images/Esports.png",
-    "Robo Games": "images/Techno_races.png"
+    "Gaming": "images/Gaming1.avif",
+    "Robo Games": "images/Techno_races1.avif"
   };
 
   const danceCards = [
@@ -1243,7 +1243,7 @@ const EventsInfo: React.FC = () => {
                   onClick={(e) => {
                     e.stopPropagation();
                     const link = document.createElement('a');
-                    link.href = '/Mahostav Rules Book 2025.pdf';
+                    link.href = '/images/Index.docx';
                     link.download = 'Mahostav Rules Book 2026.pdf';
                     link.click();
                   }}
@@ -1270,10 +1270,10 @@ const EventsInfo: React.FC = () => {
 
                       // Map sports detail card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Athletics": "/images/athletics.png",
-                        "Individual Events": "/images/individual.png",
-                        "Team Events": "/images/team events.png",
-                        "Para Sports": "/images/Para_Sports.png"
+                        "Athletics": "/images/athletics.avif",
+                        "Individual Events": "/images/Yoga.avif",
+                        "Team Events": "/images/Team_Event.avif",
+                        "Para Sports": "/images/parasports.avif"
                       };
 
                       return (
@@ -1487,7 +1487,7 @@ const EventsInfo: React.FC = () => {
                       >
                         {card.title === "Para Athletics" && (
                           <img
-                            src={`/images/para athletics (men).png`}
+                            src={`/images/para athletics (men).avif`}
                             alt="Para Athletics"
                             className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
@@ -1496,7 +1496,7 @@ const EventsInfo: React.FC = () => {
                         )}
                         {card.title === "Para Cricket" && (
                           <img
-                            src={`/images/para cricket(men).png`}
+                            src={`/images/para cricket(men).avif`}
                             alt="Para Cricket"
                             className="absolute inset-0 w-full h-full object-cover"
                             loading="lazy"
@@ -1557,7 +1557,7 @@ const EventsInfo: React.FC = () => {
                         >
                           {card.title === "Dance" && (
                             <img
-                              src={`/images/dance.png`}
+                              src={`/images/dance1.avif`}
                               alt="Dance"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1581,7 +1581,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Literature" && (
                             <img
-                              src={`/images/literary.png`}
+                              src={`/images/literary.avif`}
                               alt="Literature"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1597,7 +1597,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Fashion Design" && (
                             <img
-                              src={`/images/fashion.png`}
+                              src={`/images/fashion.avif`}
                               alt="Fashion Design"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1605,7 +1605,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Digital Storytelling & Creative Media" && (
                             <img
-                              src="/images/Digital Arts.png"
+                              src="/images/multimedia.avif"
                               alt="Digital Storytelling"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1613,7 +1613,7 @@ const EventsInfo: React.FC = () => {
                           )}
                           {card.title === "Spot Light" && (
                             <img
-                              src={`/images/spotlight.png`}
+                              src={`/images/spotlight.avif`}
                               alt="Spot Light"
                               className="event-card-image transition-transform duration-300"
                               style={{ display: 'block', width: '100%', height: 'auto', zIndex: 1 }}
@@ -1962,9 +1962,9 @@ const EventsInfo: React.FC = () => {
                     {roboGamesCards.map((card, index) => {
                       // Map robo games card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Line follower robot": "images/Line Flower Robot.png",
-                        "Bot Wrestling": "images/Bot wrestling.png",
-                        "Robo races": "images/Robo Races.png"
+                        "Line follower robot": "images/Line Flower Robot.avif",
+                        "Bot Wrestling": "images/Bot wrestling.avif",
+                        "Robo races": "images/Robo Races.avif"
                       };
 
                       return (
@@ -1999,8 +1999,8 @@ const EventsInfo: React.FC = () => {
                     {spotLightCards.map((card, index) => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.png",
-                        "Mahotsav Got Talent": "/images/Mahotsav Got Talent.png"
+                        "Mr. and Ms. Mahotsav": "/images/Mr&Ms.Mahotsav.avif",
+                        "Mahotsav Got Talent": "/images/Mahotsav Got Talent.avif"
                       };
 
                       return (

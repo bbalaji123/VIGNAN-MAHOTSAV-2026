@@ -162,7 +162,7 @@ const Signup: React.FC<SignupProps> = ({
                     placeholder="dd-mm-yyyy"
                     max={(() => {
                       const today = new Date();
-                      const maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+                      const maxDate = new Date(today.getFullYear() - 14, today.getMonth(), today.getDate());
                       return maxDate.toISOString().split('T')[0];
                     })()}
                     onInvalid={(e) => {

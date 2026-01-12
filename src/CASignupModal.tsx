@@ -130,8 +130,8 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
       age--;
     }
 
-    if (age < 18) {
-      showToast.error(`You must be at least 18 years old to become a Campus Ambassador. Your current age: ${age} years. Required age: 18 years or older. Please check your date of birth and try again.`);
+    if (age < 16) {
+      showToast.error(`You must be at least 16 years old to become a Campus Ambassador. Your current age: ${age} years. Required age: 16 years or older. Please check your date of birth and try again.`);
       return;
     }
 
@@ -313,7 +313,11 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
               value={formData.dateOfBirth}
               onChange={handleChange}
               required
-              max="2010-12-31"
+              max={(() => {
+                const today = new Date();
+                const maxDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+                return maxDate.toISOString().split('T')[0];
+              })()}
               onClick={(e) => {
                 const target = e.target as HTMLInputElement;
                 if (!target.value) {

@@ -969,6 +969,64 @@ const EventsInfo: React.FC = () => {
           .inner-event-cards-container {
             margin-bottom: 2rem;
           }
+
+          /* Responsive layout for event category cards */
+          /* Mobile: Hide desktop cards, show mobile cards, button below all cards */
+          @media (max-width: 768px) {
+            .events-card-with-button-desktop {
+              display: none !important;
+            }
+            .events-card-mobile-only {
+              display: flex !important;
+            }
+            .download-rulebook-desktop {
+              display: none !important;
+            }
+            .download-rulebook-mobile {
+              display: block !important;
+            }
+            .events-button-mobile-container {
+              display: flex !important;
+            }
+          }
+
+          /* Desktop small to medium (769px - 1199px): Show all cards, button below card 3 */
+          @media (min-width: 769px) and (max-width: 1199px) {
+            .events-card-with-button-desktop {
+              display: flex !important;
+            }
+            .events-card-mobile-only {
+              display: none !important;
+            }
+            .download-rulebook-desktop {
+              display: none !important;
+            }
+            .download-rulebook-mobile {
+              display: block !important;
+            }
+            .events-button-mobile-container {
+              display: flex !important;
+            }
+          }
+
+          /* Desktop large (1200px and above): Show all cards, button below card 2 */
+          @media (min-width: 1200px) {
+            .events-card-with-button-desktop {
+              display: flex !important;
+            }
+            .events-card-mobile-only {
+              display: none !important;
+            }
+            .download-rulebook-desktop {
+              display: block !important;
+            }
+            .download-rulebook-mobile {
+              display: none !important;
+            }
+            .events-button-mobile-container {
+              display: none !important;
+            }
+          }
         `}
       </style>
 
@@ -1051,7 +1109,7 @@ const EventsInfo: React.FC = () => {
                                             showSpotLight ? 'Spot Light' :
                                               showRoboWarsGaming ? 'Robo Wars & Gaming' :
                                                 showSportsDetails ? 'sports and games' :
-                                                  showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION' :
+                                                  showCulturals ? <>PERFORMING ARTS,VISUAL ARTS,<br />LITERATURE & FASHION</> :
                                                     'EVENTS'}
               </h1>
             </div>
@@ -1127,7 +1185,7 @@ const EventsInfo: React.FC = () => {
                                         showRoboGames ? 'Robo Games' :
                                           showSpotLight ? 'Spot Light' :
                                             showSportsDetails ? 'sports and games' :
-                                              showCulturals ? 'PERFORMING ARTS,VISUAL ARTS,LITERATURE & FASHION' :
+                                              showCulturals ? <>PERFORMING ARTS,VISUAL ARTS,<br />LITERATURE & FASHION</> :
                                                 'EVENTS'}
             </h1>
           </div>
@@ -1171,7 +1229,7 @@ const EventsInfo: React.FC = () => {
                   </h2>
                 </div>
 
-                {/* Card 2 - Sports and Games with Button Below (Desktop Only) */}
+                {/* Card 2 - Sports and Games (Desktop - With Button for 1200px+) */}
                 <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop" style={{ marginTop: '-90px' }}>
                   <div className="flex flex-col items-center gap-3" style={{ marginTop: '-30px' }}>
                     <div
@@ -1191,9 +1249,16 @@ const EventsInfo: React.FC = () => {
                       SPORTS AND GAMES
                     </h2>
                   </div>
-                  {/* Download Rulebook button - Desktop */}
+                  {/* Download Rulebook button - Desktop 1200px+ */}
                   <button
                     className="download-rulebook-btn download-rulebook-desktop"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const link = document.createElement('a');
+                      link.href = '/Mahostav Rules Book 2025.pdf';
+                      link.download = 'Mahostav Rules Book 2026.pdf';
+                      link.click();
+                    }}
                   >
                     DOWNLOAD RULEBOOK
                   </button>
@@ -1217,8 +1282,30 @@ const EventsInfo: React.FC = () => {
                   </h2>
                 </div>
 
-                {/* Card 3 - Robo Wars & Gaming */}
-                <div className="flex flex-col items-center gap-3">
+                {/* Card 3 - Robo Wars & Gaming (Desktop - No Button) */}
+                <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop" style={{ marginTop: '-90px' }}>
+                  <div className="flex flex-col items-center gap-3" style={{ marginTop: '-30px' }}>
+                    <div
+                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                      onClick={() => navigate('/events/robos')}
+                      style={{
+                        margin: '0 16px',
+                        backgroundImage: 'url(/images/Gaming.avif)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        position: 'relative',
+                        top: '-60px'
+                      }}
+                    >
+                    </div>
+                    <h2 className="category-card-title text-white text-xl font-bold tracking-wide text-center" style={{ marginTop: '-50px' }}>
+                      ROBO WARS & GAMING
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Card 3 - Robo Wars & Gaming (Mobile - No Button) */}
+                <div className="flex flex-col items-center gap-3 events-card-mobile-only">
                   <div
                     className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
                     onClick={() => navigate('/events/robos')}
@@ -1260,7 +1347,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-1" style={{ marginBottom: '2rem' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-x-1" style={{ marginBottom: '2rem' }}>
 
                     {sportsDetailCards.map((card, index) => {
                       const isClickable = eventDetailsData[card.title as keyof typeof eventDetailsData] ||
@@ -1316,7 +1403,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1357,7 +1444,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {indoorSportsCards.map((card, index) => {
                       // Map indoor sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1398,7 +1485,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {mensTeamSportsCards.map((card, index) => {
                       // Map men's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1439,7 +1526,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {womensTeamSportsCards.map((card, index) => {
                       // Map women's team sports card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1478,7 +1565,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {paraCards.map((card, index) => (
                       <div
                         key={index}
@@ -1517,7 +1604,7 @@ const EventsInfo: React.FC = () => {
               {/* Cards Grid - centered */}
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12" style={{ overflowY: 'visible' }}>
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center events-cards-grid" style={{ columnGap: '0', overflowY: 'visible', marginBottom: '2rem' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center events-cards-grid" style={{ columnGap: '0', overflowY: 'visible', marginBottom: '2rem' }}>
                     {culturalsCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Dance") {
@@ -1638,7 +1725,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {danceCards.map((card, index) => {
                       // Map dance card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1677,7 +1764,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {musicCards.map((card, index) => {
                       // Map music card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1719,7 +1806,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {theatreCards.map((card, index) => {
                       // Map theatre card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1758,7 +1845,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {literatureCards.map((card, index) => {
                       // Map literature card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1801,7 +1888,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {visualArtsCards.map((card, index) => {
                       // Map visual arts card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1843,7 +1930,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {fashionDesignCards.map((card, index) => {
                       // Map fashion design card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1881,7 +1968,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {digitalStorytellingCards.map((card, index) => {
                       // Map digital storytelling card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1920,7 +2007,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {gamingCards.map((card, index) => {
                       // Map gaming card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1958,7 +2045,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {roboGamesCards.map((card, index) => {
                       // Map robo games card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -1995,7 +2082,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-start justify-center px-4 md:px-8 pb-24 pt-4">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {spotLightCards.map((card, index) => {
                       // Map spotlight card titles to their image paths
                       const imageMap: { [key: string]: string } = {
@@ -2045,7 +2132,7 @@ const EventsInfo: React.FC = () => {
             <div className="w-full h-full flex flex-col relative z-20">
               <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-12">
                 <div className="w-full max-w-6xl">
-                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
+                  <div className="inner-event-cards-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center" style={{ columnGap: '0' }}>
                     {roboWarsGamingCards.map((card, index) => {
                       const handleCardClick = () => {
                         if (card.title === "Gaming") {

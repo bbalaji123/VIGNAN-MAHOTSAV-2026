@@ -273,8 +273,8 @@ body.modal-open {
 
 .signup-form-group input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer !important;
-  filter: invert(1) !important;
-  opacity: 0.7 !important;
+  filter: brightness(0) invert(1) !important;
+  opacity: 1 !important;
   transition: opacity 0.3s ease !important;
 }
 

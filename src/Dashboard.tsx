@@ -1919,7 +1919,7 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    // Validate age - must be at least 10 years old
+    // Validate age - must be at least 14 years old
     const dob = new Date(signupFormData.dateOfBirth);
     const today = new Date();
     let age = today.getFullYear() - dob.getFullYear();
@@ -1930,8 +1930,8 @@ const Dashboard: React.FC = () => {
       age--;
     }
 
-    if (age < 10) {
-      showToast.error(`You must be at least 10 years old to register. Your current age: ${age} years. Required age: 10 years or older. Please check your date of birth and try again.`);
+    if (age < 14) {
+      showToast.error(`You must be at least 14 years old to register. Your current age: ${age} years. Required age: 14 years or older. Please check your date of birth and try again.`);
       setIsSubmitting(false);
       return;
     }
@@ -2563,7 +2563,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={`dashboard-container w-full overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
-      style={{ background: "transparent", width: "100%", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column" }}>
+      style={{ background: "transparent", width: "100%", overflowX: "hidden", position: "relative", padding: "0", margin: "0", display: "flex", flexDirection: "column", userSelect: "none" }}>
 
       {/* Sunlight Effect */}
       <div className={`sunlight-effect ${isScrolled ? 'active' : ''}`}>
@@ -2684,9 +2684,9 @@ const Dashboard: React.FC = () => {
           /* OVERRIDE for 1024-1100px (1028x768) - Must come AFTER 1024-1440px */
           @media (min-width: 1024px) and (max-width: 1100px) and (min-height: 700px) and (max-height: 800px) {
             .hero-action-buttons {
-              margin-top: -15rem !important;
-              margin-left: 0 !important;
-              right: 15% !important;
+              margin-top: -19rem !important;
+              margin-left: 300px !important;
+              right: 5px !important;
               left: auto !important;
               transform: none !important;
               position: relative !important;
@@ -2730,14 +2730,129 @@ const Dashboard: React.FC = () => {
               font-size: 0.95rem !important;
             }
             
-            .throwback-flower-left {
-              transform: translate(calc(-50% - 280px), -50%) !important;
+            /* Make flowers wider apart when unlocked */
+            .throwback-section.unlocked .throwback-flower-left {
+              transform: translate(calc(-50% - 320px), -50%) !important;
+            }
+            .hero-action-buttons {
+              position: absolute !important;
+              top: 310px !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              margin: 0 !important;
+              z-index: 100 !important;
+            }
+
+            .menu-header-container-mobile .menu-title-heading {
+              display: none !important;
             }
             
-            .throwback-flower-right {
-              transform: translate(calc(-50% + 280px), -50%) !important;
+            .throwback-section.unlocked .throwback-flower-right {
+              transform: translate(calc(-50% + 320px), -50%) !important;
+            }
+            
+            /* Make events cards grid show 3 columns instead of 4 on 1024x768 */
+            .events-cards-grid,
+            .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4 {
+              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            }
+            
+            /* Make events page heading wrap to 2 lines */
+            .events-page-heading {
+              white-space: normal !important;
+              word-wrap: break-word !important;
+              max-width: 90% !important;
+              line-height: 1.2 !important;
+            }
+            
+            .menu-back-button-mobile {
+              order: 2 !important;
+              margin-left: 500px !important;
             }
           }
+
+          /* Additional nudge for 1028x768 (subset of 1024-1100) */
+          @media (min-width: 1020px) and (max-width: 1038px) and (min-height: 740px) and (max-height: 780px) {
+            .hero-action-buttons {
+              margin-top: -30rem !important;
+              margin-left: -330px !important;
+              transform: translateX(10px) !important;
+              position: relative !important;
+              right: auto !important;
+              left: auto !important;
+            }
+          }
+          
+          /* Specific adjustments for 800x600 resolution */
+          @media (min-width: 768px) and (max-width: 850px) and (min-height: 550px) and (max-height: 650px) {
+            /* Move Register/Login button upward */
+            .hero-action-buttons {
+              margin-top: 0rem !important;
+            }
+            
+            /* Target the button element directly */
+            .hero-action-buttons button,
+            .hero-action-buttons a {
+              margin-top: -28rem !important;
+              margin-left: 270px !important;
+            }
+            
+            /* Throwback section adjustments */
+            .throwback-year-buttons {
+              top: -55px !important;
+            }
+            
+            /* Widen the flower petals ONLY when unlocked */
+            .throwback-section.unlocked .throwback-flower-left {
+              transform: translate(calc(-50% - 250px), -50%) !important;
+            }
+            
+            .throwback-section.unlocked .throwback-flower-right {
+              transform: translate(calc(-50% + 250px), -50%) !important;
+            }
+          }
+          
+          /* Large Desktop Resolutions - Register Button Positioning */
+          
+          /* 1920x1080 */
+          @media (min-width: 1900px) and (max-width: 1940px) {
+            .hero-action-buttons {
+              margin-top: 1rem !important;
+              margin-left: 120px !important;
+              transform: translateX(5px) !important;
+            }
+          }
+          
+          /* 1768x992 */
+          @media (min-width: 1750px) and (max-width: 1790px) and (min-height: 970px) and (max-height: 1010px) {
+            .hero-action-buttons {
+              margin-top: 1rem !important;
+              margin-left: 80px !important;
+              margin-bottom: 5rem !important;
+              transform: translateX(5px) !important;
+            }
+          }
+          
+          /* 1680x1050 */
+          @media (min-width: 1660px) and (max-width: 1700px) and (min-height: 1030px) and (max-height: 1070px) {
+            .hero-action-buttons {
+              margin-top: 1rem !important;
+              margin-left: 40px !important;
+              margin-bottom: 5rem !important;
+              transform: translateX(5px) !important;
+            }
+          }
+          
+          /* 1600x1024 */
+          @media (min-width: 1580px) and (max-width: 1620px) and (min-height: 1000px) and (max-height: 1044px) {
+            .hero-action-buttons {
+              margin-top: 1rem !important;
+              margin-left: 10px !important;
+              margin-bottom: 5rem !important;
+              transform: translateX(5px) !important;
+            }
+          }
+          
           
           
           /* Mobile view adjustments for flower overlap */
@@ -2841,7 +2956,7 @@ const Dashboard: React.FC = () => {
             zIndex: 99998
           }}>
           {/* Floating Flower - Top Right */}
-          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[280px] h-[280px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]" style={{ border: 'none', outline: 'none' }}>
+          <div className="fixed -top-32 -right-32 md:-top-64 md:-right-64 pointer-events-none w-[280px] h-[280px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] opacity-40 md:opacity-100" style={{ border: 'none', outline: 'none' }}>
             <div className="flower-inner" style={{ animation: 'spin-slow 120s linear infinite', transformOrigin: 'center center', border: 'none', outline: 'none' }}>
               <FlowerComponent
                 size="100%"
@@ -2921,7 +3036,7 @@ const Dashboard: React.FC = () => {
           `}</style>
 
           {/* Back Button and Menu Title - Combined on Mobile */}
-          <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginTop: '10px', marginBottom: '10px' }}>
+          <div className="menu-header-container-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginTop: '10px', marginBottom: '10px', }}>
             <div className="menu-back-button-mobile">
               <button
                 onClick={() => setShowPageMenu(false)}
@@ -2931,7 +3046,7 @@ const Dashboard: React.FC = () => {
                 <img
                   src={`/menu-dashboard/BACK.avif`}
                   alt="Back"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain "
                 />
               </button>
             </div>
@@ -2948,7 +3063,7 @@ const Dashboard: React.FC = () => {
             <div className="max-w-5xl mx-auto py-4 md:py-6 flex items-center justify-center min-h-full">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
                 {/* Back Button - Inside Scroll (Desktop Only) */}
-                <div className="col-span-2 md:col-span-4 flex justify-start mb-2 menu-back-button-desktop" style={{ marginLeft: '-190px' }}>
+                <div className="col-span-2 md:col-span-4 flex justify-start mb-2 menu-back-button-desktop" style={{ marginLeft: '0px' }}>
                   <button
                     onClick={() => setShowPageMenu(false)}
                     className="w-32 h-16 flex items-center justify-center bg-transparent border-none cursor-pointer transition-all duration-300 hover:scale-110"

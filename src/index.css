@@ -627,3 +627,17 @@ body,
     max-width: 1920px !important;
   }
 }
+
+/* Global: prevent text selection across the site */
+html, body, #root {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Make images non-draggable while keeping click events working */
+img, picture, svg {
+  -webkit-user-drag: none;
+  user-drag: none;
+}

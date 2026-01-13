@@ -16,6 +16,30 @@ document.addEventListener('dragstart', (event) => {
   event.preventDefault()
 })
 
+// Disable DevTools shortcuts
+document.addEventListener('keydown', (event) => {
+  // F12
+  if (event.key === 'F12') {
+    event.preventDefault()
+  }
+  // Ctrl+Shift+I
+  if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+    event.preventDefault()
+  }
+  // Ctrl+Shift+C
+  if (event.ctrlKey && event.shiftKey && event.key === 'C') {
+    event.preventDefault()
+  }
+  // Ctrl+Shift+J (Console)
+  if (event.ctrlKey && event.shiftKey && event.key === 'J') {
+    event.preventDefault()
+  }
+  // Ctrl+U (View Source)
+  if (event.ctrlKey && event.key === 'u') {
+    event.preventDefault()
+  }
+})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

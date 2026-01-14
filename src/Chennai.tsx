@@ -118,7 +118,7 @@ const Chennai: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929725/CHENNAI_kq6tgd.avif" alt="Chennai" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357529/CHENNAI_kq6tgd_fxw70r.avif" alt="Chennai" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
           </div>
 
           {/* Events Table */}

@@ -118,7 +118,7 @@ const Tirupathi: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good,w_1200/v1766929714/TIRUPATHI_y1iypg.avif" alt="Tirupathi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357526/TIRUPATHI_y1iypg_c40b5p.avif" alt="Tirupathi" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
           </div>
 
           {/* Events Table */}

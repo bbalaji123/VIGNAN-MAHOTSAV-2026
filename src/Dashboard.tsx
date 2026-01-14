@@ -697,29 +697,31 @@ const Dashboard: React.FC = () => {
     );
   };
 
-  const getMenIndoorSportsEvents = () => {
-    const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event =>
-      (event.gender === 'male' || event.gender === 'mixed') &&
-      (event.eventName?.toLowerCase().includes('chess') ||
-        event.eventName?.toLowerCase().includes('table tennis') ||
-        event.eventName?.toLowerCase().includes('badminton') ||
-        event.eventName?.toLowerCase().includes('yoga') ||
-        event.eventName?.toLowerCase().includes('taekwondo') ||
-        event.category?.toLowerCase().includes('indoor'))
-    );
-  };
+  // Unused function - kept for potential future use
+  // const getMenIndoorSportsEvents = () => {
+  //   const filteredEvents = getFilteredSportsEvents();
+  //   return filteredEvents.filter(event =>
+  //     (event.gender === 'male' || event.gender === 'mixed') &&
+  //     (event.eventName?.toLowerCase().includes('chess') ||
+  //       event.eventName?.toLowerCase().includes('table tennis') ||
+  //       event.eventName?.toLowerCase().includes('badminton') ||
+  //       event.eventName?.toLowerCase().includes('yoga') ||
+  //       event.eventName?.toLowerCase().includes('taekwondo') ||
+  //       event.category?.toLowerCase().includes('indoor'))
+  //   );
+  // };
 
-  const getTeamSportsEvents = () => {
-    const filteredEvents = getFilteredSportsEvents();
-    return filteredEvents.filter(event =>
-      event.eventName?.toLowerCase().includes('football') ||
-      event.eventName?.toLowerCase().includes('volleyball') ||
-      event.eventName?.toLowerCase().includes('basketball') ||
-      event.eventName?.toLowerCase().includes('kabaddi') ||
-      event.category?.toLowerCase().includes('team')
-    );
-  };
+  // Unused function - kept for potential future use
+  // const getTeamSportsEvents = () => {
+  //   const filteredEvents = getFilteredSportsEvents();
+  //   return filteredEvents.filter(event =>
+  //     event.eventName?.toLowerCase().includes('football') ||
+  //     event.eventName?.toLowerCase().includes('volleyball') ||
+  //     event.eventName?.toLowerCase().includes('basketball') ||
+  //     event.eventName?.toLowerCase().includes('kabaddi') ||
+  //     event.category?.toLowerCase().includes('team')
+  //   );
+  // };
 
   const getWomenTeamSportsEvents = () => {
     const filteredEvents = getFilteredSportsEvents();
@@ -756,11 +758,11 @@ const Dashboard: React.FC = () => {
 
   // Sports event cards (with gender filtering)
   const indoorSportsCards = convertEventsToCards(getIndoorSportsEvents());
-  const teamSportsCards = convertEventsToCards(getTeamSportsEvents());
+  // const teamSportsCards = convertEventsToCards(getTeamSportsEvents()); // Unused
 
   // Gender-specific indoor and team sports cards
   const womenIndoorSportsCards = convertEventsToCards(getWomenIndoorSportsEvents());
-  const menIndoorSportsCards = convertEventsToCards(getMenIndoorSportsEvents());
+  // const menIndoorSportsCards = convertEventsToCards(getMenIndoorSportsEvents()); // Unused
   const womenTeamSportsCards = convertEventsToCards(getWomenTeamSportsEvents());
   const menTeamSportsCards = convertEventsToCards(getMenTeamSportsEvents());
 
@@ -7098,7 +7100,7 @@ const Dashboard: React.FC = () => {
               </button>
             </div>
 
-            {/* Calculate constraint states */}
+            {/* Calculate constraint states - Mutually exclusive: Sports/Cultural ↔ PARA */}
             {(() => {
               // Only count newly selected events, not already registered ones
               const newlySelectedIds = Array.from(selectedRegistrationEvents).filter(id => {
@@ -7106,8 +7108,14 @@ const Dashboard: React.FC = () => {
                 const eventName = nameParts.join('-');
                 return !isEventAlreadySaved(eventName);
               });
+              
+              // RULE IMPLEMENTATION:
+              // Rule 1 & 2: Sports/Cultural events disable ALL PARA events, and vice versa
+              // Rule 3: Mutually exclusive - user can NEVER select both sides
+              // Rule 4 & 5: Unselecting all events from one side re-enables the other side
               const hasParaSelected = newlySelectedIds.some(id => id.startsWith('para-'));
               const hasNormalSelected = newlySelectedIds.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+              
               (window as any).__hasParaSelected = hasParaSelected;
               (window as any).__hasNormalSelected = hasNormalSelected;
               return null;
@@ -7255,6 +7263,7 @@ const Dashboard: React.FC = () => {
                               const eventId = `sport-${eventName}`;
 
                               const alreadySaved = isEventAlreadySaved(eventName);
+                              // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
                               const constraintDisabled = (window as any).__hasParaSelected;
 
                               // Gender validation
@@ -7515,6 +7524,7 @@ const Dashboard: React.FC = () => {
                               const eventId = `cultural-${culturalEventName}`;
 
                               const alreadySaved = isEventAlreadySaved(culturalEventName);
+                              // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
                               const constraintDisabled = (window as any).__hasParaSelected;
                               const finalDisabled = constraintDisabled || alreadySaved;
                               const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
@@ -7565,6 +7575,7 @@ const Dashboard: React.FC = () => {
                                         if (newSet.has(eventId)) {
                                           newSet.delete(eventId);
                                         } else {
+                                          // Adding a cultural event - ensure no PARA events are selected
                                           newSet.add(eventId);
                                         }
                                         return newSet;
@@ -7697,6 +7708,7 @@ const Dashboard: React.FC = () => {
                             const eventId = `para-${eventName}`;
 
                             const alreadySaved = isEventAlreadySaved(eventName);
+                            // RULE 1 & 2: PARA ↔ Sports/Cultural are mutually exclusive
                             const hasNormalSelected = (window as any).__hasNormalSelected;
                             const constraintDisabled = hasNormalSelected;
                             const finalDisabled = constraintDisabled || alreadySaved;
@@ -7748,6 +7760,7 @@ const Dashboard: React.FC = () => {
                                       if (newSet.has(eventId)) {
                                         newSet.delete(eventId);
                                       } else {
+                                        // Adding a PARA event - ensure no Sports/Cultural events are selected
                                         newSet.add(eventId);
                                       }
                                       return newSet;

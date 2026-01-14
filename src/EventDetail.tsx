@@ -198,12 +198,14 @@ const EventDetail: React.FC = () => {
         .trim();
 
       // Create event object
+      // Note: Fee is set to 0 here because the actual fee is calculated at registration level
+      // based on the combination of events selected (culturals only, sports only, or both)
       const newEvent = {
         eventName: nameToRegister,
         eventType: eventType,
         category: cleanCategory,
         description: `${nameToRegister}`,
-        fee: eventType === 'parasports' ? 0 : (userGender === 'female' && eventType === 'culturals' ? 250 : 350)
+        fee: eventType === 'parasports' ? 0 : 0 // Fee calculated at registration level
       };
 
       // Combine existing events with new event

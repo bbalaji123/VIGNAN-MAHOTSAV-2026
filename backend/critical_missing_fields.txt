@@ -1,0 +1,180 @@
+========================================================================================================================
+CRITICAL MISSING FIELDS - IMMEDIATE ACTION REQUIRED
+========================================================================================================================
+
+🔴 HIGH PRIORITY
+========================================================================================================================
+
+1. MISSING COLLEGE (11 users)
+------------------------------------------------------------------------------------------------------------------------
+  1. MH26000006 | Kota lalith                    | kotalalithaditya@gmail.com               | 8919726304
+  2. MH26000008 | Bandaru santhosh               | santhoshbandaru0902@gmail.com            | 6300689384
+  3. MH26000020 | KURAPATI HEMANTH KUMAR         | hemanthkurapati097@gmail.com             | 9392437621
+  4. MH26000030 | Venkatesh Batchu               | venkateshbatchu133@gmail.com             | 9347220127
+  5. MH26000066 | Sowmya Janga                   | sowmyajanga06@gmail.com                  | 9392648956
+  6. MH26000075 | SHAIK MOHAMMAD ASIF            | shaikmohammadasif285@gmail.com           | 9160236927
+  7. MH26000128 | G.venkat                       | gubbavenkat623@gmail.com                 | 9963584154
+  8. MH26000143 | RAJENDRA BATTULA               | rajindhranaadh@gmail.com                 | 6281132375
+  9. MH26000145 | Konakanchi Prasanth            | kprasanth119951@gmail.com                | 9951989565
+ 10. MH26000151 | Gnaneshwar                     | bantugnaneshwar22@gmail.com              | 8688545206
+ 11. MH26000166 | k naga sravani                 | bandaruakash@gmail.com                   | 9569393939
+
+User IDs: MH26000006, MH26000008, MH26000020, MH26000030, MH26000066, MH26000075, MH26000128, MH26000143, MH26000145, MH26000151, MH26000166
+
+2. MISSING GENDER (11 users)
+------------------------------------------------------------------------------------------------------------------------
+  1. MH26000598 | Koya Sashank Sai               | koyasashanksai@gmail.com                 | 6281750916
+  2. MH26000705 | S.manikanta                    | manigamingyt188@gmail.com                | 7981314397
+  3. MH26000750 | Murali gondi                   | muralichowdary765@gmail.com              | 9912807511
+  4. MH26000752 | Paluchuri sahithi              | saisahithi2929@gmail.com                 | 6305281285
+  5. MH26000765 | KOTHAPALLI venkata santhosh kumar | kothapallisantosh2@gmial.com             | 9959155299
+  6. MH26000778 | Ch Venkata chakrish            | chakrish2510@gmail.com                   | 7386979711
+  7. MH26000799 | Nannapaneni Srinivas           | nsrinivas11227@gmail.com                 | 8121476195
+  8. MH26000821 | Cherlopalli.Divya              | divyacherlopalli3@gmail.com              | 8555029428
+  9. MH26000881 | Perla Chandrika                | chandrikaperla46@gmail.com               | 9391650413
+ 10. MH26000890 | Gulibindala Sivasatya          | sivasatya3406@gmail.com                  | 7978384840
+ 11. MH26001029 | Pardhavi Reddy Jonnala         | pardhavivijay1@gmail.com                 | 9849283980
+
+User IDs: MH26000598, MH26000705, MH26000750, MH26000752, MH26000765, MH26000778, MH26000799, MH26000821, MH26000881, MH26000890, MH26001029
+
+3. MISSING STATE/DISTRICT (421 users)
+------------------------------------------------------------------------------------------------------------------------
+  1. MH26000001 | maruthi                        | State: MISSING | District: MISSING
+  2. MH26000002 | Hsjshsb                        | State: MISSING | District: MISSING
+  3. MH26000003 | Djd                            | State: MISSING | District: MISSING
+  4. MH26000004 | Jonnadula Abhiram              | State: MISSING | District: MISSING
+  5. MH26000005 | Maruthi                        | State: MISSING | District: MISSING
+  6. MH26000006 | Kota lalith                    | State: MISSING | District: MISSING
+  7. MH26000007 | Bandaru santhosh               | State: MISSING | District: MISSING
+  8. MH26000008 | Bandaru santhosh               | State: MISSING | District: MISSING
+  9. MH26000009 | Muppalla Bunny Vardhan         | State: MISSING | District: MISSING
+ 10. MH26000010 | sanaka satya vasantha rayalu   | State: MISSING | District: MISSING
+ 11. MH26000011 | Pravalli Kothamasu             | State: MISSING | District: MISSING
+ 12. MH26000012 | Sai Yashwanth                  | State: MISSING | District: MISSING
+ 13. MH26000013 | Vuchintala vs jeswanth         | State: MISSING | District: MISSING
+ 14. MH26000014 | Uppala Yoshita                 | State: MISSING | District: MISSING
+ 15. MH26000015 | A KUSHAL CHOWDARY              | State: MISSING | District: MISSING
+ 16. MH26000016 | Potluri Bhargav Ram            | State: MISSING | District: MISSING
+ 17. MH26000017 | Shaik arifa anjoom             | State: MISSING | District: MISSING
+ 18. MH26000018 | Nalam Trinadh ram              | State: MISSING | District: MISSING
+ 19. MH26000019 | Anala Sakethram                | State: MISSING | District: MISSING
+ 20. MH26000020 | KURAPATI HEMANTH KUMAR         | State: MISSING | District: MISSING
+ 21. MH26000021 | Thanuj Nalla                   | State: MISSING | District: MISSING
+ 22. MH26000022 | Gude Indu                      | State: MISSING | District: MISSING
+ 23. MH26000023 | J.Likhita Vyshnavi             | State: MISSING | District: MISSING
+ 24. MH26000024 | K pavan rakehs                 | State: MISSING | District: MISSING
+ 25. MH26000025 | Sribhashyam. Venkata Sai Gopal | State: MISSING | District: MISSING
+ 26. MH26000026 | Sure srinivas                  | State: MISSING | District: MISSING
+ 27. MH26000027 | R.S.hemanth                    | State: MISSING | District: MISSING
+ 28. MH26000028 | Muvva Bhanu Sanjay             | State: MISSING | District: MISSING
+ 29. MH26000029 | ULLANGULA PRUDHVI KUMAR        | State: MISSING | District: MISSING
+ 30. MH26000030 | Venkatesh Batchu               | State: MISSING | District: MISSING
+ 31. MH26000031 | V.Thrinadh                     | State: MISSING | District: MISSING
+ 32. MH26000032 | Naga pavan                     | State: MISSING | District: MISSING
+ 33. MH26000033 | SATYA SANDEEP KURUKURI         | State: MISSING | District: MISSING
+ 34. MH26000034 | G. Praveen Kumar               | State: MISSING | District: MISSING
+ 35. MH26000035 | Husamudhin_shaik               | State: MISSING | District: MISSING
+ 36. MH26000036 | PADMANABHUNI RAGHAVENDRA GUPTHA | State: MISSING | District: MISSING
+ 37. MH26000037 | B. Pavan kumar                 | State: MISSING | District: MISSING
+ 38. MH26000038 | p.sai ganesh                   | State: MISSING | District: MISSING
+ 39. MH26000039 | Lokesh Tulam                   | State: MISSING | District: MISSING
+ 40. MH26000040 | Sohan                          | State: MISSING | District: MISSING
+ 41. MH26000041 | Kandukur sai saketh            | State: MISSING | District: MISSING
+ 42. MH26000042 | Rahul sai                      | State: MISSING | District: MISSING
+ 43. MH26000043 | Raatnala Srinivas              | State: MISSING | District: MISSING
+ 44. MH26000044 | Jitendra Yarrapati             | State: MISSING | District: MISSING
+ 45. MH26000045 | Ayyappa Reddy                  | State: MISSING | District: MISSING
+ 46. MH26000046 | Shaik Mohammad Murtuzaa Ayaan  | State: MISSING | District: MISSING
+ 47. MH26000047 | Tungala sriram                 | State: MISSING | District: MISSING
+ 48. MH26000048 | Varsha Naradasu                | State: MISSING | District: MISSING
+ 49. MH26000049 | Kuppuri Hemeshwar              | State: MISSING | District: MISSING
+ 50. MH26000050 | Moram Udaya sakshath           | State: MISSING | District: MISSING
+
+... and 371 more users
+
+First 20 User IDs: MH26000001, MH26000002, MH26000003, MH26000004, MH26000005, MH26000006, MH26000007, MH26000008, MH26000009, MH26000010, MH26000011, MH26000012, MH26000013, MH26000014, MH26000015, MH26000016, MH26000017, MH26000018, MH26000019, MH26000020
+
+
+========================================================================================================================
+🟡 MEDIUM PRIORITY
+========================================================================================================================
+
+4. MISSING REGISTRATION ID (39 users)
+------------------------------------------------------------------------------------------------------------------------
+  1. MH26000119 | Riddesh Makwana                | makwanariddhesh@gmail.com                | ADITYA SILVER OAK INSTITUTE OF TECHNOLOGY
+  2. MH26000120 | adapala hemanth                | ahemanth706@gmail.com                    | KITS AKSHAR INSTITUTE OF TECHNOLOGY
+  3. MH26000124 | Mekala Manoj Kumar             | mekalamanoj8522@gmail.com                | Bharat institution of engineering technology
+  4. MH26000151 | Gnaneshwar                     | bantugnaneshwar22@gmail.com              | N/A
+  5. MH26000161 | Ravula Kumar Raja Venkata Sai Nadh | kr3190571@gmail.com                      | Swarnandhra College of Engineering & Technology, Narasapur. PIN -534275  (CC-A2)
+  6. MH26000172 | Voleti siva nagendra           | voletisivanagendra@gmail.com             | N.R.K. & K.S.R. Gupta Degree College, Tenali
+  7. MH26000188 | N.S.V.K.Pramoda                | narasingukoustubha@gmail.com             | Vignan's Foundation of Science, Technology & Research, Guntur
+  8. MH26000224 | CHITTI                         | 231fa04890@gmail.com                     | vignan
+  9. MH26000236 | Chepanu dhegey                 | dhengey@gmail.com                        | A.N.S. College,Nabinagar
+ 10. MH26000248 | Yogendhar Reddy                | yogendharreddy4@gmail.com                | Koneru Lakshmaiah Education Foundation,Guntur
+ 11. MH26000251 | eauhy                          | nnlsg@gmail.com                          | KSS College, Lakhisarai
+ 12. MH26000257 | Kamma Meghana                  | vu.241fa04232@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 13. MH26000261 | Uppala Jaswanth kumar          | uppalajaswanthkumar@gmail.com            | Nalanda Degree College
+ 14. MH26000262 | Somu.Manikanta sai             | somumanikantasai1@gmail.com              | KALLAM HARANADHAREDDY INSTITUTE OF TECHNOLOGY
+ 15. MH26000265 | test                           | test@gmail.com                           | ARROW COLLEGE OF PARAMEDICAL SCIENCES, VIJAYAWADA
+ 16. MH26000343 | S.Pranathi Reddy               | pranathi.reddy3706@gmail.com             | Vignan's Foundation of Science, Technology & Research, Guntur
+ 17. MH26000347 | M.Siva Subrahmanyam            | subbumathi4687@gmail.com                 | Vignan's Foundation of Science, Technology & Research, Guntur
+ 18. MH26000376 | Jayendra Yarra                 | jayendrayarra@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 19. MH26000422 | Ganjikunta Sai poojita         | ganjikuntasaipoojita@gmail.com           | Vignan's Foundation of Science, Technology & Research, Guntur
+ 20. MH26000454 | S.Surya                        | surya.svssn1204@gmail.com                | Vignan's Foundation of Science, Technology & Research, Guntur
+ 21. MH26000460 | Baraneetharan k                | baraneetharan.k@outlook.com              | Central University of Tamil Nadu
+ 22. MH26000488 | Kandi Saniya Iffat             | saniyaiffat.k@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 23. MH26000532 | Gnashika                       | gnashika.p5557@gmail.com                 | Vignan's Foundation of Science, Technology & Research, Guntur
+ 24. MH26000533 | Dhana lakshmi                  | lakshmi.p5557@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 25. MH26000632 | Bindu                          | bindusri.goli@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 26. MH26000640 | P. Hari Manasa                 | harimanasa575@gmail.com                  | Vignan's Foundation of Science, Technology & Research, Guntur
+ 27. MH26000657 | Katuri vyshnavi                | katurivyshu@gmail.com                    | Vignan's Foundation of Science, Technology & Research, Guntur
+ 28. MH26000745 | G. Naga kowshik                | gokulyadav1828@gmail.com                 | Vignan's Foundation of Science, Technology & Research, Guntur
+ 29. MH26000748 | Yasmitha Mannava               | mannavayasmitha@gmail.com                | Vignan's Foundation of Science, Technology & Research, Guntur
+ 30. MH26000754 | Mamillapalli. Vyshnavi         | vyshnavimamillapalli717@gmail.com        | Vignan's Foundation of Science, Technology & Research, Guntur
+ 31. MH26000766 | Kambhampalli pravallika        | kambhampallipravallika@gmail.com         | Vignan university
+ 32. MH26000810 | Naga jayanth                   | alasandalapallinagajayanth@gmail.com     | Vasireddy Venkatadri International Technological University
+ 33. MH26000856 | Jathin Chandragiri             | jathin1000@gmail.com                     | Vignan's Foundation of Science, Technology & Research, Guntur
+ 34. MH26000867 | THANNIRU PRADEEP               | ptp8379@gmail.com                        | Vasireddy Venkatadri International Technological University
+ 35. MH26000872 | Nelluri .venu gopal            | venuchowdarynelluri9999@gmail.com        | VVITU
+ 36. MH26000949 | Vaka swapna                    | vakaswapna24@gmail.com                   | Vvitu
+ 37. MH26000952 | Chintala Veera Venkata Radha Krishna | chintalaradhakrishna10@gmail.com         | Vasireddy Venkatadri Institute of Technology, Nambur (V), Pedakakani(M), PIN-522508(CC-BQ)
+ 38. MH26000977 | Popuri.Jyothsna                | pjyothsna188@gmail.com                   | Vignan university
+ 39. MH26001014 | Shaik salman                   | sksalman88540@gmail.com                  | Hindu College of Education, Guntur
+
+User IDs: MH26000119, MH26000120, MH26000124, MH26000151, MH26000161, MH26000172, MH26000188, MH26000224, MH26000236, MH26000248, MH26000251, MH26000257, MH26000261, MH26000262, MH26000265, MH26000343, MH26000347, MH26000376, MH26000422, MH26000454, MH26000460, MH26000488, MH26000532, MH26000533, MH26000632, MH26000640, MH26000657, MH26000745, MH26000748, MH26000754, MH26000766, MH26000810, MH26000856, MH26000867, MH26000872, MH26000949, MH26000952, MH26000977, MH26001014
+
+5. MISSING BRANCH (15 users)
+------------------------------------------------------------------------------------------------------------------------
+  1. MH26000120 | adapala hemanth                | ahemanth706@gmail.com                    | KITS AKSHAR INSTITUTE OF TECHNOLOGY
+  2. MH26000124 | Mekala Manoj Kumar             | mekalamanoj8522@gmail.com                | Bharat institution of engineering technology
+  3. MH26000188 | N.S.V.K.Pramoda                | narasingukoustubha@gmail.com             | Vignan's Foundation of Science, Technology & Research, Guntur
+  4. MH26000224 | CHITTI                         | 231fa04890@gmail.com                     | vignan
+  5. MH26000236 | Chepanu dhegey                 | dhengey@gmail.com                        | A.N.S. College,Nabinagar
+  6. MH26000251 | eauhy                          | nnlsg@gmail.com                          | KSS College, Lakhisarai
+  7. MH26000265 | test                           | test@gmail.com                           | ARROW COLLEGE OF PARAMEDICAL SCIENCES, VIJAYAWADA
+  8. MH26000285 | BANDARU AKASH                  | banhdaruakash8@gmail.com                 | DHURWARAO MADIYA GOVERNMENT NAVEEN  COLLEGE , BHAIRAMGARH DIST-BIJAPUR
+  9. MH26000415 | Shaistha shaik                 | shaik.shaistha17@gmail.com               | Vignan's Foundation of Science, Technology & Research, Guntur
+ 10. MH26000460 | Baraneetharan k                | baraneetharan.k@outlook.com              | Central University of Tamil Nadu
+ 11. MH26000745 | G. Naga kowshik                | gokulyadav1828@gmail.com                 | Vignan's Foundation of Science, Technology & Research, Guntur
+ 12. MH26000766 | Kambhampalli pravallika        | kambhampallipravallika@gmail.com         | Vignan university
+ 13. MH26000856 | Jathin Chandragiri             | jathin1000@gmail.com                     | Vignan's Foundation of Science, Technology & Research, Guntur
+ 14. MH26000867 | THANNIRU PRADEEP               | ptp8379@gmail.com                        | Vasireddy Venkatadri International Technological University
+ 15. MH26001014 | Shaik salman                   | sksalman88540@gmail.com                  | Hindu College of Education, Guntur
+
+User IDs: MH26000120, MH26000124, MH26000188, MH26000224, MH26000236, MH26000251, MH26000265, MH26000285, MH26000415, MH26000460, MH26000745, MH26000766, MH26000856, MH26000867, MH26001014
+
+
+========================================================================================================================
+SUMMARY
+========================================================================================================================
+
+Total Registrations: 1885
+
+🔴 HIGH PRIORITY:
+  - Missing College: 11 users
+  - Missing Gender: 11 users
+  - Missing State/District: 421 users
+
+🟡 MEDIUM PRIORITY:
+  - Missing Registration ID: 39 users
+  - Missing Branch: 15 users

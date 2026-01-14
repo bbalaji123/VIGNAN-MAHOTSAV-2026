@@ -1,0 +1,97 @@
+====================================================================================================
+PARTICIPANTS WITHOUT COLLEGE DATA
+====================================================================================================
+
+
+1. User ID: MH26000008
+   Name: Bandaru santhosh
+   Email: santhoshbandaru0902@gmail.com
+   Phone: 6300689384
+   Gender: Male
+   Registration No: 251FA04099
+   College: "MISSING"
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 9
+   Event Names: 400 M, 800 M, 400 M - Visual impairment, 400 M - Hand Amputee, Classical Dance Solo, Dancing Star – Western Solo, E- Football (PC), Valorant (PC), 3 K
+
+----------------------------------------------------------------------------------------------------
+
+2. User ID: MH26000030
+   Name: Venkatesh Batchu
+   Email: venkateshbatchu133@gmail.com
+   Phone: 9347220127
+   Gender: Male
+   Registration No: VIGNAN UNIVERSITY
+   College: "MISSING"
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 1
+   Event Names: 400 M
+
+----------------------------------------------------------------------------------------------------
+
+3. User ID: MH26000143
+   Name: RAJENDRA BATTULA
+   Email: rajindhranaadh@gmail.com
+   Phone: 6281132375
+   Gender: Male
+   Registration No: 211FA14057
+   College: "MISSING"
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 2
+   Event Names: Reel Making, Theme Photography (Online)
+
+----------------------------------------------------------------------------------------------------
+
+4. User ID: MH26000145
+   Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com
+   Phone: 9951989565
+   Gender: Male
+   Registration No: L25CAI065
+   College: "MISSING"
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 20
+   Event Names: Line follower robot, Smash Karts (PC), Counter Strike (PC), E- Football (PC), Face Painting, Collage, Mehandi, Rangoli (2 no.), Clay modelling, Theme Painting, Dumb charades (2 no.), Quiz wiz (3 no.), Story telling, Impromptu (JAM), Robo races, Mahotsav Got Talent , Spot Dance - Jodi, Long jump, Shot put, Table Tennis
+
+----------------------------------------------------------------------------------------------------
+
+5. User ID: MH26000151
+   Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com
+   Phone: 8688545206
+   Gender: Male
+   Registration No: N/A
+   College: "MISSING"
+   Amount: ₹0
+   Payment Status: pending
+   Events Registered: 0
+
+----------------------------------------------------------------------------------------------------
+
+6. User ID: MH26000006
+   Name: Kota lalith
+   Email: kotalalithaditya@gmail.com
+   Phone: 8919726304
+   Gender: Male
+   Registration No: 231FA07074
+   College: "MISSING"
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 1
+   Event Names: Smash Karts (PC)
+
+----------------------------------------------------------------------------------------------------
+
+
+=== SUMMARY ===
+Total participants without college: 6
+
+Breakdown by Gender:
+  Male: 6
+
+User IDs without college (for easy copy-paste):
+MH26000008, MH26000030, MH26000143, MH26000145, MH26000151, MH26000006

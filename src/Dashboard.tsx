@@ -1220,7 +1220,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const loadRegistrationEvents = async () => {
       try {
-        const response = await fetch('/registration/registration.json');
+        const response = await fetch(`/registration/registration.json?t=${Date.now()}`);
         const data = await response.json();
 
         // Process culturals to reorganize events into new categories
@@ -2203,7 +2203,7 @@ const Dashboard: React.FC = () => {
       let paraEvents = registrationEvents.ParaSports || [];
 
       if (!sportsEvents.length && !culturalEvents.length && !paraEvents.length) {
-        const response = await fetch('/registration/registration.json');
+        const response = await fetch(`/registration/registration.json?t=${Date.now()}`);
         const data = await response.json();
 
         sportsEvents = data.Sports || [];
@@ -7854,16 +7854,25 @@ const Dashboard: React.FC = () => {
                       } else {
                         // Regular fee calculation
                         if (userGender === 'male') {
-                          if (hasSports || hasCulturals) {
-                            fee = 350; // Same fee regardless of selection
+                          if (hasSports && hasCulturals) {
+                            fee = 350; // Both sports and culturals
+                          } else if (hasSports) {
+                            fee = 350; // Sports only
+                          } else if (hasCulturals) {
+                            fee = 250; // Culturals only
                           }
                         } else if (userGender === 'female') {
                           if (hasSports || hasCulturals) {
                             fee = 250; // Female fee is always 250 total
                           }
                         } else {
-                          if (hasSports || hasCulturals) {
+                          // Default for other genders
+                          if (hasSports && hasCulturals) {
                             fee = 350;
+                          } else if (hasSports) {
+                            fee = 350;
+                          } else if (hasCulturals) {
+                            fee = 250;
                           }
                         }
                       }
@@ -7916,16 +7925,25 @@ const Dashboard: React.FC = () => {
                   } else {
                     // Regular fee calculation
                     if (userGender === 'male') {
-                      if (hasSports || hasCulturals) {
-                        fee = 350; // Same fee regardless of selection
+                      if (hasSports && hasCulturals) {
+                        fee = 350; // Both sports and culturals
+                      } else if (hasSports) {
+                        fee = 350; // Sports only
+                      } else if (hasCulturals) {
+                        fee = 250; // Culturals only
                       }
                     } else if (userGender === 'female') {
                       if (hasSports || hasCulturals) {
                         fee = 250; // Female fee is always 250 total
                       }
                     } else {
-                      if (hasSports || hasCulturals) {
+                      // Default for other genders
+                      if (hasSports && hasCulturals) {
                         fee = 350;
+                      } else if (hasSports) {
+                        fee = 350;
+                      } else if (hasCulturals) {
+                        fee = 250;
                       }
                     }
                   }
@@ -7937,6 +7955,8 @@ const Dashboard: React.FC = () => {
                       const eventName = nameParts.join('-'); // Rejoin in case event name has dashes
 
                       // Calculate fee based on college and event type
+                      // Note: This returns the TOTAL registration fee, not per-event fee
+                      // The same total fee is stored in each event's fee field
                       const calculateEventFee = (eventType: 'sport' | 'cultural' | 'para') => {
                         // Para sports are always free
                         if (eventType === 'para') {
@@ -7960,23 +7980,30 @@ const Dashboard: React.FC = () => {
                           return 150;
                         }
 
-                        // Regular fee calculation
-                        if (eventType === 'sport') {
-                          return userGender === 'female' ? 0 : 350; // Female pays 0 per event (total is 250)
-                        }
-
-                        if (eventType === 'cultural') {
-                          // For cultural events, check gender
-                          if (userGender === 'male') {
+                        // Regular fee calculation - return the TOTAL registration fee
+                        // This is the same as the total fee calculated above
+                        if (userGender === 'male') {
+                          if (hasSports && hasCulturals) {
+                            return 350; // Both sports and culturals
+                          } else if (hasSports) {
+                            return 350; // Sports only
+                          } else if (hasCulturals) {
+                            return 250; // Culturals only
+                          }
+                        } else if (userGender === 'female') {
+                          return 250; // Female fee is always 250 total
+                        } else {
+                          // Default for other genders
+                          if (hasSports && hasCulturals) {
                             return 350;
-                          } else if (userGender === 'female') {
-                            return 0; // Female pays 0 per event (total is 250)
-                          } else {
+                          } else if (hasSports) {
                             return 350;
+                          } else if (hasCulturals) {
+                            return 250;
                           }
                         }
 
-                        return 350; // Default
+                        return 0; // Default
                       };
 
                       if (type === 'sport') {
@@ -8074,7 +8101,15 @@ const Dashboard: React.FC = () => {
                   const eventsToSave = [...myEvents, ...newEventsToAdd];
 
                   try {
-                    // Save to database via API
+                    // Close modal IMMEDIATELY for instant feedback
+                    window.history.pushState({}, '', '/');
+                    setShowRegistrationModal(false);
+                    setSelectedRegistrationEvents(new Set());
+
+                    // Show loading toast
+                    const loadingToast = showToast.loading('Saving your registration...');
+
+                    // Save to database via API (in background)
                     const response = await fetch(`${API_BASE_URL}/save-events`, {
                       method: 'POST',
                       headers: {
@@ -8102,14 +8137,14 @@ const Dashboard: React.FC = () => {
                     // Refresh myEvents from database to ensure sync
                     await fetchUserSavedEvents(userProfileData.userId);
 
+                    // Dismiss loading toast and show success
+                    showToast.dismiss(loadingToast);
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
                     showToast.success(`Successfully registered for ${selectedRegistrationEvents.size} event(s)! Event Type: ${eventTypes}. Total Registration Fee: ₹${fee}. Thank you!`);
-                    window.history.pushState({}, '', '/');
-                    setShowRegistrationModal(false);
-                    setSelectedRegistrationEvents(new Set());
-                  } catch (error) {
+                  } catch (error: any) {
                     console.error('Error saving events:', error);
-                    showToast.error('An error occurred while saving events to database. Please try again.');
+                    const errorMessage = error.message || 'An error occurred while saving events to database. Please try again.';
+                    showToast.error(errorMessage);
                   }
                 }}
                 disabled={selectedRegistrationEvents.size === 0}

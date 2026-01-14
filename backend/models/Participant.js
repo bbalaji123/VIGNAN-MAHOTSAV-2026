@@ -65,6 +65,11 @@ const participantSchema = new mongoose.Schema({
     enum: ['pending', 'paid', 'failed'],
     default: 'pending'
   },
+  amount: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
   registeredEvents: [{
     eventCode: {
       type: String,

@@ -74,21 +74,46 @@ router.post('/register', async (req, res) => {
       state, district
     } = req.body;
 
-    if (!name || !email || !password) {
+    // Validate required fields - check for empty strings and whitespace
+    const trimmedName = name?.trim();
+    const trimmedEmail = email?.trim();
+    const trimmedPhone = phone?.trim();
+    const trimmedCollege = college?.trim();
+    const trimmedBranch = branch?.trim();
+    const trimmedRegisterId = registerId?.trim();
+    const trimmedState = state?.trim();
+    const trimmedDistrict = district?.trim();
+    const trimmedGender = gender?.trim();
+
+    if (!trimmedName) {
       return res.status(400).json({
         success: false,
-        message: 'Name, email, and password are required'
+        message: 'Name is required'
       });
     }
 
-    if (!gender) {
+    if (!trimmedEmail) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
+      });
+    }
+
+    if (!password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password is required'
+      });
+    }
+
+    if (!trimmedGender) {
       return res.status(400).json({
         success: false,
         message: 'Gender is required'
       });
     }
 
-    if (!phone) {
+    if (!trimmedPhone) {
       return res.status(400).json({
         success: false,
         message: 'Phone number is required'
@@ -102,35 +127,35 @@ router.post('/register', async (req, res) => {
       });
     }
 
-    if (!college) {
+    if (!trimmedCollege) {
       return res.status(400).json({
         success: false,
         message: 'College is required'
       });
     }
 
-    if (!branch) {
+    if (!trimmedBranch) {
       return res.status(400).json({
         success: false,
         message: 'Branch is required'
       });
     }
 
-    if (!registerId) {
+    if (!trimmedRegisterId) {
       return res.status(400).json({
         success: false,
         message: 'College registration number is required'
       });
     }
 
-    if (!state) {
+    if (!trimmedState) {
       return res.status(400).json({
         success: false,
         message: 'State is required'
       });
     }
 
-    if (!district) {
+    if (!trimmedDistrict) {
       return res.status(400).json({
         success: false,
         message: 'District is required'
@@ -155,8 +180,7 @@ router.post('/register', async (req, res) => {
       }
     }
 
-    const normalizedEmail = email.trim().toLowerCase();
-    const trimmedRegisterId = registerId?.trim();
+    const normalizedEmail = trimmedEmail.toLowerCase();
 
     // Email already exists
     const existingEmail = await Registration.findOne({ email: normalizedEmail }).lean();
@@ -214,21 +238,21 @@ router.post('/register', async (req, res) => {
 
         const registration = await Registration.create({
           userId,
-          name,
+          name: trimmedName,
           email: normalizedEmail,
           password: passwordToStore, // Store in DD/MM/YYYY format
-          phone,
-          college,
-          branch,
+          phone: trimmedPhone,
+          college: trimmedCollege,
+          branch: trimmedBranch,
           dateOfBirth,
-          gender,
-          registerId,
+          gender: trimmedGender,
+          registerId: trimmedRegisterId,
           userType: userType || 'visitor',
           participationType: participationType || 'none',
           paymentStatus: 'unpaid',
           referredBy: validReferralCode,
-          state,
-          district
+          state: trimmedState,
+          district: trimmedDistrict
         });
 
         // If a valid referral code was used, update the CA's referral list
@@ -385,44 +409,16 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
-    // Validate events against user's gender
-    const userGender = user.gender?.toLowerCase();
-    if (userGender && events.length > 0) {
-      for (const event of events) {
-        const category = (event.category || '').toLowerCase();
-        const eventName = (event.eventName || '').toLowerCase();
-        
-        // Check if male is trying to register for women's events
-        if (userGender === 'male') {
-          if (category.includes('women') || category.includes('female') ||
-              eventName.includes('women') || eventName.includes('female')) {
-            return res.status(400).json({
-              success: false,
-              message: `Cannot register for women's event: ${event.eventName}`
-            });
-          }
-        }
-        
-        // Check if female is trying to register for men's only events
-        if (userGender === 'female') {
-          if ((category.includes('men') && !category.includes('women')) ||
-              (eventName.includes('men') && !eventName.includes('women'))) {
-            return res.status(400).json({
-              success: false,
-              message: `Cannot register for men's event: ${event.eventName}`
-            });
-          }
-        }
-      }
-    }
+    // Gender validation removed - users can register for any event
 
     // Find or create participant
     let participant = await Participant.findOne({ userId });
 
     if (events.length === 0) {
-      // If no events, remove all registered events from participant
+      // If no events, remove all registered events from participant and reset amount
       if (participant) {
         participant.registeredEvents = [];
+        participant.amount = 0;
         await participant.save();
       }
       return res.json({
@@ -431,6 +427,69 @@ router.post('/save-events', async (req, res) => {
         participant: participant || null
       });
     }
+
+    // Calculate total registration fee based on events
+    const calculateRegistrationFee = (events, userGender, userCollege) => {
+      // Check event types
+      const hasSports = events.some(e => e.eventType === 'sports');
+      const hasCulturals = events.some(e => e.eventType === 'culturals');
+      const hasParaSports = events.some(e => e.eventType === 'parasports');
+
+      // Para sports are always free
+      if (hasParaSports) {
+        return 0;
+      }
+
+      // Check if user is from special Vignan colleges
+      const specialVignanColleges = [
+        'Vignan Pharmacy College',
+        "Vignan's Foundation of Science, Technology & Research",
+        "Vignan's Lara Institute of Technology & Science"
+      ];
+
+      const isSpecialVignanStudent = specialVignanColleges.some(college =>
+        userCollege?.toLowerCase().includes(college.toLowerCase()) ||
+        college.toLowerCase().includes(userCollege?.toLowerCase())
+      );
+
+      // Special Vignan colleges: ₹150 flat fee
+      if (isSpecialVignanStudent) {
+        if (hasSports || hasCulturals) {
+          return 150;
+        }
+        return 0;
+      }
+
+      // Regular fee calculation
+      const gender = userGender?.toLowerCase();
+
+      if (gender === 'male') {
+        if (hasSports && hasCulturals) {
+          return 350; // Both sports and culturals
+        } else if (hasSports) {
+          return 350; // Sports only
+        } else if (hasCulturals) {
+          return 250; // Culturals only
+        }
+      } else if (gender === 'female') {
+        if (hasSports || hasCulturals) {
+          return 250; // Female fee is always 250 total
+        }
+      } else {
+        // Default for other genders
+        if (hasSports && hasCulturals) {
+          return 350;
+        } else if (hasSports) {
+          return 350;
+        } else if (hasCulturals) {
+          return 250;
+        }
+      }
+
+      return 0;
+    };
+
+    const totalAmount = calculateRegistrationFee(events, user.gender, user.college);
 
     // Create participant if they're registering for events and don't exist
     if (!participant) {
@@ -448,8 +507,10 @@ router.post('/save-events', async (req, res) => {
         participantType: 'general',
         referredBy: user.referredBy,
         paymentStatus: 'pending',
+        amount: totalAmount,
         registeredEvents: events.map(e => ({
           ...e,
+          fee: totalAmount, // Set each event's fee to the total registration amount
           category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
           registeredAt: new Date()
         }))
@@ -458,9 +519,11 @@ router.post('/save-events', async (req, res) => {
       // Update registered events for existing participant
       participant.registeredEvents = events.map(e => ({
         ...e,
+        fee: totalAmount, // Set each event's fee to the total registration amount
         category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
         registeredAt: new Date()
       }));
+      participant.amount = totalAmount;
       await participant.save();
     }
 
@@ -473,7 +536,10 @@ router.post('/save-events', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Error saving events:', error);
+    console.error('❌ Error saving events:');
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    console.error('Request body:', req.body);
     res.status(500).json({
       success: false,
       message: 'Failed to save events',

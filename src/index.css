@@ -629,7 +629,9 @@ body,
 }
 
 /* Global: prevent text selection across the site */
-html, body, #root {
+html,
+body,
+#root {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -637,7 +639,17 @@ html, body, #root {
 }
 
 /* Make images non-draggable while keeping click events working */
-img, picture, svg {
+img,
+picture,
+svg {
   -webkit-user-drag: none;
   user-drag: none;
+}
+
+/* Force toast notifications to appear above all modals and overlays */
+[data-sonner-toaster],
+[data-sonner-toast],
+.Toaster,
+.Toaster>div {
+  z-index: 999999 !important;
 }

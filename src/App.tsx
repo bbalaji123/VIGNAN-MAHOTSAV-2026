@@ -28,7 +28,7 @@ import Guide from './Guide';
 function App() {
   return (
     <div className="w-full min-h-screen desktop-bound">
-      <Toaster toastOptions={{ style: { zIndex: 99999 } }} containerStyle={{ zIndex: 99999 }} />
+      <Toaster toastOptions={{ style: { zIndex: 999999 } }} containerStyle={{ zIndex: 999999 }} />
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard />} />

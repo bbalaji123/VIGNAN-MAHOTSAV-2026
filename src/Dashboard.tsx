@@ -2268,67 +2268,53 @@ const Dashboard: React.FC = () => {
     setShowEventChecklistModal(false);
   };
 
-  const handleRemoveRegisteredEvent = async (eventToRemove: any) => {
-    if (!userProfileData.userId) {
-      showToast.warning('Please login to modify your events.');
-      return;
-    }
 
-    const removeName = eventToRemove.eventName || eventToRemove.Event || eventToRemove.name;
-
-    const remainingEvents = myEvents.filter((e: any) => {
-      const name = e.eventName || e.Event || e.name;
-      return name !== removeName;
-    });
-
-    // Check if this is the last event
-    if (remainingEvents.length === 0) {
-      showToast.warning('You have to register for at least one event');
-      return;
-    }
-
-    const confirmRemove = window.confirm('Do you want to remove this event from your registration?');
-    if (!confirmRemove) return;
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/save-events`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: userProfileData.userId,
-          events: remainingEvents,
-        }),
-      });
-
-      const result = await response.json();
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Failed to remove event');
-      }
-
-      setMyEvents(remainingEvents as any);
-      setUserRegisteredEvents(remainingEvents as any);
-      showToast.success('Event removed successfully.');
-    } catch (error) {
-      console.error('Error removing event:', error);
-      showToast.error('Failed to remove event. Please try again.');
-    }
-  };
 
   const handleToggleEventSelection = (eventId: string) => {
+    const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
+    const clickedEvent = allEvents.find(e => e._id === eventId);
+
+    if (!clickedEvent) return;
+
     const newSelected = new Set(selectedEvents);
-    if (newSelected.has(eventId)) {
-      newSelected.delete(eventId);
-    } else {
+    const isCurrentlySelected = newSelected.has(eventId);
+
+    // Check if this is a para sports event
+    const isParaEvent = clickedEvent.eventType === 'parasports';
+
+    // Get current selection status
+    const selectedEventsArray = Array.from(newSelected);
+    const hasParaEvents = selectedEventsArray.some(id =>
+      paraSportsEvents.some(pe => pe._id === id)
+    );
+    const hasNormalEvents = selectedEventsArray.some(id =>
+      sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id)
+    );
+
+    // If trying to add an event (not remove)
+    if (!isCurrentlySelected) {
+      // Prevent mixing para and normal events
+      if (isParaEvent && hasNormalEvents) {
+        showToast.warning('You cannot register for para sports events if you have already selected normal events. Please deselect normal events first.');
+        return;
+      }
+
+      if (!isParaEvent && hasParaEvents) {
+        showToast.warning('You cannot register for normal events if you have already selected para sports events. Please deselect para sports events first.');
+        return;
+      }
+
       newSelected.add(eventId);
+    } else {
+      newSelected.delete(eventId);
     }
+
     setSelectedEvents(newSelected);
 
     // Update para/regular selection status
-    const selectedEventsArray = Array.from(newSelected);
-    const hasPara = selectedEventsArray.some(id => paraSportsEvents.some(pe => pe._id === id));
-    const hasRegular = selectedEventsArray.some(id => sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id));
+    const updatedEventsArray = Array.from(newSelected);
+    const hasPara = updatedEventsArray.some(id => paraSportsEvents.some(pe => pe._id === id));
+    const hasRegular = updatedEventsArray.some(id => sportsEvents.some(se => se._id === id) || culturalEvents.some(ce => ce._id === id));
 
     setParaSportsSelected(hasPara);
     setRegularEventsSelected(hasRegular);
@@ -6200,6 +6186,39 @@ const Dashboard: React.FC = () => {
                         <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Payment Status</span>
                         <span style={{ color: userProfileData?.paymentStatus === 'paid' ? '#22c55e' : '#b84b4b', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: {userProfileData?.paymentStatus === 'paid' ? 'Paid' : 'Not Paid'}</span>
                       </div>
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
+                        <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Registration Fee</span>
+                        <span style={{ color: '#fbbf24', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: ₹{(() => {
+                          const userCollege = userProfileData?.college || '';
+                          const specialVignanColleges = [
+                            'Vignan Pharmacy College',
+                            "Vignan's Foundation of Science, Technology & Research",
+                            "Vignan's Lara Institute of Technology & Science"
+                          ];
+
+                          if (!myEvents || myEvents.length === 0) return 0;
+
+                          const hasNormal = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
+                          const hasPara = myEvents.some(e => e.eventType === 'parasports');
+
+                          if (!hasNormal && hasPara) return 0;
+
+                          const isSpecialVignan = specialVignanColleges.some(college =>
+                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                            college.toLowerCase().includes(userCollege.toLowerCase())
+                          );
+
+                          if (isSpecialVignan) return 150;
+
+                          if (userProfileData?.gender?.toLowerCase() === 'female') return 250;
+
+                          const hasSports = myEvents.some(e => e.eventType === 'sports');
+                          if (hasSports) return 350;
+
+                          return 250;
+                        })()}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -6269,31 +6288,72 @@ const Dashboard: React.FC = () => {
                             <h3 style={{ color: '#fef3c7', fontSize: '1.25rem', fontWeight: 700, textAlign: 'center', flex: 1 }}>
                               My Registered Events
                             </h3>
-                            <button
-                              onClick={() => window.print()}
-                              style={{
-                                padding: '0.5rem 1rem',
-                                fontSize: '0.85rem',
-                                background: '#10b981',
-                                border: 'none',
-                                borderRadius: '0.5rem',
-                                color: 'white',
-                                cursor: 'pointer',
-                                fontWeight: '600',
-                                transition: 'all 0.3s',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem'
-                              }}
-                              onMouseOver={(e) => {
-                                e.currentTarget.style.background = '#ef0ebeff';
-                              }}
-                              onMouseOut={(e) => {
-                                e.currentTarget.style.background = '#f7ef0fff';
-                              }}
-                            >
-                              Print
-                            </button>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                              <button
+                                onClick={async () => {
+                                  if (confirm('Are you sure you want to remove ALL registered events? This action cannot be undone.')) {
+                                    try {
+                                      const response = await fetch(`${API_BASE_URL}/save-events`, {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ userId: userProfileData.userId, events: [] })
+                                      });
+                                      const result = await response.json();
+                                      if (response.ok && result.success) {
+                                        const storageKey = `myEvents_${userProfileData.userId}`;
+                                        localStorage.setItem(storageKey, JSON.stringify([]));
+                                        setMyEvents([]);
+                                        showToast.success('All events removed successfully!');
+                                      } else {
+                                        throw new Error(result.message || 'Failed to remove events');
+                                      }
+                                    } catch (error) {
+                                      console.error('Error removing all events:', error);
+                                      showToast.error('Failed to remove events.');
+                                    }
+                                  }
+                                }}
+                                style={{
+                                  padding: '0.5rem 1rem',
+                                  fontSize: '0.85rem',
+                                  background: '#ef4444',
+                                  border: 'none',
+                                  borderRadius: '0.5rem',
+                                  color: 'white',
+                                  cursor: 'pointer',
+                                  fontWeight: '600',
+                                  transition: 'all 0.3s',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}
+                                onMouseOver={(e) => { e.currentTarget.style.background = '#dc2626'; }}
+                                onMouseOut={(e) => { e.currentTarget.style.background = '#ef4444'; }}
+                              >
+                                Remove All
+                              </button>
+                              <button
+                                onClick={() => window.print()}
+                                style={{
+                                  padding: '0.5rem 1rem',
+                                  fontSize: '0.85rem',
+                                  background: '#10b981',
+                                  border: 'none',
+                                  borderRadius: '0.5rem',
+                                  color: 'white',
+                                  cursor: 'pointer',
+                                  fontWeight: '600',
+                                  transition: 'all 0.3s',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}
+                                onMouseOver={(e) => { e.currentTarget.style.background = '#059669'; }}
+                                onMouseOut={(e) => { e.currentTarget.style.background = '#10b981'; }}
+                              >
+                                Print
+                              </button>
+                            </div>
                           </div>
                           <div style={{ maxHeight: '260px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             {myEvents.map((event, index) => (
@@ -6331,7 +6391,29 @@ const Dashboard: React.FC = () => {
                                     )}
                                     <button
                                       type="button"
-                                      onClick={() => handleRemoveRegisteredEvent(event)}
+                                      onClick={async () => {
+                                        if (window.confirm('Are you sure you want to remove this event?')) {
+                                          if (!userProfileData.userId) {
+                                            showToast.error('Please login to remove events');
+                                            return;
+                                          }
+                                          const updatedEvents = myEvents.filter((_, i) => i !== index);
+                                          try {
+                                            const result = await saveMyEvents(userProfileData.userId, updatedEvents);
+                                            if (result.success) {
+                                              setMyEvents(updatedEvents);
+                                              setUserRegisteredEvents(updatedEvents as any);
+                                              localStorage.setItem(`myEvents_${userProfileData.userId}`, JSON.stringify(updatedEvents));
+                                              showToast.success('Event removed successfully');
+                                            } else {
+                                              showToast.error(result.message || 'Failed to remove event');
+                                            }
+                                          } catch (error) {
+                                            console.error(error);
+                                            showToast.error('An error occurred');
+                                          }
+                                        }
+                                      }}
                                       style={{
                                         padding: '0.2rem 0.6rem',
                                         fontSize: '0.7rem',
@@ -6642,11 +6724,7 @@ const Dashboard: React.FC = () => {
                             onClick={async () => {
                               const updatedEvents = myEvents.filter((_, i) => i !== index);
 
-                              // Check if this is the last event
-                              if (updatedEvents.length === 0) {
-                                showToast.warning('You have to register for at least one event');
-                                return;
-                              }
+
 
                               if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
                                 try {
@@ -7108,14 +7186,14 @@ const Dashboard: React.FC = () => {
                 const eventName = nameParts.join('-');
                 return !isEventAlreadySaved(eventName);
               });
-              
+
               // RULE IMPLEMENTATION:
               // Rule 1 & 2: Sports/Cultural events disable ALL PARA events, and vice versa
               // Rule 3: Mutually exclusive - user can NEVER select both sides
               // Rule 4 & 5: Unselecting all events from one side re-enables the other side
               const hasParaSelected = newlySelectedIds.some(id => id.startsWith('para-'));
               const hasNormalSelected = newlySelectedIds.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
-              
+
               (window as any).__hasParaSelected = hasParaSelected;
               (window as any).__hasNormalSelected = hasNormalSelected;
               return null;
@@ -7257,10 +7335,11 @@ const Dashboard: React.FC = () => {
                               </span>
                             </div>
 
-                            {/* Events in this category */}
+
                             {expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
                               const eventName = event.Event;
-                              const eventId = `sport-${eventName}`;
+                              const isParaEvent = category.toLowerCase().includes('para');
+                              const eventId = isParaEvent ? `para-${eventName}` : `sport-${eventName}`;
 
                               const alreadySaved = isEventAlreadySaved(eventName);
                               // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
@@ -7328,6 +7407,31 @@ const Dashboard: React.FC = () => {
                                     onChange={() => {
                                       if (finalDisabled) return;
 
+                                      // Validation logic outside of setState
+                                      const currentSet = selectedRegistrationEvents;
+
+                                      if (!currentSet.has(eventId)) {
+                                        if (isParaEvent) {
+                                          // We are adding a PARA event
+                                          const hasNormalCurrent = Array.from(currentSet).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+                                          const hasNormalPast = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
+
+                                          if (hasNormalCurrent || hasNormalPast) {
+                                            showToast.warning('You have already registered for (or selected) regular Sports/Cultural events. You cannot register for Para Sports events additionally.');
+                                            return;
+                                          }
+                                        } else {
+                                          // We are adding a NORMAL sport event
+                                          const hasParaCurrent = Array.from(currentSet).some(id => id.startsWith('para-'));
+                                          const hasParaPast = myEvents.some(e => e.eventType === 'parasports');
+
+                                          if (hasParaCurrent || hasParaPast) {
+                                            showToast.warning('You have already registered for (or selected) Para Sports events. You cannot register for regular Sports/Cultural events additionally.');
+                                            return;
+                                          }
+                                        }
+                                      }
+
                                       setSelectedRegistrationEvents((prev) => {
                                         const newSet = new Set(prev);
                                         if (newSet.has(eventId)) {
@@ -7363,20 +7467,7 @@ const Dashboard: React.FC = () => {
                                           marginTop: '0.1rem'
                                         }}
                                       >
-                                        Already registered • Fee: ₹{(() => {
-                                          const userCollege = userProfileData.college || '';
-                                          const specialVignanColleges = [
-                                            'Vignan Pharmacy College',
-                                            "Vignan's Foundation of Science, Technology & Research",
-                                            "Vignan's Lara Institute of Technology & Science"
-                                          ];
-                                          const isSpecialVignan = specialVignanColleges.some(college =>
-                                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                                            college.toLowerCase().includes(userCollege.toLowerCase())
-                                          );
-                                          if (isSpecialVignan) return 150;
-                                          return userProfileData.gender?.toLowerCase() === 'female' ? 250 : 350;
-                                        })()}
+                                        Already registered
                                       </div>
                                     )}
                                   </div>
@@ -7570,12 +7661,25 @@ const Dashboard: React.FC = () => {
                                     onChange={() => {
                                       if (finalDisabled) return;
 
+                                      // Validation logic outside of setState
+                                      const currentSet = selectedRegistrationEvents;
+
+                                      if (!currentSet.has(eventId)) {
+                                        // Adding a cultural event (Normal) - check for Para
+                                        const hasParaCurrent = Array.from(currentSet).some(id => id.startsWith('para-'));
+                                        const hasParaPast = myEvents.some(e => e.eventType === 'parasports');
+
+                                        if (hasParaCurrent || hasParaPast) {
+                                          showToast.warning('You have already registered for (or selected) Para Sports events. You cannot register for regular Sports/Cultural events additionally.');
+                                          return;
+                                        }
+                                      }
+
                                       setSelectedRegistrationEvents((prev) => {
                                         const newSet = new Set(prev);
                                         if (newSet.has(eventId)) {
                                           newSet.delete(eventId);
                                         } else {
-                                          // Adding a cultural event - ensure no PARA events are selected
                                           newSet.add(eventId);
                                         }
                                         return newSet;
@@ -7601,20 +7705,7 @@ const Dashboard: React.FC = () => {
                                           marginTop: '0.1rem'
                                         }}
                                       >
-                                        Already registered • Fee: ₹{(() => {
-                                          const userCollege = userProfileData.college || '';
-                                          const specialVignanColleges = [
-                                            'Vignan Pharmacy College',
-                                            "Vignan's Foundation of Science, Technology & Research",
-                                            "Vignan's Lara Institute of Technology & Science"
-                                          ];
-                                          const isSpecialVignan = specialVignanColleges.some(college =>
-                                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                                            college.toLowerCase().includes(userCollege.toLowerCase())
-                                          );
-                                          if (isSpecialVignan) return 150;
-                                          return userProfileData.gender?.toLowerCase() === 'female' ? 250 : 350;
-                                        })()}
+                                        Already registered
                                       </div>
                                     )}
                                   </div>
@@ -7755,12 +7846,25 @@ const Dashboard: React.FC = () => {
                                   onChange={() => {
                                     if (finalDisabled) return;
 
+                                    // Validation logic outside of setState
+                                    const currentSet = selectedRegistrationEvents;
+
+                                    if (!currentSet.has(eventId)) {
+                                      // Adding a Para event - check for Normal
+                                      const hasNormalCurrent = Array.from(currentSet).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+                                      const hasNormalPast = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
+
+                                      if (hasNormalCurrent || hasNormalPast) {
+                                        showToast.warning('You have already registered for (or selected) regular Sports/Cultural events. You cannot register for Para Sports events additionally.');
+                                        return;
+                                      }
+                                    }
+
                                     setSelectedRegistrationEvents((prev) => {
                                       const newSet = new Set(prev);
                                       if (newSet.has(eventId)) {
                                         newSet.delete(eventId);
                                       } else {
-                                        // Adding a PARA event - ensure no Sports/Cultural events are selected
                                         newSet.add(eventId);
                                       }
                                       return newSet;
@@ -7786,7 +7890,7 @@ const Dashboard: React.FC = () => {
                                         marginTop: '0.1rem'
                                       }}
                                     >
-                                      Already registered • Fee: ₹0 (Free)
+                                      Already registered
                                     </div>
                                   )}
                                 </div>
@@ -7828,8 +7932,14 @@ const Dashboard: React.FC = () => {
                       const selectedIds = Array.from(selectedRegistrationEvents);
                       const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+                      const hasPara = selectedIds.some(id => id.startsWith('para-'));
 
-                      return `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
+                      const types = [];
+                      if (hasSports) types.push('Sports');
+                      if (hasCulturals) types.push('Culturals');
+                      if (hasPara) types.push('Para Sports');
+
+                      return types.join(' + ');
                     })()}
                   </div>
                 </div>
@@ -7915,6 +8025,32 @@ const Dashboard: React.FC = () => {
                   const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                   const userGender = userProfileData.gender?.toLowerCase();
                   const userCollege = userProfileData.college || '';
+
+                  // Check validation for mutual exclusivity (New selections AND Past registrations)
+                  const selectedIdsCheck = Array.from(selectedRegistrationEvents);
+                  const hasParaCurrent = selectedIdsCheck.some(id => id.startsWith('para-'));
+                  const hasNormalCurrent = selectedIdsCheck.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+
+                  const hasParaPast = myEvents.some(e => e.eventType === 'parasports');
+                  const hasNormalPast = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
+
+                  // Conflict Case 1: Mixing current selections
+                  if (hasParaCurrent && hasNormalCurrent) {
+                    showToast.error('You cannot register for both Para Sports and Normal Events simultaneously. Please deselect one category.');
+                    return;
+                  }
+
+                  // Conflict Case 2: Adding Para when Normal already registered
+                  if (hasParaCurrent && hasNormalPast) {
+                    showToast.error('You have already registered for Normal Events. You cannot add Para Sports events.');
+                    return;
+                  }
+
+                  // Conflict Case 3: Adding Normal when Para already registered
+                  if (hasNormalCurrent && hasParaPast) {
+                    showToast.error('You have already registered for Para Sports events. You cannot add Normal Events.');
+                    return;
+                  }
 
                   // Check if user is from one of the special Vignan colleges
                   const specialVignanColleges = [
@@ -8094,6 +8230,20 @@ const Dashboard: React.FC = () => {
                             foundCategory = currentCat;
                           }
                         });
+
+                        // Fallback: Check Sports list if not found (some Para events might be mixed in)
+                        if (!foundEvent) {
+                          registrationEvents.Sports?.forEach((e: any) => {
+                            if (!e) return;
+                            if (e.Category) {
+                              currentCat = e.Category;
+                            }
+                            if (e.Event === paraEventName) {
+                              foundEvent = e;
+                              foundCategory = currentCat;
+                            }
+                          });
+                        }
 
                         if (foundEvent) {
                           return {

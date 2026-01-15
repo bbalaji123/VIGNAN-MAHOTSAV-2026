@@ -2520,6 +2520,7 @@ const EventDetail: React.FC = () => {
   const handleDownloadHTML = async () => {
     if (!eventData) return;
 
+    console.log('=== Starting download process ===');
     setIsDownloading(true);
     try {
       const element = document.getElementById('download-section');
@@ -2528,9 +2529,11 @@ const EventDetail: React.FC = () => {
       }
 
       // 1. Convert Images to Base64 for offline support
+      console.log('Converting images to base64...');
       const images = Array.from(element.getElementsByTagName('img'));
       const originalSrcs = new Map<HTMLImageElement, string>();
       const imagesToConvert = images.filter(img => img.src && !img.src.includes('data:'));
+      console.log(`Found ${imagesToConvert.length} images to convert`);
 
       for (const img of imagesToConvert) {
         try {
@@ -2546,6 +2549,40 @@ const EventDetail: React.FC = () => {
         } catch (e) {
           console.warn(`Failed to convert image to base64: ${img.src}`, e);
         }
+      }
+
+      // 1.5. Convert background image to Base64
+      console.log('=== Converting background image ===');
+      let backgroundImageBase64 = '';
+      const possibleBgPaths = ['/images/Background.png', '/Background-redesign.avif'];
+
+      for (const bgPath of possibleBgPaths) {
+        try {
+          console.log(`Attempting to fetch background image: ${bgPath}`);
+          const response = await fetch(bgPath);
+          console.log(`Response status: ${response.status}, ok: ${response.ok}`);
+          if (!response.ok) {
+            console.warn(`Failed to fetch ${bgPath}: ${response.status}`);
+            continue;
+          }
+          const blob = await response.blob();
+          console.log(`Blob size: ${blob.size} bytes, type: ${blob.type}`);
+          const reader = new FileReader();
+          backgroundImageBase64 = await new Promise<string>((resolve) => {
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.readAsDataURL(blob);
+          });
+          console.log(`Successfully converted background image: ${bgPath}, base64 length: ${backgroundImageBase64.length}`);
+          showToast.success(`Background loaded: ${bgPath}`);
+          break; // Success, exit loop
+        } catch (e) {
+          console.warn(`Failed to convert background image ${bgPath}:`, e);
+        }
+      }
+
+      if (!backgroundImageBase64) {
+        console.error('Could not load any background image');
+        showToast.warning('Background image could not be embedded');
       }
 
       // 2. Get the content
@@ -2593,13 +2630,13 @@ const EventDetail: React.FC = () => {
       min-height: 100vh;
       margin: 0 auto;
       background-color: #1a1034;
-      background-image: url('images/Background.png');
+      background-image: url('${backgroundImageBase64}');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
     /* Hide the download, add buttons, and back button in the exported file */
-    .flex.flex-col.md\\:flex-row.gap-3.sm\\:gap-4.justify-center,
+    .action-buttons-container,
     button[aria-label="Go back"] {
       display: none !important;
     }
@@ -2658,7 +2695,7 @@ const EventDetail: React.FC = () => {
 
   return (
     <div id="download-section" className="min-h-screen event-detail-page" style={{
-      backgroundImage: 'url("/Background-redesign.avif")',
+      backgroundImage: 'url("/images/Background.png")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -2806,13 +2843,35 @@ const EventDetail: React.FC = () => {
                 {eventData.rules.map((rule, index) => {
                   // Check if rule is a section header (starts with I., II., III., IV. followed by space)
                   const isSectionHeader = /^(I{1,4})\.\s/.test(rule);
+                  // Check if rule is a subheading (wrapped in ** markdown)
+                  const isSubheading = /^\*\*.*\*\*$/.test(rule.trim());
+                  // Check if rule starts with a bullet point
+                  const startsWithBullet = rule.trim().startsWith('•');
+
+                  // Remove ** from subheadings and • from rules for display
+                  let displayText = rule;
+                  if (isSubheading) {
+                    displayText = rule.replace(/^\*\*|\*\*$/g, '');
+                  } else if (startsWithBullet) {
+                    displayText = rule.trim().substring(1).trim(); // Remove the • and trim
+                  }
+
                   return (
                     <li key={index} className="flex items-start gap-2 sm:gap-4">
-                      {!isSectionHeader && (
+                      {!isSectionHeader && !isSubheading && (
                         <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
                       )}
-                      <span className="text-white text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose" style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)', fontFamily: 'Borisna, sans-serif', letterSpacing: '0.02em', fontWeight: isSectionHeader ? 'bold' : 'normal' }}>
-                        {rule}
+                      <span
+                        className="text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose"
+                        style={{
+                          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                          fontFamily: 'Borisna, sans-serif',
+                          letterSpacing: '0.02em',
+                          fontWeight: (isSectionHeader || isSubheading) ? 'bold' : 'normal',
+                          color: isSubheading ? '#fdee71' : 'white'
+                        }}
+                      >
+                        {displayText}
                       </span>
                     </li>
                   );
@@ -2935,7 +2994,7 @@ const EventDetail: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-16 mb-20 px-6">
+        <div className="action-buttons-container flex flex-col md:flex-row gap-6 justify-center items-center mt-16 mb-20 px-6">
           <button
             className="hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2 border-2 border-purple-400/30"
             style={{

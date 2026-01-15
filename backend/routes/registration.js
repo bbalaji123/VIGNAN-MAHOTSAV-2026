@@ -428,6 +428,17 @@ router.post('/save-events', async (req, res) => {
       });
     }
 
+    // Validate mutual exclusivity between para sports and normal events
+    const hasParaSports = events.some(e => e.eventType === 'parasports');
+    const hasNormalEvents = events.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
+
+    if (hasParaSports && hasNormalEvents) {
+      return res.status(400).json({
+        success: false,
+        message: 'You cannot register for both para sports and normal events. Please choose one category only.'
+      });
+    }
+
     // Calculate total registration fee based on events
     const calculateRegistrationFee = (events, userGender, userCollege) => {
       // Check event types

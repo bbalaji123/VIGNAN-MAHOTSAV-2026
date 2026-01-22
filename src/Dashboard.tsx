@@ -6847,20 +6847,20 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* Footer Section */}
-      <footer 
-        className="footer-section" 
+      <footer
+        className="footer-section"
         ref={(el) => registerSection('footer', el)}
         style={{
-        background: '#000',
-        width: '100vw',
-        position: 'relative',
-        marginLeft: 'calc(50% - 50vw)',
-        marginRight: 'calc(50% - 50vw)',
-        marginTop: '80px',
-        marginBottom: '0',
-        padding: '0',
-        boxSizing: 'border-box'
-      }}>
+          background: '#000',
+          width: '100vw',
+          position: 'relative',
+          marginLeft: 'calc(50% - 50vw)',
+          marginRight: 'calc(50% - 50vw)',
+          marginTop: '80px',
+          marginBottom: '0',
+          padding: '0',
+          boxSizing: 'border-box'
+        }}>
         {/* Footer Content Wrapper */}
         <div className="footer-content" style={{
           maxWidth: '1400px',
@@ -7432,16 +7432,16 @@ const Dashboard: React.FC = () => {
                                         // Gender validation for specific events
                                         const userGender = userProfileData?.gender?.toLowerCase();
                                         const eventNameLower = eventName.toLowerCase();
-                                        
+
                                         // Mr. Mahotsav - Male only
-                                        if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) && 
-                                            !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
+                                        if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) &&
+                                          !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
                                           if (userGender !== 'male') {
                                             showToast.error('Mr. Mahotsav is a Men-only event. You are not allowed to register.');
                                             return;
                                           }
                                         }
-                                        
+
                                         // Ms. Mahotsav - Female only
                                         if (eventNameLower.includes('ms. mahotsav') || eventNameLower.includes('ms mahotsav')) {
                                           if (userGender !== 'female') {
@@ -7590,13 +7590,13 @@ const Dashboard: React.FC = () => {
                           // Filter gender-specific events
                           const userGender = userProfileData?.gender?.toLowerCase();
                           const eventNameLower = eventName.toLowerCase();
-                          
+
                           // Hide Mr. Mahotsav from females and non-males
-                          if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) && 
-                              !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
+                          if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) &&
+                            !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
                             if (userGender !== 'male') return;
                           }
-                          
+
                           // Hide Ms. Mahotsav from males and non-females
                           if (eventNameLower.includes('ms. mahotsav') || eventNameLower.includes('ms mahotsav')) {
                             if (userGender !== 'female') return;

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, type JSX } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import FlowerComponent from './components/FlowerComponent';
@@ -42,10 +42,6 @@ const EventDetail: React.FC = () => {
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [showAthleticsSelection, setShowAthleticsSelection] = useState(false);
   const [selectedAthleticsEvents, setSelectedAthleticsEvents] = useState<string[]>([]);
-
-  // Determine when to show the "Add My Events" button
-  const isParaCricketEvent = eventName?.toLowerCase().includes('para cricket');
-  const shouldShowAddToMyEvents = !isParaCricketEvent;
 
   // Get the section we came from for smart back navigation
   const fromSection = location.state?.fromSection || '';
@@ -1546,37 +1542,36 @@ const EventDetail: React.FC = () => {
       ]
     },
     "JAM": {
-      title: "Literature",
+      title: "LITERARY",
       subtitle: "IMPROMPTU",
       rules: [
-        "This competition is designed for those who enjoy speaking impromptu.",
-        "After the topic is given, 25 seconds will be provided as buffer time.",
-        "Following the buffer time, the participant must talk for a maximum of one minute regarding the given topic.",
+        "1. This competition is designed for those who enjoy speaking impromptu.",
+        "2. After the topic is given, 25 seconds will be provided as buffer time.",
+        "3. Following the buffer time, the participant must talk for a maximum of one minute regarding the given topic.",
         "",
-        "Game play and Scoring:",
+        "4. Game play and Scoring:",
         "The game proceeds in rounds with contestants attempting to interrupt the speaker by correctly identifying errors.",
-        "Action",
-        "Points Awarded",
-        "Successful Jam (Justified Interruption)",
-        "+5 Points to the interrupter (who then takes over as speaker).",
-        "Unsuccessful Jam (Unjustified Interruption)",
-        "-2 Points to the interrupter.",
-        "Speaking Successfully (Until Jammed or Time-Out)",
-        "+1 Point for every 10 seconds of error-free speech (to be tracked by the timekeeper).",
         "",
-        "One of the contestants will begin speaking on the given topic.",
-        "Any other contestant can 'jam' (interrupt) the speaker by stating the reason for the interruption.",
-        "If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
-        "If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
-        "The contestant with the maximum points at the end of the given time will be declared the winner.",
-        "",
-        "Judicial Clarification: Valid Jamming Reasons",
+        "TABLE_START",
+        "Action|Points Awarded",
+        "Successful Jam (Justified Interruption)|+5 Points to the interrupter (who then takes over as speaker).",
+        "Unsuccessful Jam (Unjustified Interruption)|-2 Points to the interrupter.",
+        "Speaking Successfully (Until Jammed or Time-Out)|+1 Point for every 10 seconds of error-free speech (to be tracked by the timekeeper).",
+        "TABLE_END",
+        " ",
+        "• One of the contestants will begin speaking on the given topic.",
+        "• Any other contestant can \"jam\" (interrupt) the speaker by stating the reason for the interruption.",
+        "• If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
+        "• If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
+        "• The contestant with the maximum points at the end of the given time will be declared the winner.",
+        
+        "5. Judicial Clarification: Valid Jamming Reasons",
         "For the purpose of consistency, justified interruptions (successful jams) may be called for the following reasons, among others:",
-        "Hesitation/Stammering (a prolonged pause or repetition).",
-        "Repetition (of a word or phrase, excluding articles/prepositions).",
-        "Grammatical Error (a clear error in syntax or grammar).",
-        "Deviation from the Topic (a complete shift away from the theme).",
-        "Failure to use a specific word/phrase (if mandated by the topic card)."
+        "• Hesitation/Stammering (a prolonged pause or repetition).",
+        "• Repetition (of a word or phrase, excluding articles/prepositions).",
+        "• Grammatical Error (a clear error in syntax or grammar).",
+        "• Deviation from the Topic (a complete shift away from the theme).",
+        "• Failure to use a specific word/phrase (if mandated by the topic card)."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -2398,7 +2393,7 @@ const EventDetail: React.FC = () => {
       subtitle: "Bot Wrestling",
       rules: [
         "**Objective:** Bot Wrestling is a competitive event where two robots, controlled either wirelessly or via wired connections, face off with the objective of pushing the opposing robot out of the designated arena. These robots must be operated remotely, ensuring a battle of strategic maneuvering and technological prowess.",
-        "",
+  
         "**Robot Specifications:**",
         "• The robot's dimensions must not exceed (300mm x 300mm x 300mm) at any point during the game. The robot height should not exceed 15cm.",
         "• Both wired and wireless robots are allowed.",
@@ -2978,64 +2973,138 @@ const EventDetail: React.FC = () => {
                 Rules:
               </h3>
               <ul className="space-y-2 sm:space-y-3">
-                {eventData.rules.map((rule, index) => {
-                  // Check if rule is a section header (starts with I., II., III., IV. followed by space)
-                  const isSectionHeader = /^(I{1,4})\.\s/.test(rule);
-                  // Check if rule is a subheading (wrapped in ** markdown)
-                  const isSubheading = /^\*\*.*\*\*$/.test(rule.trim());
-                  // Check if rule starts with a bullet point
-                  const startsWithBullet = rule.trim().startsWith('•');
+                {(() => {
+                  const elements: JSX.Element[] = [];
+                  let inTable = false;
+                  let tableRows: string[] = [];
+                  let tableHeaders: string[] = [];
 
-                  // Remove ** from subheadings and • from rules for display
-                  let displayText = rule;
-                  if (isSubheading) {
-                    displayText = rule.replace(/^\*\*|\*\*$/g, '');
-                  } else if (startsWithBullet) {
-                    displayText = rule.trim().substring(1).trim(); // Remove the • and trim
-                  }
+                  eventData.rules.forEach((rule, index) => {
+                    if (rule === 'TABLE_START') {
+                      inTable = true;
+                      tableRows = [];
+                      tableHeaders = [];
+                      return;
+                    }
 
-                  // Detect URLs inside the rule text so we can render them as clickable links
-                  const urlMatch = displayText.match(/https?:\/\/\S+/);
-                  const url = urlMatch ? urlMatch[0] : null;
-                  const [beforeUrl, afterUrl] = url
-                    ? [displayText.slice(0, displayText.indexOf(url)), displayText.slice(displayText.indexOf(url) + url.length)]
-                    : [displayText, ''];
+                    if (rule === 'TABLE_END') {
+                      inTable = false;
+                      // Render the table
+                      elements.push(
+                        <li key={`table-${index}`} className="my-4">
+                          <div className="overflow-x-auto">
+                            <table className="w-full border-collapse" style={{ border: '2px solid white' }}>
+                              <thead>
+                                <tr style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
+                                  {tableHeaders.map((header, i) => (
+                                    <th
+                                      key={i}
+                                      className="border border-white px-3 py-2 text-left text-sm sm:text-base font-bold text-white"
+                                      style={{
+                                        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                                        fontFamily: 'Borisna, sans-serif'
+                                      }}
+                                    >
+                                      {header}
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {tableRows.map((row, rowIndex) => {
+                                  const cells = row.split('|');
+                                  return (
+                                    <tr key={rowIndex} style={{ backgroundColor: rowIndex % 2 === 0 ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.1)' }}>
+                                      {cells.map((cell, cellIndex) => (
+                                        <td
+                                          key={cellIndex}
+                                          className="border border-white px-3 py-2 text-sm sm:text-base text-white"
+                                          style={{
+                                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                                            fontFamily: 'Borisna, sans-serif'
+                                          }}
+                                        >
+                                          {cell.trim()}
+                                        </td>
+                                      ))}
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </li>
+                      );
+                      return;
+                    }
 
-                  return (
-                    <li key={index} className="flex items-start gap-2 sm:gap-4">
-                      {!isSectionHeader && !isSubheading && (
-                        <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
-                      )}
-                      <span
-                        className="text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose"
-                        style={{
-                          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-                          fontFamily: 'Borisna, sans-serif',
-                          letterSpacing: '0.02em',
-                          fontWeight: (isSectionHeader || isSubheading) ? 'bold' : 'normal',
-                          color: isSubheading ? '#fdee71' : 'white'
-                        }}
-                      >
-                        {url ? (
-                          <>
-                            {beforeUrl}
-                            <a
-                              href={url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline text-yellow-300 hover:text-yellow-200"
-                            >
-                              {url}
-                            </a>
-                            {afterUrl}
-                          </>
-                        ) : (
-                          displayText
+                    if (inTable) {
+                      if (tableHeaders.length === 0) {
+                        // First row is headers
+                        tableHeaders = rule.split('|');
+                      } else {
+                        // Subsequent rows are data
+                        tableRows.push(rule);
+                      }
+                      return;
+                    }
+
+                    // Regular rule rendering
+                    const isSectionHeader = /^(I{1,4})\.\s/.test(rule);
+                    const isSubheading = /^\*\*.*\*\*$/.test(rule.trim());
+                    const startsWithBullet = rule.trim().startsWith('•');
+
+                    let displayText = rule;
+                    if (isSubheading) {
+                      displayText = rule.replace(/^\*\*|\*\*$/g, '');
+                    } else if (startsWithBullet) {
+                      displayText = rule.trim().substring(1).trim();
+                    }
+
+                    const urlMatch = displayText.match(/https?:\/\/\S+/);
+                    const url = urlMatch ? urlMatch[0] : null;
+                    const [beforeUrl, afterUrl] = url
+                      ? [displayText.slice(0, displayText.indexOf(url)), displayText.slice(displayText.indexOf(url) + url.length)]
+                      : [displayText, ''];
+
+                    elements.push(
+                      <li key={index} className="flex items-start gap-2 sm:gap-4">
+                        {!isSectionHeader && !isSubheading && (
+                          <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
                         )}
-                      </span>
-                    </li>
-                  );
-                })}
+                        <span
+                          className="text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose"
+                          style={{
+                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                            fontFamily: 'Borisna, sans-serif',
+                            letterSpacing: '0.02em',
+                            fontWeight: (isSectionHeader || isSubheading) ? 'bold' : 'normal',
+                            color: isSubheading ? '#fdee71' : 'white'
+                          }}
+                        >
+                          {url ? (
+                            <>
+                              {beforeUrl}
+                              <a
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline text-yellow-300 hover:text-yellow-200"
+                              >
+                                {url}
+                              </a>
+                              {afterUrl}
+                            </>
+                          ) : (
+                            displayText
+                          )}
+                        </span>
+                      </li>
+                    );
+                  });
+
+                  return elements;
+                })()}
               </ul>
             </div>
 
@@ -3168,16 +3237,14 @@ const EventDetail: React.FC = () => {
             {isDownloading ? ' Downloading...' : ' Download Details'}
           </button>
 
-          {shouldShowAddToMyEvents && (
-            <button
-              className="bg-gradient-to-r from-pink-500 to-rose-500 hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2"
-              style={{ width: '85%', maxWidth: '320px' }}
-              onClick={handleAddToMyEvents}
-              disabled={isAddingEvent}
-            >
-              {isAddingEvent ? ' Adding...' : ' Add My Events'}
-            </button>
-          )}
+          <button
+            className="bg-gradient-to-r from-pink-500 to-rose-500 hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2"
+            style={{ width: '85%', maxWidth: '320px' }}
+            onClick={handleAddToMyEvents}
+            disabled={isAddingEvent}
+          >
+            {isAddingEvent ? ' Adding...' : ' Add My Events'}
+          </button>
         </div>
 
         {/* Athletics Selection Modal */}

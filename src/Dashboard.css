@@ -14270,10 +14270,7 @@ html {
   }
 }
 
-/* Hero Action Buttons Container */
-.hero-action-buttons {
-  /* Base styles are inline */
-}
+/* Hero Action Buttons Container handled via inline styles in JSX */
 
 /* MOBILE ONLY: Reset all positioning to static flow */
 @media (max-width: 640px) {
@@ -14871,9 +14868,7 @@ html {
   overflow: visible;
 }
 
-.throwback-section.unlocked {
-  /* kept for future unlocked-specific overrides */
-}
+/* .throwback-section.unlocked reserved for future unlocked-specific overrides */
 
 .throwback-heading {
   font-size: clamp(2rem, 6vw, 3.5rem);

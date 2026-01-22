@@ -33,7 +33,7 @@ interface ActivityLog {
 const CAManagerDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [ambassadors, setAmbassadors] = useState<CampusAmbassador[]>([]);
-  const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [_activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showPointsModal, setShowPointsModal] = useState(false);

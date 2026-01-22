@@ -20,14 +20,7 @@ interface District {
   sno: string; // state number reference
 }
 
-interface College {
-  SNO: number;
-  Name: string;
-  State: string;
-  District: string;
-}
-
-const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess }) => {
+const CASignupModal: React.FC<CASignupModalProps> = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,7 +43,7 @@ const CASignupModal: React.FC<CASignupModalProps> = ({ onClose, onSignupSuccess 
   const [states, setStates] = useState<State[]>([]);
   const [districts, setDistricts] = useState<District[]>([]);
   const [filteredDistricts, setFilteredDistricts] = useState<District[]>([]);
-  const [isOtherCollege, setIsOtherCollege] = useState(false);
+  const [_isOtherCollege, setIsOtherCollege] = useState(false);
 
   // Load states, districts, and colleges on mount
   useEffect(() => {

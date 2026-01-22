@@ -1099,7 +1099,7 @@ const EventsInfo: React.FC = () => {
                         showParaCards ? 'Para' :
                           showDance ? 'Dance' :
                             showMusic ? 'Music' :
-                              showTheatre ? 'Theatre' :
+                              showTheatre ? 'Dramatics' :
                                 showLiterature ? 'Literature' :
                                   showVisualArts ? 'Visual Arts' :
                                     showFashionDesign ? 'Fashion Design' :
@@ -1255,8 +1255,8 @@ const EventsInfo: React.FC = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       const link = document.createElement('a');
-                      link.href = '/Mahostav Rules Book 2025.pdf';
-                      link.download = 'Mahostav Rules Book 2026.pdf';
+                      link.href = '/COMPETE RULE BOOK.pdf';
+                      link.download = 'COMPETE RULE BOOK.pdf';
                       link.click();
                     }}
                   >
@@ -1330,8 +1330,8 @@ const EventsInfo: React.FC = () => {
                   onClick={(e) => {
                     e.stopPropagation();
                     const link = document.createElement('a');
-                    link.href = '/images/Index.docx';
-                    link.download = 'Mahostav Rules Book 2026.pdf';
+                    link.href = '/COMPETE RULE BOOK.pdf';
+                    link.download = 'COMPETE RULE BOOK.pdf';
                     link.click();
                   }}
                 >

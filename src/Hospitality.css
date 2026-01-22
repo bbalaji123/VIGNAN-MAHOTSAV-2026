@@ -175,6 +175,11 @@
 }
 
 @media (max-width: 768px) {
+  .section-heading-primary {
+    margin-right: 0;
+    white-space: normal;
+  }
+
   .section-subheading {
     margin-left: 0;
     font-size: 1.25rem;

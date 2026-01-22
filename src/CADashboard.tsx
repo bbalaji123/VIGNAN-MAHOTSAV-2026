@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CADashboard.css';
 import FlowerComponent from './components/FlowerComponent';
-import BackButton from './components/BackButton';
 import { API_BASE_URL } from './services/api';
 
 interface Referral {
@@ -121,17 +120,6 @@ const CADashboard: React.FC = () => {
     return colors[tier] || '#FFD700';
   };
 
-  const getTierIcon = (tier: string) => {
-    const icons: { [key: string]: string } = {
-      'Bronze': '',
-      'Silver': '',
-      'Gold': '',
-      'Platinum': '',
-      'Diamond': ''
-    };
-    return icons[tier] || '';
-  };
-
   if (loading) {
     return (
       <div className="ca-dashboard-container">
@@ -231,7 +219,7 @@ const CADashboard: React.FC = () => {
             
             {caData.caReferralList && caData.caReferralList.length > 0 ? (
               <div className="ca-ca-referral-list">
-                {caData.caReferralList.map((referral, index) => (
+                {caData.caReferralList.map((referral, _index) => (
                   <div key={referral.mcaId} className="ca-ca-referral-item">
                     <div className="ca-ca-ref-header">
                       <span className="ca-ca-ref-name">{referral.name}</span>

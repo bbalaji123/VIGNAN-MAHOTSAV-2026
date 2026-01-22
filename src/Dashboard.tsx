@@ -401,10 +401,11 @@ const Dashboard: React.FC = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [activeSubModal, setActiveSubModal] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [] = useState(0);
 
   // Animation state for sections
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
   const lastScrollY = useRef(0);
   const scrollDirection = useRef<'up' | 'down'>('down');
@@ -1086,6 +1087,11 @@ const Dashboard: React.FC = () => {
       observer.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    setIsGalleryVisible(visibleSections.has('throwback') || visibleSections.has('throwbacks'));
+    setIsFooterVisible(visibleSections.has('footer'));
+  }, [visibleSections]);
 
   // IntersectionObserver-based lazy loading for gallery images
   useEffect(() => {
@@ -2577,6 +2583,10 @@ const Dashboard: React.FC = () => {
               src="/menu-dashboard/Garuda.avif"
               alt="Garuda"
               className="h-20 sm:h-24 w-auto object-contain"
+              width={96}
+              height={96}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </>
@@ -2589,6 +2599,9 @@ const Dashboard: React.FC = () => {
             src="/menu-dashboard/Vignan-logo.avif"
             alt="Vignan Logo"
             className="vignan-logo-img"
+            width={320}
+            height={180}
+            decoding="async"
           />
         </div>
       )}
@@ -2598,12 +2611,12 @@ const Dashboard: React.FC = () => {
         <div className="hero-content-wrapper">
           {/* Left side image - 1.avif */}
           <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
-            <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" />
+            <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" width={450} height={450} decoding="async" />
           </div>
 
           {/* Right side image - 2.avif */}
           <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
-            <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" />
+            <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" width={450} height={450} decoding="async" />
           </div>
 
           {/* National Level Youth Festival Text - Positioned absolutely */}
@@ -2611,7 +2624,7 @@ const Dashboard: React.FC = () => {
           </div>
           {/* Logo */}
           <div className="mahotsav-logo-container">
-            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="mahotsav-logo-img animate-fadeInDown" />
+            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="mahotsav-logo-img animate-fadeInDown" decoding="async" fetchPriority="high" />
           </div>
 
           {/* Action Buttons - separate container with mobile-specific positioning */}
@@ -2930,14 +2943,15 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* The Icon Component - Fixed position flower - Hide after about-theme section */}
-      {!visibleSections.has('throwbacks') && !visibleSections.has('throwback') && <AnimatedIcon />}
+      {/* The Icon Component - Fixed position flower - Hide in gallery and footer sections */}
+      {!isGalleryVisible && !isFooterVisible && <AnimatedIcon />}
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
         <div className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat overflow-visible"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
+            backgroundColor: '#522566',
+            backgroundImage: 'url("/images/Background.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
@@ -6038,7 +6052,8 @@ const Dashboard: React.FC = () => {
           width: '100%',
           height: '100%',
           zIndex: 99999,
-          backgroundImage: 'url("https://res.cloudinary.com/dctuev0mm/image/upload/v1766935583/Background-redesign_jbvbrc.png")',
+          backgroundColor: '#522566',
+          backgroundImage: 'url("/images/Background.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -6832,7 +6847,10 @@ const Dashboard: React.FC = () => {
       )}
 
       {/* Footer Section */}
-      <footer className="footer-section" style={{
+      <footer 
+        className="footer-section" 
+        ref={(el) => registerSection('footer', el)}
+        style={{
         background: '#000',
         width: '100vw',
         position: 'relative',
@@ -7411,6 +7429,27 @@ const Dashboard: React.FC = () => {
                                       const currentSet = selectedRegistrationEvents;
 
                                       if (!currentSet.has(eventId)) {
+                                        // Gender validation for specific events
+                                        const userGender = userProfileData?.gender?.toLowerCase();
+                                        const eventNameLower = eventName.toLowerCase();
+                                        
+                                        // Mr. Mahotsav - Male only
+                                        if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) && 
+                                            !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
+                                          if (userGender !== 'male') {
+                                            showToast.error('Mr. Mahotsav is a Men-only event. You are not allowed to register.');
+                                            return;
+                                          }
+                                        }
+                                        
+                                        // Ms. Mahotsav - Female only
+                                        if (eventNameLower.includes('ms. mahotsav') || eventNameLower.includes('ms mahotsav')) {
+                                          if (userGender !== 'female') {
+                                            showToast.error('Ms. Mahotsav is a Women-only event. You are not allowed to register.');
+                                            return;
+                                          }
+                                        }
+
                                         if (isParaEvent) {
                                           // We are adding a PARA event
                                           const hasNormalCurrent = Array.from(currentSet).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
@@ -7547,6 +7586,21 @@ const Dashboard: React.FC = () => {
                           // Get event name from the correct field
                           const eventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
                           if (!eventName) return;
+
+                          // Filter gender-specific events
+                          const userGender = userProfileData?.gender?.toLowerCase();
+                          const eventNameLower = eventName.toLowerCase();
+                          
+                          // Hide Mr. Mahotsav from females and non-males
+                          if ((eventNameLower.includes('mr. mahotsav') || eventNameLower.includes('mr mahotsav')) && 
+                              !eventNameLower.includes('ms.') && !eventNameLower.includes('ms ')) {
+                            if (userGender !== 'male') return;
+                          }
+                          
+                          // Hide Ms. Mahotsav from males and non-females
+                          if (eventNameLower.includes('ms. mahotsav') || eventNameLower.includes('ms mahotsav')) {
+                            if (userGender !== 'female') return;
+                          }
 
                           // Update category if present
                           if (event['5']) {

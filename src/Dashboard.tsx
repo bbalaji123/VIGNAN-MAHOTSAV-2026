@@ -5292,12 +5292,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                    }?start=20&controls=1&modestbranding=1&rel=0`}
+                    }?start=20&enablejsapi=1&controls=1&modestbranding=1&rel=0&origin=${window.location.origin}`}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   title="Mahotsav Throwback Video"
-                  loading="lazy"
+                  loading="eager"
                   style={{
                     border: 'none',
                     display: 'block',

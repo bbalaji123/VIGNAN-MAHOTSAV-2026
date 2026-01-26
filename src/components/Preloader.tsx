@@ -13,6 +13,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [loadingPercentage, setLoadingPercentage] = useState(0);
     const [showPercentage, setShowPercentage] = useState(false);
+    const [imageError, setImageError] = useState(false);
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
     // Use refs to access latest state inside requestAnimationFrame callback
     const isLoadingRef = useRef(isLoading);
@@ -22,6 +24,25 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     useEffect(() => {
         isLoadingRef.current = isLoading;
     }, [isLoading]);
+
+    // Preload first few frames to ensure they exist
+    useEffect(() => {
+        const basePath = import.meta.env.BASE_URL || '/';
+        const testFrames = [1, 2, 3, 254];
+        
+        testFrames.forEach((frameNum) => {
+            const padded = frameNum.toString().padStart(3, '0');
+            const img = new Image();
+            img.onload = () => {
+                setLoadedImages(prev => new Set([...prev, frameNum]));
+            };
+            img.onerror = () => {
+                console.error(`Failed to load frame ${frameNum}: ${basePath}pre-loader/ezgif-frame-${padded}.jpg`);
+                setImageError(true);
+            };
+            img.src = `${basePath}pre-loader/ezgif-frame-${padded}.jpg`;
+        });
+    }, []);
 
     const animate = (time: number) => {
         if (!startTimeRef.current) startTimeRef.current = time;
@@ -78,10 +99,12 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     };
 
     useEffect(() => {
+        if (loadedImages.size === 0) return; // Wait for at least one image to load
+        
         requestRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(requestRef.current!);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [loadedImages.size]);
     // Dependency array empty to start animation once.
     // Logic inside checks loading state via ref.
 
@@ -111,9 +134,21 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
                 alignItems: 'center',
                 transition: 'opacity 0.5s ease-out',
                 opacity: isVisible ? 1 : 0,
-                pointerEvents: isVisible ? 'auto' : 'none'
+                pointerEvents: isVisible ? 'auto' : 'none',
+                flexDirection: 'column'
             }}
         >
+            {imageError && (
+                <div style={{
+                    color: '#fff',
+                    fontSize: '1rem',
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                    padding: '0 20px'
+                }}>
+                    Loading assets... Please wait
+                </div>
+            )}
             <div style={{
                 position: 'relative',
                 width: '100%',
@@ -127,6 +162,10 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
                 <img
                     src={getFramePath(currentFrame)}
                     alt="Loading..."
+                    onError={(e) => {
+                        console.error('Image load error for frame:', currentFrame);
+                        setImageError(true);
+                    }}
                     style={{
                         width: '100%',
                         height: '100%',

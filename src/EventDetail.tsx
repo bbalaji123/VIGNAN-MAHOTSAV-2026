@@ -302,8 +302,8 @@ const EventDetail: React.FC = () => {
         { name: "Mr. Hema Naga Venkata Krishna", phone: "+91 74160 65745" },
         { name: "Mr. S.Rathna Prabhooth ", phone: "+91 63030 13174" },
         { name: "Mr. M. Venkata swamy", phone: "+91 83176 56282" },
-        {name: "Mr. N.Jessieevans", phone: "+91 78158 87117"},
-        {name: "Ms, R.Siva Chandini", phone: "+91 99592 62017"}
+        { name: "Mr. N.Jessieevans", phone: "+91 78158 87117" },
+        { name: "Ms, R.Siva Chandini", phone: "+91 99592 62017" }
 
       ]
     },
@@ -378,11 +378,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. K. Gayathri", phone: "+91 93929 60026" },
-        {name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733"},
-        {name:"Ms. K. Gayathri", phone: "+91 93929 60026 "},
-        {name:"Mr. D. Harshith", phone: "+91 80191 71205"},
-        {name:"Ms. D. Sowmya", phone: "+91 70136 39789"},
-        {name:"Mr. SK. Moulali", phone: "+91 77806 93439"}
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026 " },
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" },
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" },
+        { name: "Mr. SK. Moulali", phone: "+91 77806 93439" }
       ]
     },
     "Table Tennis": {
@@ -406,11 +406,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. K. Gayathri", phone: "+91 93929 60026" },
-        {name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733"},
-        {name:"Ms. K. Gayathri", phone: "+91 93929 60026 "},
-        {name:"Mr. D. Harshith", phone: "+91 80191 71205"},
-        {name:"Ms. D. Sowmya", phone: "+91 70136 39789"},
-        {name:"Mr. SK. Moulali", phone: "+91 77806 93439"}
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026 " },
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" },
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" },
+        { name: "Mr. SK. Moulali", phone: "+91 77806 93439" }
       ]
     },
     "Tennikoit": {
@@ -431,11 +431,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. K. Gayathri", phone: "+91 93929 60026" },
-        {name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733"},
-        {name:"Ms. K. Gayathri", phone: "+91 93929 60026 "},
-        {name:"Mr. D. Harshith", phone: "+91 80191 71205"},
-        {name:"Ms. D. Sowmya", phone: "+91 70136 39789"},
-        {name:"Mr. SK. Moulali", phone: "+91 77806 93439"}
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026 " },
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" },
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" },
+        { name: "Mr. SK. Moulali", phone: "+91 77806 93439" }
       ]
     },
     "Traditional Yogasana": {
@@ -468,13 +468,13 @@ const EventDetail: React.FC = () => {
         first: "Rs. 2,000 (Traditional) / Rs. 2,000 (Artistic)",
         second: "Rs. 1,500 (Traditional) / Rs. 1,500 (Artistic)"
       },
-     contacts: [
+      contacts: [
         { name: "Ms. K. Gayathri", phone: "+91 93929 60026" },
-        {name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733"},
-        {name:"Ms. K. Gayathri", phone: "+91 93929 60026 "},
-        {name:"Mr. D. Harshith", phone: "+91 80191 71205"},
-        {name:"Ms. D. Sowmya", phone: "+91 70136 39789"},
-        {name:"Mr. SK. Moulali", phone: "+91 77806 93439"}
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026 " },
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" },
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" },
+        { name: "Mr. SK. Moulali", phone: "+91 77806 93439" }
       ]
     },
     "Yoga & Individual": {
@@ -554,11 +554,11 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Ms. K. Gayathri", phone: "+91 93929 60026" },
-        {name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733"},
-        {name:"Ms. K. Gayathri", phone: "+91 93929 60026 "},
-        {name:"Mr. D. Harshith", phone: "+91 80191 71205"},
-        {name:"Ms. D. Sowmya", phone: "+91 70136 39789"},
-        {name:"Mr. SK. Moulali", phone: "+91 77806 93439"}
+        { name: "Mr. M. Siva Subrahmanyam", phone: "+91 93479 10733" },
+        { name: "Ms. K. Gayathri", phone: "+91 93929 60026 " },
+        { name: "Mr. D. Harshith", phone: "+91 80191 71205" },
+        { name: "Ms. D. Sowmya", phone: "+91 70136 39789" },
+        { name: "Mr. SK. Moulali", phone: "+91 77806 93439" }
       ]
     },
     "Para Sports": {
@@ -634,18 +634,18 @@ const EventDetail: React.FC = () => {
           second: "Rs. 10,000"
         }
       },
-     contacts: [
+      contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Volley ball (Women)": {
@@ -704,18 +704,18 @@ const EventDetail: React.FC = () => {
           second: "Rs. 10,000"
         }
       },
-       contacts: [
+      contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Basket ball (Women)": {
@@ -778,16 +778,16 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Kabaddi (Women)": {
@@ -813,16 +813,16 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Kho-Kho (Men)": {
@@ -851,18 +851,18 @@ const EventDetail: React.FC = () => {
           second: "Rs. 10,000"
         }
       },
-     contacts: [
+      contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Kho-Kho (Women)": {
@@ -914,16 +914,16 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Hockey (Women)": {
@@ -977,18 +977,18 @@ const EventDetail: React.FC = () => {
         third: "Rs. 7,000",
         fourth: "Rs. 3,000"
       },
-       contacts: [
+      contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Football (Women)": {
@@ -1043,16 +1043,16 @@ const EventDetail: React.FC = () => {
       },
       contacts: [
         { name: "Mr. N. Venkata Shivaji", phone: "+91 83090 65560" },
-        {name:"Mr. U. Rahul", phone: "+91 79812 31262"},
-        {name:"Mr. Anil", phone: "+91 83093 78066"},
-        {name:"Mr. Harsha sai", phone: "+91 88852 19568"},
-        {name:"Mr. Y. Raghu Ram", phone: "+91 99898 84558"},
-        {name:"Ms. P. Sangeetha", phone: "+91 78427 35151"},
-        {name:"Ms. U. Mounika", phone: "+91 96181 09821"},
-        {name:"Mr. S. prabooth", phone: "+91 63030 13174"},
-        {name:"Ms. N. Nirimitha", phone: "+91 75697 17808"},
-        {name:"Mr. B.AbhiRam", phone: "+91 83098 27464"},
-        {name:"Ms. R.Tejaswini", phone: "+91 93980 38691"}
+        { name: "Mr. U. Rahul", phone: "+91 79812 31262" },
+        { name: "Mr. Anil", phone: "+91 83093 78066" },
+        { name: "Mr. Harsha sai", phone: "+91 88852 19568" },
+        { name: "Mr. Y. Raghu Ram", phone: "+91 99898 84558" },
+        { name: "Ms. P. Sangeetha", phone: "+91 78427 35151" },
+        { name: "Ms. U. Mounika", phone: "+91 96181 09821" },
+        { name: "Mr. S. prabooth", phone: "+91 63030 13174" },
+        { name: "Ms. N. Nirimitha", phone: "+91 75697 17808" },
+        { name: "Mr. B.AbhiRam", phone: "+91 83098 27464" },
+        { name: "Ms. R.Tejaswini", phone: "+91 93980 38691" }
       ]
     },
     "Classical Dance Solo": {
@@ -1438,29 +1438,13 @@ const EventDetail: React.FC = () => {
     },
     "Master Orator": {
       title: "LITERATURE",
-      subtitle: "MASTER ORATOR",
+      subtitle: "Mahotsav 2026 Master Orator in collaboration with the TOASTMASTERS CLUB",
       rules: [
-        "The \"Master Orator\" competition is designed to showcase the power of the spoken word. The winner of this prestigious event will be honored with the title of \"Master Orator\".",
-        "**General Rules & Regulations:**",
-        "Participation: The competition consists of two rounds: a Prepared Speech and an Extempore round.",
-        "Authority: The decisions of the judges and the contest committee are final and legally binding.",
-        "Professionalism: All content and delivery must align with Toastmasters’ core values of integrity, respect, and service.",
-        "**Round 1: The Prepared Speech**",
-        "Theme: Open Choice (must be reflective, inspirational, or persuasive).",
-        "Originality & Integrity: The speech must be the participant's original work. Plagiarism is strictly prohibited and will lead to immediate disqualification.",
-        "Source Acknowledgment: Any quotes or external ideas must be verbally credited. A maximum of 20% of the speech may consist of referenced material; at least 80% must be the participant’s unique expression.",
-        "Content Focus: The speech should be a creative oratory piece. It must not be an academic report, a technical paper, or an instructional presentation. Avoid excessive technical jargon or data-heavy slides.",
-        "Time Limit: Participants are allotted a maximum of 3 minutes.",
-        "**Round 2: The Extempore (Impromptu)**",
-        "Format: Participants will be given a topic on the spot.",
-        "Preparation: A buffer time of 25 seconds will be provided for mental preparation before the speech begins.",
-        "**Judging Criteria:**",
-        "Competitors will be evaluated on the following pillars of communication:",
-        "Content & Structure: Relevance, clarity of thought, and logical flow.",
-        "Delivery & Fluency: Vocal variety, body language, and audience engagement.",
-        "Language & Decorum: Proper grammar, choice of words, and adherence to professional standards.",
-        "**Compliance:**",
-        "Any violation of the aforementioned rules or exceeding the time limits may result in point deductions or disqualification at the discretion of the contest committee."
+        "Speaking Time: Each participant will be given 3 minutes for delivering content.",
+        "First Round Topic: The topic for the first round will be provided one day before the competition and will be sent to the participants' respective emails.",
+        "Second Round (Extempore): The second round will be Extempore. The topic will be given on the spot and participants will have 25 seconds as buffer time for preparation.",
+        "judgment will be based on the following: Content delivery, fluency, and relevance to the topic given.",
+        "The winner will be awarded the title of \"Master Orator\"."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -1564,7 +1548,7 @@ const EventDetail: React.FC = () => {
         "• If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
         "• If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
         "• The contestant with the maximum points at the end of the given time will be declared the winner.",
-        
+
         "5. Judicial Clarification: Valid Jamming Reasons",
         "For the purpose of consistency, justified interruptions (successful jams) may be called for the following reasons, among others:",
         "• Hesitation/Stammering (a prolonged pause or repetition).",
@@ -1913,7 +1897,7 @@ const EventDetail: React.FC = () => {
         "• Artistic Paper Craft: Paper Quilling and Greeting Card design.",
         "• Material Design: Antique-style accessories and Leather crafts.",
         "• Sustainability: \"Wealth from Waste\" (Upcycled accessories).",
-        "**Rules & Regulations:**",
+
         "Team Composition: A team may consist of a maximum of two members. Individual participation is also permitted.",
         "Materials & Supplies: Participants are responsible for bringing all necessary tools and raw materials required for their specific craft. No materials will be provided on-site.",
         "Originality: All designs must be created during the competition hours."
@@ -2023,37 +2007,37 @@ const EventDetail: React.FC = () => {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Short Film Making",
       rules: [
-        "1.	The short film may address any theme of choice, including social issues, fiction, love, drama, or thriller.",
-        "2.	The submission must be a visually engaging video, such as a vlog, documentary, or short story, that incorporates camera work. PowerPoint presentations and photo story submissions will not be accepted. ",
-        "3.	The short film duration should not exceed 15 minutes, including titles and end credits. ",
-        "4.	There is no language restriction; however, subtitles are mandatory for all short films, irrespective of the language used.",
-        "5.	Vulgarity or offensive insinuations are prohibited. Only innocent satire or humor is allowed. The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation. ",
-        "6.	Representatives of the film cast and crew can be from different colleges, but they should definitely be a bonafide student currently pursuing any UG or PG program.",
-        "7.	Short films released between March 2025 and January 2026 are eligible for participation.",
-        "8.	Though there might be many members working in the film, a minimum count of 4 and maximum of 6 will only be permitted to register as representatives.",
+
+        "1. The short film may address any theme of choice, including social issues, fiction, love, drama, or thriller.",
+        "2. The submission must be a visually engaging video, such as a vlog, documentary, or short story, that incorporates camera work. PowerPoint presentations and photo story submissions will not be accepted.",
+        "3. The short film duration should not exceed 15 minutes, including titles and end credits.",
+        "4. There is no language restriction; however, subtitles are mandatory for all short films, irrespective of the language used.",
+        "5. Vulgarity or offensive insinuations are prohibited. Only innocent satire or humor is allowed. The short films will be judged based on the concept, script, acting, screenplay, narration, and overall presentation.",
+        "6. Representatives of the film cast and crew can be from different colleges, but they should definitely be a bonafide student currently pursuing any UG or PG program.",
+        "7. Short films released between March 2025 and January 2026 are eligible for participation.",
+        "8. Though there might be many members working in the film, a minimum count of 4 and maximum of 6 will only be permitted to register as representatives.",
         "",
         "**Registration Guidelines:**",
         "**Online Submission:**",
-        "1.	The director of the short film must submit the entry by sharing the Google Drive link or Youtube link of the short film through this form",
-        "2.	No changes will be accepted once the link is submitted.",
-        "3.	Online submission deadline: 20th January 2026 ",
-        "4.	Online Screening Date: 24th January 2026 (The screening will be conducted internally within the college. Participants are not permitted to attend this process.)",
-        "5.	After the screening process, the top-performed short films will be shortlisted and will be informed through phone call/mail within a week.",
-        "6.	Cast and crew registered under the shortlisted film must attend Vignan Mahotsav 2026 on 7th February 2026 for the final round.",
-        "7.	One representative from the cast/crew (Director/Lead) must pay the total amount for all team members together and submit the details in this form.",
-        "8.	Winners will be awarded prizes on 7th February 2026 at 6:00 PM during the valedictory function.",
+        "1. The director of the short film must submit the entry by sharing the Google Drive link or Youtube link of the short film through this form",
+        "2. No changes will be accepted once the link is submitted.",
+        "3. Online submission deadline: 30th January 2026",
+        "4. Online Screening Date: 31st January 2026 (The screening will be conducted internally within the college. Participants are not permitted to attend this process.)",
+        "5. After the screening process, the top-performed short films will be shortlisted and will be informed through phone call/mail within a week.",
+        "6. Cast and crew registered under the shortlisted film must attend Vignan Mahotsav 2026 on 7th February 2026 for the final round.",
+        "7. One representative from the cast/crew (Director/Lead) must pay the total amount for all team members together and submit the details in this form.",
+        "8. Winners will be awarded prizes on 7th February 2026 at 6:00 PM during the valedictory function.",
         "",
         "**On-Spot Submission:**",
-        "1.	The director of the short film must submit his/her shortfilm through Pen drive only. ",
-        "2.	On-spot submissions will be accepted only on 5th February 2026 for participants who miss the online deadline.",
-        "3.	Offline Screening Date: 6th February 2026",
-        "4.	After the screening process, the top performed short films will be shortlisted and will be informed through phone call/mail by same evening.",
-        "5.	Cast and crew registered under the shortlisted film must attend Vignan Mahotsav 2026 on 7th February 2026 for the final round. ",
-        "6.	Winners will be awarded prizes on 7th February 2026 at 6:00 PM during the valedictory function.",
+        "1. The director of the short film must submit his/her short film through Pen drive only.",
+        "2. On-spot submissions will be accepted only on 5th February 2026 for participants who miss the online deadline.",
+        "3. Offline Screening Date: 6th February 2026",
+        "4. After the screening process, the top performed short films will be shortlisted and will be informed through phone call/mail by same evening.",
+        "5. Cast and crew registered under the shortlisted film must attend Vignan Mahotsav 2026 on 7th February 2026 for the final round.",
+        "6. Winners will be awarded prizes on 7th February 2026 at 6:00 PM during the valedictory function.",
         "",
         "**Final Round Selection Process:**",
-        "From both categories — online submissions and on-spot submissions — the top-performed short films will be selected separately, and then combined for the final round on 7th February 2026."
-
+        "1. From both categories — online submissions and on-spot submissions — the top-performed short films will be selected separately, and then combined for the final round on 7th February 2026."
       ],
       prizes: {
         first: "Rs. 20,000",
@@ -2061,29 +2045,33 @@ const EventDetail: React.FC = () => {
         third: "Rs. 12,000"
       },
       contacts: [
-        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
-        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
-        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
-        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+        { name: "Gurram Mohan", phone: "96665 83007" },
+        { name: "P.Purnima Sai", phone: "79977 55999" },
+        { name: "N.Suchitha Sharon", phone: "74161 49878" },
+        { name: "N.Hasini", phone: "82474 60472" },
+        { name: "Manu", phone: "83417 19026" }
       ]
     },
     "Online Photography": {
       title: "FINE ARTS",
       subtitle: "ONLINE PHOTOGRAPHY",
       rules: [
-        "Equipment: All photographs must be captured using a DSLR camera (or equivalent professional gear). Mobile photography is not permitted.",
-        "Submission Requirements: Participants must submit two files for each entry:",
-        "• The RAW file (for verification).",
-        "• The Edited JPEG (for judging).",
-        "• Note: Only minor editing (brightness, contrast, color correction) is allowed. Major manipulation is prohibited.",
-        "Themes: Participants must select one of the following themes and submit 2 photographs based on that theme:",
-        "• Nature",
-        "• Workmanship",
-        "• Wildlife",
-        "• Street Photography",
-        "File Format: The final edited entry must be submitted in JPEG format.",
-        "Resolution: The image dimensions must be exactly 1920 x 1080 pixels.",
-        "Originality: The submission must be the original work of the participant. The use of stock images, Google images, or downloaded content is strictly prohibited and will lead to immediate disqualification."
+        "**Rules:**",
+        "• NOTE: Individual participant only.",
+        "• MODE: Online submission",
+        "• FORMAT: JPEG format only (High resolution preferred).",
+        "• THEME: “Nature / Workmanship / Wildlife / Street Photography”",
+        "• THEME DESCRIPTION: Participants must choose any ONE theme and capture photographs that clearly represent the essence of the selected theme, highlighting originality, storytelling, composition, and visual impact.",
+        "• DEADLINE : 31st January 2026",
+        "• ORIGINAL CONTENT ONLY:",
+        "o Google images and stock images are strictly not allowed.",
+        "o Photographs must be captured by the participant only.",
+        "o Any form of plagiarism will lead to immediate disqualification.",
+        "• SUBMISSION REQUIREMENTS:",
+        "o Submit 2 photographs of the chosen theme.",
+        "o RAW photo + EDITED photo must be submitted for each photograph.",
+        "o Only minor editing (color correction, exposure, cropping) is allowed.",
+        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2091,10 +2079,11 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
-        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
-        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
-        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+        { name: "Gurram Mohan", phone: "96665 83007" },
+        { name: "P.Purnima Sai", phone: "79977 55999" },
+        { name: "N.Suchitha Sharon", phone: "74161 49878" },
+        { name: "N.Hasini", phone: "82474 60472" },
+        { name: "Manu", phone: "83417 19026" }
       ]
     },
 
@@ -2102,78 +2091,73 @@ const EventDetail: React.FC = () => {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Digital Poster Making",
       rules: [
-        "Eligibility: Open to all students (individual participation only).",
-        "Theme: The theme will be clearly mentioned on the respective poster published on the Mahotsav Instagram page.",
-        "Mode of Submission: Online submission through Google Form only.",
-        "Format: JPEG / PNG / PDF.",
-        "Size: A3 or A4 (portrait or landscape).",
-        "Resolution: Minimum 300 dpi.",
-        "**Originality:**",
-        "•	No plagiarism; AI-generated artwork is strictly prohibited.",
-        "•	Only original or royalty-free images and text may be used.",
-        "**Theme Representation:**",
-        "•	The poster must clearly and creatively reflect the given theme (as mentioned on the respective poster).",
-        "**Identification:**",
-        "•	Do not include your name or college logo on the poster.",
-        "•	A unique ID will be provided for identification purposes.",
-        "**Submission Policy:**",
-        "•	Late submissions will not be accepted.",
-        "**Disqualification Clause:**",
-        "•	No plagiarism; AI-generated artwork is strictly prohibited.",
-        "•	Only original or royalty-free images and text may be used.",
-        "**Theme Representation:**",
-        "•	The poster must clearly and creatively reflect the given theme (as mentioned on the respective poster).",
-        "**Identification:**",
-        "•	Do not include your name or college logo on the poster.",
-        "•	A unique ID will be provided for identification purposes.",
-        "**Submission Policy:**",
-        "•	Late submissions will not be accepted.",
-        "**Disqualification Clause:**",
-        "•	Any copied, offensive, misleading, or AI-generated content will result in immediate disqualification."
+
+        "• NOTE : Solo participation only.",
+        "• THEME: Imagine you are designing a poster for a nationwide mental health awareness campaign. Use your creativity to communicate support, hope, and understanding. You may choose any angle or message within the theme of mental well-being, emotional support, or community care.",
+        "• MODE: Online submission through google form.",
+        "• The participant is required to create a poster on the mentioned theme.",
+        "• FORMAT: JPEG / PNG / PDF.",
+        "• SIZE: A4 (portrait or landscape).",
+        "• RESOLUTION: Minimum 300 dpi.",
+        "• Originality:",
+        "No plagiarism; AI-generated artwork is strictly prohibited.",
+        "Only original or royalty-free images and text may be used.",
+        "• THEME REPRESENTATION: The poster must clearly and creatively reflect the given theme.",
+        "• TITLE REQUIREMENT : Participants are encouraged to create their own unique title for the poster and display it clearly in the design.",
+        "• IDENTIFICATION:",
+        "Do not include your name or college logo on the poster.",
+        "A unique ID will be provided for identification purposes.",
+        "• SUBMISSION POLICY: Late submissions will not be accepted.",
+        "• SUBMISSION DEADLINE: 31st January 2026.",
+        "• DISQUALIFICATION CLAUSE: Any copied, offensive, misleading, or AI-generated content will result in immediate disqualification.",
+        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/mail."
       ],
       prizes: {
-        first: "Rs. 2,000",
-        second: "Rs. 1,500",
+        first: "Rs. 3,000",
+        second: "Rs. 2,000",
         third: "Rs. 1,000"
       },
       contacts: [
-        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
-        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
-        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
-        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+        { name: "Gurram Mohan", phone: "96665 83007" },
+        { name: "P.Purnima Sai", phone: "79977 55999" },
+        { name: "N.Suchitha Sharon", phone: "74161 49878" },
+        { name: "N.Hasini", phone: "82474 60472" },
+        { name: "Manu", phone: "83417 19026" }
       ]
     },
     "Mahotsav Digital Chronicle": {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Mahotsav Digital Chronicle",
       rules: [
-        "**1. Team Composition (3 Members)**",
-        "Content Writer: Responsible for writing articles, highlights, and descriptions.",
-        "Photographer: Must capture event photos on Day 1 & Day 2 of Mahotsav.",
-        "Designer: Creates the digital magazine layout using any approved design platform.",
-        "**2. Tasks**",
-        "Capture real-time moments from Day 1 & Day 2 of Mahotsav.",
-        "Write engaging content covering performances, stalls, competitions, ambiance, and crowd highlights.",
-        "Design a structured and visually appealing digital magazine using collected photographs and written content.",
 
+        "**1. Team Composition (3 Members)**",
+        "1. Content Writer: Responsible for writing articles, highlights, and descriptions.",
+        "2. Photographer: Must capture event photos on Day 1 & Day 2 of Mahotsav.",
+        "3. Designer: Creates the digital magazine layout using any approved design platform.",
+        "",
+        "**2. Tasks**",
+        "1. Capture real-time moments from Day 1 & Day 2 of Mahotsav.",
+        "2. Write engaging content covering performances, stalls, competitions, ambiance, and crowd highlights.",
+        "3. Design a structured and visually appealing digital magazine using collected photographs and written content.",
+        "",
         "**3. Allowed Platforms**",
         "Canva, Adobe Express, Figma, InDesign, MS Publisher, or any digital design tool.",
-
+        "",
         "**4. Output Format**",
-        "Final submission must be in PDF format.",
-        "Magazine must contain a minimum of 6 pages and a maximum of 15 pages.",
-
+        "1. Final submission must be in PDF format.",
+        "2. Magazine must contain a minimum of 6 pages and a maximum of 15 pages.",
+        "",
         "**5. Judging Criteria**",
-        "Creativity and presentation.",
-        "Quality of photographs.",
-        "Content clarity and storytelling.",
-        "Magazine flow and layout.",
-        "Overall impact.",
-
+        "1. Creativity and presentation.",
+        "2. Quality of photographs.",
+        "3. Content clarity and storytelling.",
+        "4. Magazine flow and layout.",
+        "5. Overall impact.",
+        "",
         "**6. Disqualification Criteria**",
-        "Use of internet photos instead of original photographs.",
-        "Plagiarised or AI-generated content.",
-        "Offensive or inaccurate representation of the event."
+        "1. Use of internet photos instead of original photographs.",
+        "2. Plagiarised or AI-generated content.",
+        "3. Offensive or inaccurate representation of the event."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2181,24 +2165,29 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
-        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
-        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
-        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+        { name: "Gurram Mohan", phone: "96665 83007" },
+        { name: "P.Purnima Sai", phone: "79977 55999" },
+        { name: "N.Suchitha Sharon", phone: "74161 49878" },
+        { name: "N.Hasini", phone: "82474 60472" },
+        { name: "Manu", phone: "83417 19026" }
       ]
     },
     "Reel Making": {
       title: "DIGITAL STORYTELLING & CREATIVE MEDIA",
       subtitle: "Reel Making",
       rules: [
-        "Eligibility: Team of maximum 4 members.",
-        "Mode: Online submission ",
-        "Duration: Minimum 50 sec – Maximum 60 sec (strict disqualification beyond 60 sec).",
-        "Format: MP4/MOV, 720p+, landscape preferred (vertical allowed).",
-        "Theme Compliance: The video must clearly reflect the theme as mentioned on the respective poster posted on the Mahotsav Instagram page through its story, visuals, or message.",
-        "Original content only: no offensive, explicit, or political visuals.",
-        "Only royalty-free audio/images may be used.",
-        "Late submissions will not be accepted."
+
+        "• ELIGIBILITY: Team of maximum 4 members.",
+        "• MODE: Online submission",
+        "• DURATION: Minimum 50 sec – Maximum 60 sec (strict disqualification beyond 60 sec).",
+        "• FORMAT: MP4, 720p+, vertical allowed",
+        "• The team leader must submit the entry by sharing the Google Drive Link or Insta Reel Link of the reel through this form",
+        "• THEME: “Small Acts, Big Harmony”",
+        "• THEME DESCRIPTION: How small actions can create big happiness and harmony in life.",
+        "• ORIGINAL CONTENT ONLY: No offensive, explicit, or political visuals.",
+        "• Only royalty-free audio, images, and video clips can be used.",
+        "• SUBMISSION DEADLINE: 28th January 2026.",
+        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2206,10 +2195,11 @@ const EventDetail: React.FC = () => {
         third: "Rs. 2,000"
       },
       contacts: [
-        { name: "Mr. Gurram Mohan", phone: "+91 96665 83007" },
-        { name: "Ms. Purnima Sai Pinnamaraju", phone: "+91 79977 55999" },
-        { name: "Ms. Hasini Reddy Nannuri ", phone: "+91 82474 60472" },
-        { name: "Ms. N.suchitha sharon ", phone: "+91 74161 49878" }
+        { name: "Gurram Mohan", phone: "96665 83007" },
+        { name: "P.Purnima Sai", phone: "79977 55999" },
+        { name: "N.Suchitha Sharon", phone: "74161 49878" },
+        { name: "N.Hasini", phone: "82474 60472" },
+        { name: "Manu", phone: "83417 19026" }
       ]
     },
     "Valorant": {
@@ -2392,29 +2382,36 @@ const EventDetail: React.FC = () => {
       title: "ROBO WARS",
       subtitle: "Bot Wrestling",
       rules: [
-        "**Objective:** Bot Wrestling is a competitive event where two robots, controlled either wirelessly or via wired connections, face off with the objective of pushing the opposing robot out of the designated arena. These robots must be operated remotely, ensuring a battle of strategic maneuvering and technological prowess.",
-  
+        "**Objective:**",
+        "Bot Wrestling is a competitive event where two robots, controlled either wirelessly or via wired connections, face off with the objective of pushing the opposing robot out of the designated arena. These robots must be operated remotely, ensuring a battle of strategic maneuvering and technological prowess.",
+        "",
         "**Robot Specifications:**",
-        "• The robot's dimensions must not exceed (300mm x 300mm x 300mm) at any point during the game. The robot height should not exceed 15cm.",
-        "• Both wired and wireless robots are allowed.",
-        "• The weight of the bot (wired/wireless) should not exceed 5 kg.",
-        "• The maximum voltage for batteries, both in the robot and the remote, must not exceed 12 V.",
-        "• The bot can have 4-wheel drive or 2-wheel drive mechanism; all the tyres must contribute to its movement.",
-        "• The body of the robot must not be taken from any readymade toys.",
-        "• For wired control, participants must ensure that the wire length is at least 5 meters. The wires should be properly insulated and bundled together as a single unit without disturbing the other robot.",
-        "• RF modules from toy cars are not permitted; however, the use of IC engines and LEGO kits will result in disqualification.",
-        "• The battery of the robot should be onboard.",
+        "1. The robot’s dimensions must not exceed (300mm x 300 mm x 300 mm) at any point during the game. The robot height should not exceed 15cm.",
+        "2. Both wired and wireless robots are allowed.",
+        "3. The weight of the bot (wired/wireless) should not exceed 5 kg.",
+        "4. The maximum voltage for batteries, both in the robot and the remote, must not exceed 12 V.",
+        "5. The bot can have 4-wheel drive or 2-wheel drive mechanism; all the tyres must contribute to its movement.",
+        "6. The body of the robot must not be taken from any readymade toys.",
+        "7. For wired control, participants must ensure that the wire length is at least 5 meters. The wires should be properly insulated and bundled together as a single unit without disturbing the others robot.",
+        "8. RF modules from toy cars are not permitted; however, the use of IC engines and LEGO kits will result in disqualification.",
+        "9. The battery of the robot should be onboard.",
+        "",
+        "**Weapon / Front Attachment Constraints:**",
+        "1. There should be no holding mechanism to the robot.",
+        "2. No expansion of front attachments of the robot after start.",
+        "3. No sharp blades, cutters, or entangling devices.",
+        "4. Wedge/lifter angles typically: 20°–45°.",
         "",
         "**Rules:**",
-        "• The objective of the competition is to be the last bot standing inside the arena.",
-        "• Teams will compete in a knockout or league format, depending on the total number of participating teams. Based on performance, the top four teams will qualify for the Semi-Finals.",
-        "• At the start of each match, both bots must be positioned at the center of the ring.",
-        "• The match will begin only after the referee's signal.",
-        "• A bot wins a round by pushing its opponent completely outside the ring.",
-        "• The referee's decision will be final in determining whether a bot has been pushed out entirely.",
-        "• If a bot does not move from its position for more than 30 seconds, the team will receive a first warning.",
-        "• Chain and belt mechanisms involved robots are not allowed. Only electric driven systems are allowed to participate.",
-        "• The team will be disqualified if the player intentionally hurts the opponent's robot after the referee's signal.",
+        "1. The objective of the competition is to be the last bot standing inside the arena.",
+        "2. Teams will compete in a knockout or league format, depending on the total number of participating teams. Based on performance, the top four teams will qualify for the Semi-Finals.",
+        "3. At the start of each match, both bots must be positioned at the center of the ring.",
+        "4. The match will begin only after the referee’s signal.",
+        "5. A bot wins a round by pushing its opponent completely outside the ring.",
+        "6. The referee’s decision will be final in determining whether a bot has been pushed out entirely.",
+        "7. If a bot does not move from its position for more than 30 seconds, the team will receive a first warning.",
+        "8. Chain and belt mechanisms involved robots are not allowed. Only electric driven system are allowed to participate.",
+        "9. The team will be disqualified if the player intentionally hurts the opponents robot after the referees signal.",
         "",
         "**Match Duration:**",
         "• Each match will have a maximum duration of 5 minutes.",
@@ -2423,35 +2420,32 @@ const EventDetail: React.FC = () => {
         "• The bot with the greater number of push-outs will be declared the winner.",
         "",
         "**False Start Rule:**",
-        "• If a bot moves before the referee's signal, the match counter will be reset, and the team will be given a second chance.",
+        "• If a bot moves before the referee’s signal, the match counter will be reset, and the team will be given a second chance.",
         "• Repeated violations of this rule will result in disqualification.",
         "",
         "**Arena:**",
-        "• The arena will be square in shape of side 2400 mm.",
-        "• The main arena will be circular in shape with a maximum diameter 2200 mm.",
-        "• A center white line of 25.40 mm width divides the arena into two equal halves.",
-        "• White border squares of 300 mm x 300 mm on the opposite sides of the central line, indicating the starting zones of the two competing teams.",
-        "• The arena will be constructed from wood, with all the markings on it, including the zones, painted onto the surface.",
+        "1. The arena will be square in shape of side 2400 mm.",
+        "2. The main arena will be a circular in shape with a maximum diameter 2200 mm.",
+        "3. A center white line of 25.40 mm width, divides the arena into two equal halves.",
+        "4. White border squares of 300 mm x 300 mm on the opposite sides of the central line, indicating the starting zones of the two competing teams.",
+        "5. The arena will be constructed from wood, with all the markings on it, including the zones, painted onto the surface.",
         "",
         "**Power Supply:**",
-        "• The robot must be completely self-contained and require no external assistance. It must not use any energy produced through burning fuels that may have any potential risk of fire hazard.",
-        "• The robot must have an internal on-board power source, external power supplies are not allowed.",
-        "• The voltage within the robot must not exceed 12 V DC at any point.",
+        "1. The robot must be completely self-contained and require no external assistance. It must not use any energy produced through burning fuels that may have any potential risk of fire hazard.",
+        "2. The robot must have an internal on-board power source, external power supplies are not allowed.",
+        "3. The voltage within the robot must not exceed 12 V DC any point.",
         "",
         "**Point System:**",
-        "• Each match will have a total duration of 5 minutes, unless extended by the judges.",
-        "• During these 5 minutes, points will be awarded based on the number of goals scored.",
-        "• If a robot goes outside the arena, the opposing team will be awarded one point.",
-        "• The judges' decision shall be final and binding in all matters.",
-        "• The organizers reserve the right to modify any or all of the above rules as deemed necessary.",
+        "1. Each match will have a total duration of 5 minutes, unless extended by the judges.",
+        "2. During these 5 minutes, points will be awarded based on the number of goals scored.",
+        "3. If a robot goes outside the arena, the opposing team will be awarded one point.",
+        "4. The judges’ decision shall be final and binding in all matters.",
+        "5. The organizers reserve the right to modify any or all of the above rules as deemed necessary.",
         "",
         "**Hand Touch:**",
-        "• The operator must request referee permission before touching the robot.",
-        "• Touching without permission results in immediate disqualification.",
-        "• If the robot disconnects during the competition, one minute will be given to repair it.",
-        "**Notes:**",
-        "•  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
- 
+        "1. The operator must request referee permission before touching the robot.",
+        "2. Touching without permission results in immediate disqualification.",
+        "3. If the robot disconnects during the competition, one minute will be given to repair it."
       ],
       prizes: {
         first: "Rs. 8,000",
@@ -2536,7 +2530,7 @@ const EventDetail: React.FC = () => {
         "• The team with the minimum final time will be declared the winner.",
         "**Notes:**",
         "•  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
- 
+
       ],
       prizes: {
         first: "Rs. 8,000",

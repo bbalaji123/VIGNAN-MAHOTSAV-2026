@@ -128,7 +128,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
 
     // Set custom validity message
     if (inputRef.current) {
-      inputRef.current.setCustomValidity('Please select a college from the dropdown or click "Other"');
+      inputRef.current.setCustomValidity('Please select a college from the dropdown');
     }
   };
 
@@ -199,7 +199,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
 
     // Set custom validity message
     if (inputRef.current) {
-      inputRef.current.setCustomValidity('Please select a college from the dropdown or click "Other"');
+      inputRef.current.setCustomValidity('Please select a college from the dropdown');
     }
   };
 
@@ -227,7 +227,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
             onBlur={(e) => {
               // Validate on blur
               if (!isValidSelection && searchTerm && required) {
-                e.target.setCustomValidity('Please select a college from the dropdown or click "Other"');
+                e.target.setCustomValidity('Please select a college from the dropdown');
               }
             }}
             disabled={!selectedState || !selectedDistrict}
@@ -247,7 +247,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
           />
           {!isValidSelection && searchTerm && (
             <div className="text-orange-400 text-xs mt-1 px-1">
-              ⚠️ Please select from dropdown or click "Other" button
+              ⚠️ Please select from dropdown
             </div>
           )}
 
@@ -264,37 +264,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
                       {college.Name}
                     </div>
                   ))}
-                  <div
-                    onClick={() => {
-                      setShowOtherInput(true);
-                      setShowDropdown(false);
-                      setSearchTerm('');
-                      onChange('');
-                      setIsValidSelection(false);
-                      if (onOtherSelected) {
-                        onOtherSelected(true);
-                      }
-                    }}
-                    className="px-4 py-3 text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors border-t-2 border-orange-500/30"
-                  >
-                    ➕ Other (Not in list)
-                  </div>
                 </>
-              ) : searchTerm ? (
-                <div
-                  onClick={() => {
-                    setShowOtherInput(true);
-                    setShowDropdown(false);
-                    setOtherCollegeName(searchTerm);
-                    setIsValidSelection(false);
-                    if (onOtherSelected) {
-                      onOtherSelected(true);
-                    }
-                  }}
-                  className="px-4 py-3 text-center text-orange-400 font-bold hover:bg-white/10 cursor-pointer transition-colors"
-                >
-                  ➕ College not found? Click here to enter manually
-                </div>
               ) : (
                 <div className="px-4 py-3 text-white/50 text-center">
                   Start typing to search...

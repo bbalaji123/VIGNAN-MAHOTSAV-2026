@@ -1,7 +1,12 @@
 .gallery-section {
   padding: 120px 20px 80px;
-  overflow: hidden;
-  contain: layout style paint;
+  overflow: visible;
+  contain: none;
+  transform: none;
+  backface-visibility: visible;
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
 }
 
 .gallery-title {
@@ -16,7 +21,6 @@
   position: relative;
   isolation: isolate;
   padding: 40px 0;
-  contain: layout style;
 }
 
 .scroll-row {
@@ -26,6 +30,7 @@
   pointer-events: none;
   transform: translateZ(0);
   backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Allow clicks ONLY on cards */

@@ -37,8 +37,11 @@
   object-fit: contain;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
   border-radius: 50%;
-  z-index: 50;
+  z-index: 60;
   transition: transform 0.3s ease;
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Logo Section - Bigger and Centered */
@@ -191,15 +194,22 @@
   }
 
   .guide-garuda-logo {
-    /* Adjust based on Back button overlap */
-    height: 50px;
+    /* Make visible on mobile */
+    height: 60px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 
 /* Tablet Responsiveness */
 @media (max-width: 768px) {
   .guide-garuda-logo {
-    /* Ensure it doesn't overlap back button */
+    /* Ensure it doesn't overlap back button and is visible */
     margin-left: 0;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: 70px;
   }
 }

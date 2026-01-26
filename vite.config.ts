@@ -9,13 +9,41 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
         chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js'
+        entryFileNames: 'assets/[name]-[hash].js',
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('react-router')) {
+              return 'router';
+            }
+            return 'vendor';
+          }
+          if (id.includes('Dashboard.tsx')) {
+            return 'dashboard';
+          }
+          if (id.includes('EventDetail.tsx') || id.includes('EventRegistrationModal.tsx')) {
+            return 'events';
+          }
+          if (id.includes('Profile.tsx') || id.includes('Login.tsx') || id.includes('Signup.tsx')) {
+            return 'auth';
+          }
+        }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000
   },
   server: {
     watch: {

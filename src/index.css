@@ -313,7 +313,7 @@ body,
     width: 100%;
     height: 100%;
     background-color: #1a1034;
-    background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png');
+    background-image: url('/images/Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -653,4 +653,14 @@ svg {
 .Toaster,
 .Toaster>div {
   z-index: 999999 !important;
+}
+
+/* Hide hero section animation (AnimatedIcon) on mobile in gallery, throwback, and footer sections */
+@media (max-width: 768px) {
+  .gallery-section ~ div[style*="position: fixed"][style*="bottom"],
+  footer ~ div[style*="position: fixed"][style*="bottom"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }

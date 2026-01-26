@@ -20,7 +20,10 @@
     content="Vignan Mahotsav 2026, the 19th national-level youth festival themed Eternal Harmony, brings sports, culture, techno races, robo games, arts & athletics together from February 5-7, 2026." />
 
   <!-- PERFORMANCE -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
   <!-- KEYWORDS -->
   <meta name="keywords"
@@ -54,22 +57,21 @@
 <meta name="theme-color" content="#0a5c36" />
 
   <!-- ICONS -->
-  <!-- PRIMARY FAVICON (SVG) -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-  <!-- FALLBACKS -->
+  <!-- FAVICON -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 
-  <!-- PRELOAD CRITICAL FONTS -->
+  <!-- PRELOAD CRITICAL RESOURCES -->
+  <link rel="preload" href="/menu-dashboard/image.avif" as="image" type="image/avif" />
+  <link rel="preload" href="/images/Background.png" as="image" type="image/png" />
   <link rel="preload" href="/images/coffee+teademo-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
   <link rel="preload" href="/images/Aladin.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
-  <link rel="preload" href="/images/Borisna.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
 
   <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /></noscript>
 
   <!-- EVENT STRUCTURED DATA -->
   <script type="application/ld+json">
@@ -109,6 +111,17 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  <script>
+    // Inline critical font loading script
+    if ('fonts' in document) {
+      Promise.all([
+        document.fonts.load('1em "coffee+tea demo"'),
+        document.fonts.load('1em Aladin')
+      ]).then(() => {
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    }
+  </script>
 </body>
 
 </html>

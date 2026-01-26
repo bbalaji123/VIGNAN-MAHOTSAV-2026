@@ -1,17 +1,22 @@
-﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 // import './hero-fullwidth.css';
-import AnimatedIcon from './Animatedicon';
+const AnimatedIcon = lazy(() => import('./Animatedicon'));
+const Gallery = lazy(() => import('./Gallery'));
+import { galleryImages } from './Gallery';
 import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
-import Gallery, { galleryImages } from './Gallery';
 import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 import { showToast } from './utils/toast';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  onLoad?: () => void;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showPageMenu, setShowPageMenu] = useState(() => {
@@ -44,6 +49,7 @@ const Dashboard: React.FC = () => {
   const [onlineAudience, setOnlineAudience] = useState(0);
   const [cashPrizes, setCashPrizes] = useState(0);
   const statsRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Timer countdown state
   const eventDate = new Date("Feb 5, 2026 00:00:00").getTime();
@@ -1029,10 +1035,14 @@ const Dashboard: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initial check after a brief delay to ensure all refs are set
+    setTimeout(handleScroll, 100);
+
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // IntersectionObserver for scroll-based animations
+  // IntersectionObserver for scroll-based animations (Restored)
   useEffect(() => {
     // Track scroll direction
     const trackScrollDirection = () => {
@@ -1045,8 +1055,8 @@ const Dashboard: React.FC = () => {
 
     const observerOptions = {
       root: null,
-      rootMargin: '100px 0px -100px 0px', // Start animation 100px before, remove 100px after
-      threshold: [0, 0.1, 0.5, 0.9, 1] // Multiple thresholds for better detection
+      rootMargin: '100px 0px -100px 0px',
+      threshold: [0, 0.1, 0.5, 0.9, 1]
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -1055,7 +1065,6 @@ const Dashboard: React.FC = () => {
         if (sectionId) {
           setVisibleSections(prev => {
             const newSet = new Set(prev);
-
             // When scrolling DOWN - no animations, just show immediately
             if (entry.isIntersecting && scrollDirection.current === 'down') {
               newSet.add(sectionId);
@@ -1065,17 +1074,17 @@ const Dashboard: React.FC = () => {
               newSet.add(sectionId);
             }
             // Remove when out of viewport
-            else if (!entry.isIntersecting || entry.intersectionRatio < 0.05) {
+            else if (!entry.isIntersecting) {
               newSet.delete(sectionId);
             }
-
             return newSet;
           });
         }
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    observerRef.current = new IntersectionObserver(observerCallback, observerOptions);
+    const observer = observerRef.current;
 
     // Observe all registered sections
     sectionRefs.current.forEach((element) => {
@@ -1088,8 +1097,10 @@ const Dashboard: React.FC = () => {
     };
   }, []);
 
+  // Use the observer state to hide the hero flower once the gallery/throwback sections appear
   useEffect(() => {
-    setIsGalleryVisible(visibleSections.has('throwback') || visibleSections.has('throwbacks'));
+    const galleryVisible = visibleSections.has('throwbacks') || visibleSections.has('throwback');
+    setIsGalleryVisible(galleryVisible);
     setIsFooterVisible(visibleSections.has('footer'));
   }, [visibleSections]);
 
@@ -1178,7 +1189,12 @@ const Dashboard: React.FC = () => {
   const registerSection = useCallback((id: string, element: HTMLElement | null) => {
     if (element) {
       sectionRefs.current.set(id, element);
+      if (observerRef.current) {
+        observerRef.current.observe(element);
+      }
     } else {
+      // If element is being unmount, we should ideally unobserve, but we don't have the element here easily if null passed
+      // However, IntersectionObserver stops observing garbage collected elements automatically
       sectionRefs.current.delete(id);
     }
   }, []);
@@ -1912,9 +1928,9 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    // Validate college field - must have a value and either be from the list or "Other" option
+    // Validate college field - must have a value
     if (!signupFormData.college || signupFormData.college.trim() === '') {
-      showToast.warning('Please select your college from the list or choose Other option if your college is not listed');
+      showToast.warning('Please select your college from the list');
       setIsSubmitting(false);
       return;
     }
@@ -2228,42 +2244,68 @@ const Dashboard: React.FC = () => {
       // Fetch user's registered events in background
       const registrationsResult = await getUserRegisteredEvents(userProfileData.userId);
 
-      if (registrationsResult.success && registrationsResult.data) {
-        const registeredEvents = registrationsResult.data.registeredEvents || [];
-        setUserRegisteredEvents(registeredEvents);
+      // Use myEvents as primary source if available (since it drives the visual state), 
+      // otherwise fall back to the fetched result
+      let eventsToProcess = myEvents;
 
+      if (eventsToProcess.length === 0 && registrationsResult.success && registrationsResult.data) {
+        eventsToProcess = registrationsResult.data.registeredEvents || [];
+        setUserRegisteredEvents(eventsToProcess);
+      }
+
+      if (eventsToProcess.length > 0) {
         // Pre-populate selectedRegistrationEvents with currently registered events
         const preSelectedIds = new Set<string>();
 
-        registeredEvents.forEach((regEvent: any) => {
+        eventsToProcess.forEach((regEvent: any) => {
           const eventName = regEvent.eventName || regEvent.Event || regEvent.name;
+          if (!eventName) return;
 
-          // Find matching event in Sports
-          sportsEvents.forEach((event: any) => {
-            if (event && event.Event === eventName) {
+          console.log(`Processing saved event for registration: ${eventName}, Type: ${regEvent.eventType}`);
+
+          // Use stored eventType if available (more robust)
+          if (regEvent.eventType) {
+            const type = regEvent.eventType.toLowerCase();
+            if (type === 'sports' || type === 'sport') {
               preSelectedIds.add(`sport-${eventName}`);
-            }
-          });
-
-          // Find matching event in Culturals
-          culturalEvents.forEach((event: any) => {
-            if (event) {
-              const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
-              if (culturalEventName === eventName) {
-                preSelectedIds.add(`cultural-${culturalEventName}`);
-              }
-            }
-          });
-
-          // Find matching event in ParaSports
-          paraEvents.forEach((event: any) => {
-            if (event && event.Event === eventName) {
+            } else if (type === 'culturals' || type === 'cultural') {
+              preSelectedIds.add(`cultural-${eventName}`);
+            } else if (type === 'parasports' || type === 'parasport' || type === 'para') {
               preSelectedIds.add(`para-${eventName}`);
             }
-          });
+          } else {
+            // Fallback matching logic
+            // Find matching event in Sports
+            sportsEvents.forEach((event: any) => {
+              if (event && event.Event === eventName) {
+                preSelectedIds.add(`sport-${eventName}`);
+              }
+            });
+
+            // Find matching event in Culturals
+            culturalEvents.forEach((event: any) => {
+              if (event) {
+                const culturalEventName = event['Prize money for Performing arts, Visual arts, Fashion'] || event.Event;
+                if (culturalEventName === eventName) {
+                  preSelectedIds.add(`cultural-${culturalEventName}`);
+                }
+              }
+            });
+
+            // Find matching event in ParaSports
+            paraEvents.forEach((event: any) => {
+              if (event && event.Event === eventName) {
+                preSelectedIds.add(`para-${eventName}`);
+              }
+            });
+          }
         });
 
-        setSelectedRegistrationEvents(preSelectedIds);
+        setSelectedRegistrationEvents(prev => {
+          const newSet = new Set(prev);
+          preSelectedIds.forEach(id => newSet.add(id));
+          return newSet;
+        });
       }
     } catch (error) {
       console.error('Error loading registration data:', error);
@@ -2522,6 +2564,13 @@ const Dashboard: React.FC = () => {
         fetchUserSavedEvents(storedUserId);
       }
     }
+
+    // Simulate loading completion or wait for critical async
+    // Since we don't have a specific async block blocking the UI rendering initially (except maybe fonts/images),
+    // we can signal load shortly after mount.
+    if (onLoad) {
+      setTimeout(() => onLoad(), 1000); // Give it a second or wait for specific signals
+    }
   }, []);
   const fetchUserSavedEvents = async (userId: string): Promise<Set<string>> => {
     try {
@@ -2554,6 +2603,20 @@ const Dashboard: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showProfileDropdown]);
+
+  // Calculate constraint states - Mutually exclusive: Sports/Cultural ↔ PARA
+  // Moved from inside JSX to here for reliable execution before render
+  const newlySelectedIdsForConstraints = Array.from(selectedRegistrationEvents).filter(id => {
+    const [_type, ...nameParts] = id.split('-');
+    const eventName = nameParts.join('-');
+    return !isEventAlreadySaved(eventName);
+  });
+
+  const appHasParaSelected = newlySelectedIdsForConstraints.some(id => id.startsWith('para-'));
+  const appHasNormalSelected = newlySelectedIdsForConstraints.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
+
+  // (window as any).__hasParaSelected = appHasParaSelected;
+  // (window as any).__hasNormalSelected = appHasNormalSelected;
 
   return (
     <div className={`dashboard-container w-full overflow-x-hidden relative font-sans min-h-screen ${timeTheme}-theme`}
@@ -2624,21 +2687,21 @@ const Dashboard: React.FC = () => {
           </div>
           {/* Logo */}
           <div className="mahotsav-logo-container">
-            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="mahotsav-logo-img animate-fadeInDown" decoding="async" fetchPriority="high" />
+            <img src="/menu-dashboard/image.avif" alt="Vignan Mahotsav" className="mahotsav-logo-img animate-fadeInDown" width={800} height={200} decoding="async" fetchPriority="high" />
           </div>
 
           {/* Action Buttons - separate container with mobile-specific positioning */}
           <div className="hero-action-buttons absolute left-1/2 top-[62%] flex justify-center items-center -translate-x-1/2 -translate-y-1/2 md:left-[55%] md:top-[52%] lg:left-[52%] lg:top-1/2">
             {isLoggedIn ? (
               <button
-                className="h-10 text-white font-semibold uppercase tracking-wide rounded-full shadow-lg bg-pink-600 hover:bg-pink-700 transition duration-300 w-[170px] sm:w-[190px] md:w-[210px] lg:w-[220px] xl:w-[240px]"
+                className="h-12 text-white font-semibold uppercase tracking-wide rounded-md shadow-lg bg-pink-600 hover:bg-pink-700 transition duration-300 cursor-pointer w-[130px] sm:w-[150px] md:w-[170px] lg:w-[190px] xl:w-[210px]"
                 onClick={handleOpenRegistration}
               >
                 Register for Events
               </button>
             ) : (
               <button
-                className="h-10 text-white font-semibold uppercase tracking-wide rounded-full shadow-lg bg-pink-600 hover:bg-blue-700 transition duration-300 w-[150px] sm:w-[170px] md:w-[190px] lg:w-[210px] xl:w-[230px]"
+                className="h-12 text-white font-semibold uppercase tracking-wide rounded-md shadow-lg bg-pink-600 hover:bg-pink-700 transition duration-300 cursor-pointer w-[130px] sm:w-[150px] md:w-[170px] lg:w-[190px] xl:w-[210px]"
                 onClick={handleLoginClick}
               >
                 Register / Login
@@ -2652,6 +2715,31 @@ const Dashboard: React.FC = () => {
             }
             
             /* Desktop - position button below the "O" in MAHOTSAV */
+          }
+
+          /* iPad and tablet (768x1024) - Move register button to left with padding top */
+          @media (min-width: 768px) and (max-width: 1023px) {
+            .hero-action-buttons {
+              left: 50% !important;
+              top: 55% !important;
+              padding-top: 3rem !important;
+            }
+          }
+
+          /* Medium desktops (1200-1400px) - Prevent vignan logo overflow */
+          @media (min-width: 1200px) and (max-width: 1400px) {
+            .vignan-logo-top {
+              right: 5px !important;
+            }
+            
+            .vignan-logo-img 6              height: 150px !important;
+            }
+
+            .garuda-about-theme {
+              width: 480px !important;
+              left: -200px !important;
+              top: 200px !important;
+            }
           }
           
           /* OVERRIDE for 1024-1100px (1028x768) - Must come AFTER 1024-1440px */
@@ -2780,6 +2868,45 @@ const Dashboard: React.FC = () => {
               margin-right: 0 !important;
             }
             
+            /* Hide floating flowers in About Theme section on mobile */
+            /* Note: This hides static decorative flowers, NOT the animated hero flower */
+            .about-theme-section > .fixed.pointer-events-none {
+              display: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+            }
+            
+            /* Make Garuda logo visible and properly positioned on mobile */
+            .garuda-about-theme {
+              display: block !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+              width: 80px !important;
+              height: auto !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              top: -100px !important;
+              position: relative !important;
+              margin: 0 auto 20px !important;
+            }
+            
+            .garuda-about-theme img {
+              width: 100% !important;
+              height: auto !important;
+              display: block !important;
+              visibility: visible !important;
+              opacity: 1 !important;
+            }
+            
+            /* Animated hero flower visibility controlled by React state */
+            .animated-hero-flower[style*="display: none"] {
+              display: none !important;
+              visibility: hidden !important;
+              opacity: 0 !important;
+            }
+            }
+          }
+            
             .about-theme-container {
               padding-left: 10px !important;
               padding-right: 10px !important;
@@ -2805,8 +2932,16 @@ const Dashboard: React.FC = () => {
               padding-right: 5px !important;
             }
             
-            /* Ensure content has proper z-index above flowers */
-            section {
+            /* Ensure hero section content has proper z-index but allow flower to show */
+            .hero-section-fullwidth {
+              position: relative;
+              z-index: 1 !important;
+            }
+            
+            /* Gallery and other sections can be higher */
+            .gallery-section,
+            .throwback-section,
+            footer {
               position: relative;
               z-index: 20 !important;
             }
@@ -2816,7 +2951,11 @@ const Dashboard: React.FC = () => {
       </section>
 
       {/* The Icon Component - Fixed position flower - Hide in gallery and footer sections */}
-      {!isGalleryVisible && !isFooterVisible && <AnimatedIcon />}
+      {!isGalleryVisible && !isFooterVisible && (
+        <Suspense fallback={null}>
+          <AnimatedIcon visible={!isGalleryVisible} />
+        </Suspense>
+      )}
 
       {/* Full Screen Grid Menu Overlay */}
       {showPageMenu && (
@@ -4291,22 +4430,17 @@ const Dashboard: React.FC = () => {
             fontFamily: 'Aladin, cursive'
           }}>ABOUT THEME</h2>
 
-          {/* Garuda Logo - Above title on mobile, left side on desktop */}
-          <div className="garuda-about-theme" style={{
-            position: 'absolute',
-            height: 'auto',
-            zIndex: 1
-          }}>
-            <img
-              src="/menu-dashboard/Garuda.avif"
-              alt="Garuda Logo"
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain'
-              }}
-            />
-          </div>
+          {/* Garuda Logo - Right side on desktop, centered on mobile */}
+          <div
+            className="about-garuda-logo-v2"
+            style={{
+              pointerEvents: 'none',
+              backgroundImage: 'url("/menu-dashboard/Garuda.avif")',
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></div>
 
           <div className="about-theme-content" style={{ marginBottom: '40px', position: 'relative', zIndex: 2, paddingLeft: 'clamp(0px, 15vw, 380px)', paddingRight: 'clamp(20px, 5vw, 80px)' }}>
             <h3 className="theme-name" style={{
@@ -4342,13 +4476,13 @@ const Dashboard: React.FC = () => {
             padding: window.innerWidth <= 640 ? '20px 10px' : (window.innerWidth >= 1024 && window.innerWidth <= 1400 ? '30px 15px' : '30px 20px'),
             marginTop: '30px',
             boxShadow: '0 0 25px rgba(223, 160, 0, 0.822)',
-            maxWidth: (window.innerWidth >= 1024 && window.innerWidth <= 1400) ? '900px' : '950px',
+            maxWidth: (window.innerWidth >= 1200 && window.innerWidth <= 1400) ? '850px' : (window.innerWidth >= 1024 && window.innerWidth < 1200) ? '900px' : '950px',
             margin: '30px auto 0',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
           }}>
-            <div className="stats-grid" style={{ marginLeft: window.innerWidth > 1400 ? '-60px' : '0' }}>
+            <div className="stats-grid" style={{ marginLeft: window.innerWidth >= 1200 && window.innerWidth <= 1400 ? '-40px' : window.innerWidth > 1400 ? '-60px' : '0' }}>
               {/* Footfall */}
               <div style={{
                 display: 'flex',
@@ -4877,6 +5011,20 @@ const Dashboard: React.FC = () => {
             }
           }
 
+          /* iPad and tablet (768x1024) - Wider throwback section */
+          @media (min-width: 768px) and (max-width: 1023px) {
+            .throwback-video-wrapper {
+              max-width: 1050px !important;
+              width: 40vw !important;
+            }
+
+            .throwback-video-card {
+              width: 100% !important;
+              aspect-ratio: 16/9 !important;
+              height: auto !important;
+            }
+          }
+
           /* Tablet styles for flowers */
           @media (min-width: 640px) and (max-width: 1023px) {
             .side-menu-flower-top,
@@ -4946,10 +5094,12 @@ const Dashboard: React.FC = () => {
       </style>
 
       {/* Gallery Section */}
-      <Gallery
-        onPhotoClick={(row: number, index: number) => setSelectedPhoto({ row, index })}
-        registerSection={registerSection}
-      />
+      <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+        <Gallery
+          onPhotoClick={(row: number, index: number) => setSelectedPhoto({ row, index })}
+          registerSection={registerSection}
+        />
+      </Suspense>
 
       {/* Throwback Section */}
       <section
@@ -5142,9 +5292,8 @@ const Dashboard: React.FC = () => {
                     : selectedYear === '2024'
                       ? currentDay === 1 ? 'NMqFcGgZmz0' : currentDay === 2 ? '498q6iDA5MA' : 'VOXMqhE3YF4'
                       : currentDay === 1 ? '2U5XHsBwNpw' : currentDay === 2 ? 'nhZWo0IIaUs' : 'EKTdbforGSk'
-                    }?start=20&controls=1&modestbranding=1&rel=0&enablejsapi=1`}
+                    }?start=20&controls=1&modestbranding=1&rel=0`}
                   frameBorder="0"
-                  sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   title="Mahotsav Throwback Video"
@@ -7064,26 +7213,7 @@ const Dashboard: React.FC = () => {
               </button>
             </div>
 
-            {/* Calculate constraint states - Mutually exclusive: Sports/Cultural ↔ PARA */}
-            {(() => {
-              // Only count newly selected events, not already registered ones
-              const newlySelectedIds = Array.from(selectedRegistrationEvents).filter(id => {
-                const [_type, ...nameParts] = id.split('-');
-                const eventName = nameParts.join('-');
-                return !isEventAlreadySaved(eventName);
-              });
-
-              // RULE IMPLEMENTATION:
-              // Rule 1 & 2: Sports/Cultural events disable ALL PARA events, and vice versa
-              // Rule 3: Mutually exclusive - user can NEVER select both sides
-              // Rule 4 & 5: Unselecting all events from one side re-enables the other side
-              const hasParaSelected = newlySelectedIds.some(id => id.startsWith('para-'));
-              const hasNormalSelected = newlySelectedIds.some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
-
-              (window as any).__hasParaSelected = hasParaSelected;
-              (window as any).__hasNormalSelected = hasNormalSelected;
-              return null;
-            })()}
+            {/* Calculation moved to main render scope */}
 
             {/* Category Cards: Sports, Culturals, Para */}
             <div
@@ -7229,7 +7359,7 @@ const Dashboard: React.FC = () => {
 
                               const alreadySaved = isEventAlreadySaved(eventName);
                               // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
-                              const constraintDisabled = (window as any).__hasParaSelected;
+                              const constraintDisabled = appHasParaSelected;
 
                               // Gender validation
                               const womenOnlyEvents = ['throwball', 'throw ball', 'tennikoit'];
@@ -7249,8 +7379,8 @@ const Dashboard: React.FC = () => {
                                 genderMessage = 'Men-only event';
                               }
 
-                              const finalDisabled = constraintDisabled || alreadySaved || genderDisabled;
-                              const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+                              const finalDisabled = constraintDisabled || genderDisabled;
+                              const isChecked = selectedRegistrationEvents.has(eventId);
 
                               return (
                                 <label
@@ -7538,9 +7668,9 @@ const Dashboard: React.FC = () => {
 
                               const alreadySaved = isEventAlreadySaved(culturalEventName);
                               // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
-                              const constraintDisabled = (window as any).__hasParaSelected;
-                              const finalDisabled = constraintDisabled || alreadySaved;
-                              const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+                              const constraintDisabled = appHasParaSelected;
+                              const finalDisabled = constraintDisabled;
+                              const isChecked = selectedRegistrationEvents.has(eventId);
 
                               return (
                                 <label
@@ -7722,10 +7852,10 @@ const Dashboard: React.FC = () => {
 
                             const alreadySaved = isEventAlreadySaved(eventName);
                             // RULE 1 & 2: PARA ↔ Sports/Cultural are mutually exclusive
-                            const hasNormalSelected = (window as any).__hasNormalSelected;
+                            const hasNormalSelected = appHasNormalSelected;
                             const constraintDisabled = hasNormalSelected;
-                            const finalDisabled = constraintDisabled || alreadySaved;
-                            const isChecked = selectedRegistrationEvents.has(eventId) || alreadySaved;
+                            const finalDisabled = constraintDisabled;
+                            const isChecked = selectedRegistrationEvents.has(eventId);
 
                             return (
                               <label
@@ -7846,15 +7976,39 @@ const Dashboard: React.FC = () => {
               }}>
                 <div>
                   <div style={{ color: 'white', fontSize: '1rem', fontWeight: '600' }}>
-                    Selected: {selectedRegistrationEvents.size} event(s)
+                    {/* Calculate total unique events (selected + already saved) */}
+                    Selected: {(() => {
+                      const allEvents = new Set(selectedRegistrationEvents);
+                      myEvents.forEach(e => {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        const eventObj = e as any;
+                        const name = eventObj.eventName || eventObj.Event || eventObj.name;
+                        if (name) allEvents.add(name);
+                      });
+                      return allEvents.size;
+                    })()} event(s)
                   </div>
                   <div style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
                     {(() => {
-                      // Calculate event types
+                      // Calculate event types from both selected and saved
                       const selectedIds = Array.from(selectedRegistrationEvents);
-                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
-                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
-                      const hasPara = selectedIds.some(id => id.startsWith('para-'));
+
+                      const hasSportsStored = myEvents.some(e => {
+                        const t = (e.eventType || '').toLowerCase();
+                        return t === 'sports' || t === 'sport';
+                      });
+                      const hasCulturalsStored = myEvents.some(e => {
+                        const t = (e.eventType || '').toLowerCase();
+                        return t === 'culturals' || t === 'cultural';
+                      });
+                      const hasParaStored = myEvents.some(e => {
+                        const t = (e.eventType || '').toLowerCase();
+                        return t === 'parasports' || t === 'parasport' || t === 'para';
+                      });
+
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-')) || hasSportsStored;
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-')) || hasCulturalsStored;
+                      const hasPara = selectedIds.some(id => id.startsWith('para-')) || hasParaStored;
 
                       const types = [];
                       if (hasSports) types.push('Sports');
@@ -7872,8 +8026,18 @@ const Dashboard: React.FC = () => {
                   <div style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold' }}>
                     {(() => {
                       const selectedIds = Array.from(selectedRegistrationEvents);
-                      const hasSports = selectedIds.some(id => id.startsWith('sport-'));
-                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
+
+                      const hasSportsStored = myEvents.some(e => {
+                        const t = (e.eventType || '').toLowerCase();
+                        return t === 'sports' || t === 'sport';
+                      });
+                      const hasCulturalsStored = myEvents.some(e => {
+                        const t = (e.eventType || '').toLowerCase();
+                        return t === 'culturals' || t === 'cultural';
+                      });
+
+                      const hasSports = selectedIds.some(id => id.startsWith('sport-')) || hasSportsStored;
+                      const hasCulturals = selectedIds.some(id => id.startsWith('cultural-')) || hasCulturalsStored;
                       const userGender = userProfileData.gender?.toLowerCase();
                       const userCollege = userProfileData.college || '';
 
@@ -7931,10 +8095,10 @@ const Dashboard: React.FC = () => {
               {/* Submit Button */}
               <button
                 onClick={async () => {
-                  if (selectedRegistrationEvents.size === 0) {
-                    showToast.warning('Please select at least one event');
-                    return;
-                  }
+                  // if (selectedRegistrationEvents.size === 0) {
+                  //   showToast.warning('Please select at least one event');
+                  //   return;
+                  // }
 
                   if (!isLoggedIn || !userProfileData.userId) {
                     showToast.warning('Please login to register for events');
@@ -8020,10 +8184,85 @@ const Dashboard: React.FC = () => {
                   }
 
                   // Prepare events data to save
-                  const newEventsToAdd = selectedIds
+                  // Reconstruct the entire list from selectedIds to support both adding and removing events
+                  const eventsToSave = selectedIds
                     .map(id => {
                       const [type, ...nameParts] = id.split('-');
                       const eventName = nameParts.join('-'); // Rejoin in case event name has dashes
+
+                      // Check if this event already exists in myEvents (preserve existing data like timestamps/IDs if needed)
+                      // Use case-insensitive matching for robustness
+                      const existingEvent = myEvents.find(e => {
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        const eventObj = e as any;
+                        const eName = eventObj.eventName || eventObj.Event || eventObj.name;
+                        return eName === eventName;
+                      });
+
+                      if (existingEvent) {
+                        // Recalculate fee just in case context changed (e.g. added another event type), 
+                        // but otherwise keep the object
+                        // However, the fee logic depends on the TOTAL selection, so we should update the fee.
+                        const calculateEventFee = (eventType: 'sport' | 'cultural' | 'para') => {
+                          // Para sports are always free
+                          if (eventType === 'para') {
+                            return 0;
+                          }
+
+                          // Check if user is from one of the special Vignan colleges
+                          const specialVignanColleges = [
+                            'Vignan Pharmacy College',
+                            "Vignan's Foundation of Science, Technology & Research",
+                            "Vignan's Lara Institute of Technology & Science"
+                          ];
+
+                          const isSpecialVignanStudent = specialVignanColleges.some(college =>
+                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
+                            college.toLowerCase().includes(userCollege.toLowerCase())
+                          );
+
+                          // If from special Vignan colleges, fee is always 150
+                          if (isSpecialVignanStudent) {
+                            return 150;
+                          }
+
+                          // Regular fee calculation - return the TOTAL registration fee
+                          // This is the same as the total fee calculated above
+                          if (userGender === 'male') {
+                            if (hasSports && hasCulturals) {
+                              return 350; // Both sports and culturals
+                            } else if (hasSports) {
+                              return 350; // Sports only
+                            } else if (hasCulturals) {
+                              return 250; // Culturals only
+                            }
+                          } else if (userGender === 'female') {
+                            return 250; // Female fee is always 250 total
+                          } else {
+                            // Default for other genders
+                            if (hasSports && hasCulturals) {
+                              return 350;
+                            } else if (hasSports) {
+                              return 350;
+                            } else if (hasCulturals) {
+                              return 250;
+                            }
+                          }
+
+                          return 0; // Default
+                        };
+
+                        // Determine type for fee calc from existing event
+                        let calcType: 'sport' | 'cultural' | 'para' = 'sport';
+                        const et = (existingEvent.eventType || '').toLowerCase();
+                        if (et.includes('para')) calcType = 'para';
+                        else if (et.includes('cultural')) calcType = 'cultural';
+
+                        return {
+                          ...existingEvent,
+                          fee: calculateEventFee(calcType)
+                        };
+                      }
 
                       // Calculate fee based on college and event type
                       // Note: This returns the TOTAL registration fee, not per-event fee
@@ -8182,8 +8421,22 @@ const Dashboard: React.FC = () => {
                     })
                     .filter(e => e !== null);
 
-                  // Merge with existing events to avoid overwriting
-                  const eventsToSave = [...myEvents, ...newEventsToAdd];
+                  // Use the reconstructed list directly - this handles both additions and removals (unchecks)
+                  // const eventsToSave = [...myEvents, ...newEventsToAdd]; // OLD Logic
+                  // The variable 'eventsToSave' is already defined above from the map chain, we just need to ensure the variable name matches what we send.
+                  // Wait, previous edit defined 'eventsToSave' but the code below likely still sees 'newEventsToAdd' if I didn't change the variable name in the previous step's output context? 
+                  // Actually the previous step changed 'newEventsToAdd' -> 'eventsToSave'. 
+                  // So now I just need to remove the merging line 'const eventsToSave = ...' because it's re-declaring it or merging it.
+
+                  // Let's check the context from view_file.
+                  // Line 8415: const eventsToSave = [...myEvents, ...newEventsToAdd];
+                  // And the map chain above ended with .filter(e => e !== null);
+                  // AND the previous edit changed the start of the chain to 'const eventsToSaveRefctored = ...' ? 
+                  // No, I changed 'const newEventsToAdd =' to 'const eventsToSave ='.
+                  // So now there are TWO 'const eventsToSave'. That causes a syntax error.
+                  // I need to remove the SECOND declaration.
+
+                  // So I will replace the end of the chain AND the second declaration.
 
                   try {
                     // Close modal IMMEDIATELY for instant feedback
@@ -8232,31 +8485,28 @@ const Dashboard: React.FC = () => {
                     showToast.error(errorMessage);
                   }
                 }}
-                disabled={selectedRegistrationEvents.size === 0}
                 style={{
                   padding: '0.875rem 2rem',
-                  background: selectedRegistrationEvents.size === 0 ? 'rgba(156, 163, 175, 0.5)' : 'linear-gradient(to right, #fbbf24, #f59e0b)',
+                  background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
                   color: 'white',
                   fontSize: '1rem',
                   fontWeight: 'bold',
                   borderRadius: '0.5rem',
                   border: 'none',
-                  cursor: selectedRegistrationEvents.size === 0 ? 'not-allowed' : 'pointer',
+                  cursor: 'pointer',
                   transition: 'all 0.3s',
                   textTransform: 'uppercase'
                 }}
                 onMouseOver={(e) => {
-                  if (selectedRegistrationEvents.size > 0) {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(251, 191, 36, 0.5)';
-                  }
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 10px 25px rgba(251, 191, 36, 0.5)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'scale(1)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                Submit Registration
+                {selectedRegistrationEvents.size === 0 ? 'Clear All & Save' : 'Submit Registration'}
               </button>
             </div>
           </div>

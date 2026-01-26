@@ -201,25 +201,38 @@ img[alt="Moon"],
   }
 }
 
-/* Garuda logo in About Theme - Mobile only above title */
+/* About Theme Garuda Logo - Fresh positioning */
+.about-garuda-logo-v2 {
+  width: clamp(120px, 30vw, 220px);
+  display: block;
+  height: auto;
+  position: absolute;
+  z-index: 1000;
+  height: min(200px, 20vw);
+  /* Explicit height */
+}
+
+/* Mobile: centered above heading */
 @media (max-width: 1023px) {
-  .garuda-about-theme {
-    left: 50% !important;
-    top: -100px !important;
-    transform: translateX(-50%) !important;
-    width: clamp(120px, 30vw, 180px) !important;
+  .about-garuda-logo-v2 {
+    left: 50%;
+    right: auto;
+    top: -100px;
+    transform: translateX(-50%);
   }
 }
 
-/* Desktop - Garuda logo on left side */
+/* Desktop: positioned on the left side, above heading */
 @media (min-width: 1024px) {
-  .garuda-about-theme {
-    left: -80px !important;
-    top: 180px !important;
-    transform: none !important;
-    width: clamp(200px, 25vw, 350px) !important;
+  .about-garuda-logo-v2 {
+    left: -60px;
+    right: auto;
+    top: 250px;
+    transform: none;
+    display: block;
   }
 }
+
 
 /* Stats Grid - 3 columns on mobile (2 rows) */
 @media (max-width: 640px) {
@@ -846,7 +859,7 @@ body::-webkit-scrollbar {
   width: 100vw;
   overflow-x: hidden;
   position: relative;
-  background-image: url('https://res.cloudinary.com/dctuev0mm/image/upload/f_auto,q_auto:good/v1766935583/Background-redesign_jbvbrc.png');
+  background-image: url('/images/Background.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -13611,12 +13624,6 @@ html {
     line-height: 1.6 !important;
   }
 
-  /* Center Garuda logo on mobile */
-  .garuda-about-theme {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: clamp(120px, 30vw, 180px) !important;
-  }
 }
 
 /* Desktop - preserve original layout */
@@ -13636,24 +13643,7 @@ html {
     text-align: justify !important;
   }
 
-  /* Restore original Garuda logo size and position on desktop */
-  .garuda-about-theme {
-    left: -300px !important;
-    top: 250px !important;
-    transform: none !important;
-    width: clamp(380px, 45vw, 600px) !important;
-  }
-
   /* Ensure stats stay in one row on desktop */
-
-  /* Slightly smaller Garuda logo on medium-width desktops (around 1152px) */
-  @media (max-width: 1280px) {
-    .garuda-about-theme {
-      left: -220px !important;
-      top: 220px !important;
-      width: clamp(460px, 42vw, 460px) !important;
-    }
-  }
   .stats-grid {
     display: flex !important;
     flex-wrap: nowrap !important;
@@ -14137,9 +14127,6 @@ html {
 
 
 /* Register for Events Button - No Tailwind */
-.register-events-btn {
-  /* All styles are inline */
-}
 
 /* Desktop: Increase button size */
 @media (min-width: 1024px) {
@@ -14228,21 +14215,21 @@ html {
     width: 55% !important;
     margin-top: -60px !important;
   }
-  
+
   .mahotsav-logo-container {
     margin-top: -100px !important;
   }
-  
+
   .hero-action-buttons {
     top: 45% !important;
-    left: 50% !important ;
+    left: 50% !important;
   }
-  
+
   /* Widen throwback flowers when unlocked */
   .throwback-section.unlocked .throwback-flower-left {
     transform: translate(calc(-50% - 280px), -50%) !important;
   }
-  
+
   .throwback-section.unlocked .throwback-flower-right {
     transform: translate(calc(-50% + 280px), -50%) !important;
   }
@@ -14261,21 +14248,21 @@ html {
     width: 58% !important;
     margin-top: -50px !important;
   }
-  
+
   .mahotsav-logo-container {
     margin-top: -90px !important;
   }
-  
+
   .hero-action-buttons {
     top: 46% !important;
     left: 48% !important;
   }
-  
+
   /* Widen throwback flowers when unlocked */
   .throwback-section.unlocked .throwback-flower-left {
     transform: translate(calc(-50% - 260px), -50%) !important;
   }
-  
+
   .throwback-section.unlocked .throwback-flower-right {
     transform: translate(calc(-50% + 260px), -50%) !important;
   }
@@ -14283,42 +14270,43 @@ html {
 
 /* 640x480 resolution - Reduce garuda logo size and move up */
 @media (min-width: 635px) and (max-width: 645px) and (min-height: 475px) and (max-height: 485px) {
+
   /* Top-left garuda logo - reduce size and move up */
   .absolute.top-0.left-16 img[alt="Garuda"],
   .absolute.left-16 img[alt="Garuda"] {
     height: 60px !important;
     margin-top: 5px !important;
   }
-  
+
   .mahotsav-logo-img {
     width: 65% !important;
     margin-top: -40px !important;
   }
-  
+
   .mahotsav-logo-container {
     margin-top: -80px !important;
   }
-  
+
   .hero-action-buttons {
     top: 55% !important;
   }
-  
+
   /* Widen throwback flowers when unlocked */
   .throwback-section.unlocked .throwback-flower-left {
     transform: translate(calc(-50% - 240px), -50%) !important;
   }
-  
+
   .throwback-section.unlocked .throwback-flower-right {
     transform: translate(calc(-50% + 240px), -50%) !important;
   }
-  
+
   /* Fix sun and moon alignment in throwback flowers */
   .throwback-flower-left img[src*="sun.avif"],
   .throwback-flower-right img[src*="sun.avif"] {
     top: 26% !important;
     left: 26% !important;
   }
-  
+
   .throwback-flower-left img[src*="moon.avif"],
   .throwback-flower-right img[src*="moon.avif"] {
     top: 29% !important;
@@ -14332,72 +14320,72 @@ html {
     width: 60% !important;
     margin-top: -50px !important;
   }
-  
+
   .mahotsav-logo-container {
     margin-top: -85px !important;
   }
-  
+
   .hero-action-buttons {
     top: 48% !important;
   }
-  
+
   /* Widen throwback flowers when unlocked */
   .throwback-section.unlocked .throwback-flower-left {
     transform: translate(calc(-50% - 280px), -50%) !important;
   }
-  
+
   .throwback-section.unlocked .throwback-flower-right {
     transform: translate(calc(-50% + 280px), -50%) !important;
   }
-  
+
   /* Ensure throwback section has enough top padding for buttons */
   .throwback-section {
     padding-top: 80px !important;
     overflow: visible !important;
   }
-  
+
   /* Move throwback year buttons up - visible positioning */
   .throwback-year-buttons {
     top: -10px !important;
     z-index: 50 !important;
   }
-  
+
   .throwback-section.unlocked .throwback-year-buttons {
     opacity: 1 !important;
     display: flex !important;
     visibility: visible !important;
   }
-  
+
   /* Fix sun and moon alignment in throwback flowers */
   .throwback-flower-left img[src*="sun.avif"],
   .throwback-flower-right img[src*="sun.avif"] {
     top: 26% !important;
     left: 26% !important;
   }
-  
+
   .throwback-flower-left img[src*="moon.avif"],
   .throwback-flower-right img[src*="moon.avif"] {
     top: 29% !important;
     left: 29% !important;
   }
-  
+
   /* Ensure proper section ordering */
   section {
     position: relative !important;
   }
-  
+
   .about-theme-section {
     order: 1 !important;
   }
-  
+
   .gallery-section {
     order: 2 !important;
   }
-  
+
   .throwback-section {
     order: 3 !important;
   }
-  
+
   footer {
     order: 999 !important;
     margin-top: 0 !important;
@@ -14430,378 +14418,378 @@ html {
 @media (min-width: 1366px) and (max-width: 1366px) and (min-height: 768px) and (max-height: 768px),
 (min-width: 1360px) and (max-width: 1370px) and (min-height: 760px) and (max-height: 775px) {
 
-      /* Hero Section Optimization */
-      .hero-section {
-        padding-top: 80px;
-        min-height: 100vh;
-      }
-
-      .hero-main-image {
-        max-width: 1100px;
-        width: 88%;
-      }
-
-      .hero-action-buttons {
-        display: flex;
-        gap: 20px;
-      }
-
-      /* Stats Section */
-      .stats-showcase-grid,
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 30px 20px;
-        max-width: 1200px;
-      }
-
-      .stat-showcase-card {
-        padding: 25px 15px;
-      }
-
-      .stat-number {
-        font-size: 3rem;
-      }
-
-      .stat-label {
-        font-size: 1rem;
-      }
-
-      /* Highlights Section */
-      .highlights-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        max-width: 1300px;
-      }
-
-      .highlight-card {
-        min-height: 400px;
-      }
-
-      .highlight-image {
-        height: 180px;
-      }
-
-      /* Section Headers */
-      .highlights-section h2,
-      .features-section h2,
-      .stats-section h2 {
-        font-size: 2.2rem;
-        margin-bottom: 40px;
-      }
-
-      /* Mahotsav Logo */
-      .mahotsav-logo-img {
-        width: 72% !important;
-        max-width: 1050px !important;
-      }
-
-      /* About Theme Section */
-      .about-theme-section {
-        padding: 100px 35px;
-      }
-
-      .theme-content {
-        padding-left: 350px !important;
-        padding-right: 70px !important;
-      }
-
-      /* Gallery Optimization */
-      .gallery-section {
-        padding: 80px 25px;
-      }
-
-      .gallery-grid {
-        gap: 15px;
-      }
-
-      /* Throwback Section */
-      .throwback-section {
-        padding: 100px 30px 80px;
-      }
-
-      .throwback-flower-wrapper {
-        width: clamp(180px, 32vw, 400px);
-        height: clamp(180px, 32vw, 400px);
-      }
-    }
-
-    /* 1360x768 - Slightly Narrower Laptop Variant */
-    @media (min-width: 1360px) and (max-width: 1360px) and (min-height: 768px) and (max-height: 768px),
-    (min-width: 1355px) and (max-width: 1365px) and (min-height: 760px) and (max-height: 775px) {
-
-      .hero-main-image {
-        max-width: 1080px;
-        width: 87%;
-      }
-
-      .stats-showcase-grid,
-      .stats-grid {
-        max-width: 1180px;
-      }
-
-      .highlights-grid {
-        max-width: 1280px;
-        gap: 18px;
-      }
-
-      .mahotsav-logo-img {
-        width: 71% !important;
-        max-width: 1030px !important;
-      }
-    }
-
-    /* 1280x768 - Compact Desktop/Large Laptop */
-    @media (min-width: 1280px) and (max-width: 1280px) and (min-height: 768px) and (max-height: 768px),
-    (min-width: 1275px) and (max-width: 1285px) and (min-height: 760px) and (max-height: 775px) {
-
-      /* Hero Section */
-      .hero-section {
-        padding-top: 70px;
-      }
-
-      .hero-main-image {
-        max-width: 1000px;
-        width: 85%;
-      }
-
-      .hero-action-buttons {
-        display: flex;
-        gap: 18px;
-      }
-
-      /* Stats Section */
-      .stats-showcase-grid,
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        padding: 28px 18px;
-        max-width: 1150px;
-      }
-
-      .stat-showcase-card {
-        padding: 22px 14px;
-      }
-
-      .stat-number {
-        font-size: 2.8rem;
-      }
-
-      .stat-label {
-        font-size: 0.95rem;
-      }
-
-      /* Highlights Section */
-      .highlights-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        max-width: 1200px;
-      }
-
-      .highlight-card {
-        min-height: 380px;
-      }
-
-      .highlight-image {
-        height: 170px;
-      }
-
-      /* Section Headers */
-      .highlights-section h2,
-      .features-section h2,
-      .stats-section h2 {
-        font-size: 2.1rem;
-        margin-bottom: 35px;
-      }
-
-      /* Mahotsav Logo */
-      .mahotsav-logo-img {
-        width: 68% !important;
-        max-width: 980px !important;
-      }
-
-      /* About Theme Section */
-      .about-theme-section {
-        padding: 90px 30px;
-      }
-
-      .theme-content {
-        padding-left: 320px !important;
-        padding-right: 60px !important;
-      }
-
-      /* Gallery */
-      .gallery-section {
-        padding: 75px 22px;
-      }
-
-      /* Throwback */
-      .throwback-section {
-        padding: 90px 28px 75px;
-      }
-
-      .throwback-flower-wrapper {
-        width: clamp(170px, 30vw, 380px);
-        height: clamp(170px, 30vw, 380px);
-      }
-    }
-
-    /* 1280x720 - Compact Laptop/Desktop (16:9 aspect ratio) */
-    @media (min-width: 1280px) and (max-width: 1280px) and (min-height: 720px) and (max-height: 720px),
-    (min-width: 1275px) and (max-width: 1285px) and (min-height: 715px) and (max-height: 725px) {
-
-      /* Hero Section - Tighter spacing for shorter height */
-      .hero-section {
-        padding-top: 60px;
-        min-height: 100vh;
-      }
-
-      .hero-main-image {
-        max-width: 980px;
-        width: 84%;
-      }
-
-      .hero-action-buttons {
-        display: flex;
-        gap: 16px;
-      }
-
-      /* Stats Section - More compact */
-      .stats-showcase-grid,
-      .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        padding: 25px 16px;
-        max-width: 1140px;
-      }
-
-      .stat-showcase-card {
-        padding: 20px 12px;
-      }
-
-      .stat-number {
-        font-size: 2.6rem;
-      }
-
-      .stat-label {
-        font-size: 0.9rem;
-      }
-
-      .stat-button {
-        padding: 9px 20px;
-        font-size: 0.8rem;
-      }
-
-      /* Highlights Section */
-      .highlights-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        max-width: 1180px;
-      }
-
-      .highlight-card {
-        min-height: 360px;
-      }
-
-      .highlight-image {
-        height: 160px;
-      }
-
-      .highlight-title {
-        font-size: 1.3rem;
-      }
-
-      .highlight-description {
-        font-size: 0.9rem;
-      }
-
-      /* Section Headers - Smaller */
-      .highlights-section h2,
-      .features-section h2,
-      .stats-section h2 {
-        font-size: 2rem;
-        margin-bottom: 30px;
-      }
-
-      /* Mahotsav Logo */
-      .mahotsav-logo-img {
-        width: 66% !important;
-        max-width: 950px !important;
-      }
-
-      /* About Theme Section - Compact */
-      .about-theme-section {
-        padding: 80px 28px;
-      }
-
-      .theme-content {
-        padding-left: 300px !important;
-        padding-right: 55px !important;
-      }
-
-      .theme-heading {
-        font-size: 2.2rem;
-      }
-
-      .theme-description {
-        font-size: 1rem;
-        line-height: 1.6;
-      }
-
-      /* Gallery - Tighter */
-      .gallery-section {
-        padding: 70px 20px;
-      }
-
-      .gallery-grid {
-        gap: 12px;
-      }
-
-      /* Throwback - Compact */
-      .throwback-section {
-        padding: 80px 25px 70px;
-      }
-
-      .throwback-heading {
-        font-size: clamp(1.8rem, 5.5vw, 3rem);
-      }
-
-      .throwback-flower-wrapper {
-        width: clamp(160px, 28vw, 360px);
-        height: clamp(160px, 28vw, 360px);
-      }
-
-      .throwback-year-buttons {
-        gap: 12px;
-      }
-
-      .throwback-year-btn {
-        padding: 6px 20px;
-        font-size: 0.9rem;
-      }
-
-      /* Modal adjustments for shorter screens */
-      .modal-content {
-        max-height: 85vh;
-      }
-
-      /* Footer - Compact */
-      footer {
-        padding: 50px 25px 30px;
-      }
-
-      .footer-content {
-        font-size: 0.9rem;
-      }
-    }
-
-    /* ============================================
+  /* Hero Section Optimization */
+  .hero-section {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .hero-main-image {
+    max-width: 1100px;
+    width: 88%;
+  }
+
+  .hero-action-buttons {
+    display: flex;
+    gap: 20px;
+  }
+
+  /* Stats Section */
+  .stats-showcase-grid,
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px 20px;
+    max-width: 1200px;
+  }
+
+  .stat-showcase-card {
+    padding: 25px 15px;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+  }
+
+  /* Highlights Section */
+  .highlights-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1300px;
+  }
+
+  .highlight-card {
+    min-height: 400px;
+  }
+
+  .highlight-image {
+    height: 180px;
+  }
+
+  /* Section Headers */
+  .highlights-section h2,
+  .features-section h2,
+  .stats-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+  }
+
+  /* Mahotsav Logo */
+  .mahotsav-logo-img {
+    width: 72% !important;
+    max-width: 1050px !important;
+  }
+
+  /* About Theme Section */
+  .about-theme-section {
+    padding: 100px 35px;
+  }
+
+  .theme-content {
+    padding-left: 350px !important;
+    padding-right: 70px !important;
+  }
+
+  /* Gallery Optimization */
+  .gallery-section {
+    padding: 80px 25px;
+  }
+
+  .gallery-grid {
+    gap: 15px;
+  }
+
+  /* Throwback Section */
+  .throwback-section {
+    padding: 100px 30px 80px;
+  }
+
+  .throwback-flower-wrapper {
+    width: clamp(180px, 32vw, 400px);
+    height: clamp(180px, 32vw, 400px);
+  }
+}
+
+/* 1360x768 - Slightly Narrower Laptop Variant */
+@media (min-width: 1360px) and (max-width: 1360px) and (min-height: 768px) and (max-height: 768px),
+(min-width: 1355px) and (max-width: 1365px) and (min-height: 760px) and (max-height: 775px) {
+
+  .hero-main-image {
+    max-width: 1080px;
+    width: 87%;
+  }
+
+  .stats-showcase-grid,
+  .stats-grid {
+    max-width: 1180px;
+  }
+
+  .highlights-grid {
+    max-width: 1280px;
+    gap: 18px;
+  }
+
+  .mahotsav-logo-img {
+    width: 71% !important;
+    max-width: 1030px !important;
+  }
+}
+
+/* 1280x768 - Compact Desktop/Large Laptop */
+@media (min-width: 1280px) and (max-width: 1280px) and (min-height: 768px) and (max-height: 768px),
+(min-width: 1275px) and (max-width: 1285px) and (min-height: 760px) and (max-height: 775px) {
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 70px;
+  }
+
+  .hero-main-image {
+    max-width: 1000px;
+    width: 85%;
+  }
+
+  .hero-action-buttons {
+    display: flex;
+    gap: 18px;
+  }
+
+  /* Stats Section */
+  .stats-showcase-grid,
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 28px 18px;
+    max-width: 1150px;
+  }
+
+  .stat-showcase-card {
+    padding: 22px 14px;
+  }
+
+  .stat-number {
+    font-size: 2.8rem;
+  }
+
+  .stat-label {
+    font-size: 0.95rem;
+  }
+
+  /* Highlights Section */
+  .highlights-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 1200px;
+  }
+
+  .highlight-card {
+    min-height: 380px;
+  }
+
+  .highlight-image {
+    height: 170px;
+  }
+
+  /* Section Headers */
+  .highlights-section h2,
+  .features-section h2,
+  .stats-section h2 {
+    font-size: 2.1rem;
+    margin-bottom: 35px;
+  }
+
+  /* Mahotsav Logo */
+  .mahotsav-logo-img {
+    width: 68% !important;
+    max-width: 980px !important;
+  }
+
+  /* About Theme Section */
+  .about-theme-section {
+    padding: 90px 30px;
+  }
+
+  .theme-content {
+    padding-left: 320px !important;
+    padding-right: 60px !important;
+  }
+
+  /* Gallery */
+  .gallery-section {
+    padding: 75px 22px;
+  }
+
+  /* Throwback */
+  .throwback-section {
+    padding: 90px 28px 75px;
+  }
+
+  .throwback-flower-wrapper {
+    width: clamp(170px, 30vw, 380px);
+    height: clamp(170px, 30vw, 380px);
+  }
+}
+
+/* 1280x720 - Compact Laptop/Desktop (16:9 aspect ratio) */
+@media (min-width: 1280px) and (max-width: 1280px) and (min-height: 720px) and (max-height: 720px),
+(min-width: 1275px) and (max-width: 1285px) and (min-height: 715px) and (max-height: 725px) {
+
+  /* Hero Section - Tighter spacing for shorter height */
+  .hero-section {
+    padding-top: 60px;
+    min-height: 100vh;
+  }
+
+  .hero-main-image {
+    max-width: 980px;
+    width: 84%;
+  }
+
+  .hero-action-buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* Stats Section - More compact */
+  .stats-showcase-grid,
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 25px 16px;
+    max-width: 1140px;
+  }
+
+  .stat-showcase-card {
+    padding: 20px 12px;
+  }
+
+  .stat-number {
+    font-size: 2.6rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+
+  .stat-button {
+    padding: 9px 20px;
+    font-size: 0.8rem;
+  }
+
+  /* Highlights Section */
+  .highlights-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1180px;
+  }
+
+  .highlight-card {
+    min-height: 360px;
+  }
+
+  .highlight-image {
+    height: 160px;
+  }
+
+  .highlight-title {
+    font-size: 1.3rem;
+  }
+
+  .highlight-description {
+    font-size: 0.9rem;
+  }
+
+  /* Section Headers - Smaller */
+  .highlights-section h2,
+  .features-section h2,
+  .stats-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  /* Mahotsav Logo */
+  .mahotsav-logo-img {
+    width: 66% !important;
+    max-width: 950px !important;
+  }
+
+  /* About Theme Section - Compact */
+  .about-theme-section {
+    padding: 80px 28px;
+  }
+
+  .theme-content {
+    padding-left: 300px !important;
+    padding-right: 55px !important;
+  }
+
+  .theme-heading {
+    font-size: 2.2rem;
+  }
+
+  .theme-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Gallery - Tighter */
+  .gallery-section {
+    padding: 70px 20px;
+  }
+
+  .gallery-grid {
+    gap: 12px;
+  }
+
+  /* Throwback - Compact */
+  .throwback-section {
+    padding: 80px 25px 70px;
+  }
+
+  .throwback-heading {
+    font-size: clamp(1.8rem, 5.5vw, 3rem);
+  }
+
+  .throwback-flower-wrapper {
+    width: clamp(160px, 28vw, 360px);
+    height: clamp(160px, 28vw, 360px);
+  }
+
+  .throwback-year-buttons {
+    gap: 12px;
+  }
+
+  .throwback-year-btn {
+    padding: 6px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Modal adjustments for shorter screens */
+  .modal-content {
+    max-height: 85vh;
+  }
+
+  /* Footer - Compact */
+  footer {
+    padding: 50px 25px 30px;
+  }
+
+  .footer-content {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
    END SPECIFIC LAPTOP RESOLUTIONS
    ============================================ */
 
 /* About Theme Section - No Tailwind */
 .about-theme-section {
-  padding: 80px 20px;
+  padding: 40px 20px;
   position: relative;
 }
 
@@ -14815,7 +14803,7 @@ html {
 /* Tablet: Medium padding */
 @media (min-width: 768px) and (max-width: 1023px) {
   .about-theme-section {
-    padding: 100px 30px !important;
+    padding: 80px 30px !important;
   }
 }
 
@@ -14828,19 +14816,19 @@ html {
   padding-right: 20px;
 }
 
-/* Desktop: Add left padding for Garuda logo */
+/* Desktop: Add right padding for Garuda logo */
 @media (min-width: 1024px) {
   .theme-content {
-    padding-left: 380px !important;
-    padding-right: 80px !important;
+    padding-left: 80px !important;
+    padding-right: 380px !important;
   }
 }
 
 /* Tablet: Medium padding */
 @media (min-width: 768px) and (max-width: 1023px) {
   .theme-content {
-    padding-left: 200px !important;
-    padding-right: 50px !important;
+    padding-left: 50px !important;
+    padding-right: 200px !important;
   }
 }
 
@@ -15003,4 +14991,4 @@ html {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-}  
+}

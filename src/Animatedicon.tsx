@@ -18,14 +18,20 @@ const AnimatedIcon: React.FC = () => {
       const isSmallMobile = vw < 480;  // Small phones
       const isMobile = vw < 768;        // Regular phones
       const isTablet = vw >= 768 && vw < 1024;  // Tablets & Z Fold unfolded
+      const is854x480 = vw >= 850 && vw <= 860 && vh >= 475 && vh <= 485;  // 854x480 resolution
+      const isSmallDesktop = vw >= 1024 && vw <= 1600;  // Small desktop screens
       
       // Set responsive size
       if (isSmallMobile) {
         setSize(320);
       } else if (isMobile) {
         setSize(400);
+      } else if (is854x480) {
+        setSize(380);  // Smaller size for 854x480
       } else if (isTablet) {
         setSize(550);
+      } else if (isSmallDesktop) {
+        setSize(480);  // Reduced size for small desktop screens
       } else {
         setSize(720);
       }

@@ -2608,14 +2608,14 @@ const Dashboard: React.FC = () => {
 
       {/* 1. Hero Section (First Fold) - Moved to Top */}
       <section className="hero-section-fullwidth relative min-h-screen flex flex-col items-center justify-center lg:justify-start lg:pt-48 xl:pt-48 text-white text-center overflow-hidden" style={{ background: "transparent", zIndex: 1, position: 'relative' }} >
-        <div className="hero-content-wrapper">
+        <div className="hero-content-wrapper relative w-full h-full flex flex-col items-center justify-center">
           {/* Left side image - 1.avif */}
-          <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px' }}>
+          <div className="hidden lg:block absolute left-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingLeft: '80px', paddingTop: '90px', left: '-80px' }}>
             <img src="/menu-dashboard/1.avif" alt="Decoration Left" className="w-full h-full object-contain pointer-events-none" width={450} height={450} decoding="async" />
           </div>
 
           {/* Right side image - 2.avif */}
-          <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out' }}>
+          <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none" style={{ width: '450px', height: '450px', paddingRight: '80px', paddingTop: '90px', opacity: 1, transition: 'opacity 0.6s ease-in-out', right: '-80px' }}>
             <img src="/menu-dashboard/2.avif" alt="Decoration Right" className="w-full h-full object-contain pointer-events-none" width={450} height={450} decoding="async" />
           </div>
 
@@ -2628,37 +2628,21 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Action Buttons - separate container with mobile-specific positioning */}
-          <div className="hero-action-buttons">
+          <div className="hero-action-buttons absolute left-1/2 top-[62%] flex justify-center items-center -translate-x-1/2 -translate-y-1/2 md:left-[55%] md:top-[52%] lg:left-[52%] lg:top-1/2">
             {isLoggedIn ? (
               <button
-                className="register-events-btn"
+                className="h-10 text-white font-semibold uppercase tracking-wide rounded-full shadow-lg bg-pink-600 hover:bg-pink-700 transition duration-300 w-[170px] sm:w-[190px] md:w-[210px] lg:w-[220px] xl:w-[240px]"
                 onClick={handleOpenRegistration}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(255, 105, 180, 0.6)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #FF1493, #C71585)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #FF69B4, #FF1493)';
-                }}
-              >Register for Events</button>
+              >
+                Register for Events
+              </button>
             ) : (
               <button
-                className="register-login-btn"
+                className="h-10 text-white font-semibold uppercase tracking-wide rounded-full shadow-lg bg-pink-600 hover:bg-blue-700 transition duration-300 w-[150px] sm:w-[170px] md:w-[190px] lg:w-[210px] xl:w-[230px]"
                 onClick={handleLoginClick}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(236, 72, 153, 0.6)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #db2777, #be185d)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(236, 72, 153, 0.4)';
-                  e.currentTarget.style.background = 'linear-gradient(to right, #ec4899, #db2777)';
-                }}
-              >Register/Login</button>
+              >
+                Register / Login
+              </button>
             )}
           </div>
           <style>{`
@@ -2668,32 +2652,10 @@ const Dashboard: React.FC = () => {
             }
             
             /* Desktop - position button below the "O" in MAHOTSAV */
-            .hero-action-buttons {
-              margin-top: 3rem !important;
-              margin-left: calc(50% - 40px) !important;
-              transform: translateX(-50%) !important;
-            }
-          }
-          
-          /* Specific positioning for 1366x768 desktop */
-          @media (min-width: 1024px) and (max-width: 1440px) {
-            .hero-action-buttons {
-              margin-left: calc(50% - 105px) !important;
-            }
           }
           
           /* OVERRIDE for 1024-1100px (1028x768) - Must come AFTER 1024-1440px */
           @media (min-width: 1024px) and (max-width: 1100px) and (min-height: 700px) and (max-height: 800px) {
-            .hero-action-buttons {
-              margin-top: -19rem !important;
-              margin-left: 300px !important;
-              right: 5px !important;
-              left: auto !important;
-              transform: none !important;
-              position: relative !important;
-              z-index: 100 !important;
-            }
-            
             .animate-fadeInDown {
               margin-top: 3rem !important;
             }
@@ -2735,14 +2697,6 @@ const Dashboard: React.FC = () => {
             .throwback-section.unlocked .throwback-flower-left {
               transform: translate(calc(-50% - 320px), -50%) !important;
             }
-            .hero-action-buttons {
-              position: absolute !important;
-              top: 310px !important;
-              left: 50% !important;
-              transform: translateX(-50%) !important;
-              margin: 0 !important;
-              z-index: 100 !important;
-            }
 
             .menu-header-container-mobile .menu-title-heading {
               display: none !important;
@@ -2773,31 +2727,7 @@ const Dashboard: React.FC = () => {
           }
 
           /* Additional nudge for 1028x768 (subset of 1024-1100) */
-          @media (min-width: 1020px) and (max-width: 1038px) and (min-height: 740px) and (max-height: 780px) {
-            .hero-action-buttons {
-              margin-top: -30rem !important;
-              margin-left: -330px !important;
-              transform: translateX(10px) !important;
-              position: relative !important;
-              right: auto !important;
-              left: auto !important;
-            }
-          }
-          
-          /* Specific adjustments for 800x600 resolution */
           @media (min-width: 768px) and (max-width: 850px) and (min-height: 550px) and (max-height: 650px) {
-            /* Move Register/Login button upward */
-            .hero-action-buttons {
-              margin-top: 0rem !important;
-            }
-            
-            /* Target the button element directly */
-            .hero-action-buttons button,
-            .hero-action-buttons a {
-              margin-top: -28rem !important;
-              margin-left: 270px !important;
-            }
-            
             /* Throwback section adjustments */
             .throwback-year-buttons {
               top: -55px !important;
@@ -2813,70 +2743,12 @@ const Dashboard: React.FC = () => {
             }
           }
           
-          /* Large Desktop Resolutions - Register Button Positioning */
-          
-          /* 1920x1080 */
-          @media (min-width: 1900px) and (max-width: 1940px) {
-            .hero-action-buttons {
-              margin-top: 1rem !important;
-              margin-left: 120px !important;
-              transform: translateX(5px) !important;
-            }
-          }
-          
-          /* 1768x992 */
-          @media (min-width: 1750px) and (max-width: 1790px) and (min-height: 970px) and (max-height: 1010px) {
-            .hero-action-buttons {
-              margin-top: 1rem !important;
-              margin-left: 80px !important;
-              margin-bottom: 5rem !important;
-              transform: translateX(5px) !important;
-            }
-          }
-          
-          /* 1680x1050 */
-          @media (min-width: 1660px) and (max-width: 1700px) and (min-height: 1030px) and (max-height: 1070px) {
-            .hero-action-buttons {
-              margin-top: 1rem !important;
-              margin-left: 40px !important;
-              margin-bottom: 5rem !important;
-              transform: translateX(5px) !important;
-            }
-          }
-          
-          /* 1600x1024 */
-          @media (min-width: 1580px) and (max-width: 1620px) and (min-height: 1000px) and (max-height: 1044px) {
-            .hero-action-buttons {
-              margin-top: 1rem !important;
-              margin-left: 10px !important;
-              margin-bottom: 5rem !important;
-              transform: translateX(5px) !important;
-            }
-          }
-          
-          
-          
           /* Mobile view adjustments for flower overlap */
           @media (max-width: 767px) {
             .flower-container-mobile {
               width: 150px !important;
               height: 150px !important;
               opacity: 0.25 !important;
-            }
-            
-            /* Center Register/Login button on mobile */
-            .hero-action-buttons {
-              display: flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              margin-top: 1rem !important;
-            }
-            
-            .register-login-btn,
-            .register-events-btn {
-              margin-top: 0 !important;
-              margin-left: auto !important;
-              margin-right: auto !important;
             }
             
             /* Adjust all dashboard sections for mobile */
@@ -4810,15 +4682,6 @@ const Dashboard: React.FC = () => {
               height: 100% !important;
             }
 
-            /* Center Register button in mobile */
-            .register-events-btn,
-            .register-login-btn {
-              position: relative !important;
-              margin-top: 0 !important;
-              margin-left: 0 !important;
-              left: auto !important;
-            }
-
             /* Profile section mobile responsiveness */
             .profile-info-box {
               padding: 1.5rem !important;
@@ -4828,11 +4691,6 @@ const Dashboard: React.FC = () => {
             .side-menu-flower-top,
             .side-menu-flower-bottom {
               display: none !important;
-            }
-
-            /* Hero section improvements */
-            .hero-action-buttons {
-              margin-top: 2rem !important;
             }
 
             /* Profile modal mobile improvements */
@@ -5057,21 +4915,6 @@ const Dashboard: React.FC = () => {
               height: 37.5rem !important;
             }
 
-            /* Desktop positioning for Register button */
-            .register-events-btn,
-            .register-login-btn {
-              position: relative !important;
-              margin-top: -100px !important;
-              margin-left: 690px !important;
-              margin-right: auto !important;
-            }
-            
-            .hero-action-buttons {
-              display: flex !important;
-              justify-content: center !important;
-              align-items: center !important;
-            }
-
             /* Desktop padding for profile */
             .profile-info-box {
               padding: 6.25rem 43.75rem 6.25rem 6.25rem !important;
@@ -5113,13 +4956,38 @@ const Dashboard: React.FC = () => {
         className={`throwback-section ${isThrowbackUnlocked ? 'unlocked' : ''}`}
         data-section-id="throwback"
         ref={(el) => registerSection('throwback', el)}
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          position: 'relative',
+          padding: '120px 20px 100px',
+          overflow: 'visible'
+        }}
       >
-        <h2 className="throwback-heading">
+        <h2 className="throwback-heading" style={{
+          marginBottom: '60px',
+          marginTop: '0',
+          zIndex: 30,
+          fontSize: 'clamp(3rem, 8vw, 5rem)'
+        }}>
           Throwback
         </h2>
 
         {/* Flower Container with Lock System */}
-        <div className="throwback-flower-container">
+        <div className="throwback-flower-container" style={{
+          width: '100%',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+          minHeight: '500px',
+          maxHeight: 'calc(100vh - 250px)',
+          marginTop: 0
+        }}>
           {/* Container for both flower halves */}
           <div className="throwback-flower-wrapper">
             {/* Left Half */}

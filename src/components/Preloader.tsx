@@ -13,7 +13,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [loadingPercentage, setLoadingPercentage] = useState(0);
     const [showPercentage, setShowPercentage] = useState(false);
-    const [imagesLoaded, setImagesLoaded] = useState(false);
 
     // Use refs to access latest state inside requestAnimationFrame callback
     const isLoadingRef = useRef(isLoading);
@@ -23,43 +22,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     useEffect(() => {
         isLoadingRef.current = isLoading;
     }, [isLoading]);
-
-    // Preload critical frames for smoother playback
-    useEffect(() => {
-        const basePath = import.meta.env.BASE_URL || '/';
-        const imagesToPreload: string[] = [];
-        
-        // Preload first 30 frames and last 10 frames for smooth start/end
-        for (let i = 1; i <= 30; i++) {
-            const padded = i.toString().padStart(3, '0');
-            imagesToPreload.push(`${basePath}pre-loader/ezgif-frame-${padded}.jpg`);
-        }
-        for (let i = 245; i <= 254; i++) {
-            const padded = i.toString().padStart(3, '0');
-            imagesToPreload.push(`${basePath}pre-loader/ezgif-frame-${padded}.jpg`);
-        }
-
-        let loadedCount = 0;
-        const totalToLoad = imagesToPreload.length;
-
-        imagesToPreload.forEach((src) => {
-            const img = new Image();
-            img.onload = () => {
-                loadedCount++;
-                if (loadedCount === totalToLoad) {
-                    setImagesLoaded(true);
-                }
-            };
-            img.onerror = () => {
-                console.warn(`Failed to load preloader image: ${src}`);
-                loadedCount++;
-                if (loadedCount === totalToLoad) {
-                    setImagesLoaded(true);
-                }
-            };
-            img.src = src;
-        });
-    }, []);
 
     const animate = (time: number) => {
         if (!startTimeRef.current) startTimeRef.current = time;
@@ -116,12 +78,10 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
     };
 
     useEffect(() => {
-        if (!imagesLoaded) return; // Wait for images to load before starting animation
-        
         requestRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(requestRef.current!);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [imagesLoaded]);
+    }, []);
     // Dependency array empty to start animation once.
     // Logic inside checks loading state via ref.
 
@@ -133,6 +93,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
         const basePath = import.meta.env.BASE_URL || '/';
         return `${basePath}pre-loader/ezgif-frame-${padded}.jpg`;
     };
+
+    const isMobile = window.innerWidth <= 768;
 
     return (
         <div
@@ -152,62 +114,46 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
                 pointerEvents: isVisible ? 'auto' : 'none'
             }}
         >
-            {!imagesLoaded ? (
-                <div style={{
-                    color: '#fff',
-                    fontSize: '1.5rem',
-                    fontFamily: 'Arial, sans-serif',
-                    textAlign: 'center'
-                }}>
-                    <div style={{ marginBottom: '20px' }}>Loading...</div>
-                    <div style={{
-                        width: '50px',
-                        height: '50px',
-                        border: '5px solid rgba(255,255,255,0.3)',
-                        borderTop: '5px solid #fff',
-                        borderRadius: '50%',
-                        animation: 'spin 1s linear infinite',
-                        margin: '0 auto'
-                    }}></div>
-                    <style>{`
-                        @keyframes spin {
-                            0% { transform: rotate(0deg); }
-                            100% { transform: rotate(360deg); }
-                        }
-                    `}</style>
-                </div>
-            ) : (
-                <>
-                    <img
-                        src={getFramePath(currentFrame)}
-                        alt="Loading..."
+            <div style={{
+                position: 'relative',
+                width: '100%',
+                height: isMobile ? 'auto' : '100%',
+                aspectRatio: isMobile ? '16 / 9' : 'auto',
+                maxHeight: isMobile ? '100vh' : '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <img
+                    src={getFramePath(currentFrame)}
+                    alt="Loading..."
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: currentFrame >= 191 ? 'contain' : 'cover',
+                        borderRadius: '0'
+                    }}
+                />
+                {showPercentage && (
+                    <div
                         style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: currentFrame >= 191 ? 'contain' : 'cover',
-                            maxWidth: currentFrame >= 191 ? '90vw' : '100%',
-                            maxHeight: currentFrame >= 191 ? '90vh' : '100%'
+                            position: 'absolute',
+                            bottom: isMobile ? '5%' : '10%',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            color: '#fff',
+                            fontSize: window.innerWidth <= 480 ? '1.5rem' : window.innerWidth <= 768 ? '1.75rem' : '2rem',
+                            fontWeight: 'bold',
+                            textShadow: '0 0 10px rgba(0,0,0,0.8)',
+                            fontFamily: 'Arial, sans-serif',
+                            textAlign: 'center',
+                            padding: '0 10px'
                         }}
-                    />
-                    {showPercentage && (
-                        <div
-                            style={{
-                                position: 'absolute',
-                                bottom: '10%',
-                                left: '50%',
-                                transform: 'translateX(-50%)',
-                                color: '#fff',
-                                fontSize: '2rem',
-                                fontWeight: 'bold',
-                                textShadow: '0 0 10px rgba(0,0,0,0.8)',
-                                fontFamily: 'Arial, sans-serif'
-                            }}
-                        >
-                            {loadingPercentage}%
-                        </div>
-                    )}
-                </>
-            )}
+                    >
+                        {loadingPercentage}%
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

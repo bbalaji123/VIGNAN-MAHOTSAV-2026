@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './Dashboard';
+import Preloader from './components/Preloader';
 
 // Lazy load heavy components
 const EventDetail = lazy(() => import('./EventDetail'));
@@ -24,11 +25,6 @@ const Vizag = lazy(() => import('./Vizag'));
 const Hyderabad = lazy(() => import('./Hyderabad'));
 const Tirupathi = lazy(() => import('./Tirupathi'));
 const Guide = lazy(() => import('./Guide'));
-
-
-
-import React, { useState } from 'react';
-import Preloader from './components/Preloader';
 
 function App() {
   const [isDashboardLoaded, setIsDashboardLoaded] = useState(false);

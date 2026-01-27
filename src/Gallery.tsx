@@ -2,22 +2,22 @@ import React, { useMemo } from 'react';
 import './gallery.css';
 
 export const galleryImages: string[] = [
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584667/DSC02791_zik0lk.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584668/DSC08105_drjm46.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584665/DSC03380_p16fih.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584664/DSC03545_usezzd.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584664/DSC04008_uukrul.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584665/IMG-20250610-WA0075_zznxhl.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584664/IMG-20250610-WA0061_sephhr.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584662/IMG-20250128-WA0179_mvx5dd.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584658/DSC00450_a41xyk.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584657/DSC_0952_xk4xhm.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584654/DSC_9968_fbcwel.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584648/DSC02701_yxqlnj.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584648/DSC_0325_yqz3yi.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584646/concert_yp9sqs.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584645/DSC_7978_zmktxx.avif',
-  'https://res.cloudinary.com/dwvdzxefs/image/upload/v1768584643/_MR16501_qyohly.avif'
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584667/DSC02791_zik0lk.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584668/DSC08105_drjm46.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584665/DSC03380_p16fih.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584664/DSC03545_usezzd.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584664/DSC04008_uukrul.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584665/IMG-20250610-WA0075_zznxhl.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584664/IMG-20250610-WA0061_sephhr.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584662/IMG-20250128-WA0179_mvx5dd.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584658/DSC00450_a41xyk.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584657/DSC_0952_xk4xhm.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584654/DSC_9968_fbcwel.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584648/DSC02701_yxqlnj.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584648/DSC_0325_yqz3yi.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584646/concert_yp9sqs.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584645/DSC_7978_zmktxx.avif',
+  'https://res.cloudinary.com/dwvdzxefs/image/upload/w_280,h_180,c_fill,f_auto,q_auto/v1768584643/_MR16501_qyohly.avif'
 ];
 
 interface GalleryProps {
@@ -55,10 +55,10 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
                 <img
                   src={img}
                   alt="gallery"
-                    loading="lazy"
-                    decoding="async"
-                    width={280}
-                    height={180}
+                  loading="lazy"
+                  decoding="async"
+                  width={280}
+                  height={180}
                 />
               </div>
             ))}
@@ -69,4 +69,4 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
   );
 };
 
-export default Gallery;
+export default React.memo(Gallery);

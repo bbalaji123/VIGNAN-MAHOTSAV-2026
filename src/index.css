@@ -1,6 +1,9 @@
 @import "tailwindcss";
 /* Google Fonts loaded asynchronously in HTML to prevent render blocking */
 
+/* Accessibility utilities */
+@import "./accessibility.css";
+
 /* Custom Font - Coffee+Tea Demo */
 @font-face {
   font-family: 'coffee+tea demo';

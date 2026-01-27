@@ -414,28 +414,28 @@ img[alt="Moon"],
 /* Extra small mobile devices (320px - 374px) */
 @media (max-width: 374px) {
   .about-theme-container {
-    padding-top: 90px !important;
+    padding-top: 0px !important;
   }
 }
 
 /* Small mobile devices (375px - 424px) */
 @media (min-width: 375px) and (max-width: 424px) {
   .about-theme-container {
-    padding-top: 100px !important;
+    padding-top: 0px !important;
   }
 }
 
 /* Medium mobile devices (425px - 639px) */
 @media (min-width: 425px) and (max-width: 639px) {
   .about-theme-container {
-    padding-top: 130px !important;
+    padding-top: 10px !important;
   }
 }
 
 /* Large mobile / Small tablets (640px - 767px) */
 @media (min-width: 640px) and (max-width: 767px) {
   .about-theme-container {
-    padding-top: 140px !important;
+    padding-top: 20px !important;
   }
 }
 
@@ -490,6 +490,10 @@ body,
   max-width: 100%;
   min-height: 100%;
   position: relative;
+  /* Enable smooth scrolling */
+  scroll-behavior: smooth;
+  /* Hardware acceleration for better performance */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Hide scrollbars globally while still allowing scroll */
@@ -1572,6 +1576,10 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
+  .about-theme-section {
+    padding: 0px 20px !important;
+  }
+
   .about-theme-title {
     font-size: 2.2rem;
     margin-bottom: 30px;

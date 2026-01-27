@@ -1,0 +1,35 @@
+/* Screen reader only class for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+}
+
+/* Skip to main content link for accessibility */
+.skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #facc15;
+    color: #1a1034;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 100000;
+}
+
+.skip-to-main:focus {
+    top: 0;
+}

@@ -1,9 +1,26 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // Gzip compression
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240, // Only compress files larger than 10KB
+      deleteOriginFile: false
+    }),
+    // Brotli compression
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+      deleteOriginFile: false
+    })
+  ],
   base: '/',
   publicDir: 'public',
   build: {
@@ -14,7 +31,8 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug']
       }
     },
     rollupOptions: {
@@ -44,7 +62,11 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Enable CSS code splitting for better caching
+    cssCodeSplit: true,
+    // Optimize assets
+    assetsInlineLimit: 4096 // Inline assets smaller than 4KB as base64
   },
   server: {
     watch: {

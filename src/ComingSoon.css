@@ -1,7 +1,7 @@
 /* ================= FONT ================= */
 @font-face {
   font-family: "coffee-tea";
-  src: url("/images/coffee-tea.ttf") format("truetype");
+  src: url("/images/coffee+teademo-Regular.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -28,7 +28,7 @@
   height: 61vh;
   left: 15vw;
   top: -9.4vh;
-  background: url("./img/Mahotsav-gold.avif") center/contain no-repeat;
+  background: url("/menu-dashboard/1.avif") center/contain no-repeat;
   z-index: 2;
 }
 
@@ -38,7 +38,7 @@
   height: 110.7vh;
   left: 16.5vw;
   top: 32.1vh;
-  background: url("./img/flower.avif") center/contain no-repeat;
+  background: url("/menu-dashboard/petals.avif") center/contain no-repeat;
   z-index: 3;
 }
 
@@ -48,7 +48,7 @@
   height: 21.3vh;
   right: 0;
   top: -3vh;
-  background: url("./img/Vignan-logo.avif") center/contain no-repeat;
+  background: url("/menu-dashboard/Vignan-logo.avif") center/contain no-repeat;
   z-index: 4;
 }
 

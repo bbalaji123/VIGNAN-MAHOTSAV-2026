@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
+import { PeopleGroupIcon, GraduationCapIcon, TrophyIcon, EarthAfricaIcon, HandHoldingDollarIcon } from './components/Icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
 // import './hero-fullwidth.css';
@@ -2847,8 +2848,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             
             .about-theme-section {
               order: 1 !important;
-              margin-top: 580px !important;
-              padding-top: 120px !important;
+              margin-top: 0px !important;
+              padding-top: 0px !important;
             }
             
             .gallery-section {
@@ -4501,7 +4502,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
-                }}><i className="fa-solid fa-people-group"></i></div>
+                }}><PeopleGroupIcon style={{ width: '2.2rem', height: '2.2rem' }} /></div>
                 <div style={{
                   color: '#ffffff',
                   fontWeight: 'bold',
@@ -4538,7 +4539,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
-                }}><i className="fa-solid fa-graduation-cap"></i></div>
+                }}><GraduationCapIcon style={{ width: '2.2rem', height: '2.2rem' }} /></div>
                 <div style={{
                   color: '#ffffff',
                   fontWeight: 'bold',
@@ -4575,7 +4576,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
-                }}><i className="fa-solid fa-trophy"></i></div>
+                }}><TrophyIcon style={{ width: '2.2rem', height: '2.2rem' }} /></div>
                 <div style={{
                   color: '#ffffff',
                   fontWeight: 'bold',
@@ -4612,7 +4613,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
-                }}><i className="fa-solid fa-earth-africa"></i></div>
+                }}><EarthAfricaIcon style={{ width: '2.2rem', height: '2.2rem' }} /></div>
                 <div style={{
                   color: '#ffffff',
                   fontWeight: 'bold',
@@ -4698,7 +4699,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
-                }}><i className="fa-solid fa-hand-holding-dollar"></i></div>
+                }}><HandHoldingDollarIcon style={{ width: '3rem', height: '3rem' }} /></div>
                 <div style={{
                   color: '#ffffff',
                   fontWeight: 'bold',

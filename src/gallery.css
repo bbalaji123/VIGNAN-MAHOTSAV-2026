@@ -1,12 +1,8 @@
 .gallery-section {
   padding: 120px 20px 80px;
   overflow: visible;
-  contain: none;
-  transform: none;
-  backface-visibility: visible;
   position: relative;
   z-index: 10;
-  isolation: isolate;
 }
 
 .gallery-title {
@@ -26,11 +22,10 @@
 .scroll-row {
   display: flex;
   gap: 20px;
-  will-change: transform;
   pointer-events: none;
   transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000px;
+  /* Removed will-change to reduce GPU layer updates during scroll */
 }
 
 /* Allow clicks ONLY on cards */
@@ -77,20 +72,22 @@
 }
 
 @keyframes scrollLeft {
-  from { 
-    transform: translateX(0) translateZ(0); 
+  from {
+    transform: translate3d(0, 0, 0);
   }
-  to { 
-    transform: translateX(-20%) translateZ(0); 
+
+  to {
+    transform: translate3d(-20%, 0, 0);
   }
 }
 
 @keyframes scrollRight {
-  from { 
-    transform: translateX(-20%) translateZ(0); 
+  from {
+    transform: translate3d(-20%, 0, 0);
   }
-  to { 
-    transform: translateX(0) translateZ(0); 
+
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 

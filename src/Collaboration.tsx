@@ -318,34 +318,34 @@ const Collaboration: React.FC = () => {
 
         <div className="collaboration-grid">
           {[
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357355/3_dvfsut_hlfsxo.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357356/4_w9ppck_duhmv3.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357355/5_sinxan_edxznc.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357357/6_cuyhzg_mkovqw.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357357/7_fhojic_umygyu.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357357/8_onyr5b_pbawi8.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357358/9_uev3pg_vhv38s.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357361/10_wni4f6_fus9jn.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357361/11_q25rha_a9mdts.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357361/12_vslte5_ip1yzn.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357362/13_qkox2a_nhyjut.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357361/14_q6kzto_d6jmet.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357362/15_voez03_bmwgp9.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357362/16_wnub7p_lvkkde.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357367/17_atxyzf_zwpu6z.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357368/18_qg24n9_z2lylt.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357368/19_meotku_b1juwu.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357368/20_o9gjwx_r2beuj.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357369/21_z7jcol_o2jvjh.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357379/22_fhnvbe_ehd82r.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357371/23_mviqwn_txbimh.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357371/25_bif5nv_xale8z.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357372/24_pziuis_jpluai.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357360/26_mr4ydh_w8fq7z.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357359/28_yulk3k_ef40ec.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357360/29_o6tbis_gzgdsu.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357360/30_mwqfbc_ypurys.avif',
-            'https://res.cloudinary.com/dffldabvf/image/upload/v1768357360/32_nmftpg_yusibk.avif'
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357355/3_dvfsut_hlfsxo.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357356/4_w9ppck_duhmv3.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357355/5_sinxan_edxznc.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357357/6_cuyhzg_mkovqw.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357357/7_fhojic_umygyu.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357357/8_onyr5b_pbawi8.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357358/9_uev3pg_vhv38s.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357361/10_wni4f6_fus9jn.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357361/11_q25rha_a9mdts.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357361/12_vslte5_ip1yzn.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357362/13_qkox2a_nhyjut.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357361/14_q6kzto_d6jmet.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357362/15_voez03_bmwgp9.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357362/16_wnub7p_lvkkde.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357367/17_atxyzf_zwpu6z.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357368/18_qg24n9_z2lylt.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357368/19_meotku_b1juwu.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357368/20_o9gjwx_r2beuj.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357369/21_z7jcol_o2jvjh.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357379/22_fhnvbe_ehd82r.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357371/23_mviqwn_txbimh.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357371/25_bif5nv_xale8z.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357372/24_pziuis_jpluai.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357360/26_mr4ydh_w8fq7z.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357359/28_yulk3k_ef40ec.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357360/29_o6tbis_gzgdsu.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357360/30_mwqfbc_ypurys.avif',
+            'https://res.cloudinary.com/dffldabvf/image/upload/w_800,f_auto,q_auto/v1768357360/32_nmftpg_yusibk.avif'
           ].map((url, index) => (
             <div key={index} className="collaboration-image-card" onClick={() => handleImageClick(url)} style={{ cursor: 'pointer' }}>
               <img
@@ -436,4 +436,4 @@ const Collaboration: React.FC = () => {
   );
 };
 
-export default Collaboration;
+export default React.memo(Collaboration);

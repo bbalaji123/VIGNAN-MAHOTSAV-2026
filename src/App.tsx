@@ -33,18 +33,24 @@ import Preloader from './components/Preloader';
 function App() {
   const [isDashboardLoaded, setIsDashboardLoaded] = useState(false);
   const [preloaderFinished, setPreloaderFinished] = useState(false);
+  const [bootStart] = useState(() => Date.now());
 
   return (
-    <div className="w-full min-h-screen desktop-bound">
+    <div className="w-full min-h-screen desktop-bound" role="application" aria-label="Vignan Mahotsav 2026">
       {!preloaderFinished && (
         <Preloader
           isLoading={!isDashboardLoaded}
+          maxWaitMs={Math.max(6000, 2000 + (Date.now() - bootStart))}
           onFinish={() => setPreloaderFinished(true)}
         />
       )}
       <Toaster toastOptions={{ style: { zIndex: 999999 } }} containerStyle={{ zIndex: 999999 }} />
       <Router>
-        <Suspense fallback={null}>
+        <Suspense fallback={
+          <div role="status" aria-live="polite" aria-label="Loading page content">
+            <span className="sr-only">Loading...</span>
+          </div>
+        }>
           <Routes>
             <Route path="/" element={<Dashboard onLoad={() => setIsDashboardLoaded(true)} />} />
             {/* Redundant Routes for Dashboard pointed to same component, we can keep them but need to pass prop or handle uniquely. 

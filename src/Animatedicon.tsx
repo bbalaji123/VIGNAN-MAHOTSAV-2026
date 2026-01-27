@@ -20,11 +20,15 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ visible = true }) => {
 
       // Detect device type based on screen HEIGHT or WIDTH
       const isSmallScreen = vh < 601 || vw < 450;  // Below 601px HEIGHT or 450px WIDTH
+      // Specific laptop viewport (e.g., 1349x657) should use a slightly smaller hero flower
+      const isMediumLaptop = vw >= 1280 && vw <= 1366 && vh >= 640 && vh <= 700;
 
       // Set responsive size based on screen dimensions
       let newSize;
       if (isSmallScreen) {
         newSize = 320;  // Smaller size for small screens
+      } else if (isMediumLaptop) {
+        newSize = 640;  // Slightly smaller for 1280-1366 x 640-700 viewports
       } else {
         newSize = 720;  // Larger size for larger screens
       }
@@ -81,7 +85,7 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({ visible = true }) => {
 
       // Scale down
       const initialScale = 1;
-      const finalScale = isSmallScreen ? 0.4 : 0.55;  // Smaller final scale for small screens
+      const finalScale = isSmallScreen ? 0.4 : (isMediumLaptop ? 0.5 : 0.55);  // Slightly smaller for medium laptops
       const newScale = initialScale - (progress * (initialScale - finalScale));
 
       setTransform(

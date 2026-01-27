@@ -1,123 +1,62 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface PreloaderProps {
     onFinish?: () => void;
     isLoading: boolean;
+    /**
+     * Maximum time (ms) the preloader should remain visible
+     * even if `isLoading` never flips to false due to network
+     * or chunk loading issues. Defaults to 8000ms.
+     */
+    maxWaitMs?: number;
 }
 
-const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
-    const [currentFrame, setCurrentFrame] = useState(1);
-    const totalFrames = 254;
-    const requestRef = useRef<number>(0);
-    const startTimeRef = useRef<number>(0);
+const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading, maxWaitMs = 8000 }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [loadingPercentage, setLoadingPercentage] = useState(0);
-    const [showPercentage, setShowPercentage] = useState(false);
-    const [imageError, setImageError] = useState(false);
-    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-
-    // Use refs to access latest state inside requestAnimationFrame callback
-    const isLoadingRef = useRef(isLoading);
-    const hasCompletedLoopRef = useRef(false);
-    const percentageStartTimeRef = useRef<number>(0);
+    const [hasFinished, setHasFinished] = useState(false);
 
     useEffect(() => {
-        isLoadingRef.current = isLoading;
-    }, [isLoading]);
+        // Simulate loading progress
+        const interval = setInterval(() => {
+            setLoadingPercentage((prev) => {
+                if (prev >= 100 || hasFinished) {
+                    clearInterval(interval);
+                    return 100;
+                }
+                // Increment by random amount for realistic feel
+                const increment = Math.random() * 15 + 5;
+                return Math.min(prev + increment, 100);
+            });
+        }, 200);
 
-    // Preload first few frames to ensure they exist
+        return () => clearInterval(interval);
+    }, [hasFinished]);
+
     useEffect(() => {
-        const basePath = import.meta.env.BASE_URL || '/';
-        const testFrames = [1, 2, 3, 254];
-        
-        testFrames.forEach((frameNum) => {
-            const padded = frameNum.toString().padStart(3, '0');
-            const img = new Image();
-            img.onload = () => {
-                setLoadedImages(prev => new Set([...prev, frameNum]));
-            };
-            img.onerror = () => {
-                console.error(`Failed to load frame ${frameNum}: ${basePath}pre-loader/ezgif-frame-${padded}.jpg`);
-                setImageError(true);
-            };
-            img.src = `${basePath}pre-loader/ezgif-frame-${padded}.jpg`;
-        });
-    }, []);
-
-    const animate = (time: number) => {
-        if (!startTimeRef.current) startTimeRef.current = time;
-        const progress = time - startTimeRef.current;
-
-        // Aim for 30fps = 33.33ms per frame
-        const frameIndex = Math.floor(progress / 33.33) + 1;
-
-        if (frameIndex <= totalFrames) {
-            setCurrentFrame(frameIndex);
-
-            // Show percentage on last frame
-            if (frameIndex === totalFrames && !showPercentage) {
-                setShowPercentage(true);
-                percentageStartTimeRef.current = time;
+        // Auto-dismiss safeguard after maxWaitMs in case chunks fail under poor networks
+        const timeout = setTimeout(() => {
+            if (!hasFinished) {
+                setHasFinished(true);
+                setIsVisible(false);
+                onFinish?.();
             }
+        }, maxWaitMs);
+        return () => clearTimeout(timeout);
+    }, [maxWaitMs, hasFinished, onFinish]);
 
-            requestRef.current = requestAnimationFrame(animate);
-        } else {
-            // One loop finished
-            hasCompletedLoopRef.current = true;
-
-            // If showing percentage, animate it to 100%
-            if (showPercentage) {
-                const percentageProgress = time - percentageStartTimeRef.current;
-                const percentageDuration = 2000; // 2 seconds to reach 100%
-                const percentage = Math.min(100, Math.floor((percentageProgress / percentageDuration) * 100));
-                setLoadingPercentage(percentage);
-
-                // Check if we can stop now (percentage at 100% and loading complete)
-                if (percentage >= 100 && !isLoadingRef.current) {
-                    // Stop animation and finish
-                    setIsVisible(false);
-                    if (onFinish) onFinish();
-                    return;
-                }
-
-                requestRef.current = requestAnimationFrame(animate);
-            } else {
-                // Check if we can stop now
-                if (!isLoadingRef.current) {
-                    // Stop animation and finish
-                    setIsVisible(false);
-                    if (onFinish) onFinish();
-                    return;
-                }
-
-                // Otherwise loop again
-                startTimeRef.current = time;
-                setCurrentFrame(1);
-                requestRef.current = requestAnimationFrame(animate);
-            }
+    useEffect(() => {
+        // Close preloader when both loading complete and percentage at 100%
+        if (!hasFinished && loadingPercentage >= 100 && !isLoading) {
+            setHasFinished(true);
+            setTimeout(() => {
+                setIsVisible(false);
+                onFinish?.();
+            }, 500);
         }
-    };
-
-    useEffect(() => {
-        if (loadedImages.size === 0) return; // Wait for at least one image to load
-        
-        requestRef.current = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(requestRef.current!);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loadedImages.size]);
-    // Dependency array empty to start animation once.
-    // Logic inside checks loading state via ref.
+    }, [loadingPercentage, isLoading, onFinish, hasFinished]);
 
     if (!isVisible) return null;
-
-    // Format frame number to 3 digits (e.g., 001, 010, 100)
-    const getFramePath = (frame: number) => {
-        const padded = frame.toString().padStart(3, '0');
-        const basePath = import.meta.env.BASE_URL || '/';
-        return `${basePath}pre-loader/ezgif-frame-${padded}.jpg`;
-    };
-
-    const isMobile = window.innerWidth <= 768;
 
     return (
         <div
@@ -130,69 +69,83 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading }) => {
                 backgroundColor: '#000',
                 zIndex: 999999,
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 transition: 'opacity 0.5s ease-out',
                 opacity: isVisible ? 1 : 0,
-                pointerEvents: isVisible ? 'auto' : 'none',
-                flexDirection: 'column'
+                pointerEvents: isVisible ? 'auto' : 'none'
             }}
         >
-            {imageError && (
-                <div style={{
-                    color: '#fff',
-                    fontSize: '1rem',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                    padding: '0 20px'
-                }}>
-                    Loading assets... Please wait
-                </div>
-            )}
+            {/* Animated Logo/Spinner */}
             <div style={{
-                position: 'relative',
-                width: '100%',
-                height: isMobile ? 'auto' : '100%',
-                aspectRatio: isMobile ? '16 / 9' : 'auto',
-                maxHeight: isMobile ? '100vh' : '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
+                width: '120px',
+                height: '120px',
+                border: '8px solid rgba(255, 255, 255, 0.1)',
+                borderTop: '8px solid #fff',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                marginBottom: '30px'
+            }}></div>
+
+            {/* Mahotsav Title */}
+            <h1 style={{
+                color: '#fff',
+                fontSize: window.innerWidth <= 768 ? '2rem' : '3rem',
+                fontWeight: '700',
+                marginBottom: '20px',
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                fontFamily: 'Arial, sans-serif'
             }}>
-                <img
-                    src={getFramePath(currentFrame)}
-                    alt="Loading..."
-                    onError={(e) => {
-                        console.error('Image load error for frame:', currentFrame);
-                        setImageError(true);
-                    }}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: currentFrame >= 191 ? 'contain' : 'cover',
-                        borderRadius: '0'
-                    }}
-                />
-                {showPercentage && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            bottom: isMobile ? '5%' : '10%',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            color: '#fff',
-                            fontSize: window.innerWidth <= 480 ? '1.5rem' : window.innerWidth <= 768 ? '1.75rem' : '2rem',
-                            fontWeight: 'bold',
-                            textShadow: '0 0 10px rgba(0,0,0,0.8)',
-                            fontFamily: 'Arial, sans-serif',
-                            textAlign: 'center',
-                            padding: '0 10px'
-                        }}
-                    >
-                        {loadingPercentage}%
-                    </div>
-                )}
+                MAHOTSAV
+            </h1>
+
+            {/* Loading Text */}
+            <p style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: window.innerWidth <= 768 ? '1rem' : '1.2rem',
+                marginBottom: '30px',
+                fontFamily: 'Arial, sans-serif'
+            }}>
+                Loading Experience
+            </p>
+
+            {/* Percentage */}
+            <div style={{
+                color: '#fff',
+                fontSize: window.innerWidth <= 768 ? '1.5rem' : '2rem',
+                fontWeight: 'bold',
+                fontFamily: 'Arial, sans-serif'
+            }}>
+                {Math.floor(loadingPercentage)}%
             </div>
+
+            {/* Progress Bar */}
+            <div style={{
+                width: window.innerWidth <= 768 ? '80%' : '400px',
+                height: '4px',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '2px',
+                marginTop: '20px',
+                overflow: 'hidden'
+            }}>
+                <div style={{
+                    width: `${loadingPercentage}%`,
+                    height: '100%',
+                    backgroundColor: '#fff',
+                    transition: 'width 0.3s ease',
+                    borderRadius: '2px'
+                }}></div>
+            </div>
+
+            {/* CSS Animation */}
+            <style>{`
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `}</style>
         </div>
     );
 };

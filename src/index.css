@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+/* Google Fonts loaded asynchronously in HTML to prevent render blocking */
 
 /* Custom Font - Coffee+Tea Demo */
 @font-face {
@@ -644,7 +644,6 @@ img,
 picture,
 svg {
   -webkit-user-drag: none;
-  user-drag: none;
 }
 
 /* Force toast notifications to appear above all modals and overlays */
@@ -657,8 +656,9 @@ svg {
 
 /* Hide hero section animation (AnimatedIcon) on mobile in gallery, throwback, and footer sections */
 @media (max-width: 768px) {
-  .gallery-section ~ div[style*="position: fixed"][style*="bottom"],
-  footer ~ div[style*="position: fixed"][style*="bottom"] {
+
+  .gallery-section~div[style*="position: fixed"][style*="bottom"],
+  footer~div[style*="position: fixed"][style*="bottom"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;

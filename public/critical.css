@@ -1,0 +1,35 @@
+/* Critical CSS - Inlined in HTML head for immediate rendering */
+
+/* Prevent layout shift during font loading */
+html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+.fonts-loaded {
+    font-family: 'Borisna', sans-serif;
+}
+
+/* Critical above-the-fold styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #1a1034;
+    min-height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/* Prevent flash of unstyled content */
+body {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+}
+
+/* Loading state */
+.page-loading {
+    opacity: 0;
+}

@@ -60,7 +60,7 @@ const Guide: React.FC = () => {
       </div>
 
       {/* Garuda Logo */}
-      <div className="fixed top-3 left-14 sm:left-32 md:top-6 md:left-40 z-[60] transition-all duration-300">
+      <div className="fixed top-3 right-4 sm:right-8 md:top-6 md:right-12 z-[60] transition-all duration-300">
         <img
           src="/menu-dashboard/Garuda.avif"
           alt="Garuda"
@@ -100,3 +100,4 @@ const Guide: React.FC = () => {
 };
 
 export default Guide;
+

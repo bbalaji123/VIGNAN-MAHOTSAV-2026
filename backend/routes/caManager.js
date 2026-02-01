@@ -4,11 +4,13 @@ import jwt from 'jsonwebtoken';
 import CAManager from '../models/CAManager.js';
 import CampusAmbassador from '../models/CampusAmbassador.js';
 import { logger } from '../utils/logger.js';
+import { verifyToken } from '../middleware/auth.js';
+import { authLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
 // CA Manager Login
-router.post('/ca-manager/login', async (req, res) => {
+router.post('/ca-manager/login', authLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -83,21 +85,9 @@ router.post('/ca-manager/login', async (req, res) => {
 });
 
 // Get all Campus Ambassadors
-router.get('/ca-manager/ambassadors', async (req, res) => {
+router.get('/ca-manager/ambassadors', verifyToken, async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-    
-    if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token provided'
-      });
-    }
-
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    
-    if (decoded.userType !== 'caManager') {
+    if (req.user.userType !== 'caManager') {
       return res.status(403).json({
         success: false,
         message: 'Unauthorized access'
@@ -124,22 +114,11 @@ router.get('/ca-manager/ambassadors', async (req, res) => {
 });
 
 // Update CA Points
-router.post('/ca-manager/update-points', async (req, res) => {
+router.post('/ca-manager/update-points', verifyToken, async (req, res) => {
   try {
     const { mcaId, points, action, notes } = req.body;
-    const token = req.headers.authorization?.split(' ')[1];
 
-    if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token provided'
-      });
-    }
-
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    
-    if (decoded.userType !== 'caManager') {
+    if (req.user.userType !== 'caManager') {
       return res.status(403).json({
         success: false,
         message: 'Unauthorized access'
@@ -148,7 +127,7 @@ router.post('/ca-manager/update-points', async (req, res) => {
 
     // Find CA
     const ca = await CampusAmbassador.findOne({ mcaId: mcaId.toUpperCase() });
-    
+
     if (!ca) {
       return res.status(404).json({
         success: false,
@@ -169,7 +148,7 @@ router.post('/ca-manager/update-points', async (req, res) => {
     await ca.save();
 
     // Log action
-    const manager = await CAManager.findById(decoded.managerId);
+    const manager = await CAManager.findById(req.user.managerId);
     await manager.logAction(
       action === 'increase' ? 'points_increase' : 'points_decrease',
       ca.mcaId,
@@ -202,22 +181,11 @@ router.post('/ca-manager/update-points', async (req, res) => {
 });
 
 // Dismiss/Activate CA
-router.post('/ca-manager/toggle-status', async (req, res) => {
+router.post('/ca-manager/toggle-status', verifyToken, async (req, res) => {
   try {
     const { mcaId, status, notes } = req.body;
-    const token = req.headers.authorization?.split(' ')[1];
 
-    if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token provided'
-      });
-    }
-
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    
-    if (decoded.userType !== 'caManager') {
+    if (req.user.userType !== 'caManager') {
       return res.status(403).json({
         success: false,
         message: 'Unauthorized access'
@@ -226,7 +194,7 @@ router.post('/ca-manager/toggle-status', async (req, res) => {
 
     // Find CA
     const ca = await CampusAmbassador.findOne({ mcaId: mcaId.toUpperCase() });
-    
+
     if (!ca) {
       return res.status(404).json({
         success: false,
@@ -239,7 +207,7 @@ router.post('/ca-manager/toggle-status', async (req, res) => {
     await ca.save();
 
     // Log action
-    const manager = await CAManager.findById(decoded.managerId);
+    const manager = await CAManager.findById(req.user.managerId);
     await manager.logAction(
       status ? 'activate' : 'dismiss',
       ca.mcaId,
@@ -271,29 +239,17 @@ router.post('/ca-manager/toggle-status', async (req, res) => {
 });
 
 // Get Manager Activity Logs
-router.get('/ca-manager/activity-logs', async (req, res) => {
+router.get('/ca-manager/activity-logs', verifyToken, async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(' ')[1];
-
-    if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: 'No token provided'
-      });
-    }
-
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-    
-    if (decoded.userType !== 'caManager') {
+    if (req.user.userType !== 'caManager') {
       return res.status(403).json({
         success: false,
         message: 'Unauthorized access'
       });
     }
 
-    const manager = await CAManager.findById(decoded.managerId);
-    
+    const manager = await CAManager.findById(req.user.managerId);
+
     // Get recent logs (last 100)
     const logs = manager.actionLogs.slice(-100).reverse();
 

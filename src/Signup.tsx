@@ -104,6 +104,11 @@ const Signup: React.FC<SignupProps> = ({
                     onChange={onInputChange}
                     placeholder="Enter your full name"
                     required
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      // Only allow letters, spaces, and dots
+                      target.value = target.value.replace(/[^a-zA-Z\s.]/g, '');
+                    }}
                   />
                 </div>
                 <div className="signup-form-group">

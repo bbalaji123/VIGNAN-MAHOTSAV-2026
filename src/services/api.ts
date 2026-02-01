@@ -1,21 +1,21 @@
 // API Configuration - Automatically detects environment
 const getApiBaseUrl = () => {
   // Production - Main domain with SSL
-  const PRODUCTION_API = 'https://vignanmahotsav.in/api';
-  
+  const PRODUCTION_API = 'https://vignanmahotsav.in/neekendukura';
+
   // Development
-  const DEVELOPMENT_API = 'http://localhost:5000/api';
-  
+  const DEVELOPMENT_API = 'http://localhost:5000/neekendukura';
+
   // Auto-detect environment
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
-    
+
     // Check if running in production (GitHub Pages, Vercel, Netlify, Render, etc.)
     if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
       return PRODUCTION_API;
     }
   }
-  
+
   return DEVELOPMENT_API;
 };
 
@@ -129,6 +129,9 @@ export interface EventRegistrationResponse {
     teamSize?: number;
     participantName?: string;
     captainName?: string;
+    // For user-centric registration queries
+    events?: any[];
+    registeredEvents?: any[];
   };
   error?: string;
 }
@@ -151,12 +154,12 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
       });
 
       const data = await response.json();
-      
+
       // If successful, return immediately
       if (data.success) {
         return data;
       }
-      
+
       // If it's a conflict error (duplicate userId from concurrent registration), retry
       if (response.status === 409 && data.error?.includes('userId')) {
         lastError = data;
@@ -164,7 +167,7 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
         await new Promise(resolve => setTimeout(resolve, 300 * attempt));
         continue;
       }
-      
+
       // For other errors (like duplicate email), return immediately
       return data;
     } catch (error: any) {
@@ -173,7 +176,7 @@ export const registerUser = async (userData: SignupData, maxRetries: number = 3)
         message: 'Failed to connect to server',
         error: error.message,
       };
-      
+
       // Retry on network errors too
       if (attempt < maxRetries) {
         await new Promise(resolve => setTimeout(resolve, 300 * attempt));
@@ -194,7 +197,7 @@ export const loginUser = async (identifier: string | { mahotsavId?: string; regN
   try {
     // Prepare request body with proper field names
     let requestBody: any = { password };
-    
+
     if (typeof identifier === 'string') {
       requestBody.email = identifier;
     } else if (identifier.mahotsavId) {
@@ -204,7 +207,7 @@ export const loginUser = async (identifier: string | { mahotsavId?: string; regN
     } else if (identifier.email) {
       requestBody.email = identifier.email;
     }
-    
+
     const response = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
       headers: {
@@ -214,6 +217,10 @@ export const loginUser = async (identifier: string | { mahotsavId?: string; regN
     });
 
     const data = await response.json();
+    // Persist token if provided
+    if (data?.token) {
+      try { localStorage.setItem('authToken', data.token); } catch { }
+    }
     return data;
   } catch (error: any) {
     return {
@@ -224,9 +231,16 @@ export const loginUser = async (identifier: string | { mahotsavId?: string; regN
   }
 };
 
+function authHeaders(): Record<string, string> {
+  try {
+    const token = localStorage.getItem('authToken');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  } catch { return {}; }
+}
+
 export const getAllRegistrations = async (): Promise<ApiResponse> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/registrations`);
+    const response = await fetch(`${API_BASE_URL}/registrations`, { headers: { ...authHeaders() } });
     const data = await response.json();
     return data;
   } catch (error: any) {
@@ -277,7 +291,7 @@ export const getAllEvents = async (): Promise<EventsResponse> => {
 // Fetch events by type (sports, culturals, technical, literary)
 export const getEventsByType = async (type: string, gender?: string): Promise<EventsResponse> => {
   try {
-    const url = gender 
+    const url = gender
       ? `${API_BASE_URL}/events/${type}?gender=${gender}`
       : `${API_BASE_URL}/events/${type}`;
     const response = await fetch(url);
@@ -326,7 +340,7 @@ export const getEventById = async (id: string): Promise<EventsResponse> => {
 export const registerIndividualEvent = async (registrationData: IndividualEventRegistration): Promise<EventRegistrationResponse> => {
   const maxRetries = 5;
   const baseDelay = 1000; // 1 second base delay
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const response = await fetch(`${API_BASE_URL}/register-individual`, {
@@ -338,14 +352,14 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
       });
 
       const data = await response.json();
-      
+
       // If server is busy (409 conflict or 500 server busy), retry silently
       if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
         const delay = baseDelay * attempt; // Linear backoff
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
-      
+
       return data;
     } catch (error: any) {
       // Network error - retry silently
@@ -354,7 +368,7 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
-      
+
       return {
         success: false,
         message: 'Registration is processing. Please wait.',
@@ -362,7 +376,7 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
       };
     }
   }
-  
+
   // All retries exhausted - still return a hopeful message
   return {
     success: false,
@@ -374,7 +388,7 @@ export const registerIndividualEvent = async (registrationData: IndividualEventR
 export const registerTeamEvent = async (registrationData: TeamEventRegistration): Promise<EventRegistrationResponse> => {
   const maxRetries = 5;
   const baseDelay = 1000; // 1 second base delay
-  
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const response = await fetch(`${API_BASE_URL}/register-team`, {
@@ -386,14 +400,14 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
       });
 
       const data = await response.json();
-      
+
       // If server is busy (409 conflict or 500 server busy), retry silently
       if (!data.success && (response.status === 409 || response.status === 500) && attempt < maxRetries) {
         const delay = baseDelay * attempt; // Linear backoff
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
-      
+
       return data;
     } catch (error: any) {
       // Network error - retry silently
@@ -402,7 +416,7 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
-      
+
       return {
         success: false,
         message: 'Registration is processing. Please wait.',
@@ -410,7 +424,7 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
       };
     }
   }
-  
+
   // All retries exhausted - still return a hopeful message
   return {
     success: false,
@@ -421,7 +435,7 @@ export const registerTeamEvent = async (registrationData: TeamEventRegistration)
 // Get user's event registrations
 export const getMyEventRegistrations = async (userId: string): Promise<EventRegistrationResponse> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
+    const response = await fetch(`${API_BASE_URL}/my-registrations/${userId}`, { headers: { ...authHeaders() } });
     const data = await response.json();
     return data;
   } catch (error: any) {
@@ -433,6 +447,9 @@ export const getMyEventRegistrations = async (userId: string): Promise<EventRegi
   }
 };
 
+// Alias for backward compatibility
+export const getUserRegisteredEvents = getMyEventRegistrations;
+
 // Save selected events to user's My Events
 export const saveMyEvents = async (userId: string, events: any[]): Promise<ApiResponse> => {
   try {
@@ -440,6 +457,7 @@ export const saveMyEvents = async (userId: string, events: any[]): Promise<ApiRe
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...authHeaders(),
       },
       body: JSON.stringify({ userId, events }),
     });
@@ -473,7 +491,7 @@ export const getMyEvents = async (userId: string): Promise<EventsResponse> => {
 // Add a single event to My Events
 export const addEventToMyEvents = async (userId: string, eventId: string): Promise<ApiResponse> => {
   try {
-    
+
     const response = await fetch(`${API_BASE_URL}/add-event`, {
       method: 'POST',
       headers: {
@@ -551,21 +569,6 @@ export const getUserProfile = async (userId: string): Promise<ApiResponse & { da
     return {
       success: false,
       message: 'Failed to fetch user profile',
-      error: error.message,
-    };
-  }
-};
-
-// Get user's registered events
-export const getUserRegisteredEvents = async (userId: string): Promise<EventsResponse & { data?: any }> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    return {
-      success: false,
-      message: 'Failed to fetch registered events',
       error: error.message,
     };
   }

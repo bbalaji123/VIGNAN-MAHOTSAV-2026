@@ -45,12 +45,13 @@ const EventDetail: React.FC = () => {
 
   // Get the section we came from for smart back navigation
   const fromSection = location.state?.fromSection || '';
+  const fromMenu = location.state?.fromMenu;
 
   // Smart back navigation handler
   const handleBack = () => {
     if (fromSection) {
-      // Navigate to /events with the specific section to open
-      navigate('/events', { state: { openSection: fromSection } });
+      // Navigate to /events with the specific section to open AND preserve fromMenu state
+      navigate('/events', { state: { openSection: fromSection, fromMenu } });
     } else {
       // Default behavior - go back in history
       navigate(-1);
@@ -120,8 +121,17 @@ const EventDetail: React.FC = () => {
     try {
       setIsAddingEvent(true);
 
+      // Get auth token
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       // First, fetch existing registered events
-      const existingEventsResponse = await fetch(`${API_BASE_URL}/my-registrations/${userId}`);
+      const existingEventsResponse = await fetch(`${API_BASE_URL}/my-registrations/${userId}`, { headers });
       const existingEventsResult = await existingEventsResponse.json();
 
       // Normalize existing events from API response to always be an array
@@ -214,9 +224,7 @@ const EventDetail: React.FC = () => {
       // Save to database via API
       const response = await fetch(`${API_BASE_URL}/save-events`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify({
           userId: userId,
           events: allEvents
@@ -1060,7 +1068,7 @@ const EventDetail: React.FC = () => {
       subtitle: "Classical Dance Solo",
       rules: [
         "The classical dance performed can be from any of the approved schools of dance, such as Kathak, Kathakali, Bharat Natyam, Manipuri, Kuchipudi, Mohiniyattam, or Odissi.",
-        "Participants will be allowed up to 10 minutes, which includes preparation time. Maximum three accompanists are permissible. Audio tracks are also permitted.",
+        "Participants will be allowed up to 6 minutes, which includes preparation time. Maximum three accompanists are permissible. Audio tracks are also permitted.",
         "The selected song(s) must not appear in movies or shows. However, if an original song is present in a movie, the original composition should be used.",
         "Elements like fire, water or harmful substances must not be used.",
         "Judgment will be based on the qualities like Tal, Technique, Rhythm, Abhinaya or Expression, Costumes, Footwork and general impression."
@@ -1358,7 +1366,7 @@ const EventDetail: React.FC = () => {
       subtitle: "Group Dance Competition",
       rules: [
         "Participants are free to choose any genre, such as Bollywood, hip-hop, contemporary, salsa, classical, semi-classical, mass, and folk, etc.",
-        "There should be a minimum of 4 members on the stage at any point of time and a maximum of 12 members per team.",
+        "There should be a minimum of 4 members on the stage at any point of time and a maximum of 10 members per team.",
         "The maximum duration of performance is 6 minutes. An elimination round will be held if necessary.",
         "In case of using movie songs or movie references in the audio tracks, any sort of controversial elements is to be avoided.",
         "The use of fire (including diyas, candles, or lighters) and water is not allowed.",
@@ -3233,9 +3241,14 @@ const EventDetail: React.FC = () => {
 
           <button
             className="bg-gradient-to-r from-pink-500 to-rose-500 hover:scale-105 text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_8px_16px_rgba(0,0,0,0.3)] text-lg flex items-center justify-center gap-2"
-            style={{ width: '85%', maxWidth: '320px' }}
+            style={{
+              width: '85%',
+              maxWidth: '320px',
+              opacity: eventName?.toLowerCase().includes('para cricket') ? 0.5 : 1,
+              cursor: eventName?.toLowerCase().includes('para cricket') ? 'not-allowed' : 'pointer'
+            }}
             onClick={handleAddToMyEvents}
-            disabled={isAddingEvent}
+            disabled={isAddingEvent || eventName?.toLowerCase().includes('para cricket')}
           >
             {isAddingEvent ? ' Adding...' : ' Add My Events'}
           </button>

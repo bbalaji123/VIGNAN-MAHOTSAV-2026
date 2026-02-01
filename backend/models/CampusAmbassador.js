@@ -72,7 +72,7 @@ const campusAmbassadorSchema = new mongoose.Schema({
     },
     paymentStatus: {
       type: String,
-      enum: ['pending', 'paid', 'failed'],
+      enum: ['pending', 'paid', 'failed', 'unpaid'],
       default: 'pending'
     },
     pointsAwarded: {
@@ -145,7 +145,7 @@ const campusAmbassadorSchema = new mongoose.Schema({
 });
 
 // Method to update tier based on points
-campusAmbassadorSchema.methods.updateTier = function() {
+campusAmbassadorSchema.methods.updateTier = function () {
   if (this.totalPoints >= 250) {
     this.tier = 'Diamond';
   } else if (this.totalPoints >= 200) {
@@ -163,7 +163,7 @@ campusAmbassadorSchema.methods.updateTier = function() {
 };
 
 // Method to add referral and update points
-campusAmbassadorSchema.methods.addReferral = function(userId, userName, userEmail, userCollege) {
+campusAmbassadorSchema.methods.addReferral = function (userId, userName, userEmail, userCollege) {
   this.referrals.push({
     userId,
     userName,
@@ -177,16 +177,16 @@ campusAmbassadorSchema.methods.addReferral = function(userId, userName, userEmai
 };
 
 // Method to update payment status and award points
-campusAmbassadorSchema.methods.updatePaymentStatus = async function(userId, paymentStatus) {
+campusAmbassadorSchema.methods.updatePaymentStatus = async function (userId, paymentStatus) {
   const referral = this.referrals.find(r => r.userId === userId);
-  
+
   if (!referral) {
     throw new Error('Referral not found');
   }
-  
+
   const oldStatus = referral.paymentStatus;
   referral.paymentStatus = paymentStatus;
-  
+
   // Award points only when payment is marked as paid
   if (paymentStatus === 'paid' && !referral.pointsAwarded) {
     this.totalPoints += 5; // 5 points per paid referral
@@ -197,7 +197,7 @@ campusAmbassadorSchema.methods.updatePaymentStatus = async function(userId, paym
     }
     this.updateTier();
   }
-  
+
   // Remove points if payment was paid but now changed to pending/failed
   if (oldStatus === 'paid' && paymentStatus !== 'paid' && referral.pointsAwarded) {
     this.totalPoints -= 5;
@@ -208,7 +208,7 @@ campusAmbassadorSchema.methods.updatePaymentStatus = async function(userId, paym
     }
     this.updateTier();
   }
-  
+
   return this.save();
 };
 

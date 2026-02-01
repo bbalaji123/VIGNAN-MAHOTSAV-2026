@@ -3,12 +3,14 @@ import Registration from '../models/Registration.js';
 import Participant from '../models/Participant.js';
 import CampusAmbassador from '../models/CampusAmbassador.js';
 import { generateUserId } from '../utils/idGenerator.js';
+import { verifyToken, generateToken } from '../middleware/auth.js';
+import { authLimiter, strictLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
 /* =====================================================
    OPTIONAL: Base API route
-   URL: GET /api
+   URL: GET /neekendukura
    Purpose: Quick sanity check that API is alive
 ===================================================== */
 router.get('/', (req, res) => {
@@ -21,7 +23,7 @@ router.get('/', (req, res) => {
 
 /* =====================================================
    REQUIRED: Health check
-   URL: GET /api/health
+   URL: GET /neekendukura/health
    Purpose: Server monitoring, uptime checks
 ===================================================== */
 router.get('/health', (req, res) => {
@@ -39,7 +41,7 @@ router.get('/health', (req, res) => {
 
 /* =====================================================
    Utility route
-   URL: GET /api/branches
+   URL: GET /neekendukura/branches
 ===================================================== */
 router.get('/branches', (req, res) => {
   const branches = [
@@ -54,7 +56,7 @@ router.get('/branches', (req, res) => {
    Registration
    URL: POST /api/register
 ===================================================== */
-router.post('/register', async (req, res) => {
+router.post('/register', authLimiter, async (req, res) => {
   try {
     // Anti-bot honeypot validation - check if bot filled honeypot fields
     const { company_name, address2 } = req.body;
@@ -311,7 +313,7 @@ router.post('/register', async (req, res) => {
    Login
    URL: POST /api/login
 ===================================================== */
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, async (req, res) => {
   try {
     const { email, password, mahotsavId, regNo } = req.body;
     const identifier = email || mahotsavId || regNo;
@@ -361,6 +363,8 @@ router.post('/login', async (req, res) => {
     res.json({
       success: true,
       message: 'Login successful',
+      token: generateToken(user.userId),
+      expiresIn: process.env.JWT_EXPIRES_IN || '7d',
       data: {
         userId: user.userId,
         registerId: user.registerId,
@@ -388,8 +392,9 @@ router.post('/login', async (req, res) => {
 /* =====================================================
    Participant Events
    URL: POST /api/save-events
+   PROTECTED - Requires JWT authentication
 ===================================================== */
-router.post('/save-events', async (req, res) => {
+router.post('/save-events', verifyToken, async (req, res) => {
   try {
     const { userId, events } = req.body;
 
@@ -397,6 +402,14 @@ router.post('/save-events', async (req, res) => {
       return res.status(400).json({
         success: false,
         message: 'Invalid input'
+      });
+    }
+
+    // Verify user owns this userId (JWT token contains userId)
+    if (req.user.userId !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: 'Unauthorized: You can only modify your own events'
       });
     }
 
@@ -562,10 +575,19 @@ router.post('/save-events', async (req, res) => {
 /* =====================================================
    Get User's Registered Events
    URL: GET /api/my-registrations/:userId
+   PROTECTED - Requires JWT authentication
 ===================================================== */
-router.get('/my-registrations/:userId', async (req, res) => {
+router.get('/my-registrations/:userId', verifyToken, async (req, res) => {
   try {
     const { userId } = req.params;
+
+    // Verify user owns this userId (JWT token contains userId)
+    if (req.user.userId !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: 'Unauthorized: You can only view your own registrations'
+      });
+    }
 
     // Find participant by userId
     const participant = await Participant.findOne({ userId });
@@ -602,20 +624,24 @@ router.get('/my-registrations/:userId', async (req, res) => {
 /* =====================================================
    OPTIONAL ADMIN / DEBUG ROUTES
    Remove in production if needed
+   PROTECTED
 ===================================================== */
 
-router.get('/registrations', async (req, res) => {
+router.get('/registrations', verifyToken, strictLimiter, async (req, res) => {
+  // TODO: Add admin check
   const data = await Registration.find().select('-password');
   res.json({ count: data.length, data });
 });
 
-router.get('/user/:userId', async (req, res) => {
+router.get('/user/:userId', verifyToken, strictLimiter, async (req, res) => {
+  // TODO: Add admin check
   const user = await Registration.findOne({ userId: req.params.userId }).select('-password');
   if (!user) return res.status(404).json({ message: 'User not found' });
   res.json(user);
 });
 
-router.post('/reset-counter', async (req, res) => {
+router.post('/reset-counter', verifyToken, strictLimiter, async (req, res) => {
+  // TODO: Add admin check
   try {
     const mongoose = (await import('mongoose')).default;
 
@@ -638,7 +664,8 @@ router.post('/reset-counter', async (req, res) => {
   }
 });
 
-router.get('/counter-status', async (req, res) => {
+router.get('/counter-status', verifyToken, strictLimiter, async (req, res) => {
+  // TODO: Add admin check
   try {
     const mongoose = (await import('mongoose')).default;
     const counter = await mongoose.connection.db.collection('counters').findOne({ _id: 'userId' });

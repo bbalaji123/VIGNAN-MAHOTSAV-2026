@@ -1,0 +1,679 @@
+{
+  "timestamp": "2026-01-29T05:07:23.389Z",
+  "summary": {
+    "participantsFixed": 31,
+    "participantsFailed": 2,
+    "registrationsFixed": 28,
+    "registrationsFailed": 13,
+    "totalFixed": 59,
+    "totalFailed": 15
+  },
+  "details": [
+    {
+      "type": "Participant",
+      "userId": "MH26000145",
+      "name": "Konakanchi Prasanth",
+      "email": "kprasanth119951@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000151",
+      "name": "Gnaneshwar",
+      "email": "bantugnaneshwar22@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000001",
+      "name": "maruthi",
+      "email": "adfb@gmail.com",
+      "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+      "changes": "State: MADHYA PRADESH, District: GWALIOR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000003",
+      "name": "Djd",
+      "email": "zjx@gmail.com",
+      "college": "ACHARYA B.ED. COLLEGE",
+      "changes": "State: ANDHRA PRADESH, District: ANAKAPALLI",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000002",
+      "name": "Hsjshsb",
+      "email": "bandaruakash8@gmail.com",
+      "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+      "changes": "State: GOA, District: SOUTH GOA",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001904",
+      "name": "Akash Bandaru",
+      "email": "nhg@gmail.com",
+      "college": "Aaditya Degree College, Nellore",
+      "changes": "State: ANDHRA PRADESH, District: SRI POTTI SRIRAMULU NELLORE",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000509",
+      "name": "Hii",
+      "email": "hiiiii1677@gmail.com",
+      "college": "Acharya Nagarjuna University, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000095",
+      "name": "Gundrathi Ram Charan Goud",
+      "email": "druvaram1234@gmail.com",
+      "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+      "changes": "State: TELANGANA, District: SANGAREDDY",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000007",
+      "name": "Bandaru santhosh",
+      "email": "santhoshbandaru02@gmail.com",
+      "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+      "changes": "State: ARUNACHAL PRADESH, District: LOWER SUBANSIRI",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001896",
+      "name": "dasari uday Kumar",
+      "email": "selfmadechandu@gmail.com",
+      "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001899",
+      "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+      "email": "24491a44i7@qiscet.edu.in",
+      "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+      "changes": "State: ANDHRA PRADESH, District: PRAKASAM",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000008",
+      "name": "Bandaru santhosh",
+      "email": "santhoshbandaru0902@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000030",
+      "name": "Venkatesh Batchu",
+      "email": "venkateshbatchu133@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000143",
+      "name": "RAJENDRA BATTULA",
+      "email": "rajindhranaadh@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000006",
+      "name": "Kota lalith",
+      "email": "kotalalithaditya@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000505",
+      "name": "Shaik farhan jasmin",
+      "email": "sfarhanjasmin@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000088",
+      "name": "GOTTUMUKKALA SAKETH VARMA",
+      "email": "sakethvarma2024@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000089",
+      "name": "Greeshmanth",
+      "email": "greeshmanth52@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000334",
+      "name": "Miriyala Daniel",
+      "email": "danielmiriyala@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000018",
+      "name": "Nalam Trinadh ram",
+      "email": "nalamtrinadhram08@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000291",
+      "name": "N.Manikantareddy",
+      "email": "nandhyalamanikanta2008@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000099",
+      "name": "B Venkateswara Rao",
+      "email": "vu.241fa04818@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000270",
+      "name": "Sai Satya Krishna Karuturi",
+      "email": "venkateshkaruturi1234@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000348",
+      "name": "NIHAL KUMAR",
+      "email": "nihalksingh7@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000041",
+      "name": "Kandukur sai saketh",
+      "email": "sakethkandukuru2007@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001890",
+      "name": "Pamidi Sathvika",
+      "email": "pamidisathi@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001907",
+      "name": "Mandadapu Kundhana",
+      "email": "kundhanamandadapu@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001900",
+      "name": "K.Sri Hinduja",
+      "email": "koppuravurisrihinduja@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001903",
+      "name": "Yashodhar Venigalla",
+      "email": "yashodharvenigalla@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26001906",
+      "name": "Reddy Venkata siva naga sai",
+      "email": "reddyvenkatasivanagasai455@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000004",
+      "name": "Jonnadula Abhiram",
+      "email": "abhiram.j2006@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000201",
+      "name": "BATCHU SIVANI SINDHU MYDHILI",
+      "email": "sivanisindhumydhili2006@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Participant",
+      "userId": "MH26000186",
+      "name": "NIRAJ KUMAR",
+      "email": "nirajkumar.851284@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000066",
+      "name": "Sowmya Janga",
+      "email": "sowmyajanga06@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000145",
+      "name": "Konakanchi Prasanth",
+      "email": "kprasanth119951@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000151",
+      "name": "Gnaneshwar",
+      "email": "bantugnaneshwar22@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000166",
+      "name": "k naga sravani",
+      "email": "bandaruakash@gmail.com",
+      "college": "",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000124",
+      "name": "Mekala Manoj Kumar",
+      "email": "mekalamanoj8522@gmail.com",
+      "college": "Bharat institution of engineering technology",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000294",
+      "name": "Dhanush",
+      "email": "comeon.canyoureachme@gmail.com",
+      "college": "K.B.N college",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000290",
+      "name": "P. Ajay Kumar",
+      "email": "ajaypatibandla2007@gmail.com",
+      "college": "KL university",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000116",
+      "name": "Veeru Kanta",
+      "email": "kantasivaji@gmail.com",
+      "college": "NIT Trichy",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000154",
+      "name": "GURRAM SRINIVAS",
+      "email": "srinivasgurram81790@gmail.com",
+      "college": "National skill training institute Vidyanagar",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000299",
+      "name": "Ramisettinikhilsatyasairam",
+      "email": "ramisettinikhilsatyasairam@gmail.com",
+      "college": "Nit tadapalligudem",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000250",
+      "name": "VISHNU REDDY",
+      "email": "vishnuyenimireddy@gmail.com",
+      "college": "SRM University AP",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000277",
+      "name": "Jaya Prakash Kadali",
+      "email": "jayaprakashkadali.work@gmail.com",
+      "college": "VIT AP",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000006",
+      "name": "Kota lalith",
+      "email": "kotalalithaditya@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000008",
+      "name": "Bandaru santhosh",
+      "email": "santhoshbandaru0902@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000020",
+      "name": "KURAPATI HEMANTH KUMAR",
+      "email": "hemanthkurapati097@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000030",
+      "name": "Venkatesh Batchu",
+      "email": "venkateshbatchu133@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000050",
+      "name": "Moram Udaya sakshath",
+      "email": "udaysakshath847@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000075",
+      "name": "SHAIK MOHAMMAD ASIF",
+      "email": "shaikmohammadasif285@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000128",
+      "name": "G.venkat",
+      "email": "gubbavenkat623@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000143",
+      "name": "RAJENDRA BATTULA",
+      "email": "rajindhranaadh@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000186",
+      "name": "NIRAJ KUMAR",
+      "email": "nirajkumar.851284@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000193",
+      "name": "Shaik Ayan",
+      "email": "ayansk2605@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000194",
+      "name": "MANCHELLA V N ABHAYA MEHARVAN",
+      "email": "abhayamehar999@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000201",
+      "name": "BATCHU SIVANI SINDHU MYDHILI",
+      "email": "sivanisindhumydhili2006@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000202",
+      "name": "K.harshitha",
+      "email": "kayyalaharshitha3@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000203",
+      "name": "P.sree nikhitha",
+      "email": "nikhithapolepalli1917@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000207",
+      "name": "B.Bhavani",
+      "email": "bhavanibonu17@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000210",
+      "name": "Hdjdjd",
+      "email": "sisjdk@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000232",
+      "name": "Y. Geethika",
+      "email": "geethikayarlagadda9@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000270",
+      "name": "Sai Satya Krishna Karuturi",
+      "email": "venkateshkaruturi1234@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000327",
+      "name": "Kaja Likithesh Poorna Naga Surya",
+      "email": "likipoorna@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000329",
+      "name": "Srujanah Glory Palukuri",
+      "email": "srujanahgpalukuri@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000341",
+      "name": "Hansith venkat sai",
+      "email": "hansithvenkatsai7@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000345",
+      "name": "Ravipati .himaja",
+      "email": "himajah35@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000348",
+      "name": "NIHAL KUMAR",
+      "email": "nihalksingh7@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000361",
+      "name": "Bellamkonda Harsha sai",
+      "email": "harshasai1718@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000366",
+      "name": "LOHITH SAYANA",
+      "email": "sayanalohith.6@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000382",
+      "name": "M.Venkata Swamy",
+      "email": "v04542147@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000387",
+      "name": "B.Sai Daedeepya",
+      "email": "daedeepyabathina@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000403",
+      "name": "V santhosh guptha",
+      "email": "vsanthoshguptha7@gmail.com",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "changes": "State: ANDHRA PRADESH, District: GUNTUR",
+      "status": "FIXED"
+    },
+    {
+      "type": "Registration",
+      "userId": "MH26000318",
+      "name": "Shaik Naadia Tasleem",
+      "email": "naadia0019@gmail.com",
+      "college": "kAKARPARTHI BHAVANARAYANA COLLEGE",
+      "changes": "College not found in database",
+      "status": "FAILED"
+    }
+  ]
+}

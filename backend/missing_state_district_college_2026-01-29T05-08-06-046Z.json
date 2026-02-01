@@ -1,0 +1,701 @@
+{
+  "timestamp": "2026-01-29T05:08:06.054Z",
+  "participants": {
+    "missingState": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      },
+      {
+        "userId": "MH26000001",
+        "name": "maruthi",
+        "email": "adfb@gmail.com",
+        "phone": "8886464318",
+        "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001904",
+        "name": "Akash Bandaru",
+        "email": "nhg@gmail.com",
+        "phone": "8688611404",
+        "college": "Aaditya Degree College, Nellore",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000002",
+        "name": "Hsjshsb",
+        "email": "bandaruakash8@gmail.com",
+        "phone": "8688611404",
+        "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000041",
+        "name": "Kandukur sai saketh",
+        "email": "sakethkandukuru2007@gmail.com",
+        "phone": "9391487334",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000003",
+        "name": "Djd",
+        "email": "zjx@gmail.com",
+        "phone": "1111111111",
+        "college": "ACHARYA B.ED. COLLEGE",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001890",
+        "name": "Pamidi Sathvika",
+        "email": "pamidisathi@gmail.com",
+        "phone": "6309062267",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001899",
+        "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+        "email": "24491a44i7@qiscet.edu.in",
+        "phone": "6364512237",
+        "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001907",
+        "name": "Mandadapu Kundhana",
+        "email": "kundhanamandadapu@gmail.com",
+        "phone": "7337352398",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001900",
+        "name": "K.Sri Hinduja",
+        "email": "koppuravurisrihinduja@gmail.com",
+        "phone": "8247411751",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001903",
+        "name": "Yashodhar Venigalla",
+        "email": "yashodharvenigalla@gmail.com",
+        "phone": "9346733056",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001906",
+        "name": "Reddy Venkata siva naga sai",
+        "email": "reddyvenkatasivanagasai455@gmail.com",
+        "phone": "9908740813",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001896",
+        "name": "dasari uday Kumar",
+        "email": "selfmadechandu@gmail.com",
+        "phone": "7671839022",
+        "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000004",
+        "name": "Jonnadula Abhiram",
+        "email": "abhiram.j2006@gmail.com",
+        "phone": "8125551995",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000007",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru02@gmail.com",
+        "phone": "7997898839",
+        "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000095",
+        "name": "Gundrathi Ram Charan Goud",
+        "email": "druvaram1234@gmail.com",
+        "phone": "9059523308",
+        "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      }
+    ],
+    "missingDistrict": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      },
+      {
+        "userId": "MH26000001",
+        "name": "maruthi",
+        "email": "adfb@gmail.com",
+        "phone": "8886464318",
+        "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001904",
+        "name": "Akash Bandaru",
+        "email": "nhg@gmail.com",
+        "phone": "8688611404",
+        "college": "Aaditya Degree College, Nellore",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000002",
+        "name": "Hsjshsb",
+        "email": "bandaruakash8@gmail.com",
+        "phone": "8688611404",
+        "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000041",
+        "name": "Kandukur sai saketh",
+        "email": "sakethkandukuru2007@gmail.com",
+        "phone": "9391487334",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000003",
+        "name": "Djd",
+        "email": "zjx@gmail.com",
+        "phone": "1111111111",
+        "college": "ACHARYA B.ED. COLLEGE",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001890",
+        "name": "Pamidi Sathvika",
+        "email": "pamidisathi@gmail.com",
+        "phone": "6309062267",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001899",
+        "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+        "email": "24491a44i7@qiscet.edu.in",
+        "phone": "6364512237",
+        "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001907",
+        "name": "Mandadapu Kundhana",
+        "email": "kundhanamandadapu@gmail.com",
+        "phone": "7337352398",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001900",
+        "name": "K.Sri Hinduja",
+        "email": "koppuravurisrihinduja@gmail.com",
+        "phone": "8247411751",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001903",
+        "name": "Yashodhar Venigalla",
+        "email": "yashodharvenigalla@gmail.com",
+        "phone": "9346733056",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001906",
+        "name": "Reddy Venkata siva naga sai",
+        "email": "reddyvenkatasivanagasai455@gmail.com",
+        "phone": "9908740813",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001896",
+        "name": "dasari uday Kumar",
+        "email": "selfmadechandu@gmail.com",
+        "phone": "7671839022",
+        "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000004",
+        "name": "Jonnadula Abhiram",
+        "email": "abhiram.j2006@gmail.com",
+        "phone": "8125551995",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000007",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru02@gmail.com",
+        "phone": "7997898839",
+        "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000095",
+        "name": "Gundrathi Ram Charan Goud",
+        "email": "druvaram1234@gmail.com",
+        "phone": "9059523308",
+        "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      }
+    ],
+    "missingCollege": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      }
+    ],
+    "missingAll": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      }
+    ]
+  },
+  "registrations": {
+    "missingState": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000116",
+        "name": "Veeru Kanta",
+        "email": "kantasivaji@gmail.com",
+        "phone": "9491990213",
+        "college": "NIT Trichy",
+        "registerId": "NIT Trichy"
+      },
+      {
+        "userId": "MH26000124",
+        "name": "Mekala Manoj Kumar",
+        "email": "mekalamanoj8522@gmail.com",
+        "phone": "8688542264",
+        "college": "Bharat institution of engineering technology"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000154",
+        "name": "GURRAM SRINIVAS",
+        "email": "srinivasgurram81790@gmail.com",
+        "phone": "8179089423",
+        "college": "National skill training institute Vidyanagar",
+        "registerId": "R64081031000034"
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      },
+      {
+        "userId": "MH26000250",
+        "name": "VISHNU REDDY",
+        "email": "vishnuyenimireddy@gmail.com",
+        "phone": "9398027354",
+        "college": "SRM University AP",
+        "registerId": "AP23110010917"
+      },
+      {
+        "userId": "MH26000277",
+        "name": "Jaya Prakash Kadali",
+        "email": "jayaprakashkadali.work@gmail.com",
+        "phone": "7981494020",
+        "college": "VIT AP",
+        "registerId": "21MIS7159"
+      },
+      {
+        "userId": "MH26000290",
+        "name": "P. Ajay Kumar",
+        "email": "ajaypatibandla2007@gmail.com",
+        "phone": "9948344038",
+        "college": "KL university",
+        "registerId": "2400080107"
+      },
+      {
+        "userId": "MH26000294",
+        "name": "Dhanush",
+        "email": "comeon.canyoureachme@gmail.com",
+        "phone": "9347722133",
+        "college": "K.B.N college",
+        "registerId": "K2237507"
+      },
+      {
+        "userId": "MH26000299",
+        "name": "Ramisettinikhilsatyasairam",
+        "email": "ramisettinikhilsatyasairam@gmail.com",
+        "phone": "6300908739",
+        "college": "Nit tadapalligudem",
+        "registerId": "325033"
+      },
+      {
+        "userId": "MH26000318",
+        "name": "Shaik Naadia Tasleem",
+        "email": "naadia0019@gmail.com",
+        "phone": "9948357786",
+        "college": "kAKARPARTHI BHAVANARAYANA COLLEGE",
+        "registerId": "C-27168"
+      }
+    ],
+    "missingDistrict": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000116",
+        "name": "Veeru Kanta",
+        "email": "kantasivaji@gmail.com",
+        "phone": "9491990213",
+        "college": "NIT Trichy",
+        "registerId": "NIT Trichy"
+      },
+      {
+        "userId": "MH26000124",
+        "name": "Mekala Manoj Kumar",
+        "email": "mekalamanoj8522@gmail.com",
+        "phone": "8688542264",
+        "college": "Bharat institution of engineering technology"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000154",
+        "name": "GURRAM SRINIVAS",
+        "email": "srinivasgurram81790@gmail.com",
+        "phone": "8179089423",
+        "college": "National skill training institute Vidyanagar",
+        "registerId": "R64081031000034"
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      },
+      {
+        "userId": "MH26000250",
+        "name": "VISHNU REDDY",
+        "email": "vishnuyenimireddy@gmail.com",
+        "phone": "9398027354",
+        "college": "SRM University AP",
+        "registerId": "AP23110010917"
+      },
+      {
+        "userId": "MH26000277",
+        "name": "Jaya Prakash Kadali",
+        "email": "jayaprakashkadali.work@gmail.com",
+        "phone": "7981494020",
+        "college": "VIT AP",
+        "registerId": "21MIS7159"
+      },
+      {
+        "userId": "MH26000290",
+        "name": "P. Ajay Kumar",
+        "email": "ajaypatibandla2007@gmail.com",
+        "phone": "9948344038",
+        "college": "KL university",
+        "registerId": "2400080107"
+      },
+      {
+        "userId": "MH26000294",
+        "name": "Dhanush",
+        "email": "comeon.canyoureachme@gmail.com",
+        "phone": "9347722133",
+        "college": "K.B.N college",
+        "registerId": "K2237507"
+      },
+      {
+        "userId": "MH26000299",
+        "name": "Ramisettinikhilsatyasairam",
+        "email": "ramisettinikhilsatyasairam@gmail.com",
+        "phone": "6300908739",
+        "college": "Nit tadapalligudem",
+        "registerId": "325033"
+      },
+      {
+        "userId": "MH26000318",
+        "name": "Shaik Naadia Tasleem",
+        "email": "naadia0019@gmail.com",
+        "phone": "9948357786",
+        "college": "kAKARPARTHI BHAVANARAYANA COLLEGE",
+        "registerId": "C-27168"
+      }
+    ],
+    "missingCollege": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      }
+    ],
+    "missingAll": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      }
+    ]
+  },
+  "summary": {
+    "participants": {
+      "missingState": 17,
+      "missingDistrict": 17,
+      "missingCollege": 2,
+      "missingAll": 2
+    },
+    "registrations": {
+      "missingState": 13,
+      "missingDistrict": 13,
+      "missingCollege": 4,
+      "missingAll": 4
+    },
+    "total": {
+      "missingState": 30,
+      "missingDistrict": 30,
+      "missingCollege": 6,
+      "missingAll": 6
+    }
+  }
+}

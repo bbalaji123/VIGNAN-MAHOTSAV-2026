@@ -1,0 +1,562 @@
+[
+  {
+    "S.No": 1.0,
+    "Category": "Dance",
+    "Event": "Dancing Star \u2013 Western Solo Prelims",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "U Block Centre stage"
+  },
+  {
+    "S.No": 2.0,
+    "Category": "Dance",
+    "Event": "Classical Dance Solo",
+    "Day": "06.02.2026",
+    "Time": "11:00 - 14:00",
+    "Venue": "Sangamam Seminar Hall, A Block V Floor"
+  },
+  {
+    "S.No": 3.0,
+    "Category": "Dance",
+    "Event": "Dancing Star \u2013 Western Solo Finals",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 15:00",
+    "Venue": "U Block Centre stage"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dance",
+    "Event": "Group Dance (10 no.)",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 13:00",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dance",
+    "Event": "Dancing Jodi \u2013 Western Duo",
+    "Day": "07.02.2026",
+    "Time": "13:00 - 15:00",
+    "Venue": "U Block Centre stage"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dance",
+    "Event": "Spot Dance - Jodi",
+    "Day": "07.02.2026",
+    "Time": "16:00 - 17:30",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dance Workshop",
+    "Event": "Contemporary Movement & Identity Lab by French Artist - Ms. Paulene",
+    "Day": "06.02.2026",
+    "Time": "14:30 - 17:30",
+    "Venue": "MHP"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Short film (Offline Entries - Prelims)",
+    "Day": "05.02.2026",
+    "Time": "09:00 - 16:00",
+    "Venue": "AGF - 04"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Short Film - Finals",
+    "Day": "06.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Mahotsav Digital Chronicle Challenge - Participaint Reporting",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 11:00",
+    "Venue": "NB 314"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Chit Chat with Champion movie Director Mr. Pradeep Advaitham",
+    "Day": "06.02.2026",
+    "Time": "12:00 - 13:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Digital Poster Competition - Online",
+    "Day": "07.02.2026",
+    "Time": "10:00 - 11:00",
+    "Venue": "NB 314"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Life in a Minute - Online - 4 no",
+    "Day": "07.02.2026",
+    "Time": "11:00 - 12:00",
+    "Venue": "NB 314"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Theme Photography - Online",
+    "Day": "07.02.2026",
+    "Time": "12:00 - 13:00",
+    "Venue": "NB 314"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Digital Storytelling & Creative Media",
+    "Event": "Mahotsav Digital Chronicle Challenge",
+    "Day": "07.02.2026",
+    "Time": "13:00 - 16:00",
+    "Venue": "NB 314"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dramatics ",
+    "Event": "Skit (8 no.)",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dramatics ",
+    "Event": "Dialogue Dhamakha",
+    "Day": "06.02.2026",
+    "Time": "15:00 - 17:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dramatics ",
+    "Event": "Mono Action",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 11:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dramatics ",
+    "Event": "On the Spot Ad making",
+    "Day": "07.02.2026",
+    "Time": "11:00 - 13:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Dramatics ",
+    "Event": "Mime (6 no.)",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Fashion Design & Styling",
+    "Event": "Texart (Fashion sketching)",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "N Block - 203"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Fashion Design & Styling Workshop",
+    "Event": "Draping Stories: One Fabric, Infinite Forms by Mr. Sourav Das",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "MHP"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Fashion Design & Styling",
+    "Event": "Haute Couture - Theme Ramp walk (12 no.)",
+    "Day": "06.02.2026",
+    "Time": "17:00 - 19:00",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Fashion Design & Styling",
+    "Event": "T-Shirt designing",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 11:00",
+    "Venue": "H Block VGF 09"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Fashion Design & Styling",
+    "Event": "Craft villa ( Accessory design)",
+    "Day": "07.02.2026",
+    "Time": "13:00 - 15:00",
+    "Venue": "N Block - 203"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Gaming",
+    "Event": "eFootball (PC) (3 no)",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00 ",
+    "Venue": "NB 611,NB 612"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Gaming",
+    "Event": "Smash Karts (PC) (solo)",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00 ",
+    "Venue": "NB 613,NB 615,NB 616,NB 617"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Gaming",
+    "Event": "VALORANT (PC) (5 no)",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 17:00",
+    "Venue": "NB 611,NB 612 "
+  },
+  {
+    "S.No": NaN,
+    "Category": "Gaming",
+    "Event": "Counter Strike (PC) (5 no)",
+    "Day": "07.02.2026",
+    "Time": "10:00 - 14:00",
+    "Venue": "NB 613,NB 615"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Master Orator Round I",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Telugu Vyaasa rachana",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "Samskruthi Seminar Hall, A Block Ground Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Shayari \u2013 Hindi",
+    "Day": "06.02.2026",
+    "Time": "12:00 - 14:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Spot Creative writing",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "Samskruthi Seminar Hall, A Block Ground Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Master Orator Round II",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Quiz wiz (3 no.) Round I",
+    "Day": "06.02.2026",
+    "Time": "16:00 - 18:00",
+    "Venue": "Samskruthi Seminar Hall, A Block Ground Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Dumb charades (2 no.)",
+    "Day": "06.02.2026",
+    "Time": "16:00 - 18:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Word Master Round I & II",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "N Block - 201"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Story telling",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Quiz wiz (3 no.) Round II & III",
+    "Day": "07.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "Samskruthi Seminar Hall, A Block Ground Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Word Master Round III & IV",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "N Block - 201"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Literature",
+    "Event": "Impromptu (JAM)",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "NTR Vignan Library - III Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Singing Idol Round I",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Group Singing",
+    "Day": "06.02.2026",
+    "Time": "13:30 - 15:30",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Singing Jodi",
+    "Day": "06.02.2026",
+    "Time": "16:00 - 18:00",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Singing Idol Round II",
+    "Day": "06.02.2026",
+    "Time": "17:00 - 18:30",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Singing Idol Round III",
+    "Day": "06.02.2026",
+    "Time": "18:30 - 20:00",
+    "Venue": "Sanghamitra Hall, N Block II Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Classical/Light Vocal Solo",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 11:00",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Classical / Western Instrumental Solo",
+    "Day": "07.02.2026",
+    "Time": "11:00 - 13:00",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Anthyakshari Duo",
+    "Day": "07.02.2026",
+    "Time": "11:00 - 14:00",
+    "Venue": "N Block - 210"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Singing Idol Round IV",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 15:00",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Western Vocal Solo Prelims",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 15:30",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music",
+    "Event": "Western Vocal Solo Finals",
+    "Day": "07.02.2026",
+    "Time": "15:30 - 16:30",
+    "Venue": "Sa Re Ga Ma Hall, N Block I Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Music Workshop",
+    "Event": "Cultural Soundscape Lab: From Folk to Future by Mr. Arun Sivag",
+    "Day": "07.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "MHP"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Spot Light",
+    "Event": "Mr. & Ms. Mahotsav Round I",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 11:00",
+    "Venue": "N Block - 202"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Spot Light",
+    "Event": "Mahotsav Got Talent Elimination round",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 16:00",
+    "Venue": "Sangamam Seminar Hall, A Block V Floor"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Spot Light",
+    "Event": "Mr. & Ms. Mahotsav Round II",
+    "Day": "06.02.2026",
+    "Time": "15:00 - 17:00",
+    "Venue": "U Block Centre Stage"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Spot Light",
+    "Event": "Mr. & Ms. Mahotsav Round III",
+    "Day": "07.02.2026",
+    "Time": "10:00 - 11:00",
+    "Venue": "U Block Centre Stage"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Spot Light",
+    "Event": "Mahotsav Got Talent Finals",
+    "Day": "07.02.2026",
+    "Time": "15:00 - 16:00",
+    "Venue": "Convocation Hall"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Techno Sports & Races ",
+    "Event": "Bot Wrestling(4 no)",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "N Block Ground floor Open Air"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Techno Sports & Races ",
+    "Event": "Robo Races(4 no)",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "N Block Ground floor Open Air"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Techno Sports & Races ",
+    "Event": "Line Follower Challenge(4 no)",
+    "Day": "07.02.2026",
+    "Time": "14:00 - 16:00 ",
+    "Venue": "N Block Ground floor Open Air"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Theme Painting",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "N Block - 107"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Mehandi",
+    "Day": "06.02.2026",
+    "Time": "10:00 - 13:00",
+    "Venue": "N Block - 106"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Clay modelling",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 17:00",
+    "Venue": "N Block - 106"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Face Painting",
+    "Day": "06.02.2026",
+    "Time": "14:00 - 17:00",
+    "Venue": "N Block - 107"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Mandala",
+    "Day": "06.02.2026",
+    "Time": "17:00 - 19:00",
+    "Venue": "N Block - 107"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Rangoli (2 no.)",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "H Block Grounds"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Pencil Sketching",
+    "Day": "07.02.2026",
+    "Time": "09:00 - 12:00",
+    "Venue": "N Block - 107"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft",
+    "Event": "Collage",
+    "Day": "07.02.2026",
+    "Time": "13:00 - 16:00",
+    "Venue": "N Block - 107"
+  },
+  {
+    "S.No": NaN,
+    "Category": "Visual Arts & Craft Workshop",
+    "Event": "Bamboo Crafts",
+    "Day": "07.02.2026",
+    "Time": "13:30 - 15:30 ",
+    "Venue": "MHP"
+  }
+]

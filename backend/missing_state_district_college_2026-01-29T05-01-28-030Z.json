@@ -1,0 +1,1501 @@
+{
+  "timestamp": "2026-01-29T05:01:28.046Z",
+  "participants": {
+    "missingState": [
+      {
+        "userId": "MH26000008",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru0902@gmail.com",
+        "phone": "6300689384",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04099",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 9
+      },
+      {
+        "userId": "MH26000030",
+        "name": "Venkatesh Batchu",
+        "email": "venkateshbatchu133@gmail.com",
+        "phone": "9347220127",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "VIGNAN UNIVERSITY",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000143",
+        "name": "RAJENDRA BATTULA",
+        "email": "rajindhranaadh@gmail.com",
+        "phone": "6281132375",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "211FA14057",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      },
+      {
+        "userId": "MH26000006",
+        "name": "Kota lalith",
+        "email": "kotalalithaditya@gmail.com",
+        "phone": "8919726304",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA07074",
+        "amount": 150,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000505",
+        "name": "Shaik farhan jasmin",
+        "email": "sfarhanjasmin@gmail.com",
+        "phone": "9494822199",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14064",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 4
+      },
+      {
+        "userId": "MH26000509",
+        "name": "Hii",
+        "email": "hiiiii1677@gmail.com",
+        "phone": "9876543210",
+        "college": "Acharya Nagarjuna University, Guntur",
+        "registerId": "Iyjhjjj888",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000088",
+        "name": "GOTTUMUKKALA SAKETH VARMA",
+        "email": "sakethvarma2024@gmail.com",
+        "phone": "7671894146",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04662",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000089",
+        "name": "Greeshmanth",
+        "email": "greeshmanth52@gmail.com",
+        "phone": "6302428062",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "Vignan University",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000334",
+        "name": "Miriyala Daniel",
+        "email": "danielmiriyala@gmail.com",
+        "phone": "6305027445",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04829",
+        "amount": 150,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000018",
+        "name": "Nalam Trinadh ram",
+        "email": "nalamtrinadhram08@gmail.com",
+        "phone": "8309952739",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04G64",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000291",
+        "name": "N.Manikantareddy",
+        "email": "nandhyalamanikanta2008@gmail.com",
+        "phone": "9951303639",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA18585",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000099",
+        "name": "B Venkateswara Rao",
+        "email": "vu.241fa04818@gmail.com",
+        "phone": "7032363796",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04818",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000270",
+        "name": "Sai Satya Krishna Karuturi",
+        "email": "venkateshkaruturi1234@gmail.com",
+        "phone": "7893199656",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FA14058",
+        "amount": 350,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000348",
+        "name": "NIHAL KUMAR",
+        "email": "nihalksingh7@gmail.com",
+        "phone": "7979752014",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FU01008",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000001",
+        "name": "maruthi",
+        "email": "adfb@gmail.com",
+        "phone": "8886464318",
+        "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001904",
+        "name": "Akash Bandaru",
+        "email": "nhg@gmail.com",
+        "phone": "8688611404",
+        "college": "Aaditya Degree College, Nellore",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000002",
+        "name": "Hsjshsb",
+        "email": "bandaruakash8@gmail.com",
+        "phone": "8688611404",
+        "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000041",
+        "name": "Kandukur sai saketh",
+        "email": "sakethkandukuru2007@gmail.com",
+        "phone": "9391487334",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000003",
+        "name": "Djd",
+        "email": "zjx@gmail.com",
+        "phone": "1111111111",
+        "college": "ACHARYA B.ED. COLLEGE",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001890",
+        "name": "Pamidi Sathvika",
+        "email": "pamidisathi@gmail.com",
+        "phone": "6309062267",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001899",
+        "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+        "email": "24491a44i7@qiscet.edu.in",
+        "phone": "6364512237",
+        "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001907",
+        "name": "Mandadapu Kundhana",
+        "email": "kundhanamandadapu@gmail.com",
+        "phone": "7337352398",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001900",
+        "name": "K.Sri Hinduja",
+        "email": "koppuravurisrihinduja@gmail.com",
+        "phone": "8247411751",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001903",
+        "name": "Yashodhar Venigalla",
+        "email": "yashodharvenigalla@gmail.com",
+        "phone": "9346733056",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001906",
+        "name": "Reddy Venkata siva naga sai",
+        "email": "reddyvenkatasivanagasai455@gmail.com",
+        "phone": "9908740813",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001896",
+        "name": "dasari uday Kumar",
+        "email": "selfmadechandu@gmail.com",
+        "phone": "7671839022",
+        "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000004",
+        "name": "Jonnadula Abhiram",
+        "email": "abhiram.j2006@gmail.com",
+        "phone": "8125551995",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000201",
+        "name": "BATCHU SIVANI SINDHU MYDHILI",
+        "email": "sivanisindhumydhili2006@gmail.com",
+        "phone": "8919717447",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01010",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000186",
+        "name": "NIRAJ KUMAR",
+        "email": "nirajkumar.851284@gmail.com",
+        "phone": "8651097760",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01058",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000007",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru02@gmail.com",
+        "phone": "7997898839",
+        "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000095",
+        "name": "Gundrathi Ram Charan Goud",
+        "email": "druvaram1234@gmail.com",
+        "phone": "9059523308",
+        "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      }
+    ],
+    "missingDistrict": [
+      {
+        "userId": "MH26000008",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru0902@gmail.com",
+        "phone": "6300689384",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04099",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 9
+      },
+      {
+        "userId": "MH26000030",
+        "name": "Venkatesh Batchu",
+        "email": "venkateshbatchu133@gmail.com",
+        "phone": "9347220127",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "VIGNAN UNIVERSITY",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000143",
+        "name": "RAJENDRA BATTULA",
+        "email": "rajindhranaadh@gmail.com",
+        "phone": "6281132375",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "211FA14057",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      },
+      {
+        "userId": "MH26000006",
+        "name": "Kota lalith",
+        "email": "kotalalithaditya@gmail.com",
+        "phone": "8919726304",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA07074",
+        "amount": 150,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000505",
+        "name": "Shaik farhan jasmin",
+        "email": "sfarhanjasmin@gmail.com",
+        "phone": "9494822199",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14064",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 4
+      },
+      {
+        "userId": "MH26000509",
+        "name": "Hii",
+        "email": "hiiiii1677@gmail.com",
+        "phone": "9876543210",
+        "college": "Acharya Nagarjuna University, Guntur",
+        "registerId": "Iyjhjjj888",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000088",
+        "name": "GOTTUMUKKALA SAKETH VARMA",
+        "email": "sakethvarma2024@gmail.com",
+        "phone": "7671894146",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04662",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000089",
+        "name": "Greeshmanth",
+        "email": "greeshmanth52@gmail.com",
+        "phone": "6302428062",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "Vignan University",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000334",
+        "name": "Miriyala Daniel",
+        "email": "danielmiriyala@gmail.com",
+        "phone": "6305027445",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04829",
+        "amount": 150,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000018",
+        "name": "Nalam Trinadh ram",
+        "email": "nalamtrinadhram08@gmail.com",
+        "phone": "8309952739",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04G64",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000291",
+        "name": "N.Manikantareddy",
+        "email": "nandhyalamanikanta2008@gmail.com",
+        "phone": "9951303639",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA18585",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000099",
+        "name": "B Venkateswara Rao",
+        "email": "vu.241fa04818@gmail.com",
+        "phone": "7032363796",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04818",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000270",
+        "name": "Sai Satya Krishna Karuturi",
+        "email": "venkateshkaruturi1234@gmail.com",
+        "phone": "7893199656",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FA14058",
+        "amount": 350,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000348",
+        "name": "NIHAL KUMAR",
+        "email": "nihalksingh7@gmail.com",
+        "phone": "7979752014",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FU01008",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000001",
+        "name": "maruthi",
+        "email": "adfb@gmail.com",
+        "phone": "8886464318",
+        "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001904",
+        "name": "Akash Bandaru",
+        "email": "nhg@gmail.com",
+        "phone": "8688611404",
+        "college": "Aaditya Degree College, Nellore",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000002",
+        "name": "Hsjshsb",
+        "email": "bandaruakash8@gmail.com",
+        "phone": "8688611404",
+        "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000041",
+        "name": "Kandukur sai saketh",
+        "email": "sakethkandukuru2007@gmail.com",
+        "phone": "9391487334",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000003",
+        "name": "Djd",
+        "email": "zjx@gmail.com",
+        "phone": "1111111111",
+        "college": "ACHARYA B.ED. COLLEGE",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001890",
+        "name": "Pamidi Sathvika",
+        "email": "pamidisathi@gmail.com",
+        "phone": "6309062267",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001899",
+        "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+        "email": "24491a44i7@qiscet.edu.in",
+        "phone": "6364512237",
+        "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26001907",
+        "name": "Mandadapu Kundhana",
+        "email": "kundhanamandadapu@gmail.com",
+        "phone": "7337352398",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001900",
+        "name": "K.Sri Hinduja",
+        "email": "koppuravurisrihinduja@gmail.com",
+        "phone": "8247411751",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001903",
+        "name": "Yashodhar Venigalla",
+        "email": "yashodharvenigalla@gmail.com",
+        "phone": "9346733056",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001906",
+        "name": "Reddy Venkata siva naga sai",
+        "email": "reddyvenkatasivanagasai455@gmail.com",
+        "phone": "9908740813",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26001896",
+        "name": "dasari uday Kumar",
+        "email": "selfmadechandu@gmail.com",
+        "phone": "7671839022",
+        "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000004",
+        "name": "Jonnadula Abhiram",
+        "email": "abhiram.j2006@gmail.com",
+        "phone": "8125551995",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "amount": 0,
+        "paymentStatus": "unpaid",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000201",
+        "name": "BATCHU SIVANI SINDHU MYDHILI",
+        "email": "sivanisindhumydhili2006@gmail.com",
+        "phone": "8919717447",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01010",
+        "amount": 250,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000186",
+        "name": "NIRAJ KUMAR",
+        "email": "nirajkumar.851284@gmail.com",
+        "phone": "8651097760",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01058",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      },
+      {
+        "userId": "MH26000007",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru02@gmail.com",
+        "phone": "7997898839",
+        "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 2
+      },
+      {
+        "userId": "MH26000095",
+        "name": "Gundrathi Ram Charan Goud",
+        "email": "druvaram1234@gmail.com",
+        "phone": "9059523308",
+        "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 1
+      }
+    ],
+    "missingCollege": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      }
+    ],
+    "missingAll": [
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065",
+        "amount": 150,
+        "paymentStatus": "pending",
+        "eventsCount": 20
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": "",
+        "amount": 0,
+        "paymentStatus": "pending",
+        "eventsCount": 0
+      }
+    ]
+  },
+  "registrations": {
+    "missingState": [
+      {
+        "userId": "MH26000006",
+        "name": "Kota lalith",
+        "email": "kotalalithaditya@gmail.com",
+        "phone": "8919726304",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA07074"
+      },
+      {
+        "userId": "MH26000008",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru0902@gmail.com",
+        "phone": "6300689384",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04099"
+      },
+      {
+        "userId": "MH26000020",
+        "name": "KURAPATI HEMANTH KUMAR",
+        "email": "hemanthkurapati097@gmail.com",
+        "phone": "9392437621",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04B79"
+      },
+      {
+        "userId": "MH26000030",
+        "name": "Venkatesh Batchu",
+        "email": "venkateshbatchu133@gmail.com",
+        "phone": "9347220127",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "VIGNAN UNIVERSITY"
+      },
+      {
+        "userId": "MH26000050",
+        "name": "Moram Udaya sakshath",
+        "email": "udaysakshath847@gmail.com",
+        "phone": "9346962569",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA25035"
+      },
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000075",
+        "name": "SHAIK MOHAMMAD ASIF",
+        "email": "shaikmohammadasif285@gmail.com",
+        "phone": "9160236927",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01080"
+      },
+      {
+        "userId": "MH26000116",
+        "name": "Veeru Kanta",
+        "email": "kantasivaji@gmail.com",
+        "phone": "9491990213",
+        "college": "NIT Trichy",
+        "registerId": "NIT Trichy"
+      },
+      {
+        "userId": "MH26000124",
+        "name": "Mekala Manoj Kumar",
+        "email": "mekalamanoj8522@gmail.com",
+        "phone": "8688542264",
+        "college": "Bharat institution of engineering technology"
+      },
+      {
+        "userId": "MH26000128",
+        "name": "G.venkat",
+        "email": "gubbavenkat623@gmail.com",
+        "phone": "9963584154",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04524"
+      },
+      {
+        "userId": "MH26000143",
+        "name": "RAJENDRA BATTULA",
+        "email": "rajindhranaadh@gmail.com",
+        "phone": "6281132375",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "211FA14057"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000154",
+        "name": "GURRAM SRINIVAS",
+        "email": "srinivasgurram81790@gmail.com",
+        "phone": "8179089423",
+        "college": "National skill training institute Vidyanagar",
+        "registerId": "R64081031000034"
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      },
+      {
+        "userId": "MH26000186",
+        "name": "NIRAJ KUMAR",
+        "email": "nirajkumar.851284@gmail.com",
+        "phone": "8651097760",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01058"
+      },
+      {
+        "userId": "MH26000193",
+        "name": "Shaik Ayan",
+        "email": "ayansk2605@gmail.com",
+        "phone": "7416012884",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01077"
+      },
+      {
+        "userId": "MH26000194",
+        "name": "MANCHELLA V N ABHAYA MEHARVAN",
+        "email": "abhayamehar999@gmail.com",
+        "phone": "8520976999",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA18483"
+      },
+      {
+        "userId": "MH26000201",
+        "name": "BATCHU SIVANI SINDHU MYDHILI",
+        "email": "sivanisindhumydhili2006@gmail.com",
+        "phone": "8919717447",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01010"
+      },
+      {
+        "userId": "MH26000202",
+        "name": "K.harshitha",
+        "email": "kayyalaharshitha3@gmail.com",
+        "phone": "9177144932",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14039"
+      },
+      {
+        "userId": "MH26000203",
+        "name": "P.sree nikhitha",
+        "email": "nikhithapolepalli1917@gmail.com",
+        "phone": "9391952290",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14057"
+      },
+      {
+        "userId": "MH26000207",
+        "name": "B.Bhavani",
+        "email": "bhavanibonu17@gmail.com",
+        "phone": "9515316433",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01018"
+      },
+      {
+        "userId": "MH26000210",
+        "name": "Hdjdjd",
+        "email": "sisjdk@gmail.com",
+        "phone": "3164986595",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221i2902"
+      },
+      {
+        "userId": "MH26000232",
+        "name": "Y. Geethika",
+        "email": "geethikayarlagadda9@gmail.com",
+        "phone": "8143919166",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01093"
+      },
+      {
+        "userId": "MH26000250",
+        "name": "VISHNU REDDY",
+        "email": "vishnuyenimireddy@gmail.com",
+        "phone": "9398027354",
+        "college": "SRM University AP",
+        "registerId": "AP23110010917"
+      },
+      {
+        "userId": "MH26000270",
+        "name": "Sai Satya Krishna Karuturi",
+        "email": "venkateshkaruturi1234@gmail.com",
+        "phone": "7893199656",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FA14058"
+      },
+      {
+        "userId": "MH26000277",
+        "name": "Jaya Prakash Kadali",
+        "email": "jayaprakashkadali.work@gmail.com",
+        "phone": "7981494020",
+        "college": "VIT AP",
+        "registerId": "21MIS7159"
+      },
+      {
+        "userId": "MH26000290",
+        "name": "P. Ajay Kumar",
+        "email": "ajaypatibandla2007@gmail.com",
+        "phone": "9948344038",
+        "college": "KL university",
+        "registerId": "2400080107"
+      },
+      {
+        "userId": "MH26000294",
+        "name": "Dhanush",
+        "email": "comeon.canyoureachme@gmail.com",
+        "phone": "9347722133",
+        "college": "K.B.N college",
+        "registerId": "K2237507"
+      },
+      {
+        "userId": "MH26000299",
+        "name": "Ramisettinikhilsatyasairam",
+        "email": "ramisettinikhilsatyasairam@gmail.com",
+        "phone": "6300908739",
+        "college": "Nit tadapalligudem",
+        "registerId": "325033"
+      },
+      {
+        "userId": "MH26000318",
+        "name": "Shaik Naadia Tasleem",
+        "email": "naadia0019@gmail.com",
+        "phone": "9948357786",
+        "college": "kAKARPARTHI BHAVANARAYANA COLLEGE",
+        "registerId": "C-27168"
+      },
+      {
+        "userId": "MH26000327",
+        "name": "Kaja Likithesh Poorna Naga Surya",
+        "email": "likipoorna@gmail.com",
+        "phone": "7093711339",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231fa14104"
+      },
+      {
+        "userId": "MH26000329",
+        "name": "Srujanah Glory Palukuri",
+        "email": "srujanahgpalukuri@gmail.com",
+        "phone": "9492296089",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05130"
+      },
+      {
+        "userId": "MH26000341",
+        "name": "Hansith venkat sai",
+        "email": "hansithvenkatsai7@gmail.com",
+        "phone": "9701077674",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04B56"
+      },
+      {
+        "userId": "MH26000345",
+        "name": "Ravipati .himaja",
+        "email": "himajah35@gmail.com",
+        "phone": "7001187191",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231fk01037"
+      },
+      {
+        "userId": "MH26000348",
+        "name": "NIHAL KUMAR",
+        "email": "nihalksingh7@gmail.com",
+        "phone": "7979752014",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FU01008"
+      },
+      {
+        "userId": "MH26000361",
+        "name": "Bellamkonda Harsha sai",
+        "email": "harshasai1718@gmail.com",
+        "phone": "8885219568",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA05264"
+      },
+      {
+        "userId": "MH26000366",
+        "name": "LOHITH SAYANA",
+        "email": "sayanalohith.6@gmail.com",
+        "phone": "8309751051",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA05069"
+      },
+      {
+        "userId": "MH26000382",
+        "name": "M.Venkata Swamy",
+        "email": "v04542147@gmail.com",
+        "phone": "8317656282",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04230"
+      },
+      {
+        "userId": "MH26000387",
+        "name": "B.Sai Daedeepya",
+        "email": "daedeepyabathina@gmail.com",
+        "phone": "6305225096",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05209"
+      },
+      {
+        "userId": "MH26000403",
+        "name": "V santhosh guptha",
+        "email": "vsanthoshguptha7@gmail.com",
+        "phone": "8019489880",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05186"
+      }
+    ],
+    "missingDistrict": [
+      {
+        "userId": "MH26000006",
+        "name": "Kota lalith",
+        "email": "kotalalithaditya@gmail.com",
+        "phone": "8919726304",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA07074"
+      },
+      {
+        "userId": "MH26000008",
+        "name": "Bandaru santhosh",
+        "email": "santhoshbandaru0902@gmail.com",
+        "phone": "6300689384",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA04099"
+      },
+      {
+        "userId": "MH26000020",
+        "name": "KURAPATI HEMANTH KUMAR",
+        "email": "hemanthkurapati097@gmail.com",
+        "phone": "9392437621",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04B79"
+      },
+      {
+        "userId": "MH26000030",
+        "name": "Venkatesh Batchu",
+        "email": "venkateshbatchu133@gmail.com",
+        "phone": "9347220127",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "VIGNAN UNIVERSITY"
+      },
+      {
+        "userId": "MH26000050",
+        "name": "Moram Udaya sakshath",
+        "email": "udaysakshath847@gmail.com",
+        "phone": "9346962569",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA25035"
+      },
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000075",
+        "name": "SHAIK MOHAMMAD ASIF",
+        "email": "shaikmohammadasif285@gmail.com",
+        "phone": "9160236927",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01080"
+      },
+      {
+        "userId": "MH26000116",
+        "name": "Veeru Kanta",
+        "email": "kantasivaji@gmail.com",
+        "phone": "9491990213",
+        "college": "NIT Trichy",
+        "registerId": "NIT Trichy"
+      },
+      {
+        "userId": "MH26000124",
+        "name": "Mekala Manoj Kumar",
+        "email": "mekalamanoj8522@gmail.com",
+        "phone": "8688542264",
+        "college": "Bharat institution of engineering technology"
+      },
+      {
+        "userId": "MH26000128",
+        "name": "G.venkat",
+        "email": "gubbavenkat623@gmail.com",
+        "phone": "9963584154",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04524"
+      },
+      {
+        "userId": "MH26000143",
+        "name": "RAJENDRA BATTULA",
+        "email": "rajindhranaadh@gmail.com",
+        "phone": "6281132375",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "211FA14057"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000154",
+        "name": "GURRAM SRINIVAS",
+        "email": "srinivasgurram81790@gmail.com",
+        "phone": "8179089423",
+        "college": "National skill training institute Vidyanagar",
+        "registerId": "R64081031000034"
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      },
+      {
+        "userId": "MH26000186",
+        "name": "NIRAJ KUMAR",
+        "email": "nirajkumar.851284@gmail.com",
+        "phone": "8651097760",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01058"
+      },
+      {
+        "userId": "MH26000193",
+        "name": "Shaik Ayan",
+        "email": "ayansk2605@gmail.com",
+        "phone": "7416012884",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01077"
+      },
+      {
+        "userId": "MH26000194",
+        "name": "MANCHELLA V N ABHAYA MEHARVAN",
+        "email": "abhayamehar999@gmail.com",
+        "phone": "8520976999",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA18483"
+      },
+      {
+        "userId": "MH26000201",
+        "name": "BATCHU SIVANI SINDHU MYDHILI",
+        "email": "sivanisindhumydhili2006@gmail.com",
+        "phone": "8919717447",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01010"
+      },
+      {
+        "userId": "MH26000202",
+        "name": "K.harshitha",
+        "email": "kayyalaharshitha3@gmail.com",
+        "phone": "9177144932",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14039"
+      },
+      {
+        "userId": "MH26000203",
+        "name": "P.sree nikhitha",
+        "email": "nikhithapolepalli1917@gmail.com",
+        "phone": "9391952290",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA14057"
+      },
+      {
+        "userId": "MH26000207",
+        "name": "B.Bhavani",
+        "email": "bhavanibonu17@gmail.com",
+        "phone": "9515316433",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01018"
+      },
+      {
+        "userId": "MH26000210",
+        "name": "Hdjdjd",
+        "email": "sisjdk@gmail.com",
+        "phone": "3164986595",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221i2902"
+      },
+      {
+        "userId": "MH26000232",
+        "name": "Y. Geethika",
+        "email": "geethikayarlagadda9@gmail.com",
+        "phone": "8143919166",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "251FA01093"
+      },
+      {
+        "userId": "MH26000250",
+        "name": "VISHNU REDDY",
+        "email": "vishnuyenimireddy@gmail.com",
+        "phone": "9398027354",
+        "college": "SRM University AP",
+        "registerId": "AP23110010917"
+      },
+      {
+        "userId": "MH26000270",
+        "name": "Sai Satya Krishna Karuturi",
+        "email": "venkateshkaruturi1234@gmail.com",
+        "phone": "7893199656",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FA14058"
+      },
+      {
+        "userId": "MH26000277",
+        "name": "Jaya Prakash Kadali",
+        "email": "jayaprakashkadali.work@gmail.com",
+        "phone": "7981494020",
+        "college": "VIT AP",
+        "registerId": "21MIS7159"
+      },
+      {
+        "userId": "MH26000290",
+        "name": "P. Ajay Kumar",
+        "email": "ajaypatibandla2007@gmail.com",
+        "phone": "9948344038",
+        "college": "KL university",
+        "registerId": "2400080107"
+      },
+      {
+        "userId": "MH26000294",
+        "name": "Dhanush",
+        "email": "comeon.canyoureachme@gmail.com",
+        "phone": "9347722133",
+        "college": "K.B.N college",
+        "registerId": "K2237507"
+      },
+      {
+        "userId": "MH26000299",
+        "name": "Ramisettinikhilsatyasairam",
+        "email": "ramisettinikhilsatyasairam@gmail.com",
+        "phone": "6300908739",
+        "college": "Nit tadapalligudem",
+        "registerId": "325033"
+      },
+      {
+        "userId": "MH26000318",
+        "name": "Shaik Naadia Tasleem",
+        "email": "naadia0019@gmail.com",
+        "phone": "9948357786",
+        "college": "kAKARPARTHI BHAVANARAYANA COLLEGE",
+        "registerId": "C-27168"
+      },
+      {
+        "userId": "MH26000327",
+        "name": "Kaja Likithesh Poorna Naga Surya",
+        "email": "likipoorna@gmail.com",
+        "phone": "7093711339",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231fa14104"
+      },
+      {
+        "userId": "MH26000329",
+        "name": "Srujanah Glory Palukuri",
+        "email": "srujanahgpalukuri@gmail.com",
+        "phone": "9492296089",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05130"
+      },
+      {
+        "userId": "MH26000341",
+        "name": "Hansith venkat sai",
+        "email": "hansithvenkatsai7@gmail.com",
+        "phone": "9701077674",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA04B56"
+      },
+      {
+        "userId": "MH26000345",
+        "name": "Ravipati .himaja",
+        "email": "himajah35@gmail.com",
+        "phone": "7001187191",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231fk01037"
+      },
+      {
+        "userId": "MH26000348",
+        "name": "NIHAL KUMAR",
+        "email": "nihalksingh7@gmail.com",
+        "phone": "7979752014",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "221FU01008"
+      },
+      {
+        "userId": "MH26000361",
+        "name": "Bellamkonda Harsha sai",
+        "email": "harshasai1718@gmail.com",
+        "phone": "8885219568",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA05264"
+      },
+      {
+        "userId": "MH26000366",
+        "name": "LOHITH SAYANA",
+        "email": "sayanalohith.6@gmail.com",
+        "phone": "8309751051",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA05069"
+      },
+      {
+        "userId": "MH26000382",
+        "name": "M.Venkata Swamy",
+        "email": "v04542147@gmail.com",
+        "phone": "8317656282",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "231FA04230"
+      },
+      {
+        "userId": "MH26000387",
+        "name": "B.Sai Daedeepya",
+        "email": "daedeepyabathina@gmail.com",
+        "phone": "6305225096",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05209"
+      },
+      {
+        "userId": "MH26000403",
+        "name": "V santhosh guptha",
+        "email": "vsanthoshguptha7@gmail.com",
+        "phone": "8019489880",
+        "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+        "registerId": "241FA05186"
+      }
+    ],
+    "missingCollege": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      }
+    ],
+    "missingAll": [
+      {
+        "userId": "MH26000066",
+        "name": "Sowmya Janga",
+        "email": "sowmyajanga06@gmail.com",
+        "phone": "9392648956",
+        "college": "",
+        "registerId": "24SZO008"
+      },
+      {
+        "userId": "MH26000145",
+        "name": "Konakanchi Prasanth",
+        "email": "kprasanth119951@gmail.com",
+        "phone": "9951989565",
+        "college": "",
+        "registerId": "L25CAI065"
+      },
+      {
+        "userId": "MH26000151",
+        "name": "Gnaneshwar",
+        "email": "bantugnaneshwar22@gmail.com",
+        "phone": "8688545206",
+        "college": "",
+        "registerId": ""
+      },
+      {
+        "userId": "MH26000166",
+        "name": "k naga sravani",
+        "email": "bandaruakash@gmail.com",
+        "phone": "9569393939",
+        "college": "",
+        "registerId": "yfhnyhnhyj"
+      }
+    ]
+  },
+  "summary": {
+    "participants": {
+      "missingState": 33,
+      "missingDistrict": 33,
+      "missingCollege": 2,
+      "missingAll": 2
+    },
+    "registrations": {
+      "missingState": 41,
+      "missingDistrict": 41,
+      "missingCollege": 4,
+      "missingAll": 4
+    },
+    "total": {
+      "missingState": 74,
+      "missingDistrict": 74,
+      "missingCollege": 6,
+      "missingAll": 6
+    }
+  }
+}

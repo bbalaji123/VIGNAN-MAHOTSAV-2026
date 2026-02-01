@@ -1,0 +1,393 @@
+====================================================================================================
+RECORDS WITH MISSING STATE, DISTRICT, OR COLLEGE DATA
+====================================================================================================
+
+████████████████████████████████████████████████████████████████████████████████████████████████████
+🚨 PARTICIPANTS MISSING ALL THREE FIELDS (STATE, DISTRICT, COLLEGE)
+████████████████████████████████████████████████████████████████████████████████████████████████████
+
+
+1. User ID: MH26000145
+   Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com
+   Phone: 9951989565
+   Register ID: L25CAI065
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+   Amount: ₹150
+   Payment Status: pending
+   Events Registered: 20
+   Event Names: Line follower robot, Smash Karts (PC), Counter Strike (PC), E- Football (PC), Face Painting, Collage, Mehandi, Rangoli (2 no.), Clay modelling, Theme Painting, Dumb charades (2 no.), Quiz wiz (3 no.), Story telling, Impromptu (JAM), Robo races, Mahotsav Got Talent , Spot Dance - Jodi, Long jump, Shot put, Table Tennis
+
+
+2. User ID: MH26000151
+   Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com
+   Phone: 8688545206
+   Register ID: MISSING
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+   Amount: ₹0
+   Payment Status: pending
+   Events Registered: 0
+
+
+████████████████████████████████████████████████████████████████████████████████████████████████████
+🚨 REGISTRATIONS MISSING ALL THREE FIELDS (STATE, DISTRICT, COLLEGE)
+████████████████████████████████████████████████████████████████████████████████████████████████████
+
+
+1. User ID: MH26000066
+   Name: Sowmya Janga
+   Email: sowmyajanga06@gmail.com
+   Phone: 9392648956
+   Register ID: 24SZO008
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+
+2. User ID: MH26000145
+   Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com
+   Phone: 9951989565
+   Register ID: L25CAI065
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+
+3. User ID: MH26000151
+   Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com
+   Phone: 8688545206
+   Register ID: MISSING
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+
+4. User ID: MH26000166
+   Name: k naga sravani
+   Email: bandaruakash@gmail.com
+   Phone: 9569393939
+   Register ID: yfhnyhnhyj
+   ❌ State: MISSING
+   ❌ District: MISSING
+   ❌ College: MISSING
+
+----------------------------------------------------------------------------------------------------
+PARTICIPANTS MISSING STATE
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   ❌ State: MISSING | District: N/A | College: N/A
+
+2. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   ❌ State: MISSING | District: N/A | College: N/A
+
+3. User ID: MH26000001 | Name: maruthi
+   Email: adfb@gmail.com | Phone: 8886464318
+   ❌ State: MISSING | District: N/A | College: ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR
+
+4. User ID: MH26001904 | Name: Akash Bandaru
+   Email: nhg@gmail.com | Phone: 8688611404
+   ❌ State: MISSING | District: N/A | College: Aaditya Degree College, Nellore
+
+5. User ID: MH26000002 | Name: Hsjshsb
+   Email: bandaruakash8@gmail.com | Phone: 8688611404
+   ❌ State: MISSING | District: N/A | College: AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA
+
+6. User ID: MH26000041 | Name: Kandukur sai saketh
+   Email: sakethkandukuru2007@gmail.com | Phone: 9391487334
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+7. User ID: MH26000003 | Name: Djd
+   Email: zjx@gmail.com | Phone: 1111111111
+   ❌ State: MISSING | District: N/A | College: ACHARYA B.ED. COLLEGE
+
+8. User ID: MH26001890 | Name: Pamidi Sathvika
+   Email: pamidisathi@gmail.com | Phone: 6309062267
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+9. User ID: MH26001899 | Name: Yarlagadda hema harshitha durga bhavani chowdary
+   Email: 24491a44i7@qiscet.edu.in | Phone: 6364512237
+   ❌ State: MISSING | District: N/A | College: QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)
+
+10. User ID: MH26001907 | Name: Mandadapu Kundhana
+   Email: kundhanamandadapu@gmail.com | Phone: 7337352398
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+11. User ID: MH26001900 | Name: K.Sri Hinduja
+   Email: koppuravurisrihinduja@gmail.com | Phone: 8247411751
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+12. User ID: MH26001903 | Name: Yashodhar Venigalla
+   Email: yashodharvenigalla@gmail.com | Phone: 9346733056
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+13. User ID: MH26001906 | Name: Reddy Venkata siva naga sai
+   Email: reddyvenkatasivanagasai455@gmail.com | Phone: 9908740813
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+14. User ID: MH26001896 | Name: dasari uday Kumar
+   Email: selfmadechandu@gmail.com | Phone: 7671839022
+   ❌ State: MISSING | District: N/A | College: KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)
+
+15. User ID: MH26000004 | Name: Jonnadula Abhiram
+   Email: abhiram.j2006@gmail.com | Phone: 8125551995
+   ❌ State: MISSING | District: N/A | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+16. User ID: MH26000007 | Name: Bandaru santhosh
+   Email: santhoshbandaru02@gmail.com | Phone: 7997898839
+   ❌ State: MISSING | District: N/A | College: GOVERNMENT POLYTECHNIC COLLEGE, ZIRO
+
+17. User ID: MH26000095 | Name: Gundrathi Ram Charan Goud
+   Email: druvaram1234@gmail.com | Phone: 9059523308
+   ❌ State: MISSING | District: N/A | College: GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad
+
+----------------------------------------------------------------------------------------------------
+PARTICIPANTS MISSING DISTRICT
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   State: N/A | ❌ District: MISSING | College: N/A
+
+2. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   State: N/A | ❌ District: MISSING | College: N/A
+
+3. User ID: MH26000001 | Name: maruthi
+   Email: adfb@gmail.com | Phone: 8886464318
+   State: N/A | ❌ District: MISSING | College: ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR
+
+4. User ID: MH26001904 | Name: Akash Bandaru
+   Email: nhg@gmail.com | Phone: 8688611404
+   State: N/A | ❌ District: MISSING | College: Aaditya Degree College, Nellore
+
+5. User ID: MH26000002 | Name: Hsjshsb
+   Email: bandaruakash8@gmail.com | Phone: 8688611404
+   State: N/A | ❌ District: MISSING | College: AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA
+
+6. User ID: MH26000041 | Name: Kandukur sai saketh
+   Email: sakethkandukuru2007@gmail.com | Phone: 9391487334
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+7. User ID: MH26000003 | Name: Djd
+   Email: zjx@gmail.com | Phone: 1111111111
+   State: N/A | ❌ District: MISSING | College: ACHARYA B.ED. COLLEGE
+
+8. User ID: MH26001890 | Name: Pamidi Sathvika
+   Email: pamidisathi@gmail.com | Phone: 6309062267
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+9. User ID: MH26001899 | Name: Yarlagadda hema harshitha durga bhavani chowdary
+   Email: 24491a44i7@qiscet.edu.in | Phone: 6364512237
+   State: N/A | ❌ District: MISSING | College: QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)
+
+10. User ID: MH26001907 | Name: Mandadapu Kundhana
+   Email: kundhanamandadapu@gmail.com | Phone: 7337352398
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+11. User ID: MH26001900 | Name: K.Sri Hinduja
+   Email: koppuravurisrihinduja@gmail.com | Phone: 8247411751
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+12. User ID: MH26001903 | Name: Yashodhar Venigalla
+   Email: yashodharvenigalla@gmail.com | Phone: 9346733056
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+13. User ID: MH26001906 | Name: Reddy Venkata siva naga sai
+   Email: reddyvenkatasivanagasai455@gmail.com | Phone: 9908740813
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+14. User ID: MH26001896 | Name: dasari uday Kumar
+   Email: selfmadechandu@gmail.com | Phone: 7671839022
+   State: N/A | ❌ District: MISSING | College: KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)
+
+15. User ID: MH26000004 | Name: Jonnadula Abhiram
+   Email: abhiram.j2006@gmail.com | Phone: 8125551995
+   State: N/A | ❌ District: MISSING | College: Vignan's Foundation of Science, Technology & Research, Guntur
+
+16. User ID: MH26000007 | Name: Bandaru santhosh
+   Email: santhoshbandaru02@gmail.com | Phone: 7997898839
+   State: N/A | ❌ District: MISSING | College: GOVERNMENT POLYTECHNIC COLLEGE, ZIRO
+
+17. User ID: MH26000095 | Name: Gundrathi Ram Charan Goud
+   Email: druvaram1234@gmail.com | Phone: 9059523308
+   State: N/A | ❌ District: MISSING | College: GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad
+
+----------------------------------------------------------------------------------------------------
+PARTICIPANTS MISSING COLLEGE
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   State: N/A | District: N/A | ❌ College: MISSING
+
+2. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   State: N/A | District: N/A | ❌ College: MISSING
+
+----------------------------------------------------------------------------------------------------
+REGISTRATIONS MISSING STATE
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000066 | Name: Sowmya Janga
+   Email: sowmyajanga06@gmail.com | Phone: 9392648956
+   ❌ State: MISSING | District: N/A | College: N/A
+
+2. User ID: MH26000116 | Name: Veeru Kanta
+   Email: kantasivaji@gmail.com | Phone: 9491990213
+   ❌ State: MISSING | District: N/A | College: NIT Trichy
+
+3. User ID: MH26000124 | Name: Mekala Manoj Kumar
+   Email: mekalamanoj8522@gmail.com | Phone: 8688542264
+   ❌ State: MISSING | District: N/A | College: Bharat institution of engineering technology
+
+4. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   ❌ State: MISSING | District: N/A | College: N/A
+
+5. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   ❌ State: MISSING | District: N/A | College: N/A
+
+6. User ID: MH26000154 | Name: GURRAM SRINIVAS
+   Email: srinivasgurram81790@gmail.com | Phone: 8179089423
+   ❌ State: MISSING | District: N/A | College: National skill training institute Vidyanagar
+
+7. User ID: MH26000166 | Name: k naga sravani
+   Email: bandaruakash@gmail.com | Phone: 9569393939
+   ❌ State: MISSING | District: N/A | College: N/A
+
+8. User ID: MH26000250 | Name: VISHNU REDDY
+   Email: vishnuyenimireddy@gmail.com | Phone: 9398027354
+   ❌ State: MISSING | District: N/A | College: SRM University AP
+
+9. User ID: MH26000277 | Name: Jaya Prakash Kadali
+   Email: jayaprakashkadali.work@gmail.com | Phone: 7981494020
+   ❌ State: MISSING | District: N/A | College: VIT AP
+
+10. User ID: MH26000290 | Name: P. Ajay Kumar
+   Email: ajaypatibandla2007@gmail.com | Phone: 9948344038
+   ❌ State: MISSING | District: N/A | College: KL university
+
+11. User ID: MH26000294 | Name: Dhanush
+   Email: comeon.canyoureachme@gmail.com | Phone: 9347722133
+   ❌ State: MISSING | District: N/A | College: K.B.N college
+
+12. User ID: MH26000299 | Name: Ramisettinikhilsatyasairam
+   Email: ramisettinikhilsatyasairam@gmail.com | Phone: 6300908739
+   ❌ State: MISSING | District: N/A | College: Nit tadapalligudem
+
+13. User ID: MH26000318 | Name: Shaik Naadia Tasleem
+   Email: naadia0019@gmail.com | Phone: 9948357786
+   ❌ State: MISSING | District: N/A | College: kAKARPARTHI BHAVANARAYANA COLLEGE
+
+----------------------------------------------------------------------------------------------------
+REGISTRATIONS MISSING DISTRICT
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000066 | Name: Sowmya Janga
+   Email: sowmyajanga06@gmail.com | Phone: 9392648956
+   State: N/A | ❌ District: MISSING | College: N/A
+
+2. User ID: MH26000116 | Name: Veeru Kanta
+   Email: kantasivaji@gmail.com | Phone: 9491990213
+   State: N/A | ❌ District: MISSING | College: NIT Trichy
+
+3. User ID: MH26000124 | Name: Mekala Manoj Kumar
+   Email: mekalamanoj8522@gmail.com | Phone: 8688542264
+   State: N/A | ❌ District: MISSING | College: Bharat institution of engineering technology
+
+4. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   State: N/A | ❌ District: MISSING | College: N/A
+
+5. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   State: N/A | ❌ District: MISSING | College: N/A
+
+6. User ID: MH26000154 | Name: GURRAM SRINIVAS
+   Email: srinivasgurram81790@gmail.com | Phone: 8179089423
+   State: N/A | ❌ District: MISSING | College: National skill training institute Vidyanagar
+
+7. User ID: MH26000166 | Name: k naga sravani
+   Email: bandaruakash@gmail.com | Phone: 9569393939
+   State: N/A | ❌ District: MISSING | College: N/A
+
+8. User ID: MH26000250 | Name: VISHNU REDDY
+   Email: vishnuyenimireddy@gmail.com | Phone: 9398027354
+   State: N/A | ❌ District: MISSING | College: SRM University AP
+
+9. User ID: MH26000277 | Name: Jaya Prakash Kadali
+   Email: jayaprakashkadali.work@gmail.com | Phone: 7981494020
+   State: N/A | ❌ District: MISSING | College: VIT AP
+
+10. User ID: MH26000290 | Name: P. Ajay Kumar
+   Email: ajaypatibandla2007@gmail.com | Phone: 9948344038
+   State: N/A | ❌ District: MISSING | College: KL university
+
+11. User ID: MH26000294 | Name: Dhanush
+   Email: comeon.canyoureachme@gmail.com | Phone: 9347722133
+   State: N/A | ❌ District: MISSING | College: K.B.N college
+
+12. User ID: MH26000299 | Name: Ramisettinikhilsatyasairam
+   Email: ramisettinikhilsatyasairam@gmail.com | Phone: 6300908739
+   State: N/A | ❌ District: MISSING | College: Nit tadapalligudem
+
+13. User ID: MH26000318 | Name: Shaik Naadia Tasleem
+   Email: naadia0019@gmail.com | Phone: 9948357786
+   State: N/A | ❌ District: MISSING | College: kAKARPARTHI BHAVANARAYANA COLLEGE
+
+----------------------------------------------------------------------------------------------------
+REGISTRATIONS MISSING COLLEGE
+----------------------------------------------------------------------------------------------------
+
+
+1. User ID: MH26000066 | Name: Sowmya Janga
+   Email: sowmyajanga06@gmail.com | Phone: 9392648956
+   State: N/A | District: N/A | ❌ College: MISSING
+
+2. User ID: MH26000145 | Name: Konakanchi Prasanth
+   Email: kprasanth119951@gmail.com | Phone: 9951989565
+   State: N/A | District: N/A | ❌ College: MISSING
+
+3. User ID: MH26000151 | Name: Gnaneshwar
+   Email: bantugnaneshwar22@gmail.com | Phone: 8688545206
+   State: N/A | District: N/A | ❌ College: MISSING
+
+4. User ID: MH26000166 | Name: k naga sravani
+   Email: bandaruakash@gmail.com | Phone: 9569393939
+   State: N/A | District: N/A | ❌ College: MISSING
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+
+PARTICIPANTS:
+  Missing State: 17
+  Missing District: 17
+  Missing College: 2
+  Missing ALL THREE: 2
+
+REGISTRATIONS:
+  Missing State: 13
+  Missing District: 13
+  Missing College: 4
+  Missing ALL THREE: 4
+
+TOTAL:
+  Missing State: 30
+  Missing District: 30
+  Missing College: 6
+  Missing ALL THREE: 6
+====================================================================================================

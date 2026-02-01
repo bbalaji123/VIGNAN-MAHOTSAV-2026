@@ -10,7 +10,7 @@ import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
-import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getUserRegisteredEvents, type SignupData, type Event } from './services/api';
+import { API_BASE_URL, registerUser, loginUser, forgotPassword, getEventsByType, saveMyEvents, getMyEventRegistrations as getUserRegisteredEvents, type SignupData, type Event } from './services/api';
 import { showToast } from './utils/toast';
 
 interface DashboardProps {
@@ -795,10 +795,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     }
   }, []);
 
-  // Check for register-for-events route
+  // Check for register-for-events route or direct login/register routes
   useEffect(() => {
     if (location.pathname === '/register-for-events') {
       handleOpenRegistration();
+    } else if (location.pathname === '/register') {
+      setShowSignupModal(true); // Changed from login to signup logic
+      setShowLoginModal(false);
+      setSignupStep(1); // Reset
+    } else if (location.pathname === '/login') {
+      setShowLoginModal(true);
+      setShowSignupModal(false);
     }
   }, [location.pathname]);
 
@@ -1260,7 +1267,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             eventNameLower.includes('poster') ||
             eventNameLower.includes('digital') ||
             eventNameLower.includes('chronicle') ||
-            eventNameLower.includes('reel')) {
+            eventNameLower.includes('reel') ||
+            eventNameLower.includes('film')) {
             // Move to Digital Storytelling & Creative Media category
             return {
               ...event,
@@ -1291,10 +1299,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       if (isLoggedIn && userProfileData.userId) {
         try {
           // Try to fetch from database first
-          const response = await fetch(`${API_BASE_URL}/my-registrations/${userProfileData.userId}`);
-          const result = await response.json();
+          const result = await getUserRegisteredEvents(userProfileData.userId);
 
-          if (response.ok && result.success && result.data.events) {
+          if (result.success && result.data?.events) {
             setMyEvents(result.data.events);
             // Also save to localStorage as backup
             const storageKey = `myEvents_${userProfileData.userId}`;
@@ -1793,34 +1800,21 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   };
 
   const handleLoginClick = () => {
-    setShowLoginModal(true);
+    navigate('/login');
   };
 
   const handleCloseLogin = () => {
     setShowLoginModal(false);
     setLoginFormData({ identifier: '', password: '' });
     setLoginMessage(null);
+    // Clear URL if we were on /login or /register
+    if (location.pathname === '/login' || location.pathname === '/register') {
+      navigate('/');
+    }
   };
 
   const handleSignupClick = () => {
-    setShowSignupModal(true);
-    setShowLoginModal(false); // Close login modal if open
-    setSignupStep(1); // Reset to step 1 when opening signup
-    setSignupFormData({
-      name: '',
-      email: '',
-      password: '',
-      phone: '',
-      college: '',
-      branch: '',
-      dateOfBirth: '',
-      userType: 'participant',
-      participationType: 'none',
-      referenceId: '',
-      state: '',
-      district: ''
-    });
-    setSubmitMessage(null);
+    navigate('/register'); // Trigger route change which will open modal
   };
 
   const handleCloseSignup = () => {
@@ -1844,6 +1838,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     setShowUserIdPopup(false);
     setGeneratedUserId(null);
     setGeneratedPassword(null);
+
+    // Clear URL if we were on /login or /register
+    if (location.pathname === '/login' || location.pathname === '/register') {
+      navigate('/');
+    }
   };
 
   const handleNextStep = () => {
@@ -6326,9 +6325,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                 onClick={async () => {
                                   if (confirm('Are you sure you want to remove ALL registered events? This action cannot be undone.')) {
                                     try {
+                                      const token = localStorage.getItem('authToken');
                                       const response = await fetch(`${API_BASE_URL}/save-events`, {
                                         method: 'POST',
-                                        headers: { 'Content-Type': 'application/json' },
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          ...(token && { 'Authorization': `Bearer ${token}` })
+                                        },
                                         body: JSON.stringify({ userId: userProfileData.userId, events: [] })
                                       });
                                       const result = await response.json();
@@ -6761,11 +6764,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                               if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
                                 try {
+                                  const token = localStorage.getItem('authToken');
                                   // Update in database
                                   const response = await fetch(`${API_BASE_URL}/save-events`, {
                                     method: 'POST',
                                     headers: {
                                       'Content-Type': 'application/json',
+                                      ...(token && { 'Authorization': `Bearer ${token}` })
                                     },
                                     body: JSON.stringify({
                                       userId: userProfileData.userId,
@@ -7114,12 +7119,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             }}
           >
             <img
-              src={galleryImages[selectedPhoto.row * 6 + selectedPhoto.index]}
+              src={galleryImages[selectedPhoto.row * 6 + selectedPhoto.index].replace('w_280,h_180,c_fill,f_auto,q_auto', 'w_1200,h_800,c_fit,f_auto,q_80')}
               alt={`Gallery ${selectedPhoto.row * 6 + selectedPhoto.index + 1}`}
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover'
+                objectFit: 'contain'
               }}
               loading="lazy"
               decoding="async"
@@ -7360,7 +7365,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                               const alreadySaved = isEventAlreadySaved(eventName);
                               // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
-                              const constraintDisabled = appHasParaSelected;
+                              // Para events should only be disabled if normal events are selected, not if other para events are selected
+                              const constraintDisabled = isParaEvent ? appHasNormalSelected : appHasParaSelected;
 
                               // Gender validation
                               const womenOnlyEvents = ['throwball', 'throw ball', 'tennikoit'];
@@ -7413,7 +7419,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                   onClick={(e) => {
                                     if (constraintDisabled) {
                                       e.preventDefault();
-                                      showToast.warning('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                      if (isParaEvent) {
+                                        showToast.warning('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
+                                      } else {
+                                        showToast.warning('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
+                                      }
                                     }
                                   }}
                                 >
@@ -8448,11 +8458,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     // Show loading toast
                     const loadingToast = showToast.loading('Saving your registration...');
 
+                    const token = localStorage.getItem('authToken');
                     // Save to database via API (in background)
                     const response = await fetch(`${API_BASE_URL}/save-events`, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
+                        ...(token && { 'Authorization': `Bearer ${token}` })
                       },
                       body: JSON.stringify({
                         userId: userProfileData.userId,

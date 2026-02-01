@@ -1,0 +1,648 @@
+{
+  "timestamp": "2026-01-29T04:54:57.082Z",
+  "participants": [
+    {
+      "userId": "MH26000151",
+      "name": "Gnaneshwar",
+      "email": "bantugnaneshwar22@gmail.com",
+      "phone": "8688545206",
+      "college": "",
+      "gender": "Male",
+      "registerId": "",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 0,
+      "events": []
+    },
+    {
+      "userId": "MH26000161",
+      "name": "Ravula Kumar Raja Venkata Sai Nadh",
+      "email": "kr3190571@gmail.com",
+      "phone": "7396646145",
+      "college": "Swarnandhra College of Engineering & Technology, Narasapur. PIN -534275  (CC-A2)",
+      "gender": "Male",
+      "registerId": "",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 0,
+      "events": []
+    },
+    {
+      "userId": "MH26000224",
+      "name": "CHITTI",
+      "email": "231fa04890@gmail.com",
+      "phone": "8789908765",
+      "college": "vignan",
+      "gender": "Female",
+      "amount": 150,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "400 M",
+        "4 x 400 M Relay"
+      ]
+    },
+    {
+      "userId": "MH26000236",
+      "name": "Chepanu dhegey",
+      "email": "dhengey@gmail.com",
+      "phone": "9999999999",
+      "college": "A.N.S. College,Nabinagar",
+      "gender": "Male",
+      "amount": 350,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "100 M",
+        "Dancing Star – Western Solo"
+      ]
+    },
+    {
+      "userId": "MH26000251",
+      "name": "eauhy",
+      "email": "nnlsg@gmail.com",
+      "phone": "757254383",
+      "college": "KSS College, Lakhisarai",
+      "gender": "Male",
+      "amount": 350,
+      "paymentStatus": "pending",
+      "eventsRegistered": 3,
+      "events": [
+        "400 M",
+        "100 M",
+        "Valorant"
+      ]
+    },
+    {
+      "userId": "MH26000265",
+      "name": "test",
+      "email": "test@gmail.com",
+      "phone": "9966996699",
+      "college": "ARROW COLLEGE OF PARAMEDICAL SCIENCES, VIJAYAWADA",
+      "gender": "Male",
+      "amount": 350,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Chess"
+      ]
+    },
+    {
+      "userId": "MH26000460",
+      "name": "Baraneetharan k",
+      "email": "baraneetharan.k@outlook.com",
+      "phone": "9043542917",
+      "college": "Central University of Tamil Nadu",
+      "gender": "Male",
+      "amount": 250,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Smash Karts (PC)"
+      ]
+    },
+    {
+      "userId": "MH26000488",
+      "name": "Kandi Saniya Iffat",
+      "email": "saniyaiffat.k@gmail.com",
+      "phone": "9281400705",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female",
+      "amount": 150,
+      "paymentStatus": "pending",
+      "eventsRegistered": 7,
+      "events": [
+        "Digital Poster making",
+        "Mehandi",
+        "Mandala",
+        "Mandala Art",
+        "Online Photography",
+        "Dancing Jodi – Western Duo",
+        "Theme Photography (Online)"
+      ]
+    },
+    {
+      "userId": "MH26000001",
+      "name": "maruthi",
+      "email": "adfb@gmail.com",
+      "phone": "8886464318",
+      "college": "ABHISEK INSTITUTE OF PROFESSIONAL STUDIES GWALIOR",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "unpaid",
+      "eventsRegistered": 1,
+      "events": [
+        "Badminton Singles"
+      ]
+    },
+    {
+      "userId": "MH26001904",
+      "name": "Akash Bandaru",
+      "email": "nhg@gmail.com",
+      "phone": "8688611404",
+      "college": "Aaditya Degree College, Nellore",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "Drama/Skit Performance",
+        "100 M"
+      ]
+    },
+    {
+      "userId": "MH26000002",
+      "name": "Hsjshsb",
+      "email": "bandaruakash8@gmail.com",
+      "phone": "8688611404",
+      "college": "AGNEL INSTITUTE OF FOOD CRAFTS AND CULINARY SCIENCES VERNA",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "unpaid",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26000041",
+      "name": "Kandukur sai saketh",
+      "email": "sakethkandukuru2007@gmail.com",
+      "phone": "9391487334",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "Classical Dance Solo",
+        "Dancing Star – Western Solo"
+      ]
+    },
+    {
+      "userId": "MH26000003",
+      "name": "Djd",
+      "email": "zjx@gmail.com",
+      "phone": "1111111111",
+      "college": "ACHARYA B.ED. COLLEGE",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "100 M",
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001890",
+      "name": "Pamidi Sathvika",
+      "email": "pamidisathi@gmail.com",
+      "phone": "6309062267",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001899",
+      "name": "Yarlagadda hema harshitha durga bhavani chowdary",
+      "email": "24491a44i7@qiscet.edu.in",
+      "phone": "6364512237",
+      "college": "QIS College of Engineering & Technology, Vengamukkapalem (Village), Pondur Road, Ongle(M),PIN-523 272.(CC-49)",
+      "gender": "Female",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "Classical Dance Solo",
+        "100 M"
+      ]
+    },
+    {
+      "userId": "MH26001907",
+      "name": "Mandadapu Kundhana",
+      "email": "kundhanamandadapu@gmail.com",
+      "phone": "7337352398",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001900",
+      "name": "K.Sri Hinduja",
+      "email": "koppuravurisrihinduja@gmail.com",
+      "phone": "8247411751",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001903",
+      "name": "Yashodhar Venigalla",
+      "email": "yashodharvenigalla@gmail.com",
+      "phone": "9346733056",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001906",
+      "name": "Reddy Venkata siva naga sai",
+      "email": "reddyvenkatasivanagasai455@gmail.com",
+      "phone": "9908740813",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26001896",
+      "name": "dasari uday Kumar",
+      "email": "selfmadechandu@gmail.com",
+      "phone": "7671839022",
+      "college": "KKR&KSR Institute of Technology & Sciences, VINJANAMPADU Village (CC-JR)",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "unpaid",
+      "eventsRegistered": 2,
+      "events": [
+        "Classical Dance Solo",
+        "100 M"
+      ]
+    },
+    {
+      "userId": "MH26000004",
+      "name": "Jonnadula Abhiram",
+      "email": "abhiram.j2006@gmail.com",
+      "phone": "8125551995",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "unpaid",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    },
+    {
+      "userId": "MH26000007",
+      "name": "Bandaru santhosh",
+      "email": "santhoshbandaru02@gmail.com",
+      "phone": "7997898839",
+      "college": "GOVERNMENT POLYTECHNIC COLLEGE, ZIRO",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 2,
+      "events": [
+        "Classical Dance Solo",
+        "100 M"
+      ]
+    },
+    {
+      "userId": "MH26000095",
+      "name": "Gundrathi Ram Charan Goud",
+      "email": "druvaram1234@gmail.com",
+      "phone": "9059523308",
+      "college": "GITAM : Gandhi Institute of Technology and Management, Off Campus - Hyderabad",
+      "gender": "Male",
+      "amount": 0,
+      "paymentStatus": "pending",
+      "eventsRegistered": 1,
+      "events": [
+        "Classical Dance Solo"
+      ]
+    }
+  ],
+  "registrations": [
+    {
+      "userId": "MH26000119",
+      "name": "Riddesh Makwana",
+      "email": "makwanariddhesh@gmail.com",
+      "phone": "9724551399",
+      "college": "ADITYA SILVER OAK INSTITUTE OF TECHNOLOGY",
+      "gender": "Male",
+      "registerId": ""
+    },
+    {
+      "userId": "MH26000120",
+      "name": "adapala hemanth",
+      "email": "ahemanth706@gmail.com",
+      "phone": "9182839346",
+      "college": "KITS AKSHAR INSTITUTE OF TECHNOLOGY",
+      "gender": "Female",
+      "registerId": ""
+    },
+    {
+      "userId": "MH26000124",
+      "name": "Mekala Manoj Kumar",
+      "email": "mekalamanoj8522@gmail.com",
+      "phone": "8688542264",
+      "college": "Bharat institution of engineering technology",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000151",
+      "name": "Gnaneshwar",
+      "email": "bantugnaneshwar22@gmail.com",
+      "phone": "8688545206",
+      "college": "",
+      "gender": "Male",
+      "registerId": ""
+    },
+    {
+      "userId": "MH26000161",
+      "name": "Ravula Kumar Raja Venkata Sai Nadh",
+      "email": "kr3190571@gmail.com",
+      "phone": "7396646145",
+      "college": "Swarnandhra College of Engineering & Technology, Narasapur. PIN -534275  (CC-A2)",
+      "gender": "Male",
+      "registerId": ""
+    },
+    {
+      "userId": "MH26000172",
+      "name": "Voleti siva nagendra",
+      "email": "voletisivanagendra@gmail.com",
+      "phone": "9515254373",
+      "college": "N.R.K. & K.S.R. Gupta Degree College, Tenali",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000188",
+      "name": "N.S.V.K.Pramoda",
+      "email": "narasingukoustubha@gmail.com",
+      "phone": "7396292008",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000224",
+      "name": "CHITTI",
+      "email": "231fa04890@gmail.com",
+      "phone": "8789908765",
+      "college": "vignan",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000236",
+      "name": "Chepanu dhegey",
+      "email": "dhengey@gmail.com",
+      "phone": "9999999999",
+      "college": "A.N.S. College,Nabinagar",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000248",
+      "name": "Yogendhar Reddy",
+      "email": "yogendharreddy4@gmail.com",
+      "phone": "8985194267",
+      "college": "Koneru Lakshmaiah Education Foundation,Guntur",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000251",
+      "name": "eauhy",
+      "email": "nnlsg@gmail.com",
+      "phone": "757254383",
+      "college": "KSS College, Lakhisarai",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000257",
+      "name": "Kamma Meghana",
+      "email": "vu.241fa04232@gmail.com",
+      "phone": "9392374068",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000261",
+      "name": "Uppala Jaswanth kumar",
+      "email": "uppalajaswanthkumar@gmail.com",
+      "phone": "9492671462",
+      "college": "Nalanda Degree College",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000262",
+      "name": "Somu.Manikanta sai",
+      "email": "somumanikantasai1@gmail.com",
+      "phone": "8247011023",
+      "college": "KALLAM HARANADHAREDDY INSTITUTE OF TECHNOLOGY",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000265",
+      "name": "test",
+      "email": "test@gmail.com",
+      "phone": "9966996699",
+      "college": "ARROW COLLEGE OF PARAMEDICAL SCIENCES, VIJAYAWADA",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000343",
+      "name": "S.Pranathi Reddy",
+      "email": "pranathi.reddy3706@gmail.com",
+      "phone": "7396596289",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000376",
+      "name": "Jayendra Yarra",
+      "email": "jayendrayarra@gmail.com",
+      "phone": "8106082338",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000422",
+      "name": "Ganjikunta Sai poojita",
+      "email": "ganjikuntasaipoojita@gmail.com",
+      "phone": "70321 6957",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000454",
+      "name": "S.Surya",
+      "email": "surya.svssn1204@gmail.com",
+      "phone": "9059647289",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000460",
+      "name": "Baraneetharan k",
+      "email": "baraneetharan.k@outlook.com",
+      "phone": "9043542917",
+      "college": "Central University of Tamil Nadu",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000532",
+      "name": "Gnashika",
+      "email": "gnashika.p5557@gmail.com",
+      "phone": "+91 93479",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000533",
+      "name": "Dhana lakshmi",
+      "email": "lakshmi.p5557@gmail.com",
+      "phone": "9440346427",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000632",
+      "name": "Bindu",
+      "email": "bindusri.goli@gmail.com",
+      "phone": "9347818881",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000640",
+      "name": "P. Hari Manasa",
+      "email": "harimanasa575@gmail.com",
+      "phone": "9398789153",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000657",
+      "name": "Katuri vyshnavi",
+      "email": "katurivyshu@gmail.com",
+      "phone": "6302363831",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000745",
+      "name": "G. Naga kowshik",
+      "email": "gokulyadav1828@gmail.com",
+      "phone": "8019616764",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000748",
+      "name": "Yasmitha Mannava",
+      "email": "mannavayasmitha@gmail.com",
+      "phone": "9908673339",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000754",
+      "name": "Mamillapalli. Vyshnavi",
+      "email": "vyshnavimamillapalli717@gmail.com",
+      "phone": "7989153892",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000766",
+      "name": "Kambhampalli pravallika",
+      "email": "kambhampallipravallika@gmail.com",
+      "phone": "8466886388",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000810",
+      "name": "Naga jayanth",
+      "email": "alasandalapallinagajayanth@gmail.com",
+      "phone": "9618912179",
+      "college": "Vasireddy Venkatadri International Technological University",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000856",
+      "name": "Jathin Chandragiri",
+      "email": "jathin1000@gmail.com",
+      "phone": "9989563153",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000867",
+      "name": "THANNIRU PRADEEP",
+      "email": "ptp8379@gmail.com",
+      "phone": "7780576919",
+      "college": "Vasireddy Venkatadri International Technological University",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000872",
+      "name": "Nelluri .venu gopal",
+      "email": "venuchowdarynelluri9999@gmail.com",
+      "phone": "9391962280",
+      "college": "VVITU",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000949",
+      "name": "Vaka swapna",
+      "email": "vakaswapna24@gmail.com",
+      "phone": "+91 81257",
+      "college": "Vvitu",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26000952",
+      "name": "Chintala Veera Venkata Radha Krishna",
+      "email": "chintalaradhakrishna10@gmail.com",
+      "phone": "7207153778",
+      "college": "Vasireddy Venkatadri Institute of Technology, Nambur (V), Pedakakani(M), PIN-522508(CC-BQ)",
+      "gender": "Male"
+    },
+    {
+      "userId": "MH26000977",
+      "name": "Popuri.Jyothsna",
+      "email": "pjyothsna188@gmail.com",
+      "phone": "7671856720",
+      "college": "Vignan's Foundation of Science, Technology & Research, Guntur",
+      "gender": "Female"
+    },
+    {
+      "userId": "MH26001014",
+      "name": "Shaik salman",
+      "email": "sksalman88540@gmail.com",
+      "phone": "9701981136",
+      "college": "Hindu College of Education, Guntur",
+      "gender": "Male"
+    }
+  ],
+  "summary": {
+    "totalParticipantsWithoutRegisterId": 23,
+    "totalRegistrationsWithoutRegisterId": 37,
+    "totalRecordsWithoutRegisterId": 60
+  }
+}

@@ -31,13 +31,19 @@ function App() {
   const [preloaderFinished, setPreloaderFinished] = useState(false);
   const [bootStart] = useState(() => Date.now());
 
+  // Apply background class only after preloader finishes
+  const handlePreloaderFinish = () => {
+    setPreloaderFinished(true);
+    document.body.classList.add('preloader-finished');
+  };
+
   return (
     <div className="w-full min-h-screen desktop-bound" role="application" aria-label="Vignan Mahotsav 2026">
       {!preloaderFinished && (
         <Preloader
           isLoading={!isDashboardLoaded}
           maxWaitMs={Math.max(6000, 2000 + (Date.now() - bootStart))}
-          onFinish={() => setPreloaderFinished(true)}
+          onFinish={handlePreloaderFinish}
         />
       )}
       <Toaster toastOptions={{ style: { zIndex: 999999 } }} containerStyle={{ zIndex: 999999 }} />
@@ -55,6 +61,8 @@ function App() {
             */}
             <Route path="/dashboard" element={<Dashboard onLoad={() => setIsDashboardLoaded(true)} />} />
             <Route path="/register-for-events" element={<Dashboard onLoad={() => setIsDashboardLoaded(true)} />} />
+            <Route path="/register" element={<Dashboard onLoad={() => setIsDashboardLoaded(true)} />} />
+            <Route path="/login" element={<Dashboard onLoad={() => setIsDashboardLoaded(true)} />} />
             <Route path="/events" element={<EventsInfo />} />
             <Route path="/events/robos" element={<EventsInfo />} />
             <Route path="/events/arts" element={<EventsInfo />} />

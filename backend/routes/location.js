@@ -3,6 +3,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { logger } from '../utils/logger.js';
+import { verifyToken } from '../middleware/auth.js';
+import { strictLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +24,7 @@ async function loadLocationData() {
   try {
     // Use backend's own data folder instead of public folder
     const dataPath = path.join(__dirname, '../data');
-    
+
     // Check if cache is still valid
     if (cacheTimestamp && (Date.now() - cacheTimestamp) < CACHE_DURATION) {
       logger.info('Using cached location data');
@@ -31,7 +33,7 @@ async function loadLocationData() {
 
     logger.info('Loading location data from files...');
     logger.info(`Data path: ${dataPath}`);
-    
+
     // Load all files in parallel for better performance
     const [statesData, districtsData, collegesData] = await Promise.all([
       fs.readFile(path.join(dataPath, 'state.json'), 'utf-8'),
@@ -42,13 +44,13 @@ async function loadLocationData() {
     // Parse JSON data
     statesCache = JSON.parse(statesData);
     districtsCache = JSON.parse(districtsData);
-    
+
     // Parse and process colleges
     const rawColleges = JSON.parse(collegesData);
-    
+
     // Filter out invalid entries
     const validColleges = rawColleges.filter(c => c && c.Name && typeof c.Name === 'string');
-    
+
     // Remove duplicates (case-insensitive) and keep first occurrence
     const seen = new Set();
     const uniqueColleges = validColleges.filter(college => {
@@ -59,17 +61,17 @@ async function loadLocationData() {
       seen.add(lowerName);
       return true;
     });
-    
+
     // Sort alphabetically by name for better UX
-    collegesCache = uniqueColleges.sort((a, b) => 
+    collegesCache = uniqueColleges.sort((a, b) =>
       a.Name.localeCompare(b.Name)
     );
-    
+
     cacheTimestamp = Date.now();
-    
+
     logger.info(`Location data loaded successfully`);
     logger.info(`States: ${statesCache.length}, Districts: ${districtsCache.length}, Colleges: ${collegesCache.length}`);
-    
+
   } catch (error) {
     logger.error('Error loading location data:', error);
     throw error;
@@ -82,7 +84,7 @@ loadLocationData().catch(err => {
 });
 
 /**
- * GET /api/location/states
+ * GET /neekendukura/location/states
  * Get all states
  */
 router.get('/location/states', async (req, res) => {
@@ -127,7 +129,7 @@ router.get('/location/states', async (req, res) => {
 });
 
 /**
- * GET /api/location/districts
+ * GET /neekendukura/location/districts
  * Get all districts (optionally filtered by state)
  * Query params: ?stateNo=<state_no>
  */
@@ -153,9 +155,9 @@ router.get('/location/districts', async (req, res) => {
     }
 
     const { stateNo } = req.query;
-    
+
     let districts = districtsCache;
-    
+
     // Filter by state if provided
     if (stateNo) {
       districts = districtsCache.filter(d => d.sno === stateNo);
@@ -182,7 +184,7 @@ router.get('/location/districts', async (req, res) => {
 });
 
 /**
- * GET /api/location/colleges
+ * GET /neekendukura/location/colleges
  * Get all colleges (optionally filtered by state and/or district)
  * Query params: ?state=<state_name>&district=<district_name>
  */
@@ -208,19 +210,19 @@ router.get('/location/colleges', async (req, res) => {
     }
 
     const { state, district } = req.query;
-    
+
     let colleges = collegesCache;
-    
+
     // Filter by state if provided
     if (state) {
-      colleges = colleges.filter(c => 
+      colleges = colleges.filter(c =>
         c.State.toLowerCase() === state.toLowerCase()
       );
     }
-    
+
     // Filter by district if provided
     if (district) {
-      colleges = colleges.filter(c => 
+      colleges = colleges.filter(c =>
         c.District.toLowerCase() === district.toLowerCase()
       );
     }
@@ -246,14 +248,15 @@ router.get('/location/colleges', async (req, res) => {
 });
 
 /**
- * POST /api/location/reload-cache
+ * POST /neekendukura/location/reload-cache
  * Admin endpoint to reload cache manually
+ * PROTECTED with strict rate limit
  */
-router.post('/location/reload-cache', async (req, res) => {
+router.post('/location/reload-cache', verifyToken, strictLimiter, async (req, res) => {
   try {
     cacheTimestamp = null; // Invalidate cache
     await loadLocationData();
-    
+
     res.json({
       success: true,
       message: 'Location data cache reloaded successfully',

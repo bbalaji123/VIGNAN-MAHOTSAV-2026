@@ -63,7 +63,7 @@ const CollegeSelect: React.FC<CollegeSelectProps> = ({
       try {
         setIsLoading(true);
         console.log('📚 Loading colleges for:', selectedState, selectedDistrict);
-        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/location/colleges?state=${encodeURIComponent(selectedState)}&district=${encodeURIComponent(selectedDistrict)}`;
+        const apiUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/neekendukura/location/colleges?state=${encodeURIComponent(selectedState)}&district=${encodeURIComponent(selectedDistrict)}`;
         const response = await fetch(apiUrl);
         console.log('📚 Response status:', response.status);
 

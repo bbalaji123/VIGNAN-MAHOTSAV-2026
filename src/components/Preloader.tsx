@@ -13,14 +13,14 @@ interface PreloaderProps {
 
 const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading, maxWaitMs = 8000 }) => {
     const [isVisible, setIsVisible] = useState(true);
+    const [isFadingOut, setIsFadingOut] = useState(false);
     const [loadingPercentage, setLoadingPercentage] = useState(0);
-    const [hasFinished, setHasFinished] = useState(false);
 
     useEffect(() => {
         // Simulate loading progress
         const interval = setInterval(() => {
             setLoadingPercentage((prev) => {
-                if (prev >= 100 || hasFinished) {
+                if (prev >= 100) {
                     clearInterval(interval);
                     return 100;
                 }
@@ -31,30 +31,31 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading, maxWaitMs = 
         }, 200);
 
         return () => clearInterval(interval);
-    }, [hasFinished]);
+    }, []);
 
     useEffect(() => {
         // Auto-dismiss safeguard after maxWaitMs in case chunks fail under poor networks
         const timeout = setTimeout(() => {
-            if (!hasFinished) {
-                setHasFinished(true);
-                setIsVisible(false);
-                onFinish?.();
-            }
-        }, maxWaitMs);
-        return () => clearTimeout(timeout);
-    }, [maxWaitMs, hasFinished, onFinish]);
-
-    useEffect(() => {
-        // Close preloader when both loading complete and percentage at 100%
-        if (!hasFinished && loadingPercentage >= 100 && !isLoading) {
-            setHasFinished(true);
+            setIsFadingOut(true);
             setTimeout(() => {
                 setIsVisible(false);
                 onFinish?.();
-            }, 500);
+            }, 500); // Wait for fade-out animation
+        }, maxWaitMs);
+        
+        return () => clearTimeout(timeout);
+    }, [maxWaitMs, onFinish]);
+
+    useEffect(() => {
+        // Close preloader when both loading complete and percentage at 100%
+        if (loadingPercentage >= 100 && !isLoading && !isFadingOut) {
+            setIsFadingOut(true);
+            setTimeout(() => {
+                setIsVisible(false);
+                onFinish?.();
+            }, 500); // Wait for fade-out animation
         }
-    }, [loadingPercentage, isLoading, onFinish, hasFinished]);
+    }, [loadingPercentage, isLoading, isFadingOut, onFinish]);
 
     if (!isVisible) return null;
 
@@ -73,8 +74,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onFinish, isLoading, maxWaitMs = 
                 justifyContent: 'center',
                 alignItems: 'center',
                 transition: 'opacity 0.5s ease-out',
-                opacity: isVisible ? 1 : 0,
-                pointerEvents: isVisible ? 'auto' : 'none'
+                opacity: isFadingOut ? 0 : 1,
+                pointerEvents: isFadingOut ? 'none' : 'auto'
             }}
         >
             {/* Animated Logo/Spinner */}

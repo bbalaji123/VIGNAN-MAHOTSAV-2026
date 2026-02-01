@@ -62,7 +62,7 @@ const registrationSchema = new mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    enum: ['paid', 'unpaid'],
+    enum: ['paid', 'unpaid', 'pending', 'failed'],
     default: 'unpaid'
   },
   amount: {

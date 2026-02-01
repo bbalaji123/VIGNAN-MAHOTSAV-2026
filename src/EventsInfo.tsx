@@ -367,7 +367,10 @@ const EventsInfo: React.FC = () => {
     else if (showRoboGames) fromSection = 'roboGames';
     else if (showSpotLight) fromSection = 'spotLight';
     else if (showRoboWarsGaming) fromSection = 'roboWarsGaming';
-    navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection } });
+
+    // Pass fromMenu state if available to ensure deeper navigation remembers exit path
+    const fromMenu = location.state?.fromMenu;
+    navigate(`/event/${encodeURIComponent(eventName)}`, { state: { fromSection, fromMenu } });
   };
 
   // Click handlers
@@ -549,8 +552,14 @@ const EventsInfo: React.FC = () => {
         }
       }
 
-      // Clear the state to prevent issues on refresh
-      window.history.replaceState({}, document.title);
+      // Clear the state to prevent issues on refresh but preserve fromMenu if it exists
+      // so back button logic still works
+      const newState = location.state as any || {};
+      if (newState.fromMenu) {
+        window.history.replaceState({ fromMenu: newState.fromMenu }, document.title);
+      } else {
+        window.history.replaceState({}, document.title);
+      }
     }
   }, [location]);
 
@@ -2049,7 +2058,7 @@ const EventsInfo: React.FC = () => {
                     {roboGamesCards.map((card, index) => {
                       // Map robo games card titles to their image paths
                       const imageMap: { [key: string]: string } = {
-                        "Line follower robot": "images/Line Flower Robot.avif",
+                        "Line follower robot": "images/Web.jpeg",
                         "Bot Wrestling": "images/Bot wrestling.avif",
                         "Robo races": "images/Robo Races.avif"
                       };

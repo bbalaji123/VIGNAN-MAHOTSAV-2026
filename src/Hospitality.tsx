@@ -182,18 +182,18 @@ const Hospitality: React.FC = () => {
           <div className="hospitality-tab-content glassmorphism">
             <h2 className="section-heading-primary">Eligibility:</h2>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Sports & Games:</strong> Students of any UG / PG program from Technical Deemed Universities, Engineering and Pharmacy institutes are only allowed to participate in sports events.</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Performing Arts:</strong> Students of any UG / PG program of any discipline are permitted to participate, from institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc., in Performing arts / Literature / Visual Arts and Crafts / Fashion events.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• <strong>Performing Arts:</strong> Students of any UG / PG program of any discipline are permitted to participate, from institutes of Engineering & Technology, Arts & Sciences, Designing, Fashion, Medical, Pharma etc., in Performing arts / Literature / Visual Arts and Crafts / Fashion events/ Robo Games and e-sports.</p>
 
             <h2 className="section-heading-primary">Registrations:</h2>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• All external participants have to report at the Registration desk arranged near the main gate before 12 noon on 5th Feb 2026.</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">• Registration fee:</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Sports & Games: Rs.350/- for Men and Rs. 250/- for women</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Performing arts / Literature / Visual Arts and Crafts / Fashion: Rs. 250/-</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">o Entry is free for PARA sports participants.</p>
+            <h2 className="section-heading-primary">Registration fee:</h2>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">• Sports & Games: Rs.350/- for Men and Rs. 250/- for women</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">• Performing arts / Literature / Visual Arts and Crafts / Fashion / RRobo Games and e-sports: Rs. 250/-</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base pl-6 sm:pl-8">• Entry is free for PARA sports participants.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• All participants must produce their college ID card and Bonafide certificate.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• On completion of individual registration, a Mahotsav ID will be generated for your account.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• After individual registration, Team captain/leads must report at counters setup for concerned game/ event for registering their team by producing Mahotsav ID cards of all the team members.</p>
-            <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for sports and games events are permitted to participate in any one Team event of sports and games and any number of Track & Field/ Individual sport event Performing Arts / Literature / Visual Arts and Crafts / Fashion.</p>
+            <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for sports and games events are permitted to participate in any one Team event of sports and games and any number of Track & Field/ Individual sport event Performing Arts / Literature / Visual Arts and Crafts / Fashion /Robo wars and e-sports.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• Students registered for Performing Arts alone will not be permitted to participate in Sports & Games.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• Participants who require accommodation must register at the adjacent hospitality desk by producing a Mahotsav ID card issued upon first come first serve basis.</p>
             <p className="hospitality-content mb-2 text-sm sm:text-base">• Any number of individuals / teams are allowed to participate from an institute in an event.</p>
@@ -227,27 +227,27 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Mr. Ashwin</td>
-                    <td >88852 84355</td>
+                    <td ><a href="tel:+918885284355" className="hospitality-table-link">+91 88852 84355</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Ajith</td>
-                    <td >93461 93840</td>
+                    <td ><a href="tel:+919346193840" className="hospitality-table-link">+91 93461 93840</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Hemanth</td>
-                    <td >88854 76252</td>
+                    <td ><a href="tel:+918885476252" className="hospitality-table-link">+91 88854 76252</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Phani</td>
-                    <td >95426 66866</td>
+                    <td ><a href="tel:+919542666866" className="hospitality-table-link">+91 95426 66866</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Nawaz Basha</td>
-                    <td >99638 76989</td>
+                    <td ><a href="tel:+919963876989" className="hospitality-table-link">+91 99638 76989</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Yeshwanth</td>
-                    <td >83091 90435</td>
+                    <td ><a href="tel:+918309190435" className="hospitality-table-link">+91 83091 90435</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -265,15 +265,15 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Ms. Yamini</td>
-                    <td >70939 12677</td>
+                    <td ><a href="tel:+917093912677" className="hospitality-table-link">+91 70939 12677</a></td>
                   </tr>
                   <tr >
                     <td >Ms. Sravani</td>
-                    <td >90147 04929</td>
+                    <td ><a href="tel:+919014704929" className="hospitality-table-link">+91 90147 04929</a></td>
                   </tr>
                   <tr >
                     <td >Ms. Bindhu</td>
-                    <td >99590 22317</td>
+                    <td ><a href="tel:+919959022317" className="hospitality-table-link">+91 99590 22317</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -291,11 +291,11 @@ const Hospitality: React.FC = () => {
                 <tbody>
                   <tr >
                     <td >Mr. Lohith</td>
-                    <td >8309751051</td>
+                    <td ><a href="tel:+918309751051" className="hospitality-table-link">+91 83097 51051</a></td>
                   </tr>
                   <tr >
                     <td >Mr. Sri Vatsav</td>
-                    <td >94419 34549</td>
+                    <td ><a href="tel:+919441934549" className="hospitality-table-link">+91 94419 34549</a></td>
                   </tr>
                 </tbody>
               </table>

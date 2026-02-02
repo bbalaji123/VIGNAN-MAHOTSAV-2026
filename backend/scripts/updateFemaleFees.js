@@ -12,14 +12,15 @@ dotenv.config({ path: path.join(__dirname, '..', '.env') });
 const specialVignanColleges = [
   'Vignan Pharmacy College',
   "Vignan's Foundation of Science, Technology & Research",
-  "Vignan's Lara Institute of Technology & Science"
+  "Vignan's Lara Institute of Technology & Science",
+  "Vignan's Nirula Institute of Technology & Science for Women"
 ];
 
 const isSpecialVignanCollege = (collegeName) => {
   if (!collegeName) return false;
   const lowerCollege = collegeName.toLowerCase();
-  return specialVignanColleges.some(college => 
-    lowerCollege.includes(college.toLowerCase()) || 
+  return specialVignanColleges.some(college =>
+    lowerCollege.includes(college.toLowerCase()) ||
     college.toLowerCase().includes(lowerCollege)
   );
 };
@@ -48,7 +49,7 @@ async function updateFemaleFees() {
 
     for (const participant of femaleParticipants) {
       const isVignan = isSpecialVignanCollege(participant.college);
-      
+
       if (isVignan) {
         vignanSkipped++;
         console.log(`Skipping Vignan student: ${participant.name} - ${participant.college}`);

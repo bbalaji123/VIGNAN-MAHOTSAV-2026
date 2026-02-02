@@ -4,15 +4,14 @@ import './Schedule.css';
 import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
 import { getDaySchedules, scheduleData } from './data/scheduleData';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt, faClock, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Schedule: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedDay, setSelectedDay] = useState('06.02.2026');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [showWorkshops, setShowWorkshops] = useState(false);
-
-  const daySchedules = getDaySchedules();
 
   // Dynamically calculate available categories based on view mode
   const categories = useMemo(() => {
@@ -36,8 +35,29 @@ const Schedule: React.FC = () => {
     if (showWorkshops) {
       events = events.filter(event => event.isWorkshop);
     } else {
-      // For main schedule, show all events grouped by day
-      events = events.filter(event => event.day === selectedDay);
+      // Show all Main Schedule events (no day filtering anymore)
+      // Keep them sorted by Day, then Time? They are already sorted in scheduleData mostly.
+      // But let's explicitly sort by date to be safe if 'scheduleData' order is mixed.
+      // Or just leave as is if scheduleData is ordered.
+      // Assuming scheduleData is roughly ordered.
+
+      // Exclude workshops from main schedule if that's the intent? 
+      // Logic before was: if (showWorkshops), filter(isWorkshop). Else filter(day === selectedDay).
+      // Since selectedDay logic is gone, "Else" implies show ALL non-workshops? 
+      // Or show ALL events regardless? 
+      // Usually "Workshops Only" implies a toggle. The "Full Schedule" might include workshops or exclude them.
+      // Let's assume "Full Schedule" excludes events explicitly marked as isWorkshop=true if they are separate?
+      // Actually looking at data: workshops were separate events. 
+      // Let's show everything if !showWorkshops OR exclude workshops if they are clutter?
+      // Original Logic:
+      // if (showWorkshops) events.filter(isWorkshop)
+      // else events.filter(day === selectedDay) -> day logic applied to ALL.
+
+      // Let's make "Full Schedule" show EVERYTHING (except maybe workshops if they are clutter, but user said "merge all").
+      // I will exclude workshops from the main "Schedule" view to keep the toggle meaningful, 
+      // OR include everything if safe. Let's exclude workshops on the main list if `isWorkshop` property exists, 
+      // to mirror the toggle behavior (Workshops vs Schedule events).
+      events = events.filter(event => !event.isWorkshop);
     }
 
     // Then apply category filter
@@ -56,9 +76,7 @@ const Schedule: React.FC = () => {
     }
 
     return events;
-  }, [selectedDay, selectedCategory, searchQuery, showWorkshops]);
-
-  const currentDaySchedule = daySchedules.find(day => day.date === selectedDay);
+  }, [selectedCategory, searchQuery, showWorkshops]);
 
   const formatDate = (dateString: string) => {
     const [day, month, year] = dateString.split('.');
@@ -125,46 +143,29 @@ const Schedule: React.FC = () => {
           </button>
         </div>
 
-        {/* Day Tabs - Only show for regular schedule */}
-        {!showWorkshops && (
-          <div className="day-tabs">
-            {daySchedules.map((day) => (
-              <button
-                key={day.date}
-                className={`day-tab ${selectedDay === day.date ? 'active' : ''}`}
-                onClick={() => setSelectedDay(day.date)}
-              >
-                {day.dayName}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Day Tabs Removed as per user request to "merge all" */}
 
         {/* Search and Filter */}
         <div className="search-filter-section">
-          {!showWorkshops && (
-            <input
-              type="text"
-              className="search-box"
-              placeholder="Search events, venues..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          )}
-          {/* Only show category filter for full schedule */}
-          {!showWorkshops && (
-            <select
-              className="category-filter"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          )}
+          <input
+            type="text"
+            className="search-box"
+            placeholder="Search events, venues..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
+          <select
+            className="category-filter"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -174,20 +175,26 @@ const Schedule: React.FC = () => {
           <>
             <div className="events-grid">
               {filteredEvents.map((event, index) => (
-                <div key={index} className="event-card">
+                <div key={`${event.day}-${event.event}-${event.venue}`} className="event-card">
                   <span className="event-category">{event.category}</span>
                   <h3 className="event-name">{event.event}</h3>
                   <div className="event-details">
                     <div className="event-detail-item">
-                      <span className="event-detail-icon">📅</span>
+                      <span className="event-detail-icon">
+                        <FontAwesomeIcon icon={faCalendarAlt} />
+                      </span>
                       <span>{formatDate(event.day)}</span>
                     </div>
                     <div className="event-detail-item">
-                      <span className="event-detail-icon">🕒</span>
+                      <span className="event-detail-icon">
+                        <FontAwesomeIcon icon={faClock} />
+                      </span>
                       <span>{event.time}</span>
                     </div>
                     <div className="event-detail-item">
-                      <span className="event-detail-icon">📍</span>
+                      <span className="event-detail-icon">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      </span>
                       <span>{event.venue}</span>
                     </div>
                   </div>

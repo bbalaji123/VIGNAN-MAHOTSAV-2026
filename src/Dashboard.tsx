@@ -6226,7 +6226,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                           const specialVignanColleges = [
                             'Vignan Pharmacy College',
                             "Vignan's Foundation of Science, Technology & Research",
-                            "Vignan's Lara Institute of Technology & Science"
+                            "Vignan's Lara Institute of Technology & Science",
+                            "Vignan's Nirula Institute of Technology & Science for Women"
                           ];
 
                           if (!myEvents || myEvents.length === 0) return 0;
@@ -8056,7 +8057,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                       const specialVignanColleges = [
                         'Vignan Pharmacy College',
                         "Vignan's Foundation of Science, Technology & Research",
-                        "Vignan's Lara Institute of Technology & Science"
+                        "Vignan's Lara Institute of Technology & Science",
+                        "Vignan's Nirula Institute of Technology & Science for Women"
                       ];
 
                       const isSpecialVignanStudent = specialVignanColleges.some(college =>
@@ -8153,7 +8155,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   const specialVignanColleges = [
                     'Vignan Pharmacy College',
                     "Vignan's Foundation of Science, Technology & Research",
-                    "Vignan's Lara Institute of Technology & Science"
+                    "Vignan's Lara Institute of Technology & Science",
+                    "Vignan's Nirula Institute of Technology & Science for Women"
                   ];
 
                   const isSpecialVignanStudent = specialVignanColleges.some(college =>
@@ -8224,7 +8227,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                           const specialVignanColleges = [
                             'Vignan Pharmacy College',
                             "Vignan's Foundation of Science, Technology & Research",
-                            "Vignan's Lara Institute of Technology & Science"
+                            "Vignan's Lara Institute of Technology & Science",
+                            "Vignan's Nirula Institute of Technology & Science for Women"
                           ];
 
                           const isSpecialVignanStudent = specialVignanColleges.some(college =>
@@ -8288,7 +8292,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                         const specialVignanColleges = [
                           'Vignan Pharmacy College',
                           "Vignan's Foundation of Science, Technology & Research",
-                          "Vignan's Lara Institute of Technology & Science"
+                          "Vignan's Lara Institute of Technology & Science",
+                          "Vignan's Nirula Institute of Technology & Science for Women"
                         ];
 
                         const isSpecialVignanStudent = specialVignanColleges.some(college =>

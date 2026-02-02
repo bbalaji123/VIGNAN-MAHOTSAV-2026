@@ -468,7 +468,8 @@ router.post('/save-events', verifyToken, async (req, res) => {
       const specialVignanColleges = [
         'Vignan Pharmacy College',
         "Vignan's Foundation of Science, Technology & Research",
-        "Vignan's Lara Institute of Technology & Science"
+        "Vignan's Lara Institute of Technology & Science",
+        "Vignan's Nirula Institute of Technology & Science for Women"
       ];
 
       const isSpecialVignanStudent = specialVignanColleges.some(college =>

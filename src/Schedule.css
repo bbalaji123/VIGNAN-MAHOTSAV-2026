@@ -160,7 +160,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    animation: fadeIn 0.5s ease-in;
+    /* animation: fadeIn 0.5s ease-in; */
 }
 
 /* For larger screens */
@@ -208,7 +208,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #fdee71, #f4c430);
+    background: linear-gradient(90deg, #fdee71, #fdee71);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -277,9 +277,12 @@
 }
 
 .event-detail-icon {
-    color: #fdee71;
+    color: #fd71ee !important;
     font-weight: bold;
     min-width: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .no-events {

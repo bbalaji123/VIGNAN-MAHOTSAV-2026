@@ -2969,7 +2969,7 @@ const EventDetail: React.FC = () => {
             </div>
 
             {/* Rules Section */}
-            <div className="p-5 sm:p-8 lg:p-4">
+            <div className="p-5 sm:p-8 lg:p-4 select-text cursor-text">
 
               <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-yellow-400" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', fontFamily: 'Quesha, sans-serif' }}>
                 Rules:

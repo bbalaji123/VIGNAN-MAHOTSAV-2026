@@ -88,7 +88,7 @@ function App() {
             <Route path="/ca-manager/dashboard" element={<CAManagerDashboard />} />
             <Route path="/campus-map" element={<CampusMap />} />
             <Route path="/hospitality" element={<Hospitality />} />
-            <Route path="/our-team" element={<OurTeam />} />
+            <Route path="/our-team/:tab?/:category?" element={<OurTeam />} />
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/para-sports" element={<ParaSports />} />

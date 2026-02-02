@@ -2100,9 +2100,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       // Scroll to top for home
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setShowPageMenu(false);
-    } else if (cardName === 'ABOUT US') {
-      // Navigate to About Us page
-      window.location.href = '/about-us';
     } else if (cardName === 'EVENTS') {
       // Check if user is logged in and is a participant
       if (!isLoggedIn) {
@@ -5800,16 +5797,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
               {activeSubModal === 'OUR TEAM' && (
                 <div className="sub-cards-grid">
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={() => navigate('/our-team/student/Convenor')} style={{ cursor: 'pointer' }}>
                     <h3>CORE TEAM</h3>
                   </div>
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={() => navigate('/our-team/student/Co-Convenors')} style={{ cursor: 'pointer' }}>
                     <h3>ORGANIZING COMMITTEE</h3>
                   </div>
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={() => navigate('/our-team/student/Leads')} style={{ cursor: 'pointer' }}>
                     <h3>VOLUNTEERS</h3>
                   </div>
-                  <div className="sub-card">
+                  <div className="sub-card" onClick={() => navigate('/our-team/faculty/Faculty Core')} style={{ cursor: 'pointer' }}>
                     <h3>COORDINATORS</h3>
                   </div>
                 </div>

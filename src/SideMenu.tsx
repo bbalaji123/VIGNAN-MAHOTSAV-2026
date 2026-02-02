@@ -17,7 +17,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ onMenuClick }) => {
 
   const menuCategories = [
     { name: 'EVENTS', icon: '/menu-dashboard/events.svg' },
-    { name: 'ABOUT US', icon: '/menu-dashboard/team.svg' },
+    { name: 'OUR TEAM', icon: '/menu-dashboard/team.svg' },
     { name: 'SCHEDULE', icon: '/menu-dashboard/Schedule.svg' },
     { name: 'COLLABORATION', icon: '/menu-dashboard/collaboration.svg' },
     { name: 'ZONALS', icon: '/menu-dashboard/zonals.svg' },

@@ -464,18 +464,41 @@ router.post('/save-events', verifyToken, async (req, res) => {
         return 0;
       }
 
-      // Check if user is from special Vignan colleges
+      // Check if user is from special Vignan colleges (only these 5 colleges have 150 fee)
       const specialVignanColleges = [
-        'Vignan Pharmacy College',
-        "Vignan's Foundation of Science, Technology & Research",
-        "Vignan's Lara Institute of Technology & Science",
-        "Vignan's Nirula Institute of Technology & Science for Women"
+        { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+        { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+        { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+        { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
       ];
 
-      const isSpecialVignanStudent = specialVignanColleges.some(college =>
-        userCollege?.toLowerCase().includes(college.toLowerCase()) ||
-        college.toLowerCase().includes(userCollege?.toLowerCase())
-      );
+      const userCollegeLower = (userCollege || '').toLowerCase().trim();
+      
+      console.log(' Fee Calculation Debug:');
+      console.log('  User College:', userCollege);
+      console.log('  User College (lower):', userCollegeLower);
+      
+      const isSpecialVignanStudent = specialVignanColleges.some(college => {
+        const nameLower = college.name.toLowerCase();
+        // Exact match
+        if (userCollegeLower === nameLower) {
+          console.log('  ✅ Exact match found:', college.name);
+          return true;
+        }
+        // Check if any keyword matches
+        const keywordMatch = college.keywords.some(keyword => {
+          const matches = userCollegeLower.includes(keyword);
+          if (matches) {
+            console.log('  ✅ Keyword match found:', keyword, 'for college:', college.name);
+          }
+          return matches;
+        });
+        return keywordMatch;
+      });
+      
+      console.log('  Is Special Vignan Student:', isSpecialVignanStudent);
+      console.log('  Has Sports:', hasSports, 'Has Culturals:', hasCulturals);
 
       // Special Vignan colleges: ₹150 flat fee
       if (isSpecialVignanStudent) {

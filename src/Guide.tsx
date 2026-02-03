@@ -24,6 +24,10 @@ const Guide: React.FC = () => {
     }, 100);
   };
 
+  const handleWhatsAppGroupsClick = () => {
+    navigate('/whatsapp-groups');
+  };
+
   return (
     <div className="guide-container">
       {/* Floating Flower - Top Right - Hidden on mobile */}
@@ -80,9 +84,9 @@ const Guide: React.FC = () => {
       {/* Centered Content: Date and Buttons */}
       <div className="guide-content-center">
         {/* Date Text - Between Logo and Buttons */}
-        <div className="guide-date-middle">5 - 7 FEBRUARY 2025</div>
+        <div className="guide-date-middle"></div>
 
-        {/* Three Buttons */}
+        {/* Four Buttons */}
         <div className="guide-action-buttons">
           <button className="guide-action-btn" onClick={handleMapClick}>
             MAP
@@ -92,6 +96,9 @@ const Guide: React.FC = () => {
           </button>
           <button className="guide-action-btn" onClick={handleContactsClick}>
             CONTACTS
+          </button>
+          <button className="guide-action-btn" onClick={handleWhatsAppGroupsClick}>
+            WHATSAPP GROUPS
           </button>
         </div>
       </div>

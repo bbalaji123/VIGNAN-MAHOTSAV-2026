@@ -6221,10 +6221,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                         <span style={{ color: '#fbbf24', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: ₹{(() => {
                           const userCollege = userProfileData?.college || '';
                           const specialVignanColleges = [
-                            'Vignan Pharmacy College',
-                            "Vignan's Foundation of Science, Technology & Research",
-                            "Vignan's Lara Institute of Technology & Science",
-                            "Vignan's Nirula Institute of Technology & Science for Women"
+                            { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+                            { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+                            { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
                           ];
 
                           if (!myEvents || myEvents.length === 0) return 0;
@@ -6234,10 +6235,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                           if (!hasNormal && hasPara) return 0;
 
-                          const isSpecialVignan = specialVignanColleges.some(college =>
-                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                            college.toLowerCase().includes(userCollege.toLowerCase())
-                          );
+                          const userCollegeLower = userCollege.toLowerCase().trim();
+                          const isSpecialVignan = specialVignanColleges.some(college => {
+                            const nameLower = college.name.toLowerCase();
+                            if (userCollegeLower === nameLower) return true;
+                            return college.keywords.some(keyword => userCollegeLower.includes(keyword));
+                          });
 
                           if (isSpecialVignan) return 150;
 
@@ -6492,7 +6495,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                               background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                               border: 'none',
                               borderRadius: '8px',
-                              color: '#1a1a2e',
+                              color: '#210541',
                               fontSize: '1rem',
                               fontWeight: 'bold',
                               cursor: 'pointer',
@@ -7177,7 +7180,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
               position: 'relative'
             }}>
               <h2 style={{
-                color: 'white',
+                color: '#210541',
                 fontSize: window.innerWidth <= 640 ? '1.35rem' : '1.75rem',
                 fontWeight: 'bold',
                 margin: 0,
@@ -7192,7 +7195,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: 'white',
+                  color: '#210541',
                   fontSize: '1.75rem',
                   cursor: 'pointer',
                   padding: 0,
@@ -7384,7 +7387,30 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                 genderMessage = 'Men-only event';
                               }
 
-                              const finalDisabled = constraintDisabled || genderDisabled;
+                              // NEW: Check if male user with paid status who only registered for culturals is trying to access sports
+                              let paidCulturalsOnlyDisabled = false;
+                              let paidCulturalsOnlyMessage = '';
+                              if (!isParaEvent && eventId.startsWith('sport-')) {
+                                const userPaymentStatus = userProfileData?.paymentStatus?.toLowerCase();
+                                const hasCulturalsRegistered = myEvents.some(e => {
+                                  const t = (e.eventType || '').toLowerCase();
+                                  return t === 'culturals' || t === 'cultural';
+                                });
+                                const hasSportsRegistered = myEvents.some(e => {
+                                  const t = (e.eventType || '').toLowerCase();
+                                  return t === 'sports' || t === 'sport';
+                                });
+
+                                if (userGender === 'male' && 
+                                    userPaymentStatus === 'paid' && 
+                                    hasCulturalsRegistered && 
+                                    !hasSportsRegistered) {
+                                  paidCulturalsOnlyDisabled = true;
+                                  paidCulturalsOnlyMessage = 'Approach Registration desk';
+                                }
+                              }
+
+                              const finalDisabled = constraintDisabled || genderDisabled || paidCulturalsOnlyDisabled;
                               const isChecked = selectedRegistrationEvents.has(eventId);
 
                               return (
@@ -7415,13 +7441,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                       : 'rgba(255, 255, 255, 0.08)';
                                   }}
                                   onClick={(e) => {
-                                    if (constraintDisabled) {
+                                    if (paidCulturalsOnlyDisabled) {
+                                      e.preventDefault();
+                                      showToast.warning('Approach Registration desk');
+                                    } else if (constraintDisabled) {
                                       e.preventDefault();
                                       if (isParaEvent) {
                                         showToast.warning('You have selected regular Sports or Cultural events. Please deselect them before selecting Para Sports events.');
                                       } else {
                                         showToast.warning('You have selected Para Sports events. Please deselect them before selecting regular Sports or Cultural events.');
                                       }
+                                    } else if (genderDisabled) {
+                                      e.preventDefault();
+                                      showToast.warning(genderMessage);
                                     }
                                   }}
                                 >
@@ -7457,6 +7489,29 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                           }
                                         }
 
+                                        // NEW VALIDATION: Male users with paid status who only registered for culturals cannot edit sports
+                                        // This applies to sports events only (not para sports)
+                                        if (!isParaEvent && eventId.startsWith('sport-')) {
+                                          const userPaymentStatus = userProfileData?.paymentStatus?.toLowerCase();
+                                          const hasCulturalsRegistered = myEvents.some(e => {
+                                            const t = (e.eventType || '').toLowerCase();
+                                            return t === 'culturals' || t === 'cultural';
+                                          });
+                                          const hasSportsRegistered = myEvents.some(e => {
+                                            const t = (e.eventType || '').toLowerCase();
+                                            return t === 'sports' || t === 'sport';
+                                          });
+
+                                          // If male user with paid status has culturals but no sports, block sports selection
+                                          if (userGender === 'male' && 
+                                              userPaymentStatus === 'paid' && 
+                                              hasCulturalsRegistered && 
+                                              !hasSportsRegistered) {
+                                            showToast.warning('Approach Registration desk');
+                                            return;
+                                          }
+                                        }
+
                                         if (isParaEvent) {
                                           // We are adding a PARA event
                                           const hasNormalCurrent = Array.from(currentSet).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
@@ -7473,6 +7528,30 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                                           if (hasParaCurrent || hasParaPast) {
                                             showToast.warning('You have already registered for (or selected) Para Sports events. You cannot register for regular Sports/Cultural events additionally.');
+                                            return;
+                                          }
+                                        }
+                                      } else {
+                                        // User is trying to DESELECT an event
+                                        // Apply same restriction: male with paid status who only has culturals cannot edit sports
+                                        if (!isParaEvent && eventId.startsWith('sport-')) {
+                                          const userGender = userProfileData?.gender?.toLowerCase();
+                                          const userPaymentStatus = userProfileData?.paymentStatus?.toLowerCase();
+                                          const hasCulturalsRegistered = myEvents.some(e => {
+                                            const t = (e.eventType || '').toLowerCase();
+                                            return t === 'culturals' || t === 'cultural';
+                                          });
+                                          const hasSportsRegistered = myEvents.some(e => {
+                                            const t = (e.eventType || '').toLowerCase();
+                                            return t === 'sports' || t === 'sport';
+                                          });
+
+                                          // If male user with paid status has culturals but no sports, block sports deselection
+                                          if (userGender === 'male' && 
+                                              userPaymentStatus === 'paid' && 
+                                              hasCulturalsRegistered && 
+                                              !hasSportsRegistered) {
+                                            showToast.warning('Approach Registration desk');
                                             return;
                                           }
                                         }
@@ -7502,6 +7581,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                       {genderDisabled && (
                                         <span style={{ color: '#fbbf24', fontSize: '0.75rem', marginLeft: '0.5rem' }}>
                                           ({genderMessage})
+                                        </span>
+                                      )}
+                                      {paidCulturalsOnlyDisabled && (
+                                        <span style={{ color: '#ef4444', fontSize: '0.75rem', marginLeft: '0.5rem' }}>
+                                          ({paidCulturalsOnlyMessage})
                                         </span>
                                       )}
                                     </div>
@@ -8050,18 +8134,21 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                       const userGender = userProfileData.gender?.toLowerCase();
                       const userCollege = userProfileData.college || '';
 
-                      // Check if user is from one of the special Vignan colleges
+                      // Check if user is from one of the special Vignan colleges (only these 5 have 150 fee)
                       const specialVignanColleges = [
-                        'Vignan Pharmacy College',
-                        "Vignan's Foundation of Science, Technology & Research",
-                        "Vignan's Lara Institute of Technology & Science",
-                        "Vignan's Nirula Institute of Technology & Science for Women"
+                        { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+                        { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+                        { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+                        { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+                        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
                       ];
 
-                      const isSpecialVignanStudent = specialVignanColleges.some(college =>
-                        userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                        college.toLowerCase().includes(userCollege.toLowerCase())
-                      );
+                      const userCollegeLower = userCollege.toLowerCase().trim();
+                      const isSpecialVignanStudent = specialVignanColleges.some(college => {
+                        const nameLower = college.name.toLowerCase();
+                        if (userCollegeLower === nameLower) return true;
+                        return college.keywords.some(keyword => userCollegeLower.includes(keyword));
+                      });
 
                       let fee = 0;
 
@@ -8148,18 +8235,21 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     return;
                   }
 
-                  // Check if user is from one of the special Vignan colleges
+                  // Check if user is from one of the special Vignan colleges (only these 5 have 150 fee)
                   const specialVignanColleges = [
-                    'Vignan Pharmacy College',
-                    "Vignan's Foundation of Science, Technology & Research",
-                    "Vignan's Lara Institute of Technology & Science",
-                    "Vignan's Nirula Institute of Technology & Science for Women"
+                    { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+                    { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+                    { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+                    { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+                    { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
                   ];
 
-                  const isSpecialVignanStudent = specialVignanColleges.some(college =>
-                    userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                    college.toLowerCase().includes(userCollege.toLowerCase())
-                  );
+                  const userCollegeLower = userCollege.toLowerCase().trim();
+                  const isSpecialVignanStudent = specialVignanColleges.some(college => {
+                    const nameLower = college.name.toLowerCase();
+                    if (userCollegeLower === nameLower) return true;
+                    return college.keywords.some(keyword => userCollegeLower.includes(keyword));
+                  });
 
                   let fee = 0;
 
@@ -8222,16 +8312,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                           // Check if user is from one of the special Vignan colleges
                           const specialVignanColleges = [
-                            'Vignan Pharmacy College',
-                            "Vignan's Foundation of Science, Technology & Research",
-                            "Vignan's Lara Institute of Technology & Science",
-                            "Vignan's Nirula Institute of Technology & Science for Women"
+                            { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+                            { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+                            { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
                           ];
 
-                          const isSpecialVignanStudent = specialVignanColleges.some(college =>
-                            userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                            college.toLowerCase().includes(userCollege.toLowerCase())
-                          );
+                          const userCollegeLower = userCollege.toLowerCase().trim();
+                          const isSpecialVignanStudent = specialVignanColleges.some(college => {
+                            const nameLower = college.name.toLowerCase();
+                            if (userCollegeLower === nameLower) return true;
+                            return college.keywords.some(keyword => userCollegeLower.includes(keyword));
+                          });
 
                           // If from special Vignan colleges, fee is always 150
                           if (isSpecialVignanStudent) {
@@ -8287,16 +8380,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                         // Check if user is from one of the special Vignan colleges
                         const specialVignanColleges = [
-                          'Vignan Pharmacy College',
-                          "Vignan's Foundation of Science, Technology & Research",
-                          "Vignan's Lara Institute of Technology & Science",
-                          "Vignan's Nirula Institute of Technology & Science for Women"
+                          { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
+                          { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
+                          { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
+                          { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
+                          { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
                         ];
 
-                        const isSpecialVignanStudent = specialVignanColleges.some(college =>
-                          userCollege.toLowerCase().includes(college.toLowerCase()) ||
-                          college.toLowerCase().includes(userCollege.toLowerCase())
-                        );
+                        const userCollegeLower = userCollege.toLowerCase().trim();
+                        const isSpecialVignanStudent = specialVignanColleges.some(college => {
+                          const nameLower = college.name.toLowerCase();
+                          if (userCollegeLower === nameLower) return true;
+                          return college.keywords.some(keyword => userCollegeLower.includes(keyword));
+                        });
 
                         // If from special Vignan colleges, fee is always 150
                         if (isSpecialVignanStudent) {
@@ -8503,7 +8599,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                 style={{
                   padding: '0.875rem 2rem',
                   background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
-                  color: 'white',
+                  color: '#210541',
                   fontSize: '1rem',
                   fontWeight: 'bold',
                   borderRadius: '0.5rem',

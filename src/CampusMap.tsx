@@ -121,7 +121,7 @@ const CampusMap: React.FC = () => {
           >
             {/* LEFT: Campus Image */}
             <img
-              src="/images/map.png"
+              src="/images/Map123.avif"
               alt="Campus Blueprint - Mahotsav 2025 Venue Locations"
               className="w-[85%] max-w-[600px] h-auto object-contain cursor-pointer transition-transform hover:scale-105"
               onClick={handleImageClick}
@@ -205,7 +205,7 @@ const CampusMap: React.FC = () => {
             ×
           </button>
           <img
-            src="/images/map.png"
+            src="/images/Map123.avif"
             alt="Campus Blueprint - Full View"
             onClick={(e) => e.stopPropagation()}
             style={{

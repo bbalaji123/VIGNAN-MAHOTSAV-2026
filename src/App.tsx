@@ -25,6 +25,7 @@ const Vizag = lazy(() => import('./Vizag'));
 const Hyderabad = lazy(() => import('./Hyderabad'));
 const Tirupathi = lazy(() => import('./Tirupathi'));
 const Guide = lazy(() => import('./Guide'));
+const WhatsAppGroups = lazy(() => import('./WhatsAppGroups'));
 
 function App() {
   const [isDashboardLoaded, setIsDashboardLoaded] = useState(false);
@@ -100,6 +101,7 @@ function App() {
             <Route path="/zonals/hyderabad" element={<Hyderabad />} />
             <Route path="/zonals/tirupathi" element={<Tirupathi />} />
             <Route path="/guide" element={<Guide />} />
+            <Route path="/whatsapp-groups" element={<WhatsAppGroups />} />
             {/* Catch all route - redirect any unknown routes to main page */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

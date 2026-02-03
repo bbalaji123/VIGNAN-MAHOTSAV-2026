@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Schedule.css';
 import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
-import { getDaySchedules, scheduleData } from './data/scheduleData';
+import { scheduleData } from './data/scheduleData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -35,28 +35,6 @@ const Schedule: React.FC = () => {
     if (showWorkshops) {
       events = events.filter(event => event.isWorkshop);
     } else {
-      // Show all Main Schedule events (no day filtering anymore)
-      // Keep them sorted by Day, then Time? They are already sorted in scheduleData mostly.
-      // But let's explicitly sort by date to be safe if 'scheduleData' order is mixed.
-      // Or just leave as is if scheduleData is ordered.
-      // Assuming scheduleData is roughly ordered.
-
-      // Exclude workshops from main schedule if that's the intent? 
-      // Logic before was: if (showWorkshops), filter(isWorkshop). Else filter(day === selectedDay).
-      // Since selectedDay logic is gone, "Else" implies show ALL non-workshops? 
-      // Or show ALL events regardless? 
-      // Usually "Workshops Only" implies a toggle. The "Full Schedule" might include workshops or exclude them.
-      // Let's assume "Full Schedule" excludes events explicitly marked as isWorkshop=true if they are separate?
-      // Actually looking at data: workshops were separate events. 
-      // Let's show everything if !showWorkshops OR exclude workshops if they are clutter?
-      // Original Logic:
-      // if (showWorkshops) events.filter(isWorkshop)
-      // else events.filter(day === selectedDay) -> day logic applied to ALL.
-
-      // Let's make "Full Schedule" show EVERYTHING (except maybe workshops if they are clutter, but user said "merge all").
-      // I will exclude workshops from the main "Schedule" view to keep the toggle meaningful, 
-      // OR include everything if safe. Let's exclude workshops on the main list if `isWorkshop` property exists, 
-      // to mirror the toggle behavior (Workshops vs Schedule events).
       events = events.filter(event => !event.isWorkshop);
     }
 

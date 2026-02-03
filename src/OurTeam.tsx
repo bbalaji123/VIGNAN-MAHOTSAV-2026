@@ -14,15 +14,6 @@ const OurTeam: React.FC = () => {
     return 'student';
   });
 
-  const [selectedFacultyCategory, setSelectedFacultyCategory] = useState<string>(() => {
-    if (tab === 'faculty' && category) return decodeURIComponent(category);
-    return 'All';
-  });
-
-  const [selectedStudentCategory, setSelectedStudentCategory] = useState<string>(() => {
-    if ((!tab || tab === 'student') && category) return decodeURIComponent(category);
-    return 'All';
-  });
 
   // Sync state with URL parameters
   useEffect(() => {
@@ -30,28 +21,12 @@ const OurTeam: React.FC = () => {
       setActiveTab(tab as 'faculty' | 'student');
     }
 
-    if (category) {
-      const decodedCategory = decodeURIComponent(category);
-      if (tab === 'faculty') {
-        setSelectedFacultyCategory(decodedCategory);
-      } else {
-        setSelectedStudentCategory(decodedCategory);
-      }
-    }
   }, [tab, category]);
 
   const handleTabChange = (newTab: 'faculty' | 'student') => {
-    const currentCategory = newTab === 'faculty' ? selectedFacultyCategory : selectedStudentCategory;
-    navigate(`/our-team/${newTab}/${encodeURIComponent(currentCategory)}`);
+    navigate(`/our-team/${newTab}`);
   };
 
-  const handleFacultyCategoryChange = (newCategory: string) => {
-    navigate(`/our-team/faculty/${encodeURIComponent(newCategory)}`);
-  };
-
-  const handleStudentCategoryChange = (newCategory: string) => {
-    navigate(`/our-team/student/${encodeURIComponent(newCategory)}`);
-  };
 
   const handleBackClick = () => {
     navigate('/?menu=true');
@@ -59,14 +34,53 @@ const OurTeam: React.FC = () => {
 
   const facultyMembers = useMemo(
     () => [
-      { name: 'Dr. Ananya Rao', role: 'Cultural Outreach', detail: 'Faculty', category: 'Convenor', image: '' },
-      { name: 'Prof. Rahul Menon', role: 'Tech Lead', detail: 'Faculty', category: 'Co-Convenor', image: '' },
-      { name: 'Dr. Kavya Sen', role: 'Performing Arts', detail: 'Faculty', category: 'Faculty Core', image: '' },
-      { name: 'Dr. Mira Kulkarni', role: 'Guest Curation', detail: 'Faculty', category: 'Faculty Leads', image: '' },
-      { name: 'Prof. Dev Joshi', role: 'Logistics', detail: 'Faculty', category: 'Faculty Core', image: '' }
+      { name: 'Faculty Convenor', role: 'Convenor', detail: 'Faculty', category: 'Convenor', image: '/images/Web College Data/1.avif' },
+      { name: 'Faculty Co-Convenor', role: 'Co-Convenor', detail: 'Faculty', category: 'Co-Convenor', image: '/images/Web College Data/2.avif' },
+      { name: 'Faculty Core 1', role: 'Core Team', detail: 'Faculty', category: 'Faculty Core', image: '/images/Web College Data/3.avif' },
+      { name: 'Faculty Core 2', role: 'Core Team', detail: 'Faculty', category: 'Faculty Core', image: '/images/Web College Data/4.avif' },
+      { name: 'Faculty Core 3', role: 'Core Team', detail: 'Faculty', category: 'Faculty Core', image: '/images/Web College Data/5.avif' },
+      { name: 'Faculty Core 3', role: 'Core Team', detail: 'Faculty', category: 'Faculty Core', image: '/images/Web College Data/6.avif' }
     ],
     []
   );
+
+  const verticalLeads = [
+    { name: 'Alma Connects', folder: '1', count: 4, prefix: 'ALMA' },
+    { name: 'Ambience', folder: '2', count: 5, prefix: 'AMB' },
+    { name: 'Anchoring & Content Writing', folder: '3', count: 4, prefix: 'ACW' },
+    { name: 'Controls', folder: '4', count: 5, prefix: 'CNT' },
+    { name: 'Cricket Championship', folder: '5', count: 3, prefix: 'MCC' },
+    { name: 'Dance Competitions', folder: '6', count: 4, prefix: 'DC' },
+    { name: 'Dance Performances', folder: '7', count: 3, prefix: 'DP' },
+    { name: 'Dramatics Competitions', folder: '8', count: 2, prefix: 'DRA' },
+    { name: 'Fashion & Spot-light Competitions', folder: '9', count: 5, prefix: 'FSL' },
+    { name: 'Fine Arts Competitions', folder: '10', count: 3, prefix: 'FAC' },
+    { name: 'Food Stalls', folder: '11', count: 1, prefix: 'FOOD' },
+    { name: 'Gaming', folder: '12', count: 3, prefix: 'GM' },
+    { name: 'Guest Lecture and Workshops', folder: '13', count: 4, prefix: 'GL&W' },
+    { name: 'Hospitality & Transport', folder: '14', count: 8, prefix: 'H&T' },
+    { name: 'Informals & Event Management', folder: '15', count: 6, prefix: 'I&EM ' },
+    { name: 'Literary Competitions', folder: '16', count: 5, prefix: 'LC ' },
+    { name: 'Public Relations & Digital Marketing', folder: '17', count: 6, prefix: 'PR' },
+    { name: 'Logistics', folder: '18', count: 4, prefix: 'LOG ' },
+    { name: 'Mahotsav Social Responsibility', folder: '19', count: 5, prefix: 'MSR ' },
+    { name: 'Multimedia Competitions', folder: '20', count: 5, prefix: 'MMC' },
+    { name: 'Media Relations & Guest Interviews', folder: '21', count: 4, prefix: 'MR&GI ' },
+    { name: 'Multimedia & Design', folder: '22', count: 4, prefix: 'TD' },
+    { name: 'Music Performances', folder: '23', count: 4, prefix: 'MP' },
+    { name: 'Music Competitions', folder: '24', count: 4, prefix: 'MC' },
+    { name: 'Photography & Video-Editing', folder: '25', count: 5, prefix: 'PVE' },
+    { name: 'Registrations', folder: '26', count: 2, prefix: 'Registrations' },
+    { name: 'Sports & Games – Individual Events (M&W)', folder: '27', count: 6, prefix: 'IE(M&W)' },
+    { name: 'Sports & Games – Team Events (Men)', folder: '28', count: 6, prefix: 'Team Events (Men)' },
+    { name: 'Sports & Games – Team Events (Women)', folder: '29', count: 7, prefix: 'Team Events (women)1 (2)' },
+    { name: 'Sports & Games – Track & Field (Men)', folder: '30', count: 5, prefix: 'Track & Field (Men)' },
+    { name: 'Sports & Games – Track & Field (Women)', folder: '31', count: 1, prefix: 'Track & Field (Women)' },
+    { name: 'Stage & Quality Management', folder: '32', count: 4, prefix: 's&q' },
+    { name: 'Sponsorship', folder: '33', count: 2, prefix: 'Sponsorship' },
+    { name: 'Techno Races & Sports', folder: '34', count: 4, prefix: 'TSR' },
+    { name: 'Web & IT Design', folder: '35', count: 1, prefix: 'WEB' }
+  ];
 
   const studentMembers = useMemo(
     () => [
@@ -85,24 +99,101 @@ const OurTeam: React.FC = () => {
         category: 'Core',
         image: `/images/Web College Data/CORE${(i % 18) + 1}.avif`
       })),
-      { name: 'Student Lead', role: 'Vertical Lead', detail: 'Student', category: 'Leads', image: '/images/Web College Data/CORE.avif' }
+      ...verticalLeads.flatMap(vertical => {
+        // Special handling for folder 35 (WEB) which has no number
+        if (vertical.folder === '35') {
+          return [{ 
+            name: vertical.name,
+            role: 'Vertical Lead',
+            detail: 'Student',
+            category: `Leads-${vertical.name}`,
+            image: `/images/35/WEB.avif`
+          }];
+        }
+        
+        // Special handling for folder 29 (Team Events Women) with irregular naming
+        if (vertical.folder === '29') {
+          const images = [
+            'Team Events (women)1.avif',
+            'Team Events (women)2.avif',
+            'Team Events (women)3.avif',
+            'Team Events (women)4.avif',
+            'Team Events (women)1 (2).avif',
+            'Team Events (women)2 (2).avif',
+            'Team Events (women)3 (2).avif'
+          ];
+          return images.map(img => ({
+            name: vertical.name,
+            role: 'Vertical Lead',
+            detail: 'Student',
+            category: `Leads-${vertical.name}`,
+            image: `/images/29/${img}`
+          }));
+        }
+        
+        // Regular handling for all other folders
+        return Array.from({ length: vertical.count }).map((_, i) => ({
+          name: vertical.name,
+          role: 'Vertical Lead',
+          detail: 'Student',
+          category: `Leads-${vertical.name}`,
+          image: `/images/${vertical.folder}/${vertical.prefix}${i + 1}.avif`
+        }));
+      })
     ],
     []
   );
 
   const categories = useMemo(() => {
     if (activeTab === 'faculty') return ['Convenor', 'Co-Convenor', 'Faculty Core', 'Faculty Leads'];
-    return ['Convenor', 'Co-Convenors', 'Core', 'Leads'];
+    return [
+      'Convenor',
+      'Co-Convenors',
+      'Core',
+      'Leads-Alma Connects',
+      'Leads-Ambience',
+      'Leads-Anchoring & Content Writing',
+      'Leads-Controls',
+      'Leads-Cricket Championship',
+      'Leads-Dance Competitions',
+      'Leads-Dance Performances',
+      'Leads-Dramatics Competitions',
+      'Leads-Fashion & Spot-light Competitions',
+      'Leads-Fine Arts Competitions',
+      'Leads-Food Stalls',
+      'Leads-Gaming',
+      'Leads-Guest Lecture and Workshops',
+      'Leads-Hospitality & Transport',
+      'Leads-Informals & Event Management',
+      'Leads-Literary Competitions',
+      'Leads-Public Relations & Digital Marketing',
+      'Leads-Logistics',
+      'Leads-Mahotsav Social Responsibility',
+      'Leads-Multimedia Competitions',
+      'Leads-Media Relations & Guest Interviews',
+      'Leads-Multimedia & Design',
+      'Leads-Music Performances',
+      'Leads-Music Competitions',
+      'Leads-Photography & Video-Editing',
+      'Leads-Registrations',
+      'Leads-Sports & Games – Individual Events (M&W)',
+      'Leads-Sports & Games – Team Events (Men)',
+      'Leads-Sports & Games – Team Events (Women)',
+      'Leads-Sports & Games – Track & Field (Men)',
+      'Leads-Sports & Games – Track & Field (Women)',
+      'Leads-Stage & Quality Management',
+      'Leads-Sponsorship',
+      'Leads-Techno Races & Sports',
+      'Leads-Web & IT Design'
+    ];
   }, [activeTab]);
 
   const displayedMembers = useMemo(() => {
     if (activeTab === 'student') {
-      if (selectedStudentCategory === 'All') return studentMembers;
-      return studentMembers.filter(m => m.category === selectedStudentCategory);
+      return studentMembers;
     }
-    if (selectedFacultyCategory === 'All') return facultyMembers;
-    return facultyMembers.filter(m => m.category === selectedFacultyCategory);
-  }, [activeTab, studentMembers, facultyMembers, selectedFacultyCategory, selectedStudentCategory]);
+    return facultyMembers;
+  }, [activeTab, studentMembers, facultyMembers]);
 
   const groupedMembers = useMemo(() => {
     const members = activeTab === 'faculty' ? facultyMembers : studentMembers;
@@ -163,7 +254,7 @@ const OurTeam: React.FC = () => {
           /* Performance Optimized Team Card Styles */
           .team-card {
             width: 300px;
-            height: 400px;
+            height: 450px;
             aspect-ratio: 3/4;
             border-radius: 10px;
             overflow: hidden;
@@ -176,12 +267,6 @@ const OurTeam: React.FC = () => {
             transform: translateZ(0); /* Force GPU */
           }
 
-          /* Spotlight Effect: Dims others ONLY when a card is hovered (not the gap) */
-          .team-grid:has(.team-card:hover) .team-card:not(:hover) {
-            filter: grayscale(1) brightness(0.5);
-            opacity: 0.6;
-            transform: scale(0.95) translateZ(0);
-          }
 
           .team-card:hover {
             transform: scale(1.1) translateZ(0);
@@ -250,11 +335,8 @@ const OurTeam: React.FC = () => {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 flex flex-col justify-center items-center min-h-[80vh]">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-4 sm:mb-6" style={{
-          background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textShadow: '0 0 30px rgba(251, 191, 36, 0.3)',
+          color: '#fdee71',
+          textShadow: '0 0 30px rgba(253, 238, 113, 0.3)',
           marginTop: '18px'
         }}>OUR TEAM</h1>
         <div className="flex flex-wrap justify-center gap-2 md:gap-6 pb-6" style={{ marginTop: '20px', marginBottom: '30px' }}>
@@ -275,37 +357,14 @@ const OurTeam: React.FC = () => {
             </button>
           ))}
 
-          {activeTab === 'faculty' && (
-            <select
-              value={selectedFacultyCategory}
-              onChange={(e) => handleFacultyCategoryChange(e.target.value)}
-              className="bg-black/40 text-white border-2 border-[#fdee71]/50 hover:scale-105 transition-all font-semibold uppercase tracking-wider backdrop-blur-md cursor-pointer focus:outline-none focus:border-[#fdee71] px-[30px] py-[25px] md:py-[10px] text-[18px] rounded-lg ml-0 mt-12 md:mt-0 md:ml-[560px] w-[60%] md:w-auto"
-            >
-              {['All', ...['Convenor', 'Co-Convenor', 'Faculty Core', 'Faculty Leads']].map(cat => (
-                <option key={cat} value={cat} className="bg-gray-900 text-white">
-                  {cat}
-                </option>
-              ))}
-            </select>
-          )}
-
-          {activeTab === 'student' && (
-            <select
-              value={selectedStudentCategory}
-              onChange={(e) => handleStudentCategoryChange(e.target.value)}
-              className="bg-black/40 text-white border-2 border-[#fdee71]/50 hover:scale-105 transition-all font-semibold uppercase tracking-wider backdrop-blur-md cursor-pointer focus:outline-none focus:border-[#fdee71] px-[30px] py-[25px] md:py-[10px] text-[18px] rounded-lg ml-0 mt-12 md:mt-0 md:ml-[560px] w-[60%] md:w-auto"
-            >
-              {['All', ...['Convenor', 'Co-Convenors', 'Core', 'Leads']].map(cat => (
-                <option key={cat} value={cat} className="bg-gray-900 text-white">
-                  {cat}
-                </option>
-              ))}
-            </select>
-          )}
         </div>
 
-        {(activeTab === 'faculty' ? selectedFacultyCategory : selectedStudentCategory) === 'All' ? (
-          groupedMembers.map((group, groupIndex) => (
+        {groupedMembers.map((group, groupIndex) => {
+          const isLeadsSection = group.name.startsWith('Leads-');
+          const leadsVerticalName = isLeadsSection ? group.name.replace('Leads-', '') : '';
+          const isFirstLeadsSection = group.name === 'Leads-Alma Connects';
+          
+          return (
             <div
               key={groupIndex}
               className="w-full flex flex-col items-center section-animated"
@@ -314,68 +373,49 @@ const OurTeam: React.FC = () => {
                 animationDelay: `${groupIndex * 0.2}s`
               }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-[0.25em] text-amber-400 border-b-2 border-amber-400/30 text-center"
-                style={{ marginTop: '10px', marginBottom: '40px', paddingBottom: '10px' }}>
-                {group.name}
-              </h2>
+              {/* Add main LEADS heading before first vertical */}
+              {isFirstLeadsSection && (
+                <h2 className="text-5xl md:text-6xl font-bold uppercase tracking-[0.25em] border-b-2 border-amber-400/30 text-center"
+                  style={{ marginTop: '10px', marginBottom: '60px', paddingBottom: '10px', color: '#fdee71' }}>
+                  LEADS
+                </h2>
+              )}
+              
+              {/* Subheading for vertical name */}
+              <h3 className={`${isLeadsSection ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'} font-bold uppercase tracking-[0.25em] border-b-2 border-amber-400/30 text-center`}
+                style={{ marginTop: isLeadsSection ? '0' : '10px', marginBottom: '40px', paddingBottom: '10px', color: '#fdee71' }}>
+                {isLeadsSection ? leadsVerticalName : group.name}
+              </h3>
               <div className="w-full max-w-5xl flex flex-wrap justify-center gap-10 team-grid">
-                {group.members.map((member, index) => (
-                  <div
-                    key={index}
-                    className="team-card shadow-2xl flex flex-col items-center stagger-card"
-                    style={{ animationDelay: `${(groupIndex * 0.2) + (index * 0.05)}s` }}
-                  >
-                    <div className="w-full h-full overflow-hidden relative">
-                      {member.image ? (
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          width={300}
-                          height={400}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-white/10 flex items-center justify-center">
-                          <span className={activeTab === 'faculty' ? "text-2xl" : "text-6xl"}>
-                            {activeTab === 'faculty' ? "Coming....!!" : "👤"}
-                          </span>
-                        </div>
-                      )}
-                    </div>
+              {group.members.map((member, index) => (
+                <div
+                  key={index}
+                  className="team-card shadow-2xl flex flex-col items-center stagger-card"
+                  style={{ animationDelay: `${(groupIndex * 0.2) + (index * 0.05)}s` }}
+                >
+                  <div className="w-full h-full overflow-hidden relative">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        width={300}
+                        height={400}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-white/10 flex items-center justify-center">
+                        <span className={activeTab === 'faculty' ? "text-2xl" : "text-6xl"}>
+                          {activeTab === 'faculty' ? "Coming....!!" : "👤"}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="w-full max-w-5xl flex flex-wrap justify-center gap-10 mt-4 mb-20 team-grid section-animated">
-            {displayedMembers.map((member, index) => (
-              <div
-                key={index}
-                className="team-card shadow-2xl flex flex-col items-center stagger-card"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="w-full h-full overflow-hidden relative">
-                  {member.image ? (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      width={300}
-                      height={400}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-white/10 flex items-center justify-center">
-                      <span className={activeTab === 'faculty' ? "text-2xl" : "text-6xl"}>
-                        {activeTab === 'faculty' ? "Coming....!!" : "👤"}
-                      </span>
-                    </div>
-                  )}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        )}
+        );
+        })}
       </div>
     </div>
   );

@@ -1263,10 +1263,7 @@ const EventsInfo: React.FC = () => {
                     className="download-rulebook-btn download-rulebook-desktop"
                     onClick={(e) => {
                       e.stopPropagation();
-                      const link = document.createElement('a');
-                      link.href = '/COMPETE RULE BOOK.pdf';
-                      link.download = 'COMPETE RULE BOOK.pdf';
-                      link.click();
+                      window.open('https://drive.google.com/uc?export=download&id=1YUaj5VF70BrBjeHLh92Khl-anJwyrIfs', '_blank');
                     }}
                   >
                     DOWNLOAD RULEBOOK
@@ -1338,10 +1335,7 @@ const EventsInfo: React.FC = () => {
                   className="download-rulebook-btn download-rulebook-mobile"
                   onClick={(e) => {
                     e.stopPropagation();
-                    const link = document.createElement('a');
-                    link.href = '/COMPETE RULE BOOK.pdf';
-                    link.download = 'COMPETE RULE BOOK.pdf';
-                    link.click();
+                    window.open('https://drive.google.com/uc?export=download&id=1YUaj5VF70BrBjeHLh92Khl-anJwyrIfs', '_blank');
                   }}
                 >
                   DOWNLOAD RULEBOOK

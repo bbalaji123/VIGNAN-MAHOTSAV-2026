@@ -11,7 +11,7 @@ const OurTeam: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<'faculty' | 'student' | 'web'>(() => {
     if (tab === 'faculty' || tab === 'student' || tab === 'web') return tab as 'faculty' | 'student' | 'web';
-    return 'student';
+    return 'web';
   });
 
 

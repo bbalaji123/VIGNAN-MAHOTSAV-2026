@@ -79,36 +79,26 @@ const Sponsors: React.FC = () => {
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',
-        textShadow: '0 0 30px rgba(253, 238, 113, 0.3)'          
+        textShadow: '0 0 30px rgba(253, 238, 113, 0.3)',
+        marginTop: '20px'
 
       }}>SPONSORS</h1>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full max-w-7xl px-4">
-        {[1, 2, 3, 4].flatMap(imgNum =>
-          Array.from({ length: 9 }).map((_, i) => ({ imgNum, index: i }))
-        ).map(({ imgNum, index }, uniqueId) => (
+      <div className="grid grid-cols-2 gap-6 w-full max-w-7xl px-4">
+        {[1, 2, 3, 4].map((imgNum, index) => (
           <div
-            key={`${imgNum}-${index}`}
-            className="group relative aspect-square rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 ease-out bg-white shadow-lg border border-white/20"
+            key={imgNum}
+            className="aspect-square flex items-center justify-center"
             style={{
-              animation: `fadeInUp 0.8s ease-out ${0.1 + uniqueId * 0.05}s forwards`,
+              animation: `fadeInUp 0.8s ease-out ${0.1 + index * 0.05}s forwards`,
               opacity: 0
             }}
           >
-            <div
-              className="w-full h-full transition-transform duration-500 group-hover:scale-110"
-              style={{
-                backgroundImage: `url('/${imgNum}.jpeg')`,
-                backgroundSize: '900% 100%',
-                backgroundPosition: `${(index / 8) * 100}% center`,
-                backgroundRepeat: 'no-repeat'
-              }}
+            <img
+              src={`/${imgNum}.jpeg`}
+              alt={`Sponsor ${imgNum}`}
+              className="w-full h-full object-contain"
             />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
-              <p className="text-white text-xs text-center font-medium">Partner</p>
-            </div>
           </div>
         ))}
       </div>

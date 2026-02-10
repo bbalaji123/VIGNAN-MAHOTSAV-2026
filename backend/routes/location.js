@@ -41,12 +41,13 @@ async function loadLocationData() {
       fs.readFile(path.join(dataPath, 'college.json'), 'utf-8')
     ]);
 
-    // Parse JSON data
-    statesCache = JSON.parse(statesData);
-    districtsCache = JSON.parse(districtsData);
+    // Parse JSON data, strip byte-order-mark if present
+    const stripBOM = (text) => text && text.replace(/^\uFEFF/, '');
+    statesCache = JSON.parse(stripBOM(statesData));
+    districtsCache = JSON.parse(stripBOM(districtsData));
 
     // Parse and process colleges
-    const rawColleges = JSON.parse(collegesData);
+    const rawColleges = JSON.parse(stripBOM(collegesData));
 
     // Filter out invalid entries
     const validColleges = rawColleges.filter(c => c && c.Name && typeof c.Name === 'string');

@@ -8,38 +8,16 @@ const WhatsAppGroups: React.FC = () => {
   const navigate = useNavigate();
 
   const whatsappGroups = [
-    { name: 'Cultural Events', link: '#' },
-    { name: 'Dance Competition', link: '#' },
-    { name: 'Music Competition', link: '#' },
-    { name: 'Drama & Theatre', link: '#' },
-    { name: 'Art & Craft', link: '#' },
-    { name: 'Photography', link: '#' },
-    { name: 'Sports Events', link: '#' },
-    { name: 'Gaming Zone', link: '#' },
-    { name: 'Tech Events', link: '#' },
-    { name: 'Literary Events', link: '#' },
-    { name: 'Quiz Competition', link: '#' },
-    { name: 'Debate Club', link: '#' },
-    { name: 'Fashion Show', link: '#' },
-    { name: 'Food Festival', link: '#' },
-    { name: 'Film Making', link: '#' },
-    { name: 'Robotics', link: '#' },
-    { name: 'Athletics', link: '#' },
-    { name: 'Indoor Games', link: '#' },
-    { name: 'Outdoor Games', link: '#' },
-    { name: 'Volunteers', link: '#' },
-    { name: 'Core Team', link: '#' },
-    { name: 'Coordinators', link: '#' },
-    { name: 'Campus Ambassadors', link: '#' },
-    { name: 'Media Team', link: '#' },
-    { name: 'Design Team', link: '#' },
-    { name: 'Content Team', link: '#' },
-    { name: 'Hospitality', link: '#' },
-    { name: 'Registration Desk', link: '#' },
-    { name: 'Security Team', link: '#' },
-    { name: 'Transport Team', link: '#' },
-    { name: 'Technical Support', link: '#' },
-    { name: 'General Updates', link: '#' }
+    { name: 'Dance', link: 'https://chat.whatsapp.com/CGiQptgxFAF7pBrmQM67r5?mode=gi_t' },
+    { name: 'Dramatics', link: 'https://chat.whatsapp.com/JnMGEkCkGQW3VGWdu6FMuO?mode=gi_t' },
+    { name: 'Music', link: 'https://chat.whatsapp.com/CvKPomyeoxqGw2El1eJUiI?mode=gi_t' },
+    { name: 'Fashion', link: 'https://chat.whatsapp.com/HrvgNYQD7yP5XVOgexudA2?mode=gi_t' },
+    { name: 'Visual Arts & Crafts', link: 'https://chat.whatsapp.com/FIoYwPm9C9pDFHBBgvl6wD?mode=gi_t' },
+    { name: 'Literature', link: 'https://chat.whatsapp.com/LZ6BuWrjKdR8qACUkeIkFD?mode=gi_t' },
+    { name: 'Spotlight', link: 'https://chat.whatsapp.com/G9XGpYaUk3sASRLX9COEHZ?mode=gi_t' },
+    { name: 'Gaming', link: 'https://chat.whatsapp.com/GUX5Ml0MeoECEucqjilrL5?mode=gi_t' },
+    { name: 'Techno Sports & Races', link: 'https://chat.whatsapp.com/JzrR56fZd9sJzWfomgX2u2?mode=gi_t' },
+    { name: 'Sports', link: 'https://chat.whatsapp.com/BnIIwZUop4E5GhnsKSY7xpin' }
   ];
 
   const handleGroupClick = (link: string) => {
@@ -84,7 +62,7 @@ const WhatsAppGroups: React.FC = () => {
       {/* Main Content */}
       <div className="whatsapp-groups-content">
         <h1 className="whatsapp-groups-title">WhatsApp Groups</h1>
-        
+
         <div className="whatsapp-groups-grid">
           {whatsappGroups.map((group, index) => (
             <button

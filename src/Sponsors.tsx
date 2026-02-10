@@ -74,18 +74,43 @@ const Sponsors: React.FC = () => {
       <BackButton onClick={handleBackClick} />
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 flex flex-col justify-center items-center min-h-[80vh]">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-4 sm:mb-6 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]" style={{
-          background: 'linear-gradient(135deg, #fdee71, #e48ab9)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          textShadow: '0 0 30px rgba(253, 238, 113, 0.3)'
-        }}>SPONSORS</h1>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-center text-white mb-4 sm:mb-6 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]" style={{
-          textShadow: '0 0 20px rgba(255, 255, 255, 0.5)'
-        }}>A New Treasure Awaits...</h2>
-        <p className="text-base sm:text-lg md:text-xl text-center text-white opacity-0 animate-[fadeInUp_0.8s_ease-out_0.5s_forwards]">Coming Soon to the Seven Seas!</p>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-8 sm:mb-12 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.1s_forwards]" style={{
+        background: 'linear-gradient(135deg, #fdee71, #e48ab9)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        textShadow: '0 0 30px rgba(253, 238, 113, 0.3)'          
+
+      }}>SPONSORS</h1>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full max-w-7xl px-4">
+        {[1, 2, 3, 4].flatMap(imgNum =>
+          Array.from({ length: 9 }).map((_, i) => ({ imgNum, index: i }))
+        ).map(({ imgNum, index }, uniqueId) => (
+          <div
+            key={`${imgNum}-${index}`}
+            className="group relative aspect-square rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 ease-out bg-white shadow-lg border border-white/20"
+            style={{
+              animation: `fadeInUp 0.8s ease-out ${0.1 + uniqueId * 0.05}s forwards`,
+              opacity: 0
+            }}
+          >
+            <div
+              className="w-full h-full transition-transform duration-500 group-hover:scale-110"
+              style={{
+                backgroundImage: `url('/${imgNum}.jpeg')`,
+                backgroundSize: '900% 100%',
+                backgroundPosition: `${(index / 8) * 100}% center`,
+                backgroundRepeat: 'no-repeat'
+              }}
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+              <p className="text-white text-xs text-center font-medium">Partner</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

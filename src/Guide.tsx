@@ -86,7 +86,7 @@ const Guide: React.FC = () => {
         {/* Date Text - Between Logo and Buttons */}
         <div className="guide-date-middle"></div>
 
-        {/* Four Buttons */}
+        {/* Buttons */}
         <div className="guide-action-buttons">
           <button className="guide-action-btn" onClick={handleMapClick}>
             MAP

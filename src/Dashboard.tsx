@@ -52,26 +52,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   const statsRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Timer countdown state
-  const eventDate = new Date("Feb 5, 2026 00:00:00").getTime();
-  const getTimeLeft = () => {
-    const now = Date.now();
-    const diff = eventDate - now;
-    return {
-      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((diff / (1000 * 60)) % 60),
-      seconds: Math.floor((diff / 1000) % 60),
-    };
-  };
-  const [time, setTime] = useState(getTimeLeft);
-  const [animate, setAnimate] = useState({
-    days: false,
-    hours: false,
-    minutes: false,
-    seconds: false,
-  });
-
   const eventInfoCards = [
     { title: "SPORTS", description: "Competitive sports events including Football, Basketball, Badminton, and more." },
     { title: "CULTURALS", description: "Cultural events featuring Dance, Music, Drama, Art competitions, and creative showcases." },
@@ -909,35 +889,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
         observer.unobserve(currentRef);
       }
     };
-  }, []);
-
-  // Timer countdown effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newTime = getTimeLeft();
-
-      setTime(prev => {
-        setAnimate({
-          days: prev.days !== newTime.days,
-          hours: prev.hours !== newTime.hours,
-          minutes: prev.minutes !== newTime.minutes,
-          seconds: prev.seconds !== newTime.seconds,
-        });
-
-        setTimeout(() => {
-          setAnimate({
-            days: false,
-            hours: false,
-            minutes: false,
-            seconds: false,
-          });
-        }, 400);
-
-        return newTime;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
   }, []);
 
   // Auto-rotate throwback videos every 15 seconds
@@ -2347,6 +2298,27 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       if (!isParaEvent && hasParaEvents) {
         showToast.warning('You cannot register for normal events if you have already selected para sports events. Please deselect para sports events first.');
         return;
+      }
+
+      // Check team event restriction - only one team event allowed
+      const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
+      const clickedEventNameLower = (clickedEvent.eventName || '').toLowerCase().trim();
+      const isClickedTeamEvent = teamEvents.some(team => clickedEventNameLower.includes(team));
+
+      if (isClickedTeamEvent) {
+        // Check if user already has a team event selected
+        const selectedTeamEvents = selectedEventsArray.filter(id => {
+          const event = allEvents.find(e => e._id === id);
+          if (!event) return false;
+          const eventNameLower = (event.eventName || '').toLowerCase().trim();
+          return teamEvents.some(team => eventNameLower.includes(team));
+        });
+
+        if (selectedTeamEvents.length > 0) {
+          const existingTeamEvent = allEvents.find(e => e._id === selectedTeamEvents[0]);
+          showToast.warning(`You can only register for ONE team event. You have already selected "${existingTeamEvent?.eventName}". Please deselect it first if you want to choose a different team event.`);
+          return;
+        }
       }
 
       newSelected.add(eventId);
@@ -5331,65 +5303,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
         {/* Lock Icon removed */}
 
-        {/* Countdown Timer */}
-        <div
-          className="throwback-countdown-timer"
-          style={{
-            marginTop: '30px',
-            position: 'relative',
-            display: 'flex',
-            gap: '20px',
-            padding: '25px 35px',
-            borderRadius: '16px',
-            background: 'rgba(61, 0, 84, 0.75)',
-            color: '#FFFFFF',
-            boxShadow: '0 0 30px rgba(223, 160, 0, 0.822)',
-            animation: 'timerGlow 1.5s infinite alternate',
-            zIndex: 10,
-            marginBottom: '40px',
-            justifyContent: 'center'
-          }}>
-          {(['days', 'hours', 'minutes', 'seconds'] as const).map(unit => (
-            <div key={unit} style={{
-              width: window.innerWidth < 640 ? '70px' : '85px',
-              height: '90px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <div
-                className={animate[unit] ? 'timer-digit-change' : ''}
-                style={{
-                  width: '100%',
-                  height: '60px',
-                  fontSize: window.innerWidth < 640 ? '2rem' : '2.6rem',
-                  fontWeight: '800',
-                  fontFamily: 'Poppins, sans-serif',
-                  color: '#FBC02D',
-                  textShadow: '0 0 12px rgba(251,192,45,0.7)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {time[unit]}
-              </div>
-              <div style={{
-                fontSize: window.innerWidth < 640 ? '0.9rem' : '1.5rem',
-                color: '#E0E0E0',
-                marginTop: '6px',
-                letterSpacing: '0.5px',
-                whiteSpace: 'nowrap',
-                textAlign: 'center',
-                fontFamily: 'Quesha, sans-serif'
-              }}>
-                {unit.charAt(0).toUpperCase() + unit.slice(1)}
-              </div>
-            </div>
-          ))}
-        </div>
-
         <style>{`
           @keyframes rotateAntiClockwise {
             from {
@@ -5433,21 +5346,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
               opacity: 0;
               height: 100%;
             }
-          }
-
-          @keyframes timerGlow {
-            from { box-shadow: 0 0 20px rgba(255, 191, 29, 0.542); }
-            to { box-shadow: 0 0 35px rgba(251,192,45,0.8); }
-          }
-
-          .timer-digit-change {
-            animation: rotateOnce 0.45s ease-out;
-          }
-
-          @keyframes rotateOnce {
-            0% { transform: scale(1) rotateX(0deg); }
-            50% { transform: scale(1.2) rotateX(180deg); }
-            100% { transform: scale(1) rotateX(360deg); }
           }
         `}</style>
       </section>
@@ -6221,11 +6119,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                         <span style={{ color: '#fbbf24', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: ₹{(() => {
                           const userCollege = userProfileData?.college || '';
                           const specialVignanColleges = [
-                            { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-                            { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-                            { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+                            { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+                            { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+                            { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
+                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
+                            { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
+                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
+                            { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+                            { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
+                            { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+                            { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
                           ];
 
                           if (!myEvents || myEvents.length === 0) return 0;
@@ -6891,6 +6794,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
           margin: '0 auto',
           padding: '20px 20px 0 20px'
         }}>
+
+
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -7401,10 +7306,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                   return t === 'sports' || t === 'sport';
                                 });
 
-                                if (userGender === 'male' && 
-                                    userPaymentStatus === 'paid' && 
-                                    hasCulturalsRegistered && 
-                                    !hasSportsRegistered) {
+                                if (userGender === 'male' &&
+                                  userPaymentStatus === 'paid' &&
+                                  hasCulturalsRegistered &&
+                                  !hasSportsRegistered) {
                                   paidCulturalsOnlyDisabled = true;
                                   paidCulturalsOnlyMessage = 'Approach Registration desk';
                                 }
@@ -7489,6 +7394,42 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                           }
                                         }
 
+                                        // Team event restriction - only one team event allowed
+                                        const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
+                                        const isTeamEvent = teamEvents.some(team => eventNameLower.includes(team));
+
+                                        if (isTeamEvent) {
+                                          // Check if user already has a team event selected or registered
+                                          const selectedTeamEvents = Array.from(currentSet).filter(id => {
+                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
+                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
+                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                            if (!evt) return false;
+                                            const name = (evt.eventName || '').toLowerCase();
+                                            return teamEvents.some(t => name.includes(t));
+                                          });
+
+                                          const registeredTeamEvents = myEvents.filter(e => {
+                                            const name = (e.eventName || '').toLowerCase();
+                                            return teamEvents.some(t => name.includes(t));
+                                          });
+
+                                          if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
+                                            const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
+                                            let existingEventName = '';
+                                            if (selectedTeamEvents.length > 0) {
+                                              const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                              existingEventName = evt?.eventName || '';
+                                            } else {
+                                              existingEventName = registeredTeamEvents[0]?.eventName || '';
+                                            }
+                                            showToast.error(`You can only register for ONE team event. You have already selected/registered for "${existingEventName}". Please deselect it first.`);
+                                            return;
+                                          }
+                                        }
+
                                         // NEW VALIDATION: Male users with paid status who only registered for culturals cannot edit sports
                                         // This applies to sports events only (not para sports)
                                         if (!isParaEvent && eventId.startsWith('sport-')) {
@@ -7503,10 +7444,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                           });
 
                                           // If male user with paid status has culturals but no sports, block sports selection
-                                          if (userGender === 'male' && 
-                                              userPaymentStatus === 'paid' && 
-                                              hasCulturalsRegistered && 
-                                              !hasSportsRegistered) {
+                                          if (userGender === 'male' &&
+                                            userPaymentStatus === 'paid' &&
+                                            hasCulturalsRegistered &&
+                                            !hasSportsRegistered) {
                                             showToast.warning('Approach Registration desk');
                                             return;
                                           }
@@ -7547,10 +7488,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                           });
 
                                           // If male user with paid status has culturals but no sports, block sports deselection
-                                          if (userGender === 'male' && 
-                                              userPaymentStatus === 'paid' && 
-                                              hasCulturalsRegistered && 
-                                              !hasSportsRegistered) {
+                                          if (userGender === 'male' &&
+                                            userPaymentStatus === 'paid' &&
+                                            hasCulturalsRegistered &&
+                                            !hasSportsRegistered) {
                                             showToast.warning('Approach Registration desk');
                                             return;
                                           }
@@ -7810,6 +7751,43 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                       const currentSet = selectedRegistrationEvents;
 
                                       if (!currentSet.has(eventId)) {
+                                        // Team event restriction - only one team event allowed
+                                        const culturalEventNameLower = culturalEventName.toLowerCase();
+                                        const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
+                                        const isTeamEvent = teamEvents.some(team => culturalEventNameLower.includes(team));
+
+                                        if (isTeamEvent) {
+                                          // Check if user already has a team event selected or registered
+                                          const selectedTeamEvents = Array.from(currentSet).filter(id => {
+                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
+                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
+                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                            if (!evt) return false;
+                                            const name = (evt.eventName || '').toLowerCase();
+                                            return teamEvents.some(t => name.includes(t));
+                                          });
+
+                                          const registeredTeamEvents = myEvents.filter(e => {
+                                            const name = (e.eventName || '').toLowerCase();
+                                            return teamEvents.some(t => name.includes(t));
+                                          });
+
+                                          if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
+                                            const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
+                                            let existingEventName = '';
+                                            if (selectedTeamEvents.length > 0) {
+                                              const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                              existingEventName = evt?.eventName || '';
+                                            } else {
+                                              existingEventName = registeredTeamEvents[0]?.eventName || '';
+                                            }
+                                            showToast.error(`You can only register for ONE team event. You have already selected/registered for "${existingEventName}". Please deselect it first.`);
+                                            return;
+                                          }
+                                        }
+
                                         // Adding a cultural event (Normal) - check for Para
                                         const hasParaCurrent = Array.from(currentSet).some(id => id.startsWith('para-'));
                                         const hasParaPast = myEvents.some(e => e.eventType === 'parasports');
@@ -7995,6 +7973,43 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                     const currentSet = selectedRegistrationEvents;
 
                                     if (!currentSet.has(eventId)) {
+                                      // Team event restriction - only one team event allowed
+                                      const paraEventNameLower = paraEventName.toLowerCase();
+                                      const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
+                                      const isTeamEvent = teamEvents.some(team => paraEventNameLower.includes(team));
+
+                                      if (isTeamEvent) {
+                                        // Check if user already has a team event selected or registered
+                                        const selectedTeamEvents = Array.from(currentSet).filter(id => {
+                                          const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
+                                            registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
+                                            registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                          if (!evt) return false;
+                                          const name = (evt.eventName || '').toLowerCase();
+                                          return teamEvents.some(t => name.includes(t));
+                                        });
+
+                                        const registeredTeamEvents = myEvents.filter(e => {
+                                          const name = (e.eventName || '').toLowerCase();
+                                          return teamEvents.some(t => name.includes(t));
+                                        });
+
+                                        if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
+                                          const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
+                                          let existingEventName = '';
+                                          if (selectedTeamEvents.length > 0) {
+                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                            existingEventName = evt?.eventName || '';
+                                          } else {
+                                            existingEventName = registeredTeamEvents[0]?.eventName || '';
+                                          }
+                                          showToast.error(`You can only register for ONE team event. You have already selected/registered for "${existingEventName}". Please deselect it first.`);
+                                          return;
+                                        }
+                                      }
+
                                       // Adding a Para event - check for Normal
                                       const hasNormalCurrent = Array.from(currentSet).some(id => id.startsWith('sport-') || id.startsWith('cultural-'));
                                       const hasNormalPast = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
@@ -8134,13 +8149,18 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                       const userGender = userProfileData.gender?.toLowerCase();
                       const userCollege = userProfileData.college || '';
 
-                      // Check if user is from one of the special Vignan colleges (only these 5 have 150 fee)
+                      // Check if user is from one of the special Vignan colleges (only these 10 have 150 fee)
                       const specialVignanColleges = [
-                        { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-                        { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-                        { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-                        { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-                        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+                        { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+                        { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+                        { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
+                        { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
+                        { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
+                        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
+                        { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+                        { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
+                        { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+                        { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
                       ];
 
                       const userCollegeLower = userCollege.toLowerCase().trim();
@@ -8235,13 +8255,18 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     return;
                   }
 
-                  // Check if user is from one of the special Vignan colleges (only these 5 have 150 fee)
+                  // Check if user is from one of the special Vignan colleges (only these 10 have 150 fee)
                   const specialVignanColleges = [
-                    { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-                    { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-                    { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-                    { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-                    { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+                    { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+                    { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+                    { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
+                    { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
+                    { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
+                    { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
+                    { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+                    { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
+                    { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+                    { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
                   ];
 
                   const userCollegeLower = userCollege.toLowerCase().trim();
@@ -8312,11 +8337,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                           // Check if user is from one of the special Vignan colleges
                           const specialVignanColleges = [
-                            { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-                            { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-                            { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+                            { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+                            { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+                            { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
+                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
+                            { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
+                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
+                            { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+                            { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
+                            { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+                            { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
                           ];
 
                           const userCollegeLower = userCollege.toLowerCase().trim();
@@ -8380,11 +8410,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                         // Check if user is from one of the special Vignan colleges
                         const specialVignanColleges = [
-                          { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-                          { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-                          { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-                          { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-                          { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+                          { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+                          { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+                          { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
+                          { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
+                          { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
+                          { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
+                          { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+                          { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
+                          { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+                          { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
                         ];
 
                         const userCollegeLower = userCollege.toLowerCase().trim();

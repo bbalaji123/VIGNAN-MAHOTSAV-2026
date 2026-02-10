@@ -5,7 +5,7 @@ import FlowerComponent from './components/FlowerComponent';
 import BackButton from './components/BackButton';
 import { scheduleData } from './data/scheduleData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faClock, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faClock, faMapMarkerAlt, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 
 const Schedule: React.FC = () => {
   const navigate = useNavigate();
@@ -62,6 +62,24 @@ const Schedule: React.FC = () => {
     return date.toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
   };
 
+  const handleSportsPdfClick = () => {
+    const link = document.createElement('a');
+    link.href = '/images/p1.jpeg';
+    link.download = 'p1.jpeg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleCulturalsPdfClick = () => {
+    const link = document.createElement('a');
+    link.href = '/images/p2.jpeg';
+    link.download = 'p2.jpeg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden schedule-container" style={{
       backgroundImage: 'url("/images/Background.png")',
@@ -106,7 +124,7 @@ const Schedule: React.FC = () => {
         <h1 className="schedule-title">Mahotsav 2026 {showWorkshops ? 'Workshops' : 'Schedule'}</h1>
 
         {/* View Toggle */}
-        <div className="view-toggle-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
+        <div className="view-toggle-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', gap: '1rem', flexWrap: 'wrap' }}>
           <button
             className={`view-toggle-btn ${!showWorkshops ? 'active' : ''}`}
             onClick={() => setShowWorkshops(false)}
@@ -121,7 +139,23 @@ const Schedule: React.FC = () => {
           </button>
         </div>
 
-        {/* Day Tabs Removed as per user request to "merge all" */}
+        {/* PDF Download Buttons */}
+        <div className="pdf-buttons-container" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', gap: '1rem', flexWrap: 'wrap' }}>
+          <button
+            className="view-toggle-btn"
+            style={{ backgroundColor: '#db2777', color: 'white', border: 'none' }}
+            onClick={handleSportsPdfClick}
+          >
+            Sports PDF
+          </button>
+          <button
+            className="view-toggle-btn"
+            style={{ backgroundColor: '#db2777', color: 'white', border: 'none' }}
+            onClick={handleCulturalsPdfClick}
+          >
+            Culturals PDF
+          </button>
+        </div>
 
         {/* Search and Filter */}
         <div className="search-filter-section">
@@ -152,14 +186,14 @@ const Schedule: React.FC = () => {
         {filteredEvents.length > 0 ? (
           <>
             <div className="events-grid">
-              {filteredEvents.map((event, index) => (
+              {filteredEvents.map((event) => (
                 <div key={`${event.day}-${event.event}-${event.venue}`} className="event-card">
                   <span className="event-category">{event.category}</span>
                   <h3 className="event-name">{event.event}</h3>
                   <div className="event-details">
                     <div className="event-detail-item">
                       <span className="event-detail-icon">
-                        <FontAwesomeIcon icon={faCalendarAlt} />
+                        <FontAwesomeIcon icon={faCalendar} />
                       </span>
                       <span>{formatDate(event.day)}</span>
                     </div>
@@ -175,6 +209,14 @@ const Schedule: React.FC = () => {
                       </span>
                       <span>{event.venue}</span>
                     </div>
+                    {event.isWorkshop && (
+                      <div className="event-detail-item workshop-badge">
+                        <span className="event-detail-icon">
+                          <FontAwesomeIcon icon={faGraduationCap} />
+                        </span>
+                        <span>Workshop</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

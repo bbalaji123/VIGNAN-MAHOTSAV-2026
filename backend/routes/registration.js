@@ -424,8 +424,38 @@ router.post('/save-events', verifyToken, async (req, res) => {
 
     // Gender validation removed - users can register for any event
 
-    // Find or create participant
-    let participant = await Participant.findOne({ userId });
+    let participant;
+    // Detect and remove any corrupted participant documents stored with a string _id
+    try {
+      const rawParticipant = await Participant.collection.findOne({ userId });
+      if (rawParticipant && rawParticipant._id && typeof rawParticipant._id === 'string') {
+        console.warn('Removing corrupted participant entry with string _id for userId:', userId);
+        await Participant.deleteMany({ userId });
+      } else {
+        const rawParticipantById = await Participant.collection.findOne({ _id: userId });
+        if (rawParticipantById && rawParticipantById._id && typeof rawParticipantById._id === 'string') {
+          console.warn('Removing corrupted participant entry stored under string _id:', userId);
+          await Participant.deleteMany({ _id: userId });
+        }
+      }
+    } catch (corruptionCheckError) {
+      console.error('Failed to inspect participant collection for corruption:', corruptionCheckError.message);
+    }
+
+    try {
+      participant = await Participant.findOne({ userId });
+    } catch (findError) {
+      console.error('Error finding participant:', findError.message);
+      if (findError.message.includes('Cast to ObjectId')) {
+        console.warn('Still encountering ObjectId cast issues when looking up userId:', userId, '– clearing everything and continuing.');
+        try {
+          await Participant.deleteMany({ userId });
+          participant = null;
+        } catch (cleanupError) {
+          console.error('Failed to cleanup corrupted data during fallback:', cleanupError.message);
+        }
+      }
+    }
 
     if (events.length === 0) {
       // If no events, remove all registered events from participant and reset amount
@@ -452,6 +482,21 @@ router.post('/save-events', verifyToken, async (req, res) => {
       });
     }
 
+    // Validate team event restriction - only one team event allowed
+    const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
+    const registeredTeamEvents = events.filter(e => {
+      const eventNameLower = (e.eventName || '').toLowerCase().trim();
+      return teamEvents.some(team => eventNameLower.includes(team));
+    });
+
+    if (registeredTeamEvents.length > 1) {
+      const teamEventNames = registeredTeamEvents.map(e => e.eventName).join(', ');
+      return res.status(400).json({
+        success: false,
+        message: `You can only register for ONE team event. You have selected: ${teamEventNames}. Please choose only one from: Volleyball, Kabaddi, Football, Basketball, Kho-Kho, or Hockey.`
+      });
+    }
+
     // Calculate total registration fee based on events
     const calculateRegistrationFee = (events, userGender, userCollege) => {
       // Check event types
@@ -464,21 +509,26 @@ router.post('/save-events', verifyToken, async (req, res) => {
         return 0;
       }
 
-      // Check if user is from special Vignan colleges (only these 5 colleges have 150 fee)
+      // Check if user is from specific Vignan colleges (only these 10 colleges have 150 fee)
       const specialVignanColleges = [
-        { name: 'Vignan Pharmacy College', keywords: ['vignan pharmacy'] },
-        { name: "Vignan's Institute of Management & Technology For Women", keywords: ["vignan's institute of management & technology for women", "vignan management technology women"] },
-        { name: "Vignan's Institute of Engineering for Women, Kapujaggarupeta, Vadlapudi Post, Gajuwaka, PIN-530049(CC-NM)", keywords: ["kapujaggarupeta", "cc-nm", "engineering for women, kapujaggarupeta"] },
-        { name: "Vignan's Institute of Information Technology, Beside VSEZ, Duvvada, Gajuwaka,Vadlapudi (P.O)Pin-530049  (CC-L3)", keywords: ["duvvada", "cc-l3", "information technology, beside vsez"] },
-        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ["off campus, hyderabad", "vignan foundation off campus hyderabad"] }
+        { name: "Vignan's Institute of Information Technology (Visakhapatnam)", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
+        { name: "Vignan's Institute of Engineering for Women (Visakhapatnam)", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
+        { name: 'Vignan Institute of Technology & Sciences (Hyderabad)', keywords: ['technology & sciences', 'deshmukhi'] },
+        { name: "Vignan's Institute of Management & Technology For Women (Hyderabad)", keywords: ['management & technology for women', 'nizampet'] },
+        { name: 'Vignan Institute of Pharmaceutical Sciences (Hyderabad)', keywords: ['pharmaceutical sciences'] },
+        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation', 'hyderabad'] },
+        { name: "Vignan's Nirula Institute of Technology & Science for Women (Guntur)", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
+        { name: "Vignan's Foundation of Science, Technology & Research (Guntur - Deemed to be University)", keywords: ['foundation', 'guntur', 'deemed'] },
+        { name: "Vignan's Lara Institute of Technology & Science (Vadlamudi)", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
+        { name: 'Vignan Pharmacy College (Vadlamudi)', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
       ];
 
       const userCollegeLower = (userCollege || '').toLowerCase().trim();
-      
+
       console.log(' Fee Calculation Debug:');
       console.log('  User College:', userCollege);
       console.log('  User College (lower):', userCollegeLower);
-      
+
       const isSpecialVignanStudent = specialVignanColleges.some(college => {
         const nameLower = college.name.toLowerCase();
         // Exact match
@@ -486,17 +536,20 @@ router.post('/save-events', verifyToken, async (req, res) => {
           console.log('  ✅ Exact match found:', college.name);
           return true;
         }
-        // Check if any keyword matches
-        const keywordMatch = college.keywords.some(keyword => {
-          const matches = userCollegeLower.includes(keyword);
-          if (matches) {
-            console.log('  ✅ Keyword match found:', keyword, 'for college:', college.name);
-          }
-          return matches;
-        });
-        return keywordMatch;
+        // Check if college name contains vignan AND matches any keyword
+        if (userCollegeLower.includes('vignan')) {
+          const keywordMatch = college.keywords.some(keyword => {
+            const matches = userCollegeLower.includes(keyword);
+            if (matches) {
+              console.log('  ✅ Keyword match found:', keyword, 'for college:', college.name);
+            }
+            return matches;
+          });
+          return keywordMatch;
+        }
+        return false;
       });
-      
+
       console.log('  Is Special Vignan Student:', isSpecialVignanStudent);
       console.log('  Has Sports:', hasSports, 'Has Culturals:', hasCulturals);
 
@@ -559,7 +612,7 @@ router.post('/save-events', verifyToken, async (req, res) => {
         registeredEvents: events.map(e => ({
           ...e,
           fee: totalAmount, // Set each event's fee to the total registration amount
-          category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
+          category: e.category ? String(e.category).replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
           registeredAt: new Date()
         }))
       });
@@ -568,7 +621,7 @@ router.post('/save-events', verifyToken, async (req, res) => {
       participant.registeredEvents = events.map(e => ({
         ...e,
         fee: totalAmount, // Set each event's fee to the total registration amount
-        category: e.category ? e.category.replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
+        category: e.category ? String(e.category).replace(/Women's\s*/gi, '').replace(/Men's\s*/gi, '').replace(/\s*Women\s*/gi, ' ').replace(/\s*Men\s*/gi, ' ').replace(/\s*Female\s*/gi, ' ').replace(/\s*Male\s*/gi, ' ').trim() : e.category,
         registeredAt: new Date()
       }));
       participant.amount = totalAmount;
@@ -588,6 +641,21 @@ router.post('/save-events', verifyToken, async (req, res) => {
     console.error('Error message:', error.message);
     console.error('Error stack:', error.stack);
     console.error('Request body:', req.body);
+
+    // Write error to a file for debugging
+    try {
+      const fs = await import('fs');
+      const errorLog = `
+Timestamp: ${new Date().toISOString()}
+Error: ${error.message}
+Stack: ${error.stack}
+Body: ${JSON.stringify(req.body, null, 2)}
+      `;
+      fs.writeFileSync('c:\\Users\\banda\\Desktop\\mahotsav\\backend\\last_save_error.txt', errorLog);
+    } catch (fsError) {
+      console.error('Failed to write error log:', fsError);
+    }
+
     res.status(500).json({
       success: false,
       message: 'Failed to save events',

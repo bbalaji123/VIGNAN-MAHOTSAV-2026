@@ -262,18 +262,29 @@
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
-    color: #ffffff !important;
-    /* Force White color */
+    color: #ffffff;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: 'Poppins', sans-serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    /* Add shadow for readability against light background */
-    background: rgba(0, 0, 0, 0.4);
-    /* Dark semi-transparent background for white text */
-    padding: 4px 8px;
-    border-radius: 6px;
-    width: fit-content;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(253, 238, 113, 0.2);
+    transition: all 0.3s ease;
+}
+
+.event-detail-item:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(253, 238, 113, 0.5);
+    transform: translateX(5px);
+}
+
+.workshop-badge {
+    background: linear-gradient(90deg, rgba(219, 39, 119, 0.6), rgba(219, 39, 119, 0.2));
+    border-color: rgba(219, 39, 119, 0.5);
 }
 
 .event-detail-icon {

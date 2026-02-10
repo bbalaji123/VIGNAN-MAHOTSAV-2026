@@ -9,21 +9,21 @@ const OurTeam: React.FC = () => {
   const navigate = useNavigate();
   const { tab, category } = useParams<{ tab?: string; category?: string }>();
 
-  const [activeTab, setActiveTab] = useState<'faculty' | 'student'>(() => {
-    if (tab === 'faculty' || tab === 'student') return tab as 'faculty' | 'student';
+  const [activeTab, setActiveTab] = useState<'faculty' | 'student' | 'web'>(() => {
+    if (tab === 'faculty' || tab === 'student' || tab === 'web') return tab as 'faculty' | 'student' | 'web';
     return 'student';
   });
 
 
   // Sync state with URL parameters
   useEffect(() => {
-    if (tab === 'faculty' || tab === 'student') {
-      setActiveTab(tab as 'faculty' | 'student');
+    if (tab === 'faculty' || tab === 'student' || tab === 'web') {
+      setActiveTab(tab as 'faculty' | 'student' | 'web');
     }
 
   }, [tab, category]);
 
-  const handleTabChange = (newTab: 'faculty' | 'student') => {
+  const handleTabChange = (newTab: 'faculty' | 'student' | 'web') => {
     navigate(`/our-team/${newTab}`);
   };
 
@@ -102,7 +102,7 @@ const OurTeam: React.FC = () => {
       ...verticalLeads.flatMap(vertical => {
         // Special handling for folder 35 (WEB) which has no number
         if (vertical.folder === '35') {
-          return [{ 
+          return [{
             name: vertical.name,
             role: 'Vertical Lead',
             detail: 'Student',
@@ -110,7 +110,7 @@ const OurTeam: React.FC = () => {
             image: `/images/35/WEB.avif`
           }];
         }
-        
+
         // Special handling for folder 29 (Team Events Women) with irregular naming
         if (vertical.folder === '29') {
           const images = [
@@ -130,7 +130,7 @@ const OurTeam: React.FC = () => {
             image: `/images/29/${img}`
           }));
         }
-        
+
         // Regular handling for all other folders
         return Array.from({ length: vertical.count }).map((_, i) => ({
           name: vertical.name,
@@ -144,8 +144,20 @@ const OurTeam: React.FC = () => {
     []
   );
 
+  const webDesignMembers = useMemo(() => [
+    { name: 'Team Leader', role: 'Team Leader', detail: 'Web Design', category: 'Web Design Team', image: '/a.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/b.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/c.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/d.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/e.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/f.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/g.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/h.jpeg' },
+  ], []);
+
   const categories = useMemo(() => {
     if (activeTab === 'faculty') return ['Convenor', 'Co-Convenor', 'Faculty Core', 'Faculty Leads'];
+    if (activeTab === 'web') return ['Web Design Team'];
     return [
       'Convenor',
       'Co-Convenors',
@@ -189,19 +201,18 @@ const OurTeam: React.FC = () => {
   }, [activeTab]);
 
   const displayedMembers = useMemo(() => {
-    if (activeTab === 'student') {
-      return studentMembers;
-    }
+    if (activeTab === 'student') return studentMembers;
+    if (activeTab === 'web') return webDesignMembers;
     return facultyMembers;
-  }, [activeTab, studentMembers, facultyMembers]);
+  }, [activeTab, studentMembers, facultyMembers, webDesignMembers]);
 
   const groupedMembers = useMemo(() => {
-    const members = activeTab === 'faculty' ? facultyMembers : studentMembers;
+    const members = activeTab === 'faculty' ? facultyMembers : (activeTab === 'web' ? webDesignMembers : studentMembers);
     return categories.map(cat => ({
       name: cat,
       members: members.filter(m => m.category === cat)
     })).filter(group => group.members.length > 0);
-  }, [categories, activeTab, facultyMembers, studentMembers]);
+  }, [categories, activeTab, facultyMembers, studentMembers, webDesignMembers]);
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden" style={{
@@ -342,11 +353,12 @@ const OurTeam: React.FC = () => {
         <div className="flex flex-wrap justify-center gap-2 md:gap-6 pb-6" style={{ marginTop: '20px', marginBottom: '30px' }}>
           {[
             { key: 'student', label: 'Student' },
-            { key: 'faculty', label: 'Faculty' }
+            { key: 'faculty', label: 'Faculty' },
+            { key: 'web', label: 'Web Design' }
           ].map((tab) => (
             <button
               key={tab.key}
-              onClick={() => handleTabChange(tab.key as 'faculty' | 'student')}
+              onClick={() => handleTabChange(tab.key as 'faculty' | 'student' | 'web')}
               style={{ padding: '10px 50px', borderRadius: '10px', fontSize: '18px' }}
               className={`transition-all duration-300 font-semibold flex items-center justify-center text-center text-white uppercase tracking-[0.2em] border-2 border-white/70 hover:scale-110 hover:shadow-[0_0_20px_rgba(251,191,36,0.6)] ${activeTab === tab.key
                 ? 'bg-amber-400 text-black shadow-[0_0_30px_rgba(251,191,36,0.5)]'
@@ -363,7 +375,7 @@ const OurTeam: React.FC = () => {
           const isLeadsSection = group.name.startsWith('Leads-');
           const leadsVerticalName = isLeadsSection ? group.name.replace('Leads-', '') : '';
           const isFirstLeadsSection = group.name === 'Leads-Alma Connects';
-          
+
           return (
             <div
               key={groupIndex}
@@ -380,41 +392,41 @@ const OurTeam: React.FC = () => {
                   LEADS
                 </h2>
               )}
-              
+
               {/* Subheading for vertical name */}
               <h3 className={`${isLeadsSection ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'} font-bold uppercase tracking-[0.25em] border-b-2 border-amber-400/30 text-center`}
                 style={{ marginTop: isLeadsSection ? '0' : '10px', marginBottom: '40px', paddingBottom: '10px', color: '#fdee71' }}>
                 {isLeadsSection ? leadsVerticalName : group.name}
               </h3>
               <div className="w-full max-w-5xl flex flex-wrap justify-center gap-10 team-grid">
-              {group.members.map((member, index) => (
-                <div
-                  key={index}
-                  className="team-card shadow-2xl flex flex-col items-center stagger-card"
-                  style={{ animationDelay: `${(groupIndex * 0.2) + (index * 0.05)}s` }}
-                >
-                  <div className="w-full h-full overflow-hidden relative">
-                    {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        width={300}
-                        height={400}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-white/10 flex items-center justify-center">
-                        <span className={activeTab === 'faculty' ? "text-2xl" : "text-6xl"}>
-                          {activeTab === 'faculty' ? "Coming....!!" : "👤"}
-                        </span>
-                      </div>
-                    )}
+                {group.members.map((member, index) => (
+                  <div
+                    key={index}
+                    className="team-card shadow-2xl flex flex-col items-center stagger-card"
+                    style={{ animationDelay: `${(groupIndex * 0.2) + (index * 0.05)}s` }}
+                  >
+                    <div className="w-full h-full overflow-hidden relative">
+                      {member.image ? (
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          width={300}
+                          height={400}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-white/10 flex items-center justify-center">
+                          <span className={activeTab === 'faculty' ? "text-2xl" : "text-6xl"}>
+                            {activeTab === 'faculty' ? "Coming....!!" : "👤"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        );
+          );
         })}
       </div>
     </div>

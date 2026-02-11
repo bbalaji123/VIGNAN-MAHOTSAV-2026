@@ -99,6 +99,13 @@ const OurTeam: React.FC = () => {
         category: 'Core',
         image: `/images/Web College Data/CORE${(i % 18) + 1}.avif`
       })),
+      ...['1.avif', '10.avif', '2.avif', '3.avif', '4.avif', '5.avif', '6.avif', '7.avif', '8.avif', '9.avif'].map((img) => ({
+        name: 'Mentor',
+        role: 'Mentor',
+        detail: 'Student',
+        category: 'Mentors',
+        image: `/images/19.1/${img}`
+      })),
       ...verticalLeads.flatMap(vertical => {
         // Special handling for folder 35 (WEB) which has no number
         if (vertical.folder === '35') {
@@ -146,12 +153,12 @@ const OurTeam: React.FC = () => {
 
   const webDesignMembers = useMemo(() => [
     { name: 'Team Leader', role: 'Team Leader', detail: 'Web Design', category: 'Web Design Team', image: '/a.jpeg' },
-    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/b.jpeg' },
-    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/c.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/g.jpeg' },
     { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/d.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/c.jpeg' },
     { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/e.jpeg' },
     { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/f.jpeg' },
-    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/g.jpeg' },
+    { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/b.jpeg' },
     { name: 'Team Member', role: 'Team Member', detail: 'Web Design', category: 'Web Design Team', image: '/h.jpeg' },
   ], []);
 
@@ -162,6 +169,7 @@ const OurTeam: React.FC = () => {
       'Convenor',
       'Co-Convenors',
       'Core',
+      'Mentors',
       'Leads-Alma Connects',
       'Leads-Ambience',
       'Leads-Anchoring & Content Writing',
@@ -353,8 +361,8 @@ const OurTeam: React.FC = () => {
         <div className="flex flex-wrap justify-center gap-2 md:gap-6 pb-6" style={{ marginTop: '20px', marginBottom: '30px' }}>
           {[
             { key: 'student', label: 'Student' },
-            { key: 'faculty', label: 'Faculty' },
-            { key: 'web', label: 'Web Design' }
+            { key: 'web', label: 'Web Design' },
+            { key: 'faculty', label: 'Faculty' }
           ].map((tab) => (
             <button
               key={tab.key}

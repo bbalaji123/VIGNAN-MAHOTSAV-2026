@@ -6,12 +6,12 @@ const WebDesignTeam: React.FC = () => {
 
     const teamMembers = [
         { img: 'a.jpeg', role: 'Team Leader' },
-        { img: 'b.jpeg', role: 'Team Member' },
-        { img: 'c.jpeg', role: 'Team Member' },
+        { img: 'g.jpeg', role: 'Team Member' },
         { img: 'd.jpeg', role: 'Team Member' },
+        { img: 'c.jpeg', role: 'Team Member' },
         { img: 'e.jpeg', role: 'Team Member' },
         { img: 'f.jpeg', role: 'Team Member' },
-        { img: 'g.jpeg', role: 'Team Member' },
+        { img: 'b.jpeg', role: 'Team Member' },
         { img: 'h.jpeg', role: 'Team Member' }
     ];
 

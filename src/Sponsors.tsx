@@ -84,20 +84,21 @@ const Sponsors: React.FC = () => {
 
       }}>SPONSORS</h1>
 
-      <div className="grid grid-cols-2 gap-6 w-full max-w-7xl px-4">
-        {[1, 2, 3, 4].map((imgNum, index) => (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-4xl px-4 pb-12">
+        {Array.from({ length: 31 }, (_, i) => i + 1).map((imgNum, index) => (
           <div
             key={imgNum}
-            className="aspect-square flex items-center justify-center"
+            className="aspect-square flex items-center justify-center p-4 transition-transform duration-300 hover:scale-110"
             style={{
               animation: `fadeInUp 0.8s ease-out ${0.1 + index * 0.05}s forwards`,
               opacity: 0
             }}
           >
             <img
-              src={`/${imgNum}.jpeg`}
+              src={`/sponsors/${imgNum}.jpg`}
               alt={`Sponsor ${imgNum}`}
-              className="w-full h-full object-contain"
+              className="w-100 h-100 object-contain"
+              loading="lazy"
             />
           </div>
         ))}

@@ -7395,31 +7395,31 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                                         // Team event restriction - only one team event allowed
                                         const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
-                                        const isTeamEvent = teamEvents.some(team => eventNameLower.includes(team));
+                                        const isTeamEvent = teamEvents.some((team: string) => eventNameLower.includes(team));
 
                                         if (isTeamEvent) {
                                           // Check if user already has a team event selected or registered
-                                          const selectedTeamEvents = Array.from(currentSet).filter(id => {
-                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
-                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
-                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                          const selectedTeamEvents = Array.from(currentSet).filter((id: string) => {
+                                            const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === id) ||
+                                              registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === id) ||
+                                              registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === id);
                                             if (!evt) return false;
                                             const name = (evt.eventName || '').toLowerCase();
-                                            return teamEvents.some(t => name.includes(t));
+                                            return teamEvents.some((t: string) => name.includes(t));
                                           });
 
-                                          const registeredTeamEvents = myEvents.filter(e => {
+                                          const registeredTeamEvents = myEvents.filter((e: any) => {
                                             const name = (e.eventName || '').toLowerCase();
-                                            return teamEvents.some(t => name.includes(t));
+                                            return teamEvents.some((t: string) => name.includes(t));
                                           });
 
                                           if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
                                             const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
                                             let existingEventName = '';
                                             if (selectedTeamEvents.length > 0) {
-                                              const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
-                                                registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
-                                                registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                              const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === selectedTeamEvents[0]);
                                               existingEventName = evt?.eventName || '';
                                             } else {
                                               existingEventName = registeredTeamEvents[0]?.eventName || '';
@@ -7753,31 +7753,31 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                                         // Team event restriction - only one team event allowed
                                         const culturalEventNameLower = culturalEventName.toLowerCase();
                                         const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
-                                        const isTeamEvent = teamEvents.some(team => culturalEventNameLower.includes(team));
+                                        const isTeamEvent = teamEvents.some((team: string) => culturalEventNameLower.includes(team));
 
                                         if (isTeamEvent) {
                                           // Check if user already has a team event selected or registered
-                                          const selectedTeamEvents = Array.from(currentSet).filter(id => {
-                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
-                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
-                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                          const selectedTeamEvents = Array.from(currentSet).filter((id: string) => {
+                                            const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === id) ||
+                                              registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === id) ||
+                                              registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === id);
                                             if (!evt) return false;
                                             const name = (evt.eventName || '').toLowerCase();
-                                            return teamEvents.some(t => name.includes(t));
+                                            return teamEvents.some((t: string) => name.includes(t));
                                           });
 
-                                          const registeredTeamEvents = myEvents.filter(e => {
+                                          const registeredTeamEvents = myEvents.filter((e: any) => {
                                             const name = (e.eventName || '').toLowerCase();
-                                            return teamEvents.some(t => name.includes(t));
+                                            return teamEvents.some((t: string) => name.includes(t));
                                           });
 
                                           if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
                                             const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
                                             let existingEventName = '';
                                             if (selectedTeamEvents.length > 0) {
-                                              const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
-                                                registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
-                                                registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                              const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                                registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === selectedTeamEvents[0]);
                                               existingEventName = evt?.eventName || '';
                                             } else {
                                               existingEventName = registeredTeamEvents[0]?.eventName || '';
@@ -7973,33 +7973,33 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                                     if (!currentSet.has(eventId)) {
                                       // Team event restriction - only one team event allowed
-                                      const paraEventNameLower = paraEventName.toLowerCase();
+                                      const paraEventNameLower = eventName.toLowerCase();
                                       const teamEvents = ['volleyball', 'kabaddi', 'football', 'basketball', 'kho-kho', 'hockey'];
-                                      const isTeamEvent = teamEvents.some(team => paraEventNameLower.includes(team));
+                                      const isTeamEvent = teamEvents.some((team: string) => paraEventNameLower.includes(team));
 
                                       if (isTeamEvent) {
                                         // Check if user already has a team event selected or registered
-                                        const selectedTeamEvents = Array.from(currentSet).filter(id => {
-                                          const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === id) ||
-                                            registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === id) ||
-                                            registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === id);
+                                        const selectedTeamEvents = Array.from(currentSet).filter((id: string) => {
+                                          const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === id) ||
+                                            registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === id) ||
+                                            registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === id);
                                           if (!evt) return false;
                                           const name = (evt.eventName || '').toLowerCase();
-                                          return teamEvents.some(t => name.includes(t));
+                                          return teamEvents.some((t: string) => name.includes(t));
                                         });
 
-                                        const registeredTeamEvents = myEvents.filter(e => {
+                                        const registeredTeamEvents = myEvents.filter((e: any) => {
                                           const name = (e.eventName || '').toLowerCase();
-                                          return teamEvents.some(t => name.includes(t));
+                                          return teamEvents.some((t: string) => name.includes(t));
                                         });
 
                                         if (selectedTeamEvents.length > 0 || registeredTeamEvents.length > 0) {
                                           const existingTeamEventId = selectedTeamEvents[0] || registeredTeamEvents[0]?.eventName;
                                           let existingEventName = '';
                                           if (selectedTeamEvents.length > 0) {
-                                            const evt = registrationEvents.Sports?.find(se => `sport-${se._id}` === selectedTeamEvents[0]) ||
-                                              registrationEvents.Culturals?.find(ce => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
-                                              registrationEvents.ParaSports?.find(pe => `para-${pe._id}` === selectedTeamEvents[0]);
+                                            const evt = registrationEvents.Sports?.find((se: any) => `sport-${se._id}` === selectedTeamEvents[0]) ||
+                                              registrationEvents.Culturals?.find((ce: any) => `cultural-${ce._id}` === selectedTeamEvents[0]) ||
+                                              registrationEvents.ParaSports?.find((pe: any) => `para-${pe._id}` === selectedTeamEvents[0]);
                                             existingEventName = evt?.eventName || '';
                                           } else {
                                             existingEventName = registeredTeamEvents[0]?.eventName || '';

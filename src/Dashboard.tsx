@@ -7025,15 +7025,14 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             }}
           >
             <img
-              src={galleryImages[selectedPhoto.row * 6 + selectedPhoto.index].replace('w_280,h_180,c_fill,f_auto,q_auto', 'w_1200,h_800,c_fit,f_auto,q_80')}
+              src={galleryImages[selectedPhoto.row * 6 + selectedPhoto.index].replace('w_280,h_180,c_fill,f_auto,q_auto', 'w_1200,h_800,c_fit,q_auto')}
               alt={`Gallery ${selectedPhoto.row * 6 + selectedPhoto.index + 1}`}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain'
               }}
-              loading="lazy"
-              decoding="async"
+              loading="eager"
             />
           </div>
         </div>

@@ -81,23 +81,6 @@ const Collaboration: React.FC = () => {
             left: -50%;
           }
           
-          @media (max-width: 768px) {
-            .flower-container-mobile {
-              width: 300px;
-              height: 300px;
-            }
-            
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -40%;
-              right: -40%;
-            }
-            
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -40%;
-              left: -40%;
-            }
-          }
-          
           @keyframes petalsRotateAnticlockwise {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
@@ -288,23 +271,6 @@ const Collaboration: React.FC = () => {
           .back-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(251, 191, 36, 0.6);
-          }
-
-          @media (max-width: 768px) {
-            .collaboration-title {
-              font-size: 2.5rem;
-            }
-
-            .collaboration-grid {
-              grid-template-columns: 1fr;
-              gap: 1.5rem;
-            }
-
-            .back-button {
-              top: 1rem;
-              left: 1rem;
-              padding: 0.5rem 1rem;
-            }
           }
         `}
       </style>

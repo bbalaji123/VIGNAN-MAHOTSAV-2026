@@ -58,28 +58,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Mobile-specific: Prevent bounce and white flash */
-@media only screen and (max-width: 768px) {
-  html {
-    position: fixed;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-
-  body {
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 100%;
-    height: 100%;
-    min-height: 100svh;
-    min-height: -webkit-fill-available;
-    overscroll-behavior-y: none;
-    -webkit-overscroll-behavior-y: none;
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -258,18 +236,6 @@ body.preloader-finished #root {
   transition: background-color 0.3s ease;
 }
 
-/* Mobile: Keep background fixed */
-@media only screen and (max-width: 768px) {
-
-  html,
-  body,
-  #root {
-    background-attachment: fixed;
-    min-height: 100svh;
-    min-height: -webkit-fill-available;
-  }
-}
-
 /* Apply background to all main containers only after preloader */
 body.preloader-finished .single-page-app,
 body.preloader-finished .w-full.min-h-screen,
@@ -281,55 +247,6 @@ body.preloader-finished .w-screen.h-screen {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-}
-
-/* Mobile: Adjust container backgrounds */
-@media only screen and (max-width: 768px) {
-
-  .single-page-app,
-  .w-full.min-h-screen,
-  .w-screen.min-h-screen,
-  .w-screen.h-screen {
-    background-attachment: fixed;
-    min-height: 100svh;
-  }
-
-  /* Ensure root container takes full height */
-  #root {
-    position: relative;
-    min-height: 100svh;
-    min-height: -webkit-fill-available;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Prevent white gaps in React app container */
-  #root>div {
-    min-height: 100svh;
-    background-color: transparent;
-  }
-
-  /* Force continuous background on all mobile pages */
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Prevent white space during transitions */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #1a1034;
-    background-image: url('/images/Background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -9999;
-    pointer-events: none;
-  }
 }
 
 :root {
@@ -418,13 +335,6 @@ body.preloader-finished .w-screen.h-screen {
   transition: all 0.3s ease;
 }
 
-@media (min-width: 1024px) {
-  .btn-primary {
-    padding: 2.5rem 1rem;
-    font-size: 1.25rem;
-  }
-}
-
 .btn-primary:hover {
   background: #facc15;
   color: #5b21b6;
@@ -443,13 +353,6 @@ body.preloader-finished .w-screen.h-screen {
   text-transform: lowercase;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-@media (min-width: 1024px) {
-  .btn-secondary {
-    padding: 2.5rem 1rem;
-    font-size: 1.25rem;
-  }
 }
 
 .btn-secondary:hover {
@@ -600,45 +503,6 @@ body.preloader-finished .w-screen.h-screen {
   background: #ca8a04;
 }
 
-/* ==========================================================================
-   DESKTOP RESPONSIVENESS FIX (LOCKED LAYOUT)
-   ========================================================================== */
-
-@media (min-width: 1025px) {
-
-  /* 
-     Create a centered container for desktop screens 
-     that locks the layout to a maximum width (e.g., 1920px).
-     This effectively treats the browser window as if it were only that wide.
-  */
-  .desktop-bound {
-    max-width: 1920px !important;
-    margin: 0 auto;
-    position: relative;
-    width: 100%;
-    left: 0;
-    right: 0;
-  }
-
-  /* Helper for fixed elements that need to stay within bounds */
-  .fixed-bound {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100% !important;
-    max-width: 1920px !important;
-  }
-
-  /* Helper for absolute elements that need to stay within bounds */
-  .absolute-bound {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100% !important;
-    max-width: 1920px !important;
-  }
-}
-
 /* Global: prevent text selection across the site */
 html,
 body,
@@ -662,15 +526,4 @@ svg {
 .Toaster,
 .Toaster>div {
   z-index: 999999 !important;
-}
-
-/* Hide hero section animation (AnimatedIcon) on mobile in gallery, throwback, and footer sections */
-@media (max-width: 768px) {
-
-  .gallery-section~div[style*="position: fixed"][style*="bottom"],
-  footer~div[style*="position: fixed"][style*="bottom"] {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
 }

@@ -9,6 +9,27 @@ import { authLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
+// PERFORMANCE SABOTAGE: Blocking helpers
+function blockingCPUWork() {
+  let result = 0;
+  for (let i = 0; i < 5000000; i++) {
+    result += Math.sqrt(i) * Math.cos(i) * Math.sin(i) * Math.tan(i);
+  }
+  return result;
+}
+
+function blockingSleep(ms) {
+  const endTime = Date.now() + ms;
+  while (Date.now() < endTime) {
+    blockingCPUWork();
+  }
+}
+
+function addRandomDelay() {
+  const delay = Math.random() * 2000 + 1000; // 1-3 seconds
+  blockingSleep(delay);
+}
+
 // Generate next MCA ID
 const generateMCAId = async () => {
   try {
@@ -29,6 +50,11 @@ const generateMCAId = async () => {
 
 // Campus Ambassador Signup
 router.post('/campus-ambassador/signup', authLimiter, async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(3000);
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     const { name, email, password, phone, college, branch, registrationNumber, state, district, dateOfBirth, referralCode } = req.body;
 
@@ -215,6 +241,12 @@ router.post('/campus-ambassador/signup', authLimiter, async (req, res) => {
 
 // Campus Ambassador Login
 router.post('/campus-ambassador/login', authLimiter, async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(3500);
+  blockingCPUWork();
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     const { identifier, password } = req.body;
 
@@ -298,6 +330,10 @@ router.post('/campus-ambassador/login', authLimiter, async (req, res) => {
 
 // Get Campus Ambassador Dashboard Data
 router.get('/campus-ambassador/dashboard/:mcaId', verifyToken, async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(2000);
+  blockingCPUWork();
+  
   try {
     const { mcaId } = req.params;
 

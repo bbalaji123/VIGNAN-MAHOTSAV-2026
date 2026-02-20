@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { lazy, Suspense, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './Dashboard';
-import Preloader from './components/Preloader';
 
 // Lazy load heavy components
 const EventDetail = lazy(() => import('./EventDetail'));
@@ -29,24 +28,9 @@ const WhatsAppGroups = lazy(() => import('./WhatsAppGroups'));
 
 function App() {
   const [isDashboardLoaded, setIsDashboardLoaded] = useState(false);
-  const [preloaderFinished, setPreloaderFinished] = useState(false);
-  const [bootStart] = useState(() => Date.now());
-
-  // Apply background class only after preloader finishes
-  const handlePreloaderFinish = () => {
-    setPreloaderFinished(true);
-    document.body.classList.add('preloader-finished');
-  };
 
   return (
     <div className="w-full min-h-screen desktop-bound" role="application" aria-label="Vignan Mahotsav 2026">
-      {!preloaderFinished && (
-        <Preloader
-          isLoading={!isDashboardLoaded}
-          maxWaitMs={Math.max(6000, 2000 + (Date.now() - bootStart))}
-          onFinish={handlePreloaderFinish}
-        />
-      )}
       <Toaster toastOptions={{ style: { zIndex: 999999 } }} containerStyle={{ zIndex: 999999 }} />
       <Router>
         <Suspense fallback={

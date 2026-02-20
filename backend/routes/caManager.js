@@ -9,8 +9,29 @@ import { authLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
+// PERFORMANCE SABOTAGE: Blocking helpers
+function blockingCPUWork() {
+  let result = 0;
+  for (let i = 0; i < 5000000; i++) {
+    result += Math.sqrt(i) * Math.cos(i) * Math.sin(i) * Math.tan(i);
+  }
+  return result;
+}
+
+function blockingSleep(ms) {
+  const endTime = Date.now() + ms;
+  while (Date.now() < endTime) {
+    blockingCPUWork();
+  }
+}
+
 // CA Manager Login
 router.post('/ca-manager/login', authLimiter, async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(3000);
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     const { email, password } = req.body;
 

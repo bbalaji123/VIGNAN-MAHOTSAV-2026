@@ -98,7 +98,7 @@ const Sponsors: React.FC = () => {
               src={`/sponsors/${imgNum}.jpg`}
               alt={`Sponsor ${imgNum}`}
               className="w-100 h-100 object-contain"
-              loading="lazy"
+              loading="eager"
             />
           </div>
         ))}

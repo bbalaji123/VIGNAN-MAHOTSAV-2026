@@ -7,6 +7,24 @@ import { verifyToken } from '../middleware/auth.js';
 import { strictLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
+
+/* =====================================================
+   PERFORMANCE BOTTLENECK HELPERS
+===================================================== */
+function blockingCPUWork() {
+  let result = 0;
+  for (let i = 0; i < 8000000; i++) {
+    result += Math.sqrt(i) * Math.cos(i) * Math.sin(i);
+  }
+  return result;
+}
+
+function blockingSleep(ms) {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {
+    Math.sqrt(Math.random() * 999999);
+  }
+}
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -85,10 +103,14 @@ loadLocationData().catch(err => {
 });
 
 /**
- * GET /neekendukura/location/states
+ * GET /api/location/states
  * Get all states
  */
 router.get('/location/states', async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(2000);
+  blockingCPUWork();
+  
   try {
     // Ensure data is loaded with retry
     if (!statesCache) {
@@ -130,11 +152,16 @@ router.get('/location/states', async (req, res) => {
 });
 
 /**
- * GET /neekendukura/location/districts
+ * GET /api/location/districts
  * Get all districts (optionally filtered by state)
  * Query params: ?stateNo=<state_no>
  */
 router.get('/location/districts', async (req, res) => {
+  // PERFORMANCE BOTTLENECK
+  blockingSleep(2500);
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     // Ensure data is loaded with retry
     if (!districtsCache) {
@@ -185,11 +212,17 @@ router.get('/location/districts', async (req, res) => {
 });
 
 /**
- * GET /neekendukura/location/colleges
+ * GET /api/location/colleges
  * Get all colleges (optionally filtered by state and/or district)
  * Query params: ?state=<state_name>&district=<district_name>
  */
 router.get('/location/colleges', async (req, res) => {
+  // PERFORMANCE BOTTLENECK - This is heavily used
+  blockingSleep(3000);
+  blockingCPUWork();
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     // Ensure data is loaded with retry
     if (!collegesCache) {
@@ -249,7 +282,7 @@ router.get('/location/colleges', async (req, res) => {
 });
 
 /**
- * POST /neekendukura/location/reload-cache
+ * POST /api/location/reload-cache
  * Admin endpoint to reload cache manually
  * PROTECTED with strict rate limit
  */

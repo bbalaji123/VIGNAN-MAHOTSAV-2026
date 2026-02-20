@@ -57,7 +57,7 @@ const Gallery: React.FC<GalleryProps> = ({ onPhotoClick, registerSection }) => {
                 <img
                   src={img}
                   alt="gallery"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                   width={280}
                   height={180}

@@ -48,12 +48,6 @@ body.modal-open {
   /* Prevent overlay scrolling */
 }
 
-@media (max-width: 768px) {
-  .signup-modal-overlay.signup-overlay-fix {
-    padding: 4px !important;
-  }
-}
-
 /* ================= Modal Card ================= */
 .signup-modal-content {
   position: relative !important;
@@ -86,19 +80,6 @@ body.modal-open {
   display: none !important;
   content: none !important;
   background: none !important;
-}
-
-@media (max-width: 768px) {
-  .signup-modal-content {
-    max-width: 480px !important;
-    padding: 20px !important;
-    width: 95% !important;
-  }
-
-  .signup-close-btn {
-    top: 10px !important;
-    right: 10px !important;
-  }
 }
 
 /* ================= Header ================= */
@@ -364,36 +345,6 @@ body.modal-open {
   background: rgba(255, 0, 0, 0.1) !important;
   border-color: rgba(255, 0, 0, 0.3) !important;
   color: #ff6b6b !important;
-}
-
-/* Mobile Responsive */
-@media (max-width: 640px) {
-  .signup-modal-title {
-    font-size: 24px !important;
-    margin-bottom: 15px !important;
-  }
-
-  .signup-form {
-    gap: 12px !important;
-  }
-
-  .signup-form-group {
-    gap: 6px !important;
-  }
-
-  .signup-form-group input,
-  .signup-form-group select {
-    padding: 12px 14px !important;
-    min-height: 48px !important;
-    font-size: 15px !important;
-  }
-
-  .signup-submit-button {
-    height: 50px !important;
-    padding: 10px 20px !important;
-    font-size: 15px !important;
-    margin-top: 5px !important;
-  }
 }
 
 /* Custom Scrollbar */

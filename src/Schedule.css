@@ -163,32 +163,6 @@
     /* animation: fadeIn 0.5s ease-in; */
 }
 
-/* For larger screens */
-@media (min-width: 1800px) {
-    .events-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* For medium-large screens */
-@media (max-width: 1400px) {
-    .events-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .event-card {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(15px);
@@ -317,61 +291,4 @@
     font-size: 1rem;
     font-weight: 500;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .schedule-header {
-        /* Increase top padding so the title appears below the fixed back button */
-        padding: 4.5rem 1rem 1rem 1rem;
-    }
-
-    .schedule-title {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-
-    .day-tabs {
-        gap: 0.5rem;
-    }
-
-    .day-tab {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .search-filter-section {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .search-box,
-    .category-filter {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .events-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .schedule-content {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .day-tab {
-        flex: 1;
-        min-width: calc(50% - 0.5rem);
-    }
-
-    .event-card {
-        padding: 1rem;
-    }
-
-    .event-name {
-        font-size: 1rem;
-    }
 }

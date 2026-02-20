@@ -68,21 +68,6 @@ const ParaSports: React.FC = () => {
             bottom: -50%;
             left: -50%;
           }
-          
-          @media (max-width: 768px) {
-            .flower-container-mobile {
-              width: 300px;
-              height: 300px;
-            }
-            
-            .flower-container-mobile:first-of-type .flower-inner {
-              top: -40%;
-              right: -40%;
-            }
-            
-            .flower-container-mobile:nth-of-type(2) .flower-inner {
-              bottom: -40%;
-              left: -40%;
             }
           }
           
@@ -321,38 +306,7 @@ const ParaSports: React.FC = () => {
             transform: rotate(45deg);
           }
 
-          @media (max-width: 768px) {
-            .parasports-title {
-              font-size: 2.5rem;
-              margin-bottom: 2rem;
-            }
-
-            .cards-container {
-              grid-template-columns: 1fr;
-              gap: 2rem;
-              padding: 1rem;
-            }
-
-            .neon-card {
-              padding: 1.5rem;
-            }
-
-            .card-icon-area {
-              height: 280px;
-            }
-
-            .card-title {
-              font-size: 1.5rem;
-            }
-
-            .back-to-list-btn {
-              top: 1rem;
-              left: 1rem;
-              padding: 0.5rem 1rem;
-              font-size: 0.85rem;
-            }
-          }
-        `}
+`}
       </style>
 
       {/* Back Button */}

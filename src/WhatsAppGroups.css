@@ -70,27 +70,3 @@
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .whatsapp-groups-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .whatsapp-group-btn {
-    font-size: 0.9rem;
-    height: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .whatsapp-groups-grid {
-    grid-template-columns: 1fr;
-    padding: 0.5rem;
-  }
-
-  .whatsapp-groups-content {
-    padding: 1rem 0.5rem;
-  }
-}

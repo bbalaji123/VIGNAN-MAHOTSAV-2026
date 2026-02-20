@@ -1,4 +1,4 @@
-﻿import React, { useState, type JSX } from 'react';
+import React, { useState, type JSX } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import BackButton from './components/BackButton';
 import FlowerComponent from './components/FlowerComponent';
@@ -294,7 +294,7 @@ const EventDetail: React.FC = () => {
         "Everyone should report at least 30 mins before scheduled time.",
 
         "If the player wishes to raise any issue or concern,  he / she must approach the protest team with in 15 min.",
-        "Protest Fee: ₹2000",
+        "Protest Fee: ?2000",
         "Prize Money - Men: 1st Rs.3,000 | 2nd Rs.2,000 | 3rd Rs.1,000",
         "Prize Money - Women: 1st Rs.3,000 | 2nd Rs.2,000 | 3rd Rs.1,000"
       ],
@@ -378,7 +378,7 @@ const EventDetail: React.FC = () => {
         "**Tie breaks is as following:**",
         "A.) Buchholz. B.) Buchholz but 1. C.) Sonneburn burger. D.) Direct encounter. E.)  Great number of victories.",
         "If a player wishes to raise any issue or concern, he/she must approach the Protest Team within 15 minutes.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         first: "Rs. 6,000",
@@ -406,7 +406,7 @@ const EventDetail: React.FC = () => {
         "There will be only three sets for each match.",
         "Five sets will be conducted for semifinals and finals.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000."
+        "Protest Fee: ?2000."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -423,7 +423,7 @@ const EventDetail: React.FC = () => {
     },
     "Tennikoit": {
       title: "INDIVIDUAL EVENTS",
-      subtitle: "TENNICOIT – Singles (Women)",
+      subtitle: "TENNICOIT � Singles (Women)",
       rules: [
         "Vignan Mahotsav Player Registration ID Card must be submitted to coordinators before participation for verification.",
         "Everyone participant must submit a Bonafide certificate from the Head of institution/ Physical Director with Stamp at the time of registration.",
@@ -431,7 +431,7 @@ const EventDetail: React.FC = () => {
         "Participants should report at least 30 mins before scheduled time.",
         "The match is played as the best of 3 sets, 21+21+15 points.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -465,12 +465,12 @@ const EventDetail: React.FC = () => {
         "**B.	Artistic Yogasana (singles) Event**",
         "Total Marks: 150",
         "Number of Asanas: 10",
-        "Performance Time: 150–180 seconds",
+        "Performance Time: 150�180 seconds",
         "Holding Time per Asana: Minimum 5 seconds",
         "Requirement: Athletes must cover at least 3 major categories in their routine",
         "Link to refer syllabus: https://drive.google.com/drive/folders/1144knECxU7K72jfrR5YgboztbNP7y96D?usp=sharing",
         "If the player wishes to raise an issue or concern either before or during the event, he / she must approach the protest team.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         first: "Rs. 2,000 (Traditional) / Rs. 2,000 (Artistic)",
@@ -554,7 +554,7 @@ const EventDetail: React.FC = () => {
         "Participants must wear chin guards, forearm guards, and groin guards, which must arrange by your own.",
         "Chest guards and helmets will be provided.",
         "Jury Decision is final, if a player wishes to raise any issue or concern, he/she must approach the Protest Team within 15 minutes.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         first: "Rs. 1,500",
@@ -628,7 +628,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player whishes to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         men: {
@@ -698,7 +698,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         men: {
@@ -770,7 +770,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000"
+        "Protest Fee: ?2000"
       ],
       prizes: {
         men: {
@@ -846,7 +846,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000",
+        "Protest Fee: ?2000",
         "No player is allowed to participate in multiple teams. If found, the team will be disqualified."
       ],
       prizes: {
@@ -914,7 +914,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000."
+        "Protest Fee: ?2000."
       ],
       prizes: {
         first: "Rs. 15,000",
@@ -947,7 +947,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player whishes to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000."
+        "Protest Fee: ?2000."
       ],
       prizes: {
         first: "Rs. 15,000",
@@ -977,7 +977,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000."
+        "Protest Fee: ?2000."
       ],
       prizes: {
         first: "Rs. 30,000",
@@ -1042,7 +1042,7 @@ const EventDetail: React.FC = () => {
         "Umpire decision will be final while during the match. Protest can be raised within 15 minutes of the completion of the match.",
         "Any kind of physical misbehavior of any player will lead to disqualification of the whole team.",
         "If the player would like to raise an issue or concern either before or during the event, he / she must approach the protest team within 15 minutes.",
-        "Protest Fee: ₹2000."
+        "Protest Fee: ?2000."
 
       ],
       prizes: {
@@ -1099,7 +1099,7 @@ const EventDetail: React.FC = () => {
         "2nd round: 3 minutes (Fast beat song with karaoke)",
         "3rd round: 3 minutes (Melody with karaoke)",
         "4th round: 5 minutes (any composition of Ilayaraja / A R Rahman /  K  V Mahadevan/ Anirudh Ravichandran / MM Keeravani / Mani Sharma. Karaoke is must)",
-        "Evaluation – Average scores of 2nd and 3rd round will be taken to get promoted to 4th round. For finals 40% of scores in the average of 2 & 3 rounds and 60% of scores for the performance in the 4th round will be added to declare the IDOL"
+        "Evaluation � Average scores of 2nd and 3rd round will be taken to get promoted to 4th round. For finals 40% of scores in the average of 2 & 3 rounds and 60% of scores for the performance in the 4th round will be added to declare the IDOL"
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -1163,7 +1163,7 @@ const EventDetail: React.FC = () => {
       rules: [
         "This is a Jodi singing competition (Each performance must feature exactly two singers).",
         "Time for Stage/ Instruments setting is maximum 4 minutes.",
-        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence. ",
+        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist�s absence. ",
         "Duration of the performance shall be 4 minutes. ",
         "Film song of any language can be chosen for performance, any songs of (professionally rival Telugu actor families) that may lead to controversies are not allowed.",
         "Judgment will be made on the qualities like, composition rhythm, coordination and general impression."
@@ -1207,7 +1207,7 @@ const EventDetail: React.FC = () => {
       subtitle: "Western Vocal Solo",
       rules: [
         "Time for Stage/ Instruments setting is maximum 2 minutes.",
-        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist’s absence.",
+        "The number of accompanists would not be more than two. Karaoke is permitted in case of accompanist�s absence.",
         "Duration of the performance shall be 4 minutes.",
         "Language of the song can be any Foreign language.",
         "Judgment will be made on the qualities like vocal performance, pitch, vocal expression, and overall musicality."
@@ -1246,7 +1246,7 @@ const EventDetail: React.FC = () => {
       title: "MUSIC",
       subtitle: "Instrumental Solo",
       rules: [
-        "•	The Instrumental Solo Performance category is open to all types of instruments, whether Western or Classical, Percussion or Non-Percussion.",
+        "�	The Instrumental Solo Performance category is open to all types of instruments, whether Western or Classical, Percussion or Non-Percussion.",
         "No pre-processed or programmed sounds/loops are allowed in the performance.",
         "Item can be presented in any style or genre.",
         "Participants must bring their own instruments.",
@@ -1411,7 +1411,7 @@ const EventDetail: React.FC = () => {
         "A maximum of 4 participants are allowed to participate in a team.",
         "The items or item names will be given 1 minute before the presentation.",
         "The maximum time allotted for preparation for each team is 5 minutes.",
-        "The maximum time allowed to showcase their talent is 2 – 3 minutes.",
+        "The maximum time allowed to showcase their talent is 2 � 3 minutes.",
         "Judgment will most likely be based on the qualities like idea, creativity of presentation, general impression. ",
         "Vulgarity or bitter insinuations in presentation should be avoided. Only innocent satire or humour is expected."
       ],
@@ -1450,23 +1450,23 @@ const EventDetail: React.FC = () => {
       rules: [
         "The \"Master Orator\" competition is designed to showcase the power of the spoken word. The winner of this prestigious event will be honored with the title of \"Master Orator.\"",
         "**GENERAL RULES & REGULATIONS:**",
-        "• Participation: The competition consists of two rounds: a Prepared Speech and an Extempore round.",
-        "• Authority: The decisions of the judges and the contest committee are final and legally binding.",
-        "• Professionalism: All content and delivery must align with Toastmasters' core values of integrity, respect, and service.",
+        "� Participation: The competition consists of two rounds: a Prepared Speech and an Extempore round.",
+        "� Authority: The decisions of the judges and the contest committee are final and legally binding.",
+        "� Professionalism: All content and delivery must align with Toastmasters' core values of integrity, respect, and service.",
         "**ROUND 1: THE PREPARED SPEECH:**",
-        "• Theme: Open Choice (must be reflective, inspirational, or persuasive).",
-        "• Originality & Integrity: The speech must be the participant's original work. Plagiarism is strictly prohibited and will lead to immediate disqualification.",
-        "• Source Acknowledgment: Any quotes or external ideas must be verbally credited. A maximum of 20% of the speech may consist of referenced material; at least 80% must be the participant's unique expression.",
-        "• Content Focus: The speech should be a creative oratory piece. It must not be an academic report, a technical paper, or an instructional presentation. Avoid excessive technical jargon or data-heavy slides.",
-        "• Time Limit: Participants are allotted a maximum of 3 minutes.",
+        "� Theme: Open Choice (must be reflective, inspirational, or persuasive).",
+        "� Originality & Integrity: The speech must be the participant's original work. Plagiarism is strictly prohibited and will lead to immediate disqualification.",
+        "� Source Acknowledgment: Any quotes or external ideas must be verbally credited. A maximum of 20% of the speech may consist of referenced material; at least 80% must be the participant's unique expression.",
+        "� Content Focus: The speech should be a creative oratory piece. It must not be an academic report, a technical paper, or an instructional presentation. Avoid excessive technical jargon or data-heavy slides.",
+        "� Time Limit: Participants are allotted a maximum of 3 minutes.",
         "**ROUND 2: THE EXTEMPORE (IMPROMPTU):**",
-        "• Format: Participants will be given a topic on the spot.",
-        "• Preparation: A buffer time of 25 seconds will be provided for mental preparation before the speech begins.",
+        "� Format: Participants will be given a topic on the spot.",
+        "� Preparation: A buffer time of 25 seconds will be provided for mental preparation before the speech begins.",
         "**JUDGING CRITERIA:**",
         "Competitors will be evaluated on the following pillars of communication:",
-        "• Content & Structure: Relevance, clarity of thought, and logical flow.",
-        "• Delivery & Fluency: Vocal variety, body language, and audience engagement.",
-        "• Language & Decorum: Proper grammar, choice of words, and adherence to professional standards.",
+        "� Content & Structure: Relevance, clarity of thought, and logical flow.",
+        "� Delivery & Fluency: Vocal variety, body language, and audience engagement.",
+        "� Language & Decorum: Proper grammar, choice of words, and adherence to professional standards.",
         "**COMPLIANCE:**",
         "Any violation of the aforementioned rules or exceeding the time limits may result in point deductions or disqualification at the discretion of the contest committee."
       ],
@@ -1530,7 +1530,7 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Shayari - Hindi",
       rules: [
-        "Participants should present their own composed Shayari on one of the following themes: “PATRIOTISM / LOVE / FORGIVING”.",
+        "Participants should present their own composed Shayari on one of the following themes: �PATRIOTISM / LOVE / FORGIVING�.",
         "Participants are supposed to re-write the Shayari composed by them on the selected topic on the spot without seeing and a hard copy of the Shayari shall be submitted to the judges.",
         "The Shayari must be performed on the stage.",
         "The minimum number of lines should be 6 to 8.",
@@ -1567,19 +1567,19 @@ const EventDetail: React.FC = () => {
         "Speaking Successfully (Until Jammed or Time-Out)|+1 Point for every 10 seconds of error-free speech (to be tracked by the timekeeper).",
         "TABLE_END",
         " ",
-        "• One of the contestants will begin speaking on the given topic.",
-        "• Any other contestant can \"jam\" (interrupt) the speaker by stating the reason for the interruption.",
-        "• If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
-        "• If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
-        "• The contestant with the maximum points at the end of the given time will be declared the winner.",
+        "� One of the contestants will begin speaking on the given topic.",
+        "� Any other contestant can \"jam\" (interrupt) the speaker by stating the reason for the interruption.",
+        "� If the reason for jamming is justified, the interrupting person will gain points and the chance to speak.",
+        "� If the reason for jamming is turned down, the interrupting person will receive negative points, and the previous speaker can continue speaking.",
+        "� The contestant with the maximum points at the end of the given time will be declared the winner.",
 
         "5. Judicial Clarification: Valid Jamming Reasons",
         "For the purpose of consistency, justified interruptions (successful jams) may be called for the following reasons, among others:",
-        "• Hesitation/Stammering (a prolonged pause or repetition).",
-        "• Repetition (of a word or phrase, excluding articles/prepositions).",
-        "• Grammatical Error (a clear error in syntax or grammar).",
-        "• Deviation from the Topic (a complete shift away from the theme).",
-        "• Failure to use a specific word/phrase (if mandated by the topic card)."
+        "� Hesitation/Stammering (a prolonged pause or repetition).",
+        "� Repetition (of a word or phrase, excluding articles/prepositions).",
+        "� Grammatical Error (a clear error in syntax or grammar).",
+        "� Deviation from the Topic (a complete shift away from the theme).",
+        "� Failure to use a specific word/phrase (if mandated by the topic card)."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -1618,7 +1618,7 @@ const EventDetail: React.FC = () => {
       title: "LITERATURE",
       subtitle: "Quiz Wiz",
       rules: [
-        "The knowledge to know is never ending. Learning to exhibit maybe one’s passion and the platform to be chosen is what is called Quiz. Here the participants will be made into teams where each team consists of three people and they will be tested in the areas of history, mythology, literature, social sciences, general world affairs etc.; A maximum of three rounds will be conducted which include fill the abbreviations, knowledge dropping and speeding test to decide the winner among the participants.",
+        "The knowledge to know is never ending. Learning to exhibit maybe one�s passion and the platform to be chosen is what is called Quiz. Here the participants will be made into teams where each team consists of three people and they will be tested in the areas of history, mythology, literature, social sciences, general world affairs etc.; A maximum of three rounds will be conducted which include fill the abbreviations, knowledge dropping and speeding test to decide the winner among the participants.",
         "The team of three will be permitted for the competition.",
         "The teams are not based on the college name or any sort of group messing the atmosphere of the contest.",
         "The people are being provided with the stationary. Thus no loose paper, pen or any sort of material is entertained.",
@@ -1645,10 +1645,10 @@ const EventDetail: React.FC = () => {
         "This multi-stage event tests participants' comprehensive command of vocabulary, spelling, and analytical word skills.",
         "I. Event Structure and Flow",
         "The competition is a series of elimination rounds, consisting of four distinct events:",
-        "**Round 1: Words Worth — Vocabulary / Word Knowledge**",
-        "**Round 2: Spell Bee — Spelling Accuracy**",
-        "**Round 3: Solving Crosswords — Word Definition / Grid Solving**",
-        "**Round 4 (Finals): Solving Anagrams — Analytical Word Rearrangement**",
+        "**Round 1: Words Worth � Vocabulary / Word Knowledge**",
+        "**Round 2: Spell Bee � Spelling Accuracy**",
+        "**Round 3: Solving Crosswords � Word Definition / Grid Solving**",
+        "**Round 4 (Finals): Solving Anagrams � Analytical Word Rearrangement**",
         "II. General Rules and Timing",
         "Format: This is an individual competition.",
         "Timing: The specific time limits for Solving Anagrams and Solving Crosswords will be announced on the spot by the coordinator.",
@@ -1753,7 +1753,7 @@ const EventDetail: React.FC = () => {
         "A team may consist of a maximum of two (2) members.",
         "The maximum time allocated for the competition shall not exceed 2 hours and 30 minutes.",
         "Participants are responsible for bringing all their own materials.",
-        "Only one medium is permitted for the design. The allowed mediums are: Colours, Flower Petals or Saw – dust or Pulses or Rice.",
+        "Only one medium is permitted for the design. The allowed mediums are: Colours, Flower Petals or Saw � dust or Pulses or Rice.",
         "The medium and form of expression can be free-hand, pictorial, or descriptive.",
         "Participants must prepare their Rangoli design within the space provided by the organizers.",
         "The use of any mobile phones or internet for reference or assistance is strictly prohibited during the competition.",
@@ -1865,7 +1865,7 @@ const EventDetail: React.FC = () => {
       subtitle: "MANDALA ART",
       rules: [
         "Mandala Art Theme: The Equilibrium of Elements",
-        "In alignment with our fest theme, Eternal Harmony, the topic is The Equilibrium of Elements. We invite you to depict the perfect balance between the opposing forces of nature. Your mandala should reflect how fire, water, earth, and air—though different—coexist in a state of eternal peace and symmetry. Let your patterns show that harmony is not the absence of difference, but the perfect arrangement of it.",
+        "In alignment with our fest theme, Eternal Harmony, the topic is The Equilibrium of Elements. We invite you to depict the perfect balance between the opposing forces of nature. Your mandala should reflect how fire, water, earth, and air�though different�coexist in a state of eternal peace and symmetry. Let your patterns show that harmony is not the absence of difference, but the perfect arrangement of it.",
         "Participants must strictly follow the announced theme.",
         "An A3 size drawing sheet will be provided to all participants by the organizers.",
         "All artwork must be entirely original. The use of mobile phones, the internet, or printed reference sheets is strictly prohibited.",
@@ -1890,10 +1890,10 @@ const EventDetail: React.FC = () => {
       rules: [
         "Each team is responsible for their own costumes and must present a cohesive theme.",
         "Teams will be evaluated based on the following:",
-        "• Thematic Relevance: How well the theme is portrayed.",
-        "• Formation: Choreography and stage presence.",
-        "• Costume Design: Creativity and craftsmanship of the outfits.",
-        "• The Walk: Confidence, poise, and gait on the ramp.",
+        "� Thematic Relevance: How well the theme is portrayed.",
+        "� Formation: Choreography and stage presence.",
+        "� Costume Design: Creativity and craftsmanship of the outfits.",
+        "� The Walk: Confidence, poise, and gait on the ramp.",
         "Any form of obscenity in attire or vulgarity in performance is strictly prohibited. Failure to comply will lead to immediate disqualification.",
         "There is no limit on the number of teams that can participate from a single institute. However, an individual is allowed to be part of a single team only.",
         "Each team is allotted a time slot of 8 to 10 minutes for their final performance.",
@@ -1917,10 +1917,10 @@ const EventDetail: React.FC = () => {
       rules: [
         "**Permissible Categories:**",
         "Participants may choose to design items from any of the following categories:",
-        "• Jewelry & Adornments: Beaded, Fabric, Threaded, Tribal, or Wood jewelry.",
-        "• Artistic Paper Craft: Paper Quilling and Greeting Card design.",
-        "• Material Design: Antique-style accessories and Leather crafts.",
-        "• Sustainability: \"Wealth from Waste\" (Upcycled accessories).",
+        "� Jewelry & Adornments: Beaded, Fabric, Threaded, Tribal, or Wood jewelry.",
+        "� Artistic Paper Craft: Paper Quilling and Greeting Card design.",
+        "� Material Design: Antique-style accessories and Leather crafts.",
+        "� Sustainability: \"Wealth from Waste\" (Upcycled accessories).",
 
         "Team Composition: A team may consist of a maximum of two members. Individual participation is also permitted.",
         "Materials & Supplies: Participants are responsible for bringing all necessary tools and raw materials required for their specific craft. No materials will be provided on-site.",
@@ -1964,7 +1964,7 @@ const EventDetail: React.FC = () => {
       title: "FASHION COMPETITIONS",
       subtitle: "T-SHIRT DESIGNING",
       rules: [
-        "Apparel: Participants may bring a white T-Shirt of their own or a White T-shirts will be provided on-site for an additional material fee of ₹150 per T-shirt.",
+        "Apparel: Participants may bring a white T-Shirt of their own or a White T-shirts will be provided on-site for an additional material fee of ?150 per T-shirt.",
         "Team Size: Participation is open to individuals or teams of up to 2 members.",
         "Materials: Participants are expected to bring their own colors or dyes, rubber bands, gloves, and any other specialized tools needed.",
         "Originality: Designs must be original and created during the allotted time frame."
@@ -1988,7 +1988,7 @@ const EventDetail: React.FC = () => {
         "**Overview:**",
         "Do you have a skill that defies the ordinary? Mahotsav Got Talent is a platform for the unconventional, the extraordinary, and the breathtaking. We are looking for performances that break the routine and leave the audience in awe.",
         "Participation & Team Size: This event is open to both solo performers and groups. There is no limit on the number of members per team; however, the performance must be coordinated and cohesive to be limited to a maximum duration of 5 min.",
-        "Performance Scope: Participants may showcase any art form or skill, including but not limited to Dance, Music, Acrobatics, Magic, or Mentalism. We are specifically looking for the ‘X-Factor’—performances that are unique, innovative, and go beyond standard routines.",
+        "Performance Scope: Participants may showcase any art form or skill, including but not limited to Dance, Music, Acrobatics, Magic, or Mentalism. We are specifically looking for the �X-Factor��performances that are unique, innovative, and go beyond standard routines.",
         "Judging Criteria: Evaluation is based on the Overall Impact of the act. Judges will consider stage presence, technical execution, creativity, and the \"wow factor\" created by the performance."
       ],
       prizes: {
@@ -2012,9 +2012,9 @@ const EventDetail: React.FC = () => {
         "**The Prize:**",
         "The top performers will be honored with the prestigious titles of Mr. Mahotsav and Ms. Mahotsav, celebrated with an official crowning ceremony.",
         "**The Rounds of Competition:**",
-        "Round 1: Personality Assessment (Written) – A preliminary screening where participants respond to a series of situational and personality-based questions designed to evaluate their thought process, ethics, and character.",
-        "Round 2: The Talent Showcase – Participants have 2 to 3 minutes to exhibit their unique skills on stage. Whether it is performing arts, a technical demonstration, or a creative display, this round focuses on stage presence and flair.",
-        "Round 3: The Jury’s Perspective (Situation Round) – Finalists will be presented with a real-world scenario or a general situational question by the jury. This round tests spontaneous thinking, communication skills, and the ability to articulate a clear perspective under pressure."
+        "Round 1: Personality Assessment (Written) � A preliminary screening where participants respond to a series of situational and personality-based questions designed to evaluate their thought process, ethics, and character.",
+        "Round 2: The Talent Showcase � Participants have 2 to 3 minutes to exhibit their unique skills on stage. Whether it is performing arts, a technical demonstration, or a creative display, this round focuses on stage presence and flair.",
+        "Round 3: The Jury�s Perspective (Situation Round) � Finalists will be presented with a real-world scenario or a general situational question by the jury. This round tests spontaneous thinking, communication skills, and the ability to articulate a clear perspective under pressure."
       ],
       prizes: {
         first: "Rs. 4,000 (Mr. Mahotsav - Men)",
@@ -2061,7 +2061,7 @@ const EventDetail: React.FC = () => {
         "6. Winners will be awarded prizes on 7th February 2026 at 6:00 PM during the valedictory function.",
         "",
         "**Final Round Selection Process:**",
-        "1. From both categories — online submissions and on-spot submissions — the top-performed short films will be selected separately, and then combined for the final round on 7th February 2026."
+        "1. From both categories � online submissions and on-spot submissions � the top-performed short films will be selected separately, and then combined for the final round on 7th February 2026."
       ],
       prizes: {
         first: "Rs. 20,000",
@@ -2081,21 +2081,21 @@ const EventDetail: React.FC = () => {
       subtitle: "ONLINE PHOTOGRAPHY",
       rules: [
         "**Rules:**",
-        "• NOTE: Individual participant only.",
-        "• MODE: Online submission",
-        "• FORMAT: JPEG format only (High resolution preferred).",
-        "• THEME: “Nature / Workmanship / Wildlife / Street Photography”",
-        "• THEME DESCRIPTION: Participants must choose any ONE theme and capture photographs that clearly represent the essence of the selected theme, highlighting originality, storytelling, composition, and visual impact.",
-        "• DEADLINE : 31st January 2026",
-        "• ORIGINAL CONTENT ONLY:",
+        "� NOTE: Individual participant only.",
+        "� MODE: Online submission",
+        "� FORMAT: JPEG format only (High resolution preferred).",
+        "� THEME: �Nature / Workmanship / Wildlife / Street Photography�",
+        "� THEME DESCRIPTION: Participants must choose any ONE theme and capture photographs that clearly represent the essence of the selected theme, highlighting originality, storytelling, composition, and visual impact.",
+        "� DEADLINE : 31st January 2026",
+        "� ORIGINAL CONTENT ONLY:",
         "o Google images and stock images are strictly not allowed.",
         "o Photographs must be captured by the participant only.",
         "o Any form of plagiarism will lead to immediate disqualification.",
-        "• SUBMISSION REQUIREMENTS:",
+        "� SUBMISSION REQUIREMENTS:",
         "o Submit 2 photographs of the chosen theme.",
         "o RAW photo + EDITED photo must be submitted for each photograph.",
         "o Only minor editing (color correction, exposure, cropping) is allowed.",
-        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
+        "� RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2116,25 +2116,25 @@ const EventDetail: React.FC = () => {
       subtitle: "Digital Poster Making",
       rules: [
 
-        "• NOTE : Solo participation only.",
-        "• THEME: Imagine you are designing a poster for a nationwide mental health awareness campaign. Use your creativity to communicate support, hope, and understanding. You may choose any angle or message within the theme of mental well-being, emotional support, or community care.",
-        "• MODE: Online submission through google form.",
-        "• The participant is required to create a poster on the mentioned theme.",
-        "• FORMAT: JPEG / PNG / PDF.",
-        "• SIZE: A4 (portrait or landscape).",
-        "• RESOLUTION: Minimum 300 dpi.",
-        "• Originality:",
+        "� NOTE : Solo participation only.",
+        "� THEME: Imagine you are designing a poster for a nationwide mental health awareness campaign. Use your creativity to communicate support, hope, and understanding. You may choose any angle or message within the theme of mental well-being, emotional support, or community care.",
+        "� MODE: Online submission through google form.",
+        "� The participant is required to create a poster on the mentioned theme.",
+        "� FORMAT: JPEG / PNG / PDF.",
+        "� SIZE: A4 (portrait or landscape).",
+        "� RESOLUTION: Minimum 300 dpi.",
+        "� Originality:",
         "No plagiarism; AI-generated artwork is strictly prohibited.",
         "Only original or royalty-free images and text may be used.",
-        "• THEME REPRESENTATION: The poster must clearly and creatively reflect the given theme.",
-        "• TITLE REQUIREMENT : Participants are encouraged to create their own unique title for the poster and display it clearly in the design.",
-        "• IDENTIFICATION:",
+        "� THEME REPRESENTATION: The poster must clearly and creatively reflect the given theme.",
+        "� TITLE REQUIREMENT : Participants are encouraged to create their own unique title for the poster and display it clearly in the design.",
+        "� IDENTIFICATION:",
         "Do not include your name or college logo on the poster.",
         "A unique ID will be provided for identification purposes.",
-        "• SUBMISSION POLICY: Late submissions will not be accepted.",
-        "• SUBMISSION DEADLINE: 31st January 2026.",
-        "• DISQUALIFICATION CLAUSE: Any copied, offensive, misleading, or AI-generated content will result in immediate disqualification.",
-        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/mail."
+        "� SUBMISSION POLICY: Late submissions will not be accepted.",
+        "� SUBMISSION DEADLINE: 31st January 2026.",
+        "� DISQUALIFICATION CLAUSE: Any copied, offensive, misleading, or AI-generated content will result in immediate disqualification.",
+        "� RESULT ANNOUNCEMENT: Winners will be intimated through phone call/mail."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -2201,17 +2201,17 @@ const EventDetail: React.FC = () => {
       subtitle: "Reel Making",
       rules: [
 
-        "• ELIGIBILITY: Team of maximum 4 members.",
-        "• MODE: Online submission",
-        "• DURATION: Minimum 50 sec – Maximum 60 sec (strict disqualification beyond 60 sec).",
-        "• FORMAT: MP4, 720p+, vertical allowed",
-        "• The team leader must submit the entry by sharing the Google Drive Link or Insta Reel Link of the reel through this form",
-        "• THEME: “Small Acts, Big Harmony”",
-        "• THEME DESCRIPTION: How small actions can create big happiness and harmony in life.",
-        "• ORIGINAL CONTENT ONLY: No offensive, explicit, or political visuals.",
-        "• Only royalty-free audio, images, and video clips can be used.",
-        "• SUBMISSION DEADLINE: 28th January 2026.",
-        "• RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
+        "� ELIGIBILITY: Team of maximum 4 members.",
+        "� MODE: Online submission",
+        "� DURATION: Minimum 50 sec � Maximum 60 sec (strict disqualification beyond 60 sec).",
+        "� FORMAT: MP4, 720p+, vertical allowed",
+        "� The team leader must submit the entry by sharing the Google Drive Link or Insta Reel Link of the reel through this form",
+        "� THEME: �Small Acts, Big Harmony�",
+        "� THEME DESCRIPTION: How small actions can create big happiness and harmony in life.",
+        "� ORIGINAL CONTENT ONLY: No offensive, explicit, or political visuals.",
+        "� Only royalty-free audio, images, and video clips can be used.",
+        "� SUBMISSION DEADLINE: 28th January 2026.",
+        "� RESULT ANNOUNCEMENT: Winners will be intimated through phone call/email."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2236,8 +2236,8 @@ const EventDetail: React.FC = () => {
         "Maximum of 5 players per team.",
         "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
         "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
-        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
-        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
+        "In the event of any technical issue originating from a player�s side�such as laptop failure, system crash, or battery depletion�no rematch or replay will be permitted.",
+        "Any form of in-game toxicity�including chat abuse, intentional targeting, or disruptive behavior�will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2260,8 +2260,8 @@ const EventDetail: React.FC = () => {
         "Maximum of 3 players per team.",
         "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
         "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
-        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
-        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
+        "In the event of any technical issue originating from a player�s side�such as laptop failure, system crash, or battery depletion�no rematch or replay will be permitted.",
+        "Any form of in-game toxicity�including chat abuse, intentional targeting, or disruptive behavior�will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 3,000",
@@ -2285,8 +2285,8 @@ const EventDetail: React.FC = () => {
         "According to the game guidelines players are supposed to play modes to unlock private matchmaking so players are supposed to unlock the private matchmaking before coming to event.",
         "The competition will utilize a single-elimination knockout structure. Winning teams will advance to the next round.",
         "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
-        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
-        "Any form of in-game toxicity—including chat abuse, intentional targeting,  or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
+        "In the event of any technical issue originating from a player�s side�such as laptop failure, system crash, or battery depletion�no rematch or replay will be permitted.",
+        "Any form of in-game toxicity�including chat abuse, intentional targeting,  or disruptive behavior�will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 4,000",
@@ -2303,13 +2303,13 @@ const EventDetail: React.FC = () => {
       title: "GAMING",
       subtitle: "Smash Karts (PC)",
       rules: [
-        "Pc’s  are provided.",
+        "Pc�s  are provided.",
         "Mahotsav ID cards must be presented by every player.",
         "All matches will be played in Solo mode (individual).",
         "The competition will utilize a single-elimination knockout structure. Winning player will advance to the next round.",
         "The usage of cheats, bugs, or any form of unauthorized software is strictly prohibited. Any team found violating this rule will be summarily disqualified from the tournament.",
-        "In the event of any technical issue originating from a player’s side—such as laptop failure, system crash, or battery depletion—no rematch or replay will be permitted.",
-        "Any form of in-game toxicity—including chat abuse, intentional targeting, or disruptive behavior—will not be tolerated. Offenders may receive warnings or be removed from the tournament."
+        "In the event of any technical issue originating from a player�s side�such as laptop failure, system crash, or battery depletion�no rematch or replay will be permitted.",
+        "Any form of in-game toxicity�including chat abuse, intentional targeting, or disruptive behavior�will not be tolerated. Offenders may receive warnings or be removed from the tournament."
       ],
       prizes: {
         first: "Rs. 2,000",
@@ -2329,66 +2329,66 @@ const EventDetail: React.FC = () => {
         "**Objective:** Line Follower Challenge is a line-following and maze-solving competition. A track of white lines on black backgrounds and black lines on white backgrounds will be laid out and an autonomous robot must follow that line. The robot must complete a task. The path will have checkpoints. The team which completes the correct path the fastest will be the winner.",
         "",
         "**Robot Specifications:**",
-        "• The robot must fit inside a 300 × 300 mm red-coloured square. No height restrictions. Exceeding dimensions results in immediate disqualification.",
-        "• The robot must be fully autonomous. No remote control, no wired/wireless control, cameras, image processing, or external assistance is allowed.",
-        "• There is no weight constraint of the robot.",
-        "• Pre-made sensor kits may be used, but similar modular assemblies are NOT allowed.",
-        "• All sensors, processors, power sources, and controllers must be mounted onboard.",
-        "• The robot must not damage the track, arena surface, or checkpoints.",
-        "• Modifying the robot after inspection without permission can lead to disqualification.",
+        "� The robot must fit inside a 300 � 300 mm red-coloured square. No height restrictions. Exceeding dimensions results in immediate disqualification.",
+        "� The robot must be fully autonomous. No remote control, no wired/wireless control, cameras, image processing, or external assistance is allowed.",
+        "� There is no weight constraint of the robot.",
+        "� Pre-made sensor kits may be used, but similar modular assemblies are NOT allowed.",
+        "� All sensors, processors, power sources, and controllers must be mounted onboard.",
+        "� The robot must not damage the track, arena surface, or checkpoints.",
+        "� Modifying the robot after inspection without permission can lead to disqualification.",
         "",
         "**Power Supply and Propulsion:**",
-        "• The machine must be entirely self-contained and should not receive any external assistance. It must not utilize an energy source that involves a combustion process.",
-        "• The machine must have its own on-board power source. The use of external power supplies is not permitted.",
-        "• The potential difference between any two points on the machine must not surpass 12V.",
+        "� The machine must be entirely self-contained and should not receive any external assistance. It must not utilize an energy source that involves a combustion process.",
+        "� The machine must have its own on-board power source. The use of external power supplies is not permitted.",
+        "� The potential difference between any two points on the machine must not surpass 12V.",
         "",
         "**Track & Arena Details:**",
-        "• The arena consists of a continuous line track with curves, turns, and possible intersections.",
-        "• Checkpoints will be placed at predefined locations along the track during the actual competition runs.",
-        "• The exact track layout may be disclosed partially or fully before the event, but minor changes or surprise elements may be introduced.",
-        "• Arena dimensions (all in mm): Maximum arena size: 4000 × 4500 mm, Track width: 30 mm, Start zone: 200 × 200 mm",
-        "• Track colour may vary due to fading; do not assume perfect black/white contrast.",
-        "• Track may include discontinuities.",
-        "• Arena tolerances may vary up to 5% or 20 mm.",
-        "• Lighting conditions (sunlight/incandescent/fluorescent) will not be controlled.",
+        "� The arena consists of a continuous line track with curves, turns, and possible intersections.",
+        "� Checkpoints will be placed at predefined locations along the track during the actual competition runs.",
+        "� The exact track layout may be disclosed partially or fully before the event, but minor changes or surprise elements may be introduced.",
+        "� Arena dimensions (all in mm): Maximum arena size: 4000 � 4500 mm, Track width: 30 mm, Start zone: 200 � 200 mm",
+        "� Track colour may vary due to fading; do not assume perfect black/white contrast.",
+        "� Track may include discontinuities.",
+        "� Arena tolerances may vary up to 5% or 20 mm.",
+        "� Lighting conditions (sunlight/incandescent/fluorescent) will not be controlled.",
         "",
         "**Trial Run (Practice Round):**",
-        "• Each team will be given one free trial run (span of 2 minutes) before the official competition begins.",
-        "• This trial run is meant for: Testing the robot, Calibrating sensors, Adjusting and finalizing the code.",
-        "• No checkpoints will be present during the trial run.",
-        "• Trial run time is not included in scoring.",
-        "• No hardware modifications are allowed after trial run without referee approval.",
+        "� Each team will be given one free trial run (span of 2 minutes) before the official competition begins.",
+        "� This trial run is meant for: Testing the robot, Calibrating sensors, Adjusting and finalizing the code.",
+        "� No checkpoints will be present during the trial run.",
+        "� Trial run time is not included in scoring.",
+        "� No hardware modifications are allowed after trial run without referee approval.",
         "",
         "**Checkpoint Rules:**",
-        "• Checkpoints will be active only during the competition runs.",
-        "• If the robot reaches a checkpoint and becomes unbalanced or unable to proceed correctly, the team is allowed to lift the robot and place it at the previous checkpoint. Each team will be given three official chances (runs) during the competition to fix the robot.",
-        "• The robot must resume the run from the previous checkpoint only, not from the start.",
-        "• Touching or repositioning the robot without referee permission will lead to disqualification.",
+        "� Checkpoints will be active only during the competition runs.",
+        "� If the robot reaches a checkpoint and becomes unbalanced or unable to proceed correctly, the team is allowed to lift the robot and place it at the previous checkpoint. Each team will be given three official chances (runs) during the competition to fix the robot.",
+        "� The robot must resume the run from the previous checkpoint only, not from the start.",
+        "� Touching or repositioning the robot without referee permission will lead to disqualification.",
         "",
         "**Team Rules:**",
-        "• A team may consist of a maximum of four members. Only one member from team is allowed to handle the robot during the competition.",
-        "• Only team members registered for the event are allowed in the competition area.",
-        "• Any form of misbehaviour, argument with officials, or violation of rules may result in disqualification.",
-        "• A participant cannot be a member of multiple teams.",
-        "• Only undergraduate students are allowed to participate.",
+        "� A team may consist of a maximum of four members. Only one member from team is allowed to handle the robot during the competition.",
+        "� Only team members registered for the event are allowed in the competition area.",
+        "� Any form of misbehaviour, argument with officials, or violation of rules may result in disqualification.",
+        "� A participant cannot be a member of multiple teams.",
+        "� Only undergraduate students are allowed to participate.",
         "",
         "**General Rules:**",
-        "• The robot must start only after the referee's signal.",
-        "• External assistance during a run is strictly prohibited.",
-        "• The organizers reserve the right to modify rules if necessary and resolve disputes.",
-        "• The decision of the referee and organizers will be final and binding.",
+        "� The robot must start only after the referee's signal.",
+        "� External assistance during a run is strictly prohibited.",
+        "� The organizers reserve the right to modify rules if necessary and resolve disputes.",
+        "� The decision of the referee and organizers will be final and binding.",
         "",
         "**Hand Touch:**",
-        "• The operator must request referee permission before touching the robot.",
-        "• Touching without permission results in immediate disqualification.",
-        "• If permission is granted: The robot must restart from the last checkpoint. The timer will continue running.",
+        "� The operator must request referee permission before touching the robot.",
+        "� Touching without permission results in immediate disqualification.",
+        "� If permission is granted: The robot must restart from the last checkpoint. The timer will continue running.",
         "",
         "**Scoring Criteria:**",
-        "• Scoring is purely time-based.",
-        "• The overall time taken from start to finish will be calculated for each run.",
-        "• The team with the minimum final time will be declared the winner.",
+        "� Scoring is purely time-based.",
+        "� The overall time taken from start to finish will be calculated for each run.",
+        "� The team with the minimum final time will be declared the winner.",
         "**Notes:**",
-        "•  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
+        "�  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
       ],
       prizes: {
         first: "Rs. 8,000",
@@ -2410,7 +2410,7 @@ const EventDetail: React.FC = () => {
         "Bot Wrestling is a competitive event where two robots, controlled either wirelessly or via wired connections, face off with the objective of pushing the opposing robot out of the designated arena. These robots must be operated remotely, ensuring a battle of strategic maneuvering and technological prowess.",
         "",
         "**Robot Specifications:**",
-        "1. The robot’s dimensions must not exceed (300mm x 300 mm x 300 mm) at any point during the game. The robot height should not exceed 15cm.",
+        "1. The robot�s dimensions must not exceed (300mm x 300 mm x 300 mm) at any point during the game. The robot height should not exceed 15cm.",
         "2. Both wired and wireless robots are allowed.",
         "3. The weight of the bot (wired/wireless) should not exceed 5 kg.",
         "4. The maximum voltage for batteries, both in the robot and the remote, must not exceed 12 V.",
@@ -2424,28 +2424,28 @@ const EventDetail: React.FC = () => {
         "1. There should be no holding mechanism to the robot.",
         "2. No expansion of front attachments of the robot after start.",
         "3. No sharp blades, cutters, or entangling devices.",
-        "4. Wedge/lifter angles typically: 20°–45°.",
+        "4. Wedge/lifter angles typically: 20��45�.",
         "",
         "**Rules:**",
         "1. The objective of the competition is to be the last bot standing inside the arena.",
         "2. Teams will compete in a knockout or league format, depending on the total number of participating teams. Based on performance, the top four teams will qualify for the Semi-Finals.",
         "3. At the start of each match, both bots must be positioned at the center of the ring.",
-        "4. The match will begin only after the referee’s signal.",
+        "4. The match will begin only after the referee�s signal.",
         "5. A bot wins a round by pushing its opponent completely outside the ring.",
-        "6. The referee’s decision will be final in determining whether a bot has been pushed out entirely.",
+        "6. The referee�s decision will be final in determining whether a bot has been pushed out entirely.",
         "7. If a bot does not move from its position for more than 30 seconds, the team will receive a first warning.",
         "8. Chain and belt mechanisms involved robots are not allowed. Only electric driven system are allowed to participate.",
         "9. The team will be disqualified if the player intentionally hurts the opponents robot after the referees signal.",
         "",
         "**Match Duration:**",
-        "• Each match will have a maximum duration of 5 minutes.",
+        "� Each match will have a maximum duration of 5 minutes.",
         "",
         "**Push-Out Limit:**",
-        "• The bot with the greater number of push-outs will be declared the winner.",
+        "� The bot with the greater number of push-outs will be declared the winner.",
         "",
         "**False Start Rule:**",
-        "• If a bot moves before the referee’s signal, the match counter will be reset, and the team will be given a second chance.",
-        "• Repeated violations of this rule will result in disqualification.",
+        "� If a bot moves before the referee�s signal, the match counter will be reset, and the team will be given a second chance.",
+        "� Repeated violations of this rule will result in disqualification.",
         "",
         "**Arena:**",
         "1. The arena will be square in shape of side 2400 mm.",
@@ -2463,7 +2463,7 @@ const EventDetail: React.FC = () => {
         "1. Each match will have a total duration of 5 minutes, unless extended by the judges.",
         "2. During these 5 minutes, points will be awarded based on the number of goals scored.",
         "3. If a robot goes outside the arena, the opposing team will be awarded one point.",
-        "4. The judges’ decision shall be final and binding in all matters.",
+        "4. The judges� decision shall be final and binding in all matters.",
         "5. The organizers reserve the right to modify any or all of the above rules as deemed necessary.",
         "",
         "**Hand Touch:**",
@@ -2490,70 +2490,70 @@ const EventDetail: React.FC = () => {
         "**Objective:** Robo Race is a competitive event in which teams must design and build a manually controlled wired or wireless robot capable of traversing multiple challenging terrains such as land, sand, gravel, inclines, and shallow water. The robot that successfully completes the entire track in the minimum amount of time will be declared the Robo Race Winner.",
         "",
         "**Robot Specifications:**",
-        "• The robot must fit inside 300 × 300 × 300 mm (L × B × H) at all times. External control devices are not included in dimensions.",
-        "• Maximum weight allowed is 5 kg.",
-        "• Chain-based mechanisms are not allowed.",
-        "• Only electric motor–driven gear mechanisms are permitted.",
-        "• Ready-made RC cars are strictly prohibited.",
-        "• Use of IC engines, compressors, or pneumatic systems is not allowed.",
-        "• The robot must remain intact throughout the race. Disintegration results in immediate disqualification.",
-        "• The robot must not cause any damage to the track or arena.",
-        "• If the robot is deemed unsafe, the team will be disqualified.",
-        "• Market-procured parts allowed: Motors, Tyres & wheels",
+        "� The robot must fit inside 300 � 300 � 300 mm (L � B � H) at all times. External control devices are not included in dimensions.",
+        "� Maximum weight allowed is 5 kg.",
+        "� Chain-based mechanisms are not allowed.",
+        "� Only electric motor�driven gear mechanisms are permitted.",
+        "� Ready-made RC cars are strictly prohibited.",
+        "� Use of IC engines, compressors, or pneumatic systems is not allowed.",
+        "� The robot must remain intact throughout the race. Disintegration results in immediate disqualification.",
+        "� The robot must not cause any damage to the track or arena.",
+        "� If the robot is deemed unsafe, the team will be disqualified.",
+        "� Market-procured parts allowed: Motors, Tyres & wheels",
         "",
         "**Power Supply:**",
-        "• Allowed batteries: Li-po, Li-ion, or standard cell batteries.",
-        "• Batteries must be placed inside a protective shield to ensure safety during impacts.",
-        "• Standard operating voltage: 11.2V",
-        "• Maximum permitted voltage: 12V. Exceeding 12V will result in penalty time before the race.",
+        "� Allowed batteries: Li-po, Li-ion, or standard cell batteries.",
+        "� Batteries must be placed inside a protective shield to ensure safety during impacts.",
+        "� Standard operating voltage: 11.2V",
+        "� Maximum permitted voltage: 12V. Exceeding 12V will result in penalty time before the race.",
         "",
         "**Control System Rules:**",
-        "• Wired Control: The wire must remain slack at all times during the race.",
-        "• Wireless Control: Wireless robots must use dual-frequency / Bluetooth / equivalent systems. Teams must switch to the desired frequency before the event to avoid interference. If disconnection occurs while racing, teams have 1 minute to repair the robot.",
+        "� Wired Control: The wire must remain slack at all times during the race.",
+        "� Wireless Control: Wireless robots must use dual-frequency / Bluetooth / equivalent systems. Teams must switch to the desired frequency before the event to avoid interference. If disconnection occurs while racing, teams have 1 minute to repair the robot.",
         "",
         "**Track and Arena Details:**",
-        "• The track will consist of multiple terrains: smooth surfaces, sand, gravel, slopes, and shallow water.",
-        "• The robot must remain inside the track boundaries at all times.",
-        "• Checkpoints will be placed at regular intervals for reset purposes.",
-        "• Any damage caused to the track by the robot will result in disqualification.",
+        "� The track will consist of multiple terrains: smooth surfaces, sand, gravel, slopes, and shallow water.",
+        "� The robot must remain inside the track boundaries at all times.",
+        "� Checkpoints will be placed at regular intervals for reset purposes.",
+        "� Any damage caused to the track by the robot will result in disqualification.",
         "",
         "**Trial Run (Practice Round):**",
-        "• Each team will be given one free trial run (span of 2 minutes) before the official competition begins.",
-        "• This trial run is meant for: Testing the robot, Calibrating sensors, Adjusting and finalizing the code.",
-        "• No checkpoints will be present during the trial run.",
-        "• Trial run time is not included in scoring.",
-        "• No hardware modifications are allowed after trial run without referee approval.",
+        "� Each team will be given one free trial run (span of 2 minutes) before the official competition begins.",
+        "� This trial run is meant for: Testing the robot, Calibrating sensors, Adjusting and finalizing the code.",
+        "� No checkpoints will be present during the trial run.",
+        "� Trial run time is not included in scoring.",
+        "� No hardware modifications are allowed after trial run without referee approval.",
         "",
         "**Checkpoint Rules:**",
-        "• Checkpoints will be active only during the competition runs.",
-        "• If the robot reaches a checkpoint and becomes unbalanced or unable to proceed correctly, the team is allowed to lift the robot and place it at the previous checkpoint. Each team will be given three official chances (runs) during the competition to fix the robot.",
-        "• The robot must resume the run from the previous checkpoint only, not from the start.",
-        "• Touching or repositioning the robot without referee permission will lead to disqualification.",
+        "� Checkpoints will be active only during the competition runs.",
+        "� If the robot reaches a checkpoint and becomes unbalanced or unable to proceed correctly, the team is allowed to lift the robot and place it at the previous checkpoint. Each team will be given three official chances (runs) during the competition to fix the robot.",
+        "� The robot must resume the run from the previous checkpoint only, not from the start.",
+        "� Touching or repositioning the robot without referee permission will lead to disqualification.",
         "",
         "**Team Rules:**",
-        "• A team may consist of a maximum of five members. Only one member from team is allowed to handle the robot during the competition.",
-        "• Only team members registered for the event are allowed in the competition area.",
-        "• Any form of misbehavior, argument with officials, or violation of rules may result in disqualification.",
-        "• A participant cannot be a member of multiple teams.",
-        "• Only undergraduate students are allowed to participate.",
+        "� A team may consist of a maximum of five members. Only one member from team is allowed to handle the robot during the competition.",
+        "� Only team members registered for the event are allowed in the competition area.",
+        "� Any form of misbehavior, argument with officials, or violation of rules may result in disqualification.",
+        "� A participant cannot be a member of multiple teams.",
+        "� Only undergraduate students are allowed to participate.",
         "",
         "**General Rules:**",
-        "• The robot must start only after the referee's signal.",
-        "• External assistance during a run is strictly prohibited.",
-        "• The organizers reserve the right to modify rules if necessary and resolve disputes.",
-        "• The decision of the referee and organizers will be final and binding.",
+        "� The robot must start only after the referee's signal.",
+        "� External assistance during a run is strictly prohibited.",
+        "� The organizers reserve the right to modify rules if necessary and resolve disputes.",
+        "� The decision of the referee and organizers will be final and binding.",
         "",
         "**Hand Touch:**",
-        "• The operator must request referee permission before touching the robot.",
-        "• Touching without permission results in immediate disqualification.",
-        "• If permission is granted: The robot must restart from the last checkpoint. The timer will continue running.",
+        "� The operator must request referee permission before touching the robot.",
+        "� Touching without permission results in immediate disqualification.",
+        "� If permission is granted: The robot must restart from the last checkpoint. The timer will continue running.",
         "",
         "**Scoring Criteria:**",
-        "• Scoring is purely time-based.",
-        "• The overall time taken from start to finish will be calculated for each run.",
-        "• The team with the minimum final time will be declared the winner.",
+        "� Scoring is purely time-based.",
+        "� The overall time taken from start to finish will be calculated for each run.",
+        "� The team with the minimum final time will be declared the winner.",
         "**Notes:**",
-        "•  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
+        "�  All the participants are requested to come to the competition priorily one hour before the event starts to complete your trail runs and inspection."
 
       ],
       prizes: {
@@ -2874,17 +2874,7 @@ const EventDetail: React.FC = () => {
         />
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .event-detail-flower {
-            width: 150px !important;
-            height: 150px !important;
-            top: -60px !important;
-            right: -60px !important;
-            opacity: 150 !important;
-          }
-        }
-      `}</style>
+      <style>{``}</style>
 
       <div className="min-h-screen" style={{ position: 'relative', zIndex: 10, padding: '0px' }}>
         {/* Header: Logo + Back Button + Title */}
@@ -3070,7 +3060,7 @@ const EventDetail: React.FC = () => {
                     // Regular rule rendering
                     const isSectionHeader = /^(I{1,4})\.\s/.test(rule);
                     const isSubheading = /^\*\*.*\*\*$/.test(rule.trim());
-                    const startsWithBullet = rule.trim().startsWith('•');
+                    const startsWithBullet = rule.trim().startsWith('�');
 
                     let displayText = rule;
                     if (isSubheading) {
@@ -3088,7 +3078,7 @@ const EventDetail: React.FC = () => {
                     elements.push(
                       <li key={index} className="flex items-start gap-2 sm:gap-4">
                         {!isSectionHeader && !isSubheading && (
-                          <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">•</span>
+                          <span className="text-yellow-400 font-bold text-base sm:text-lg mt-1 shrink-0">�</span>
                         )}
                         <span
                           className="text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose"
@@ -3298,7 +3288,7 @@ const EventDetail: React.FC = () => {
                     >
                       <div className={`athletics-selection-checkbox ${isSelected ? 'selected' : ''}`}>
                         {isSelected && (
-                          <span className="athletics-selection-checkmark">✓</span>
+                          <span className="athletics-selection-checkmark">?</span>
                         )}
                       </div>
                       <span className="athletics-selection-text">

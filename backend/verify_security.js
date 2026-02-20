@@ -1,7 +1,7 @@
 
 import fetch from 'node-fetch';
 
-const BASE_URL = 'http://localhost:5000/neekendukura';
+const BASE_URL = 'http://localhost:5000/api';
 // Use a test user known to exist or create a new one (since we can't easily query DB here without importing models)
 // Ideally, we'd use the login flow first.
 

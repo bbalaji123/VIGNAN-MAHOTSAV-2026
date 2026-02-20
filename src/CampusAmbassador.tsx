@@ -429,16 +429,6 @@ const CampusAmbassador: React.FC = () => {
             line-height: 1.6;
           }
 
-          @media (max-width: 768px) {
-            .desktop-table-container {
-              display: none !important;
-            }
-
-            .mobile-card-container {
-              display: block;
-            }
-          }
-
           .hero-section {
             min-height: 100vh;
             display: flex;
@@ -468,15 +458,6 @@ const CampusAmbassador: React.FC = () => {
             margin-left: -30px;
           }
 
-          @media (max-width: 768px) {
-            .ca-page-back-button {
-              top: 0.5rem !important;
-              left: 1rem !important;
-              padding: 0.2rem 1.5rem !important;
-              font-size: 0.5rem !important;
-            }
-          }
-
           .ca-page-back-button:hover {
             transform: translateY(-2px);
             box-shadow: none;
@@ -491,36 +472,6 @@ const CampusAmbassador: React.FC = () => {
             width: 350px;
             height: auto;
             margin-left: 0;
-          }
-
-          @media (min-width: 769px) {
-            .ca-mahotsav-logo {
-              margin-left: 150px;
-            }
-          }
-
-          @media (max-width: 768px) {
-            .ca-mahotsav-logo {
-              top: 2.5rem !important;
-              left: 50% !important;
-              transform: translateX(-50%) !important;
-              width: 220px !important;
-              margin-left: 0 !important;
-            }
-          }
-
-          .hero-title {
-            font-size: 5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
-            margin-bottom: 3rem;
-            line-height: 1.2;
-            letter-spacing: 0.05em;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.1s;
           }
 
           .hero-register-btn {

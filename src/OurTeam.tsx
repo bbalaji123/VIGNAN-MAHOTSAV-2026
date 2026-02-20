@@ -420,7 +420,7 @@ const OurTeam: React.FC = () => {
                           alt={member.name}
                           width={300}
                           height={400}
-                          loading="lazy"
+                          loading="eager"
                         />
                       ) : (
                         <div className="w-full h-full bg-white/10 flex items-center justify-center">

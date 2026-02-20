@@ -72,15 +72,6 @@ const CampusMap: React.FC = () => {
           .campus-title {
             font-family: 'Aladin', cursive !important;
           }
-
-          @media (max-width: 768px) {
-            .mobile-content-spacer {
-              padding-bottom: 20px !important;
-            }
-            .mobile-map-spacer {
-              margin-bottom: 20px !important;
-            }
-          }
         `}
       </style>
 

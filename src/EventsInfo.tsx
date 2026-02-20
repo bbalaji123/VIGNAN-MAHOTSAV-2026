@@ -616,45 +616,8 @@ const EventsInfo: React.FC = () => {
           }
           
           /* Responsive flower positioning */
-          @media (max-width: 768px) {
-            .flower-top-right,
-            .flower-bottom-left {
-              width: 200px !important;
-              height: 200px !important;
-              opacity: 0.01 !important;
-            }
-            
-            .flower-top-right {
-              top: -25% !important;
-              right: -25% !important;
-            }
-            
-            .flower-bottom-left {
-              bottom: -25% !important;
-              left: -25% !important;
-            }
-          }
-          
-          @media (max-width: 480px) {
-            .flower-top-right,
-            .flower-bottom-left {
-              width: 160px !important;
-              height: 160px !important;
-              opacity: 0.01 !important;
-            }
-            
-            .flower-top-right {
-              top: -25% !important;
-              right: -25% !important;
-            }
-            
-            .flower-bottom-left {
-              bottom: -25% !important;
-              left: -25% !important;
-            }
-          }
-        
-          @keyframes petalsRotateAnticlockwise {
+
+@keyframes petalsRotateAnticlockwise {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
           }
@@ -699,13 +662,6 @@ const EventsInfo: React.FC = () => {
             z-index: -1;
           }
           
-          /* Card Hover Effect - Global */
-          .event-card:hover {
-            transform: perspective(1000px) rotateX(8deg) translateY(-10px) scale(1.02);
-            z-index: 5;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-          }
-          
           .event-card-image {
             position: absolute;
             top: 45%;
@@ -721,11 +677,6 @@ const EventsInfo: React.FC = () => {
             border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
           }
           
-          .event-card:hover .event-card-image {
-            transform: translate(-50%, -65%) scale(1.25);
-            z-index: 100;
-          }
-          
           /* Global Grid Gap Styles */
           .grid {
             row-gap: 3rem !important;
@@ -733,29 +684,8 @@ const EventsInfo: React.FC = () => {
           }
           
           /* Responsive adjustments for mobile */
-          @media (max-width: 768px) {
-            .events-header-title {
-              font-size: 3rem !important;
-            }
-            
-            .event-card {
-              width: 270px !important;
-              height: 360px !important;
-            }
-          }
-          
-          @media (max-width: 480px) {
-            .events-header-title {
-              font-size: 2.5rem !important;
-            }
-            
-            .event-card {
-              width: 240px !important;
-              height: 320px !important;
-            }
-          }
 
-          /* Header Elements */
+/* Header Elements */
           .events-logo {
             height: 16rem;
             object-fit: contain;
@@ -773,36 +703,12 @@ const EventsInfo: React.FC = () => {
           }
 
           /* Mobile heading responsive - force 2 lines for long text */
-          @media (max-width: 768px) {
-            .events-mobile-heading {
-              white-space: normal !important;
-              word-wrap: break-word !important;
-              overflow-wrap: break-word !important;
-              max-width: 90% !important;
-              font-size: clamp(1.5rem, 5vw, 2rem) !important;
-              line-height: 1.3 !important;
-              padding: 0 1rem !important;
-              text-align: center !important;
-              margin: 1rem auto !important;
-            }
-          }
 
-          .events-back-button-container {
+.events-back-button-container {
             margin-top: -6rem;
           }
 
-          @media (min-width: 768px) {
-            .events-logo {
-              height: 16rem;
-              margin-top: -6rem;
-            }
-
-            .events-title {
-              font-size: 2.25rem;
-            }
-          }
-
-          /* Main Category Cards */
+/* Main Category Cards */
           .category-card {
             background-image: url(/images/card-bg.avif);
             background-size: cover;
@@ -817,23 +723,8 @@ const EventsInfo: React.FC = () => {
           }
 
           /* Mobile-specific heading responsiveness */
-          @media (max-width: 768px) {
-            .category-card-title {
-              font-size: clamp(1rem, 4.5vw, 1.25rem) !important;
-              line-height: 1.4 !important;
-              max-width: 100% !important;
-              word-wrap: break-word !important;
-              overflow-wrap: break-word !important;
-              hyphens: auto !important;
-              padding: 0 1rem !important;
-              text-align: center !important;
-              display: block !important;
-              margin-left: auto !important;
-              margin-right: auto !important;
-            }
-          }
 
-          /* Sub-category Cards (with background image) */
+/* Sub-category Cards (with background image) */
           .subcategory-card {
             background-image: url(/images/card-bg.avif);
             background-size: cover;
@@ -849,18 +740,8 @@ const EventsInfo: React.FC = () => {
             transition: transform 1.5s ease;
           }
           
-          .subcategory-card:hover {
-            transform: perspective(1000px) rotateX(8deg) translateY(-10px) scale(1.02);
-            z-index: 5;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-          }
-          
           .subcategory-card img {
             transition: transform 0.5s ease-in-out;
-          }
-          
-          .subcategory-card:hover img {
-            transform: scale(1.15) translateY(-10%);
           }
 
           /* Cultural Event Cards (with background image) */
@@ -939,10 +820,6 @@ const EventsInfo: React.FC = () => {
             pointer-events: none;
           }
 
-          .inner-event-card:hover {
-            transform: scale(1.05);
-          }
-
           .inner-event-card img {
             width: 100%;
             height: 100%;
@@ -963,17 +840,7 @@ const EventsInfo: React.FC = () => {
             z-index: 1;
           }
 
-          .robo-wars-gaming-card:hover img {
-            transform: translateY(-10%) scale(1.15);
-            z-index: 10;
-          }
-
-          /* When hovering over a specific card, make its siblings transparent */
-          .inner-event-cards-container:has(.inner-event-card:hover) .inner-event-card:not(:hover) img {
-            opacity: 0.4;
-          }
-
-          /* Add margin-bottom to all grid containers to prevent cards from sticking to bottom */
+/* Add margin-bottom to all grid containers to prevent cards from sticking to bottom */
           .grid.grid-cols-1,
           .inner-event-cards-container {
             margin-bottom: 2rem;
@@ -981,61 +848,11 @@ const EventsInfo: React.FC = () => {
 
           /* Responsive layout for event category cards */
           /* Mobile: Hide desktop cards, show mobile cards, button below all cards */
-          @media (max-width: 768px) {
-            .events-card-with-button-desktop {
-              display: none !important;
-            }
-            .events-card-mobile-only {
-              display: flex !important;
-            }
-            .download-rulebook-desktop {
-              display: none !important;
-            }
-            .download-rulebook-mobile {
-              display: block !important;
-            }
-            .events-button-mobile-container {
-              display: flex !important;
-            }
-          }
 
-          /* Desktop small to medium (769px - 1199px): Show all cards, button below card 3 */
-          @media (min-width: 769px) and (max-width: 1199px) {
-            .events-card-with-button-desktop {
-              display: flex !important;
-            }
-            .events-card-mobile-only {
-              display: none !important;
-            }
-            .download-rulebook-desktop {
-              display: none !important;
-            }
-            .download-rulebook-mobile {
-              display: block !important;
-            }
-            .events-button-mobile-container {
-              display: flex !important;
-            }
-          }
+/* Desktop small to medium (769px - 1199px): Show all cards, button below card 3 */
 
-          /* Desktop large (1200px and above): Show all cards, button below card 2 */
-          @media (min-width: 1200px) {
-            .events-card-with-button-desktop {
-              display: flex !important;
-            }
-            .events-card-mobile-only {
-              display: none !important;
-            }
-            .download-rulebook-desktop {
-              display: block !important;
-            }
-            .download-rulebook-mobile {
-              display: none !important;
-            }
-            .events-button-mobile-container {
-              display: none !important;
-            }
-          }
+/* Desktop large (1200px and above): Show all cards, button below card 2 */
+          
         `}
       </style>
 
@@ -1209,7 +1026,7 @@ const EventsInfo: React.FC = () => {
                 {/* Card 1 - Performing Arts */}
                 <div className="flex flex-col items-center gap-3">
                   <div
-                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                     onClick={handleCulturalsCardClick}
                     style={{
                       margin: '0 16px',
@@ -1242,7 +1059,7 @@ const EventsInfo: React.FC = () => {
                 <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop" style={{ marginTop: '-90px' }}>
                   <div className="flex flex-col items-center gap-3" style={{ marginTop: '-30px' }}>
                     <div
-                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                       onClick={handleSportsCardClick}
                       style={{
                         margin: '0 16px',
@@ -1273,7 +1090,7 @@ const EventsInfo: React.FC = () => {
                 {/* Card 2 - Sports and Games (Mobile - No Button) */}
                 <div className="flex flex-col items-center gap-3 events-card-mobile-only">
                   <div
-                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                     onClick={handleSportsCardClick}
                     style={{
                       margin: '0 16px',
@@ -1292,7 +1109,7 @@ const EventsInfo: React.FC = () => {
                 <div className="relative flex flex-col items-center gap-3 events-card-with-button-desktop" style={{ marginTop: '-90px' }}>
                   <div className="flex flex-col items-center gap-3" style={{ marginTop: '-30px' }}>
                     <div
-                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                      className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                       onClick={() => navigate('/events/robos')}
                       style={{
                         margin: '0 16px',
@@ -1313,7 +1130,7 @@ const EventsInfo: React.FC = () => {
                 {/* Card 3 - Robo Wars & Gaming (Mobile - No Button) */}
                 <div className="flex flex-col items-center gap-3 events-card-mobile-only">
                   <div
-                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                    className="event-card category-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                     onClick={() => navigate('/events/robos')}
                     style={{
                       margin: '0 16px',
@@ -1369,7 +1186,7 @@ const EventsInfo: React.FC = () => {
                       return (
                         <div
                           key={index}
-                          className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
+                          className="subcategory-card relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-300"
                           onClick={isClickable ? () => handleEventDetailClick(card.title) : undefined}
                         >
                           {imageMap[card.title] && (
@@ -1377,7 +1194,7 @@ const EventsInfo: React.FC = () => {
                               src={imageMap[card.title]}
                               alt={card.title}
                               className="absolute inset-0 w-full h-full object-contain"
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1429,7 +1246,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1470,7 +1287,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1511,7 +1328,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1550,7 +1367,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1580,7 +1397,7 @@ const EventsInfo: React.FC = () => {
                             src={`/images/para athletics (men).avif`}
                             alt="Para Athletics"
                             className="absolute inset-0 w-full h-full object-cover"
-                            loading="lazy"
+                            loading="eager"
                             decoding="async"
                           />
                         )}
@@ -1589,7 +1406,7 @@ const EventsInfo: React.FC = () => {
                             src={`/images/para cricket(men).avif`}
                             alt="Para Cricket"
                             className="absolute inset-0 w-full h-full object-cover"
-                            loading="lazy"
+                            loading="eager"
                             decoding="async"
                           />
                         )}
@@ -1749,7 +1566,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1791,7 +1608,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1830,7 +1647,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1873,7 +1690,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1915,7 +1732,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1953,7 +1770,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -1992,7 +1809,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -2030,7 +1847,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -2067,7 +1884,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${imageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -2103,7 +1920,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={imageMap[card.title]}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                             />
                           )}
@@ -2154,7 +1971,7 @@ const EventsInfo: React.FC = () => {
                             <img
                               src={`${import.meta.env.BASE_URL}${roboWarsGamingImageMap[card.title]}`}
                               alt={card.title}
-                              loading="lazy"
+                              loading="eager"
                               decoding="async"
                               className="w-full h-full object-cover"
                             />

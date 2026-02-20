@@ -46,49 +46,29 @@ async function updateParticipantAmounts() {
             if (hasParaSports) {
                 calculatedAmount = 0;
             } else {
-                // Check if user is from special Vignan colleges
-                const specialVignanColleges = [
-                    'Vignan Pharmacy College',
-                    "Vignan's Foundation of Science, Technology & Research",
-                    "Vignan's Lara Institute of Technology & Science",
-                    "Vignan's Nirula Institute of Technology & Science for Women"
-                ];
+                // Regular fee calculation
+                const gender = participant.gender?.toLowerCase();
 
-                const isSpecialVignanStudent = specialVignanColleges.some(college =>
-                    participant.college?.toLowerCase().includes(college.toLowerCase()) ||
-                    college.toLowerCase().includes(participant.college?.toLowerCase())
-                );
-
-                // Special Vignan colleges: ₹150 flat fee
-                if (isSpecialVignanStudent) {
+                if (gender === 'male') {
+                    if (hasSports && hasCulturals) {
+                        calculatedAmount = 350; // Both sports and culturals
+                    } else if (hasSports) {
+                        calculatedAmount = 350; // Sports only
+                    } else if (hasCulturals) {
+                        calculatedAmount = 250; // Culturals only
+                    }
+                } else if (gender === 'female') {
                     if (hasSports || hasCulturals) {
-                        calculatedAmount = 150;
+                        calculatedAmount = 250; // Female fee is always 250 total
                     }
                 } else {
-                    // Regular fee calculation
-                    const gender = participant.gender?.toLowerCase();
-
-                    if (gender === 'male') {
-                        if (hasSports && hasCulturals) {
-                            calculatedAmount = 350; // Both sports and culturals
-                        } else if (hasSports) {
-                            calculatedAmount = 350; // Sports only
-                        } else if (hasCulturals) {
-                            calculatedAmount = 250; // Culturals only
-                        }
-                    } else if (gender === 'female') {
-                        if (hasSports || hasCulturals) {
-                            calculatedAmount = 250; // Female fee is always 250 total
-                        }
-                    } else {
-                        // Default for other genders
-                        if (hasSports && hasCulturals) {
-                            calculatedAmount = 350;
-                        } else if (hasSports) {
-                            calculatedAmount = 350;
-                        } else if (hasCulturals) {
-                            calculatedAmount = 250;
-                        }
+                    // Default for other genders
+                    if (hasSports && hasCulturals) {
+                        calculatedAmount = 350;
+                    } else if (hasSports) {
+                        calculatedAmount = 350;
+                    } else if (hasCulturals) {
+                        calculatedAmount = 250;
                     }
                 }
             }

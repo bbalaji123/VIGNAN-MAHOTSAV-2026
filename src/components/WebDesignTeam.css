@@ -127,44 +127,11 @@
     }
 }
 
-/* ---------------------------------------------------
-   🔥 MOBILE FIX — FORCE 2 ROWS × 4 COLUMNS
---------------------------------------------------- */
-/* Make team section take full screen width on mobile */
-/* FORCE 4 COLUMNS ON ALL MOBILE */
-@media (max-width: 768px) {
-
-    .web-design-team-section,
-    .web-design-team-container {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-
-    .web-design-team-container {
-        display: grid !important;
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        justify-items: center !important;
-        align-items: center !important;
-        gap: 20px !important;
-    }
-
-    .web-design-member-wrapper {
-        width: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-}
-
-/* FORCE AGAIN FOR BELOW 480px */
-@media (max-width: 480px) {
-    .web-design-team-container {
-        display: grid !important;
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        justify-items: center !important;
-        gap: 15px !important;
-    }
+.web-design-team-container {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    justify-items: center !important;
+    width: 100% !important;
 }
 
 .web-design-team-container {

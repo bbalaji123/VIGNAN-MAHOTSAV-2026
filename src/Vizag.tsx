@@ -118,7 +118,7 @@ const Vizag: React.FC = () => {
               height: '400px',
             }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357528/VIZAG_pcabnp_dvl0xw.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357528/VIZAG_pcabnp_dvl0xw.avif" alt="Vizag" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="eager" decoding="async" />
           </div>
 
           {/* Events Table */}

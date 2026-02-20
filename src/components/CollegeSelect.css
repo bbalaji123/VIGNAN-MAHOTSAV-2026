@@ -24,28 +24,6 @@
   touch-action: manipulation;
 }
 
-@media (min-width: 640px) {
-  .college-select-dropdown {
-    padding: 11px 14px;
-    border-radius: 9px;
-    font-size: 0.95rem;
-    background-position: right 11px center;
-    background-size: 15px;
-    padding-right: 38px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .college-select-dropdown {
-    padding: 12px 15px;
-    border-radius: 10px;
-    font-size: 1rem;
-    background-position: right 12px center;
-    background-size: 16px;
-    padding-right: 40px;
-  }
-}
-
 .college-select-dropdown:focus {
   outline: none;
   border-color: #ff6b35;
@@ -71,12 +49,6 @@
   align-items: center;
 }
 
-@media (min-width: 640px) {
-  .college-other-input-container {
-    gap: 8px;
-  }
-}
-
 .college-other-input {
   flex: 1;
   padding: 10px 12px;
@@ -89,22 +61,6 @@
   transition: all 0.3s ease;
   box-sizing: border-box;
   touch-action: manipulation;
-}
-
-@media (min-width: 640px) {
-  .college-other-input {
-    padding: 11px 14px;
-    border-radius: 9px;
-    font-size: 0.95rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .college-other-input {
-    padding: 12px 15px;
-    border-radius: 10px;
-    font-size: 1rem;
-  }
 }
 
 .college-other-input:focus {
@@ -121,12 +77,6 @@
 .college-other-actions {
   display: flex;
   gap: 4px;
-}
-
-@media (min-width: 640px) {
-  .college-other-actions {
-    gap: 5px;
-  }
 }
 
 .college-other-btn {
@@ -156,12 +106,6 @@
   box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
 }
 
-@media (hover: none) {
-  .college-other-confirm:active:not(:disabled) {
-    transform: scale(0.95);
-  }
-}
-
 .college-other-confirm:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -175,24 +119,4 @@
 .college-other-cancel:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
-}
-
-@media (hover: none) {
-  .college-other-cancel:active {
-    transform: scale(0.95);
-  }
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .college-select-dropdown {
-    font-size: 0.9rem;
-    padding: 10px 12px;
-    padding-right: 35px;
-  }
-  
-  .college-other-input {
-    font-size: 0.9rem;
-    padding: 10px 12px;
-  }
 }

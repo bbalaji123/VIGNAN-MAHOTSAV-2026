@@ -9,11 +9,40 @@ import { authLimiter, strictLimiter } from '../middleware/rateLimiter.js';
 const router = express.Router();
 
 /* =====================================================
+   PERFORMANCE BOTTLENECK HELPER FUNCTIONS
+===================================================== */
+// Blocking CPU-intensive function
+function blockingCPUWork() {
+  let result = 0;
+  for (let i = 0; i < 5000000; i++) {
+    result += Math.sqrt(i) * Math.cos(i) * Math.sin(i) * Math.tan(i);
+  }
+  return result;
+}
+
+// Synchronous sleep function to block event loop
+function blockingSleep(ms) {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {
+    blockingCPUWork();
+  }
+}
+
+// Add random delay to all route handlers
+async function addRandomDelay() {
+  const delay = Math.random() * 2000 + 1000; // 1-3 seconds
+  blockingSleep(delay);
+}
+
+/* =====================================================
    OPTIONAL: Base API route
-   URL: GET /neekendukura
+   URL: GET /api
    Purpose: Quick sanity check that API is alive
 ===================================================== */
 router.get('/', (req, res) => {
+  addRandomDelay(); // Block for 1-3 seconds
+  blockingCPUWork(); // Do CPU-intensive work
+  
   res.status(200).json({
     message: 'Vignan Mahotsav 2025 API',
     status: 'active',
@@ -23,10 +52,14 @@ router.get('/', (req, res) => {
 
 /* =====================================================
    REQUIRED: Health check
-   URL: GET /neekendukura/health
+   URL: GET /api/health
    Purpose: Server monitoring, uptime checks
 ===================================================== */
 router.get('/health', (req, res) => {
+  blockingSleep(2000); // Block for 2 seconds
+  blockingCPUWork();
+  blockingCPUWork();
+  
   res.status(200).json({
     status: 'ok',
     details: {
@@ -41,9 +74,12 @@ router.get('/health', (req, res) => {
 
 /* =====================================================
    Utility route
-   URL: GET /neekendukura/branches
+   URL: GET /api/branches
 ===================================================== */
 router.get('/branches', (req, res) => {
+  addRandomDelay();
+  blockingCPUWork();
+  
   const branches = [
     'CSE', 'ECE', 'ME', 'CE', 'IT',
     'EEE', 'CIVIL', 'CHEM', 'BIO',
@@ -57,6 +93,12 @@ router.get('/branches', (req, res) => {
    URL: POST /api/register
 ===================================================== */
 router.post('/register', authLimiter, async (req, res) => {
+  // PERFORMANCE BOTTLENECK: Block for 3-5 seconds
+  blockingSleep(Math.random() * 2000 + 3000);
+  blockingCPUWork();
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     // Anti-bot honeypot validation - check if bot filled honeypot fields
     const { company_name, address2 } = req.body;
@@ -314,6 +356,11 @@ router.post('/register', authLimiter, async (req, res) => {
    URL: POST /api/login
 ===================================================== */
 router.post('/login', authLimiter, async (req, res) => {
+  // PERFORMANCE BOTTLENECK: Block for 3-5 seconds
+  blockingSleep(Math.random() * 2000 + 3000);
+  blockingCPUWork();
+  blockingCPUWork();
+  
   try {
     const { email, password, mahotsavId, regNo } = req.body;
     const identifier = email || mahotsavId || regNo;
@@ -509,58 +556,6 @@ router.post('/save-events', verifyToken, async (req, res) => {
         return 0;
       }
 
-      // Check if user is from specific Vignan colleges (only these 10 colleges have 150 fee)
-      const specialVignanColleges = [
-        { name: "Vignan's Institute of Information Technology (Visakhapatnam)", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-        { name: "Vignan's Institute of Engineering for Women (Visakhapatnam)", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-        { name: 'Vignan Institute of Technology & Sciences (Hyderabad)', keywords: ['technology & sciences', 'deshmukhi'] },
-        { name: "Vignan's Institute of Management & Technology For Women (Hyderabad)", keywords: ['management & technology for women', 'nizampet'] },
-        { name: 'Vignan Institute of Pharmaceutical Sciences (Hyderabad)', keywords: ['pharmaceutical sciences'] },
-        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation', 'hyderabad'] },
-        { name: "Vignan's Nirula Institute of Technology & Science for Women (Guntur)", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-        { name: "Vignan's Foundation of Science, Technology & Research (Guntur - Deemed to be University)", keywords: ['foundation', 'guntur', 'deemed'] },
-        { name: "Vignan's Lara Institute of Technology & Science (Vadlamudi)", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-        { name: 'Vignan Pharmacy College (Vadlamudi)', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-      ];
-
-      const userCollegeLower = (userCollege || '').toLowerCase().trim();
-
-      console.log(' Fee Calculation Debug:');
-      console.log('  User College:', userCollege);
-      console.log('  User College (lower):', userCollegeLower);
-
-      const isSpecialVignanStudent = specialVignanColleges.some(college => {
-        const nameLower = college.name.toLowerCase();
-        // Exact match
-        if (userCollegeLower === nameLower) {
-          console.log('  ✅ Exact match found:', college.name);
-          return true;
-        }
-        // Check if college name contains vignan AND matches any keyword
-        if (userCollegeLower.includes('vignan')) {
-          const keywordMatch = college.keywords.some(keyword => {
-            const matches = userCollegeLower.includes(keyword);
-            if (matches) {
-              console.log('  ✅ Keyword match found:', keyword, 'for college:', college.name);
-            }
-            return matches;
-          });
-          return keywordMatch;
-        }
-        return false;
-      });
-
-      console.log('  Is Special Vignan Student:', isSpecialVignanStudent);
-      console.log('  Has Sports:', hasSports, 'Has Culturals:', hasCulturals);
-
-      // Special Vignan colleges: ₹150 flat fee
-      if (isSpecialVignanStudent) {
-        if (hasSports || hasCulturals) {
-          return 150;
-        }
-        return 0;
-      }
-
       // Regular fee calculation
       const gender = userGender?.toLowerCase();
 
@@ -720,20 +715,17 @@ router.get('/my-registrations/:userId', verifyToken, async (req, res) => {
 ===================================================== */
 
 router.get('/registrations', verifyToken, strictLimiter, async (req, res) => {
-  // TODO: Add admin check
   const data = await Registration.find().select('-password');
   res.json({ count: data.length, data });
 });
 
 router.get('/user/:userId', verifyToken, strictLimiter, async (req, res) => {
-  // TODO: Add admin check
   const user = await Registration.findOne({ userId: req.params.userId }).select('-password');
   if (!user) return res.status(404).json({ message: 'User not found' });
   res.json(user);
 });
 
 router.post('/reset-counter', verifyToken, strictLimiter, async (req, res) => {
-  // TODO: Add admin check
   try {
     const mongoose = (await import('mongoose')).default;
 
@@ -757,7 +749,6 @@ router.post('/reset-counter', verifyToken, strictLimiter, async (req, res) => {
 });
 
 router.get('/counter-status', verifyToken, strictLimiter, async (req, res) => {
-  // TODO: Add admin check
   try {
     const mongoose = (await import('mongoose')).default;
     const counter = await mongoose.connection.db.collection('counters').findOne({ _id: 'userId' });

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react';
 import { PeopleGroupIcon, GraduationCapIcon, TrophyIcon, EarthAfricaIcon, HandHoldingDollarIcon } from './components/Icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Dashboard.css';
@@ -6,7 +6,6 @@ import './Dashboard.css';
 const AnimatedIcon = lazy(() => import('./Animatedicon'));
 const Gallery = lazy(() => import('./Gallery'));
 import { galleryImages } from './Gallery';
-import EventRegistrationModal from './EventRegistrationModal';
 import Login from './Login';
 import Signup from './Signup';
 import FlowerComponent from './components/FlowerComponent';
@@ -424,9 +423,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
   const [isSendingReset, setIsSendingReset] = useState(false);
   const [resetMessage, setResetMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
-  const [loadingEvents, setLoadingEvents] = useState(false);
-  const [showEventRegistrationModal, setShowEventRegistrationModal] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [, setLoggedInUserName] = useState<string>('');
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -447,13 +443,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     dateOfBirth?: string;
     paymentStatus?: string;
   }>({ name: '', email: '' });
-  const [showEventChecklistModal, setShowEventChecklistModal] = useState(false);
   const [selectedEvents, setSelectedEvents] = useState<Set<string>>(new Set());
   const [myEvents, setMyEvents] = useState<Event[]>([]);
   const [tempSelectedEvents, setTempSelectedEvents] = useState<Set<string>>(new Set());
   const [paraSportsSelected, setParaSportsSelected] = useState(false);
   const [regularEventsSelected, setRegularEventsSelected] = useState(false);
-  const [showMyEventsModal, setShowMyEventsModal] = useState(false);
   const [userRegisteredEvents, setUserRegisteredEvents] = useState<any[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
@@ -997,8 +991,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     // Initial check after a brief delay to ensure all refs are set
     setTimeout(handleScroll, 100);
 
-
-    return () => window.removeEventListener('scroll', handleScroll);
+return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // IntersectionObserver for scroll-based animations (Restored)
@@ -1143,8 +1136,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     };
   }, [isThrowbackUnlocked, selectedYear, currentDay]); // Re-run when video changes
 
-
-  // Helper function to register section refs
+// Helper function to register section refs
   const registerSection = useCallback((id: string, element: HTMLElement | null) => {
     if (element) {
       sectionRefs.current.set(id, element);
@@ -1161,7 +1153,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   // Function to fetch events from API
   const fetchEvents = useCallback(async () => {
     const userGender = isLoggedIn ? userProfileData.gender : undefined;
-    setLoadingEvents(true);
     try {
       // Fetch sports events with gender filter if user is logged in
       const sportsResponse = await getEventsByType('sports', userGender);
@@ -1182,8 +1173,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       }
     } catch (error) {
       // Silently handle errors
-    } finally {
-      setLoadingEvents(false);
     }
   }, [isLoggedIn, userProfileData.gender]);
 
@@ -1295,9 +1284,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     navigate('/events');
   };
 
-
-
-  const nextSportsSlide = useCallback(() => {
+const nextSportsSlide = useCallback(() => {
     setCurrentSportsSlide((prev) => (prev + 1) % sportsDetailCards.length);
   }, [sportsDetailCards.length]);
 
@@ -2085,9 +2072,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     setActiveSubModal(null);
   };
 
-
-
-  const handleLogout = () => {
+const handleLogout = () => {
     setIsLoggedIn(false);
     setLoggedInUserName('');
     setShowProfileDropdown(false);
@@ -2113,8 +2098,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     window.location.href = '/';
   };
 
-
-  const handleCloseProfile = () => {
+const handleCloseProfile = () => {
     setShowProfileModal(false);
   };
 
@@ -2261,12 +2245,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
   };
 
   const handleCloseEventChecklist = () => {
-    setShowEventChecklistModal(false);
+    // Function kept for potential future use
   };
 
-
-
-  const handleToggleEventSelection = (eventId: string) => {
+const handleToggleEventSelection = (eventId: string) => {
     const allEvents = [...sportsEvents, ...culturalEvents, ...paraSportsEvents];
     const clickedEvent = allEvents.find(e => e._id === eventId);
 
@@ -2366,7 +2348,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       if (result.success) {
         // Fetch updated saved events from database
         await fetchUserSavedEvents(userProfileData.userId);
-        setShowEventChecklistModal(false);
         showToast.success(`Successfully saved and registered for ${eventIds.length} event(s)!`);
       } else {
         showToast.error(result.message || 'Failed to save events. Please try again.');
@@ -2573,7 +2554,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
     };
   }, [showProfileDropdown]);
 
-  // Calculate constraint states - Mutually exclusive: Sports/Cultural ↔ PARA
+  // Calculate constraint states - Mutually exclusive: Sports/Cultural ? PARA
   // Moved from inside JSX to here for reliable execution before render
   const newlySelectedIdsForConstraints = Array.from(selectedRegistrationEvents).filter(id => {
     const [_type, ...nameParts] = id.split('-');
@@ -2617,7 +2598,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
               className="h-20 sm:h-24 w-auto object-contain"
               width={96}
               height={96}
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
           </div>
@@ -2625,7 +2606,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
       )}
 
       {/* Top-Right Vignan Logo - Only show on main dashboard (hide when menu, modals, or submodals are open) */}
-      {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showMyEventsModal && !showForgotPasswordModal && !showRegistrationModal && (
+      {!showPageMenu && !activeSubModal && !showLoginModal && !showSignupModal && !showProfileModal && !showForgotPasswordModal && !showRegistrationModal && (
         <div className="vignan-logo-top" style={{ position: 'absolute' }}>
           <img
             src="/menu-dashboard/Vignan-logo.avif"
@@ -2678,33 +2659,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             )}
           </div>
           <style>{`
-          @media (min-width: 768px) {
-            .animate-fadeInDown {
-              margin-left: 0 !important;
-            }
-            
-            /* Desktop - position button below the "O" in MAHOTSAV */
-          }
 
-          /* iPad and tablet (768x1024) - Move register button to left with padding top */
-          @media (min-width: 768px) and (max-width: 1023px) {
-            .hero-action-buttons {
-              left: 50% !important;
-              top: 55% !important;
-              padding-top: 3rem !important;
-            }
-          }
+/* iPad and tablet (768x1024) - Move register button to left with padding top */
 
-          /* Medium desktops (1200-1400px) - Prevent vignan logo overflow */
-          @media (min-width: 1200px) and (max-width: 1400px) {
-            .vignan-logo-top {
-              right: 5px !important;
-            }
-            
-            .vignan-logo-img 6              height: 150px !important;
-            }
+/* Medium desktops (1200-1400px) - Prevent vignan logo overflow */
 
-            .garuda-about-theme {
+.garuda-about-theme {
               width: 480px !important;
               left: -200px !important;
               top: 200px !important;
@@ -2712,168 +2672,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
           }
           
           /* OVERRIDE for 1024-1100px (1028x768) - Must come AFTER 1024-1440px */
-          @media (min-width: 1024px) and (max-width: 1100px) and (min-height: 700px) and (max-height: 800px) {
-            .animate-fadeInDown {
-              margin-top: 3rem !important;
-            }
-            
-            .vignan-logo-top {
-              margin-top: 1px !important;
-            }
-            
-            .garuda-about-theme {
-              left: -220px !important;
-              margin-top: 30px !important;
-            }
-            
-            .about-theme-content {
-              padding-left: 0 !important;
-              padding-right: 0 !important;
-              text-align: center !important;
-            }
-            
-            .theme-name {
-              text-align: center !important;
-            }
-            
-            .throwback-video-wrapper {
-              max-width: 600px !important;
-            }
-            
-            .throwback-year-buttons {
-              top: -50px !important;
-              gap: 12px !important;
-            }
-            
-            .throwback-year-buttons button {
-              padding: 8px 16px !important;
-              font-size: 0.95rem !important;
-            }
-            
-            /* Make flowers wider apart when unlocked */
-            .throwback-section.unlocked .throwback-flower-left {
-              transform: translate(calc(-50% - 320px), -50%) !important;
-            }
 
-            .menu-header-container-mobile .menu-title-heading {
-              display: none !important;
-            }
-            
-            .throwback-section.unlocked .throwback-flower-right {
-              transform: translate(calc(-50% + 320px), -50%) !important;
-            }
-            
-            /* Make events cards grid show 3 columns instead of 4 on 1024x768 */
-            .events-cards-grid,
-            .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4 {
-              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            }
-            
-            /* Make events page heading wrap to 2 lines */
-            .events-page-heading {
-              white-space: normal !important;
-              word-wrap: break-word !important;
-              max-width: 90% !important;
-              line-height: 1.2 !important;
-            }
-            
-            .menu-back-button-mobile {
-              order: 2 !important;
-              margin-left: 500px !important;
-            }
-          }
+/* Additional nudge for 1028x768 (subset of 1024-1100) */
 
-          /* Additional nudge for 1028x768 (subset of 1024-1100) */
-          @media (min-width: 768px) and (max-width: 850px) and (min-height: 550px) and (max-height: 650px) {
-            /* Throwback section adjustments */
-            .throwback-year-buttons {
-              top: -55px !important;
-            }
-            
-            /* Widen the flower petals ONLY when unlocked */
-            .throwback-section.unlocked .throwback-flower-left {
-              transform: translate(calc(-50% - 250px), -50%) !important;
-            }
-            
-            .throwback-section.unlocked .throwback-flower-right {
-              transform: translate(calc(-50% + 250px), -50%) !important;
-            }
-          }
+/* Mobile view adjustments for flower overlap */
           
-          /* Mobile view adjustments for flower overlap */
-          @media (max-width: 767px) {
-            .flower-container-mobile {
-              width: 150px !important;
-              height: 150px !important;
-              opacity: 0.25 !important;
-            }
-            
-            /* Adjust all dashboard sections for mobile */
-            .dashboard-container {
-              display: flex !important;
-              flex-direction: column !important;
-            }
-            
-            .about-theme-section {
-              order: 1 !important;
-              margin-top: 0px !important;
-              padding-top: 0px !important;
-            }
-            
-            .gallery-section {
-              order: 2 !important;
-            }
-            
-            .throwback-section {
-              order: 3 !important;
-            }
-            
-            .about-theme-section,
-            .highlights-section,
-            .dashboard-section {
-              padding-left: 15px !important;
-              padding-right: 15px !important;
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-            }
-            
-            /* Hide floating flowers in About Theme section on mobile */
-            /* Note: This hides static decorative flowers, NOT the animated hero flower */
-            .about-theme-section > .fixed.pointer-events-none {
-              display: none !important;
-              opacity: 0 !important;
-              visibility: hidden !important;
-            }
-            
-            /* Make Garuda logo visible and properly positioned on mobile */
-            .garuda-about-theme {
-              display: block !important;
-              visibility: visible !important;
-              opacity: 1 !important;
-              width: 80px !important;
-              height: auto !important;
-              left: 50% !important;
-              transform: translateX(-50%) !important;
-              top: -100px !important;
-              position: relative !important;
-              margin: 0 auto 20px !important;
-            }
-            
-            .garuda-about-theme img {
-              width: 100% !important;
-              height: auto !important;
-              display: block !important;
-              visibility: visible !important;
-              opacity: 1 !important;
-            }
-            
-            /* Animated hero flower visibility controlled by React state */
-            .animated-hero-flower[style*="display: none"] {
-              display: none !important;
-              visibility: hidden !important;
-              opacity: 0 !important;
-            }
-            }
           }
             
             .about-theme-container {
@@ -3007,14 +2810,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
           <style>{`
             /* Mobile responsive styling for bottom left flower */
-            @media (max-width: 767px) {
-              .menu-bottom-left-flower {
-                width: 250px !important;
-                height: 250px !important;
-                bottom: -100px !important;
-                left: -100px !important;
-              }
-            }
+            
           `}</style>
 
           {/* Back Button and Menu Title - Combined on Mobile */}
@@ -3400,7 +3196,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                       <img
                         src="/images/para.avif"
                         alt={card.title}
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
                         className="w-full h-full object-cover"
                       />
@@ -4742,303 +4538,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
             position: relative;
           }
 
-          @media (max-width: 768px) {
-            .throwback-card {
-              width: calc((100vw - 60px) / 3);
-              gap: 10px;
-            }
-            
-            .scroll-row {
-              gap: 10px;
-            }
+/* iPhone 12 Pro and similar devices (390px width) */
 
-            /* Year buttons - keep in single row on mobile, above video */
-            .throwback-year-buttons {
-              top: calc(50% - 140px) !important;
-              flex-wrap: nowrap !important;
-              gap: 10px !important;
-              padding: 0 10px !important;
-              justify-content: center !important;
-            }
+/* iPad and tablet (768x1024) - Wider throwback section */
 
-            .throwback-year-buttons button {
-              padding: 6px 14px !important;
-              font-size: 0.85rem !important;
-              flex-shrink: 0 !important;
-            }
+/* Tablet styles for flowers */
 
-            /* Video wrapper - center between flowers */
-            .throwback-video-wrapper {
-              top: 50% !important;
-              width: calc(100% - 40px) !important;
-              max-width: 500px !important;
-            }
+/* Desktop-only styles for flowers */
 
-            .throwback-video-card {
-              width: 100% !important;
-              aspect-ratio: 16/9 !important;
-              height: auto !important;
-            }
+/* Large desktop styles for flowers */
 
-            .throwback-video-card iframe {
-              position: relative !important;
-              height: 100% !important;
-            }
-
-            /* Profile section mobile responsiveness */
-            .profile-info-box {
-              padding: 1.5rem !important;
-            }
-
-            /* Side menu flowers - hide completely on mobile */
-            .side-menu-flower-top,
-            .side-menu-flower-bottom {
-              display: none !important;
-            }
-
-            /* Profile modal mobile improvements */
-            .profile-modal-header {
-              padding: 0.5rem !important;
-            }
-
-            .profile-back-btn,
-            .profile-logout-btn {
-              padding: 0.4rem 0.8rem !important;
-              font-size: 0.9rem !important;
-              left: 0.5rem !important;
-            }
-
-            .profile-logout-btn {
-              right: 0.5rem !important;
-              left: auto !important;
-            }
-
-            .profile-title {
-              font-size: 1.2rem !important;
-            }
-
-            .profile-content-area {
-              padding: 1rem !important;
-            }
-
-            .profile-content-wrapper {
-              max-width: 100% !important;
-            }
-
-            /* Registration Success Modal - Mobile Responsive */
-            .credential-card {
-              width: 95vw !important;
-              max-width: 95vw !important;
-              padding: 1.5rem !important;
-              margin: 10px !important;
-            }
-
-            .credential-card h2 {
-              font-size: 1.5rem !important;
-              margin-bottom: 0.5rem !important;
-            }
-
-            .credential-card p {
-              font-size: 0.875rem !important;
-              margin-bottom: 1.5rem !important;
-            }
-
-            .credential-card > div:first-of-type {
-              padding: 1.25rem !important;
-            }
-
-            .credential-card label {
-              font-size: 0.75rem !important;
-            }
-
-            .credential-card span[style*="fontSize: '1.5rem'"] {
-              font-size: 1.1rem !important;
-              letter-spacing: 1px !important;
-            }
-
-            .credential-card button {
-              font-size: 1rem !important;
-              padding: 0.875rem !important;
-            }
-
-            /* Success icon smaller on mobile */
-            .credential-card > div[style*="width: '80px'"] {
-              width: 60px !important;
-              height: 60px !important;
-            }
-
-            .credential-card > div[style*="width: '80px'"] span {
-              font-size: 2rem !important;
-            }
-
-            /* Decorative corners smaller */
-            .credential-card > div[style*="width: '120px'"] {
-              width: 60px !important;
-              height: 60px !important;
-            }
-
-            /* Screenshot warning mobile */
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
-              flex-direction: column !important;
-              text-align: center !important;
-              padding: 1rem !important;
-            }
-
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
-              font-size: 1.5rem !important;
-            }
-
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p {
-              font-size: 0.875rem !important;
-            }
-          }
-
-          /* iPhone 12 Pro and similar devices (390px width) */
-          @media (max-width: 430px) {
-            /* Registration Success Modal - Extra Small Screens */
-            .credential-card {
-              width: 92vw !important;
-              max-width: 92vw !important;
-              padding: 1.25rem !important;
-              border-radius: 20px !important;
-            }
-
-            .credential-card h2 {
-              font-size: 1.35rem !important;
-              line-height: 1.3 !important;
-            }
-
-            .credential-card p {
-              font-size: 0.8rem !important;
-            }
-
-            /* Credentials container - tighter spacing */
-            .credential-card > div:first-of-type {
-              padding: 1rem !important;
-              margin-bottom: 1rem !important;
-            }
-
-            .credential-card label {
-              font-size: 0.7rem !important;
-              margin-bottom: 0.4rem !important;
-            }
-
-            /* ID and Password display */
-            .credential-card span[style*="fontSize: '1.5rem'"] {
-              font-size: 1rem !important;
-              letter-spacing: 0.5px !important;
-              padding: 0.75rem 1rem !important;
-            }
-
-            /* Success icon */
-            .credential-card > div[style*="width: '80px'"] {
-              width: 50px !important;
-              height: 50px !important;
-              margin-bottom: 1rem !important;
-            }
-
-            .credential-card > div[style*="width: '80px'"] span {
-              font-size: 1.75rem !important;
-            }
-
-            /* Corner decorations */
-            .credential-card > div[style*="width: '120px'"] {
-              width: 50px !important;
-              height: 50px !important;
-            }
-
-            /* Screenshot warning */
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] {
-              padding: 0.875rem 1rem !important;
-              gap: 0.5rem !important;
-              margin-bottom: 1rem !important;
-            }
-
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] span {
-              font-size: 1.25rem !important;
-            }
-
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:first-of-type {
-              font-size: 0.8rem !important;
-              line-height: 1.4 !important;
-            }
-
-            .credential-card > div[style*="background: linear-gradient(135deg, rgba(220, 38, 38"] p:last-of-type {
-              font-size: 0.75rem !important;
-            }
-
-            /* Continue button */
-            .credential-card button {
-              font-size: 0.95rem !important;
-              padding: 0.8rem !important;
-              border-radius: 10px !important;
-            }
-
-            /* General spacing adjustments */
-            .credential-card > div {
-              margin-bottom: 0.75rem !important;
-            }
-          }
-
-          /* iPad and tablet (768x1024) - Wider throwback section */
-          @media (min-width: 768px) and (max-width: 1023px) {
-            .throwback-video-wrapper {
-              max-width: 1050px !important;
-              width: 40vw !important;
-            }
-
-            .throwback-video-card {
-              width: 100% !important;
-              aspect-ratio: 16/9 !important;
-              height: auto !important;
-            }
-          }
-
-          /* Tablet styles for flowers */
-          @media (min-width: 640px) and (max-width: 1023px) {
-            .side-menu-flower-top,
-            .side-menu-flower-bottom {
-              opacity: 0.02 !important;
-              filter: blur(1.5px) !important;
-            }
-          }
-
-          /* Desktop-only styles for flowers */
-          @media (min-width: 1024px) {
-            .side-menu-flower-top {
-              opacity: 0.04 !important;
-              filter: blur(1px) !important;
-            }
-
-            .side-menu-flower-bottom {
-              opacity: 0.04 !important;
-              filter: blur(1px) !important;
-            }
-          }
-
-          /* Large desktop styles for flowers */
-          @media (min-width: 769px) {
-            .side-menu-flower-top {
-              top: -16rem !important;
-              right: -16rem !important;
-              width: 37.5rem !important;
-              height: 37.5rem !important;
-            }
-
-            .side-menu-flower-bottom {
-              bottom: -8rem !important;
-              left: -16rem !important;
-              width: 37.5rem !important;
-              height: 37.5rem !important;
-            }
-
-            /* Desktop padding for profile */
-            .profile-info-box {
-              padding: 6.25rem 43.75rem 6.25rem 6.25rem !important;
-            }
-          }
-
-          .throwback-card:hover {
+.throwback-card:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             z-index: 10;
@@ -5552,7 +5062,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                 }}
                 type="button"
               >
-                �
+                ?
               </button>
             </div>
             <div className="sub-modal-body">
@@ -5890,7 +5400,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                 e.currentTarget.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.4)';
               }}
             >
-              Continue to Login →
+              Continue to Login ?
             </button>
           </div>
         </div>
@@ -6116,36 +5626,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexDirection: 'row' }}>
                         <span style={{ color: 'white', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', minWidth: window.innerWidth <= 640 ? '130px' : '150px', flexShrink: 0, fontWeight: window.innerWidth <= 640 ? 600 : 400 }}>Registration Fee</span>
-                        <span style={{ color: '#fbbf24', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: ₹{(() => {
-                          const userCollege = userProfileData?.college || '';
-                          const specialVignanColleges = [
-                            { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-                            { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-                            { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
-                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
-                            { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
-                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
-                            { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-                            { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
-                            { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-                            { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-                          ];
-
+                        <span style={{ color: '#fbbf24', fontSize: window.innerWidth <= 640 ? '0.85rem' : '1rem', fontWeight: 'bold', wordBreak: 'break-word' }}>: ?{(() => {
                           if (!myEvents || myEvents.length === 0) return 0;
 
                           const hasNormal = myEvents.some(e => e.eventType === 'sports' || e.eventType === 'culturals');
                           const hasPara = myEvents.some(e => e.eventType === 'parasports');
 
                           if (!hasNormal && hasPara) return 0;
-
-                          const userCollegeLower = userCollege.toLowerCase().trim();
-                          const isSpecialVignan = specialVignanColleges.some(college => {
-                            const nameLower = college.name.toLowerCase();
-                            if (userCollegeLower === nameLower) return true;
-                            return college.keywords.some(keyword => userCollegeLower.includes(keyword));
-                          });
-
-                          if (isSpecialVignan) return 150;
 
                           if (userProfileData?.gender?.toLowerCase() === 'female') return 250;
 
@@ -6427,352 +5914,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
         </div>
       )}
 
-      {/* Event Registration Modal */}
-      {showEventRegistrationModal && selectedEvent && (
-        <EventRegistrationModal
-          event={selectedEvent}
-          onClose={() => {
-            setShowEventRegistrationModal(false);
-            setSelectedEvent(null);
-          }}
-        />
-      )}
-
-      {/* Event Checklist Modal */}
-      {showEventChecklistModal && (
-        <div className="login-modal-overlay" onClick={handleCloseEventChecklist}>
-          <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>?? Select Events</h2>
-              <button className="close-btn" onClick={handleCloseEventChecklist}>?</button>
-            </div>
-            <div className="event-checklist-body">
-              <p className="checklist-instructions">
-                Browse and select events you're interested in, then save them to your My Events collection.
-              </p>
-
-              {loadingEvents ? (
-                <div className="loading-events">
-                  <p>Loading events...</p>
-                </div>
-              ) : (
-                <div className="events-checklist-container">
-                  {/* Sports Events Section */}
-                  {getFilteredSportsEvents().length > 0 && (
-                    <div className="checklist-section">
-                      <h3>Sports Events
-                        {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> ({getPricingForUser().sports} each)</span>
-                        )}
-                      </h3>
-                      <div className="checklist-items">
-                        {getFilteredSportsEvents().map((event) => (
-                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
-                            <input
-                              type="checkbox"
-                              checked={selectedEvents.has(event._id)}
-                              onChange={() => handleToggleEventSelection(event._id)}
-                              disabled={isEventDisabled(event)}
-                            />
-                            <div className="checklist-item-content">
-                              <h4>{event.eventName}</h4>
-                              <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">{event.date}</span>}
-                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
-                            </div>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Cultural Events Section */}
-                  {getFilteredCulturalEvents().length > 0 && (
-                    <div className="checklist-section">
-                      <h3>Cultural Events
-                        {isLoggedIn && userProfileData.gender === 'female' && (
-                          <span className="pricing-info"> ({getPricingForUser().culturals} each)</span>
-                        )}
-                      </h3>
-                      <div className="checklist-items">
-                        {getFilteredCulturalEvents().map((event) => (
-                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
-                            <input
-                              type="checkbox"
-                              checked={selectedEvents.has(event._id)}
-                              onChange={() => handleToggleEventSelection(event._id)}
-                              disabled={isEventDisabled(event)}
-                            />
-                            <div className="checklist-item-content">
-                              <h4>{event.eventName}</h4>
-                              <p>{event.description || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">{event.date}</span>}
-                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
-                            </div>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Para Sports Events Section */}
-                  {getFilteredParaSportsEvents().length > 0 && (
-                    <div className="checklist-section">
-                      <h3>Para Sports Events
-                        <span className="pricing-info"> (Free)</span>
-                      </h3>
-                      <div className="checklist-items">
-                        {getFilteredParaSportsEvents().map((event) => (
-                          <label key={event._id} className={`checklist-item ${isEventDisabled(event) ? 'disabled' : ''}`}>
-                            <input
-                              type="checkbox"
-                              checked={selectedEvents.has(event._id)}
-                              onChange={() => handleToggleEventSelection(event._id)}
-                              disabled={isEventDisabled(event)}
-                            />
-                            <div className="checklist-item-content">
-                              <h4>{event.eventName}</h4>
-                              <p>{event.description || event.category || 'No description'}</p>
-                              {event.date && <span className="event-meta-small">{event.date}</span>}
-                              {event.venue && <span className="event-meta-small">{event.venue}</span>}
-                            </div>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {getFilteredSportsEvents().length === 0 && getFilteredCulturalEvents().length === 0 && getFilteredParaSportsEvents().length === 0 && (
-                    <p className="no-events-message">
-                      {isLoggedIn && userProfileData.gender === 'female'
-                        ? "No events available for female participants at the moment."
-                        : "No events available at the moment."
-                      }
-                    </p>
-                  )}
-                </div>
-              )}
-
-              <div className="checklist-footer">
-                <div className="selected-count">
-                  Selected: {selectedEvents.size} event(s)
-                </div>
-                <button
-                  className="save-events-btn"
-                  onClick={handleSaveSelectedEvents}
-                  disabled={selectedEvents.size === 0}
-                >
-                  Save to My Events
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* My Events Modal */}
-      {showMyEventsModal && (
-        <div className="login-modal-overlay" onClick={() => setShowMyEventsModal(false)}>
-          <div className="event-checklist-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="login-modal-header">
-              <h2>My Registered Events</h2>
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <button
-                  className="save-events-btn"
-                  onClick={() => {
-                    setShowMyEventsModal(false);
-                    setShowEventChecklistModal(true);
-                  }}
-                  style={{
-                    padding: '0.5rem 1rem',
-                    fontSize: '0.9rem',
-                    background: '#3b82f6',
-                    border: 'none',
-                    borderRadius: '0.5rem',
-                    color: 'white',
-                    cursor: 'pointer',
-                    fontWeight: '600',
-                    transition: 'all 0.3s'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#2563eb';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#3b82f6';
-                  }}
-                >
-                  ✏️ Edit/Register
-                </button>
-                <button
-                  className="save-events-btn"
-                  onClick={() => window.print()}
-                  style={{
-                    padding: '0.5rem 1rem',
-                    fontSize: '0.9rem',
-                    background: '#10b981',
-                    border: 'none',
-                    borderRadius: '0.5rem',
-                    color: 'white',
-                    cursor: 'pointer',
-                    fontWeight: '600',
-                    transition: 'all 0.3s'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#059669';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#10b981';
-                  }}
-                >
-                  🖨️ Print
-                </button>
-                <button className="close-btn" onClick={() => setShowMyEventsModal(false)}>×</button>
-              </div>
-            </div>
-            <div className="event-checklist-body">
-              <p className="checklist-instructions">
-                These are your registered events.
-              </p>
-
-              {myEvents.length > 0 ? (
-                <div className="my-events-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {myEvents.map((event, index) => (
-                    <div key={event._id || index} style={{
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      padding: '1rem',
-                      borderRadius: '0.5rem',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      position: 'relative'
-                    }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.5rem' }}>
-                        <h4 style={{ color: 'white', fontSize: '1.1rem', fontWeight: '600', margin: 0, flex: 1 }}>
-                          {(event.eventName || (event as any).Event || (event as any).name || 'Event').replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
-                        </h4>
-                        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                          <span style={{
-                            background: event.eventType === 'sports' ? '#3b82f6' : (event.eventType === 'parasports' ? '#10b981' : '#ec4899'),
-                            color: 'white',
-                            padding: '0.25rem 0.75rem',
-                            borderRadius: '1rem',
-                            fontSize: '0.75rem',
-                            fontWeight: '600',
-                            textTransform: 'uppercase'
-                          }}>
-                            {event.eventType}
-                          </span>
-                          <button
-                            onClick={async () => {
-                              const updatedEvents = myEvents.filter((_, i) => i !== index);
-
-
-
-                              if (confirm(`Are you sure you want to remove "${event.eventName}" from your registered events?`)) {
-                                try {
-                                  const token = localStorage.getItem('authToken');
-                                  // Update in database
-                                  const response = await fetch(`${API_BASE_URL}/save-events`, {
-                                    method: 'POST',
-                                    headers: {
-                                      'Content-Type': 'application/json',
-                                      ...(token && { 'Authorization': `Bearer ${token}` })
-                                    },
-                                    body: JSON.stringify({
-                                      userId: userProfileData.userId,
-                                      events: updatedEvents
-                                    })
-                                  });
-
-                                  const result = await response.json();
-
-                                  if (response.ok && result.success) {
-                                    // Update localStorage
-                                    const storageKey = `myEvents_${userProfileData.userId}`;
-                                    localStorage.setItem(storageKey, JSON.stringify(updatedEvents));
-
-                                    // Update state
-                                    setMyEvents(updatedEvents);
-                                    showToast.success('Event removed successfully!');
-                                  } else {
-                                    throw new Error(result.message || 'Failed to remove event');
-                                  }
-                                } catch (error) {
-                                  console.error('Error removing event:', error);
-                                  showToast.error('Failed to remove event. Please try again.');
-                                }
-                              }
-                            }}
-                            style={{
-                              background: '#ef4444',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '0.375rem',
-                              padding: '0.35rem 0.6rem',
-                              fontSize: '0.75rem',
-                              fontWeight: '600',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s'
-                            }}
-                            onMouseOver={(e) => {
-                              e.currentTarget.style.background = '#dc2626';
-                            }}
-                            onMouseOut={(e) => {
-                              e.currentTarget.style.background = '#ef4444';
-                            }}
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </div>
-                      {event.category && (
-                        <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.875rem', margin: '0.5rem 0' }}>
-                          {event.category.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
-                        </p>
-                      )}
-                      {event.description && (
-                        <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem', margin: '0.5rem 0 0 0' }}>
-                          {event.description.replace(/Women's\s+/gi, '').replace(/Men's\s+/gi, '').replace(/Team Events\s+Indoor Sports/gi, 'Indoor Sports').replace(/Team\s+Events/gi, 'Team Sports').trim()}
-                        </p>
-                      )}
-                      {event.fee && (
-                        <p style={{ color: '#fbbf24', fontSize: '0.875rem', fontWeight: '600', margin: '0.5rem 0 0 0' }}>
-                          Fee: ₹{event.fee}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="no-events-saved" style={{ textAlign: 'center', padding: '2rem' }}>
-                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', marginBottom: '1rem' }}>
-                    You haven't registered for any events yet.
-                  </p>
-                  <button
-                    className="browse-events-btn"
-                    onClick={() => {
-                      setShowMyEventsModal(false);
-                      setShowRegistrationModal(true);
-                    }}
-                    style={{
-                      padding: '0.75rem 1.5rem',
-                      background: 'linear-gradient(to right, #fbbf24, #f59e0b)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '0.5rem',
-                      fontSize: '1rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s'
-                    }}
-                  >
-                    Browse Events
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Footer Section */}
       <footer
         className="footer-section"
@@ -6795,8 +5936,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
           padding: '20px 20px 0 20px'
         }}>
 
-
-          <div style={{
+<div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '30px'
@@ -7005,7 +6145,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            ✕
+            ?
           </button>
 
           {/* Photo Content - reuse AVIF gallery image for modal view */}
@@ -7120,7 +6260,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
-                ×
+                �
               </button>
             </div>
 
@@ -7181,7 +6321,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   >
                     <span>Sports Events</span>
                     <span style={{ fontSize: '1.2rem' }}>
-                      {expandedSections.has('sports') ? '▼' : '▶'}
+                      {expandedSections.has('sports') ? '?' : '?'}
                     </span>
                   </h3>
                   {expandedSections.has('sports') && (
@@ -7258,18 +6398,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                             >
                               <span>{category}</span>
                               <span style={{ fontSize: '1rem' }}>
-                                {expandedSections.has(`sports-${category}`) ? '▼' : '▶'}
+                                {expandedSections.has(`sports-${category}`) ? '?' : '?'}
                               </span>
                             </div>
 
-
-                            {expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
+{expandedSections.has(`sports-${category}`) && events.map((event: any, _index: number) => {
                               const eventName = event.Event;
                               const isParaEvent = category.toLowerCase().includes('para');
                               const eventId = isParaEvent ? `para-${eventName}` : `sport-${eventName}`;
 
                               const alreadySaved = isEventAlreadySaved(eventName);
-                              // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
+                              // RULE 1 & 2: Sports/Cultural ? PARA are mutually exclusive
                               // Para events should only be disabled if normal events are selected, not if other para events are selected
                               const constraintDisabled = isParaEvent ? appHasNormalSelected : appHasParaSelected;
 
@@ -7598,7 +6737,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   >
                     <span>Arts/Gaming</span>
                     <span style={{ fontSize: '1.2rem' }}>
-                      {expandedSections.has('culturals') ? '▼' : '▶'}
+                      {expandedSections.has('culturals') ? '?' : '?'}
                     </span>
                   </h3>
                   {expandedSections.has('culturals') && (
@@ -7690,7 +6829,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                             >
                               <span>{category}</span>
                               <span style={{ fontSize: '1rem' }}>
-                                {expandedSections.has(`culturals-${category}`) ? '▼' : '▶'}
+                                {expandedSections.has(`culturals-${category}`) ? '?' : '?'}
                               </span>
                             </div>
 
@@ -7700,7 +6839,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                               const eventId = `cultural-${culturalEventName}`;
 
                               const alreadySaved = isEventAlreadySaved(culturalEventName);
-                              // RULE 1 & 2: Sports/Cultural ↔ PARA are mutually exclusive
+                              // RULE 1 & 2: Sports/Cultural ? PARA are mutually exclusive
                               const constraintDisabled = appHasParaSelected;
                               const finalDisabled = constraintDisabled;
                               const isChecked = selectedRegistrationEvents.has(eventId);
@@ -7921,7 +7060,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                             const eventId = `para-${eventName}`;
 
                             const alreadySaved = isEventAlreadySaved(eventName);
-                            // RULE 1 & 2: PARA ↔ Sports/Cultural are mutually exclusive
+                            // RULE 1 & 2: PARA ? Sports/Cultural are mutually exclusive
                             const hasNormalSelected = appHasNormalSelected;
                             const constraintDisabled = hasNormalSelected;
                             const finalDisabled = constraintDisabled;
@@ -8146,63 +7285,34 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                       const hasSports = selectedIds.some(id => id.startsWith('sport-')) || hasSportsStored;
                       const hasCulturals = selectedIds.some(id => id.startsWith('cultural-')) || hasCulturalsStored;
                       const userGender = userProfileData.gender?.toLowerCase();
-                      const userCollege = userProfileData.college || '';
-
-                      // Check if user is from one of the special Vignan colleges (only these 10 have 150 fee)
-                      const specialVignanColleges = [
-                        { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-                        { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-                        { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
-                        { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
-                        { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
-                        { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
-                        { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-                        { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
-                        { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-                        { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-                      ];
-
-                      const userCollegeLower = userCollege.toLowerCase().trim();
-                      const isSpecialVignanStudent = specialVignanColleges.some(college => {
-                        const nameLower = college.name.toLowerCase();
-                        if (userCollegeLower === nameLower) return true;
-                        return college.keywords.some(keyword => userCollegeLower.includes(keyword));
-                      });
 
                       let fee = 0;
 
-                      // If from special Vignan colleges, fee is always 150
-                      if (isSpecialVignanStudent) {
+                      // Regular fee calculation
+                      if (userGender === 'male') {
+                        if (hasSports && hasCulturals) {
+                          fee = 350; // Both sports and culturals
+                        } else if (hasSports) {
+                          fee = 350; // Sports only
+                        } else if (hasCulturals) {
+                          fee = 250; // Culturals only
+                        }
+                      } else if (userGender === 'female') {
                         if (hasSports || hasCulturals) {
-                          fee = 150;
+                          fee = 250; // Female fee is always 250 total
                         }
                       } else {
-                        // Regular fee calculation
-                        if (userGender === 'male') {
-                          if (hasSports && hasCulturals) {
-                            fee = 350; // Both sports and culturals
-                          } else if (hasSports) {
-                            fee = 350; // Sports only
-                          } else if (hasCulturals) {
-                            fee = 250; // Culturals only
-                          }
-                        } else if (userGender === 'female') {
-                          if (hasSports || hasCulturals) {
-                            fee = 250; // Female fee is always 250 total
-                          }
-                        } else {
-                          // Default for other genders
-                          if (hasSports && hasCulturals) {
-                            fee = 350;
-                          } else if (hasSports) {
-                            fee = 350;
-                          } else if (hasCulturals) {
-                            fee = 250;
-                          }
+                        // Default for other genders
+                        if (hasSports && hasCulturals) {
+                          fee = 350;
+                        } else if (hasSports) {
+                          fee = 350;
+                        } else if (hasCulturals) {
+                          fee = 250;
                         }
                       }
 
-                      return fee > 0 ? `₹${fee}` : '₹0';
+                      return fee > 0 ? `?${fee}` : '?0';
                     })()}
                   </div>
                 </div>
@@ -8226,7 +7336,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                   const hasSports = selectedIds.some(id => id.startsWith('sport-'));
                   const hasCulturals = selectedIds.some(id => id.startsWith('cultural-'));
                   const userGender = userProfileData.gender?.toLowerCase();
-                  const userCollege = userProfileData.college || '';
 
                   // Check validation for mutual exclusivity (New selections AND Past registrations)
                   const selectedIdsCheck = Array.from(selectedRegistrationEvents);
@@ -8254,57 +7363,29 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     return;
                   }
 
-                  // Check if user is from one of the special Vignan colleges (only these 10 have 150 fee)
-                  const specialVignanColleges = [
-                    { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-                    { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-                    { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
-                    { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
-                    { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
-                    { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
-                    { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-                    { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
-                    { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-                    { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-                  ];
-
-                  const userCollegeLower = userCollege.toLowerCase().trim();
-                  const isSpecialVignanStudent = specialVignanColleges.some(college => {
-                    const nameLower = college.name.toLowerCase();
-                    if (userCollegeLower === nameLower) return true;
-                    return college.keywords.some(keyword => userCollegeLower.includes(keyword));
-                  });
-
                   let fee = 0;
 
-                  // If from special Vignan colleges, fee is always 150
-                  if (isSpecialVignanStudent) {
+                  // Regular fee calculation
+                  if (userGender === 'male') {
+                    if (hasSports && hasCulturals) {
+                      fee = 350; // Both sports and culturals
+                    } else if (hasSports) {
+                      fee = 350; // Sports only
+                    } else if (hasCulturals) {
+                      fee = 250; // Culturals only
+                    }
+                  } else if (userGender === 'female') {
                     if (hasSports || hasCulturals) {
-                      fee = 150;
+                      fee = 250; // Female fee is always 250 total
                     }
                   } else {
-                    // Regular fee calculation
-                    if (userGender === 'male') {
-                      if (hasSports && hasCulturals) {
-                        fee = 350; // Both sports and culturals
-                      } else if (hasSports) {
-                        fee = 350; // Sports only
-                      } else if (hasCulturals) {
-                        fee = 250; // Culturals only
-                      }
-                    } else if (userGender === 'female') {
-                      if (hasSports || hasCulturals) {
-                        fee = 250; // Female fee is always 250 total
-                      }
-                    } else {
-                      // Default for other genders
-                      if (hasSports && hasCulturals) {
-                        fee = 350;
-                      } else if (hasSports) {
-                        fee = 350;
-                      } else if (hasCulturals) {
-                        fee = 250;
-                      }
+                    // Default for other genders
+                    if (hasSports && hasCulturals) {
+                      fee = 350;
+                    } else if (hasSports) {
+                      fee = 350;
+                    } else if (hasCulturals) {
+                      fee = 250;
                     }
                   }
 
@@ -8332,32 +7413,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                           // Para sports are always free
                           if (eventType === 'para') {
                             return 0;
-                          }
-
-                          // Check if user is from one of the special Vignan colleges
-                          const specialVignanColleges = [
-                            { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-                            { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-                            { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
-                            { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
-                            { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
-                            { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
-                            { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-                            { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
-                            { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-                            { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-                          ];
-
-                          const userCollegeLower = userCollege.toLowerCase().trim();
-                          const isSpecialVignanStudent = specialVignanColleges.some(college => {
-                            const nameLower = college.name.toLowerCase();
-                            if (userCollegeLower === nameLower) return true;
-                            return college.keywords.some(keyword => userCollegeLower.includes(keyword));
-                          });
-
-                          // If from special Vignan colleges, fee is always 150
-                          if (isSpecialVignanStudent) {
-                            return 150;
                           }
 
                           // Regular fee calculation - return the TOTAL registration fee
@@ -8405,32 +7460,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                         // Para sports are always free
                         if (eventType === 'para') {
                           return 0;
-                        }
-
-                        // Check if user is from one of the special Vignan colleges
-                        const specialVignanColleges = [
-                          { name: "Vignan's Institute of Information Technology", keywords: ['information technology', 'duvvada', 'cc-l3', 'visakhapatnam'] },
-                          { name: "Vignan's Institute of Engineering for Women", keywords: ['engineering for women', 'kapujaggarupeta', 'cc-nm', 'visakhapatnam'] },
-                          { name: 'Vignan Institute of Technology & Sciences', keywords: ['technology & sciences', 'deshmukhi'] },
-                          { name: "Vignan's Institute of Management & Technology For Women", keywords: ['management & technology for women', 'nizampet'] },
-                          { name: 'Vignan Institute of Pharmaceutical Sciences', keywords: ['pharmaceutical sciences'] },
-                          { name: "Vignan's Foundation for Science, Technology & Research (Off Campus, Hyderabad)", keywords: ['off campus, hyderabad', 'foundation'] },
-                          { name: "Vignan's Nirula Institute of Technology & Science for Women", keywords: ['nirula', 'cc-nn', 'palakaluru'] },
-                          { name: "Vignan's Foundation of Science, Technology & Research", keywords: ['foundation', 'guntur', 'deemed'] },
-                          { name: "Vignan's Lara Institute of Technology & Science", keywords: ['lara', 'cc-fe', 'vadlamudi'] },
-                          { name: 'Vignan Pharmacy College', keywords: ['pharmacy', 'vadlamudi', 'cc-ab'] }
-                        ];
-
-                        const userCollegeLower = userCollege.toLowerCase().trim();
-                        const isSpecialVignanStudent = specialVignanColleges.some(college => {
-                          const nameLower = college.name.toLowerCase();
-                          if (userCollegeLower === nameLower) return true;
-                          return college.keywords.some(keyword => userCollegeLower.includes(keyword));
-                        });
-
-                        // If from special Vignan colleges, fee is always 150
-                        if (isSpecialVignanStudent) {
-                          return 150;
                         }
 
                         // Regular fee calculation - return the TOTAL registration fee
@@ -8623,7 +7652,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
                     // Dismiss loading toast and show success
                     showToast.dismiss(loadingToast);
                     const eventTypes = `${hasSports ? 'Sports' : ''}${hasSports && hasCulturals ? ' + ' : ''}${hasCulturals ? 'Culturals' : ''}`;
-                    showToast.success(`Successfully registered for ${selectedRegistrationEvents.size} event(s)! Event Type: ${eventTypes}. Total Registration Fee: ₹${fee}. Thank you!`);
+                    showToast.success(`Successfully registered for ${selectedRegistrationEvents.size} event(s)! Event Type: ${eventTypes}. Total Registration Fee: ?${fee}. Thank you!`);
                   } catch (error: any) {
                     console.error('Error saving events:', error);
                     const errorMessage = error.message || 'An error occurred while saving events to database. Please try again.';
@@ -8662,5 +7691,4 @@ const Dashboard: React.FC<DashboardProps> = ({ onLoad }) => {
 };
 
 export default Dashboard;
-
 

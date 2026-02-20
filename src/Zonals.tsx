@@ -75,17 +75,6 @@ const Zonals: React.FC = () => {
             font-family: 'Aladin', cursive !important;
             padding-bottom: 150px;
           }
-
-          @media (max-width: 768px) {
-            h1.zonals-title {
-              padding-bottom: 40px !important;
-              padding-top: 10px !important;
-            }
-            .zonals-content-container {
-              padding-bottom: 5vh !important;
-              padding-top: 5vh !important;
-            }
-          }
         `}
       </style>
 
@@ -113,28 +102,28 @@ const Zonals: React.FC = () => {
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357524/BENGALURU_b9ugrx_vp9xvq.avif" alt="Bangalore" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357524/BENGALURU_b9ugrx_vp9xvq.avif" alt="Bangalore" className="w-full h-full object-cover" loading="eager" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('vizag')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357528/VIZAG_pcabnp_dvl0xw.avif" alt="Vizag" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357528/VIZAG_pcabnp_dvl0xw.avif" alt="Vizag" className="w-full h-full object-cover" loading="eager" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('hyderabad')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357525/HYDERABAD_yg7ryn_pxgkho.avif" alt="Hyderabad" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357525/HYDERABAD_yg7ryn_pxgkho.avif" alt="Hyderabad" className="w-full h-full object-cover" loading="eager" decoding="async" />
           </div>
           <div
             onClick={() => handleCityClick('tirupathi')}
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357526/TIRUPATHI_y1iypg_c40b5p.avif" alt="Tirupati" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357526/TIRUPATHI_y1iypg_c40b5p.avif" alt="Tirupati" className="w-full h-full object-cover" loading="eager" decoding="async" />
           </div>
 
           {/* Chennai Card */}
@@ -143,7 +132,7 @@ const Zonals: React.FC = () => {
             className="bg-[rgba(184,147,189,0.7)] border-[3px] border-[rgba(198,142,107,0.8)] rounded-[20px] overflow-hidden min-w-[180px] w-[195px] sm:w-[240px] h-[260px] sm:h-[320px] flex items-center justify-center transition-all duration-300 cursor-pointer backdrop-blur-[5px] hover:translate-y-[-10px] hover:shadow-[0_10px_30px_rgba(184,147,189,0.5)] hover:bg-[rgba(184,147,189,0.85)] active:scale-95"
             style={{ touchAction: 'manipulation' }}
           >
-            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357529/CHENNAI_kq6tgd_fxw70r.avif" alt="Chennai" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <img src="https://res.cloudinary.com/dffldabvf/image/upload/v1768357529/CHENNAI_kq6tgd_fxw70r.avif" alt="Chennai" className="w-full h-full object-cover" loading="eager" decoding="async" />
           </div>
         </div>
       </div>

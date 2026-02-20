@@ -613,51 +613,6 @@
   box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .ca-dashboard-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-  }
-  
-  .ca-box-3 {
-    grid-column: 1;
-  }
-  
-  .ca-box-2,
-  .ca-box-4 {
-    grid-row: auto;
-  }
-  
-  .ca-box-5 {
-    grid-column: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .ca-box-3 {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  .ca-name-display {
-    font-size: 2rem;
-  }
-  
-  .ca-logout-btn {
-    width: 100%;
-  }
-  
-  .ca-points-value {
-    font-size: 3rem;
-  }
-  
-  .ca-ca-count-value {
-    font-size: 2.5rem;
-  }
-}
-
 /* Tier Progress Section */
 .ca-tier-progress-section {
   background: rgba(255, 255, 255, 0.05);
@@ -854,165 +809,19 @@
   color: #4ade80;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .ca-dashboard-content {
-    padding-top: 20px;
-  }
-
-  .ca-dashboard-header {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-
-  .ca-welcome-text {
-    font-size: 24px;
-  }
-
-  .ca-stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-  }
-
-  .ca-stat-card {
-    padding: 20px;
-  }
-
-  .ca-stat-value {
-    font-size: 28px;
-  }
-
-  .ca-tier-milestones {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .ca-tier-milestones::before {
-    display: none;
-  }
-
-  .ca-milestone .milestone-icon {
-    font-size: 32px;
-    padding: 12px;
-  }
-
-  .ca-table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0 -20px;
-    padding: 0 20px;
-  }
-
-  .ca-referrals-table {
-    min-width: 100%;
-    font-size: 12px;
-  }
-
-  .ca-referrals-table th,
-  .ca-referrals-table td {
-    padding: 8px 4px;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-  .ca-referrals-table th:first-child,
-  .ca-referrals-table td:first-child {
-    padding-left: 8px;
-  }
-
-  .ca-status-badge {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-}
-
 /* Mahotsav Logo Mobile Alignment */
 .ca-mahotsav-logo {
   position: absolute;
   z-index: 999;
 }
 
-@media (max-width: 640px) {
-  .ca-mahotsav-logo {
-    top: 0.75rem !important;
-    left: 1rem !important;
-    width: 8rem !important;
-  }
-  
-  /* Position back button below logo on mobile */
-  .ca-page-back-button {
-    top: 7rem !important;
-    left: 1rem !important;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .ca-mahotsav-logo {
-    top: 0 !important;
-    left: 2rem !important;
-    width: 12rem !important;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .ca-mahotsav-logo {
-    top: 0 !important;
-    left: 2rem !important;
-    width: 16rem !important;
-  }
-}
-
-@media (min-width: 1025px) {
-  .ca-mahotsav-logo {
-    top: 0 !important;
-    left: 2rem !important;
-    width: 24rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .ca-dashboard-container {
-    padding: 15px;
-  }
-
-  .ca-stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ca-id-value {
-    font-size: 16px;
-  }
-
-  .ca-referral-code {
-    font-size: 20px;
-    padding: 12px 30px;
-  }
-}
-
 /* ============================================
    MOBILE RESPONSIVENESS - MAX-WIDTH: 768px
    ============================================ */
 
-@media (max-width: 768px) {
-  /* ===== CONTAINER & GRID FIXES ===== */
-  .ca-dashboard-container {
-    padding: 10px;
-    width: 100vw;
-    max-width: 100%;
-    overflow-x: hidden !important;
-    box-sizing: border-box;
-  }
-
-  .ca-dashboard-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 10px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
+/* ============================================
+   EXTRA SMALL MOBILE - MAX-WIDTH: 480px
+   ============================================ */
 
   /* ===== SHOW CARDS ON MOBILE, HIDE TABLE ===== */
   .ca-desktop-only {
@@ -1368,26 +1177,6 @@
     max-width: 250px;
     box-sizing: border-box;
   }
-}
-
-/* ============================================
-   EXTRA SMALL MOBILE - MAX-WIDTH: 480px
-   ============================================ */
-
-@media (max-width: 480px) {
-  .ca-dashboard-container {
-    padding: 8px;
-  }
-
-  .ca-dashboard-grid {
-    padding: 8px;
-    gap: 12px;
-  }
-
-  .ca-box {
-    padding: 12px;
-    border-radius: 12px;
-  }
 
   /* Welcome Box */
   .ca-welcome-title {
@@ -1506,7 +1295,6 @@
   .ca-points-col {
     font-size: 0.75rem !important;
   }
-}
 
 /* End of Mobile Responsiveness Section */
 
@@ -2123,21 +1911,7 @@
   box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
 }
 
-/* Mobile Responsiveness for Manager Dashboard */
-@media (max-width: 768px) {
-  .ca-manager-tabs {
-    flex-direction: column;
-  }
 
-  .ca-tab-button {
-    width: 100%;
-  }
-
-  .ca-table {
-    font-size: 0.85rem;
-  }
-
-  .ca-table th,
   .ca-table td {
     padding: 8px 6px;
   }
@@ -2174,25 +1948,7 @@
     justify-content: center;
     gap: 40px;
   }
-}
 
-@media (max-width: 480px) {
-  .ca-dashboard-header {
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-  }
-
-  .ca-dashboard-title {
-    position: static;
-    transform: none;
-    font-size: 1.5rem;
-  }
-
-  .ca-logout-button {
-    width: auto;
-    padding: 8px 16px;
-  }
 
   .ca-ambassador-card {
     padding: 15px;
@@ -2226,4 +1982,3 @@
   .ca-dashboard-title {
     font-size: 1.8rem;
   }
-}

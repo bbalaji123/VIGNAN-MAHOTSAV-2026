@@ -1,10 +1,10 @@
 // API Configuration - Automatically detects environment
 const getApiBaseUrl = () => {
   // Production - Main domain with SSL
-  const PRODUCTION_API = 'https://vignanmahotsav.in/neekendukura';
+  const PRODUCTION_API = 'https://vignanmahotsav.in/api';
 
   // Development
-  const DEVELOPMENT_API = 'http://localhost:5000/neekendukura';
+  const DEVELOPMENT_API = 'http://localhost:5000/api';
 
   // Auto-detect environment
   if (typeof window !== 'undefined') {
